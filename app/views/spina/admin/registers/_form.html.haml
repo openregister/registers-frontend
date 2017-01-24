@@ -1,0 +1,92 @@
+- content_for(:permanent_notice) do
+  - unless current_account.robots_allowed?
+    .permanent-notice.permanent-notice-info
+      = icon('search')
+      %p
+        =t 'spina.pages.invisible_to_search_engines'
+        %small=t 'spina.pages.invisible_to_search_engines_description'
+
+- if @register.errors.any?
+  - content_for :notifications do
+    .notification.notification-danger.animated.fadeInRight
+      = icon('exclamation')
+      .notification-message
+        =t 'spina.notifications.alert'
+        %small= @register.errors.full_messages.join('<br />').html_safe
+      = link_to '#', data: {close_notification: true} do
+        = icon('cross')
+
+= form_for [:admin, @register], multipart: true, html: { autocomplete: "off" } do |f|
+  %header#header
+    .breadcrumbs= render_breadcrumbs separator: '<div class="divider"></div>'
+
+    #header_actions
+      %button.button.button-primary{type: 'submit'}
+        = icon('check')
+        = t('spina.registers.save', scaffold_name: t('spina.registers.scaffold_name'))
+      = link_to t('spina.cancel'), spina.admin_registers_path, class: 'button button button-secondary'
+
+  #steps.tab-content.active.well
+    .horizontal-form
+      .horizontal-form-group
+        .horizontal-form-label
+          = Spina::Page.human_attribute_name :name
+        .horizontal-form-content
+          = f.text_field :name
+      .horizontal-form-group
+        .horizontal-form-label
+          = Spina::Page.human_attribute_name :phase
+        .horizontal-form-content
+          .select-dropdown
+            = f.collection_select :phase, Spina::Register::PHASES, :to_s, :to_s, include_blank: 'Select phase'
+      .horizontal-form-group
+        .horizontal-form-label
+          = Spina::Page.human_attribute_name :url
+        .horizontal-form-content
+          = f.text_field :url
+      .horizontal-form-group
+        .horizontal-form-label
+          Registry
+        .horizontal-form-content
+          .select-dropdown
+            = f.collection_select :owner, Spina::Register::OWNERS, :to_s, :to_s, include_blank: 'Select registry'
+      .horizontal-form-group
+        .horizontal-form-label
+          = Spina::Page.human_attribute_name :custodian
+        .horizontal-form-content
+          = f.text_field :custodian
+      .horizontal-form-group
+        .horizontal-form-label
+          Introduction
+        .horizontal-form-content
+          = f.text_area :history
+      .horizontal-form-group
+        .horizontal-form-content
+          .structure-form
+            .structure-form-menu
+              %label Steps
+              %ul
+                - f.object.steps.each_with_index do |step, index|
+                  %li{class: ('active' if index == 0), data: {structure_item_id: step.id}}
+                    = link_to "#structure_form_pane_#{step.id}" do
+                      = step.title
+
+              = link_to_add_association f, :steps, class: "button button-link add-steps", data: {association_insertion_node: ".structure-form-pane"} do
+                = icon('plus')
+
+            .structure-form-content
+              = f.fields_for :steps do |step|
+                = render "spina/admin/registers/step_fields", f: step
+
+
+  - unless @register.new_record?
+    .pull-right= link_to t('spina.permanently_delete'), spina.admin_register_path(@register), method: :delete, data: {confirm: t('spina.pages.delete_confirmation', subject: @register.name) }, class: 'button button-link button-danger'
+
+= content_for :head do
+  :javascript
+    $(document).on('turbolinks:load', function() {
+      $('#steps').bind('cocoon:after-insert', function(e, added_task) {
+        $('.structure-form-pane').removeClass('active');
+        added_task.addClass('active');
+      })
+    });

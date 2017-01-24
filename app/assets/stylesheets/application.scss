@@ -1,0 +1,383 @@
+// From GDS's alphagov/govuk_frontend_toolkit
+@import 'colours';
+@import 'measurements';
+@import 'grid_layout';
+@import 'typography';
+@import 'shims';
+
+@import 'design-patterns/alpha-beta';
+@import 'design-patterns/buttons';
+@import 'design-patterns/breadcrumbs';
+
+// From GDS's alphagov/govuk_elements;
+@import 'govuk-elements';
+
+// Base styles for headings
+// ==========================================================================
+
+h1 {
+  @extend .heading-xlarge;
+}
+
+h2 {
+  @extend .heading-large;
+}
+
+h3 {
+  @extend .heading-medium;
+}
+
+h4 {
+  @extend .heading-small;
+}
+
+.no-bullets {
+  margin-left: 0;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+// Column full width
+// ==========================================================================
+
+.column-full {
+  @include grid-column(1);
+}
+
+.column-one-sixth {
+  @include grid-column(1/6);
+}
+
+.column-one-fifth {
+  @include grid-column(1/5);
+}
+
+// Register styles
+// ==========================================================================
+
+.register-block {
+  background: $grey-3;
+  margin-top: 20px;
+  min-height: 100px;
+  padding: 6px;
+
+  h3 {
+    margin: 4px 0 0 4px;
+  }
+}
+
+// Phase styles
+// ==========================================================================
+
+$backlog-colour: #2e358b;
+
+.phase {
+  color: $page-colour;
+  display: block;
+  text-align: center;
+  padding-top: 4.8px;
+  padding-bottom: 4.8px;
+
+  &.backlog {
+    background: $backlog-colour;
+  }
+
+  &.discovery {
+    background: $discovery-colour;
+  }
+
+  &.alpha {
+    background: $alpha-colour;
+  }
+
+  &.beta {
+    background: $beta-colour;
+  }
+
+  &.live {
+    background: $live-colour;
+  }
+}
+
+.phase-count {
+  font-size: 80px;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+
+  &.backlog {
+    color: $backlog-colour;
+  }
+
+  &.discovery {
+    color: $discovery-colour;
+  }
+
+  &.alpha  {
+    color: $alpha-colour;
+  }
+
+  &.beta {
+    color: $beta-colour;
+  }
+
+  &.live {
+    color: $live-colour;
+  }
+}
+
+table {
+  .phase-count {
+    font-size: 16px;
+    text-align: right;
+  }
+}
+
+// Phase circle
+// ==========================================================================
+
+.related-container {
+  margin-top: 30px;
+}
+
+.phase-circle {
+  position: relative;
+  width: 40%;
+}
+
+.circle-label {
+  color: $page-colour;
+  font-weight: 700;
+  font-size: 24px;
+  left: 0px;
+  position: absolute;
+  margin: 5px 0 0;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.circle {
+  background: $grey-1;
+  border-radius: 50% 50%;
+  color: $page-colour;
+  display: block;
+  height: 0;
+  margin: 0;
+  padding-top: 100%;
+  width: 100%;
+}
+
+.arrow {
+  display: inline-block;
+  background-image: image-url('arrows_sprite-2x.png');
+  background-repeat: no-repeat;
+  background-size: 25px;
+  height: 17px;
+  vertical-align: middle;
+  width: 15px;
+
+  &.arrow-down {
+    background-position: top 2px center;
+  }
+
+  &.arrow-up {
+    background-position: bottom 2px center;
+  }
+}
+
+.tag {
+  color: white !important;
+  font-weight: 700;
+  padding: 0.25em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &.backlog {
+    background-color: $backlog-colour;
+  }
+
+  &.discovery {
+    background-color: $discovery-colour;
+  }
+
+  &.alpha {
+    background-color: $alpha-colour;
+  }
+
+  &.beta {
+    background-color: $beta-colour;
+  }
+
+  &.live {
+    background-color: $live-colour;
+  }
+}
+
+.txt-backlog {
+  color: $backlog-colour;
+}
+
+.txt-discovery {
+  color: $discovery-colour;
+}
+
+.txt-alpha {
+  color: $alpha-colour;
+}
+
+.txt-beta {
+  color: $beta-colour;
+}
+
+.txt-live {
+  color: $live-colour;
+}
+
+.headline {
+  color: white;
+  display: inline-block;
+  font-weight: normal;
+  text-transform: none;
+  padding: 2px 8px 0;
+
+  strong {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.backlog-headline {
+  @extend .headline;
+  background-color: $backlog-colour;
+}
+
+.discovery-headline {
+  @extend .headline;
+  background-color: $discovery-colour;
+}
+
+.live-headline {
+  @extend .headline;
+  background-color: $live-colour;
+}
+
+.beta-headline {
+  @extend .headline;
+  background-color: $beta-colour;
+}
+
+.alpha-headline {
+  @extend .headline;
+  background-color: $alpha-colour;
+}
+
+.phase-history {
+  clear: both;
+  margin-top: 30px;
+}
+
+.phase-history-item {
+  padding-left: 10px;
+  border-left: 3px solid black;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.tag-history {
+  display: inline-block;
+  margin-left: -10px;
+  padding: 4px 10px 2px;
+}
+
+.border-backlog {
+  border-color: $backlog-colour;
+}
+
+.border-discovery {
+  border-color: $discovery-colour;
+}
+
+.border-alpha {
+  border-color: $alpha-colour;
+}
+
+.border-beta {
+  border-color: $beta-colour;
+}
+
+.border-live {
+  border-color: $live-colour;
+}
+
+.circle.backlog {
+  background-color: $backlog-colour;
+}
+
+.circle.discovery {
+  background-color: $discovery-colour;
+}
+
+.circle.alpha {
+  background-color: $alpha-colour;
+}
+
+.circle.beta {
+  background-color: $beta-colour;
+}
+
+.circle.live {
+  background-color: $live-colour;
+}
+
+.phase_modifier {
+  font-size: 16px;
+  position: absolute;
+  top: 24px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.phase-circle {
+  width: 40%;
+  position: relative;
+}
+
+.circle-label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  margin-top: -15px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.circle {
+  background: red;
+  color: white;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  border-radius: 50% 50%;
+  display: inline-block;
+  margin: 0;
+}

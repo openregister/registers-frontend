@@ -1,0 +1,16 @@
+- @page_title = @page.seo_title
+- @page_description = @page.description
+
+.grid-row
+  .column-full
+    %h1.heading-xlarge Registers
+
+    %table
+      %thead
+        %tr
+          %th{scope: "col"}= sort_link "name", "Register"
+          %th{scope: "col"}= sort_link "owner", "Registry"
+          %th{scope: "col", class: "numeric"}= sort_link "phase"
+      %tbody
+        - @registers.each do |register|
+          = render partial: 'spina/registers/register', object: register

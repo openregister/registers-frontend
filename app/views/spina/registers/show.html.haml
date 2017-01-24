@@ -1,0 +1,69 @@
+- @page_title = "#{@register.name.capitalize} Register"
+- @page_description = ""
+- @phases = Spina::Register::PHASES
+
+.grid-row
+  .column-two-thirds
+    %h1.heading-xlarge= @page_title
+
+    = govspeak(@register.history)
+
+    %h2 Project history
+    .phase-history
+      - @phases.reverse.each do |phase|
+        %div{class: "phase-history-item border-#{phase.downcase} txt-#{phase.downcase}"}
+          %h3= link_to phase, "#{'#' + phase.downcase}", class: "tag tag-history #{phase.downcase}"
+
+    %h2 Project updates
+
+    - @phases.reverse.each do |phase|
+      - grouped_sales = @register.steps.select { |step| step.phase == phase }
+
+      %div{class: "#{phase.downcase}-headline", id: "#{phase.downcase}"}
+        %strong= phase
+
+      - grouped_sales.each do |step|
+        %h3{class: "heading-medium", id: "#{step.title.parameterize}"}= step.title
+        = govspeak(step.content)
+
+  .column-third
+    %aside#related
+      .related-container
+        .group
+          .phase-circle
+            %p{class: "circle #{@register.phase.downcase} phase"}
+            %p.circle-label= @register.phase.capitalize
+          - if @register.url.present?
+            %h4.heading-small Register url
+            %p= link_to @register.url, @register.url, rel: 'external'
+          %h4.heading-small Registry
+          %p= @register.owner
+          - if @register.custodian.present?
+            %h4.heading-small Custodian
+            %p= @register.custodian
+
+          %hr
+
+          - @phases.reverse.each do |phase|
+            - grouped_sales = @register.steps.select { |step| step.phase == phase }
+
+            %h4.heading-small= phase
+
+            %ul.no-bullets
+              - grouped_sales.each do |step|
+                %li
+                  - if step.completed.present?
+                    %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                      %g
+                        %g
+                          %path{:d => "M12.393,29.908", :fill => "#231F20"}
+                      %g
+                        %polyline{:fill => "#FFFFFF", :points => "30.848,7.857 12.811,25.895 3.836,16.921 \t"}
+                        %polygon{:fill => "#231F20", :points => "27.012,11.66 10.742,27.93 3.535,20.724 0,24.26 10.742,35 30.547,15.195 \t"}
+                  - else
+                    %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                  = link_to step.title, "#{ '#' + step.title.parameterize}"
+
+.grid-row
+  .column-two-thirds
+    %p= link_to "All registers", '/registers', class: 'link-back'

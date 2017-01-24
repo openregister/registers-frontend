@@ -1,0 +1,27 @@
+- @page_title = @page.seo_title
+- @page_description = @page.description
+
+- @registers = Spina::Register.all
+- @phases = Spina::Register::PHASES
+
+.grid-row
+  .column-full
+    %h1.heading-xlarge= @page.title
+
+    = govspeak(@page.content(:text))
+
+.grid-row
+  - @phases.each do |phase|
+    - registers = @registers.select{ |register| register.phase == phase }
+    .column-one-fifth
+      %h3{class: "#{phase.downcase} phase heading-medium"}
+        = phase.capitalize
+      %span{class: "#{phase.downcase} phase-count"}
+        = registers.size
+      - registers.each do |register|
+        .register-block
+          %h3.heading-small= register.name
+          %p
+            = link_to "History", register_path(register.slug)
+            |
+            = link_to "Register", register.url, target: :blank

@@ -1,0 +1,7 @@
+%tr
+  %td
+    = link_to register.name, spina.register_path(register.slug)
+  %td
+    = register.owner
+  %td{class: "numeric"}
+    %span{class: "#{register.phase.downcase} phase-count"}= register.phase

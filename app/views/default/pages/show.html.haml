@@ -1,0 +1,8 @@
+- @page_title = @page.seo_title
+- @page_description = @page.description
+
+.grid-row
+  .column-full
+    %h1.heading-xlarge= @page.title
+
+    = govspeak(@page.content(:text))

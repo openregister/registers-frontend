@@ -1,0 +1,23 @@
+%div{class: "structure-form-pane #{('active' if f.options[:child_index] == 0)}", id: "structure_form_pane_#{f.object.id}"}
+  .form-group
+    .form-label
+      Title
+    .form-content
+      = f.text_field :title, placeholder: "Title"
+  .form-group
+    .form-label Phase
+    .form-content
+      .select-dropdown
+        = f.collection_select :phase, Spina::Register::PHASES, :to_s, :to_s, include_blank: 'Select phase'
+  .form-group
+    .form-label
+      Register update
+    .form-content
+      = f.text_area :content, placeholder: "Update"
+  .form-group
+    .form-label
+      Completed?
+    .form-content
+      = f.check_box :completed, data: { switch: true }
+
+  = link_to_remove_association t('spina.delete'), f, class: "button button-mini button-link pull-right"
