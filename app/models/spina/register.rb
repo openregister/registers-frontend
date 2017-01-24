@@ -12,7 +12,7 @@ module Spina
     validates_uniqueness_of :name
     validates :slug, uniqueness: true
 
-    has_many :steps, -> { order('created_at DESC') }
+    has_many :steps, -> { order('position DESC') }
     accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
 
     private

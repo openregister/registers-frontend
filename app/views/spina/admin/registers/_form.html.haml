@@ -69,6 +69,7 @@
                 - f.object.steps.each_with_index do |step, index|
                   %li{class: ('active' if index == 0), data: {structure_item_id: step.id}}
                     = link_to "#structure_form_pane_#{step.id}" do
+                      %i.icon.icon-bars.sortable-handle
                       = step.title
 
               = link_to_add_association f, :steps, class: "button button-link add-steps", data: {association_insertion_node: ".structure-form-pane"} do

@@ -1,4 +1,5 @@
 %div{class: "structure-form-pane #{('active' if f.options[:child_index] == 0)}", id: "structure_form_pane_#{f.object.id}"}
+  = f.hidden_field :position, class: "structure_form_pane_#{f.object.id}_position"
   .form-group
     .form-label
       Title
