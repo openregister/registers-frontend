@@ -9,7 +9,7 @@
     .form-label Phase
     .form-content
       .select-dropdown
-        = f.collection_select :phase, Spina::Register::PHASES, :to_s, :to_s, include_blank: 'Select phase'
+        = f.collection_select :phase, Spina::Register::CURRENT_PHASES, :to_s, :to_s, include_blank: 'Select phase'
   .form-group
     .form-label
       Register update

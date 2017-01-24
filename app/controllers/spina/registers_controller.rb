@@ -12,12 +12,13 @@ module Spina
     end
 
     def show
+      @current_phases = Spina::Register::CURRENT_PHASES
     end
 
     private
 
     def sortable_columns
-      ["name", "phase", "owner"]
+      ["name", "current_phase", "owner"]
     end
 
     def sort_column

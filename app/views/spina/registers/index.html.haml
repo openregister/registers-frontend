@@ -10,7 +10,7 @@
         %tr
           %th{scope: "col"}= sort_link "name", "Register"
           %th{scope: "col"}= sort_link "owner", "Registry"
-          %th{scope: "col", class: "numeric"}= sort_link "phase"
+          %th{scope: "col", class: "numeric"}= sort_link "current_phase", "Phase"
       %tbody
         - @registers.each do |register|
           = render partial: 'spina/registers/register', object: register

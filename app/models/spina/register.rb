@@ -3,7 +3,7 @@ module Spina
 
     before_validation :set_slug
 
-    PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta', 'Live']
+    CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta', 'Live']
     OWNERS = ['Companies House', 'Ministry of Justice', 'Department for Education', 'Foreign Commonwealth Office', 'Welsh government',
               'Government Digital Service', 'Dept. for Work & Pensions', 'Home Office', 'Valuation Office Agency', 'Cabinet Office',
               'NHS', 'Government Statistical Service', 'Dept. for Communities & Local Government', 'Dept. for Environment, Food, & Rural Affairs']
