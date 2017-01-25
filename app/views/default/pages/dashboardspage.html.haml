@@ -2,15 +2,15 @@
 - @page_description = @page.description
 
 - @registers = Spina::Register.all
-- @phases = Spina::Register::CURRENT_PHASES
+- @current_phases = Spina::Register::CURRENT_PHASES
 
 .grid-row
   .column-full
     = govspeak(@page.content(:text))
 
 .grid-row
-  - @phases.each do |phase|
-    - registers = @registers.select{ |register| register.current_phase == phase }
+  - @current_phases.each do |phase|
+    - registers = @registers.select{ |register| register.register_phase == phase }
     .column-one-fifth
       %h3{class: "#{phase.downcase} phase heading-medium"}
         = phase.capitalize

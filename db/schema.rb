@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124133415) do
+ActiveRecord::Schema.define(version: 20170125164813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(version: 20170124133415) do
     t.boolean  "active",              default: true
   end
 
+  create_table "spina_phases", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phase_update"
+    t.integer  "position"
+    t.integer  "register_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "spina_photo_collections", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -160,12 +169,12 @@ ActiveRecord::Schema.define(version: 20170124133415) do
     t.string   "name"
     t.string   "url"
     t.text     "history"
-    t.string   "current_phase"
+    t.string   "register_phase"
     t.string   "slug"
     t.string   "custodian"
     t.string   "owner"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "spina_rewrite_rules", force: :cascade do |t|
@@ -177,7 +186,7 @@ ActiveRecord::Schema.define(version: 20170124133415) do
 
   create_table "spina_steps", force: :cascade do |t|
     t.string   "title"
-    t.string   "phase"
+    t.string   "step_phase"
     t.text     "content"
     t.boolean  "completed",   default: false
     t.integer  "register_id"

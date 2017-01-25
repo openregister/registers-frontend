@@ -26,7 +26,7 @@
         = t('spina.registers.save', scaffold_name: t('spina.registers.scaffold_name'))
       = link_to t('spina.cancel'), spina.admin_registers_path, class: 'button button button-secondary'
 
-  #steps.tab-content.active.well
+  .tab-content.active.well
     .horizontal-form
       .horizontal-form-group
         .horizontal-form-label
@@ -35,10 +35,10 @@
           = f.text_field :name
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Page.human_attribute_name :current_phase
+          = Spina::Page.human_attribute_name :register_phase
         .horizontal-form-content
           .select-dropdown
-            = f.collection_select :current_phase, Spina::Register::CURRENT_PHASES, :to_s, :to_s, include_blank: 'Select current phase'
+            = f.collection_select :register_phase, Spina::Register::CURRENT_PHASES, :to_s, :to_s, include_blank: 'Select current phase'
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :url
@@ -60,7 +60,24 @@
           Introduction
         .horizontal-form-content
           = f.text_area :history
-      .horizontal-form-group#step
+      .horizontal-form-group#phases
+        .horizontal-form-content
+          .structure-form
+            .structure-form-menu
+              %label Phases
+              %ul
+                - f.object.phases.each_with_index do |phase, index|
+                  %li{class: ('active' if index == 0), data: {structure_item_id: phase.id}}
+                    = link_to "#structure_form_pane_#{phase.id}" do
+                      %i.icon.icon-bars.sortable-handle
+                      = phase.name
+
+              = link_to_add_association "#{icon('plus')}".html_safe, f, :phases, class: "button button-link add-steps", data: {association_insertion_node: ".phases-form-pane"}
+
+            .structure-form-content
+              = f.fields_for :phases do |phase|
+                = render "spina/admin/registers/phase_fields", f: phase
+      .horizontal-form-group#steps
         .horizontal-form-content
           .structure-form
             .structure-form-menu
@@ -72,8 +89,7 @@
                       %i.icon.icon-bars.sortable-handle
                       = step.title
 
-              = link_to_add_association f, :steps, class: "button button-link add-steps", data: {association_insertion_node: ".structure-form-pane"} do
-                = icon('plus')
+              = link_to_add_association "#{icon('plus')}".html_safe, f, :steps, class: "button button-link add-steps", data: {association_insertion_node: ".steps-form-pane"}
 
             .structure-form-content
               = f.fields_for :steps do |step|
@@ -86,7 +102,12 @@
   :javascript
     $(document).on('turbolinks:load', function() {
       $('#steps').bind('cocoon:after-insert', function(e, added_task) {
-        $('.structure-form-pane').removeClass('active');
+        $('.steps-form-pane').removeClass('active');
+        added_task.addClass('active');
+      })
+
+      $('#phases').bind('cocoon:after-insert', function(e, added_task) {
+        $('.phases-form-pane').removeClass('active');
         added_task.addClass('active');
       })
     });

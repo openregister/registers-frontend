@@ -9,17 +9,18 @@
 
     %h2 Project history
     .phase-history
-      - @current_phases.reverse.each do |phase|
-        %div{class: "phase-history-item border-#{phase.downcase} txt-#{phase.downcase}"}
-          %h3= link_to phase, "#{'#' + phase.downcase}", class: "tag tag-history #{phase.downcase}"
+      - @register.phases.each do |phase|
+        %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
+          %h3= link_to phase.name, "#{'#' + phase.name.downcase}", class: "tag tag-history #{phase.name.downcase}"
+          %p= phase.phase_update
 
     %h2 Project updates
 
-    - @current_phases.reverse.each do |phase|
-      - grouped_steps = @register.steps.select { |step| step.phase == phase }
+    - @register.phases.each do |phase|
+      - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-      %div{class: "#{phase.downcase}-headline", id: "#{phase.downcase}"}
-        %strong= phase
+      %div{class: "#{phase.name.downcase}-headline", id: "#{phase.name.downcase}"}
+        %strong= phase.name
 
       - grouped_steps.each do |step|
         %h3{class: "heading-medium", id: "#{step.title.parameterize}"}= step.title
@@ -30,8 +31,8 @@
       .related-container
         .group
           .phase-circle
-            %p{class: "circle #{@register.current_phase.downcase} current_phase"}
-            %p.circle-label= @register.current_phase.capitalize
+            %p{class: "circle #{@register.register_phase.downcase} register_phase"}
+            %p.circle-label= @register.register_phase.capitalize
           - if @register.url.present?
             %h4.heading-small Register url
             %p= link_to @register.url, @register.url, rel: 'external'
@@ -43,10 +44,10 @@
 
           %hr
 
-          - @current_phases.reverse.each do |phase|
-            - grouped_steps = @register.steps.select { |step| step.phase == phase }
+          - @register.phases.each do |phase|
+            - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-            %h4.heading-small= phase
+            %h4.heading-small= phase.name
 
             %ul.no-bullets
               - grouped_steps.each do |step|

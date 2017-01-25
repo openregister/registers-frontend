@@ -12,13 +12,13 @@ module Spina
     end
 
     def show
-      @current_phases = Spina::Register::CURRENT_PHASES
+      @register = Spina::Register.find_by_slug(params[:id])
     end
 
     private
 
     def sortable_columns
-      ["name", "current_phase", "owner"]
+      ["name", "register_phase", "owner"]
     end
 
     def sort_column
@@ -27,10 +27,6 @@ module Spina
 
     def sort_direction
       ["asc", "desc"].include?(params[:direction]) ? params[:direction] : "asc"
-    end
-
-    def set_register
-      @register = Spina::Register.find_by_slug(params[:id])
     end
   end
 end

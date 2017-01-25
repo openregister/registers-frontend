@@ -1,0 +1,15 @@
+%div{class: "phases-form-pane structure-form-pane #{('active' if f.options[:child_index] == 0)}", id: "structure_form_pane_#{f.object.id}"}
+  = f.hidden_field :position, class: "structure_form_pane_#{f.object.id}_position"
+  .form-group
+    .form-label
+      Name
+    .form-content
+      .select-dropdown
+        = f.collection_select :name, Spina::Register::CURRENT_PHASES, :to_s, :to_s, include_blank: 'Select phase'
+  .form-group
+    .form-label
+      Phase update
+    .form-content
+      = f.text_field :phase_update, placeholder: "Update"
+
+  = link_to_remove_association t('spina.delete'), f, class: "button button-mini button-link pull-right"
