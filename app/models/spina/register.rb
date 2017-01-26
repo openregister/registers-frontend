@@ -11,7 +11,7 @@ module Spina
     validates_uniqueness_of :name
     validates :slug, uniqueness: true
 
-    has_many :steps, -> { order('position DESC') }
+    has_many :steps, -> { order('position ASC') }
     accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
     has_many :phases, -> { order('position ASC') }
     accepts_nested_attributes_for :phases, reject_if: :all_blank, allow_destroy: true
