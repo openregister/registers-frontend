@@ -1,7 +1,5 @@
 module Spina
   class RegistersController < Spina::ApplicationController
-    before_action :set_register, only: [:show]
-
     helper_method :sort_column, :sort_direction
 
     layout "layouts/default/application"
