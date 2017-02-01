@@ -1,4 +1,4 @@
-# Open Registers Dashboard incl History
+# Register status
 
 Deployed to https://registers-dashboard-history.herokuapp.com/
 
