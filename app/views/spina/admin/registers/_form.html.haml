@@ -103,26 +103,45 @@
 = content_for :head do
   :javascript
     $(document).on('turbolinks:load', function() {
-      $('#steps').bind('cocoon:after-insert', function(e, added_task) {
-        var new_id = new Date().getTime(),
+      $('#steps')
+        .on('cocoon:after-insert', function(e, added_task) {
+          var new_id = new Date().getTime(),
+              $link = $('<li><a href="#structure_form_pane_' + new_id + '"><i class="icon icon-bars"></i> </a></li>')
+
+          $('.steps-form-pane').removeClass('active');
+          added_task.addClass('active');
+          added_task.attr('id', 'structure_form_pane_' + new_id);
+
+          $('#steps').find('.structure-form-menu ul').append($link);
+        })
+
+        .on('cocoon:before-remove', function(e, removed_step) {
+          var pane_id = removed_step.attr('id'),
+              $link = $('a[href="#' + pane_id + '"]').parents('li'),
+              $previousLink = $link.siblings('li:visible');
+
+          $previousLink.find('a').trigger('click')
+          $link.hide();
+        })
+
+      $('#phases')
+        .on('cocoon:after-insert', function(e, added_task) {
+          var new_id = new Date().getTime(),
             $link = $('<li><a href="#structure_form_pane_' + new_id + '"><i class="icon icon-bars"></i> </a></li>')
 
-        $('.steps-form-pane').removeClass('active');
-        added_task.addClass('active');
-        added_task.attr('id', 'structure_form_pane_' + new_id);
+          $('.phases-form-pane').removeClass('active');
+          added_task.addClass('active');
+          added_task.attr('id', 'structure_form_pane_' + new_id);
 
-        $('#steps').find('.structure-form-menu ul').append($link);
+          $('#phases').find('.structure-form-menu ul').append($link);
+        })
 
-      })
+        .on('cocoon:before-remove', function(e, removed_phase) {
+          var pane_id = removed_phase.attr('id'),
+              $link = $('a[href="#' + pane_id + '"]').parents('li'),
+              $previousLink = $link.siblings('li:visible');
 
-      $('#phases').bind('cocoon:after-insert', function(e, added_task) {
-        var new_id = new Date().getTime(),
-          $link = $('<li><a href="#structure_form_pane_' + new_id + '"><i class="icon icon-bars"></i> </a></li>')
-
-        $('.phases-form-pane').removeClass('active');
-        added_task.addClass('active');
-        added_task.attr('id', 'structure_form_pane_' + new_id);
-
-        $('#phases').find('.structure-form-menu ul').append($link);
-      })
+          $previousLink.find('a').trigger('click')
+          $link.hide();
+        })
     });

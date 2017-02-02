@@ -1,4 +1,4 @@
-%div{class: "steps-form-pane structure-form-pane #{('active' if f.options[:child_index] == 0)}", id: "structure_form_pane_#{f.object.id}"}
+%div{class: "steps-form-pane structure-form-pane nested-fields #{('active' if f.options[:child_index] == 0)}", id: "structure_form_pane_#{f.object.id}"}
   = f.hidden_field :position, class: "structure_form_pane_#{f.object.id}_position"
   .form-group
     .form-label
@@ -21,4 +21,4 @@
     .form-content
       = f.check_box :completed, data: { switch: true }
 
-  = link_to_remove_association t('spina.delete'), f
+  = link_to_remove_association t('spina.delete'), f, class: "button button-mini button-link pull-right"
