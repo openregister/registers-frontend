@@ -5,12 +5,23 @@
   .column-full
     = govspeak(@page.content(:text))
 
-    %table
+.grid-row
+  - @current_phases.each do |phase|
+    - registers = @registers.select{ |register| register.register_phase == phase }
+    .column-one-fifth
+      %div{class: "data #{phase.downcase}"}
+        %span.data-item.bold-xxlarge= registers.size
+        %span.data-item.bold-xsmall Registers in #{phase.downcase}
+
+.grid-row
+  .column-full
+    %table.register-status-table
       %thead
         %tr
-          %th{scope: "col"}= sort_link "name", "Register"
-          %th{scope: "col"}= sort_link "owner", "Registry"
-          %th{scope: "col", class: "numeric"}= sort_link "register_phase", "Phase"
+          %th= sort_link "name", "Register"
+          %th= sort_link "register_phase", "Status"
+          %th= sort_link "owner", "Managed by"
+          %th
       %tbody
         - @registers.each do |register|
           = render partial: 'spina/registers/register', object: register

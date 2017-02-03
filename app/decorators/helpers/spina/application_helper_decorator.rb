@@ -3,9 +3,9 @@ module Spina
     def sort_link(column, title = nil)
       title ||= column.titleize
       direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-      icon = sort_direction == "asc" ? "arrow arrow-up" : "arrow arrow-down"
-      icon = column == sort_column ? icon : ""
-      link_to "#{title} <span class='#{icon}'></span>".html_safe, { column: column, direction: direction }
+      css_class = sort_direction == "asc" ? "sorting-up" : "sorting-down"
+      css_class = column == sort_column ? css_class : ""
+      link_to title, { column: column, direction: direction }, class: css_class
     end
   end
 end

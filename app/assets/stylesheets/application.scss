@@ -82,9 +82,9 @@ $backlog-colour: #2e358b;
 .phase {
   color: $page-colour;
   display: block;
-  text-align: center;
   padding-top: 4.8px;
   padding-bottom: 4.8px;
+  text-align: center;
 
   &.backlog {
     background: $backlog-colour;
@@ -111,11 +111,11 @@ $backlog-colour: #2e358b;
   td,
   th {
     font-size: 16px;
-    word-wrap: break-word;
     max-width: 400px;
     padding: 15px 40px 15px 0;
-    white-space: normal;
     vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
   }
 
   th {
@@ -148,8 +148,8 @@ $backlog-colour: #2e358b;
 
 .data {
   border-top: 15px solid $black;
-  padding-top: 20px;
   margin: 40px 0 60px 0;
+  padding-top: 20px;
 }
 
 .data.live {
@@ -157,7 +157,7 @@ $backlog-colour: #2e358b;
 }
 
 .data.beta {
-  border-color: $discovery-colour;
+  border-color: $beta-colour;
 }
 
 .data.alpha {
@@ -253,11 +253,11 @@ $backlog-colour: #2e358b;
 
   &:after {
     content: "";
-    width: 0;
-    height: 0;
     display: inline-block;
-    margin-left: 5px;
+    height: 0;
     line-height: 16px;
+    margin-left: 5px;
+    width: 0;
   }
 }
 
@@ -275,9 +275,9 @@ $backlog-colour: #2e358b;
   @extend .sorting;
 
   &:after {
+    border-bottom: 8px solid $govuk-blue;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-bottom: 8px solid $govuk-blue;
   }
 }
 
@@ -334,8 +334,8 @@ $backlog-colour: #2e358b;
   color: white;
   display: inline-block;
   font-weight: normal;
-  text-transform: none;
   padding: 2px 8px 0;
+  text-transform: none;
 
   strong {
     font-size: 18px;
@@ -374,9 +374,9 @@ $backlog-colour: #2e358b;
 }
 
 .phase-history-item {
-  padding-left: 10px;
   border-left: 3px solid black;
   margin-bottom: 0;
+  padding-left: 10px;
   padding-bottom: 10px;
 
   h3 {
@@ -435,11 +435,11 @@ $backlog-colour: #2e358b;
 }
 
 .phase_modifier {
+  color: $white;
   font-size: 16px;
-  position: absolute;
-  top: 24px;
   left: 0;
-  width: 100%;
+  position: absolute;
   text-align: center;
-  color: white;
+  top: 24px;
+  width: 100%;
 }
