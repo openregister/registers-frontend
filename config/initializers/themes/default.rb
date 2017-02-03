@@ -15,10 +15,6 @@
     title:        'Homepage',
     page_parts:   ['text']
   }, {
-    name:         'dashboardspage',
-    title:        'Dashboardspage',
-    page_parts:   ['text']
-  }, {
     name:         'registerspage',
     title:        'Registerspage',
     page_parts:   ['text']
@@ -35,11 +31,6 @@
     title:          'Homepage',
     deletable:      false,
     view_template:  'homepage'
-  }, {
-    name:           'dashboardspage',
-    title:          'Dashboardspage',
-    deletable:      false,
-    view_template:  'dashboardspage'
   }, {
     name:           'registerspage',
     title:          'Registerspage',

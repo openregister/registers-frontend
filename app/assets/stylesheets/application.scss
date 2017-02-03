@@ -12,6 +12,8 @@
 // From GDS's alphagov/govuk_elements;
 @import 'govuk-elements';
 
+@import 'govuk-component/*';
+
 // Base styles for headings
 // ==========================================================================
 
@@ -105,37 +107,106 @@ $backlog-colour: #2e358b;
   }
 }
 
-.phase-count {
-  font-size: 80px;
-  text-align: center;
-  font-weight: bold;
-  display: block;
-
-  &.backlog {
-    color: $backlog-colour;
+.register-status-table {
+  td,
+  th {
+    font-size: 16px;
+    word-wrap: break-word;
+    max-width: 400px;
+    padding: 15px 40px 15px 0;
+    white-space: normal;
+    vertical-align: middle;
   }
 
-  &.discovery {
-    color: $discovery-colour;
+  th {
+    border-top: 2px solid $grey-3;
+    font-weight: normal;
   }
 
-  &.alpha  {
-    color: $alpha-colour;
+  .links {
+    padding-right: 0;
+
+    a {
+      display: inline-block;
+      text-align: right;
+
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
   }
 
-  &.beta {
-    color: $beta-colour;
-  }
+  .status-logo {
+    vertical-align: middle;
 
-  &.live {
-    color: $live-colour;
+    img {
+      display: block;
+      max-width: 100px;
+    }
   }
 }
 
-table {
-  .phase-count {
-    font-size: 16px;
-    text-align: right;
+.data {
+  border-top: 15px solid $black;
+  padding-top: 20px;
+  margin: 40px 0 60px 0;
+}
+
+.data.live {
+  border-color: $live-colour;
+}
+
+.data.beta {
+  border-color: $discovery-colour;
+}
+
+.data.alpha {
+  border-color: $alpha-colour;
+}
+
+.data.discovery {
+  border-color: $discovery-colour;
+}
+
+.data.backlog {
+  border-color: $backlog-colour;
+}
+
+.data details {
+  font-size: 16px;
+}
+
+.status {
+  font-weight: bold;
+
+  &:before {
+    border: 6px solid $black;
+    border-radius: 100%;
+    content: '';
+    display: inline-block;
+    height: 0;
+    margin-right: 5px;
+    width: 0;
+  }
+
+  &.live:before {
+    border-color: $live-colour;
+  }
+
+  &.beta:before {
+    border-color: $beta-colour;
+  }
+
+  &.alpha:before {
+    border-color: $alpha-colour;
+  }
+
+  &.discovery:before {
+    border-color: $discovery-colour;
+  }
+
+  &.backlog:before {
+    border-color: $backlog-colour;
   }
 }
 
@@ -177,21 +248,36 @@ table {
   width: 100%;
 }
 
-.arrow {
-  display: inline-block;
-  background-image: image-url('arrows_sprite-2x.png');
-  background-repeat: no-repeat;
-  background-size: 25px;
-  height: 17px;
-  vertical-align: middle;
-  width: 15px;
+.sorting {
+  font-weight: 700;
 
-  &.arrow-down {
-    background-position: top 2px center;
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    margin-left: 5px;
+    line-height: 16px;
   }
+}
 
-  &.arrow-up {
-    background-position: bottom 2px center;
+.sorting-up {
+  @extend .sorting;
+
+  &:after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid $govuk-blue;
+  }
+}
+
+.sorting-down {
+  @extend .sorting;
+
+  &:after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 8px solid $govuk-blue;
   }
 }
 
