@@ -4,9 +4,9 @@ module Spina
     before_validation :set_slug
 
     CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta', 'Live']
-    OWNERS = ['Companies House', 'Ministry of Justice', 'Dept. for Education', 'Foreign & Commonwealth Office', 'Welsh government',
-              'Government Digital Service', 'Dept. for Work & Pensions', 'Home Office', 'Valuation Office Agency', 'Cabinet Office',
-              'NHS', 'Government Statistical Service', 'Dept. for Communities & Local Government', 'Dept. for Environment, Food, & Rural Affairs']
+    OWNERS = ['Companies House', 'Ministry of Justice', 'Department for Education', 'Foreign & Commonwealth Office', 'Welsh government',
+              'Government Digital Service', 'Department for Work & Pensions', 'Home Office', 'Valuation Office Agency', 'Cabinet Office',
+              'NHS', 'Government Statistical Service', 'Department for Communities & Local Government', 'Department for Environment, Food, & Rural Affairs']
     validates_presence_of :name, :url, :register_phase, :owner
     validates_uniqueness_of :name
     validates :slug, uniqueness: true
