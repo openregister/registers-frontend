@@ -35,6 +35,11 @@
           = f.text_field :name
       .horizontal-form-group
         .horizontal-form-label
+          Description
+        .horizontal-form-content
+          = f.text_area :description, rows: "2"
+      .horizontal-form-group
+        .horizontal-form-label
           = Spina::Page.human_attribute_name :register_phase
         .horizontal-form-content
           .select-dropdown
@@ -46,7 +51,7 @@
           = f.text_field :url
       .horizontal-form-group
         .horizontal-form-label
-          Registry
+          Authority
         .horizontal-form-content
           .select-dropdown
             = f.collection_select :owner, Spina::Register::OWNERS, :to_s, :to_s, include_blank: 'Select registry'
@@ -59,7 +64,7 @@
         .horizontal-form-label
           Introduction
         .horizontal-form-content
-          = f.text_area :history
+          = f.text_area :history, rows: "6"
       .horizontal-form-group#phases
         .horizontal-form-content
           .structure-form
