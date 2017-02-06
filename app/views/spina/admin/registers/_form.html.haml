@@ -54,7 +54,7 @@
           Authority
         .horizontal-form-content
           .select-dropdown
-            = f.collection_select :owner, Spina::Register::OWNERS, :to_s, :to_s, include_blank: 'Select registry'
+            = f.collection_select :authority, Spina::Register::AUTHORITIES, :to_s, :to_s, include_blank: 'Select registry'
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :custodian

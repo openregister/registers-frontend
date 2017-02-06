@@ -54,7 +54,7 @@ module Spina
       end
 
       def register_params
-        params.require(:register).permit(:name, :slug, :url, :history, :register_phase, :custodian, :owner, :description,
+        params.require(:register).permit(:name, :slug, :url, :history, :register_phase, :custodian, :authority, :description,
                                           phases_attributes: [:name, :phase_update, :position, :_destroy, :id],
                                           steps_attributes: [:step_phase, :title, :completed, :content, :position, :_destroy, :id])
       end

@@ -17,7 +17,7 @@ module Spina
     private
 
     def sortable_columns
-      ["name", "register_phase", "owner"]
+      ["name", "register_phase", "authority"]
     end
 
     def sort_column

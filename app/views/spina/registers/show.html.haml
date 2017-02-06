@@ -37,7 +37,7 @@
             %h4.heading-small Register url
             %p= link_to @register.url, @register.url, rel: 'external'
           %h4.heading-small Registry
-          %p= @register.owner
+          %p= @register.authority
           - if @register.custodian.present?
             %h4.heading-small Custodian
             %p= @register.custodian
