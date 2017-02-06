@@ -9,7 +9,7 @@
   - @current_phases.each do |phase|
     - registers = @registers.select{ |register| register.register_phase == phase }
     .column-one-fifth
-      %div{class: "data #{phase.downcase}"}
+      %div{class: "data border-#{phase.downcase}"}
         %span.data-item.bold-xxlarge= registers.size
         %span.data-item.bold-xsmall Registers in #{phase.downcase}
 

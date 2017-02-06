@@ -77,7 +77,11 @@ html {
 // Phase styles
 // ==========================================================================
 
-$backlog-colour: #2e358b;
+$phases: (live, $live-colour),
+         (beta, $beta-colour),
+         (alpha, $alpha-colour),
+         (discovery, $discovery-colour),
+         (backlog, #2e358b);
 
 .phase {
   color: $page-colour;
@@ -85,26 +89,6 @@ $backlog-colour: #2e358b;
   padding-top: 4.8px;
   padding-bottom: 4.8px;
   text-align: center;
-
-  &.backlog {
-    background: $backlog-colour;
-  }
-
-  &.discovery {
-    background: $discovery-colour;
-  }
-
-  &.alpha {
-    background: $alpha-colour;
-  }
-
-  &.beta {
-    background: $beta-colour;
-  }
-
-  &.live {
-    background: $live-colour;
-  }
 }
 
 .register-status-table {
@@ -135,45 +119,16 @@ $backlog-colour: #2e358b;
       }
     }
   }
-
-  .status-logo {
-    vertical-align: middle;
-
-    img {
-      display: block;
-      max-width: 100px;
-    }
-  }
 }
 
 .data {
   border-top: 15px solid $black;
   margin: 40px 0 60px 0;
   padding-top: 20px;
-}
 
-.data.live {
-  border-color: $live-colour;
-}
-
-.data.beta {
-  border-color: $beta-colour;
-}
-
-.data.alpha {
-  border-color: $alpha-colour;
-}
-
-.data.discovery {
-  border-color: $discovery-colour;
-}
-
-.data.backlog {
-  border-color: $backlog-colour;
-}
-
-.data details {
-  font-size: 16px;
+  details {
+    font-size: 16px;
+  }
 }
 
 .status {
@@ -189,24 +144,10 @@ $backlog-colour: #2e358b;
     width: 0;
   }
 
-  &.live:before {
-    border-color: $live-colour;
-  }
-
-  &.beta:before {
-    border-color: $beta-colour;
-  }
-
-  &.alpha:before {
-    border-color: $alpha-colour;
-  }
-
-  &.discovery:before {
-    border-color: $discovery-colour;
-  }
-
-  &.backlog:before {
-    border-color: $backlog-colour;
+  @each $phases, $colour in $phases {
+    &.#{$phases}:before {
+      border-color: $colour;
+    }
   }
 }
 
@@ -283,51 +224,12 @@ $backlog-colour: #2e358b;
 
 .tag {
   color: white !important;
-  font-weight: 700;
-  padding: 0.25em;
+  display: inline-block;
+  margin-left: -10px;
+  padding: 4px 10px 2px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-
-  &.backlog {
-    background-color: $backlog-colour;
-  }
-
-  &.discovery {
-    background-color: $discovery-colour;
-  }
-
-  &.alpha {
-    background-color: $alpha-colour;
-  }
-
-  &.beta {
-    background-color: $beta-colour;
-  }
-
-  &.live {
-    background-color: $live-colour;
-  }
-}
-
-.txt-backlog {
-  color: $backlog-colour;
-}
-
-.txt-discovery {
-  color: $discovery-colour;
-}
-
-.txt-alpha {
-  color: $alpha-colour;
-}
-
-.txt-beta {
-  color: $beta-colour;
-}
-
-.txt-live {
-  color: $live-colour;
 }
 
 .headline {
@@ -341,31 +243,6 @@ $backlog-colour: #2e358b;
     font-size: 18px;
     font-weight: 700;
   }
-}
-
-.backlog-headline {
-  @extend .headline;
-  background-color: $backlog-colour;
-}
-
-.discovery-headline {
-  @extend .headline;
-  background-color: $discovery-colour;
-}
-
-.live-headline {
-  @extend .headline;
-  background-color: $live-colour;
-}
-
-.beta-headline {
-  @extend .headline;
-  background-color: $beta-colour;
-}
-
-.alpha-headline {
-  @extend .headline;
-  background-color: $alpha-colour;
 }
 
 .phase-history {
@@ -388,58 +265,16 @@ $backlog-colour: #2e358b;
   }
 }
 
-.tag-history {
-  display: inline-block;
-  margin-left: -10px;
-  padding: 4px 10px 2px;
-}
+@each $phases, $colour in $phases {
+  .background-#{$phases} {
+    background-color: $colour;
+  }
 
-.border-backlog {
-  border-color: $backlog-colour;
-}
+  .border-#{$phases} {
+    border-color: $colour;
+  }
 
-.border-discovery {
-  border-color: $discovery-colour;
-}
-
-.border-alpha {
-  border-color: $alpha-colour;
-}
-
-.border-beta {
-  border-color: $beta-colour;
-}
-
-.border-live {
-  border-color: $live-colour;
-}
-
-.circle.backlog {
-  background-color: $backlog-colour;
-}
-
-.circle.discovery {
-  background-color: $discovery-colour;
-}
-
-.circle.alpha {
-  background-color: $alpha-colour;
-}
-
-.circle.beta {
-  background-color: $beta-colour;
-}
-
-.circle.live {
-  background-color: $live-colour;
-}
-
-.phase_modifier {
-  color: $white;
-  font-size: 16px;
-  left: 0;
-  position: absolute;
-  text-align: center;
-  top: 24px;
-  width: 100%;
+  .txt-#{$phases} {
+    color: $colour;
+  }
 }

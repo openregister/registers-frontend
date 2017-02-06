@@ -11,15 +11,14 @@
     .phase-history
       - @register.phases.each do |phase|
         %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-          %h3= link_to phase.name, "#{'#' + phase.name.downcase}", class: "tag tag-history #{phase.name.downcase}"
+          %h3= link_to phase.name, "#{'#' + phase.name.downcase}", class: "tag background-#{phase.name.downcase}"
           %p= phase.phase_update
 
     %h2 Project updates
-
     - @register.phases.each do |phase|
       - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-      %div{class: "#{phase.name.downcase}-headline", id: "#{phase.name.downcase}"}
+      %div{class: "headline background-#{phase.name.downcase}", id: "#{phase.name.downcase}"}
         %strong= phase.name
 
       - grouped_steps.each do |step|
@@ -31,7 +30,7 @@
       .related-container
         .group
           .phase-circle
-            %p{class: "circle #{@register.register_phase.downcase} register_phase"}
+            %p{class: "circle background-#{@register.register_phase.downcase}"}
             %p.circle-label= @register.register_phase.capitalize
           - if @register.url.present?
             %h4.heading-small Register url
