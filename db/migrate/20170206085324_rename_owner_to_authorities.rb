@@ -1,5 +1,5 @@
-class RenameauthorityToAuthorities < ActiveRecord::Migration[5.0]
+class RenameOwnerToAuthorities < ActiveRecord::Migration[5.0]
   def change
-    rename_column :spina_registers, :authority, :authority
+    rename_column :spina_registers, :owner, :authority
   end
 end
