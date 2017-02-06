@@ -33,9 +33,9 @@
             %p{class: "circle background-#{@register.register_phase.downcase}"}
             %p.circle-label= @register.register_phase.capitalize
           - if @register.url.present?
-            %h4.heading-small Register url
+            %h4.heading-small Register
             %p= link_to @register.url, @register.url, rel: 'external'
-          %h4.heading-small Registry
+          %h4.heading-small Authority
           %p= @register.authority
           - if @register.custodian.present?
             %h4.heading-small Custodian
