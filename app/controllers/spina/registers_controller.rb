@@ -7,6 +7,7 @@ module Spina
     def index
       @registers = Spina::Register.order("#{sort_column} #{sort_direction}")
       @page = Spina::Page.find_by(name: 'registerspage')
+      @current_phases = Spina::Register::CURRENT_PHASES
     end
 
     def show
@@ -16,7 +17,7 @@ module Spina
     private
 
     def sortable_columns
-      ["name", "register_phase", "owner"]
+      ["name", "register_phase", "authority"]
     end
 
     def sort_column

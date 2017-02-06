@@ -27,7 +27,7 @@ phases = [
 Spina::Register.create(
   name: "Country",
   register_phase: "Beta",
-  owner: "Foreign & Commonwealth Office",
+  authority: "Foreign and Commonwealth Office",
   custodian: "Tony Worron",
   url: "https://country.beta.openregister.org/",
   history: "",
@@ -39,7 +39,7 @@ puts "Created Country Register"
 Spina::Register.create(
   name: "Local authority eng",
   register_phase: "Beta",
-  owner: "Dept. for Communities & Local Government",
+  authority: "Department for Communities and Local Government",
   custodian: "Stephen McAllister",
   url: "https://local-authority-eng.beta.openregister.org/",
   history: "",
@@ -51,7 +51,7 @@ puts "Created Local authority eng Register"
 Spina::Register.create(
   name: "Territory",
   register_phase: "Beta",
-  owner: "Foreign & Commonwealth Office",
+  authority: "Foreign and Commonwealth Office",
   custodian: "Tony Worron",
   url: "https://territory.beta.openregister.org/",
   history: "",
@@ -63,7 +63,7 @@ puts "Created Territory Register"
 Spina::Register.create(
   name: "Academy school",
   register_phase: "Alpha",
-  owner: "Dept. for Education",
+  authority: "Department for Education",
   custodian: "",
   url: "https://academy-school-eng.alpha.openregister.org/",
   history: "",
@@ -75,7 +75,7 @@ puts "Created Academy school Register"
 Spina::Register.create(
   name: "Religious character",
   register_phase: "Alpha",
-  owner: "Dept. for Education",
+  authority: "Department for Education",
   custodian: "",
   url: "https://religious-character.alpha.openregister.org/",
   history: "",
@@ -87,7 +87,7 @@ puts "Created Religious character Register"
 Spina::Register.create(
   name: "School trust",
   register_phase: "Alpha",
-  owner: "Dept. for Education",
+  authority: "Department for Education",
   custodian: "",
   url: "https://school-trust.alpha.openregister.org/",
   history: "",
@@ -99,7 +99,7 @@ puts "Created School trust Register"
 Spina::Register.create(
   name: "Diocese",
   register_phase: "Alpha",
-  owner: "Dept. for Education",
+  authority: "Department for Education",
   custodian: "",
   url: "https://diocese.alpha.openregister.org/",
   history: "",
@@ -111,7 +111,7 @@ puts "Created Diocese Register"
 Spina::Register.create(
   name: "Local authority eng",
   register_phase: "Alpha",
-  owner: "Dept. for Communities & Local Government",
+  authority: "Department for Communities and Local Government",
   custodian: "",
   url: "https://local-authority-eng.alpha.openregister.org/",
   history: "",
@@ -123,7 +123,7 @@ puts "Created Local authority eng Register"
 Spina::Register.create(
   name: "Prison",
   register_phase: "Discovery",
-  owner: "Ministry of Justice",
+  authority: "Ministry of Justice",
   custodian: "",
   url: "http://prison.discovery.openregister.org/",
   history: "",
@@ -135,7 +135,7 @@ puts "Created Prison Register"
 Spina::Register.create(
   name: "Jobcentre",
   register_phase: "Discovery",
-  owner: "Dept. for Work & Pensions",
+  authority: "Department for Work and Pensions",
   custodian: "",
   url: "http://jobcentre.discovery.openregister.org/",
   history: "",
@@ -147,7 +147,7 @@ puts "Created Jobcentre Register"
 Spina::Register.create(
   name: "Gov. organisation",
   register_phase: "Discovery",
-  owner: "Cabinet Office",
+  authority: "Cabinet Office",
   url: "",
   custodian: "",
   history: "",
@@ -159,7 +159,7 @@ puts "Created Gov. organisation Register"
 Spina::Register.create(
   name: "Gov. domain",
   register_phase: "Discovery",
-  owner: "Cabinet Office",
+  authority: "Cabinet Office",
   url: "https://government-domain.discovery.openregister.org/",
   custodian: "",
   history: "",
@@ -171,7 +171,7 @@ puts "Created Gov. domain Register"
 Spina::Register.create(
   name: "Local Authority (Wales)",
   register_phase: "Discovery",
-  owner: "Welsh government",
+  authority: "Welsh government",
   url: "https://local-authority-wls.discovery.openregister.org/",
   custodian: "",
   history: "",

@@ -12,6 +12,8 @@
 // From GDS's alphagov/govuk_elements;
 @import 'govuk-elements';
 
+@import 'govuk-component/*';
+
 // Base styles for headings
 // ==========================================================================
 
@@ -75,67 +77,77 @@ html {
 // Phase styles
 // ==========================================================================
 
-$backlog-colour: #2e358b;
+$phases: (live, $live-colour),
+         (beta, $beta-colour),
+         (alpha, $alpha-colour),
+         (discovery, $discovery-colour),
+         (backlog, #2e358b);
 
 .phase {
   color: $page-colour;
   display: block;
-  text-align: center;
   padding-top: 4.8px;
   padding-bottom: 4.8px;
-
-  &.backlog {
-    background: $backlog-colour;
-  }
-
-  &.discovery {
-    background: $discovery-colour;
-  }
-
-  &.alpha {
-    background: $alpha-colour;
-  }
-
-  &.beta {
-    background: $beta-colour;
-  }
-
-  &.live {
-    background: $live-colour;
-  }
-}
-
-.phase-count {
-  font-size: 80px;
   text-align: center;
-  font-weight: bold;
-  display: block;
+}
 
-  &.backlog {
-    color: $backlog-colour;
+.register-status-table {
+  td,
+  th {
+    font-size: 16px;
+    max-width: 400px;
+    padding: 15px 40px 15px 0;
+    vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
   }
 
-  &.discovery {
-    color: $discovery-colour;
+  th {
+    border-top: 2px solid $grey-3;
+    font-weight: normal;
   }
 
-  &.alpha  {
-    color: $alpha-colour;
-  }
+  .links {
+    padding-right: 0;
 
-  &.beta {
-    color: $beta-colour;
-  }
+    a {
+      display: inline-block;
+      text-align: right;
 
-  &.live {
-    color: $live-colour;
+      &:first-child {
+        margin-right: 20px;
+      }
+    }
   }
 }
 
-table {
-  .phase-count {
+.data {
+  border-top: 15px solid $black;
+  margin: 40px 0 60px 0;
+  padding-top: 20px;
+
+  details {
     font-size: 16px;
-    text-align: right;
+  }
+}
+
+.status {
+  font-weight: bold;
+
+  &:before {
+    border: 6px solid $black;
+    border-radius: 100%;
+    content: '';
+    display: inline-block;
+    height: 0;
+    margin-right: 5px;
+    width: 0;
+  }
+
+  @each $phases, $colour in $phases {
+    &.#{$phases}:before {
+      border-color: $colour;
+    }
   }
 }
 
@@ -177,109 +189,60 @@ table {
   width: 100%;
 }
 
-.arrow {
-  display: inline-block;
-  background-image: image-url('arrows_sprite-2x.png');
-  background-repeat: no-repeat;
-  background-size: 25px;
-  height: 17px;
-  vertical-align: middle;
-  width: 15px;
+.sorting {
+  font-weight: 700;
 
-  &.arrow-down {
-    background-position: top 2px center;
+  &:after {
+    content: "";
+    display: inline-block;
+    height: 0;
+    line-height: 16px;
+    margin-left: 5px;
+    width: 0;
   }
+}
 
-  &.arrow-up {
-    background-position: bottom 2px center;
+.sorting-up {
+  @extend .sorting;
+
+  &:after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid $govuk-blue;
+  }
+}
+
+.sorting-down {
+  @extend .sorting;
+
+  &:after {
+    border-bottom: 8px solid $govuk-blue;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
   }
 }
 
 .tag {
   color: white !important;
-  font-weight: 700;
-  padding: 0.25em;
+  display: inline-block;
+  margin-left: -10px;
+  padding: 4px 10px 2px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-
-  &.backlog {
-    background-color: $backlog-colour;
-  }
-
-  &.discovery {
-    background-color: $discovery-colour;
-  }
-
-  &.alpha {
-    background-color: $alpha-colour;
-  }
-
-  &.beta {
-    background-color: $beta-colour;
-  }
-
-  &.live {
-    background-color: $live-colour;
-  }
-}
-
-.txt-backlog {
-  color: $backlog-colour;
-}
-
-.txt-discovery {
-  color: $discovery-colour;
-}
-
-.txt-alpha {
-  color: $alpha-colour;
-}
-
-.txt-beta {
-  color: $beta-colour;
-}
-
-.txt-live {
-  color: $live-colour;
 }
 
 .headline {
   color: white;
   display: inline-block;
   font-weight: normal;
-  text-transform: none;
   padding: 2px 8px 0;
+  text-transform: none;
 
   strong {
     font-size: 18px;
     font-weight: 700;
   }
-}
-
-.backlog-headline {
-  @extend .headline;
-  background-color: $backlog-colour;
-}
-
-.discovery-headline {
-  @extend .headline;
-  background-color: $discovery-colour;
-}
-
-.live-headline {
-  @extend .headline;
-  background-color: $live-colour;
-}
-
-.beta-headline {
-  @extend .headline;
-  background-color: $beta-colour;
-}
-
-.alpha-headline {
-  @extend .headline;
-  background-color: $alpha-colour;
 }
 
 .phase-history {
@@ -288,9 +251,9 @@ table {
 }
 
 .phase-history-item {
-  padding-left: 10px;
   border-left: 3px solid black;
   margin-bottom: 0;
+  padding-left: 10px;
   padding-bottom: 10px;
 
   h3 {
@@ -302,58 +265,16 @@ table {
   }
 }
 
-.tag-history {
-  display: inline-block;
-  margin-left: -10px;
-  padding: 4px 10px 2px;
-}
+@each $phases, $colour in $phases {
+  .background-#{$phases} {
+    background-color: $colour;
+  }
 
-.border-backlog {
-  border-color: $backlog-colour;
-}
+  .border-#{$phases} {
+    border-color: $colour;
+  }
 
-.border-discovery {
-  border-color: $discovery-colour;
-}
-
-.border-alpha {
-  border-color: $alpha-colour;
-}
-
-.border-beta {
-  border-color: $beta-colour;
-}
-
-.border-live {
-  border-color: $live-colour;
-}
-
-.circle.backlog {
-  background-color: $backlog-colour;
-}
-
-.circle.discovery {
-  background-color: $discovery-colour;
-}
-
-.circle.alpha {
-  background-color: $alpha-colour;
-}
-
-.circle.beta {
-  background-color: $beta-colour;
-}
-
-.circle.live {
-  background-color: $live-colour;
-}
-
-.phase_modifier {
-  font-size: 16px;
-  position: absolute;
-  top: 24px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  color: white;
+  .txt-#{$phases} {
+    color: $colour;
+  }
 }
