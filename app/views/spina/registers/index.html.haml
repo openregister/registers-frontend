@@ -3,7 +3,8 @@
 
 .grid-row
   .column-full
-    = govspeak(@page.content(:text))
+    .govspeak
+      = govspeak(@page.content(:text))
 
 .grid-row
   - @current_phases.each do |phase|

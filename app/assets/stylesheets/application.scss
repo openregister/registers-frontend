@@ -14,6 +14,13 @@
 
 @import 'govuk-component/*';
 
+// From Whitewall needed for gov speak markdown extension
+@import 'whitehall/colours';
+@import 'whitehall/dimensions';
+@import 'whitehall/right-to-left';
+@import 'whitehall/typography';
+@import 'whitehall/gov_speak';
+
 // Base styles for headings
 // ==========================================================================
 

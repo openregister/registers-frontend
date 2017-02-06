@@ -5,7 +5,8 @@
   .column-two-thirds
     %h1.heading-xlarge= @page_title
 
-    = govspeak(@register.history)
+    .govspeak
+      = govspeak(@register.history)
 
     %h2 Project history
     .phase-history
@@ -23,7 +24,8 @@
 
       - grouped_steps.each do |step|
         %h3{class: "heading-medium", id: "#{step.title.parameterize}"}= step.title
-        = govspeak(step.content)
+        .govspeak
+          = govspeak(step.content)
 
   .column-third
     %aside#related
