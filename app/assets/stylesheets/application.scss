@@ -230,25 +230,24 @@ $phases: (live, $live-colour),
 }
 
 .tag {
-  color: white !important;
+  color: $white;
   display: inline-block;
-  margin-left: -10px;
+  line-height: 1.6;
   padding: 4px 10px 2px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-}
+  vertical-align: middle;
 
-.headline {
-  color: white;
-  display: inline-block;
-  font-weight: normal;
-  padding: 2px 8px 0;
-  text-transform: none;
+  .heading-medium &,
+  .heading-small & {
+    font-size: 16px;
+    margin-right: 10px;
+  }
 
-  strong {
-    font-size: 18px;
-    font-weight: 700;
+  .phase-history & {
+    font-size: 20px;
+    margin-left: -10px;
   }
 }
 
@@ -264,10 +263,11 @@ $phases: (live, $live-colour),
   padding-bottom: 10px;
 
   h3 {
-    margin: 0;
+    margin: 0 0 0 -10px;
   }
 
   p {
+    font-size: 16px;
     margin: 10px 0 0;
   }
 }

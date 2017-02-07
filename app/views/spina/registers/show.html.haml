@@ -8,22 +8,22 @@
     .govspeak
       = govspeak(@register.history)
 
-    %h2 Project history
+    %h2 Register history
     .phase-history
       - @register.phases.each do |phase|
         %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-          %h3= link_to phase.name, "#{'#' + phase.name.downcase}", class: "tag background-#{phase.name.downcase}"
+          %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
           %p= phase.phase_update
 
-    %h2 Project updates
+    %h2 Register updates
     - @register.phases.each do |phase|
       - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-      %div{class: "headline background-#{phase.name.downcase}", id: "#{phase.name.downcase}"}
-        %strong= phase.name
-
       - grouped_steps.each do |step|
-        %h3{class: "heading-medium", id: "#{step.title.parameterize}"}= step.title
+        %h3{class: "heading-medium", id: "#{step.title.parameterize}"}
+          %span{class: "tag background-#{phase.name.downcase}"}
+            = phase.name
+          = step.title
         .govspeak
           = govspeak(step.content)
 
@@ -48,7 +48,9 @@
           - @register.phases.each do |phase|
             - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-            %h4.heading-small= phase.name
+            %h4{class: "heading-small"}
+              %span{class: "tag background-#{phase.name.downcase}"}
+                = phase.name
 
             %ul.no-bullets
               - grouped_steps.each do |step|
