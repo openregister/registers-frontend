@@ -35,6 +35,8 @@ module Spina
     has_many :phases, -> { order('position ASC') }
     accepts_nested_attributes_for :phases, reject_if: :all_blank, allow_destroy: true
 
+    scope :by_phase, -> (phase) { where register_phase: phase }
+
     private
 
     def set_slug

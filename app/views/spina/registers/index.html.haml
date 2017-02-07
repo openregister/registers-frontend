@@ -6,13 +6,22 @@
     .govspeak
       = govspeak(@page.content(:text))
 
-.grid-row
-  - @current_phases.each do |phase|
-    - registers = @registers.select{ |register| register.register_phase == phase }
+- if params[:phase].present?
+  .grid-row
     .column-one-fifth
-      %div{class: "data border-#{phase.downcase}"}
-        %span.data-item.bold-xxlarge= registers.size
-        %span.data-item.bold-xsmall Registers in #{phase.downcase}
+      %div{class: "data border-#{params[:phase].downcase}"}
+        %span.data-item.bold-xxlarge= @registers.size
+        %span.data-item.bold-xsmall Registers in #{params[:phase]}
+      = link_to "View all registers", registers_path
+
+- else
+  .grid-row
+    - @current_phases.each do |phase|
+      - registers = @registers.select{ |register| register.register_phase == phase }
+      .column-one-fifth
+        %div{class: "data border-#{phase.downcase}"}
+          %span.data-item.bold-xxlarge= registers.size
+          %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", registers_path(phase: phase)
 
 .grid-row
   .column-full

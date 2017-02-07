@@ -52,6 +52,11 @@ html {
   scroll-behavior: smooth;
 }
 
+// Override purple colour
+a:visited {
+  color: $govuk-blue;
+}
+
 // Column full width
 // ==========================================================================
 
@@ -130,11 +135,17 @@ $phases: (live, $live-colour),
 
 .data {
   border-top: 15px solid $black;
-  margin: 40px 0 60px 0;
+  margin-bottom: 60px;
   padding-top: 20px;
 
   details {
     font-size: 16px;
+  }
+
+  & + a {
+    display: block;
+    font-size: 16px;
+    margin: -50px 0 60px;
   }
 }
 

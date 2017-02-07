@@ -5,7 +5,12 @@ module Spina
     layout "layouts/default/application"
 
     def index
-      @registers = Spina::Register.order("#{sort_column} #{sort_direction}")
+      if params[:phase].present?
+        @registers = Spina::Register.by_phase(params[:phase]).order("#{sort_column} #{sort_direction}")
+      else
+        @registers = Spina::Register.order("#{sort_column} #{sort_direction}")
+      end
+
       @page = Spina::Page.find_by(name: 'registerspage')
       @current_phases = Spina::Register::CURRENT_PHASES
     end
