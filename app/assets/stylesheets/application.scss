@@ -121,13 +121,13 @@ $phases: (live, $live-colour),
 
   .links {
     padding-right: 0;
+    text-align: right;
 
     a {
       display: inline-block;
-      text-align: right;
 
-      &:first-child {
-        margin-right: 20px;
+      &:nth-child(2) {
+        margin-left: 20px;
       }
     }
   }
