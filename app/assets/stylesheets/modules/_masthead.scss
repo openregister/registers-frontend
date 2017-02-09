@@ -1,0 +1,21 @@
+/**
+ * Masthead Component
+ *
+ * Notes:
+ * - It's big and it's blue
+ *
+ * Example Usage:
+ *
+ * <div class="masthead">
+ *  [...]
+ * </div>
+ */
+
+.masthead {
+  background-color: $govuk-blue;
+  margin-bottom: $gutter-half;
+
+  @include media(tablet) {
+    margin-bottom: $gutter;
+  }
+}

@@ -1,26 +1,46 @@
-- content_for :page_title, "#{@page_title} - Open Registers"
+!!!
+%html
+  %head
+    %meta{ charset: "utf-8" }
+    %meta{ content: "width=device-width, initial-scale=1", name: "viewport" }
+    %meta{ name: "description", content: "#{@page_description}" }
+    = csrf_meta_tags
+    %title GOV.UK Registers - #{@page_title}
+    = stylesheet_link_tag 'application', media: 'all'
 
-- content_for :head do
-  = stylesheet_link_tag 'application', media: 'all'
-  = csrf_meta_tags
-  %meta{ name: "description", content: "#{@page_description}" }
+  %body
+    %a.skip-link{href: "#main"} Skip to main content
+    %header{class: "header #{'header--without-border' if current_page?(spina.root_path)}"}
+      .header__container
+        .header__brand
+          = link_to spina.root_path do
+            %span.header__title
+              = current_account.name
+              %span.phase-banner Beta
+        %input#show-menu.header__navigation-toggle-checkbox{"aria-controls" => "navigation", "aria-expanded" => "false", :type => "checkbox"}/
+        %label.header__navigation-toggle{:for => "show-menu"}
+          Menu
+        %nav#navigation.header__navigation{"aria-hidden" => "true", "aria-label" => "Top Level Navigation"}
+          %ul
+            = render 'default/shared/navigation'
+            %li
+              = link_to "Documentation", "http://open-registers-docs.readthedocs.io/en/latest/", target: :blank
 
-- content_for :header_class, "with-proposition"
+    %main#main{role: "main"}
+      = yield
 
-- content_for :proposition_header do
-  .header-proposition
-    .content
-      #nav.proposition-menu
-        = link_to current_account.name, spina.root_path, id: "proposition-name"
-        %ul#proposition-links
-          = render 'default/shared/navigation'
+    %footer#footer.group.js-footer{role: "contentinfo"}
+      .footer-wrapper
+        .footer-meta
+          .footer-meta-inner
+            .open-government-licence
+              %p.logo
+                %a{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", :rel => "license"} Open Government Licence
+              %p
+                All content is available under the
+                = succeed "," do
+                  %a{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", :rel => "license"} Open Government Licence v3.0
+          .copyright
+            %a{href: "http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/"}= content_for?(:crown_copyright_message) ? yield(:crown_copyright_message) : "© Crown copyright"
 
-- content_for :content do
-  %main{id: 'content', role:'main'}
-    .phase-banner
-      %p
-        %strong.phase-tag ALPHA
-        %span This is a new service – your <a href="#">feedback</a> will help us to improve it.
-    = yield
-
-= render file: 'layouts/govuk_template'
+    = javascript_include_tag :application

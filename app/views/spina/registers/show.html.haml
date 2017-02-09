@@ -1,72 +1,84 @@
 - @page_title = "#{@register.name.capitalize} Register"
 - @page_description = ""
 
-.grid-row
-  .column-two-thirds
-    %h1.heading-xlarge= @page_title
+%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
+  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+        %span{itemprop: "name"} Components
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"} Registers
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to registers_path, itemprop: "item" do
+        %span{itemprop: "name"} Register status
+    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"}= @register.name
 
-    .govspeak
-      = govspeak(@register.history)
+.container
+  .grid-row
+    .column-two-thirds
+      %h1= @page_title
 
-    %h2 Register history
-    .phase-history
+      .govspeak
+        = govspeak(@register.history)
+
+      %h2 Register history
+      .phase-history
+        - @register.phases.each do |phase|
+          %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
+            %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
+            %p= phase.phase_update
+
+      %h2 Register updates
       - @register.phases.each do |phase|
-        %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-          %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
-          %p= phase.phase_update
+        - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-    %h2 Register updates
-    - @register.phases.each do |phase|
-      - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
+        - grouped_steps.each do |step|
+          %h3{id: "#{step.title.parameterize}"}
+            %span{class: "tag background-#{phase.name.downcase}"}
+              = phase.name
+            = step.title
+          .govspeak
+            = govspeak(step.content)
 
-      - grouped_steps.each do |step|
-        %h3{class: "heading-medium", id: "#{step.title.parameterize}"}
-          %span{class: "tag background-#{phase.name.downcase}"}
-            = phase.name
-          = step.title
-        .govspeak
-          = govspeak(step.content)
+    .column-third
+      %aside#related
+        .related-container
+          .group
+            .phase-circle
+              %p{class: "circle background-#{@register.register_phase.downcase}"}
+              %p.circle-label= @register.register_phase.capitalize
+            - if @register.url.present?
+              %h4 Register
+              %p= link_to @register.url, @register.url, rel: 'external'
+            %h4.heading-small Authority
+            %p= @register.authority
+            - if @register.custodian.present?
+              %h4 Custodian
+              %p= @register.custodian
 
-  .column-third
-    %aside#related
-      .related-container
-        .group
-          .phase-circle
-            %p{class: "circle background-#{@register.register_phase.downcase}"}
-            %p.circle-label= @register.register_phase.capitalize
-          - if @register.url.present?
-            %h4.heading-small Register
-            %p= link_to @register.url, @register.url, rel: 'external'
-          %h4.heading-small Authority
-          %p= @register.authority
-          - if @register.custodian.present?
-            %h4.heading-small Custodian
-            %p= @register.custodian
+            %hr
 
-          %hr
+            - @register.phases.each do |phase|
+              - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-          - @register.phases.each do |phase|
-            - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
+              %h4
+                %span{class: "tag background-#{phase.name.downcase}"}
+                  = phase.name
 
-            %h4{class: "heading-small"}
-              %span{class: "tag background-#{phase.name.downcase}"}
-                = phase.name
-
-            %ul.no-bullets
-              - grouped_steps.each do |step|
-                %li
-                  - if step.completed.present?
-                    %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
-                      %g
+              %ul.no-bullets
+                - grouped_steps.each do |step|
+                  %li
+                    - if step.completed.present?
+                      %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
                         %g
-                          %path{:d => "M12.393,29.908", :fill => "#231F20"}
-                      %g
-                        %polyline{:fill => "#FFFFFF", :points => "30.848,7.857 12.811,25.895 3.836,16.921 \t"}
-                        %polygon{:fill => "#231F20", :points => "27.012,11.66 10.742,27.93 3.535,20.724 0,24.26 10.742,35 30.547,15.195 \t"}
-                  - else
-                    %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
-                  = link_to step.title, "#{ '#' + step.title.parameterize}"
-
-.grid-row
-  .column-two-thirds
-    %p= link_to "All registers", '/registers', class: 'link-back'
+                          %g
+                            %path{:d => "M12.393,29.908", :fill => "#231F20"}
+                        %g
+                          %polyline{:fill => "#FFFFFF", :points => "30.848,7.857 12.811,25.895 3.836,16.921 \t"}
+                          %polygon{:fill => "#231F20", :points => "27.012,11.66 10.742,27.93 3.535,20.724 0,24.26 10.742,35 30.547,15.195 \t"}
+                    - else
+                      %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
+                    = link_to step.title, "#{ '#' + step.title.parameterize}"

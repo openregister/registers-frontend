@@ -1,7 +1,44 @@
 - @page_title = @page.seo_title
 - @page_description = @page.description
 
-.grid-row
-  .column-full
-    .govspeak
-      = govspeak(@page.content(:text))
+.masthead
+  %nav{class: "breadcrumbs breadcrumbs--inverse", "aria-label" => "Breadcrumbs"}
+    %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+      %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+        = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+          %span{itemprop: "name"} Components
+      %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+        %a{href: "#main", itemprop: "item"}
+          %span{itemprop: "name"} Registers
+
+  .hero.hero--breaded
+    .hero__content
+      .hero__body
+        %h1.hero__title Build services using accurate and up-to-date data
+        .hero__inline-image
+          = image_tag "registers-top-image.png", role: "presentation"
+        %p.hero__description
+          Use registers to build your service and get access to current and reliable data.
+      .hero__aside-image
+        = image_tag "registers-top-image.png", role: "presentation"
+
+.container
+  .grid-row
+    .column-two-thirds
+      %section.content-section
+        .govspeak
+          = govspeak(@page.content(:text))
+    .column-one-third
+      %aside.related-items
+        %h2.related-items__title Registers you can use
+        %ul.related-items__list
+          %li
+            %a{:href => "https://country.register.gov.uk/"} Country register
+          %li
+            %a{:href => "https://territory.register.gov.uk/"} Territory register
+          %li
+            %a{:href => "https://local-authority-eng.register.gov.uk/"} Local authority England register
+          %li
+            %a{:href => "https://local-authority-type.register.gov.uk/"} Local authority type register
+
+
