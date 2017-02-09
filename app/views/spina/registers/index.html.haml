@@ -1,37 +1,50 @@
 - @page_title = @page.seo_title
 - @page_description = @page.description
 
-.grid-row
-  .column-full
-    .govspeak
-      = govspeak(@page.content(:text))
+%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
+  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+        %span{itemprop: "name"} Components
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to root_path, itemprop: "item" do
+        %span{itemprop: "name"} Registers
+    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"}= @page.seo_title
 
-- if params[:phase].present?
+.container
   .grid-row
-    .column-one-fifth
-      %div{class: "data border-#{params[:phase].downcase}"}
-        %span.data-item.bold-xxlarge= @registers.size
-        %span.data-item.bold-xsmall Registers in #{params[:phase]}
-      = link_to "View all registers", registers_path
+    .column-one-whole
+      .govspeak
+        = govspeak(@page.content(:text))
 
-- else
-  .grid-row
-    - @current_phases.each do |phase|
-      - registers = @registers.select{ |register| register.register_phase == phase }
+  - if params[:phase].present?
+    .grid-row
       .column-one-fifth
-        %div{class: "data border-#{phase.downcase}"}
-          %span.data-item.bold-xxlarge= registers.size
-          %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", registers_path(phase: phase)
+        %div{class: "data border-#{params[:phase].downcase}"}
+          %span.data-item.bold-xxlarge= @registers.size
+          %span.data-item.bold-xsmall Registers in #{params[:phase]}
+        = link_to "View all registers", registers_path
 
-.grid-row
-  .column-full
-    %table.register-status-table
-      %thead
-        %tr
-          %th= sort_link "name", "Register"
-          %th= sort_link "register_phase", "Status"
-          %th= sort_link "authority", "Managed by"
-          %th
-      %tbody
-        - @registers.each do |register|
-          = render partial: 'spina/registers/register', object: register
+  - else
+    .grid-row
+      - @current_phases.each do |phase|
+        - registers = @registers.select{ |register| register.register_phase == phase }
+        .column-one-fifth
+          %div{class: "data border-#{phase.downcase}"}
+            %span.data-item.bold-xxlarge= registers.size
+            %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", registers_path(phase: phase)
+
+  .grid-row
+    .column-one-whole
+      %table.register-status-table
+        %thead
+          %tr
+            %th= sort_link "name", "Register"
+            %th= sort_link "register_phase", "Status"
+            %th= sort_link "authority", "Managed by"
+            %th
+        %tbody
+          - @registers.each do |register|
+            = render partial: 'spina/registers/register', object: register
