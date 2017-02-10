@@ -9,5 +9,5 @@
       %div{class: "logo-with-crest #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
   %td.links
-    = link_to "View Register", register.url, target: :blank if register.url.present?
-    = link_to "View History", register_path(register.slug)
+    = link_to "View register", register.url, target: :blank if register.url.present?
+    = link_to "View history", register_path(register.slug)
