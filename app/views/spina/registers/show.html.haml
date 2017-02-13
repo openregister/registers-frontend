@@ -24,19 +24,19 @@
       .govspeak
         = govspeak(@register.history)
 
-      %h2 Register history
+      %h2.heading-large Register history
       .phase-history
         - @register.phases.each do |phase|
           %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
             %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
             %p= phase.phase_update
 
-      %h2 Register updates
+      %h2.heading-large Register updates
       - @register.phases.each do |phase|
         - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
         - grouped_steps.each do |step|
-          %h3{id: "#{step.title.parameterize}"}
+          %h3.heading-medium{id: "#{step.title.parameterize}"}
             %span{class: "tag background-#{phase.name.downcase}"}
               = phase.name
             = step.title
@@ -51,12 +51,12 @@
               %p{class: "circle background-#{@register.register_phase.downcase}"}
               %p.circle-label= @register.register_phase.capitalize
             - if @register.url.present?
-              %h4 Register
+              %h4.heading-small Register
               %p= link_to @register.url, @register.url, rel: 'external'
             %h4.heading-small Authority
             %p= @register.authority
             - if @register.custodian.present?
-              %h4 Custodian
+              %h4.heading-small Custodian
               %p= @register.custodian
 
             %hr
@@ -64,11 +64,11 @@
             - @register.phases.each do |phase|
               - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-              %h4
+              %h4.heading-small
                 %span{class: "tag background-#{phase.name.downcase}"}
                   = phase.name
 
-              %ul.no-bullets
+              %ul.tick-list
                 - grouped_steps.each do |step|
                   %li
                     - if step.completed.present?

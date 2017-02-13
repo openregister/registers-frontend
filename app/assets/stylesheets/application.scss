@@ -60,14 +60,6 @@ h1 {
   @extend .heading-xlarge;
 }
 
-.no-bullets {
-  margin-left: 0;
-
-  li {
-    list-style-type: none;
-  }
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -215,7 +207,7 @@ $phases: (live, $live-colour),
   font-size: 24px;
   left: 0px;
   position: absolute;
-  margin: 5px 0 0;
+  margin: 0;
   text-align: center;
   top: 50%;
   width: 100%;
@@ -272,7 +264,7 @@ $phases: (live, $live-colour),
   color: $white;
   display: inline-block;
   line-height: 1.6;
-  padding: 4px 10px 2px;
+  padding: 2px 10px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -322,5 +314,15 @@ $phases: (live, $live-colour),
 
   .txt-#{$phases} {
     color: $colour;
+  }
+}
+
+.tick-list {
+  margin-left: 0;
+  padding-left: 0;
+
+  li {
+    font-size: 18px;
+    list-style-type: none;
   }
 }
