@@ -16,7 +16,7 @@ module Spina
     end
 
     def show
-      @register = Spina::Register.find_by_slug(params[:id])
+      @register = Spina::Register.find_by_slug!(params[:id])
     end
 
     private
