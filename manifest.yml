@@ -1,0 +1,6 @@
+---
+applications:
+- name: registers
+  memory: 256MB
+  buildpack: ruby_buildpack
+  instances: 2
