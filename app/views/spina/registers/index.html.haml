@@ -9,9 +9,13 @@
     %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       = link_to root_path, itemprop: "item" do
         %span{itemprop: "name"} Registers
-    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      %a{href: "#main", itemprop: "item"}
+    %li{class: "breadcrumbs__item #{'breadcrumbs__item--active' unless params[:phase].present?}", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "/registers", itemprop: "item"}
         %span{itemprop: "name"}= @page.menu_title
+    - if params[:phase].present?
+      %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+        = link_to "/register-status", itemprop: "item" do
+          %span{itemprop: "name"} Registers in #{params[:phase]}
 
 .container
   .grid-row
@@ -25,7 +29,6 @@
         %div{class: "data border-#{params[:phase].downcase}"}
           %span.data-item.bold-xxlarge= @registers.size
           %span.data-item.bold-xsmall Registers in #{params[:phase]}
-        = link_to "View all registers", registers_path
 
   - else
     .grid-row
