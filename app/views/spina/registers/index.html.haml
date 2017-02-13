@@ -34,7 +34,7 @@
         .column-one-fifth
           %div{class: "data border-#{phase.downcase}"}
             %span.data-item.bold-xxlarge= registers.size
-            %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", registers_path(phase: phase)
+            %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", request.query_parameters.merge({ phase: phase })
 
   .grid-row
     .column-one-whole
