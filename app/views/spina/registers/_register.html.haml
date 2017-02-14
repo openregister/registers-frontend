@@ -6,7 +6,7 @@
     %span{class: "#{register.register_phase.downcase} status"}= register.register_phase
   %td
     %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
-      %div{class: "logo-with-crest #{crest_class_name(register.authority.parameterize)}"}
+      %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
   %td.links
     = link_to "View register", register.url, target: :blank if register.url.present?
