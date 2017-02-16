@@ -48,6 +48,9 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'whitehall/typography';
 @import 'whitehall/gov_speak';
 
+// From alphagov/spotlight
+@import 'spotlight/*';
+
 #main {
   display: block;
   margin-bottom: $gutter * 3;
@@ -134,20 +137,76 @@ $phases: (live, $live-colour),
     white-space: normal;
   }
 
-  th {
-    border-top: 2px solid $grey-3;
+  tr {
+    width: 100%;
+  }
+
+  thead th {
     font-weight: normal;
+
+    @include media(tablet) {
+      border-top: 2px solid $grey-3;
+
+      &:nth-of-type(1) {
+        width: 285px;
+      }
+
+      &:nth-of-type(2) {
+        width: 150px;
+      }
+
+      &:nth-of-type(3) {
+        width: 100px;
+      }
+
+      &:nth-of-type(4) {
+        width: 300px;
+      }
+    }
+  }
+
+  @include media(tablet) {
+    tbody {
+      th {
+        width: 300px;
+      }
+
+      td {
+        &:nth-of-type(1) {
+          width: 150px;
+        }
+
+        &:nth-of-type(2) {
+          width: 100px;
+        }
+
+        &:nth-of-type(3) {
+          width: 300px;
+        }
+      }
+    }
   }
 
   .links {
-    padding-right: 0;
-    text-align: right;
+    @include media(tablet) {
+      padding-right: 0;
+      text-align: right;
+    }
 
     a {
       display: inline-block;
+      font-size: 14px;
+
+      @include media(tablet) {
+        font-size: 16px;
+      }
 
       &:nth-child(2) {
-        margin-left: 20px;
+        margin-left: 10px;
+
+        @include media(tablet) {
+          margin-left: 20px;
+        }
       }
     }
   }
@@ -324,5 +383,11 @@ $phases: (live, $live-colour),
   li {
     font-size: 18px;
     list-style-type: none;
+  }
+}
+
+@include media(tablet) {
+  .mq-small-only {
+    display: none;
   }
 }

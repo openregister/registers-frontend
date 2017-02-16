@@ -41,13 +41,18 @@
 
   .grid-row
     .column-one-whole
-      %table.register-status-table
+      %h3.heading-small.mq-small-only Sort by:
+      %table.register-status-table.floated-header.table-collapsible
         %thead
           %tr
-            %th= sort_link "name", "Register"
-            %th= sort_link "register_phase", "Status"
-            %th= sort_link "authority", "Managed by"
-            %th
+            %th{role: "columnheader", scope: "col"}
+              = sort_link "name", "Register"
+            %th{role: "columnheader", scope: "col"}
+              = sort_link "register_phase", "Status"
+            %th{role: "columnheader", scope: "col"}
+              = sort_link "register_authority", "Managed by"
+            %th{role: "columnheader", scope: "col"}
         %tbody
-          - @registers.each do |register|
-            = render partial: 'spina/registers/register', object: register
+          - @registers.each_with_index do |register, index|
+            - index = index + 1
+            = render partial: 'spina/registers/register', object: register, locals: { index: index }

@@ -1,13 +1,13 @@
 %tr
-  %td
-    %h3.heading-small= register.name
+  %th{"data-title" => index, }
+    %h4.heading-xsmall= register.name
     = govspeak(register.description)
-  %td
+  %td{"data-title" => "Phase: "}
     %span{class: "#{register.register_phase.downcase} status"}= register.register_phase
-  %td
+  %td{"data-title" => "Managed by: "}
     %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
       %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
-  %td.links
+  %td{class: "links", "data-title" => "View more: "}
     = link_to "View register", register.url, target: :blank if register.url.present?
     = link_to "View history", register_path(register.slug)
