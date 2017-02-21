@@ -5,10 +5,12 @@ module Spina
     layout "layouts/default/application"
 
     def index
+      @search = Spina::Register.ransack(params[:q])
+
       if params[:phase].present?
-        @registers = Spina::Register.by_phase(params[:phase]).order("#{sort_column} #{sort_direction}")
+        @registers = @search.result.by_phase(params[:phase]).by_name
       else
-        @registers = Spina::Register.order("#{sort_column} #{sort_direction}")
+        @registers = @search.result.sort_by_phase_name_asc.by_name
       end
 
       @page = Spina::Page.find_by(name: 'registerspage')
@@ -17,20 +19,6 @@ module Spina
 
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
-    end
-
-    private
-
-    def sortable_columns
-      ["name", "register_phase", "authority"]
-    end
-
-    def sort_column
-      sortable_columns.include?(params[:column]) ? params[:column] : "name"
-    end
-
-    def sort_direction
-      ["asc", "desc"].include?(params[:direction]) ? params[:direction] : "asc"
     end
   end
 end

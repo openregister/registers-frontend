@@ -33,6 +33,9 @@ gem 'govspeak', '~> 3.4.0'
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
 gem 'globalize', github: 'globalize/globalize', branch: 'master'
 
+# Ransack
+gem 'ransack', github: 'activerecord-hackery/ransack'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end

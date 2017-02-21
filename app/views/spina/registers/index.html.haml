@@ -46,11 +46,11 @@
         %thead
           %tr
             %th{role: "columnheader", scope: "col"}
-              = sort_link "name", "Register"
+              = sort_link(@search, :name, "Register", default_order: :desc)
             %th{role: "columnheader", scope: "col"}
-              = sort_link "register_phase", "Status"
+              = sort_link(@search, :phase_name, "Status", default_order: :desc)
             %th{role: "columnheader", scope: "col"}
-              = sort_link "register_authority", "Managed by"
+              = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
             %th{role: "columnheader", scope: "col"}
         %tbody
           - @registers.each_with_index do |register, index|

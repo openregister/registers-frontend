@@ -286,36 +286,10 @@ $phases: (live, $live-colour),
   width: 100%;
 }
 
-.sorting {
-  font-weight: 700;
-
-  &:after {
-    content: "";
-    display: inline-block;
-    height: 0;
-    line-height: 16px;
-    margin-left: 5px;
-    width: 0;
-  }
-}
-
-.sorting-up {
-  @extend .sorting;
-
-  &:after {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 8px solid $govuk-blue;
-  }
-}
-
-.sorting-down {
-  @extend .sorting;
-
-  &:after {
-    border-bottom: 8px solid $govuk-blue;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
+.sort_link {
+  &.asc,
+  &.desc {
+    font-weight: 700;
   }
 }
 
