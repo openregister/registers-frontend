@@ -23,7 +23,18 @@ module Spina
                   'Department for Environment, Food and Rural Affairs',
                   'General Register Office',
                   'National Offender Management Service',
-                  'Animal and Plant Health Agency'
+                  'Animal and Plant Health Agency',
+                  'HM Passport Office',
+                  'Scottish government',
+                  'Driver and Vehicle Licensing Agency',
+                  'HM Revenue and Customs',
+                  'Homes and Communities Agency',
+                  'Charity Commission',
+                  'The Pensions Regulator',
+                  'Department for Transport',
+                  'Ministry of Defence',
+                  'Department of Health',
+                  'The Planning Inspectorate'
                 ]
 
     validates_presence_of :name, :register_phase, :authority
