@@ -58,6 +58,27 @@
     }
   }
 
+  // Some of the organisations include `and` where the css class doesn't so these correct the border colours
+  &.department-for-work-and-pensions .logo-with-crest {
+    border-color: $department-for-work-pensions;
+  }
+
+  &.welsh-government .logo-with-crest {
+    border-color: $wales-office;
+  }
+
+  &.department-for-environment-food-and-rural-affairs .logo-with-crest {
+    border-color: $department-for-environment-food-rural-affairs;
+  }
+
+  &.hm-revenue-and-customs .logo-with-crest {
+    border-color: $hm-revenue-customs;
+  }
+
+  &.foreign-and-commonwealth-office .logo-with-crest {
+    border-color: $foreign-commonwealth-office;
+  }
+
   .logo-link:link,
   .logo-link:visited {
     color: $black;
