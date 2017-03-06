@@ -33,12 +33,14 @@
         %h2.related-items__title Registers you can use
         %ul.related-items__list
           %li
-            %a{:href => "https://country.register.gov.uk/"} Country register
+            = link_to "Country register", "https://country.register.gov.uk/"
           %li
-            %a{:href => "https://territory.register.gov.uk/"} Territory register
+            = link_to "Territory register", "https://territory.register.gov.uk/"
           %li
-            %a{:href => "https://local-authority-eng.register.gov.uk/"} Local authority England register
+            = link_to "Local authority England register", "https://local-authority-eng.register.gov.uk/"
           %li
-            %a{:href => "https://local-authority-type.register.gov.uk/"} Local authority type register
-
-
+            = link_to "Local authority type register", "https://local-authority-type.register.gov.uk/"
+        %h2.related-items__title Upcoming registers
+        %ul.related-items__list
+          %li
+            = link_to "View all registers in progress", spina.registers_path
