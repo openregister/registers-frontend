@@ -15,3 +15,6 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+//=require govuk_toolkit
+
+	var selectionButtons = new GOVUK.SelectionButtons("label input[type='radio']");
