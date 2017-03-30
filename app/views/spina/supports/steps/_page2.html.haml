@@ -1,0 +1,11 @@
+#step_two
+  %h3.heading-medium What type of problem would you like to report?
+  .form-group
+    %fieldset
+      %legend.visually-hidden What type of problem would you like to report?
+      .multiple-choice
+        = f.radio_button :step_two, "general", checked: true
+        = f.label :step_two, "A problem using Registers"
+      .multiple-choice
+        = f.radio_button :step_two, "specific"
+        = f.label :step_two, "A problem with the data on a specfic Register"

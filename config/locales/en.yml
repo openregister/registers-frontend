@@ -29,3 +29,10 @@ en:
       new: "New %{scaffold_name}"
       save: "Save %{scaffold_name}"
       delete_confirmation: "Are you sure you want to delete <strong>%{subject}'s</strong> register?"
+  helpers:
+    label:
+      support:
+        email: Email address
+  errors:
+    messages:
+      blank: is required

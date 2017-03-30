@@ -31,6 +31,13 @@ GIT
       sass-rails
       turbolinks (~> 5)
 
+GIT
+  remote: https://github.com/ministryofjustice/govuk_elements_form_builder.git
+  revision: f5c4588193fdd2b15ba4088de62a4ebc100e277c
+  specs:
+    govuk_elements_form_builder (0.0.4)
+      rails (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -285,6 +292,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.2)
   govspeak (~> 3.4.0)
+  govuk_elements_form_builder!
   govuk_elements_rails
   govuk_frontend_toolkit
   govuk_template

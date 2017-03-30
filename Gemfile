@@ -29,6 +29,7 @@ gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
 gem 'govuk_elements_rails'
 gem 'govspeak', '~> 3.4.0'
+gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'

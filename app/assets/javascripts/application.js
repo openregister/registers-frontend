@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cocoon
-//= require govuk_toolkit
 //= require_tree .
