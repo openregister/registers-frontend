@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20170329112348) do
     t.string "name"
     t.string "email"
     t.string "message"
+    t.string "subject"
   end
 
   create_table "spina_text_translations", force: :cascade do |t|

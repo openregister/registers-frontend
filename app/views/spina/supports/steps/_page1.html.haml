@@ -4,8 +4,8 @@
     %fieldset
       %legend.visually-hidden How can we help you?
       .multiple-choice
-        = f.radio_button :step_one, "problem", checked: true
-        = f.label :step_one_problem, "I want to report a problem"
+        = f.radio_button :subject, "Problem", checked: true
+        = f.label :subject, "I want to report a problem"
       .multiple-choice
-        = f.radio_button :step_one, "question"
-        = f.label :step_one_question, "I have a question or want to give feedback"
+        = f.radio_button :subject, "Question or Feedback"
+        = f.label :subject, "I have a question or want to give feedback"

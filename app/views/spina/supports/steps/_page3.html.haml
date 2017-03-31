@@ -1,8 +1,0 @@
-#step_three
-  %h3.heading-medium Ask a question or give feedback
-
-  - if params[:support][:step_two] == "specific"
-    = f.text_field :register_name
-  = f.text_area :message, rows: 10
-  = f.text_field :name
-  = f.email_field :email

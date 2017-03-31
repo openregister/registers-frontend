@@ -3,7 +3,7 @@ require 'uri'
 
 class DeskproFeedback
 
-  attr_reader :params, :name, :email, :message, :register_name
+  attr_reader :params, :name, :email, :message, :register_name, :subject
 
   @@url = ENV["DESKPRO_API_BASE_URL"]
   @@key = ENV["DESKPRO_API_KEY"]
@@ -13,6 +13,7 @@ class DeskproFeedback
     @@person_email = params[:email]
     @@register = params[:register_name]
     @@message = params[:message]
+    @@subject = params[:subject]
   end
 
   def send_feedback
@@ -21,7 +22,7 @@ class DeskproFeedback
 
   # Subject, message and person identifier required https://manuals.deskpro.com/html/developer-apps/api/api-tickets.html
   def post_ticket_url
-    URI.encode(@@url + '/tickets' + '?subject=Feedback&message=' + @@message + '&person_email=' + @@person_email + '&person_name=' + @@person_name)
+    URI.encode(@@url + '/tickets?subject=' + @@subject + '&message=' + @@message + '&person_email=' + @@person_email + '&person_name=' + @@person_name)
   end
 
 end

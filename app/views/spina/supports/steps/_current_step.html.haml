@@ -1,4 +1,5 @@
 = f.hidden_field :current_step, value: f.object.current_step
+= f.hidden_field :subject, value: f.object.subject
 
 = render "spina/supports/steps/page#{f.object.current_step + 1}", f: f
 

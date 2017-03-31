@@ -36,8 +36,7 @@ module Spina
 
         params.require(:support).permit(
           :current_step,
-          :step_one,
-          :step_two,
+          :subject,
           :register_name,
           :name,
           :email,
