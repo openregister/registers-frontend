@@ -7,7 +7,7 @@ module Spina
       layout "spina/admin/admin"
 
       def index
-        @registers = Spina::Register.all
+        @registers = Spina::Register.by_name
       end
 
       def new
