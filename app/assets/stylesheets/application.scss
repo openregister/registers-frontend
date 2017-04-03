@@ -18,6 +18,9 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'elements/elements-typography';
 @import 'elements/buttons';
 @import 'elements/forms';
+@import 'elements/forms/form-multiple-choice';
+@import 'elements/forms/form-date';
+@import 'elements/forms/form-validation';
 @import 'elements/lists';
 @import 'elements/panels';
 @import 'elements/tables';
@@ -363,5 +366,34 @@ $phases: (live, $live-colour),
 @include media(tablet) {
   .mq-small-only {
     display: none;
+  }
+}
+
+.error-summary {
+  @include media(tablet) {
+    padding: 15px;
+  }
+}
+
+.error-summary-list {
+  margin: 0;
+}
+
+.form-group.error {
+  margin-right: 15px;
+  border-left: 4px solid $error-colour;
+  padding-left: 10px;
+
+  @include media(tablet) {
+    border-left: 5px solid $error-colour;
+    padding-left: 15px;
+  }
+
+  .form-control {
+    border: 4px solid $error-colour;
+  }
+
+  .error-message {
+    padding-bottom: 4px;
   }
 }

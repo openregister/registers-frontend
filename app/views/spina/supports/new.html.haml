@@ -1,0 +1,16 @@
+- @page_title = "Support"
+
+.container
+  .grid-row
+    .column-one-whole
+      %h1.heading-large Support
+      - if @support.errors.any?
+        %div{id: "validation-error-message-no-js", class: "error-summary form-group"}
+          %h1.heading-medium.error-summary-heading Support form could not be sent
+          %ul.error-summary-list
+            - @support.errors.full_messages.each do |error|
+              %li
+                = error
+
+      = form_for @support do |f|
+        = render 'spina/supports/steps/current_step', f: f

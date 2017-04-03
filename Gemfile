@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'http', '2.2.1'
 
 # Nested forms
 gem 'cocoon'
@@ -24,14 +25,14 @@ gem 'cocoon'
 gem 'haml-rails'
 
 # GDS Frontend Toolkit, templates and elements
-gem 'govuk_frontend_toolkit', git: 'https://github.com/alphagov/govuk_frontend_toolkit_gem.git', submodules: true
+gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
 gem 'govuk_elements_rails'
 gem 'govspeak', '~> 3.4.0'
+gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
-gem 'globalize', github: 'globalize/globalize', branch: 'master'
 
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'

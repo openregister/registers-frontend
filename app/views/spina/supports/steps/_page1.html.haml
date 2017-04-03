@@ -1,0 +1,11 @@
+#step_one
+  %h3.heading-medium How can we help you?
+  .form-group
+    %fieldset
+      %legend.visually-hidden How can we help you?
+      .multiple-choice
+        = f.radio_button :subject, "Problem", checked: true
+        = f.label :subject, "I want to report a problem"
+      .multiple-choice
+        = f.radio_button :subject, "Question or Feedback"
+        = f.label :subject, "I have a question or want to give feedback"

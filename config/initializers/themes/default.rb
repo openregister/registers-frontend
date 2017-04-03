@@ -38,4 +38,10 @@
     view_template:  'registerspage'
   }]
 
+  theme.navigations = [{
+    name: 'header',
+    label: 'Header',
+    auto_add_pages: true
+  }]
+
 end
