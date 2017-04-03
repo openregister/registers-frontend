@@ -4,38 +4,11 @@ module Spina
     before_validation :set_slug
 
     CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta', 'Live']
-    AUTHORITIES =
-                [
-                  'Companies House',
-                  'Ministry of Justice',
-                  'Department for Education',
-                  'Foreign and Commonwealth Office',
-                  'Welsh government',
-                  'Government Digital Service',
-                  'Department for Work and Pensions',
-                  'Home Office',
-                  'Valuation Office Agency',
-                  'Cabinet Office',
-                  'NHS',
-                  'Government Statistical Service',
-                  'Department for Communities and Local Government',
-                  'Food Standards Agency',
-                  'Department for Environment, Food and Rural Affairs',
-                  'General Register Office',
-                  'National Offender Management Service',
-                  'Animal and Plant Health Agency',
-                  'HM Passport Office',
-                  'Scottish government',
-                  'Driver and Vehicle Licensing Agency',
-                  'HM Revenue and Customs',
-                  'Homes and Communities Agency',
-                  'Charity Commission',
-                  'The Pensions Regulator',
-                  'Department for Transport',
-                  'Ministry of Defence',
-                  'Department of Health',
-                  'The Planning Inspectorate'
-                ]
+    AUTHORITIES = OpenRegister.register('government-organisation', :alpha)
+                              ._all_records
+                              .reject{ |r| r.end_date.present? }
+                              .sort_by(&:name)
+                              .map(&:name)
 
     validates_presence_of :name, :register_phase, :authority
     validates_uniqueness_of :name

@@ -38,6 +38,14 @@ GIT
     govuk_elements_form_builder (0.0.4)
       rails (>= 4.2)
 
+GIT
+  remote: https://github.com/openregister/openregister-ruby
+  revision: b3f28f9f1feb0ebf23870a52e04d62867ea980f2
+  specs:
+    openregister-ruby (0.0.1)
+      morph (~> 0.5.0)
+      rest-client (~> 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -195,7 +203,10 @@ GEM
     mini_magick (4.7.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    morph (0.5.1)
+      activesupport (>= 2.0.2)
     multi_json (1.12.1)
+    netrc (0.11.0)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -236,6 +247,10 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     request_store (1.3.2)
+    rest-client (2.0.1)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     ruby_parser (3.8.4)
       sexp_processor (~> 4.1)
     sanitize (2.1.0)
@@ -300,6 +315,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  openregister-ruby!
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.1)

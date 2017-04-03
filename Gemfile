@@ -28,6 +28,8 @@ gem 'govuk_template'
 gem 'govuk_elements_rails'
 gem 'govspeak', '~> 3.4.0'
 gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
+gem 'openregister-ruby', git: 'https://github.com/openregister/openregister-ruby'
+
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
