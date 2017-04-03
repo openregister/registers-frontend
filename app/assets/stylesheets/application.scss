@@ -116,8 +116,8 @@ a:visited {
 // ==========================================================================
 
 $phases: (live, $live-colour),
-         (beta, $beta-colour),
-         (alpha, $alpha-colour),
+         (beta, #f47738),
+         (alpha, #d53880),
          (discovery, $discovery-colour),
          (backlog, #2e358b);
 
@@ -217,7 +217,7 @@ $phases: (live, $live-colour),
 
 .data {
   border-top: 15px solid $black;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   padding-top: 20px;
 
   details {
