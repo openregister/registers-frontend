@@ -4,6 +4,8 @@ require 'json'
 module Spina
   class SupportsController < Spina::ApplicationController
 
+    default_form_builder GovukElementsFormBuilder::FormBuilder
+
     layout "layouts/default/application"
 
     def index
