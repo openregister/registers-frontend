@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329112348) do
+ActiveRecord::Schema.define(version: 20170404112957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,14 +220,6 @@ ActiveRecord::Schema.define(version: 20170329112348) do
   create_table "spina_structures", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "spina_supports", force: :cascade do |t|
-    t.string "register_name"
-    t.string "name"
-    t.string "email"
-    t.string "message"
-    t.string "subject"
   end
 
   create_table "spina_text_translations", force: :cascade do |t|

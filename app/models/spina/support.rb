@@ -1,11 +1,9 @@
 module Spina
-  class Support < ActiveRecord::Base
-    include MultiStepModel
+  class Support
+    include ActiveModel::Model
 
-    validates_presence_of :email, :name, :message, if: :step2?
+    attr_accessor :email, :name, :message, :subject
 
-    def self.total_steps
-      2
-    end
+    validates_presence_of :email, :name, :message
   end
 end
