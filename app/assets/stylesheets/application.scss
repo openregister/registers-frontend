@@ -369,6 +369,10 @@ $phases: (live, $live-colour),
   }
 }
 
+.new_support {
+  margin-top: 40px;
+}
+
 .error-summary {
   @include media(tablet) {
     padding: 15px;

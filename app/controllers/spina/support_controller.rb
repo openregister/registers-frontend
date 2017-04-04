@@ -2,7 +2,7 @@ require 'deskpro_feedback'
 require 'json'
 
 module Spina
-  class SupportsController < Spina::ApplicationController
+  class SupportController < Spina::ApplicationController
 
     default_form_builder GovukElementsFormBuilder::FormBuilder
 
@@ -11,21 +11,32 @@ module Spina
     def index
     end
 
-    def new
-      @wizard = ModelWizard.new(Spina::Support, session, params).start
-      @support = @wizard.object
+    def select_support
+      if params[:subject] == "problem"
+        redirect_to support_problem_path
+      else
+        redirect_to support_question_path
+      end
+    end
+
+    def problem
+      @support = Spina::Support.new
+    end
+
+    def question
+      @support = Spina::Support.new
     end
 
     def create
-      @wizard = ModelWizard.new(Spina::Support, session, params, support_params).continue
-      @support = @wizard.object
-      if @wizard.save
+      @support = Spina::Support.new(support_params)
+
+      if @support.valid?
         @deskproService = DeskproFeedback.new(support_params)
         @response = @deskproService.send_feedback
         if @response.status.code != 201
           logger.debug("Feedback ticket creation failed with status: #{@response.status} and content: #{@response.body}")
         end
-        redirect_to spina.supports_path
+        redirect_to spina.support_thanks_path
       else
         flash.now[:errors] = @support.errors[:base].first
         render :new
@@ -33,13 +44,10 @@ module Spina
     end
 
     private
-      def support_params
-        return params unless params[:support]
 
+      def support_params
         params.require(:support).permit(
-          :current_step,
           :subject,
-          :register_name,
           :name,
           :email,
           :message

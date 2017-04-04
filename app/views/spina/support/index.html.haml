@@ -4,16 +4,20 @@
   .grid-row
     .column-one-whole
       %h1.heading-large Support
-      - if @support.errors.any?
-        %div{id: "validation-error-message-no-js", class: "error-summary form-group"}
-          %h1.heading-medium.error-summary-heading Support form could not be sent
-          %ul.error-summary-list
-            - @support.errors.full_messages.each do |error|
-              %li
-                = error
 
-      = form_for @support do |f|
-        = render 'spina/supports/steps/current_step', f: f
+      %h3.heading-medium How can we help you?
+      = form_tag select_support_path do
+        .form-group
+          %fieldset
+            %legend.visually-hidden How can we help you?
+            .multiple-choice
+              = radio_button_tag :subject, :problem, checked: true
+              = label_tag :subject_problem, "I want to report a problem"
+            .multiple-choice
+              = radio_button_tag :subject, :question
+              = label_tag :subject_question, "I have a question or want to give feedback"
+        .form-group
+          = submit_tag "Continue", class: "button"
 
   .grid-row
     .column-two-thirds
