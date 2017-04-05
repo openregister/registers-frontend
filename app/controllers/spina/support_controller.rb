@@ -39,7 +39,11 @@ module Spina
         redirect_to spina.support_thanks_path
       else
         flash.now[:errors] = @support.errors[:base].first
-        render :new
+        if params[:subject] == "problem"
+          render :problem
+        else
+          render :question
+        end
       end
     end
 

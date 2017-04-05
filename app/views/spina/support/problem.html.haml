@@ -5,7 +5,7 @@
     .column-one-whole
       %h1.heading-large Report a problem
       - if @support.errors.any?
-        = render partial: "layouts/defaults/errors", locals: { object: @support }
+        = render partial: "layouts/default/errors", locals: { object: @support }
 
       = form_for @support, url: support_problem_path  do |f|
         = f.hidden_field :subject, value: "Problem"
