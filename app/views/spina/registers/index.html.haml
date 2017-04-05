@@ -8,7 +8,7 @@
         %span{itemprop: "name"} Components
     %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       = link_to root_path, itemprop: "item" do
-        %span{itemprop: "name"} Registers
+        %span{itemprop: "name"} GOV.UK Registers
     %li{class: "breadcrumbs__item #{'breadcrumbs__item--active' unless params[:phase].present?}", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "/registers", itemprop: "item"}
         %span{itemprop: "name"}= @page.menu_title
@@ -19,25 +19,20 @@
 
 .container
   .grid-row
-    .column-one-whole
-      .govspeak
-        = govspeak(@page.content(:text))
+    .column-two-thirds
+      %h1.heading-xlarge Registers
 
-  - if params[:phase].present?
+  .search-wrapper
     .grid-row
-      .column-one-fifth
-        %div{class: "data border-#{params[:phase].downcase}"}
-          %span.data-item.bold-xxlarge= @registers.size
-          %span.data-item.bold-xsmall Registers in #{params[:phase]}
-
-  - else
-    .grid-row
-      - @current_phases.each do |phase|
-        - registers = @registers.select{ |register| register.register_phase == phase }
-        .column-one-fifth
-          %div{class: "data border-#{phase.downcase}"}
-            %span.data-item.bold-xxlarge= registers.size
-            %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", request.query_parameters.merge({ phase: phase })
+      .column-one-half
+        %div{class: "js-filter-list", "aria-hidden" => "true"}
+          %form.js-filter-form
+            %fieldset
+              .form-group
+                %label{class: "form-label", for: "search"} Search for a register
+                %input{name: "search", id: "search", class: "form-control form-control-3-4"}
+      .column-one-half
+        = link_to "Suggest a register", "/", class: "link--right"
 
   .grid-row
     .column-one-whole
@@ -48,11 +43,17 @@
             %th{role: "columnheader", scope: "col"}
               = sort_link(@search, :name, "Register", default_order: :desc)
             %th{role: "columnheader", scope: "col"}
-              = sort_link(@search, :phase_name, "Status", default_order: :desc)
+              = sort_link(@search, :phase_name, "Phase", default_order: :desc)
             %th{role: "columnheader", scope: "col"}
               = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
             %th{role: "columnheader", scope: "col"}
-        %tbody
+        %tbody.js-filter-block
           - @registers.each_with_index do |register, index|
             - index = index + 1
             = render partial: 'spina/registers/register', object: register, locals: { index: index }
+
+= content_for :javascript do
+  :javascript
+    jQuery(function($) {
+      GOVUK.filterListItems.init();
+    });

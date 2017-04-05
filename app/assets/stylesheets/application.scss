@@ -17,6 +17,7 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'elements/layout';
 @import 'elements/elements-typography';
 @import 'elements/buttons';
+@import 'elements/details';
 @import 'elements/forms';
 @import 'elements/forms/form-multiple-choice';
 @import 'elements/forms/form-date';
@@ -57,6 +58,31 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 #main {
   display: block;
   margin-bottom: $gutter * 3;
+}
+
+// Defintion lists
+details {
+  margin-bottom: 1rem;
+}
+
+dl {
+  font-size: 16px;
+  overflow: hidden;
+
+  dt {
+    clear: left;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 1em;
+    width: 35%;
+  }
+
+  dd {
+    float: left;
+    margin: 0;
+    padding-bottom: 1em;
+    width: 65%;
+  }
 }
 
 // Base styles for headings
@@ -115,18 +141,21 @@ a:visited {
 // Phase styles
 // ==========================================================================
 
-$phases: (live, $live-colour),
-         (beta, #f47738),
-         (alpha, #d53880),
-         (discovery, $discovery-colour),
-         (backlog, #2e358b);
+.phase-banner {
+  color: $white;
+  padding: 2px 5px;
 
-.phase {
-  color: $page-colour;
-  display: block;
-  padding-top: 4.8px;
-  padding-bottom: 4.8px;
-  text-align: center;
+  .heading-with-phase & {
+    margin-left: 15px;
+    margin-top: 15px;
+    padding: 2px 5px;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.heading-with-phase {
+  position: relative;
 }
 
 .register-status-table {
@@ -215,141 +244,14 @@ $phases: (live, $live-colour),
   }
 }
 
-.data {
-  border-top: 15px solid $black;
-  margin-bottom: 40px;
-  padding-top: 20px;
-
-  details {
-    font-size: 16px;
-  }
-
-  & + a {
-    display: block;
-    font-size: 16px;
-    margin: -50px 0 60px;
-  }
-}
-
-.status {
-  font-weight: bold;
-
-  &:before {
-    border: 6px solid $black;
-    border-radius: 100%;
-    content: '';
-    display: inline-block;
-    height: 0;
-    margin-right: 5px;
-    width: 0;
-  }
-
-  @each $phases, $colour in $phases {
-    &.#{$phases}:before {
-      border-color: $colour;
-    }
-  }
-}
-
-// Phase circle
-// ==========================================================================
-
 .related-container {
   margin-top: 30px;
-}
-
-.phase-circle {
-  position: relative;
-  width: 40%;
-}
-
-.circle-label {
-  color: $page-colour;
-  font-weight: 700;
-  font-size: 24px;
-  left: 0px;
-  position: absolute;
-  margin: 0;
-  text-align: center;
-  top: 50%;
-  width: 100%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.circle {
-  background: $grey-1;
-  border-radius: 50% 50%;
-  color: $page-colour;
-  display: block;
-  height: 0;
-  margin: 0;
-  padding-top: 100%;
-  width: 100%;
 }
 
 .sort_link {
   &.asc,
   &.desc {
     font-weight: 700;
-  }
-}
-
-.tag {
-  color: $white;
-  display: inline-block;
-  line-height: 1.6;
-  padding: 2px 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-
-  .heading-medium &,
-  .heading-small & {
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
-  .phase-history & {
-    font-size: 20px;
-    margin-left: -10px;
-  }
-}
-
-.phase-history {
-  clear: both;
-  margin-top: 30px;
-}
-
-.phase-history-item {
-  border-left: 3px solid black;
-  margin-bottom: 0;
-  padding-left: 10px;
-  padding-bottom: 10px;
-
-  h3 {
-    margin: 0 0 0 -10px;
-  }
-
-  p {
-    font-size: 16px;
-    margin: 10px 0 0;
-  }
-}
-
-@each $phases, $colour in $phases {
-  .background-#{$phases} {
-    background-color: $colour;
-  }
-
-  .border-#{$phases} {
-    border-color: $colour;
-  }
-
-  .txt-#{$phases} {
-    color: $colour;
   }
 }
 
@@ -395,5 +297,20 @@ $phases: (live, $live-colour),
 
   .error-message {
     padding-bottom: 4px;
+  }
+}
+
+.search-wrapper {
+  margin-bottom: 40px;
+
+   @include media(tablet) {
+    .link--right {
+      float: right;
+      margin: 18px 0;
+    }
+
+    .form-group {
+      margin-bottom: 0;
+    }
   }
 }

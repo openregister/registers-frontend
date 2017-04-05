@@ -1,13 +1,13 @@
-%tr
+%tr{class: "js-filter-item", "data-filter-terms" => "#{register.name}"}
   %th{"data-title" => index, }
     %h4.heading-xsmall= register.name
     = govspeak(register.description)
   %td{"data-title" => "Phase: "}
-    %span{class: "#{register.register_phase.downcase} status"}= register.register_phase
+    = register.register_phase
   %td{"data-title" => "Managed by: "}
     %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
       %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
   %td{class: "links", "data-title" => "View more: "}
     = link_to "View register", register.url, target: :blank if register.url.present?
-    = link_to "View history", register_path(register.slug)
+    = link_to "View updates", register_path(register.slug) if register.phases.any?
