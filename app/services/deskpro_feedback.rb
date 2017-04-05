@@ -5,14 +5,17 @@ class DeskproFeedback
 
   attr_reader :params, :name, :email, :message, :register_name, :subject
 
-  @@url = ENV["DESKPRO_API_BASE_URL"]
-  @@key = ENV["DESKPRO_API_KEY"]
+  @@url = ENV['DESKPRO_API_BASE_URL']
+  @@key = ENV['DESKPRO_API_KEY']
 
   def initialize(params)
     @@person_name = params[:name]
     @@person_email = params[:email]
-    @@register = params[:register_name]
-    @@message = params[:message]
+    if params[:register_name].present?
+      @@message = 'Register name: ' + params[:register_name] + '. Description: ' + params[:message]
+    else
+      @@message = params[:message]
+    end
     @@subject = params[:subject]
   end
 
