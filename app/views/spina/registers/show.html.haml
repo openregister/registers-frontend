@@ -8,10 +8,10 @@
         %span{itemprop: "name"} Components
     %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "#main", itemprop: "item"}
-        %span{itemprop: "name"} Registers
+        %span{itemprop: "name"} GOV.UK Registers
     %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       = link_to registers_path, itemprop: "item" do
-        %span{itemprop: "name"} Register status
+        %span{itemprop: "name"} Registers
     %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "#main", itemprop: "item"}
         %span{itemprop: "name"}= @register.name
@@ -19,17 +19,12 @@
 .container
   .grid-row
     .column-two-thirds
-      %h1= @page_title
+      %h1.heading-with-phase
+        = @page_title
+        %span.phase-banner= @register.register_phase
 
       .govspeak
         = govspeak(@register.history)
-
-      %h2.heading-large Register history
-      .phase-history
-        - @register.phases.each do |phase|
-          %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-            %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
-            %p= phase.phase_update
 
       %h2.heading-large Register updates
       - @register.phases.each do |phase|
@@ -37,7 +32,7 @@
 
         - grouped_steps.each do |step|
           %h3.heading-medium{id: "#{step.title.parameterize}"}
-            %span{class: "tag background-#{phase.name.downcase}"}
+            %span.phase-banner
               = phase.name
             = step.title
           .govspeak
@@ -47,9 +42,6 @@
       %aside#related
         .related-container
           .group
-            .phase-circle
-              %p{class: "circle background-#{@register.register_phase.downcase}"}
-              %p.circle-label= @register.register_phase.capitalize
             - if @register.url.present?
               %h4.heading-small Register
               %p= link_to @register.url, @register.url, rel: 'external'
@@ -64,9 +56,7 @@
             - @register.phases.each do |phase|
               - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-              %h4.heading-small
-                %span{class: "tag background-#{phase.name.downcase}"}
-                  = phase.name
+              %span.phase-banner= phase.name
 
               %ul.tick-list
                 - grouped_steps.each do |step|
