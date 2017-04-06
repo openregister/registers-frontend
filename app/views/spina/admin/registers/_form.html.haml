@@ -43,7 +43,7 @@
           = Spina::Page.human_attribute_name :register_phase
         .horizontal-form-content
           .select-dropdown
-            = f.collection_select :register_phase, Spina::Register::CURRENT_PHASES, :to_s, :to_s, include_blank: 'Select current phase'
+            = f.select :register_phase, Spina::Register::CURRENT_PHASES, include_blank: 'Select current phase'
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :url
@@ -53,7 +53,7 @@
         .horizontal-form-label
           Authority
         .horizontal-form-content
-          = f.collection_select :authority, Spina::Register::AUTHORITIES, :to_s, :to_s
+          = f.select :authority, Spina::Register::AUTHORITIES, { data: { "default-value" => @register.authority } }
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :custodian
@@ -105,14 +105,13 @@
     .pull-right= link_to t('spina.permanently_delete'), spina.admin_register_path(@register), method: :delete, data: {confirm: t('spina.pages.delete_confirmation', subject: @register.name) }, class: 'button button-link button-danger'
 
 = content_for :head do
-  %script{src: "https://unpkg.com/accessible-typeahead@0.3.5", "data-turbolinks-track" => "true"}
-
   :javascript
     $(document).on('turbolinks:load', function() {
       element = document.querySelector('#register_authority')
       AccessibleTypeahead.enhanceSelectElement({
         selectElement: element,
-        placeholder: "Search for Authority"
+        placeholder: "Search for Authority",
+        defaultValue: "#{@register.authority}"
       })
 
       $('#steps')
