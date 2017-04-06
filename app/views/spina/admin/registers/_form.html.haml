@@ -53,8 +53,7 @@
         .horizontal-form-label
           Authority
         .horizontal-form-content
-          .select-dropdown
-            = f.collection_select :authority, Spina::Register::AUTHORITIES, :to_s, :to_s, include_blank: 'Select registry'
+          = f.collection_select :authority, Spina::Register::AUTHORITIES, :to_s, :to_s
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :custodian
@@ -106,8 +105,16 @@
     .pull-right= link_to t('spina.permanently_delete'), spina.admin_register_path(@register), method: :delete, data: {confirm: t('spina.pages.delete_confirmation', subject: @register.name) }, class: 'button button-link button-danger'
 
 = content_for :head do
+  %script{src: "https://unpkg.com/accessible-typeahead@0.3.5", "data-turbolinks-track" => "true"}
+
   :javascript
     $(document).on('turbolinks:load', function() {
+      element = document.querySelector('#register_authority')
+      AccessibleTypeahead.enhanceSelectElement({
+        selectElement: element,
+        placeholder: "Search for Authority"
+      })
+
       $('#steps')
         .on('cocoon:after-insert', function(e, added_task) {
           var new_id = new Date().getTime(),
