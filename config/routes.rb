@@ -15,6 +15,11 @@ Rails.application.routes.draw do
 
     get 'support/thanks', to: 'support#thanks'
 
+    get 'suggest-register', to: 'suggest_register#index'
+    post 'suggest-register', to: 'suggest_register#create'
+
+    get 'suggest-register/thanks', to: 'suggest_register#thanks'
+
     namespace :admin do
       resources :registers, except: [:show]
     end
