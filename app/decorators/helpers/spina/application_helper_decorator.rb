@@ -30,5 +30,13 @@ module Spina
         "logo-with-crest crest-org"
       end
     end
+
+    def beta_registers
+      meta_registers = %w(register datatype field registration-district)
+
+      OpenRegister.registers(:beta)
+                  .reject{ |r| meta_registers.include?(r.register) || r._records.empty?}
+                  .sort_by(&:register)
+    end
   end
 end
