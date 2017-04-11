@@ -29,6 +29,12 @@
               = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank
 
     %main#main{role: "main"}
+      - if Rails.env.staging?
+        .container
+          .grid-row
+            .column-one-whole
+              .error-summary This is a staging environment, intended to testing and user research only
+
       = yield
 
     %footer#footer.group.js-footer{role: "contentinfo"}
