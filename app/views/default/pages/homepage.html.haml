@@ -33,7 +33,7 @@
         %h2.related-items__title Registers you can use
         %ul.related-items__list
           - beta_registers.each do |register|
-            %li= link_to register.register, "https://#{register.register}.register.gov.uk", target: :blank
+            %li= link_to register.register, register._uri, target: :blank
         %h2.related-items__title Upcoming registers
         %ul.related-items__list
           %li
