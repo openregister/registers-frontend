@@ -40,6 +40,14 @@
             %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", request.query_parameters.merge({ phase: phase })
 
   .grid-row
+    .column-two-thirds
+      %div{class: "js-filter-list", "aria-hidden" => "true"}
+        %form.js-filter-form
+          %fieldset
+            .form-group
+              %label{class: "form-label", for: "search"} Search for a register
+              %input{name: "search", id: "search", class: "form-control form-control-3-4"}
+
     .column-one-whole
       %h3.heading-small.mq-small-only Sort by:
       %table.register-status-table.table-collapsible
@@ -52,7 +60,13 @@
             %th{role: "columnheader", scope: "col"}
               = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
             %th{role: "columnheader", scope: "col"}
-        %tbody
+        %tbody.js-filter-block
           - @registers.each_with_index do |register, index|
             - index = index + 1
             = render partial: 'spina/registers/register', object: register, locals: { index: index }
+
+= content_for :javascript do
+  :javascript
+    jQuery(function($) {
+      GOVUK.filterListItems.init();
+    });
