@@ -111,7 +111,7 @@
       AccessibleTypeahead.enhanceSelectElement({
         selectElement: element,
         placeholder: "Search for Authority",
-        defaultValue: "#{@register.authority}"
+        defaultValue: element.options[element.options.selectedIndex].innerHTML,
       })
 
       $('#steps')

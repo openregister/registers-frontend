@@ -79,7 +79,8 @@ textarea {
     background-color: #f5f5fa;
   }
 
-  &__option--focused {
+  &__option--focused,
+  &__option:hover {
     background-color: #6865b4;
     border-color: #6865b4;
     color: #FFFFFF;
