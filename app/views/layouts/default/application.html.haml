@@ -54,5 +54,6 @@
     = render partial: "spina/shared/analytics"
 
     = javascript_include_tag :application
+    :javascript
+      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     = yield(:javascript)
-

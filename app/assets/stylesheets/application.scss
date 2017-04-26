@@ -75,6 +75,14 @@ a:visited {
   color: $govuk-blue;
 }
 
+.js-hidden {
+  display: none;
+
+  .js-enabled & {
+    display: block;
+  }
+}
+
 // Column full width
 // ==========================================================================
 

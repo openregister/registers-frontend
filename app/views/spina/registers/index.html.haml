@@ -40,7 +40,7 @@
             %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", request.query_parameters.merge({ phase: phase })
 
   .grid-row
-    .column-two-thirds
+    .column-two-thirds.js-hidden
       %div{class: "js-filter-list", "aria-hidden" => "true"}
         %form.js-filter-form
           %fieldset
