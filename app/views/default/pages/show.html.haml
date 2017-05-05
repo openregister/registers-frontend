@@ -32,3 +32,8 @@
     .column-two-thirds
       .govspeak
         = govspeak(@page.content(:text))
+
+        - if @page.title == "Available registers"
+          - beta_registers.each do |register|
+            %h2= register.register
+            %p= register.text
