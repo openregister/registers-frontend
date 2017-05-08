@@ -35,5 +35,5 @@
 
         - if @page.title == "Available registers"
           - beta_registers.each do |register|
-            %h2= register.register
+            %h2= link_to register.register, register._uri, target: :blank
             %p= register.text
