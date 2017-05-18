@@ -123,8 +123,7 @@ a:visited {
 // Phase styles
 // ==========================================================================
 
-$phases: (live, $live-colour),
-         (beta, #f47738),
+$phases: (beta, #f47738),
          (alpha, #d53880),
          (discovery, $discovery-colour),
          (backlog, #2e358b);

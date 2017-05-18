@@ -3,7 +3,7 @@ module Spina
 
     before_validation :set_slug
 
-    CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta', 'Live']
+    CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta']
     AUTHORITIES = OpenRegister.register('government-organisation', :alpha)
                               ._all_records
                               .reject{ |r| r.end_date.present? }
@@ -21,8 +21,8 @@ module Spina
 
     scope :by_phase, -> (phase) { where register_phase: phase }
     scope :by_name, -> { order name: :asc }
-    scope :sort_by_phase_name_asc, -> { order("CASE register_phase WHEN 'Live' THEN 1 WHEN 'Beta' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Discovery' THEN 4 WHEN 'Backlog' THEN 5 END") }
-    scope :sort_by_phase_name_desc, -> { order("CASE register_phase WHEN 'Backlog' THEN 1 WHEN 'Discovery' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Beta' THEN 4 WHEN 'Live' THEN 5 END") }
+    scope :sort_by_phase_name_asc, -> { order("CASE register_phase WHEN 'Beta' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Discovery' THEN 4 WHEN 'Backlog' THEN 5 END") }
+    scope :sort_by_phase_name_desc, -> { order("CASE register_phase WHEN 'Backlog' THEN 1 WHEN 'Discovery' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Beta' THEN 4 END") }
 
     private
 

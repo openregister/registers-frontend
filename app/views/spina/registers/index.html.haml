@@ -34,7 +34,7 @@
     .grid-row
       - @current_phases.each do |phase|
         - registers = @registers.select{ |register| register.register_phase == phase }
-        .column-one-fifth
+        .column-one-quarter
           %div{class: "data border-#{phase.downcase}"}
             %span.data-item.bold-xxlarge= registers.size
             %span.data-item.bold-xsmall= link_to "Registers in #{phase.downcase}", request.query_parameters.merge({ phase: phase })

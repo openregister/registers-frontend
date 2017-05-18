@@ -20,8 +20,7 @@ phases = [
   { name: "Backlog", phase_update: "" },
   { name: "Discovery", phase_update: "" },
   { name: "Alpha", phase_update: "" },
-  { name: "Beta", phase_update: "" },
-  { name: "Live", phase_update: "" }
+  { name: "Beta", phase_update: "" }
 ]
 
 Spina::Register.create(
