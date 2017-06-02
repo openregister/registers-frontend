@@ -24,7 +24,7 @@ module Spina
         "logo-with-crest crest-so"
       when "uk-atomic-energy-authority"
         "logo-with-crest crest-ukaea"
-      when "nhs", "government-digital-service", "the-scottish-government"
+      when "nhs", "government-digital-service", "scottish-government"
         " "
       else
         "logo-with-crest crest-org"
