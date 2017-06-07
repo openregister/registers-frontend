@@ -14,7 +14,7 @@
         %span{itemprop: "name"}= @page.menu_title
     - if params[:phase].present?
       %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-        = link_to "/register-status", itemprop: "item" do
+        %a{href: "#main", itemprop: "item"}
           %span{itemprop: "name"} Registers in #{params[:phase]}
 
 .container
