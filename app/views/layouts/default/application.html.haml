@@ -1,59 +1,52 @@
-!!!
-%html
-  %head
-    %meta{ charset: "utf-8" }
-    %meta{ content: "width=device-width, initial-scale=1", name: "viewport" }
-    %meta{ name: "description", content: "#{@page_description}" }
-    = csrf_meta_tags
-    %title GOV.UK Registers - #{@page_title}
-    = stylesheet_link_tag 'application', media: 'all'
+- content_for :page_title, "GOV.UK Registers - #{@page_title}"
 
-  %body
-    %a.skip-link{href: "#main"} Skip to main content
-    %header{class: "header #{'header--without-border' if current_page?(spina.root_path)}"}
-      .header__container
-        .header__brand
-          = link_to spina.root_path do
-            %span.header__title
-              = current_account.name
-              %span.phase-banner Alpha
-        %input#show-menu.header__navigation-toggle-checkbox{"aria-controls" => "navigation", "aria-expanded" => "false", :type => "checkbox"}/
-        %label.header__navigation-toggle{:for => "show-menu"}
-          Menu
-        %nav#navigation.header__navigation{"aria-hidden" => "true", "aria-label" => "Top Level Navigation"}
-          %ul
-            = render 'default/shared/navigation'
-            %li
-              = link_to "Support", spina.support_path
-            %li
-              = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank
+- content_for :inside_header do
+  %strong.beta-badge Beta
 
-    %main#main{role: "main"}
-      - if Rails.env.staging?
-        .container
-          .grid-row
-            .column-one-whole
-              .error-summary This is a staging environment, intended to testing and user research only
+- content_for :global_header_text, 'GOV.UK <span id="product-name">Registers</span>'.html_safe
 
-      = yield
+- content_for :homepage_url, '/'
 
-    %footer#footer.group.js-footer{role: "contentinfo"}
-      .footer-wrapper
-        .footer-meta
-          .footer-meta-inner
-            .open-government-licence
-              %p.logo
-                %a{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", :rel => "license"} Open Government Licence
-              %p
-                All content is available under the
-                = succeed "," do
-                  %a{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", :rel => "license"} Open Government Licence v3.0
-          .copyright
-            %a{href: "http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/"}= content_for?(:crown_copyright_message) ? yield(:crown_copyright_message) : "© Crown copyright"
+- content_for :header_class, "with-proposition #{'header--without-border' if current_page?(spina.root_path)}"
 
-    = render partial: "spina/shared/analytics"
+- content_for :proposition_header do
+  .header-proposition
+    .content
+      = link_to 'Menu', '#proposition-links', class: 'js-header-toggle menu'
+      %nav#proposition-menu
+        %ul#proposition-links
+          = render 'default/shared/navigation'
+          %li
+            = link_to 'Support', '/support', target: :blank
+          %li
+            = link_to 'Documentation', 'https://registers-docs.cloudapps.digital', target: :blank
 
-    = javascript_include_tag :application
-    :javascript
-      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-    = yield(:javascript)
+- content_for :head do
+  = stylesheet_link_tag 'application'
+  = csrf_meta_tags
+  = tag :meta, property: 'description', content: @page_description
+
+- content_for :content do
+  %main#main{role: 'main'}
+    - if Rails.env.staging?
+      .container
+        .grid-row
+          .column-one-whole
+            .error-summary This is a staging environment, intended to testing and user research only
+    - if alert
+      .grid-row
+        .column-two-thirds
+          .flash.flash--dangerous= alert
+    - if notice
+      .grid-row
+        .column-two-thirds
+          .flash.flash--notice= notice
+
+    = content_for?(:main) ? yield(:main) : yield
+
+- content_for :body_end do
+  = render partial: 'spina/shared/analytics'
+  = javascript_include_tag 'application'
+  = yield(:javascript)
+
+= render file: 'layouts/govuk_template'
