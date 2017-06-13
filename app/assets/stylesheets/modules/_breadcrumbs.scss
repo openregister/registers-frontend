@@ -30,77 +30,23 @@
 
 .breadcrumbs {
   @extend %site-width-container;
-  @include core-16($line-height: (25 / 16), $line-height-640: 1.75);
+}
 
-  padding: $gutter-one-third 0;
-  list-style: none;
+.breadcrumbs--inverse {
+  border-bottom: 1px $white solid;
+  border-bottom-color: rgba($white, 0.25);
 
-  @include media(tablet) {
-    margin-bottom: $gutter;
-  }
+  li {
+    margin-bottom: 0;
 
-  ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  &__item {
-    display: inline-block;
-
-    margin: 0;
-    padding: 0 $gutter-one-quarter 0 (11px + $gutter-one-quarter);
-
-    background-image: image-url('separator.png');
-    background-repeat: no-repeat;
-    background-size: 6px 11px;
-    background-position: left center;
-
-    white-space: nowrap;
-
-    @include device-pixel-ratio(2) {
-      background-image: image-url('separator-2x.png');
-    }
-
-    &,
-    a:link,
-    a:hover,
-    a:active,
-    a:visited {
-      color: $black;
-    }
-
-    &--active {
-      @include bold-16;
-
-      a:link,
-      a:visited {
-        text-decoration: none;
-      }
-    }
-
-    &:first-child {
-      padding-left: 0;
-      background-image: none;
+    &.breadcrumbs__item--active a {
+      font-weight: bold;
+      text-decoration: none;
     }
   }
 
-  &--inverse {
-    border-bottom: 1px $white solid;
-    border-bottom-color: rgba($white, 0.25);
-
-    .breadcrumbs__item {
-      &--active,
-      a:link,
-      a:hover,
-      a:active,
-      a:visited {
-        color: $white;
-      }
-
-      a:focus {
-        color: $black;
-      }
-    }
+  a,
+  span {
+    color: $white;
   }
 }
