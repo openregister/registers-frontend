@@ -33,10 +33,6 @@ en:
     label:
       support:
         email: Email address
-      suggest_register:
-        email: Your email address
-        name: Your name
-        message: Description
   errors:
     messages:
       blank: is required

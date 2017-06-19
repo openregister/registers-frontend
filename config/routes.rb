@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   Spina::Engine.routes.draw do
     resources :registers, only: [:show, :index]
 
+    # Support
+
     get 'support', to: 'support#index'
     post 'select_support', to: 'support#select_support'
 
@@ -15,10 +17,18 @@ Rails.application.routes.draw do
 
     get 'support/thanks', to: 'support#thanks'
 
-    get 'suggest-register', to: 'suggest_register#index'
-    post 'suggest-register', to: 'suggest_register#create'
+    # Request or suggest register
 
-    get 'suggest-register/thanks', to: 'suggest_register#thanks'
+    get 'new-register', to: 'new_register#index'
+    post 'select_request_or_suggest', to: 'new_register#select_request_or_suggest'
+
+    get 'new-register/suggest-register', to: 'new_register#suggest_register'
+    post 'new-register/suggest-register', to: 'new_register#create'
+
+    get 'new-register/request-register', to: 'new_register#request_register'
+    post 'new-register/request-register', to: 'new_register#create'
+
+    get 'new-register/thanks', to: 'new_register#thanks'
 
     namespace :admin do
       resources :registers, except: [:show]

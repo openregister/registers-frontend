@@ -3,19 +3,15 @@ require 'uri'
 
 class DeskproFeedback
 
-  attr_reader :params, :name, :email, :message, :register_name, :subject
+  attr_reader :params, :name, :email, :message, :subject
 
-  @@url = ENV['DESKPRO_API_BASE_URL']
-  @@key = ENV['DESKPRO_API_KEY']
+  @@url = ENV['DESKPRO_API_BASE_URL'] || 'https://openregisters.deskpro.com:443/api'
+  @@key = ENV['DESKPRO_API_KEY'] || '1:PA8JQZN552RT9QMHWNQ7ZH88W'
 
   def initialize(params)
     @@person_name = params[:name]
     @@person_email = params[:email]
-    if params[:register_name].present?
-      @@message = 'Register name: ' + params[:register_name] + '. Description: ' + params[:message]
-    else
-      @@message = params[:message]
-    end
+    @@message = params[:message]
     @@subject = params[:subject]
   end
 
