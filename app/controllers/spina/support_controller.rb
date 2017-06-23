@@ -38,7 +38,7 @@ module Spina
         end
         redirect_to spina.support_thanks_path
       else
-        flash.now[:errors] = @support.errors[:base].first
+        flash[:errors] = @support.errors
         if params[:subject] == "problem"
           render :problem
         else

@@ -390,6 +390,10 @@ $phases: (beta, #f47738),
   margin: 0;
 }
 
+.form-hint {
+  width: 50%;
+}
+
 .form-group.error {
   margin-right: 15px;
   border-left: 4px solid $error-colour;

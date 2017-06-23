@@ -37,19 +37,14 @@ gem 'fog'
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
-group :development, :test do
-  gem 'byebug', platform: :mri
-end
-
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-byebug'
 
   # Nicer UI for debugging errors
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

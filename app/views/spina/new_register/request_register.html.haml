@@ -1,0 +1,28 @@
+- @page_title = 'New register - Request a register'
+
+.container
+  .grid-row
+    .column-two-thirds
+      = link_to 'Back', spina.new_register_path, class: 'link-back'
+
+.container
+  .grid-row
+    .column-one-whole
+      %h1.heading-large Request a register
+
+      - if @new_register.errors.any?
+        = render partial: 'layouts/default/errors', locals: { object: @new_register }
+
+      = form_for @new_register, url: new_register_request_register_path  do |f|
+        = f.hidden_field :subject, value: 'Request a Register'
+        %div{class: "form-group  #{@new_register.errors[:message].present? ? 'form-group-error' : ''}"}
+          = f.label :message, 'Describe the data you need', class: 'form-label'
+          %span.form-hint For example, I need a list of all schools including name and school type so I can use it in my service.
+          = f.text_area :message, rows: 10, class: 'form-control'
+        %div{class: "form-group  #{@new_register.errors[:name].present? ? 'form-group-error' : ''}"}
+          = f.label :name, 'Name', class: 'form-label'
+          = f.text_field :name, class: 'form-control'
+        %div{class: "form-group  #{@new_register.errors[:email].present? ? 'form-group-error' : ''}"}
+          = f.label :email, 'Email address', class: 'form-label'
+          = f.email_field :email, class: 'form-control'
+        = f.submit 'Submit', class: 'button'
