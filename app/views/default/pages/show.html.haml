@@ -28,6 +28,8 @@
               %li{class: "sub-navigation__item #{'sub-navigation__item--active' if child == @page }", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
                 = link_to child.materialized_path, itemprop: "item" do
                   %span{itemprop: "name"}= child.seo_title
+            %li{class: "sub-navigation__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+              = link_to "Suggest a register", spina.new_register_path
 
     .column-two-thirds
       .govspeak

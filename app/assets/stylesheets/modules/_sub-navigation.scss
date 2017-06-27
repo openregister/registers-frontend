@@ -51,6 +51,10 @@
     a:active {
       text-decoration: underline;
     }
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
   }
 
   &__item--active {

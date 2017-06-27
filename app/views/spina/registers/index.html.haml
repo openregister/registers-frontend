@@ -65,6 +65,9 @@
             - index = index + 1
             = render partial: 'spina/registers/register', object: register, locals: { index: index }
 
+      %h3.heading-medium Suggest a register
+      = link_to "Find out more", spina.new_register_path
+
 = content_for :javascript do
   :javascript
     jQuery(function($) {
