@@ -2,7 +2,7 @@
   %div.dd-item-inner
     = link_to spina.edit_admin_register_path(register), class: 'button button-link button-small sortable-link' do
       = register.name
-      "- #{register.register_phase}"
+      %span.register__phase (#{register.register_phase})
     %span.pull-right
       = link_to spina.edit_admin_register_path(register), class: 'button button-small button-link dd-nodrag' do
         = icon('pencil-outline')
