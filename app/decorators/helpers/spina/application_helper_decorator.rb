@@ -2,6 +2,8 @@ require 'govspeak'
 
 module Spina
   ApplicationHelper.module_eval do
+    include HTTParty
+
     def govspeak(text)
       Govspeak::Document.new(text).to_html.html_safe
     end
@@ -29,6 +31,10 @@ module Spina
       else
         "logo-with-crest crest-org"
       end
+    end
+
+    def register_description(register, phase)
+      HTTParty.get("https://#{register}.#{phase}.openregister.org/register.json", headers: { 'Content-Type' => 'application/json' } )['register-record']['text']
     end
 
     def beta_registers

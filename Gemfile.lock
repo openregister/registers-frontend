@@ -309,6 +309,8 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.2)
     http_parser.rb (0.6.0)
+    httparty (0.15.5)
+      multi_xml (>= 0.5.2)
     i18n (0.8.1)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -354,6 +356,7 @@ GEM
     morph (0.5.1)
       activesupport (>= 2.0.2)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     netrc (0.11.0)
     nio4r (2.0.0)
     nokogiri (1.7.2)
@@ -476,6 +479,7 @@ DEPENDENCIES
   govuk_template
   haml-rails
   http (= 2.2.1)
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

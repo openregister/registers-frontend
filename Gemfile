@@ -37,6 +37,8 @@ gem 'fog'
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
+gem 'httparty'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
