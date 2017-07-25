@@ -49,7 +49,7 @@
                 = succeed "," do
                   %a{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", :rel => "license"} Open Government Licence v3.0
           .copyright
-            %a{href: "http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/"}= content_for?(:crown_copyright_message) ? yield(:crown_copyright_message) : "&copy; Crown copyright"
+            = link_to "&copy; Crown copyright".html_safe, "http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/"
 
     = render partial: "spina/shared/analytics"
 
