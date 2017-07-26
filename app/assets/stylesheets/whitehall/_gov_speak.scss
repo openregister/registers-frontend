@@ -106,10 +106,8 @@
     list-style: disc;
     list-style-position: outside;
     @include ig-core-19;
-    margin: $gutter-one-sixth 0 $gutter-one-sixth $gutter-two-thirds;
-    @include media (tablet) {
-      margin: $gutter-one-third 0 $gutter-one-third $gutter-two-thirds;
-    }
+    margin: 0;
+    padding-left: $gutter-two-thirds;
     ul, ol {
       margin: 0 0 0 $gutter-two-thirds;
       padding: 0;
