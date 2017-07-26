@@ -4,7 +4,7 @@
   .grid-row
     .column-two-thirds
       %h1.heading-large Suggest a register
-      %p If you cant find a register in our #{link_to 'Registers pipeline', spina.registers_path} or want to tell us about a potential register, let us know what you need and we'll contact you.
+      %p If you can't find a register in our #{link_to 'Registers pipeline', spina.registers_path} or want to tell us about a potential register, let us know what you need and we'll contact you.
 
       %h3.heading-medium How can we help you?
       = form_tag select_request_or_suggest_path do
@@ -16,6 +16,6 @@
               = label_tag :subject_problem, 'Request a register that I need'
             .multiple-choice
               = radio_button_tag :subject, :suggest
-              = label_tag :subject_question, 'Suggest a register that can be built with data I have'
+              = label_tag :subject_question, 'Suggest a register that uses my data'
         .form-group
           = submit_tag 'Continue', class: 'button'
