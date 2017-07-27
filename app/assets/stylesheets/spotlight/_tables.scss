@@ -185,6 +185,11 @@ table tbody .sort-column {
           display: inline-block;
         }
 
+        p {
+          font-weight: normal;
+          margin-bottom: 0;
+        }
+
         &:before {
           content: attr(data-title) ".";
           margin-right: 7px;

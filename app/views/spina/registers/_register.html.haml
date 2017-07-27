@@ -2,9 +2,9 @@
   %th{"data-title" => index, }
     %h4.heading-xsmall= register.name
     - if register.register_phase == 'Backlog'
-      = govspeak(register.description)
+      %p= govspeak(register.description)
     - else
-      = register_description(register.name.parameterize, register.register_phase.downcase)
+      %p= register_description(register.name.parameterize, register.register_phase.downcase)
   %td{"data-title" => "Phase: "}
     %span{class: "#{register.register_phase.downcase} status"}= register.register_phase
   %td{"data-title" => "Managed by: "}
