@@ -1,16 +1,15 @@
 language: ruby
 rvm:
-  - 2.4.0
-
+- 2.4.0
+cache: bundler
 deploy:
-  edge: true
   provider: cloudfoundry
-  username: register-design-authority@digital.cabinet-office.gov.uk
   api: https://api.cloud.service.gov.uk
+  username: register-design-authority@digital.cabinet-office.gov.uk
+  password:
+    secure: N+l1lnUl6DTnKdzdl1y2C1qBbMlWPP9J+QvcOPdEQ3ZttQEzQVBlWZ1h5IvDjZAK14OAh/rKejp6EZOqJeTmbZv5EzGDOhmyzQNUKGHh8z5Y1O63JUGRsgFYqbBZyqfLl27UEJv1KRdt0heInVvm3az+ReEUJVXDOTiT5firlAUKPsp1O97+qp67RYK/TBtAGf2fD1ZR4BcA6Le5fYBV8RwapIkboB2BzFr4xwXPZk4/QP858VwK2c3qmvIe1d59iiviWIGP+zid+3BdVVzsjGBmi6OFfxMaq/EaGyCHvvrMC19unoCOpvlPygo/bRV7VSDqeIe/2SR4+QrTgJyj6bB54HYsv1dD632w7V8/ZFWKCblKWQs/aCg0T63sNwPaskM/G9V9q6EGcTqxHrDFPzkAYWv/iRneASwyXDRzNYC56eYxt0rxBXNIYhIKBKKGff7LS5qYO3M9TCcjgasJpxv2PN67PGMDSiUEC8bFwvDDGQYfHantmP0mbgupDXMmsGIpp+trOHKfx+NKE6PhpJRp8r4T5ZhEa+zYeDQI1OXJXPC00y/4IkgGO8icI+9VcG64T338IiLdHnvAgt9bYtA8TvEZP1rVsntxV9It+mSYLD67o5W6gmK6xvGAHWAGbvia39N0pXEaAoQ1HHwVrPzVi9MlWdVk1n9ZjsY+ePE=
   organization: openregister
   space: prod
-  password:
-    secure: IiJDkjX5lzQPJpZmcEdOs4Jo1A5IUSMQekKjZn05KhK7qkWPPgO2vpDC57f/qzX6/lqibtCP8869499WCWZTY1qawcguTvDzSmLyYO4hZYGqhWAMp3d4jyPnRMDesmHwAdAiei0Cys25VkFZK9yxSows40lSPfQRO2jHYwlPGXkV+FRGBj0FtCp+tTzgqZGWM8asuPiYp2ybfuhW3g+oWflAmf3fkc+E40tOJfrDwJCprMURTkuFBAKabJaC6C6KcJGpvTRbhVVFo64I7hTVPRi2Y2LcbZeTrsb9xvhmcwY08WvXC1PBXYfyAn53uFoL82gprvCjGPem+Ki3KWHxpSMRwnqyEmPTtm4qy1vhC9F5omMXMd8Ku4zPtKFBF1jrMz4J1vm9tn1S/TRyk4uVSemrpuInC9121WEeyCtuqaDyFj6F4IKXyrdxjrzQ3uF5TODzeBqxDQNnpDb3aTdn+TWkdyVTkVoBA0B7vMnFR7RC35T57qTiaOks2zz0JvRYhuC8h8RKDgkl7ghUz4Vikb1ovn5T2tLFcy33+uk76EciIMaVKeLywc2II6prQzbzQjrO0z4LCZgu9b409ARb0CiaQd3e5jAoyvGgaQwxyLvtNMQiXUag4bo7SfkYbQ2sxKwf/l1A+1SOmwlMQZ3i5iTzh+v5U9VSyy+jEChfp/M=
   on:
     repo: openregister/register-status
     branch: master
