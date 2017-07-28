@@ -16,4 +16,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore jet brains tools config
 .idea
+
+# ignore outputs from travis
+/vendor
