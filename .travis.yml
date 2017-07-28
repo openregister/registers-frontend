@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - 2.4.0
+
+deploy:
+  edge: true
+  provider: cloudfoundry
+  username: register-design-authority@digital.cabinet-office.gov.uk
+  api: https://api.cloud.service.gov.uk
+  organization: openregister
+  space: prod
+  password:
+    secure: IiJDkjX5lzQPJpZmcEdOs4Jo1A5IUSMQekKjZn05KhK7qkWPPgO2vpDC57f/qzX6/lqibtCP8869499WCWZTY1qawcguTvDzSmLyYO4hZYGqhWAMp3d4jyPnRMDesmHwAdAiei0Cys25VkFZK9yxSows40lSPfQRO2jHYwlPGXkV+FRGBj0FtCp+tTzgqZGWM8asuPiYp2ybfuhW3g+oWflAmf3fkc+E40tOJfrDwJCprMURTkuFBAKabJaC6C6KcJGpvTRbhVVFo64I7hTVPRi2Y2LcbZeTrsb9xvhmcwY08WvXC1PBXYfyAn53uFoL82gprvCjGPem+Ki3KWHxpSMRwnqyEmPTtm4qy1vhC9F5omMXMd8Ku4zPtKFBF1jrMz4J1vm9tn1S/TRyk4uVSemrpuInC9121WEeyCtuqaDyFj6F4IKXyrdxjrzQ3uF5TODzeBqxDQNnpDb3aTdn+TWkdyVTkVoBA0B7vMnFR7RC35T57qTiaOks2zz0JvRYhuC8h8RKDgkl7ghUz4Vikb1ovn5T2tLFcy33+uk76EciIMaVKeLywc2II6prQzbzQjrO0z4LCZgu9b409ARb0CiaQd3e5jAoyvGgaQwxyLvtNMQiXUag4bo7SfkYbQ2sxKwf/l1A+1SOmwlMQZ3i5iTzh+v5U9VSyy+jEChfp/M=
+  on:
+    repo: openregister/register-status
+    branch: master
