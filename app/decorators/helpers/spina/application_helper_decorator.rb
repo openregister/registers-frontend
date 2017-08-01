@@ -34,7 +34,12 @@ module Spina
     end
 
     def register_description(register, phase)
-      HTTParty.get("https://#{register}.#{phase}.openregister.org/register.json", headers: { 'Content-Type' => 'application/json' } )['register-record']['text']
+      begin
+        response = HTTParty.get("https://#{register}.#{phase}.openregister.org/register.json")
+        response['register-record']['text']
+      rescue
+        "Description not found"
+      end
     end
 
     def beta_registers
