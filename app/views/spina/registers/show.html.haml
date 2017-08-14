@@ -21,6 +21,8 @@
     .column-two-thirds
       %h1= @page_title
 
+      - if @register.url.present?
+        %p #{link_to "View the register here", @register.url, target: :blank}. If you have a question or want to give feedback on the register #{link_to 'contact the team', support_path}.
       .govspeak
         = govspeak(@register.history)
 
@@ -47,17 +49,16 @@
       %aside#related
         .related-container
           .group
-            .phase-circle
-              %p{class: "circle background-#{@register.register_phase.downcase}"}
-              %p.circle-label= @register.register_phase.capitalize
-            - if @register.url.present?
-              %h4.heading-small Register
-              %p= link_to @register.url, @register.url, rel: 'external'
-            %h4.heading-small Authority
-            %p= @register.authority
+            %h4.heading-small Managed by
+            %div{class: "govuk-organisation-logo #{@register.authority.parameterize}"}
+              %div{class: "logo-container #{crest_class_name(@register.authority.parameterize)}"}
+                %span= @register.authority
             - if @register.custodian.present?
               %h4.heading-small Custodian
               %p= @register.custodian
+            - if @register.url.present?
+              %h4.heading-small Register
+              %p= link_to @register.url, @register.url, rel: 'external'
 
             %hr
 
