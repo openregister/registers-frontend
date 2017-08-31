@@ -5,8 +5,8 @@ class DeskproFeedback
 
   attr_reader :params, :name, :email, :message, :subject
 
-  @@url = ENV['DESKPRO_API_BASE_URL'] || 'https://openregisters.deskpro.com:443/api'
-  @@key = ENV['DESKPRO_API_KEY'] || '1:PA8JQZN552RT9QMHWNQ7ZH88W'
+  @@url = ENV['DESKPRO_API_BASE_URL']
+  @@key = ENV['DESKPRO_API_KEY']
 
   def initialize(params)
     @@person_name = params[:name]
