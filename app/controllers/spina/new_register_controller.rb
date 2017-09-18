@@ -1,4 +1,3 @@
-require 'deskpro_feedback'
 require 'json'
 
 module Spina
@@ -32,12 +31,12 @@ module Spina
       @new_register = Spina::NewRegister.new(new_register_params)
 
       if @new_register.valid?
-        @deskproService = DeskproFeedback.new(new_register_params)
-        @response = @deskproService.send_feedback
+        @zendeskService = ZendeskFeedback.new
+        @response = @zendeskService.send_feedback(new_register_params)
         redirect_to spina.new_register_thanks_path
       else
         flash[:errors] = @new_register.errors
-        if params[:new_register][:subject] == 'Request a Register'
+        if params[:new_register][:subject] == '[Request a Register]'
           render :request_register
         else
           render :suggest_register
