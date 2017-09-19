@@ -14,7 +14,7 @@
         = render partial: 'layouts/default/errors', locals: { object: @new_register }
 
       = form_for @new_register, url: new_register_request_register_path  do |f|
-        = f.hidden_field :subject, value: 'Request a Register'
+        = f.hidden_field :subject, value: '[Request a Register]'
         %div{class: "form-group  #{@new_register.errors[:message].present? ? 'form-group-error' : ''}"}
           = f.label :message, 'Describe the data you need', class: 'form-label'
           %span.form-hint For example, I need a list of all schools including name and school type so I can use it in my service.

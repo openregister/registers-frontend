@@ -39,6 +39,9 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 
 gem 'httparty'
 
+# Zendesk
+gem 'zendesk_api'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'

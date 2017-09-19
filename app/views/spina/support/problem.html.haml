@@ -8,7 +8,7 @@
         = render partial: "layouts/default/errors", locals: { object: @support }
 
       = form_for @support, url: support_problem_path  do |f|
-        = f.hidden_field :subject, value: "Problem"
+        = f.hidden_field :subject, value: "[Problem]"
         = f.text_area :message, rows: 10
         = f.text_field :name
         = f.email_field :email

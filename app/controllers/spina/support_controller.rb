@@ -1,4 +1,3 @@
-require 'deskpro_feedback'
 require 'json'
 
 module Spina
@@ -31,11 +30,8 @@ module Spina
       @support = Spina::Support.new(support_params)
 
       if @support.valid?
-        @deskproService = DeskproFeedback.new(support_params)
-        @response = @deskproService.send_feedback
-        if @response.status.code != 201
-          logger.debug("Feedback ticket creation failed with status: #{@response.status} and content: #{@response.body}")
-        end
+        @zendeskService = ZendeskFeedback.new
+        @response = @zendeskService.send_feedback(support_params)
         redirect_to spina.support_thanks_path
       else
         flash[:errors] = @support.errors
