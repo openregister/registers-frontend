@@ -8,7 +8,7 @@
     %title GOV.UK Registers - #{@page_title}
     = stylesheet_link_tag 'application', media: 'all'
 
-  %body
+  %body{class: "#{@body_class}"}
     %a.skip-link{href: "#main"} Skip to main content
     %header{class: "header #{'header--without-border' if current_page?(spina.root_path)}"}
       .header__container

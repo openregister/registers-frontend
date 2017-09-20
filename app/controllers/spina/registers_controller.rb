@@ -7,8 +7,10 @@ module Spina
     def index
       @search = Spina::Register.ransack(params[:q])
 
-      if params[:phase].present?
-        @registers = @search.result.by_phase(params[:phase]).by_name
+      if params[:phase] == 'ready to use'
+        @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
+      elsif params[:phase] == 'in progress'
+        @registers = @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
       else
         @registers = @search.result.sort_by_phase_name_asc.by_name
       end
