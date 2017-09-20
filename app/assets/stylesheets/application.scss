@@ -231,6 +231,10 @@ $phases: (beta, #f47738),
     margin: -20px 0 40px 0;
   }
 
+  .home-page & {
+    margin-bottom: 40px;
+  }
+
   details {
     font-size: 16px;
   }
@@ -240,11 +244,9 @@ $phases: (beta, #f47738),
     font-size: 16px;
     text-decoration: none;
 
-    &:hover {
       .data-item.bold-xsmall {
         text-decoration: underline;
       }
-    }
   }
 }
 
@@ -373,5 +375,24 @@ $phases: (beta, #f47738),
 
   .error-message {
     padding-bottom: 4px;
+  }
+}
+
+.text-separator {
+  color: $grey-2;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.services-using-registers-page {
+  table {
+    thead th {
+      font-weight: bold;
+    }
+
+    td,
+    th {
+      vertical-align: top;
+    }
   }
 }

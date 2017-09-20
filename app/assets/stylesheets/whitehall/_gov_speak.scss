@@ -268,49 +268,50 @@
     }
   }
 
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: $gutter 0;
-    width: $full-width;
-    @include ig-core-19;
+  // We don't want tables styles
+  // table {
+  //   border-collapse: collapse;
+  //   border-spacing: 0;
+  //   margin: $gutter 0;
+  //   width: $full-width;
+  //   @include ig-core-19;
 
-    caption {
-      text-align:left;
-      font-weight: 300;
-      margin-bottom: 0.5em;
-      font-size:1.16em;
-      padding-left:1em;
-    }
+  //   caption {
+  //     text-align:left;
+  //     font-weight: 300;
+  //     margin-bottom: 0.5em;
+  //     font-size:1.16em;
+  //     padding-left:1em;
+  //   }
 
-    th, td {
-      vertical-align: top;
-      line-height: 1.3em;
-      padding: 0.7em 0.5em 0.7em 1em;
-    }
+  //   th, td {
+  //     vertical-align: top;
+  //     line-height: 1.3em;
+  //     padding: 0.7em 0.5em 0.7em 1em;
+  //   }
 
-    tr:nth-child(even) td {
-      background-color: #fff;
-    }
+  //   tr:nth-child(even) td {
+  //     background-color: #fff;
+  //   }
 
-    td {
-      background: #fafafa;
-      border:dotted 1px #bbb;
-    }
+  //   td {
+  //     background: #fafafa;
+  //     border:dotted 1px #bbb;
+  //   }
 
-    th {
-      line-height:1.25em;
-      text-align: left;
-      color: $black;
-      font-weight:normal;
-      background-color: #e1e8e8;
-      border:solid 1px #bbb;
-    }
+  //   th {
+  //     line-height:1.25em;
+  //     text-align: left;
+  //     color: $black;
+  //     font-weight:normal;
+  //     background-color: #e1e8e8;
+  //     border:solid 1px #bbb;
+  //   }
 
-    td small{
-      font-size:1em;
-    }
-  }
+  //   td small{
+  //     font-size:1em;
+  //   }
+  // }
 
   .fraction {
     sup,
