@@ -49,5 +49,18 @@ module Spina
                   .reject{ |r| meta_registers.include?(r.register) || r._records.empty?}
                   .sort_by(&:register)
     end
+
+    def phase_label(phase)
+      case phase
+      when 'Beta'
+        'Ready to use'
+      when 'Alpha'
+        'Open for feedback'
+      when 'Discovery'
+        'In the backlog'
+      when 'Backlog'
+        'In the backlog'
+      end
+    end
   end
 end
