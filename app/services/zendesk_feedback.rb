@@ -3,9 +3,9 @@ require 'zendesk_api'
 class ZendeskFeedback
   def initialize
     @client = ZendeskAPI::Client.new do |config|
-      config.url = ENV['ZENDESK_URL']
-      config.username = ENV['ZENDESK_USERNAME']
-      config.token = ENV['ZENDESK_TOKEN']
+      config.url = Rails.application.secrets.zendesk_url
+      config.username = Rails.application.secrets.zendesk_username
+      config.token = Rails.application.secrets.zendesk_token
     end
   end
 
