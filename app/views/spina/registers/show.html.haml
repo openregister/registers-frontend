@@ -26,24 +26,25 @@
       .govspeak
         = govspeak(@register.history)
 
-      %h2.heading-large Register history
-      .phase-history
+      - if @register.phases.any?
+        %h2.heading-large Register history
+        .phase-history
+          - @register.phases.each do |phase|
+            %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
+              %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
+              %p= phase.phase_update
+
+        %h2.heading-large Register updates
         - @register.phases.each do |phase|
-          %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-            %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
-            %p= phase.phase_update
+          - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
-      %h2.heading-large Register updates
-      - @register.phases.each do |phase|
-        - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
-
-        - grouped_steps.each do |step|
-          %h3.heading-medium{id: "#{step.title.parameterize}"}
-            %span{class: "tag background-#{phase.name.downcase}"}
-              = phase.name
-            = step.title
-          .govspeak
-            = govspeak(step.content)
+          - grouped_steps.each do |step|
+            %h3.heading-medium{id: "#{step.title.parameterize}"}
+              %span{class: "tag background-#{phase.name.downcase}"}
+                = phase.name
+              = step.title
+            .govspeak
+              = govspeak(step.content)
 
     .column-third
       %aside#related
