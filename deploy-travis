@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+# Parse app name from manifest to ensure it matches up
+APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")
+
+echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
+
+# $CF env variables are set by Travis and configured in ../.travis.yml
+cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+
+# Zero downtime push comes from "Autopilot" which is installed in before_deploy
+# step in Travis
+cf zero-downtime-push $APP_NAME -f manifest.yml
+
+# Set env variables that the new app
+cf set-env $CF_APP AWS_BUCKET $AWS_BUCKET
+cf set-env $CF_APP AWS_SECRET $AWS_SECRET
+cf set-env $CF_APP AWS_KEY $AWS_KEY
+cf set-env $CF_APP AWS_REGION $AWS_REGION
+cf set-env $CF_APP ZENDESK_URL $ZENDESK_URL
+cf set-env $CF_APP ZENDESK_USERNAME $ZENDESK_USERNAME
+cf set-env $CF_APP ZENDESK_TOKEN $ZENDESK_TOKEN
+
+# Logout from Cloudfoundry
+cf logout
