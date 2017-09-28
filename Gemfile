@@ -42,6 +42,9 @@ gem 'httparty'
 # Zendesk
 gem 'zendesk_api'
 
+# Cloudfoundry ruby helper
+gem 'cf-app-utils'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'

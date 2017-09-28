@@ -1,13 +1,16 @@
+require 'cf-app-utils'
+
 CarrierWave.configure do |config|
   if Rails.env.production?
+    @credentials = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')
     config.fog_credentials = {
       provider:               'AWS',
-      region:                 'eu-west-2',
-      aws_access_key_id:      Rails.application.secrets.aws_key,
-      aws_secret_access_key:  Rails.application.secrets.aws_secret
+      region:                 @credentials['AWS_REGION'],
+      aws_access_key_id:      @credentials['AWS_KEY'],
+      aws_secret_access_key:  @credentials['AWS_SECRET']
     }
-    config.storage = :fog
-    config.fog_directory  = Rails.application.secrets.aws_bucket
+    config.storage        = :fog
+    config.fog_directory  = @credentials['AWS_BUCKET']
     config.fog_public     = true
     config.fog_attributes = { 'Cache-Control' => 'max-age=315576000' }
   else
