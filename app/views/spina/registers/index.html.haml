@@ -19,19 +19,38 @@
           %span{itemprop: "name"} Registers #{params[:phase]}
 
 .container
-  .grid-row
-    .column-one-whole
-      .govspeak
-        = govspeak(@page.content(:text))
-
   - if params[:phase].present?
+    .grid-row
+      .column-full
+        %h1 Registers #{params[:phase]}
     .grid-row
       .column-one-third
         .data
           %span.data-item.bold-xxlarge= @registers.size
-          %span.data-item.bold-xsmall Registers #{params[:phase]}
+
+    .grid-row
+      .column-two-thirds
+        %details.regiser-phase-description{role: "group"}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", role: "button"}
+            - if params[:phase] == 'ready to use'
+              %span.summary When a register is ready
+            - elsif params[:phase] == 'in progress'
+              %span.summary When a register is in progress
+          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+            - if params[:phase] == 'ready to use'
+              %p A register is ready to use once
+              %ul.panel__list
+                %li the data has been finalised by the custodian and is no longer open for user feedback
+            - elsif params[:phase] == 'in progress'
+              %p A register is in progress when
+              %ul.panel__list
+                %li the data in the register is changing and still open to user feedback
+                %li the data is in the backlog and Government Digital Service (GDS) is creating a first draft of the register
 
   - else
+    .grid-row
+      .column-full
+        %h1 Registers pipeline
     .grid-row
       .column-one-quarter
         .data
