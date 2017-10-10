@@ -24,6 +24,7 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'elements/lists';
 @import 'elements/panels';
 @import 'elements/tables';
+@import 'elements/details';
 
 //From alphagov/govuk_template;
 @import 'govuk_template/colours';
@@ -399,5 +400,16 @@ $phases: (beta, #f47738),
     th {
       vertical-align: top;
     }
+  }
+}
+
+.regiser-phase-description {
+  margin: -20px 0 40px 0;
+}
+
+.panel {
+  &__list {
+    list-style-type: disc;
+    padding-left: 20px;
   }
 }
