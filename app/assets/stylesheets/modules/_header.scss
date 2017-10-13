@@ -1,289 +1,95 @@
-/**
- * Header Component
- *
- * Based on the existing GOV.UK header in GOV.UK Template, with an 'inline'
- * product name and hopefully improved mobile behaviour
- *
- * Notes:
- *
- * - Make sure you include header.js in your application. This will update
- *   the aria-expanded and aria-hidden attributes on the toggle and the nav
- *   respectively so that screen readers know what's happening.
- * - Link the current page to the same place as your skip link (e.g. #main) –
- *   this means that it is included by screen readers but is referred to as a
- *   'same page' link, and clicking it does not reload the page.
- *
- * Example Usage:
- *
- * <header class="header">
- *   <div class="header__container">
- *     <div class="header__brand">
- *       <a href="/">
- *         <span class="header__title">My Product Page</span>
- *       </a>
- *     </div>
- *
- *     <input class="header__navigation-toggle-checkbox" type="checkbox" id="show-menu" aria-controls="navigation" aria-expanded="false" />
- *     <label class="header__navigation-toggle" for="show-menu">
- *       Menu
- *     </label>
- *
- *     <nav id="navigation" class="header__navigation" aria-label="Top Level Navigation" aria-hidden="true">
- *       <ul>
- *         <li class="active"><a href="#main">Active Page</a></li>
- *         <li><a href="/other.html">Other Page</a></li>
- *       </ul>
- *     </nav>
- *   </div>
- * </header>
- */
-
-$active-nav-color: #1d8feb;
-
-.header {
-  @extend %contain-floats;
-
-  @include screen {
-    background: $black;
-    color: $white;
-    border-bottom: 10px solid $white;
-  }
-}
-
-.header__container {
-  @extend %site-width-container;
-  @extend %contain-floats;
-  zoom: 1;
-
-  padding: 8px 0;
-
-  @include screen {
-    border-bottom: 10px solid $mainstream-brand;
-    margin-bottom: -10px;
-  }
-}
-
-.header.header--full-width {
-  margin-bottom: 0;
-
-  @include screen {
-    border-bottom: 10px solid $mainstream-brand;
-  }
-
-  .header__container {
-    border-bottom: none;
-    width: auto;
-    max-width: none;
-    margin: 0 $gutter-half;
-
-    @include media(tablet) {
-      margin: 0 $gutter;
-    }
-  }
-}
-
-.header--without-border {
-  border-bottom: none;
-  margin-bottom: 0;
-
-  .header__container {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-}
-
-.header__brand {
-  font-size: 30px;
-
-  // Give brand focus outline on mobile
-  &:after {
-    content: ".";
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
-
-  a:link, a:visited {
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  .govuk-logo {
-    float: left;
-  }
-
-  @include screen {
-    a:link, a:visited {
-      color: $white;
-    }
-
-    a:focus {
-      background-color: inherit;
-    }
-
-    @include media(tablet) {
-      float: left;
-
-      .govuk-logo {
-        float: none;
-      }
-
-      a:hover {
-        text-decoration: none;
-        border-bottom: 1px solid $white;
-      }
-    }
-  }
-
-  @include print {
-    a:link, a:visited {
-      color: $black;
-    }
-  }
-}
-
-.header__title {
-  @include core-24;
-  display: block;
+// We have both a title and a search box in our header. This is unusual. To make
+// this work, we need to slightly tweak the header's CSS from our app.
+.header-title {
   float: left;
-  clear: left;
-
-  @include media(tablet) {
-    display: inherit;
-    float: none;
-    clear: none;
-    padding-left: 5px;
-  }
-
-  .phase-banner {
-    margin-left: 5px;
-  }
-}
-
-.header__navigation {
-  @include screen {
-
-    // We want the same font size on mobile as tablet, so we can't use bold-16.
-    @include _core-font-generator(
-      $font-size: 16px,
-      $font-size-640: 16px,
-      $font-size-print: 12pt,
-      $line-height: (20 / 16),
-      $line-height-640: (20 / 16),
-      $font-weight: 700
-    );
-
-    display: none;
-    clear: both;
-
-    padding-top: 10px;
-
-    a:link, a:visited {
-      color: $white;
-      text-decoration: none;
-      padding: 8px 0;
-      display: inline-block;
-    }
-
-    .active a:link, .active a:visited {
-      color: $active-nav-color;
-    }
-
-    a:focus, .active a:focus {
-      color: $black;
-    }
-
-    a:hover, a:active {
-      text-decoration: underline;
-    }
-
-    ul {
-      border-top: 1px solid $grey-1;
-      margin: 0;
-      padding: 8px 0 0;
-    }
-
-    li {
-      list-style: none;
-      margin: 2px 0;
-    }
-
-    @include media(tablet) {
-      display: block;
-      clear: none;
-      padding-top: 2px;
-      border-top: none;
-      float: right;
-
-      a:link, a:visited {
-        padding: 0;
-      }
-
-      ul {
-        border-top: none;
-        padding: 0;
-      }
-
-      li {
-        float: left;
-        margin: 12px 0 0 $gutter-half;
-      }
-    }
-  }
-
-  @include print {
-    display: none;
-  }
-}
-
-.header__navigation-toggle {
-  float: right;
   color: $white;
-  text-decoration: none;
-  border: 1px solid $grey-1;
-  border-radius: 3px;
-  padding: 2px 6px 1px;
-  font-size: 80%;
-  font-weight: bold;
+  @include bold-24;
 
-  input {
-    display: none;
+  // When the title appears on its own line (the search box is hidden and only a
+  // search toggle is visible) it needs some padding
+  @media screen and (max-width: 379px) {
+    margin: 5px 15px 0;
   }
 
+  // When it appears next to the crown, align the heading with the baseline of
+  // the GOV.UK logo...
+  // ...at 16px
+  @media screen and (min-width: 380px) {
+    margin-top: 14px;
+  }
+
+  // ...and at 24px
   @include media(tablet) {
-    display: none;
+    margin-top: 8px;
+  }
+}
+
+#global-header.with-proposition .header-wrapper {
+  .header-global {
+    // Don't push the title to the 1/3 mark
+    .header-logo {
+      width: auto;
+    }
+
+    // We have to use the ID #global-header because we're overriding a rule in
+    // static which has it as part of its selector, and we need to be as specific.
+    // scss-lint:disable IdSelector
+    .site-search {
+      // On mobile, force the search box onto a 'new line'.
+      @include media(mobile) {
+        width: 100%;
+        float: right;
+        margin: 5px 0;
+      }
+
+      // Slightly reduce the width of the search box to allow room for the title.
+      @include media(tablet) {
+        width: 40%;
+      }
+    }
+
+    @include media(desktop) {
+      width: 40%;
+    }
   }
 
-  &:after {
-    display: inline-block;
-    font-size: 8px;
-    height: 8px;
+  .header-proposition {
+    @include media(desktop) {
+      width: 60%;
+    }
+  }
+
+  #logo #product-name {
+    font-size: 24px;
+    font-weight: 400;
     padding-left: 5px;
-    vertical-align: middle;
-    content: " \25BC";
+  }
+
+  #proposition-links a {
+    font-family: $toolkit-font-stack;
   }
 }
 
-.header__navigation-toggle-checkbox {
-  position: absolute;
-  left: -9999em;
+#proposition-menu {
+  @include media(tablet) {
+    float: right;
+  }
+}
+
+.phase-badge {
+  background-color: $govuk-blue;
+  color: $white;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14286;
+  letter-spacing: 1px;
+  margin: 10px 0 0 0;
+  padding: 2px 5px 0;
+  text-transform: uppercase;
 
   @include media(tablet) {
-    display: none;
+    font-size: 16px;
+    line-height: 1.25;
   }
-}
-
-.header__navigation-toggle-checkbox:focus ~ .header__navigation-toggle {
-  outline: 3px solid $focus-colour;
-}
-
-.header__navigation-toggle-checkbox:checked ~ .header__navigation-toggle:after {
-  content: "\25B2";
-}
-
-.header__navigation-toggle-checkbox:checked ~ .header__navigation {
-  display: block;
 }
