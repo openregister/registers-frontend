@@ -30,8 +30,8 @@
         %h2.heading-large Register history
         .phase-history
           - @register.phases.each do |phase|
-            %div{class: "phase-history-item border-#{phase.name.downcase} txt-#{phase.name.downcase}"}
-              %h3{class: "tag background-#{phase.name.downcase}"}= phase.name
+            .phase-history-item
+              %h3.tag= phase.name
               %p= phase.phase_update
 
         %h2.heading-large Register updates
@@ -40,7 +40,7 @@
 
           - grouped_steps.each do |step|
             %h3.heading-medium{id: "#{step.title.parameterize}"}
-              %span{class: "tag background-#{phase.name.downcase}"}
+              %span.tag
                 = phase.name
               = step.title
             .govspeak
@@ -67,7 +67,7 @@
               - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
 
               %h4.heading-small
-                %span{class: "tag background-#{phase.name.downcase}"}
+                %span.tag
                   = phase.name
 
               %ul.tick-list
