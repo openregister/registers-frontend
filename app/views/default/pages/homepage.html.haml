@@ -1,6 +1,6 @@
 - @page_title = @page.seo_title
 - @page_description = @page.description
-- @body_class = 'home-page'
+= content_for :body_classes, 'home-page'
 
 .masthead
   %nav{class: "breadcrumbs breadcrumbs--inverse", "aria-label" => "Breadcrumbs"}

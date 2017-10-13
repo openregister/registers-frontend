@@ -26,10 +26,6 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'elements/tables';
 @import 'elements/details';
 
-//From alphagov/govuk_template;
-@import 'govuk_template/colours';
-@import 'govuk_template/footer';
-
 // From alphagov/product-page-example
 @import 'util/print';
 @import 'modules/breadcrumbs';
