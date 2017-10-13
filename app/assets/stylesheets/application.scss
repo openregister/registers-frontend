@@ -84,9 +84,8 @@ a:visited {
   }
 }
 
-.phase-banner {
-  margin-left: 10px;
-  padding-bottom: 2px;
+.home-page #global-header-bar {
+  display: none;
 }
 
 // Column full width
@@ -112,29 +111,12 @@ a:visited {
   @include grid-column(1/5);
 }
 
-// Register styles
-// ==========================================================================
-
-.register-block {
-  background: $grey-3;
-  margin-top: 20px;
-  min-height: 100px;
-  padding: 6px;
-
-  h3 {
-    margin: 4px 0 0 4px;
-  }
+#footer {
+  margin-top: 40px;
 }
 
-// Phase styles
-// ==========================================================================
-
-$phases: (beta, #f47738),
-         (alpha, #d53880),
-         (discovery, $discovery-colour),
-         (backlog, #2e358b);
-
 .phase {
+  background-color: $govuk-blue;
   color: $page-colour;
   display: block;
   padding-top: 4.8px;
@@ -250,18 +232,11 @@ $phases: (beta, #f47738),
     font-size: 16px;
     text-decoration: none;
 
-      .data-item.bold-xsmall {
-        text-decoration: underline;
-      }
+    .data-item.bold-xsmall {
+      text-decoration: underline;
+    }
   }
 }
-
-.status {
-  font-weight: bold;
-}
-
-// Phase circle
-// ==========================================================================
 
 .related-container {
   margin-top: 30px;
@@ -275,6 +250,7 @@ $phases: (beta, #f47738),
 }
 
 .tag {
+  background-color: $govuk-blue;
   color: $white;
   display: inline-block;
   line-height: 1.6;
@@ -296,13 +272,8 @@ $phases: (beta, #f47738),
   }
 }
 
-.phase-history {
-  clear: both;
-  margin-top: 30px;
-}
-
 .phase-history-item {
-  border-left: 3px solid black;
+  border-left: 3px solid $govuk-blue;
   margin-bottom: 0;
   padding-left: 10px;
   padding-bottom: 10px;
@@ -314,20 +285,6 @@ $phases: (beta, #f47738),
   p {
     font-size: 16px;
     margin: 10px 0 0;
-  }
-}
-
-@each $phases, $colour in $phases {
-  .background-#{$phases} {
-    background-color: $colour;
-  }
-
-  .border-#{$phases} {
-    border-color: $colour;
-  }
-
-  .txt-#{$phases} {
-    color: $colour;
   }
 }
 
