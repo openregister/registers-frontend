@@ -1,5 +1,3 @@
-require 'cf-app-utils'
-
 CarrierWave.configure do |config|
   if Rails.env.production?
     @credentials = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')

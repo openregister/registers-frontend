@@ -1,5 +1,4 @@
 require 'zendesk_api'
-require 'cf-app-utils'
 
 class ZendeskFeedback
   def initialize
