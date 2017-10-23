@@ -74,10 +74,11 @@ a:visited {
 
 .js-hidden {
   display: none;
+}
 
-  .js-enabled & {
-    display: block;
-  }
+.js-enabled .js-hidden {
+  display: block;
+  visibility: visible;
 }
 
 .home-page #global-header-bar {
