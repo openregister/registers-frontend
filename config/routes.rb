@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   Spina::Engine.routes.draw do
     resources :registers, only: [:show, :index]
+    get '/registers/:id/history', to: 'registers#history', as: 'history'
 
     # Support
 
