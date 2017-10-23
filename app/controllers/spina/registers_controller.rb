@@ -22,5 +22,9 @@ module Spina
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
     end
+
+    def history
+      @register = Spina::Register.find_by_slug!(params[:id])
+    end
   end
 end

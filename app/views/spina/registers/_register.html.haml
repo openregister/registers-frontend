@@ -18,6 +18,6 @@
     %td
   - if register.phases.present?
     %td{class: "links", "data-title" => "View more: "}
-      = link_to "View history", register_path(register.slug)
+      = link_to "View history", history_path(register.slug)
   - else
     %td
