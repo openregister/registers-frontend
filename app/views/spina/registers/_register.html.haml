@@ -16,7 +16,7 @@
       = link_to "View register", register.url, target: :blank
   - else
     %td
-  - if register.phases.present?
+  - if register.history.present?
     %td{class: "links", "data-title" => "View more: "}
       = link_to "View history", register_path(register.slug)
   - else
