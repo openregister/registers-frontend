@@ -2,6 +2,8 @@ module Spina
   class RegistersController < Spina::ApplicationController
     helper_method :sort_column, :sort_direction
 
+    before_action :initialize_client
+
     layout "layouts/default/application"
 
     def index
@@ -21,10 +23,19 @@ module Spina
 
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
+
+      @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
+      @records = @register_data.get_current_records
     end
 
     def history
       @register = Spina::Register.find_by_slug!(params[:id])
+    end
+
+    private
+
+    def initialize_client
+      @@registers_client ||= OpenRegister::RegistersClient.new({ cache_duration: 3600 })
     end
   end
 end

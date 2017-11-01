@@ -42,10 +42,12 @@ GIT
       rails (>= 4.2)
 
 GIT
-  remote: https://github.com/openregister/openregister-ruby
-  revision: 6769a5123d30bc800a40f39a08072fa3be6b31ce
+  remote: https://github.com/openregister/openregister-ruby-client
+  revision: 8924f3b8cbb76548f334bb66c8cb9010634366f2
+  tag: v0.2.1
   specs:
-    openregister-ruby (0.1.0)
+    openregister-ruby (0.2.1)
+      mini_cache (~> 1.1.0)
       morph (~> 0.5.0)
       rest-client (~> 2)
 
@@ -333,7 +335,8 @@ GEM
     http_parser.rb (0.6.0)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    i18n (0.8.6)
+    i18n (0.9.0)
+      concurrent-ruby (~> 1.0)
     inflection (1.0.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -378,6 +381,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_cache (1.1.0)
     mini_magick (4.8.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
@@ -481,7 +485,7 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
