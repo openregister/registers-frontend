@@ -1,5 +1,6 @@
 - @page_title = "#{@register.name.capitalize} Register"
 - @page_description = ""
+- content_for :body_classes, 'register-show'
 
 %nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
   %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
@@ -17,23 +18,88 @@
         %span{itemprop: "name"} #{@register.name} Register
 
 .container
+
+  - if @register.register_phase != 'Beta'
+    .grid-row
+      .column-two-thirds
+        .panel.panel-border-wide
+          %span.phase-badge In progress
+          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
+
   .grid-row
     .column-two-thirds
-      %h1= @page_title
+
+      %h1 #{@register.name} register
+
+      .govuk-metadata
+        %dl
+          %dt Updated:
+          %dd
+            = DateTime.parse(@register_data.get_entries.last[:timestamp]).strftime('%d/%m/%Y')
+          %dt Managed by:
+          %dd
+            = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
+
+      %p= @register_data.get_register_definition[:item]['text']
+
+      %details{:role => "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary What are Registers?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p Registers are reliable lists of information managed by one custodian from the government organisation responsible for maintaining the Register’s data.
+          %p
+            = link_to "Using Registers", "https://registers.cloudapps.digital/using-registers"
+            %br
+            = link_to "Registers collection", "https://registers.cloudapps.digital/registers"
+
+      %details{:role => "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary How do I use a Register in my service?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p There are 2 ways to use Registers. You can either:
+          %ul.list-bullet
+            %li use an #{link_to "application programming interface", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} (API) to automatically pull data from a register into your service
+            %li download the data for this Register and keep your own copy up-to-date
 
     .column-third
       %aside#related
         .related-container
-          .group
-            %h4.heading-small Managed by
-            %div{class: "govuk-organisation-logo #{@register.authority.parameterize}"}
-              %div{class: "logo-container #{crest_class_name(@register.authority.parameterize)}"}
-                %span= @register.authority
-            - if @register.custodian.present?
-              %h4.heading-small Custodian
-              %p= @register.custodian
-            - if @register.url.present?
-              %h4.heading-small Register
-              %p= link_to @register.url, @register.url, rel: 'external'
+          %h4.heading-small Find out more
+          %ul
+            %li
+              = link_to "API documentation", "https://registers-docs.cloudapps.digital", target: :blank
+            %li
+              = link_to "Create a register", "https://www.gov.uk/guidance/creating-a-register", target: :blank
+            %li
+              = link_to "Contact the team", "https://registers.cloudapps.digital/support", target: :blank
 
-            %hr
+  .grid-row
+    .column-one-whole
+      .search-wrapper
+        %h3.heading-large #{@records.count} Records
+
+        %details{:role => "group"}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+            %span.summary Get a copy this data
+          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+            %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xls"}.
+            %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
+
+        %details{:role => "group"}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+            %span.summary What are the column headings?
+          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+            %dl
+              - @register_data.get_field_definitions.each do |field|
+                %dt= field[:item]['field']
+                %dd= field[:item]['text']
+
+      .table-scroll
+        %table.register-data-table
+          %thead
+            %tr
+              - @register_data.get_field_definitions.each do |field|
+                %th= field[:item]['field']
+
+          %tbody
+            = render partial: 'record', collection: @records
