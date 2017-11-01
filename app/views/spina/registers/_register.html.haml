@@ -13,7 +13,7 @@
         %span= register.authority
   - if register.url.present?
     %td{class: "links", "data-title" => "View more: "}
-      = link_to "View register", register.url, target: :blank
+      = link_to "View register", register_path(register.slug)
   - else
     %td
   - if register.history.present?

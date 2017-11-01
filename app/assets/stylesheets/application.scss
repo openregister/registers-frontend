@@ -85,6 +85,29 @@ a:visited {
   display: none;
 }
 
+dl {
+  margin-bottom: 20px;
+  overflow: hidden
+}
+
+dl dt {
+  clear: left;
+  float: left;
+  font-weight: bold;
+  max-width: 150px;
+  padding-bottom: 0.5rem;
+  padding-right: 1%;
+  width: 20%
+}
+
+dl dd {
+  float: left;
+  margin: 0;
+  max-width: 480px;
+  padding-bottom: 0.5rem;
+  width: 78%
+}
+
 // Column full width
 // ==========================================================================
 
@@ -119,6 +142,41 @@ a:visited {
   padding-top: 4.8px;
   padding-bottom: 4.8px;
   text-align: center;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.register-data-table {
+  margin-top: 40px;
+
+  td,
+  th {
+    font-size: 16px;
+    max-width: 400px;
+    padding: 15px 40px 15px 0;
+    vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
+
+    .unknown {
+      color: $grey-2;
+    }
+  }
+
+    tr {
+    width: 100%;
+  }
+
+  thead th {
+    font-weight: normal;
+
+    @include media(tablet) {
+      border-top: 2px solid $grey-3;
+    }
+  }
 }
 
 .register-status-table {
@@ -237,6 +295,10 @@ a:visited {
 
 .related-container {
   margin-top: 30px;
+
+  ul {
+    padding: 0;
+  }
 }
 
 .sort_link {
@@ -365,5 +427,28 @@ a:visited {
   &__list {
     list-style-type: disc;
     padding-left: 20px;
+  }
+}
+
+.govuk-metadata {
+  font-size: 16px;
+  margin: 45px 0;
+
+  dt {
+      font-weight: normal
+  }
+
+  dl {
+      margin-bottom: 0
+  }
+}
+
+.search-wrapper {
+  border-top: 2px solid $grey-3;
+  margin: 40px 0 20px 0;
+  padding-top: 40px;
+
+  .heading-large {
+    margin-top: 0;
   }
 }
