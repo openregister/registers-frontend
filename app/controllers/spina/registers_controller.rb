@@ -21,14 +21,14 @@ module Spina
       @current_phases = Spina::Register::CURRENT_PHASES
     end
 
-    def show
+    def new_show
       @register = Spina::Register.find_by_slug!(params[:id])
 
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
       @records = @register_data.get_current_records
     end
 
-    def history
+    def show
       @register = Spina::Register.find_by_slug!(params[:id])
     end
 
