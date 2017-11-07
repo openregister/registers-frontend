@@ -53,7 +53,7 @@
         .horizontal-form-label
           Authority
         .horizontal-form-content
-          = f.select :authority, Spina::Register::AUTHORITIES, { data: { "default-value" => @register.authority } }
+          = f.text_field :authority
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :custodian

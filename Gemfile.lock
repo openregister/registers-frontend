@@ -42,13 +42,11 @@ GIT
       rails (>= 4.2)
 
 GIT
-  remote: https://github.com/openregister/openregister-ruby-client
-  revision: 8924f3b8cbb76548f334bb66c8cb9010634366f2
-  tag: v0.2.1
+  remote: https://github.com/openregister/registers-ruby-client.git
+  revision: fa7af6cb1c2fccc5ae74fcee194840052cbfb90b
   specs:
-    openregister-ruby (0.2.1)
+    registers-ruby-client (0.1.0)
       mini_cache (~> 1.1.0)
-      morph (~> 0.5.0)
       rest-client (~> 2)
 
 GEM
@@ -385,8 +383,6 @@ GEM
     mini_magick (4.8.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    morph (0.5.1)
-      activesupport (>= 2.0.2)
     multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -528,12 +524,12 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  openregister-ruby!
   pg (~> 0.18)
   pry-byebug
   puma (~> 3.0)
   rails (= 5.1.3)
   ransack!
+  registers-ruby-client!
   sass-rails (~> 5.0)
   spina!
   spring

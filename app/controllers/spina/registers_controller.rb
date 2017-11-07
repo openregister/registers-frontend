@@ -34,7 +34,7 @@ module Spina
     private
 
     def initialize_client
-      @@registers_client ||= OpenRegister::RegistersClient.new({ cache_duration: 3600 })
+      @@registers_client ||= RegistersClient::RegistersClientManager.new({ cache_duration: 3600 })
     end
   end
 end
