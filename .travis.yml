@@ -20,7 +20,7 @@ before_deploy:
 
 deploy:
   provider: script
-  script: chmod +x ./bin/deploy
+  script: ./bin/deploy
   skip_cleanup: true
   on:
     repo: openregister/register-status
