@@ -23,9 +23,8 @@ module Spina
 
     def new_show
       @register = Spina::Register.find_by_slug!(params[:id])
-
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-      @records = @register_data.get_current_records
+      @records = @register_data.get_records
     end
 
     def show
