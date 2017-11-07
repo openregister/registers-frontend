@@ -43,11 +43,10 @@ module Spina
     end
 
     def beta_registers
-      meta_registers = %w(register datatype field)
-
-      OpenRegister.registers('https://register.register.gov.uk/')
-                  .reject{ |r| meta_registers.include?(r.register) || r._records.empty?}
-                  .sort_by(&:register)
+      registers_client = RegistersClient::RegistersClientManager.new({ cache_duration: 3600 })
+      register_data = registers_client.get_register('register', 'beta')
+      beta_registers = register_data.get_records
+      return beta_registers
     end
 
     def phase_label(phase)
