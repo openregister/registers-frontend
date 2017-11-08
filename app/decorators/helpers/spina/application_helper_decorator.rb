@@ -32,7 +32,7 @@ module Spina
     end
 
     def registers_client
-      RegistersClient::RegistersClientManager.new({ cache_duration: 3600 })
+      RegistersClient::RegistersClientManager.new({ cache_duration: 600 })
     end
 
     def government_organisations
