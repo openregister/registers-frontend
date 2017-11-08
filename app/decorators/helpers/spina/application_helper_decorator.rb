@@ -2,8 +2,6 @@ require 'govspeak'
 
 module Spina
   ApplicationHelper.module_eval do
-    include HTTParty
-
     def govspeak(text)
       Govspeak::Document.new(text).to_html.html_safe
     end
@@ -33,21 +31,19 @@ module Spina
       end
     end
 
-    def register_description(register, phase)
-      begin
-        response = HTTParty.get("https://#{register}.#{phase}.openregister.org/register.json")
-        response['register-record']['text']
-      rescue
-        "Description not found"
-      end
+    def registers_client
+      RegistersClient::RegistersClientManager.new({ cache_duration: 600 })
+    end
+
+    def government_organisations
+      register_data = registers_client.get_register('government-organisation', 'beta')
+      return register_data.get_records
     end
 
     def beta_registers
-      meta_registers = %w(register datatype field)
-
-      OpenRegister.registers('https://register.register.gov.uk/')
-                  .reject{ |r| meta_registers.include?(r.register) || r._records.empty?}
-                  .sort_by(&:register)
+      register_data = registers_client.get_register('register', 'beta')
+      beta_registers = register_data.get_records
+      return beta_registers
     end
 
     def phase_label(phase)

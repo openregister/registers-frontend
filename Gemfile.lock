@@ -42,13 +42,12 @@ GIT
       rails (>= 4.2)
 
 GIT
-  remote: https://github.com/openregister/openregister-ruby-client
-  revision: 8924f3b8cbb76548f334bb66c8cb9010634366f2
-  tag: v0.2.1
+  remote: https://github.com/openregister/registers-ruby-client.git
+  revision: fa7af6cb1c2fccc5ae74fcee194840052cbfb90b
+  tag: v0.1.0
   specs:
-    openregister-ruby (0.2.1)
+    registers-ruby-client (0.1.0)
       mini_cache (~> 1.1.0)
-      morph (~> 0.5.0)
       rest-client (~> 2)
 
 GEM
@@ -98,13 +97,7 @@ GEM
       activerecord (>= 3.2.0)
     arel (8.0.0)
     bcrypt (3.1.11)
-    better_errors (2.3.0)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     bindex (0.5.0)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.1.0)
@@ -124,7 +117,6 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.2)
-    debug_inspector (0.0.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.0)
@@ -333,8 +325,6 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
-    httparty (0.15.6)
-      multi_xml (>= 0.5.2)
     i18n (0.9.0)
       concurrent-ruby (~> 1.0)
     inflection (1.0.0)
@@ -385,10 +375,7 @@ GEM
     mini_magick (4.8.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    morph (0.5.1)
-      activesupport (>= 2.0.2)
     multi_json (1.12.2)
-    multi_xml (0.6.0)
     multipart-post (2.0.0)
     netrc (0.11.0)
     nio4r (2.1.0)
@@ -512,8 +499,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  better_errors
-  binding_of_caller
   cf-app-utils
   cocoon
   fog
@@ -524,16 +509,15 @@ DEPENDENCIES
   govuk_template
   haml-rails
   http (= 2.2.1)
-  httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  openregister-ruby!
   pg (~> 0.18)
   pry-byebug
   puma (~> 3.0)
   rails (= 5.1.3)
   ransack!
+  registers-ruby-client!
   sass-rails (~> 5.0)
   spina!
   spring

@@ -4,11 +4,6 @@ module Spina
     before_validation :set_slug
 
     CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta']
-    AUTHORITIES = OpenRegister.register('government-organisation', :beta)
-                              ._all_records
-                              .reject{ |r| r.end_date.present? }
-                              .sort_by(&:name)
-                              .map(&:name)
 
     validates_presence_of :name, :register_phase, :authority
     validates_uniqueness_of :name

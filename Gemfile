@@ -28,7 +28,7 @@ gem 'govuk_template'
 gem 'govuk_elements_rails'
 gem 'govspeak', '~> 3.4.0'
 gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
-gem 'openregister-ruby', git: 'https://github.com/openregister/openregister-ruby-client', tag: 'v0.2.1'
+gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.1.0'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
@@ -36,8 +36,6 @@ gem 'fog'
 
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
-
-gem 'httparty'
 
 # Zendesk
 gem 'zendesk_api'
@@ -51,8 +49,4 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-byebug'
-
-  # Nicer UI for debugging errors
-  gem 'better_errors'
-  gem 'binding_of_caller'
 end
