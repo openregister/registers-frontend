@@ -1,0 +1,20 @@
+%li.entries__item.js-filter-item{ "data-filter-terms" => timeline_record[:current_record][:item].map { |key, value| value }.uniq }
+  %p.entries__date
+    Last updated:
+    = DateTime.parse(timeline_record[:current_record][:timestamp]).strftime('%d/%m/%Y')
+  %h3.heading-medium= timeline_record[:current_record][:key]
+  %table
+    %thead
+      %tr
+        %th Field
+        %th Previous Value
+        %th New Value
+    %tbody
+      - timeline_record[:updated_fields].each do |field_name|
+        %tr
+          %td
+            = field_name
+          %td
+            = timeline_record[:previous_record].present? ? timeline_record[:previous_record][:item][field_name] : "<span class='unknown'>No data found</span>".html_safe
+          %td
+            = timeline_record[:current_record][:item][field_name].present? ? timeline_record[:current_record][:item][field_name] : "<span class='unknown'>No data found</span>".html_safe

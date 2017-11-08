@@ -1,0 +1,40 @@
+= content_for :page_title, "Register updates"
+
+%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
+  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+        %span{itemprop: "name"} Components
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to root_path, itemprop: "item" do
+        %span{itemprop: "name"} GOV.UK Registers
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to registers_path, itemprop: "item" do
+        %span{itemprop: "name"} Register pipeline
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to new_show_path(@register.slug), itemprop: "item" do
+        %span{itemprop: "name"} #{@register.name} Register
+    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"} Register updates
+
+%main#content{role:'main'}
+  .grid-row
+    .column-two-thirds.js-hidden
+      %div{class: "js-filter-list", "aria-hidden" => "true"}
+        %form.js-filter-form
+          %fieldset
+            .form-group
+              %label{class: "form-label", for: "search"} Search for an update
+              %input{name: "search", id: "search", class: "form-control form-control-3-4"}
+
+  .grid-row
+    .column-full
+      %ul.entries.js-filter-block
+        = render partial: 'timeline_record', collection: @entries_with_items
+
+= content_for :javascript do
+  :javascript
+    jQuery(function($) {
+      GOVUK.filterListItems.init();
+    });

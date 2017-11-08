@@ -160,10 +160,6 @@ dl dd {
     vertical-align: middle;
     word-wrap: break-word;
     white-space: normal;
-
-    .unknown {
-      color: $grey-2;
-    }
   }
 
     tr {
@@ -451,4 +447,45 @@ dl dd {
   .heading-large {
     margin-top: 0;
   }
+}
+
+.entries {
+  border-left: 10px solid $grey-3;
+  list-style-type: none;
+  padding-left: 30px;
+
+  &__item {
+    position: relative;
+    padding: 30px 0;
+
+    &:before {
+      background-color: $grey-3;
+      content: "";
+      display: block;
+      height: 10px;
+      left: -30px;
+      position: absolute;
+      width: 10px;
+    }
+  }
+
+  &__date {
+    color: $grey-1;
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    margin: 0 0 20px;
+  }
+
+  .heading-medium {
+    margin-top: 0;
+  }
+
+  tr td {
+    width: 33.3333%;
+  }
+}
+
+.unknown {
+  color: $grey-2;
 }
