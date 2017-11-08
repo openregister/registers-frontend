@@ -37,8 +37,6 @@ gem 'fog'
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
-gem 'httparty'
-
 # Zendesk
 gem 'zendesk_api'
 

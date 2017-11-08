@@ -19,6 +19,12 @@ module Spina
 
       @page = Spina::Page.find_by(name: 'registerspage')
       @current_phases = Spina::Register::CURRENT_PHASES
+
+      # Fetch the register register for each phase and get records
+      beta_register_register = @@registers_client.get_register('register', 'beta').get_records
+      alpha_register_register = @@registers_client.get_register('register', 'alpha').get_records
+      discovery_register_register = @@registers_client.get_register('register', 'discovery').get_records
+      @register_registers = beta_register_register + alpha_register_register + discovery_register_register
     end
 
     def new_show

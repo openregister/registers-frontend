@@ -4,7 +4,7 @@
     - if register.register_phase == 'Backlog'
       %p= govspeak(register.description)
     - else
-      %p= register_description(register.name.parameterize, register.register_phase.downcase)
+      = @register_registers.select{ |r| r[:key] == register.name.parameterize }[0][:item]['text']
   %td{"data-title" => "Phase: "}
     = phase_label(register.register_phase)
   %td{"data-title" => "Managed by: "}
