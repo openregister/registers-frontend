@@ -42,8 +42,16 @@ module Spina
       end
     end
 
+    def registers_client
+      RegistersClient::RegistersClientManager.new({ cache_duration: 3600 })
+    end
+
+    def government_organisations
+      register_data = registers_client.get_register('government-organisation', 'beta')
+      return register_data.get_records
+    end
+
     def beta_registers
-      registers_client = RegistersClient::RegistersClientManager.new({ cache_duration: 3600 })
       register_data = registers_client.get_register('register', 'beta')
       beta_registers = register_data.get_records
       return beta_registers
