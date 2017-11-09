@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/openregister/registers-frontend.svg?branch=master)](https://travis-ci.org/openregister/registers-frontend)
 
-# Register status
+# Registers Frontend
 
-Frontend content management for [GOV.UK Open Registers](https://registers.cloudapps.digital/)
+Frontend for [GOV.UK Registers](https://registers.cloudapps.digital/)
 
 ## Prerequisites
 
 This is a Rails 5 app using [Spina CMS](https://github.com/denkGroot/Spina)
 
-1. Install [Ruby 2.4.0](https://www.ruby-lang.org/en/news/2016/12/25/ruby-2-4-0-released/)
-2. Install [Rails 5](http://weblog.rubyonrails.org/2017/3/1/Rails-5-0-2-has-been-released/)
+1. Install [Ruby 2.4.1](https://www.ruby-lang.org/en/news/2017/03/22/ruby-2-4-1-released/)
+2. Install [Rails 5.1.4](http://weblog.rubyonrails.org/2017/9/7/Rails-5-1-4-and-5-0-6-released/)
 3. Install [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Installing and running locally
@@ -26,12 +26,13 @@ $ rails server
 
 You can access the CMS via http://localhost:3000/admin
 
-## DeskPro
+## Zendesk
 
-If you need to use the DeskPro service you need to add 2 environment variables
+If you need to use the Zendesk service you need to add 3 environment variables
 
-1. `DESKPRO_API_KEY`
-2. `DESKPRO_API_BASE_URL` e.g. `https://openregisters.deskpro.com:443/api/`
+1. `ZENDESK_TOKEN`
+2. `ZENDESK_URL`
+2. `ZENDESK_USERNAME`
 
 ## License
 
