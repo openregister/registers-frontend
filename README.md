@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/openregister/register-status.svg?branch=master)](https://travis-ci.org/openregister/register-status)
+[![Build Status](https://travis-ci.org/openregister/registers-frontend.svg?branch=master)](https://travis-ci.org/openregister/registers-frontend)
 
 # Register status
 
