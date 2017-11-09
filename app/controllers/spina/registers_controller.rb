@@ -30,7 +30,18 @@ module Spina
     def new_show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-      @records = @register_data.get_records
+
+      if params[:status]
+        if params[:status] == 'closed'
+          @records = @register_data.get_expired_records
+        elsif params[:status] == 'current'
+          @records = @register_data.get_current_records
+        elsif params[:status] == 'all'
+          @records = @register_data.get_records
+        end
+      else
+        @records = @register_data.get_current_records
+      end
     end
 
     def show
