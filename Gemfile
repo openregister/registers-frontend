@@ -43,6 +43,9 @@ gem 'zendesk_api'
 # Cloudfoundry ruby helper
 gem 'cf-app-utils'
 
+# Email and Text Notifications
+gem 'govuk_notify_rails'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
