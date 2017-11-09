@@ -41,26 +41,20 @@ module Spina
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
-      fields = @register_data.get_field_definitions.map{|field| field[:item]['field']}
+      fields = @register_data.get_field_definitions.map{ |field| field[:item]['field'] }
       all_records = @register_data.get_records_with_history
       entries_reversed = @register_data.get_entries.reverse
 
       @entries_with_items = entries_reversed.map { |entry|
         records_for_key = all_records[entry[:key]]
-        current_record = records_for_key.select{|record| record[:entry_number] == entry[:entry_number]}.first
+        current_record = records_for_key.detect{ |record| record[:entry_number] == entry[:entry_number] }
         previous_record_index = records_for_key.find_index(current_record) - 1
-        previous_record = previous_record_index >= 0 ? records_for_key[previous_record_index] : nil
 
-        changed_fields = []
-
-        if previous_record.nil?
+        if previous_record_index < 0
           changed_fields = fields
         else
-          fields.each {|f|
-            if current_record[:item][f] != previous_record[:item][f]
-              changed_fields << f
-            end
-          }
+          previous_record = records_for_key[previous_record_index]
+          changed_fields = fields.select { |f| current_record[:item][f] != previous_record[:item][f] }
         end
 
         { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry[:key] }
