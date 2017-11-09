@@ -1,8 +1,7 @@
 module Spina
   class UserMailer < GovukNotifyRails::Mailer
     def forgot_password(user)
-      @credentials = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')
-      set_template(@credentials['FORGOTTEN_PASSWORD_TETMPLATE_ID'])
+      set_template(ENV['FORGOTTEN_PASSWORD_TEMPLATE_ID'])
 
       @user = user
 

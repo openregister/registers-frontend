@@ -2,12 +2,10 @@ require 'zendesk_api'
 
 class ZendeskFeedback
   def initialize
-    @credentials = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')
-
     @client = ZendeskAPI::Client.new do |config|
-      config.url = @credentials['ZENDESK_URL']
-      config.username = @credentials['ZENDESK_USERNAME']
-      config.token = @credentials['ZENDESK_TOKEN']
+      config.url = ENV['ZENDESK_URL']
+      config.username = ENV['ZENDESK_USERNAME']
+      config.token = ENV['ZENDESK_TOKEN']
     end
   end
 
