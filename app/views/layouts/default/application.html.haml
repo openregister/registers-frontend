@@ -24,10 +24,10 @@
 - content_for :head do
   = stylesheet_link_tag 'application'
   = csrf_meta_tags
+  = render partial: "spina/shared/analytics"
 
 - content_for :body_end do
   = javascript_include_tag 'application'
-  = render partial: "spina/shared/analytics"
   = yield(:javascript)
 
 = render file: 'layouts/govuk_template'
