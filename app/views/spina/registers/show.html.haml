@@ -1,5 +1,6 @@
 - @page_title = "#{@register.name.capitalize} Register"
 - @page_description = ""
+- content_for :body_classes, 'register-show'
 
 %nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
   %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
@@ -14,73 +15,95 @@
         %span{itemprop: "name"} Register pipeline
     %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "#main", itemprop: "item"}
-        %span{itemprop: "name"} #{@register.name} Register
+        %span{itemprop: "name"}= @register.name
 
 .container
+
+  - if @register.register_phase != 'Beta'
+    .grid-row
+      .column-two-thirds
+        .panel.panel-border-wide
+          %span.phase-badge In progress
+          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
+
   .grid-row
     .column-two-thirds
-      %h1= @page_title
 
-      - if @register.url.present?
-        %p #{link_to "View the register here", @register.url, target: :blank}. If you have a question or want to give feedback on the register #{link_to 'contact the team', support_path}.
-      .govspeak
-        = govspeak(@register.history)
+      %h1 #{@register.name} register
 
-      - if @register.phases.any?
-        %h2.heading-large Register history
-        .phase-history
-          - @register.phases.each do |phase|
-            .phase-history-item
-              %h3.tag= phase.name
-              %p= phase.phase_update
+      .govuk-metadata
+        %dl
+          %dt Updated:
+          %dd
+            = DateTime.parse(@register_data.get_entries.last[:timestamp]).strftime('%d/%m/%Y')
+          %dt Managed by:
+          %dd
+            = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
 
-        %h2.heading-large Register updates
-        - @register.phases.each do |phase|
-          - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
+      %p= @register_data.get_register_definition[:item]['text']
 
-          - grouped_steps.each do |step|
-            %h3.heading-medium{id: "#{step.title.parameterize}"}
-              %span.tag
-                = phase.name
-              = step.title
-            .govspeak
-              = govspeak(step.content)
+      %details{:role => "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary What are Registers?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p Registers are reliable lists of information managed by one custodian from the government organisation responsible for maintaining the Register’s data.
+          %p
+            = link_to "Using Registers", "https://registers.cloudapps.digital/using-registers"
+            %br
+            = link_to "Registers collection", "https://registers.cloudapps.digital/registers"
+
+      %details{:role => "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary How do I use a Register in my service?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p There are 2 ways to use Registers. You can either:
+          %ul.list-bullet
+            %li use an #{link_to "application programming interface", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} (API) to automatically pull data from a register into your service
+            %li download the data for this Register and keep your own copy up-to-date
 
     .column-third
       %aside#related
         .related-container
-          .group
-            %h4.heading-small Managed by
-            %div{class: "govuk-organisation-logo #{@register.authority.parameterize}"}
-              %div{class: "logo-container #{crest_class_name(@register.authority.parameterize)}"}
-                %span= @register.authority
-            - if @register.custodian.present?
-              %h4.heading-small Custodian
-              %p= @register.custodian
-            - if @register.url.present?
-              %h4.heading-small Register
-              %p= link_to @register.url, @register.url, rel: 'external'
+          %h4.heading-small Find out more
+          %ul
+            %li
+              = link_to "Register informaton", register_info_path(@register.slug)
+            %li
+              = link_to "Register updates", history_path(@register.slug)
+            %li
+              = link_to "API documentation", "https://registers-docs.cloudapps.digital", target: :blank
+            %li
+              = link_to "Create a register", "https://www.gov.uk/guidance/creating-a-register", target: :blank
+            %li
+              = link_to "Contact the team", "https://registers.cloudapps.digital/support", target: :blank
 
-            %hr
+  .grid-row
+    .column-one-whole
+      .search-wrapper
+        %h3.heading-large #{@records.count} Records
 
-            - @register.phases.each do |phase|
-              - grouped_steps = @register.steps.select { |step| step.step_phase == phase.name }
+        %details{:role => "group"}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+            %span.summary Get a copy this data
+          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+            %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xls"}.
+            %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
 
-              %h4.heading-small
-                %span.tag
-                  = phase.name
+        %details{:role => "group"}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+            %span.summary What are the column headings?
+          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+            %dl
+              - @register_data.get_field_definitions.each do |field|
+                %dt= field[:item]['field']
+                %dd= field[:item]['text']
 
-              %ul.tick-list
-                - grouped_steps.each do |step|
-                  %li
-                    - if step.completed.present?
-                      %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
-                        %g
-                          %g
-                            %path{:d => "M12.393,29.908", :fill => "#231F20"}
-                        %g
-                          %polyline{:fill => "#FFFFFF", :points => "30.848,7.857 12.811,25.895 3.836,16.921 \t"}
-                          %polygon{:fill => "#231F20", :points => "27.012,11.66 10.742,27.93 3.535,20.724 0,24.26 10.742,35 30.547,15.195 \t"}
-                    - else
-                      %svg#Layer_1{"enable-background" => "new 0 0 35 35", :height => "30px", :space => "preserve", :version => "1.1", :viewbox => "0 0 35 35", :width => "30px", :x => "0px", :xmlns => "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink", :y => "0px"}
-                    = link_to step.title, "#{ '#' + step.title.parameterize}"
+      .table-scroll
+        %table.register-data-table
+          %thead
+            %tr
+              - @register_data.get_field_definitions.each do |field|
+                %th= field[:item]['field']
+
+          %tbody
+            = render partial: 'record', collection: @records
