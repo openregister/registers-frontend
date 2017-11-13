@@ -27,7 +27,7 @@ module Spina
       @register_registers = beta_register_register + alpha_register_register + discovery_register_register
     end
 
-    def new_show
+    def show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
@@ -45,7 +45,7 @@ module Spina
       end
     end
 
-    def show
+    def info
       @register = Spina::Register.find_by_slug!(params[:id])
     end
 
