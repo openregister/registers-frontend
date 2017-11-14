@@ -4,6 +4,8 @@ applications:
   memory: 256MB
   buildpack: ruby_buildpack
   instances: 2
+  domain: registers-trial.service.gov.uk
+  no-hostname: true
   services:
     # postgres database
     - registers-prod
