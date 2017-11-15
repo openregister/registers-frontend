@@ -81,7 +81,7 @@
     .column-one-whole
       .search-wrapper
         .form-group-wrapper.js-enabled
-          = form_tag new_show_path(@register.slug), method: :get, id: 'search_records' do
+          = form_tag registers_path(@register.slug), method: :get, id: 'search_records' do
             .form-group
               = label_tag 'Filter by', nil, class: 'form-label', for: 'record_status'
               = select_tag "status", options_for_select([['Existing records', 'current'], ['Closed records', 'closed'], ['Existing and closed records', 'all']], selected: params[:status]), class: "form-control", id: 'record_status'
