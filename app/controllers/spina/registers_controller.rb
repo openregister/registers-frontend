@@ -32,11 +32,12 @@ module Spina
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
       if params[:status]
-        if params[:status] == 'closed'
+        case params[:status]
+        when 'closed'
           @records = @register_data.get_expired_records
-        elsif params[:status] == 'current'
+        when 'current'
           @records = @register_data.get_current_records
-        elsif params[:status] == 'all'
+        when 'all'
           @records = @register_data.get_records
         end
       else
