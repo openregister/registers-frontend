@@ -12,7 +12,7 @@
       = link_to registers_path, itemprop: "item" do
         %span{itemprop: "name"} Register pipeline
     %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to new_show_path(@register.slug), itemprop: "item" do
+      = link_to register_path(@register.slug), itemprop: "item" do
         %span{itemprop: "name"} #{@register.name} Register
     %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "#main", itemprop: "item"}
