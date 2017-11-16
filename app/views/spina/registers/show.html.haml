@@ -114,6 +114,8 @@
           %tbody
             = render partial: 'record', collection: @records
 
+      = paginate @records
+
 = content_for :javascript do
   :javascript
     $("#record_status").change(function () {
