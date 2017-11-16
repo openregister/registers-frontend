@@ -34,14 +34,14 @@ module Spina
       if params[:status]
         case params[:status]
         when 'closed'
-          @records = @register_data.get_expired_records
+          @records = Kaminari.paginate_array(@register_data.get_expired_records).page(params[:page]).per(100)
         when 'current'
-          @records = @register_data.get_current_records
+          @records = Kaminari.paginate_array(@register_data.get_current_records).page(params[:page]).per(100)
         when 'all'
-          @records = @register_data.get_records
+          @records = Kaminari.paginate_array(@register_data.get_records).page(params[:page]).per(100)
         end
       else
-        @records = @register_data.get_current_records
+        @records = Kaminari.paginate_array(@register_data.get_current_records).page(params[:page]).per(100)
       end
     end
 

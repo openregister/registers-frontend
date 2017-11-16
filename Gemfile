@@ -28,7 +28,7 @@ gem 'govuk_template'
 gem 'govuk_elements_rails'
 gem 'govspeak', '~> 3.4.0'
 gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
-gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.1.0'
+gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', branch: 'fix-item-load-time'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
@@ -45,6 +45,9 @@ gem 'cf-app-utils'
 
 # Email and Text Notifications
 gem 'govuk_notify_rails'
+
+# Pagination
+gem 'kaminari'
 
 group :development do
   gem 'govuk-lint', '~> 3.3'
