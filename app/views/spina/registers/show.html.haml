@@ -40,26 +40,14 @@
           %dd
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
 
+      %h2.heading-medium About this register
       %p= @register_data.get_register_definition[:item]['text']
 
-      %details{:role => "group"}
-        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
-          %span.summary What are Registers?
-        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
-          %p Registers are reliable lists of information managed by one custodian from the government organisation responsible for maintaining the Register’s data.
-          %p
-            = link_to "Using Registers", "https://registers.cloudapps.digital/using-registers"
-            %br
-            = link_to "Registers collection", "https://registers.cloudapps.digital/registers"
-
-      %details{:role => "group"}
-        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
-          %span.summary How do I use a Register in my service?
-        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
-          %p There are 2 ways to use Registers. You can either:
-          %ul.list-bullet
-            %li use an #{link_to "application programming interface", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} (API) to automatically pull data from a register into your service
-            %li download the data for this Register and keep your own copy up-to-date
+      %h2.heading-medium Using this register
+      %p There are 2 ways to use Registers. You can either:
+      %ul.list-bullet
+        %li use our #{link_to "(API)", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
+        %li download the data for this Register and keep your own copy up-to-date
 
     .column-third
       %aside#related
