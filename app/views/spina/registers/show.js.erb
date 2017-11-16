@@ -1,0 +1,8 @@
+$("#records-tbody").append("<%= j(render(partial: 'record', collection: @records)) %>");
+$("#load-more-records").attr("href", "<%= register_path(@register.slug, page: (@records.current_page + 1)) %>");
+
+<% if @records.last_page? %>
+  $("#load-more-records").hide();
+<% else %>
+  $("#load-more-records").attr("href", "<%= register_path(@register.slug, page: (@records.current_page + 1)) %>");
+<% end %>
