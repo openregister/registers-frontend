@@ -17,7 +17,7 @@
       %a{href: "#main", itemprop: "item"}
         %span{itemprop: "name"}= @register.name
 
-.container
+%main.container{role:'main'}
 
   - if @register.register_phase != 'Beta'
     .grid-row
