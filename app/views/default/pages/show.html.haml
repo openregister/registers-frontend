@@ -19,7 +19,7 @@
       %a{href: "#main", itemprop: "item"}
         %span{itemprop: "name"}= @page.menu_title
 
-.container
+%main.container{role:'main'}
   .grid-row
     - if @page.has_children? || @page.parent.present?
       .column-one-third
