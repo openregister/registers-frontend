@@ -18,7 +18,7 @@
         %a{href: "#main", itemprop: "item"}
           %span{itemprop: "name"} Registers #{params[:phase]}
 
-.container
+%main.container{role:'main'}
   - if params[:phase].present?
     .grid-row
       .column-full
