@@ -43,10 +43,10 @@ GIT
 
 GIT
   remote: https://github.com/openregister/registers-ruby-client.git
-  revision: fa7af6cb1c2fccc5ae74fcee194840052cbfb90b
-  tag: v0.1.0
+  revision: f0f4326fc4f2b846e38b40dd0ac321e2068eb0c5
+  tag: v0.1.1
   specs:
-    registers-ruby-client (0.1.0)
+    registers-ruby-client (0.1.1)
       mini_cache (~> 1.1.0)
       rest-client (~> 2)
 
@@ -519,6 +519,7 @@ DEPENDENCIES
   http (= 2.2.1)
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari
   listen (~> 3.0.5)
   pg (~> 0.18)
   pry-byebug
