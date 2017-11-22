@@ -1,7 +1,7 @@
 ---
 applications:
 - name: registers-frontend
-  memory: 256MB
+  memory: 1GB
   buildpack: ruby_buildpack
   instances: 2
   domain: registers-trial.service.gov.uk
