@@ -16,7 +16,7 @@
     page_parts:   ['text']
   }, {
     name:         'registerspage',
-    title:        'Registerspage',
+    title:        'Registers',
     page_parts:   ['text']
   }, {
     name:         'show',
@@ -33,7 +33,7 @@
     view_template:  'homepage'
   }, {
     name:           'registerspage',
-    title:          'Registerspage',
+    title:          'Registers',
     deletable:      false,
     view_template:  'registerspage'
   }]

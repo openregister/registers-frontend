@@ -18,9 +18,7 @@ Install the gem dependencies and setup the postgresql database
 
 ```bash
 $ bundle install
-$ rake db:create
-$ rails g spina:install
-$ rake db:seed
+$ rails db:setup
 $ rails server
 ```
 
