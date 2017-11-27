@@ -30,19 +30,20 @@ module Spina
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
+      records = case params[:status]
+                when 'closed'
+                  @register_data.get_expired_records
+                when 'all'
+                  @register_data.get_records
+                else
+                  @register_data.get_current_records
+                end
 
-      if params[:status]
-        case params[:status]
-        when 'closed'
-          @records = Kaminari.paginate_array(@register_data.get_expired_records).page(params[:page]).per(100)
-        when 'current'
-          @records = Kaminari.paginate_array(@register_data.get_current_records).page(params[:page]).per(100)
-        when 'all'
-          @records = Kaminari.paginate_array(@register_data.get_records).page(params[:page]).per(100)
-        end
-      else
-        @records = Kaminari.paginate_array(@register_data.get_current_records).page(params[:page]).per(100)
+      if params[:q]
+        records = search(records, params[:q])
       end
+
+      @records = paginate(records)
     end
 
     def info
@@ -77,6 +78,14 @@ module Spina
 
     def initialize_client
       @@registers_client ||= RegistersClient::RegistersClientManager.new({ cache_duration: 600 })
+    end
+
+    def search(records, query)
+      records.select { |r| r[:item].values.map(&:downcase).any? { |v| v.include?(query.downcase) } }
+    end
+
+    def paginate(records)
+      Kaminari.paginate_array(records).page(params[:page]).per(100)
     end
   end
 end
