@@ -494,3 +494,14 @@ dl dd {
 .unknown {
   color: $grey-2;
 }
+
+.panel-change-notification {
+  background-color: rgba($yellow-50, 0.5);
+  border-color: $yellow-50;
+  border-width: 5px;
+  display: inline-block;
+  margin: -7px 20px -4px 0;
+  padding: 7px;
+  text-align: left;
+  width: 100%;
+}
