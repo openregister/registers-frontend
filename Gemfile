@@ -47,6 +47,7 @@ gem 'cf-app-utils'
 gem 'govuk_notify_rails'
 
 group :development do
+  gem 'govuk-lint', '~> 3.3'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

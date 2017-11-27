@@ -18,6 +18,7 @@
 
 # Ignore jet brains tools config
 .idea
+*.iml
 
 # ignore outputs from travis
 /vendor
