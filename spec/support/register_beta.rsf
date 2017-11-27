@@ -1,0 +1,73 @@
+assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"beta","text":"The copyright and licensing terms which may apply to the data held in a register."}
+add-item	{"fields":["internal-drainage-board","name","legislation","start-date","end-date"],"phase":"beta","register":"internal-drainage-board","registry":"department-for-environment-food-rural-affairs","text":"A register of internal drainage boards in England"}
+add-item	{"fields":["country","name","official-name","citizen-names","start-date","end-date"],"phase":"beta","register":"country","registry":"foreign-commonwealth-office","text":"British English-language names and descriptive terms for countries"}
+add-item	{"fields":["register","text","registry","phase","copyright","fields"],"phase":"beta","register":"register","registry":"cabinet-office","text":"Registers maintained by HM Government"}
+add-item	{"fields":["datatype","phase","text"],"phase":"beta","register":"datatype","registry":"cabinet-office","text":"Datatypes constraining values used by register fields and idenitifying ways in which it may be encoded a representation"}
+add-item	{"name":"register"}
+add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"beta","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
+add-item	{"fields":["registration-district","name","name-cy","start-date","end-date"],"phase":"beta","register":"registration-district","registry":"hm-passport-office","text":"Districts in England and Wales responsible for recording births, marriages, deaths or civil partnerships for the purpose of registration acts"}
+add-item	{"fields":["prison-estate","name","start-date","end-date"],"phase":"beta","register":"prison-estate","registry":"ministry-of-justice","text":"A register of the prison estate in England and Wales as defined by HM Prison and Probation Service"}
+add-item	{"fields":["datatype","phase","text"],"phase":"beta","register":"datatype","registry":"cabinet-office","text":"Forms that the data in a register field can take"}
+add-item	{"custodian":"Paul Downey"}
+add-item	{"fields":["territory","name","official-name","start-date","end-date"],"phase":"beta","register":"territory","registry":"foreign-commonwealth-office","text":"British English-language names and descriptive terms for political, administrative and geographical entities that aren’t recognised as countries by the UK"}
+add-item	{"fields":["local-authority-type","name","start-date","end-date"],"phase":"beta","register":"local-authority-type","registry":"government-digital-service","text":"Types of local government organisations in the United Kingdom"}
+add-item	{"fields":["local-authority-eng","local-authority-type","name","official-name","start-date","end-date"],"phase":"beta","register":"local-authority-eng","registry":"department-for-communities-and-local-government","text":"Local authorities in England"}
+add-item	{"fields":["local-authority-type","name","start-date","end-date"],"phase":"beta","register":"local-authority-type","registry":"department-for-communities-and-local-government","text":"Types of local government organisations in the United Kingdom"}
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"beta","text":"Notes and other additional information about a record in a register."}
+add-item	{"fields":["prison-estate","name","start-date","end-date"],"phase":"beta","register":"prison-estate","registry":"ministry-of-justice","text":"A register of the prison estates in England and Wales as defined by HM Prison and Probation Service"}
+add-item	{"fields":["principal-local-authority","name","name-cy","official-name","official-name-cy","start-date","end-date"],"phase":"beta","register":"principal-local-authority","registry":"welsh-government","text":"Principal local authorities in Wales"}
+add-item	{"fields":["government-service","hostname","government-organisation","start-date","end-date"],"phase":"beta","register":"government-service","registry":"government-digital-service","text":"Government services that have a government service domain"}
+add-item	{"cardinality":"n","datatype":"string","field":"fields","phase":"beta","register":"field","text":"The names of the fields in register."}
+add-item	{"fields":["registration-district","name","name-cy","start-date","end-date"],"phase":"beta","register":"registration-district","registry":"hm-passport-office","text":"Registration districts in England and Wales, defined for the purposes of the Civil Registrations Acts"}
+add-item	{"fields":["internal-drainage-board","name","legislation","start-date","end-date"],"phase":"beta","register":"internal-drainage-board","registry":"department-for-environment-food-rural-affairs","text":"Public bodies in England that manage drainage systems"}
+add-item	{"fields":["field","datatype","phase","register","cardinality","text"],"phase":"beta","register":"field","registry":"cabinet-office","text":"Field names which may appear in a register"}
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"beta","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+add-item	{"fields":["register","text","registry","phase","copyright","fields"],"phase":"beta","register":"register","registry":"cabinet-office","text":"Registers maintained by the UK government"}
+add-item	{"fields":["local-authority-type","name","start-date","end-date"],"phase":"beta","register":"local-authority-type","registry":"department-for-communities-and-local-government","text":"Types of local government organisations in the UK"}
+add-item	{"fields":["local-authority-sct","local-authority-type","name","official-name","start-date","end-date"],"phase":"beta","register":"local-authority-sct","registry":"the-scottish-government","text":"Local authorities in Scotland"}
+add-item	{"fields":["territory","name","official-name","start-date","end-date"],"phase":"beta","register":"territory","registry":"foreign-commonwealth-office","text":"British English-language names and descriptive terms for political, administrative and geographical entities that aren’t recognised as countries"}
+add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"beta","register":"register","text":"The name of a register."}
+add-item	{"fields":["government-organisation","name","website","start-date","end-date"],"phase":"beta","register":"government-organisation","registry":"government-digital-service","text":"Government department, agency or teams that exist on GOV.UK"}
+add-item	{"fields":["registration-district","name","name-cy","start-date","end-date"],"phase":"beta","register":"registration-district","registry":"hm-passport-office","text":"Registration districts in England and Wales, defined for the purposes of the Registration Acts"}
+add-item	{"fields":["government-domain","hostname","organisation","start-date","end-date"],"phase":"beta","register":"government-domain","registry":"cabinet-office","text":"Government domains that appear on GOV.UK"}
+add-item	{"fields":["statistical-geography-unitary-authority-wls","principal-local-authority","start-date","end-date"],"phase":"beta","register":"statistical-geography-unitary-authority-wls","registry":"office-for-national-statistics","text":"Statistical geography data for principal local authorities in Wales"}
+add-item	{"fields":["statistical-geography","name","area","organisation","register","start-date","end-date"],"phase":"beta","register":"statistical-geography","registry":"office-for-national-statistics","text":"Geographies that are used in compiling official statistics"}
+add-item	{"fields":["prison-estate","name","start-date","end-date"],"phase":"beta","register":"prison-estate","registry":"ministry-of-justice","text":"Prison estates in England and Wales as defined by HM Prison and Probation Service"}
+append-entry	system	name	2017-07-17T10:59:45Z	sha-256:6165e10a2d0eda90d341fd6cb4136634503162220781595f528d1ca0cf396518
+append-entry	system	custodian	2017-07-17T10:59:45Z	sha-256:3c05997dfe57349dca50d905ccee505e3c7dcbd051a7e7f7a27e70d75f6bdfb2
+append-entry	system	field:register	2017-01-10T17:16:07Z	sha-256:1d17151d6c822c3b07a5d9e2ba2ad91715fce96993c1da1604da89d0476d4030
+append-entry	system	field:text	2017-01-10T17:16:07Z	sha-256:40f4b6019edb91a65e83062c77cc698bde2905deda95b1e69374a6e8722d8f67
+append-entry	system	field:registry	2017-01-10T17:16:07Z	sha-256:7e275a1200844bd1516956cc48f8ce2ebc91a5c4b0f1dd114f926f9bc40be410
+append-entry	system	field:phase	2017-01-10T17:16:07Z	sha-256:b21a695aa0623d71d9797af0f02201f2e91ba770f6c0bcf3b41a603d1bcabab9
+append-entry	system	field:copyright	2017-01-10T17:16:07Z	sha-256:311e05feb11ce8617ca3b8fa3c3e52267577ac5eb8d3991f60ada73797d41450
+append-entry	system	field:fields	2017-01-10T17:16:07Z	sha-256:1be055c52d2b6fa8377da297c6a773bad3550c5dc107e1dae59451f9e14171fa
+append-entry	system	register:register	2017-07-14T15:05:33Z	sha-256:d0197f7b2f3654ac0b72b05432c511ac739b90a0d4256c418d3c29d4fa85d2e5
+append-entry	user	register	2016-08-04T14:45:41Z	sha-256:5fa9c4b569a71542c9c791203d54b6b94c125f189a9c529c63466a0b34cbe38c
+append-entry	user	country	2016-08-04T14:45:41Z	sha-256:610bde42d3ae2ed3dd829263fe461542742a10ca33865d96d31ae043b242c300
+append-entry	user	datatype	2016-08-04T14:45:41Z	sha-256:85131084c2175bcea8d1113368b2783a32ee106d9150aed9881b7fa806e3ec47
+append-entry	user	field	2016-08-04T14:45:41Z	sha-256:ebb8bc0c3639577c5b7d01e5b5a382c52dfc7dee41c290bd8b29647db00259d4
+append-entry	user	local-authority-type	2016-10-21T15:20:42Z	sha-256:d64cdda6d5f6d74c9db55781f55cc6ac676b80441fe7df22961c0bd646205c5c
+append-entry	user	local-authority-eng	2016-10-21T15:20:42Z	sha-256:c1762331b777d5f820735a693cc9443eebefc076fa7f2ce0ceaeea9d0f52a5d4
+append-entry	user	territory	2016-12-15T11:37:14Z	sha-256:5b8e5ee02caedd0a6f3539b19d6b462dd2d08918764e7f476506996024f7b84a
+append-entry	user	territory	2016-12-15T15:44:11Z	sha-256:40a3400b0843f7b0a63a84ce4e9575627b2cae8154dc1f77b62c5ab75624d299
+append-entry	user	local-authority-type	2017-03-06T12:41:06Z	sha-256:1e9cf29c59112d9b877f713fb8672db58b8f76a830a2768a7c39ceddea3562d1
+append-entry	user	internal-drainage-board	2017-04-06T06:58:03Z	sha-256:eca9c442b5d1328ddd2cf13b97c1e37e47d8f0ac57bf362fbd9b37cbe888b8d2
+append-entry	user	government-organisation	2017-04-27T13:52:32Z	sha-256:a464b8513b681d2a2b6968aeb4dbe02f0a0c74bea64bc8e0dbef824d91e6130c
+append-entry	user	government-service	2017-05-03T13:19:02Z	sha-256:e1a8078a7599557527effc77ba5da48980992fa7f5b31102807b5da067a9c831
+append-entry	user	registration-district	2017-05-16T09:49:11Z	sha-256:83c5c89b03a384c1da56a31c3e737768f1c0c1ac9e310d6575bf093da49430e8
+append-entry	user	prison-estate	2017-05-24T11:15:39Z	sha-256:4e04c23d6e9b384a215c7bc8483edb2ccc3b883479ecc8b746c2be495d4c401a
+append-entry	user	registration-district	2017-05-24T12:11:34Z	sha-256:e131c3d30381124f2f73b2c6eed14ca7a8f6e7e2a0ad9c85585e61f50825a3bb
+append-entry	user	local-authority-sct	2017-05-25T07:52:39Z	sha-256:8b94087072c5ad2a477fcccb159095267a1f9a0e8eceb5eeb45cbc14d3f86bea
+append-entry	user	principal-local-authority	2017-07-07T10:51:15Z	sha-256:f1ee779ef04563be8a5436f804bbbf862fcc3c619385d6e90910f46f8df651f6
+append-entry	user	register	2017-07-14T15:05:33Z	sha-256:d0197f7b2f3654ac0b72b05432c511ac739b90a0d4256c418d3c29d4fa85d2e5
+append-entry	user	datatype	2017-07-14T15:18:13Z	sha-256:6dfd44a3cf06517a7431cc3a9bd649afa57b5238b58cf1501355aa684929870d
+append-entry	user	internal-drainage-board	2017-07-14T15:18:57Z	sha-256:9c60af8aa025fda558e74267ee83ba8108a650fe94534df880907068d2b80a5f
+append-entry	user	local-authority-type	2017-07-14T15:19:32Z	sha-256:8795fead7029a400e05954c74e19650d90afec3f91fcf3c2ced9e68c04986b8a
+append-entry	user	prison-estate	2017-07-14T15:20:32Z	sha-256:e387a6be2938c33abc656f083b9d24dca95bbea13d46639a60edb18c7a5270c2
+append-entry	user	registration-district	2017-07-14T15:21:24Z	sha-256:59c3ac4a88495846b9c3690e2a4e85a97902a90568e6cd1ca221c3b86eaac5dd
+append-entry	user	government-domain	2017-09-25T08:16:14Z	sha-256:db7cd79b15d5719215fd0041d0d23754fca24407320de639b6f5a292292da065
+append-entry	user	statistical-geography-unitary-authority-wls	2017-09-25T08:17:15Z	sha-256:6cb56fcbe3f2feaa32de5d1ced8bada929537084e50933404bba8a590ddb2fab
+append-entry	user	statistical-geography	2017-09-25T08:17:40Z	sha-256:e043c9c3add2a67fefaf22e39830670657cc0eea8d17400fb328cca34b7bc44f
+append-entry	user	prison-estate	2017-10-03T15:49:32Z	sha-256:2dccfc9ab72d5c1be79332cc37832b15a832c8f5b730ff4b3c12edfc6ff22bae
+assert-root-hash	sha-256:65e529f5c74ede0f17cdbf0091de474a5a83df8eb3ac8b0c9773165a9dc0e517

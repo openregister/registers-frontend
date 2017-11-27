@@ -1,0 +1,83 @@
+assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add-item	{"name":"register"}
+add-item	{"custodian":"Paul Downey"}
+add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"discovery","register":"register","text":"The name of a register."}
+add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"discovery","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"discovery","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"discovery","text":"Any additional information about a record in a register."}
+add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"discovery","text":"The copyright and licensing terms which may apply to the data held in a register."}
+add-item	{"cardinality":"n","datatype":"string","field":"fields","phase":"discovery","register":"field","text":"The names of the fields in a register."}
+add-item	{"fields":["register","text","registry","phase","copyright","fields"],"phase":"discovery","register":"register","registry":"cabinet-office","text":"Registers maintained by the UK government"}
+add-item	{"fields":["street-custodian","organisation"],"phase":"discovery","register":"street-custodian","registry":"government-digital-service","text":"Local land and property gazetteer custodian"}
+add-item	{"fields":["clinical-commissioning-group","name","website","start-date","end-date"],"phase":"discovery","register":"clinical-commissioning-group","registry":"nhs-commissioning-board","text":"Clinically-led statutory National Health Service bodies responsible for the planning and commissioning of health care services for their local area"}
+add-item	{"fields":["statistical-geography-council-area-sct","local-authority-sct","enacting-legislation","dissolving-legislation","start-date","end-date"],"phase":"discovery","register":"statistical-geography-council-area-sct","registry":"the-scottish-government","text":"Statistical geography data for council areas in Scotland"}
+add-item	{"fields":["qualification-subject","name","start-date","end-date"],"phase":"discovery","register":"qualification-subject","registry":"ofqual","text":"Subjects of qualifications regulated by Ofqual"}
+add-item	{"fields":["local-authority-type","name","start-date","end-date"],"phase":"discovery","register":"local-authority-type","registry":"government-digital-service","text":"Types of local government organisations in the United Kingdom"}
+add-item	{"fields":["place","name","name-cy","name-gd","uk","point","start-date","end-date"],"phase":"discovery","register":"place","registry":"government-digital-service","text":"Named places in the UK"}
+add-item	{"fields":["datatype","phase","text"],"phase":"discovery","register":"datatype","registry":"cabinet-office","text":"Forms that the data in a register field can take"}
+add-item	{"fields":["meat-establishment-operation","name","start-date","end-date"],"phase":"discovery","register":"meat-establishment-operation","registry":"food-standards-agency","text":"Parts of the business of meat establishments that can be approved by the Food Standards Agency"}
+add-item	{"fields":["meat-establishment-type","name","start-date","end-date"],"phase":"discovery","register":"meat-establishment-type","registry":"food-standards-agency","text":"Types of meat establishment approved by the Food Standards Agency"}
+add-item	{"fields":["charity","name","charity-classes","company","address","start-date","end-date"],"phase":"discovery","register":"charity","registry":"charity-commission","text":"A charity in England or Wales as defined by the Charity Commission"}
+add-item	{"fields":["allergen","name","allergen-group","start-date","end-date"],"phase":"discovery","register":"allergen","registry":"food-standards-agency","text":"Allegens referenced in Food Standards Agency food safety alerts"}
+add-item	{"fields":["local-authority-nir","local-authority-type","name","website","start-date","end-date"],"phase":"discovery","register":"local-authority-nir","registry":"department-for-communities-northern-ireland","text":"Local authorities in Northern Ireland"}
+add-item	{"fields":["qualification-level","name","start-date","end-date"],"phase":"discovery","register":"qualification-level","registry":"ofqual","text":"Levels of qualifications regulated by Ofqual"}
+add-item	{"fields":["qualification-assessment-method","name","start-date","end-date"],"phase":"discovery","register":"qualification-assessment-method","registry":"ofqual","text":"Assessment methods of qualifications regulated by Ofqual"}
+add-item	{"fields":["vehicle-colour","name","name-cy","start-date","end-date"],"phase":"discovery","register":"vehicle-colour","registry":"driver-and-vehicle-licensing-agency","text":"colours used to identify a vehicle"}
+add-item	{"fields":["address","parent-address","primary-address","name","name-cy","name-gd","street","street-custodian","point","start-date","end-date"],"phase":"discovery","register":"address","registry":"government-digital-service","text":"Addresses in the UK"}
+add-item	{"fields":["charity-class","name","start-date","end-date"],"phase":"discovery","register":"charity-class","registry":"charity-commission","text":"The classes a charity can fall into as defined by the Charity Commission"}
+add-item	{"fields":["meat-establishment-outcome","name","start-date","end-date"],"phase":"discovery","register":"meat-establishment-outcome","registry":"food-standards-agency","text":"Possible outcomes of audits of meat establishments by the Food Standards Agency"}
+add-item	{"fields":["uk","name","official-name","start-date","end-date"],"phase":"discovery","register":"uk","registry":"cabinet-office","text":"Constituent units of the United Kingdom"}
+add-item	{"fields":["field","datatype","phase","register","cardinality","text"],"phase":"discovery","register":"field","registry":"cabinet-office","text":"Field names which may appear in a register"}
+add-item	{"fields":["street","name","name-cy","name-gd","place","street-custodian","start-date","end-date"],"phase":"discovery","register":"street","registry":"government-digital-service","text":"Streets in the UK"}
+add-item	{"fields":["westminster-parliamentary-constituency","name","start-date","end-date"],"phase":"discovery","register":"westminster-parliamentary-constituency","registry":"the-electoral-commission","text":"Constituency in the Westminster parliament"}
+add-item	{"fields":["jobcentre","name","address","postcode"],"phase":"discovery","register":"jobcentre","registry":"department-for-work-pensions","text":"Jobcentre Offices"}
+add-item	{"fields":["approved-meat-establishment","company","meat-establishment-type","meat-establishment-operation","meat-establishment-outcome","local-authority","meat-establishment-audit-date","meat-establishment-audit-frequency","meat-establishment-next-audit-due-date","start-date","end-date"],"phase":"discovery","register":"approved-meat-establishment","registry":"food-standards-agency","text":"Slaughter, cutting or game establishments approved by the Food Standards Agency"}
+add-item	{"fields":["green-deal-certification-body","name","green-deal-licensed","company","address","green-deal-technology","start-date","end-date"],"phase":"discovery","register":"green-deal-certification-body","registry":"department-for-business-energy-and-industrial-strategy","text":"A Green Deal Certification Body is a company that has been accredited by the United Kingdom Accreditation Service (UKAS) for the certification of installation and advisory services under the Green Deal"}
+add-item	{"fields":["qualification-type","name","start-date","end-date"],"phase":"discovery","register":"qualification-type","registry":"ofqual","text":"Types of qualification regulated by Ofqual"}
+add-item	{"fields":["prison","name","operator","address","change-date","start-date","end-date"],"phase":"discovery","register":"prison","registry":"ministry-of-justice","text":"The Prison Estate in England and Wales, including public and contracted prisons, NOMS Immigration Removal Centres operated on behalf of the Home Office and Secure Training Centre"}
+add-item	{"fields":["police-neighbourhood","name","police-force"],"phase":"discovery","register":"police-neighbourhood","registry":"home-office","text":"police neighbourhoods"}
+add-item	{"fields":["police-force","name"],"phase":"discovery","register":"police-force","registry":"home-office","text":"police forces"}
+add-item	{"fields":["allergen","name","allergen-group","start-date","end-date"],"phase":"discovery","register":"allergen","registry":"food-standards-agency","text":"Allergens referenced in Food Standards Agency food safety alerts"}
+add-item	{"fields":["qualification-level","name","european-qualification-framework-level","start-date","end-date"],"phase":"discovery","register":"qualification-level","registry":"ofqual","text":"Levels of qualifications regulated by Ofqual"}
+append-entry	system	name	2017-11-09T12:31:42Z	sha-256:6165e10a2d0eda90d341fd6cb4136634503162220781595f528d1ca0cf396518
+append-entry	system	custodian	2017-11-09T12:31:42Z	sha-256:3c05997dfe57349dca50d905ccee505e3c7dcbd051a7e7f7a27e70d75f6bdfb2
+append-entry	system	field:register	2017-11-09T12:31:42Z	sha-256:09478078ba5a5f23514379dbaaa565af45536e8595b8dc9e72893caaa3a30adc
+append-entry	system	field:registry	2017-11-09T12:31:42Z	sha-256:78b380e14793470d035f9d04ed80bcaf2a2189700a9d071071cc126c2109b54b
+append-entry	system	field:phase	2017-11-09T12:31:42Z	sha-256:e4f4135902c68babb9fc98f98b3a847b29e4cf0c5b5fccfaf9f62c4c4db227da
+append-entry	system	field:text	2017-11-09T12:31:42Z	sha-256:f1a8505e19e10f66073c8d85b00072903b27b0e1efe334ad9ed3a8d6a3c85af3
+append-entry	system	field:copyright	2017-11-09T12:31:42Z	sha-256:ec29e0731b1660814662c76e84a8b7f84769e0ed9e57178071577a4264313f41
+append-entry	system	field:fields	2017-11-09T12:31:42Z	sha-256:8c7dc9008e9eb21b8b42feffdd49ba85d7751c49e87b87648de75470bcdcb757
+append-entry	system	register:register	2017-11-09T12:31:42Z	sha-256:5a5d4b822d803d20032d918d2ac62492413d78b80fe3c46415784b3b6137acb6
+append-entry	user	address	2017-11-09T12:31:42Z	sha-256:a6fee0dfd94e13980349025322a397e0b3d91753d451cff8705d3cce8fbef47a
+append-entry	user	allergen	2017-11-09T12:31:42Z	sha-256:d065c4134236dff4a8a27720f771b4aaf1343b1d5fa3d3ed90c76ddca7455b81
+append-entry	user	approved-meat-establishment	2017-11-09T12:31:42Z	sha-256:32373ce2b5c42dc30b3aafb30e98a9689aab4316ca16ac3322d379983d77122e
+append-entry	user	charity-class	2017-11-09T12:31:42Z	sha-256:f2fef02eb503a719911a9b4c203a4a34676fd58991df67de364ad6a4bb59654e
+append-entry	user	charity	2017-11-09T12:31:42Z	sha-256:61c2d0dcfc6caafb42ae61d8719172e1599159c83e6daad1ff324962a34f54c3
+append-entry	user	clinical-commissioning-group	2017-11-09T12:31:42Z	sha-256:6b272f51e73e575ba1237e9f46c22d3dcec63bbf9ffecdbec592133e701d48fd
+append-entry	user	datatype	2017-11-09T12:31:42Z	sha-256:832c2c739f6b86a1eb5c5d9f9863edaad751fa3d5cd7104d56bba117b8b0f416
+append-entry	user	field	2017-11-09T12:31:42Z	sha-256:4ed1ffbdc48e7e4825ddf876ca6e182de1b6bd478648defcde810e07fad681cf
+append-entry	user	green-deal-certification-body	2017-11-09T12:31:42Z	sha-256:9488125ac988ec1a910a6ed7c6e60da14de9c2a91b9d096186a1447d3a7630eb
+append-entry	user	jobcentre	2017-11-09T12:31:42Z	sha-256:9fbab4e4d2707d8c37b8b20cd369cdf657ce99605438c9e36ea55f52f15747de
+append-entry	user	local-authority-nir	2017-11-09T12:31:42Z	sha-256:72d1dc0c2e2f525e30a4096d542a8b16612e14f73fce7364f675f4c7a4b3d1a1
+append-entry	user	local-authority-type	2017-11-09T12:31:42Z	sha-256:032464b20171a0880312a9dc8997e050a63ba21b7d96f546b13dac8861e09a48
+append-entry	user	meat-establishment-operation	2017-11-09T12:31:42Z	sha-256:bd22d74637feac6c6db15315cebc0af3b8a99b8c5d5385f2fa208410ddd0b24d
+append-entry	user	meat-establishment-outcome	2017-11-09T12:31:42Z	sha-256:a3f96d66c5f3868c88c0ee5a7e43ec3e05d95307197221b1172679e14aed4e19
+append-entry	user	meat-establishment-type	2017-11-09T12:31:42Z	sha-256:5bcd1f39c3b58293034bfc440b38e9ff92b67792fea91f3d83689faabb48d48d
+append-entry	user	place	2017-11-09T12:31:42Z	sha-256:ba8141008537b3be10738c9690b04a1f4b7a339d94eda38952ee34a1b0a83711
+append-entry	user	prison	2017-11-09T12:31:42Z	sha-256:ae7431ac99269e8da1ba9a0e06544edcdfd7dadeff79f5c17dbe0e7084bb54da
+append-entry	user	qualification-assessment-method	2017-11-09T12:31:42Z	sha-256:71885a40a13504765e73818df1f38b615b0290559442c11431cfc702f9ebdfdb
+append-entry	user	qualification-level	2017-11-09T12:31:42Z	sha-256:dde58edd9798749235f3ac761f02c855b6dd787f8deb040547aadd8d49aa7010
+append-entry	user	qualification-subject	2017-11-09T12:31:42Z	sha-256:eb194b4dd82d806c513a6ecdab9ace719750d16c0d9cf2c3ed73192ce0214e90
+append-entry	user	qualification-type	2017-11-09T12:31:42Z	sha-256:9bd9824ca576ca4d347009fdd0e9e53ae9ed85d1dcb4e28221c3fb4892d88a8f
+append-entry	user	register	2017-11-09T12:31:42Z	sha-256:5a5d4b822d803d20032d918d2ac62492413d78b80fe3c46415784b3b6137acb6
+append-entry	user	statistical-geography-council-area-sct	2017-11-09T12:31:42Z	sha-256:22f3e68efb6f7ee7106b2dd7c876033857458ce95b5cb201f6ca31775f25708d
+append-entry	user	street-custodian	2017-11-09T12:31:42Z	sha-256:98ed01fb8c37e4a44d686adb478f55a1d9050b2db26d3d06d0707c779ae6929f
+append-entry	user	street	2017-11-09T12:31:42Z	sha-256:50cd0567cfea10d38d412aca44b714e7865642aeebabdd140250f8140a4e9480
+append-entry	user	uk	2017-11-09T12:31:42Z	sha-256:babdb54b8f714008dd0aa2eaa969e85b492fc2c7ed4239996af82e1b5f3609af
+append-entry	user	vehicle-colour	2017-11-09T12:31:42Z	sha-256:3507384d1540802c16bc0dca74a8855f92f4fada14774ca827cf831cab71d623
+append-entry	user	westminster-parliamentary-constituency	2017-11-09T12:31:42Z	sha-256:13b5f7cbce9ec246449b5f88ba27ad26d8bc96b978e4ec26fe610a5bb6fd4c03
+append-entry	user	police-neighbourhood	2017-11-20T16:16:20Z	sha-256:81c0e1459a49193c87fb298dfc38d5621e23faf9b8c15841c6ac890b8162c1f2
+append-entry	user	police-force	2017-11-20T16:16:33Z	sha-256:02a60d1ead02be0b77d87e9f5365e66a2aee8ab6dd42dbc414cc080008991eaa
+append-entry	user	allergen	2017-11-21T11:14:01Z	sha-256:cce8b05b0441aae05bcb1120d452746e8010629e9d3fd174a41b8c60bd579c66
+append-entry	user	qualification-level	2017-11-29T16:53:05Z	sha-256:af3e3dff960a2cd571dce740a73b524e5bfba6822020c6c8c53134b01ccb2399
+assert-root-hash	sha-256:409db0de9405d227de1fbbd1367a0470a21310358b1a94fadf44b827672e3578

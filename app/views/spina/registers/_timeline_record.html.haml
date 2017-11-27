@@ -1,4 +1,4 @@
-%li.entries__item.js-filter-item{ "data-filter-terms" => timeline_record[:current_record][:item].map { |key, value| value }.uniq }
+%li.entries__item
   %p.entries__date
     Last updated:
     = DateTime.parse(timeline_record[:current_record][:timestamp]).strftime('%d/%m/%Y')

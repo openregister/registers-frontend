@@ -1,4 +1,7 @@
 language: ruby
+rvm:
+- 2.4.2
+
 cache: bundler
 
 env:
@@ -7,6 +10,12 @@ env:
   - CF_ORG="openregister"
   - CF_SPACE="prod"
   - CF_USERNAME="register-design-authority@digital.cabinet-office.gov.uk"
+
+addons:
+  postgresql: "9.6"
+
+before_script:
+  - bundle exec rake db:setup
 
 before_deploy:
   - export PATH=$HOME:$PATH

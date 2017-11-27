@@ -1,0 +1,40 @@
+assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add-item	{"charity":"201349-0","end-date":"1961-01-02T00:00:00","name":"THE WEST AND SOUTH OF ENGLAND JOURNEYMEN CONFECTIONERS BREAD AND BISCUIT BAKERS PENSION SOCIETY","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"525786-0","charity-classes":["308","307","306","305","304","207","113","112","110","109","108","107","102"],"name":"TRINITY COLLEGE CARMARTHEN","start-date":"1960-09-09T00:00:00"}
+add-item	{"charity":"200020-0","end-date":"1992-12-10T00:00:00","name":"THE 1961 RANK GROUP CHARITY","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"200015-0","end-date":"1961-01-02T00:00:00","name":"SEMBAL TRUST","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"201252-0","end-date":"1992-05-11T05:20:00","name":"EDWIN THOMAS CHARITY","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"200639-0","end-date":"1995-01-03T00:00:00","name":"LOWFIELD HEATH VILLAGE TRUST","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"201104-0","end-date":"1961-01-02T00:00:00","name":"CHARITY OF MARY TOMPSON","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"200022-0","end-date":"1961-01-02T00:00:00","name":"BRADLEY LITHO LIMITED TRUST","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"200033-0","end-date":"1961-01-02T00:00:00","name":"PARISH CHURCH ROOM","start-date":"1961-01-01T00:00:00"}
+add-item	{"charity":"200306-0","end-date":"1995-11-22T00:00:00","name":"MARY SEATON WATTS","start-date":"1961-01-01T00:00:00"}
+add-item	{"name":"charity"}
+add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"discovery","text":"The date a record first became relevant to a register."}
+add-item	{"cardinality":"1","datatype":"datetime","field":"end-date","phase":"discovery","text":"The date a record stopped being applicable."}
+add-item	{"cardinality":"1","datatype":"string","field":"company","phase":"discovery","text":"A UK registered company."}
+add-item	{"cardinality":"1","datatype":"string","field":"charity","phase":"discovery","register":"charity","text":"A charity registered in England or Wales."}
+add-item	{"cardinality":"1","datatype":"string","field":"name","phase":"discovery","text":"The commonly-used name of a record."}
+add-item	{"fields":["charity","name","charity-classes","company","address","start-date","end-date"],"phase":"discovery","register":"charity","registry":"charity-commission","text":"A charity in England or Wales as defined by the Charity Commission"}
+add-item	{"cardinality":"n","datatype":"string","field":"charity-classes","phase":"discovery","register":"charity-class","text":"The classes that a charity falls into."}
+add-item	{"cardinality":"1","datatype":"string","field":"address","phase":"discovery","register":"address","text":"An address in the UK"}
+append-entry	system	name	2017-11-07T13:50:41Z	sha-256:29efb496ee7812f53d0f0403b4dc51495a958521b1210fb2cf05b90ba2586de0
+append-entry	system	field:start-date	2017-11-07T13:50:41Z	sha-256:935a9622bc5666329ef424f8f9dd7f56e4d48be1ab5228d8b6d9d410a14d6d63
+append-entry	system	field:charity-classes	2017-11-07T13:50:41Z	sha-256:0a89792e26f9fe928359b32cb6fd20092bf48229f73a06b6713802ac3f53e027
+append-entry	system	field:address	2017-11-07T13:50:41Z	sha-256:9e67526c11d1e4fe911d3684ca069b64d1ec6946bd3e865ca9aa98076217567c
+append-entry	system	field:end-date	2017-11-07T13:50:41Z	sha-256:ea436b22ebe3387594439603deff103431b618f796ccb6a05fbc2f78bedc0d58
+append-entry	system	field:charity	2017-11-07T13:50:41Z	sha-256:2d73695dd68f3e0512189bb5d42340a338f4fdbd3174a902e4024dec56c7e27d
+append-entry	system	field:name	2017-11-07T13:50:41Z	sha-256:b7e20ea5a012f5b8c916db8ae541729646a89cd44ea651d33f3033e34877b999
+append-entry	system	field:company	2017-11-07T13:50:41Z	sha-256:009c8e81701dfef12909698d03b849989da2dc48ea5563a0040032ce9d1d5b24
+append-entry	system	register:charity	2017-11-07T13:50:41Z	sha-256:61c2d0dcfc6caafb42ae61d8719172e1599159c83e6daad1ff324962a34f54c3
+append-entry	user	525786-0	2017-11-07T13:50:41Z	sha-256:098aaeace7ccd2c962d6ad1bf9d831e3d241168ad968e0ec153105c5c90959f3
+append-entry	user	200015-0	2017-11-07T13:50:41Z	sha-256:043f961bb157e86f5b8a5bff37d49b86ac8802dbbbb14a479442e71109cc6f32
+append-entry	user	200020-0	2017-11-07T13:50:41Z	sha-256:6cabeb58e73577cb9a6503a6f80da1fa92d83c77f3ade23a9b83b687f4e5e39b
+append-entry	user	200022-0	2017-11-07T13:50:41Z	sha-256:466c2250cd28d1e39fb5512fe0cb6ba65aae6ee4e6d7eacfe93311b53f1b9e8b
+append-entry	user	200033-0	2017-11-07T13:50:41Z	sha-256:26607bca399c7182d9375b10384a1a4db67d9a90521393051c4e1a96a907cdcd
+append-entry	user	200306-0	2017-11-07T13:50:41Z	sha-256:8f2f04994e3af4b67c05b217748da316dee82a11f896836939dcdc2dd89a3987
+append-entry	user	200639-0	2017-11-07T13:50:41Z	sha-256:7a7f3c806bef36575445d3bf4b32f271bafcf138a69f6b15900b12cdb9612d94
+append-entry	user	201104-0	2017-11-07T13:50:41Z	sha-256:77e0f5f81950e9a32d0bf8ede9e2ad51ee8af9f669cf8fb9487eae23a6cd19f0
+append-entry	user	201252-0	2017-11-07T13:50:41Z	sha-256:627320def6d308b812de34c0affade8e8268f813c49c91eafecd1fa40dc72d58
+append-entry	user	201349-0	2017-11-07T13:50:41Z	sha-256:44499a0a43ab6696898d601d583243502fb2ad92577be946732883bbc0fc3f67
+assert-root-hash	sha-256:406dcba53c90bde5ae585fa2707599946372fb6690ed79f4963d1f5d010ed005

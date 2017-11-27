@@ -1,0 +1,106 @@
+assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add-item	{"name":"register"}
+add-item	{"fields":["statistical-geography","name","area","organisation","register","start-date","end-date"],"phase":"alpha","register":"statistical-geography","registry":"office-for-national-statistics","text":"Geographies that are used in compiling official statistics"}
+add-item	{"fields":["social-housing-provider-designation","name","start-date","end-date"],"phase":"alpha","register":"social-housing-provider-designation","registry":"homes-and-communities-agency","text":"The Designation of a social housing provider"}
+add-item	{"fields":["social-housing-provider","name","start-date","end-date"],"phase":"alpha","register":"social-housing-provider","registry":"homes-and-communities-agency","text":"Social housing providers in England"}
+add-item	{"fields":["occupation","name","parent-occupation","start-date","end-date"],"phase":"alpha","register":"occupation","registry":"office-for-national-statistics","text":"Standard Occupation Codes (SOC) are classifications of occupations in the UK used when collecting occupational data to enable comparison of occupations across data sets"}
+add-item	{"fields":["social-housing-provider","name","organisation","social-housing-provider-designation","social-housing-provider-legal-entity","start-date","end-date"],"phase":"alpha","register":"social-housing-provider","registry":"homes-and-communities-agency","text":"Social housing providers in England"}
+add-item	{"fields":["social-housing-provider-legal-entity","name","start-date","end-date"],"phase":"alpha","register":"social-housing-provider-legal-entity","registry":"homes-and-communities-agency","text":"The legal classification of the social housing provider"}
+add-item	{"cardinality":"1","datatype":"string","field":"register","phase":"alpha","register":"register","text":"Registers maintained by the UK government"}
+add-item	{"custodian":"Paul Downey"}
+add-item	{"cardinality":"1","datatype":"string","field":"registry","phase":"alpha","text":"The organisation responsible for the data in a register. The custodian is usually from the registry."}
+add-item	{"cardinality":"1","datatype":"text","field":"copyright","phase":"alpha","text":"The copyright and licensing terms which may apply to the data held in a register."}
+add-item	{"cardinality":"n","datatype":"string","field":"fields","phase":"alpha","register":"field","text":"The names of the fields in a register."}
+add-item	{"fields":["field","datatype","phase","register","cardinality","text"],"phase":"alpha","register":"field","registry":"cabinet-office","text":"Field names which may appear in a register"}
+add-item	{"fields":["industrial-classification","parent-industrial-classification","name","start-date","end-date"],"phase":"alpha","register":"industrial-classification","registry":"office-for-national-statistics","text":"Standard Industry Codes (SIC) used to classify business establishments and other standard units by the type of economic activity in which they are engaged"}
+add-item	{"fields":["industrial-classification","parent-industrial-classification","name","name-cy","start-date","end-date"],"phase":"alpha","register":"industrial-classification","registry":"office-for-national-statistics","text":"Standard Industry Codes (SIC) used to classify business establishments and other standard units by the type of economic activity in which they are engaged"}
+add-item	{"fields":["school-type","name","start-date","end-date"],"phase":"alpha","register":"school-type","registry":"department-for-education","text":"Types of schools in the UK"}
+add-item	{"fields":["government-domain","hostname","organisation","start-date","end-date"],"phase":"alpha","register":"government-domain","registry":"cabinet-office","text":"Government domains that appear on GOV.UK"}
+add-item	{"fields":["internal-drainage-board","name","legislation","start-date","end-date"],"phase":"alpha","register":"internal-drainage-board","registry":"department-for-environment-food-rural-affairs","text":"A register of internal drainage boards in England"}
+add-item	{"fields":["school-eng","name","address","school-type","minimum-age","maximum-age","school-capacity","headteacher","start-date","end-date"],"phase":"alpha","register":"school-eng","registry":"department-for-education","text":"Schools in England legally registered to provide full time education to pupils of compulsory school age"}
+add-item	{"fields":["datatype","phase","text"],"phase":"alpha","register":"datatype","registry":"cabinet-office","text":"Forms that the data in a register field can take"}
+add-item	{"fields":["principal-local-authority","name","name-cy","official-name","official-name-cy","start-date","end-date"],"phase":"alpha","register":"principal-local-authority","registry":"welsh-government","text":"Principal local authorities in Wales"}
+add-item	{"cardinality":"1","datatype":"text","field":"text","phase":"alpha","text":"Any additional information about a record in a register."}
+add-item	{"fields":["register","text","registry","phase","copyright","fields"],"phase":"alpha","register":"register","registry":"cabinet-office","text":"Registers maintained by the UK government"}
+add-item	{"cardinality":"1","datatype":"string","field":"phase","phase":"alpha","text":"The stage of development a register is in. There are 4 phases - discovery, alpha, beta and live."}
+add-item	{"fields":["statistical-geography-unitary-authority-wls","principal-local-authority","start-date","end-date"],"phase":"alpha","register":"statistical-geography-unitary-authority-wls","registry":"office-for-national-statistics","text":"Statistical geography data for principal local authorities in Wales"}
+add-item	{"fields":["school-type-eng","name","start-date","end-date"],"phase":"alpha","register":"school-type-eng","registry":"department-for-education","text":"Types of schools in England"}
+add-item	{"fields":["school-eng","name","address","school-type-eng","minimum-age","maximum-age","school-capacity","headteacher","start-date","end-date"],"phase":"alpha","register":"school-eng","registry":"department-for-education","text":"Schools in England legally registered to provide full time education to pupils of compulsory school age"}
+add-item	{"fields":["public-body","name","organisations","public-body-classifications","start-date","end-date"],"phase":"discovery","register":"public-body","registry":"office-for-national-statistics","text":"A register of current and former public bodies that are classified for national accounting"}
+add-item	{"fields":["public-body-classification","name","start-date","end-date"],"phase":"discovery","register":"public-body-classification","registry":"office-for-national-statistics","text":"A register of the classifications that current and former public bodies can have"}
+add-item	{"fields":["social-housing-provider-eng","name","organisation","social-housing-provider-designation-eng","social-housing-provider-legal-entity-eng","start-date","end-date"],"phase":"alpha","register":"social-housing-provider-eng","registry":"homes-and-communities-agency","text":"Social housing providers in England"}
+add-item	{"fields":["social-housing-provider-legal-entity-eng","name","start-date","end-date"],"phase":"alpha","register":"social-housing-provider-legal-entity-eng","registry":"homes-and-communities-agency","text":"The legal classification of a social housing provider in England"}
+add-item	{"fields":["social-housing-provider-designation-eng","name","start-date","end-date"],"phase":"alpha","register":"social-housing-provider-designation-eng","registry":"homes-and-communities-agency","text":"The designation of a social housing provider in England"}
+add-item	{"fields":["statistical-geography-council-area-sct","local-authority-sct","enacting-legislation","dissolving-legislation","start-date","end-date"],"phase":"discovery","register":"statistical-geography-council-area-sct","registry":"the-scottish-government","text":"Statistical geography data for council areas in Scotland"}
+add-item	{"fields":["statistical-geography-council-area-sct","local-authority-sct","enacting-legislation","dissolving-legislation","start-date","end-date"],"phase":"alpha","register":"statistical-geography-council-area-sct","registry":"the-scottish-government","text":"Statistical geography data for council areas in Scotland"}
+add-item	{"fields":["public-body","name","organisations","public-body-classifications","start-date","end-date"],"phase":"alpha","register":"public-body","registry":"office-for-national-statistics","text":"A register of current and former public bodies that are classified for national accounting"}
+add-item	{"fields":["public-body-classification","name","start-date","end-date"],"phase":"alpha","register":"public-body-classification","registry":"office-for-national-statistics","text":"A register of the classifications that current and former public bodies can have"}
+add-item	{"fields":["local-authority-type","name","start-date","end-date"],"phase":"alpha","register":"local-authority-type","registry":"department-for-communities-and-local-government","text":"Types of local government organisations in the UK"}
+add-item	{"fields":["local-authority-nir","local-authority-type","name","website","start-date","end-date"],"phase":"alpha","register":"local-authority-nir","registry":"department-for-communities-northern-ireland","text":"Local authorities in Northern Ireland"}
+add-item	{"fields":["statistical-geography-council-area-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-council-area-eng","registry":"office-for-national-statistics","text":"Statistical geography data for council areas in England"}
+add-item	{"fields":["statistical-geography-county-eng","local-authority-eng","name","start-date","end-date"],"phase":"alpha","register":"statistical-geography-county-eng","registry":"office-for-national-statistics","text":"Statistical geography data for counties in England"}
+add-item	{"fields":["statistical-geography-london-borough-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-london-borough-eng","registry":"office-for-national-statistics","text":"Statistical geography data for London boroughs in England"}
+add-item	{"fields":["statistical-geography-metropolitan-council-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-metropolitan-council-eng","registry":"office-for-national-statistics","text":"Statistical geography data for metropolitan councils in England"}
+add-item	{"fields":["statistical-geography-non-metropolitan-council-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-non-metropolitan-council-eng","registry":"office-for-national-statistics","text":"Statistical geography data for non-metropolitan councils in England"}
+add-item	{"fields":["statistical-geography-registration-district-eng","registration-district","name","start-date","end-date"],"phase":"alpha","register":"statistical-geography-registration-district-eng","registry":"office-for-national-statistics","text":"Statistical geography data for registration districts in England"}
+add-item	{"fields":["statistical-geography-registration-district-wls","registration-district","name","name-cy","start-date","end-date"],"phase":"alpha","register":"statistical-geography-registration-district-wls","registry":"office-for-national-statistics","text":"Statistical geography data for registration districts in Wales"}
+add-item	{"fields":["allergen","name","allergen-group","start-date","end-date"],"phase":"alpha","register":"allergen","registry":"food-standards-agency","text":"Allergens referenced in Food Standards Agency food safety alerts"}
+add-item	{"fields":["statistical-geography-metropolitan-district-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-metropolitan-district-eng","registry":"office-for-national-statistics","text":"Statistical geography data for metropolitan councils in England"}
+add-item	{"fields":["statistical-geography-non-metropolitan-district-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-non-metropolitan-district-eng","registry":"office-for-national-statistics","text":"Statistical geography data for non-metropolitan councils in England"}
+add-item	{"fields":["statistical-geography-unitary-authority-eng","local-authority-eng","name","start-date","end-date"],"phase":"alpha","register":"statistical-geography-unitary-authority-eng","registry":"office-for-national-statistics","text":"Statistical geography data for a unitary authority in England"}
+add-item	{"fields":["statistical-geography-unitary-authority-eng","local-authority-eng","start-date","end-date"],"phase":"alpha","register":"statistical-geography-unitary-authority-eng","registry":"office-for-national-statistics","text":"Statistical geography data for a unitary authority in England"}
+add-item	{"fields":["qualification-level","name","european-qualification-framework-level","start-date","end-date"],"phase":"discovery","register":"qualification-level","registry":"ofqual","text":"Levels of qualifications regulated by Ofqual"}
+append-entry	system	name	2017-07-17T10:23:00Z	sha-256:6165e10a2d0eda90d341fd6cb4136634503162220781595f528d1ca0cf396518
+append-entry	system	custodian	2017-07-17T10:23:00Z	sha-256:3c05997dfe57349dca50d905ccee505e3c7dcbd051a7e7f7a27e70d75f6bdfb2
+append-entry	system	field:register	2017-07-14T13:23:00Z	sha-256:63330aafe9f1dfb0456683b708b51c32a2254e72a761f6a1066e709ba0f2d0fc
+append-entry	system	field:text	2017-07-14T13:23:00Z	sha-256:2108df725a601f3354242aa1e4e6dfb256a30b5642e367239b176223668fdad6
+append-entry	system	field:registry	2017-07-14T13:23:00Z	sha-256:b58faf5ccd130997fc215f8a47bafdbbd2654490df3932b8189c61fd1108fa97
+append-entry	system	field:phase	2017-07-14T13:23:00Z	sha-256:6b4f1465970264c09e5572824c94301e5c76a310be4dc41e04bd301c9cd723d2
+append-entry	system	field:copyright	2017-07-14T13:23:00Z	sha-256:4a4cd52643043366688f3cff0144d39371ca93c485361b934ccdd60faf4217cf
+append-entry	system	field:fields	2017-07-14T13:23:00Z	sha-256:7f8b3fe1eff4540654395e3097d321a240b0931f9a28b4bae7c3099d3efb0370
+append-entry	system	register:register	2017-07-14T13:24:13Z	sha-256:7187f688df3ea6bf83a0dfaf4216615de2651e665dd197e8ee513f735feff82d
+append-entry	user	datatype	2017-07-14T13:24:13Z	sha-256:1353388c96d4478bf448b51529cd8f4dc44688baceacc2459545f17512b7ef62
+append-entry	user	field	2017-07-14T13:24:13Z	sha-256:e744c984158aea29904201aee263815a4bdab401ff8e6a194b25ff640ce191e2
+append-entry	user	industrial-classification	2017-07-14T13:24:13Z	sha-256:aaf7f3cead651210257cf4650e8d8ace9273a744e204c97d2b794aff074de291
+append-entry	user	internal-drainage-board	2017-07-14T13:24:13Z	sha-256:8c1be5002d652871f67f37b1d4c8d0de82a9cf1834491d2c75a5ee3536563637
+append-entry	user	occupation	2017-07-14T13:24:13Z	sha-256:3db0735403a975bd2e8b3b561e95b02bcc73a52290a1a27ed1ab2fa2fc4338b4
+append-entry	user	principal-local-authority	2017-07-14T13:24:13Z	sha-256:92e1cf2e0accfb65708ab9ce3a85fdc2cbf67d1eb6971613dec3b3f5b4ceaca3
+append-entry	user	register	2017-07-14T13:24:13Z	sha-256:7187f688df3ea6bf83a0dfaf4216615de2651e665dd197e8ee513f735feff82d
+append-entry	user	school-eng	2017-07-14T13:24:13Z	sha-256:0b0b5678f5f060f343fac649e6c6e71e06a8c55540d54dc2f5e4696a80d96143
+append-entry	user	social-housing-provider	2017-07-14T13:24:13Z	sha-256:173a29ab590badedb20bb67878fda26eeaf0b0579c83f807d84fb83ce34beceb
+append-entry	user	school-type	2017-07-19T10:45:50Z	sha-256:b2a48d7de9b596810f5464858c3d215cffb529c6590abb89a0e841cfac16bb18
+append-entry	user	statistical-geography-unitary-authority-wls	2017-08-04T10:05:07Z	sha-256:a0d88fcbff36a8b14c5ceecc00e69b13caf34d76cc4f36be582e8d208f54dfb5
+append-entry	user	statistical-geography	2017-08-04T10:05:07Z	sha-256:46602ed2cad7080bac28be2a0421bb67212b42cd9d023bad8dae48e4ce98dd3b
+append-entry	user	government-domain	2017-08-09T07:45:21Z	sha-256:7dc2fa42e14904f29abd9ef3d46e0157ebbadcb02b791ad51254c117a938419d
+append-entry	user	industrial-classification	2017-08-09T08:57:23Z	sha-256:0d5dc62693f75cd0020bb9ceeb24af2d9d8fc95d6a6d791156af40dc33ea3bb7
+append-entry	user	social-housing-provider	2017-08-10T14:11:55Z	sha-256:6876203837526448acae23b6546054729acb8bdecabc361f02c4d25f55725401
+append-entry	user	social-housing-provider-designation	2017-08-10T14:12:19Z	sha-256:c86e6eb13eaf5014b1d09439a7dde97b6741c592068412b6cb9745b223085ad2
+append-entry	user	social-housing-provider-legal-entity	2017-08-10T14:12:35Z	sha-256:315de3743b3ab4734feee2251bdf3ced49cdfc85e383b9bf861a19ad803cef78
+append-entry	user	social-housing-provider-legal-entity	2017-08-10T16:34:58Z	sha-256:315de3743b3ab4734feee2251bdf3ced49cdfc85e383b9bf861a19ad803cef78
+append-entry	user	school-type-eng	2017-09-14T13:00:14Z	sha-256:e5a7516c0e70f3fcbb7b0ce6203214244084b0c558b636122aa21bf03587810a
+append-entry	user	school-eng	2017-09-14T13:18:04Z	sha-256:739da52862999483c2e6b2001f2e75bda83a3a72de5bd1e741acf6ac4d9235aa
+append-entry	user	public-body	2017-09-20T11:40:10Z	sha-256:a2a7799a4ed8db91da930599757c6f6c7d7722566c2621adb211c4752f241d90
+append-entry	user	public-body-classification	2017-09-20T11:40:22Z	sha-256:a041e4562ff211a08451a79fdd619734ba93e0a91a7b5a2cf941de617f0cb353
+append-entry	user	social-housing-provider-eng	2017-10-03T13:27:18Z	sha-256:e48fb125feb890e40025c8448855768c79854c68a39ab89a31a05458199837cf
+append-entry	user	social-housing-provider-legal-entity-eng	2017-10-03T13:28:25Z	sha-256:b48af8c22006f1aad0e9b2c366c72c9501a75ebd6d14b41661118444e02ed72b
+append-entry	user	social-housing-provider-designation-eng	2017-10-03T13:29:00Z	sha-256:2fda1181333116076ae74ea99e8dea4106a6dc7cccee8b7f5584d682c3562d50
+append-entry	user	statistical-geography-council-area-sct	2017-10-06T09:56:35Z	sha-256:22f3e68efb6f7ee7106b2dd7c876033857458ce95b5cb201f6ca31775f25708d
+append-entry	user	statistical-geography-council-area-sct	2017-10-06T10:00:46Z	sha-256:e2a0f5d3884f51c42fcd56ca658039cb73ab1ce879b5d20b7b343d3c656cf895
+append-entry	user	public-body	2017-11-15T16:23:30Z	sha-256:d581eeecc68bb026089c11d36c1ebc69f2ff77f88af9ec1f210d57a91f4d7ef2
+append-entry	user	public-body-classification	2017-11-15T16:23:43Z	sha-256:a35deabfed73b05986ee290e907befb4e4c3a681ecc96495abc97a8110567580
+append-entry	user	local-authority-type	2017-11-17T16:13:29Z	sha-256:b04ed20c2f12f5a6032159c6d6df0dd1a65eb225530de8b92d359cca5b500d9e
+append-entry	user	local-authority-nir	2017-11-17T16:13:40Z	sha-256:16d70d34839c4a092f27e87a58efab2afe0497068d4887e4058b00d0f809f4f2
+append-entry	user	statistical-geography-council-area-eng	2017-11-28T13:53:22Z	sha-256:cc9ddff5c49e7ea67ea05cdc3c202df8607760ff340449c82c3d6428592c6eb8
+append-entry	user	statistical-geography-county-eng	2017-11-28T13:53:47Z	sha-256:b5840640429201357e87a2e4bd9930d28bccfb84d3aa2da938584384f32a6a68
+append-entry	user	statistical-geography-london-borough-eng	2017-11-28T13:54:07Z	sha-256:0a3c528809e7781ff1ba9878a7e7dc872a64feaec1c3ba808e8fc01f63750a46
+append-entry	user	statistical-geography-metropolitan-council-eng	2017-11-28T13:54:26Z	sha-256:4626729a92e44e7ab0e0c456355a51cecf63bb5d2990c7a5d26a6d76801b47e7
+append-entry	user	statistical-geography-non-metropolitan-council-eng	2017-11-28T13:54:37Z	sha-256:7f4f03be76518891acd2ad86e16791666bb11b3f33b9bc9e38a6d9c3b4d9aa38
+append-entry	user	statistical-geography-registration-district-eng	2017-11-28T13:55:06Z	sha-256:097612b3f7d93943e5651d75104e7dba5fc92f569c27a5bd65ef485ec02866ad
+append-entry	user	statistical-geography-registration-district-wls	2017-11-28T13:55:29Z	sha-256:e5e9ad1e3f6327c03e2177bdd34765eeff9acf7deda5e5189e731831e24797dc
+append-entry	user	allergen	2017-11-29T10:52:11Z	sha-256:34c2eda4eb615fb4da5b5ef16362d67d1e686a8694a77090dd2de44c94552984
+append-entry	user	statistical-geography-metropolitan-district-eng	2017-11-29T13:18:22Z	sha-256:f0587b77ceac64ea1d2782c9a1a46022ed7e2433154212b2b8d5c84b52c6a868
+append-entry	user	statistical-geography-non-metropolitan-district-eng	2017-11-29T13:18:45Z	sha-256:7833ea72272ea9b1c4e89e81660dede81db838b650a516b901e8ef1ea018b7b5
+append-entry	user	statistical-geography-unitary-authority-eng	2017-11-29T13:48:57Z	sha-256:bd1c558be719a39a69dedb61610e60f9ccdc38924be90fe64fc0112bfd9d102a
+append-entry	user	statistical-geography-unitary-authority-eng	2017-11-29T13:58:31Z	sha-256:2c4b43721e96fc1d7a66fc7b52be39041ba36bb32891457e8f4431cf03b683d7
+append-entry	user	qualification-level	2017-11-29T16:51:59Z	sha-256:af3e3dff960a2cd571dce740a73b524e5bfba6822020c6c8c53134b01ccb2399
+assert-root-hash	sha-256:e0b9ec6a1b53e6f19b7a9713fa20b5738ca944e57d9261cbf5ad6721c746029f

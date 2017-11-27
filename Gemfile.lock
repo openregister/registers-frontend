@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/denkGroot/Spina.git
-  revision: 5058f8b7876701970bf30c6c1ec2e95aa4ee5a77
+  revision: a69ee5abcd3759b4230786a81641e886e82cdbd3
   branch: master
   specs:
     spina (0.12.0)
@@ -24,7 +24,7 @@ GIT
       haml-rails
       jquery-fileupload-rails
       jquery-rails
-      jsonb_accessor (~> 1.0.0.beta.6)
+      jsonb_accessor (~> 1.0.0)
       kaminari
       mini_magick
       rack-rewrite (~> 1.5.0)
@@ -101,6 +101,13 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.1.0)
+    capybara (2.15.4)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     carrierwave (1.2.1)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -116,13 +123,24 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.3)
+    database_cleaner (1.6.2)
+    diff-lcs (1.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.0)
     erubis (2.7.0)
     excon (0.59.0)
     execjs (2.7.0)
+    factory_bot (4.8.2)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
+      railties (>= 3.0.0)
+    faker (1.8.4)
+      i18n (~> 0.5)
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -178,6 +196,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hashdiff (0.3.7)
     hashie (3.5.6)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
@@ -283,6 +302,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.1.4)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.2)
+      actionpack (~> 5.x, >= 5.0.1)
+      actionview (~> 5.x, >= 5.0.1)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -305,6 +328,23 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rspec-core (3.7.0)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-rails (3.7.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.0)
     rubocop (0.51.0)
       parallel (~> 1.10)
       parser (>= 2.3.3.1, < 3.0)
@@ -317,6 +357,7 @@ GEM
     ruby-progressbar (1.9.0)
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
+    safe_yaml (1.0.4)
     sanitize (2.1.0)
       nokogiri (>= 1.4.4)
     sass (3.5.3)
@@ -366,9 +407,15 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webmock (3.1.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    xpath (2.1.0)
+      nokogiri (~> 1.3)
     zendesk_api (1.16.0)
       faraday (~> 0.9)
       hashie (>= 3.5.2, < 4.0.0)
@@ -380,8 +427,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capybara
   cf-app-utils
   cocoon
+  database_cleaner
+  factory_bot_rails (~> 4.8, >= 4.8.2)
+  faker
   fog-aws
   govspeak (~> 3.4.0)
   govuk-lint (~> 3.3)
@@ -400,14 +451,17 @@ DEPENDENCIES
   pry-byebug
   puma (~> 3.0)
   rails (= 5.1.4)
+  rails-controller-testing
   ransack!
   registers-ruby-client!
+  rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
   spina!
   spring
   spring-watcher-listen (~> 2.0.0)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webmock
   zendesk_api
 
 RUBY VERSION

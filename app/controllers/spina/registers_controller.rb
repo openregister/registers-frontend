@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Spina
   class RegistersController < Spina::ApplicationController
     helper_method :sort_column, :sort_direction
 
     before_action :initialize_client
 
-    layout "layouts/default/application"
+    layout 'layouts/default/application'
 
     def index
       @search = Spina::Register.ransack(params[:q])
@@ -30,18 +32,18 @@ module Spina
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-      records = case params[:status]
-                when 'closed'
-                  @register_data.get_expired_records
-                when 'all'
-                  @register_data.get_records
-                else
-                  @register_data.get_current_records
-                end
 
-      if params[:q]
-        records = search(records, params[:q])
-      end
+      records =
+        case params[:status]
+        when 'closed'
+          @register_data.get_expired_records
+        when 'all'
+          @register_data.get_records
+        else
+          @register_data.get_current_records
+        end
+
+      records = search(records, params[:q]) if params[:q]
 
       @records = paginate(records)
     end
@@ -54,36 +56,77 @@ module Spina
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
-      fields = @register_data.get_field_definitions.map{ |field| field[:item]['field'] }
+      fields = @register_data.get_field_definitions.map { |field| field[:item]['field'] }
       all_records = @register_data.get_records_with_history
       entries_reversed = @register_data.get_entries.reverse
 
-      entries_mapped_with_items = entries_reversed.map { |entry|
+      entries_mapped_with_items = entries_reversed.map do |entry|
         records_for_key = all_records[entry[:key]]
-        current_record = records_for_key.detect{ |record| record[:entry_number] == entry[:entry_number] }
+        current_record = records_for_key.detect { |record| record[:entry_number] == entry[:entry_number] }
         previous_record_index = records_for_key.find_index(current_record) - 1
 
         if previous_record_index < 0
           changed_fields = fields
         else
           previous_record = records_for_key[previous_record_index]
-          changed_fields = fields.select { |f| current_record[:item][f] != previous_record[:item][f] }
+          changed_fields = fields.reject { |f| current_record[:item][f] == previous_record[:item][f] }
         end
 
         { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry[:key] }
-      }
+      end
 
-      @entries_with_items = paginate(entries_mapped_with_items)
+      if params[:q].present?
+        filtered = filter(entries_mapped_with_items, params[:q])
+        @entries_with_items = paginate(filtered)
+      else
+        @entries_with_items = paginate(entries_mapped_with_items)
+      end
     end
 
     private
 
-    def initialize_client
-      @@registers_client ||= RegistersClient::RegistersClientManager.new({ cache_duration: 600 })
+    def filter(entries, query)
+      entries.select do |entry|
+        entry[:key].downcase.include?(query.downcase) ||
+          contained?(entry[:previous_record], query) ||
+          contained?(entry[:current_record], query)
+      end
     end
 
     def search(records, query)
-      records.select { |r| r[:item].values.map(&:downcase).any? { |v| v.include?(query.downcase) } }
+      records.select { |r| contained?(r, query) }
+    end
+
+    def contained?(item, query)
+      return false if item.nil?
+
+      item[:item].each do |fields|
+        fields.each do |field_value|
+          if field_value.is_a?(String)
+            return true if included_in_cardinality_1?(field_value, query)
+          else
+            return true if included_in_cardinality_n?(field_value, query)
+          end
+        end
+      end
+
+      false
+    end
+
+    def included_in_cardinality_n?(field_values, request_value)
+      field_values.each do |field_value|
+        return true if included_in_cardinality_1?(field_value, request_value)
+      end
+
+      false
+    end
+
+    def included_in_cardinality_1?(field_value, request_value)
+      field_value.downcase.include?(request_value.downcase)
+    end
+
+    def initialize_client
+      @@registers_client ||= RegistersClient::RegistersClientManager.new(cache_duration: 600)
     end
 
     def paginate(records)
