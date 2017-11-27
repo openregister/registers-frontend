@@ -97,7 +97,7 @@
       %p
         Showing
         %strong.text-spacing= @records.count
-        records
+        = 'record'.pluralize(@records.count)
 
       .table-scroll
         %table.register-data-table
