@@ -57,7 +57,7 @@ module Spina
       all_records = @register_data.get_records_with_history
       entries_reversed = @register_data.get_entries.reverse
 
-      @entries_with_items = entries_reversed.map { |entry|
+      entries_mapped_with_items = entries_reversed.map { |entry|
         records_for_key = all_records[entry[:key]]
         current_record = records_for_key.detect{ |record| record[:entry_number] == entry[:entry_number] }
         previous_record_index = records_for_key.find_index(current_record) - 1
@@ -71,6 +71,8 @@ module Spina
 
         { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry[:key] }
       }
+
+      @entries_with_items = Kaminari.paginate_array(entries_mapped_with_items).page(params[:page]).per(100)
     end
 
     private
