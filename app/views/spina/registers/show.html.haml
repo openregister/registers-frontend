@@ -33,12 +33,14 @@
 
       .govuk-metadata
         %dl
-          %dt Updated:
-          %dd
-            = DateTime.parse(@register_data.get_entries.last[:timestamp]).strftime('%d/%m/%Y')
           %dt Managed by:
           %dd
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
+          %dt Updated:
+          %dd
+            = DateTime.parse(@register_data.get_entries.last[:timestamp]).strftime('%d/%m/%Y')
+            %strong.text-spacing -
+            = link_to "See all register updates", history_path(@register.slug)
 
       %h2.heading-medium About this register
       %p= @register_data.get_register_definition[:item]['text']
@@ -57,9 +59,9 @@
             %li
               = link_to "Register informaton", register_info_path(@register.slug)
             %li
-              = link_to "Register updates", history_path(@register.slug)
-            %li
               = link_to "API documentation", "https://registers-docs.cloudapps.digital", target: :blank
+          %h4.heading-small Help
+          %ul
             %li
               = link_to "Create a register", "https://www.gov.uk/guidance/creating-a-register", target: :blank
             %li
@@ -68,13 +70,7 @@
   .grid-row
     .column-one-whole
       .search-wrapper
-        .form-group-wrapper.js-enabled
-          = form_tag registers_path(@register.slug), method: :get, id: 'search_records' do
-            .form-group
-              = label_tag 'Filter by', nil, class: 'form-label', for: 'record_status'
-              = select_tag "status", options_for_select([['Existing records', 'current'], ['Closed records', 'closed'], ['Existing and closed records', 'all']], selected: params[:status]), class: "form-control", id: 'record_status'
-
-        %h3.heading-large #{@records.total_count} Records
+        %h3.heading-medium There are #{@register_data.get_records.count} Records in this register
 
         %details{:role => "group"}
           %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
@@ -91,6 +87,17 @@
               - @register_data.get_field_definitions.each do |field|
                 %dt= field[:item]['field']
                 %dd= field[:item]['text']
+
+        .form-group-wrapper.js-enabled
+          = form_tag register_path(@register.slug), method: :get, id: 'search_records' do
+            .form-group
+              = label_tag 'Show', nil, class: 'form-label', for: 'record_status'
+              = select_tag "status", options_for_select([['Existing records', 'current'], ['Closed records', 'closed'], ['Existing and closed records', 'all']], selected: params[:status]), class: "form-control", id: 'record_status'
+
+      %p
+        Showing
+        %strong.text-spacing= @records.count
+        records
 
       .table-scroll
         %table.register-data-table
