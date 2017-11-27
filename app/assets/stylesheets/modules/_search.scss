@@ -1,0 +1,40 @@
+.records-search {
+  .search-input {
+    border: 2px solid #0b0c0c;
+    font-size: 16px;
+    height: 20px;
+    padding: 7px;
+    width: 86%;
+    width: calc(100% - 56px);
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+    }
+
+    @include media(tablet) {
+      font-size: 19px;
+      padding: 9px 7px;
+      height: 16px;
+    }
+  }
+
+  .search-submit {
+    background: $govuk-blue image-url('search-button.png') no-repeat 0 50%;
+    border-radius: 0;
+    border: 1px solid $govuk-blue;
+    color: $white;
+    cursor: pointer;
+    height: 38px;
+    margin-left: -2px;
+    position: absolute;
+    overflow: hidden;
+    text-indent: -5000px;
+    width: 38px;
+
+    @include device-pixel-ratio() {
+      background-size: 52.5px 35px;
+      background-position: 100% 50%;
+    }
+  }
+}

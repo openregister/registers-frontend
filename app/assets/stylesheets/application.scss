@@ -35,6 +35,7 @@
 @import 'modules/skip-link';
 @import 'modules/sub-navigation';
 @import 'modules/pagination';
+@import 'modules/search';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -444,13 +445,17 @@ dl dd {
   }
 }
 
-.search-wrapper {
+.search-records-wrapper {
   border-top: 2px solid $grey-3;
   margin: 40px 0 20px 0;
   padding-top: 40px;
 
   .heading-medium {
     margin-top: 0;
+  }
+
+  .form-control {
+    width: 100%;
   }
 }
 
