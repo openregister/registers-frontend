@@ -58,5 +58,9 @@ module Spina
         'In the backlog'
       end
     end
+
+    def formatted_date(date)
+      DateTime.parse(date).strftime('%d/%m/%Y')
+    end
   end
 end
