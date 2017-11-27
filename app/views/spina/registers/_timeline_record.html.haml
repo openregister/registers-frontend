@@ -17,4 +17,7 @@
           %td
             = timeline_record[:previous_record].present? ? timeline_record[:previous_record][:item][field_name] : "<span class='unknown'>No data found</span>".html_safe
           %td
-            = timeline_record[:current_record][:item][field_name].present? ? timeline_record[:current_record][:item][field_name] : "<span class='unknown'>No data found</span>".html_safe
+            - if timeline_record[:current_record][:item][field_name].present?
+              %span.panel.panel-change-notification= timeline_record[:current_record][:item][field_name]
+            - else
+              %span.unknown No data found
