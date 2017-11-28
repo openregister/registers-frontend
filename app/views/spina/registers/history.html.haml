@@ -30,8 +30,17 @@
 
   .grid-row
     .column-full
-      %ul.entries.js-filter-block
+      %ul.entries.js-filter-block#entries-list
         = render partial: 'timeline_record', collection: @entries_with_items
+
+      .pager
+        .pager-controls
+          = paginate @entries_with_items, outer_window: 0, window: 3
+        .pager-summary
+          Showing #{@entries_with_items.offset_value + 1} &ndash; #{@entries_with_items.offset_value + @entries_with_items.length} of #{@entries_with_items.total_count} records
+
+      - unless @entries_with_items.last_page?
+        = link_to 'Load more', history_path(@register.slug, page: @entries_with_items.current_page + 1), id: 'load-more-entries', class: 'js-hidden', remote: true
 
 = content_for :javascript do
   :javascript
