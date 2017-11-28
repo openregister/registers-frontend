@@ -20,14 +20,13 @@
 
 %main#content{role:'main'}
   .grid-row
-    .column-two-thirds.js-hidden
-      %div{class: "js-filter-list", "aria-hidden" => "true"}
-        %form.js-filter-form
-          %fieldset
+    .search-records-wrapper
+      .column-two-thirds
+        .form-group-wrapper.js-enabled
+          = form_tag history_path(@register.slug), method: :get, id: 'filter_records' do
             .form-group
-              %label{class: "form-label", for: "search"} Search for an update
-              %input{name: "search", id: "search", class: "form-control form-control-3-4"}
-
+              = label_tag 'Search for an update', nil, class: 'form-label', for: 'search_input'
+              = text_field_tag 'search_input', nil, class: 'search-input', value: params[:record_status], id: 'search_input'
   .grid-row
     .column-full
       %ul.entries.js-filter-block
@@ -35,6 +34,6 @@
 
 = content_for :javascript do
   :javascript
-    jQuery(function($) {
-      GOVUK.filterListItems.init();
+    $("#search_input").change(function () {
+      $('#filter_records').submit();
     });
