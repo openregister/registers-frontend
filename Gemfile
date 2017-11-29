@@ -32,7 +32,7 @@ gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-rub
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
-gem 'fog'
+gem 'fog-aws'
 
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
