@@ -35,12 +35,12 @@ module Spina
 
       records =
         case params[:status]
-        when 'closed'
-          @register_data.get_expired_records
-        when 'all'
-          @register_data.get_records
-        else
-          @register_data.get_current_records
+          when 'closed'
+            @register_data.get_expired_records
+          when 'all'
+            @register_data.get_records
+          else
+            @register_data.get_current_records
         end
 
       records = search(records, params[:q]) if params[:q]
@@ -60,6 +60,8 @@ module Spina
       all_records = @register_data.get_records_with_history
       entries_reversed = @register_data.get_entries.reverse
 
+      changed_fields = []
+
       entries_mapped_with_items = entries_reversed.map do |entry|
         records_for_key = all_records[entry[:key]]
         current_record = records_for_key.detect { |record| record[:entry_number] == entry[:entry_number] }
@@ -76,7 +78,7 @@ module Spina
       end
 
       if params[:q].present?
-        filtered = filter(entries_mapped_with_items, params[:q])
+        filtered = filter(entries_mapped_with_items, changed_fields, params[:q])
         @entries_with_items = paginate(filtered)
       else
         @entries_with_items = paginate(entries_mapped_with_items)
@@ -85,16 +87,35 @@ module Spina
 
     private
 
-    def filter(entries, query)
+    def filter(entries, updated_fields, query)
       entries.select do |entry|
         entry[:key].downcase.include?(query.downcase) ||
-          contained?(entry[:previous_record], query) ||
-          contained?(entry[:current_record], query)
+          if updated_fields.nil?
+            contained?(entry[:current_record], query)
+          else
+            contained_with_fields?(entry[:current_record], updated_fields, query)
+          end
       end
     end
 
     def search(records, query)
       records.select { |r| contained?(r, query) }
+    end
+
+    def contained_with_fields?(item, updated_fields, query)
+      return false if item.nil?
+
+      item[:item].each do |key, value|
+        next unless updated_fields.include?(key)
+
+        if value.is_a?(String)
+          return true if included_in_cardinality_1?(value, query)
+        else
+          return true if included_in_cardinality_n?(value, query)
+        end
+      end
+
+      false
     end
 
     def contained?(item, query)
