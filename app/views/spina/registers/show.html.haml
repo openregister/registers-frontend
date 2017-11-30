@@ -76,7 +76,7 @@
             .column-one-third
               .records-search
                 = label_tag 'Search', nil, class: 'form-label', for: 'q'
-                = text_field_tag 'q', nil, class: 'search-input', value: params[:q]
+                = search_field_tag 'q', nil, class: 'search-input', value: params[:q]
                 = submit_tag 'Search', class: 'search-submit', name: nil
             .column-one-third
               .form-group.js-enabled
