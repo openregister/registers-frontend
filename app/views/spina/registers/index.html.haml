@@ -64,13 +64,12 @@
             %span.data-item.bold-xsmall Registers in progress
 
   .grid-row
-    .column-two-thirds.js-hidden
-      %div{class: "js-filter-list", "aria-hidden" => "true"}
-        %form.js-filter-form
-          %fieldset
-            .form-group
-              %label{class: "form-label", for: "search"} Search for a register
-              %input{name: "search", id: "search", class: "form-control form-control-3-4"}
+    = search_form_for @search do |f|
+      .column-one-third
+        .records-search
+          = f.label :name_cont, 'Search', class: 'form-label'
+          = f.search_field :name_cont, class: 'search-input'
+          = f.submit 'Search', class: 'search-submit'
 
     .column-one-whole
       %h3.heading-small.mq-small-only Sort by:
@@ -84,16 +83,10 @@
             %th{role: "columnheader", scope: "col"}
               = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
             %th{role: "columnheader", scope: "col", colspan: "2"}
-        %tbody.js-filter-block
+        %tbody
           - @registers.each_with_index do |register, index|
             - index = index + 1
             = render partial: 'spina/registers/register', object: register, locals: { index: index }
 
       %h3.heading-medium Suggest a register
       = link_to "Find out more", spina.new_register_path
-
-= content_for :javascript do
-  :javascript
-    jQuery(function($) {
-      GOVUK.filterListItems.init();
-    });
