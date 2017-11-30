@@ -1,6 +1,8 @@
 $("#records-tbody").append("<%= j(render(partial: 'record', collection: @records)) %>");
 $("#load-more-records").attr("href", "<%= register_path(@register.slug, page: (@records.current_page + 1)) %>");
 
+$("#records-count").html("Showing<strong class='text-spacing'><%= @records.count + @records.offset_value %></strong><%= 'record'.pluralize(@records.count + @records.offset_value) %>")
+
 <% if @records.last_page? %>
   $("#load-more-records").hide();
 <% else %>
