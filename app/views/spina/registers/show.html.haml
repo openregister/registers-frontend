@@ -99,7 +99,7 @@
                 %dt= field[:item]['field']
                 %dd= field[:item]['text']
 
-      %p
+      %p#records-count
         Showing
         %strong.text-spacing= @records.count
         = 'record'.pluralize(@records.count)
