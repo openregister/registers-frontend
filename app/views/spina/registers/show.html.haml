@@ -120,7 +120,7 @@
         .pager-summary
           Showing #{@records.offset_value + 1} &ndash; #{@records.offset_value + @records.length} of #{@records.total_count} records
 
-      - unless @records.last_page?
+      - unless @records.last_page? || @records.count == 0
         = link_to 'Load more', register_path(@register.slug, page: @records.current_page + 1), id: 'load-more-records', class: 'js-hidden', remote: true
 
 = content_for :javascript do
