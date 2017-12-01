@@ -26,22 +26,20 @@ module Spina
       beta_register_register = @@registers_client.get_register('register', 'beta').get_records
       alpha_register_register = @@registers_client.get_register('register', 'alpha').get_records
       discovery_register_register = @@registers_client.get_register('register', 'discovery').get_records
-      @register_registers = beta_register_register + alpha_register_register + discovery_register_register
+      @register_registers = [beta_register_register, alpha_register_register, discovery_register_register]
     end
 
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-
-      records =
-        case params[:status]
-          when 'closed'
-            @register_data.get_expired_records
-          when 'all'
-            @register_data.get_records
-          else
-            @register_data.get_current_records
-        end
+      records = (case params[:status]
+                when 'closed'
+                  @register_data.get_expired_records
+                when 'all'
+                  @register_data.get_records
+                else
+                  @register_data.get_current_records
+                end).to_a
 
       records = search(records, params[:q]) if params[:q]
 
@@ -58,10 +56,10 @@ module Spina
 
       fields = @register_data.get_field_definitions.map { |field| field[:item]['field'] }
       all_records = @register_data.get_records_with_history
-      entries_reversed = @register_data.get_entries.reverse
+      entries_reversed = @register_data.get_entries.reverse_each
 
       entries_mapped_with_items = entries_reversed.map do |entry|
-        records_for_key = all_records[entry[:key]]
+        records_for_key = all_records.get_records_for_key(entry[:key])
         current_record = records_for_key.detect { |record| record[:entry_number] == entry[:entry_number] }
         previous_record_index = records_for_key.find_index(current_record) - 1
 
