@@ -114,14 +114,15 @@
           %tbody#records-tbody
             = render partial: 'record', collection: @records
 
-      .pager
-        .pager-controls
-          = paginate @records, outer_window: 0, window: 3
-        .pager-summary
-          Showing #{@records.offset_value + 1} &ndash; #{@records.offset_value + @records.length} of #{@records.total_count} records
+      - unless @records.empty?
+        .pager
+          .pager-controls
+            = paginate @records, outer_window: 0, window: 3
+          .pager-summary
+            Showing #{@records.offset_value + 1} &ndash; #{@records.offset_value + @records.length} of #{@records.total_count} records
 
-      - unless @records.last_page? || @records.empty?
-        = link_to 'Load more', register_path(@register.slug, page: @records.current_page + 1), id: 'load-more-records', class: 'js-hidden', remote: true
+        - unless @records.last_page?
+          = link_to 'Load more', register_path(@register.slug, page: @records.current_page + 1), id: 'load-more-records', class: 'js-hidden', remote: true
 
 = content_for :javascript do
   :javascript
