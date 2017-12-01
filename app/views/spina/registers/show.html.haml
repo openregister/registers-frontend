@@ -99,22 +99,25 @@
                 %dt= field[:item]['field']
                 %dd= field[:item]['text']
 
-      %p#records-count
-        Showing
-        %strong.text-spacing= @records.count
-        = 'record'.pluralize(@records.count)
-
-      .table-scroll
-        %table.register-data-table
-          %thead
-            %tr
-              - @register_data.get_field_definitions.each do |field|
-                %th= field[:item]['field']
-
-          %tbody#records-tbody
-            = render partial: 'record', collection: @records
+      - if @records.present?
+        %p#records-count
+          Showing
+          %strong.text-spacing= @records.count
+          = 'record'.pluralize(@records.count)
+      - else
+        %p No records found
 
       - unless @records.empty?
+        .table-scroll
+          %table.register-data-table
+            %thead
+              %tr
+                - @register_data.get_field_definitions.each do |field|
+                  %th= field[:item]['field']
+
+            %tbody#records-tbody
+              = render partial: 'record', collection: @records
+
         .pager
           .pager-controls
             = paginate @records, outer_window: 0, window: 3
