@@ -49,11 +49,24 @@ gem 'govuk_notify_rails'
 # Pagination
 gem 'kaminari'
 
-group :development do
+group :development, :test do
   gem 'govuk-lint', '~> 3.3'
-  gem 'web-console', '>= 3.3.0'
+  gem 'pry-byebug'
+end
+
+group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-byebug'
+  gem 'web-console', '>= 3.3.0'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+  gem 'faker'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.6'
+  gem 'webmock'
 end

@@ -19,18 +19,18 @@
         %span{itemprop: "name"} Register updates
 
 %main.container{role:'main'}
-  .grid-row
-    .column-two-thirds.js-hidden
-      %div{class: "js-filter-list", "aria-hidden" => "true"}
-        %form.js-filter-form
-          %fieldset
-            .form-group
-              %label{class: "form-label", for: "search"} Search for an update
-              %input{name: "search", id: "search", class: "form-control form-control-3-4"}
+  .search-records-wrapper#search_wrapper
+    .grid-row
+      = form_tag history_path(@register.slug), method: :get, id: 'search_updates' do
+        .column-one-third
+          .records-search
+            = label_tag 'Search updates', nil, class: 'form-label', for: 'q'
+            = text_field_tag 'q', nil, class: 'search-input', value: params[:q]
+            = submit_tag 'Search', class: 'search-submit', name: nil
 
   .grid-row
     .column-full
-      %ul.entries.js-filter-block#entries-list
+      %ul.entries#entries-list
         = render partial: 'timeline_record', collection: @entries_with_items
 
       .pager
@@ -41,9 +41,3 @@
 
       - unless @entries_with_items.last_page?
         = link_to 'Load more', history_path(@register.slug, page: @entries_with_items.current_page + 1), id: 'load-more-entries', class: 'js-hidden', remote: true
-
-= content_for :javascript do
-  :javascript
-    jQuery(function($) {
-      GOVUK.filterListItems.init();
-    });
