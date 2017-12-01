@@ -1,4 +1,5 @@
 %tr
   - @register_data.get_field_definitions.each do |field|
+    - field_value = record[:item][field[:item]['field']]
     %td{class: field[:item]['field']}
-      = record[:item][field[:item]['field']].is_a?(Array) ? (record[:item][field[:item]['field']]).join(', ') : record[:item][field[:item]['field']] || "<span class='unknown'>No data found</span>".html_safe
+      = field_value.is_a?(Array) ? field_value.join(', ') : field_value || "<span class='unknown'>No data found</span>".html_safe
