@@ -11,9 +11,11 @@ RSpec.describe Spina::RegistersController, type: :controller do
     register_alpha_data = File.read('./spec/support/register_alpha.rsf')
     register_discovery_data = File.read('./spec/support/register_discovery.rsf')
     register_charity_data = File.read('./spec/support/charity_card_n.rsf')
+    register_territory_data = File.read('./spec/support/territory_short.rsf')
 
     @country_register = ObjectsFactory.new.create_register('country', 'Backlog', 'Ministry of Justice')
     @charity_register = ObjectsFactory.new.create_register('charity', 'Backlog', 'Ministry of Justice')
+    @territory_register = ObjectsFactory.new.create_register('territory', 'Backlog', 'Ministry of Justice')
 
     allow(Spina::Register)
       .to receive(:find_by_slug!)
@@ -25,6 +27,11 @@ RSpec.describe Spina::RegistersController, type: :controller do
             .with('charity')
             .and_return(@charity_register)
 
+    allow(Spina::Register)
+      .to receive(:find_by_slug!)
+            .with('territory')
+            .and_return(@territory_register)
+
     # History stubs
     stub_request(:get, 'https://country.backlog.openregister.org/download-rsf')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.Backlog.openregister.org' })
@@ -33,6 +40,10 @@ RSpec.describe Spina::RegistersController, type: :controller do
     stub_request(:get, 'https://charity.backlog.openregister.org/download-rsf')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.Backlog.openregister.org' })
       .to_return(status: 200, body: register_charity_data, headers: {})
+
+    stub_request(:get, 'https://territory.backlog.openregister.org/download-rsf')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.Backlog.openregister.org' })
+      .to_return(status: 200, body: register_territory_data, headers: {})
 
     # Index stubs
     stub_request(:get, 'https://register.beta.openregister.org/download-rsf')
@@ -83,6 +94,34 @@ RSpec.describe Spina::RegistersController, type: :controller do
       subject
 
       expect(assigns(:entries_with_items).length).to eq(4)
+    end
+  end
+
+  describe 'Request: GET #history. Descr: Check with filter. Params: Search param (field name). Result: 3 rows' do
+    subject { get :history, params: { id: 'territory', q: 'official-name' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :history }
+
+    it do
+      subject
+
+      expect(assigns(:entries_with_items).length).to eq(3)
+    end
+  end
+
+  describe 'Request: GET #history. Descr: Check with filter. Params: Search param (changed field). Result: 1 rows' do
+    subject { get :history, params: { id: 'territory', q: 'The New' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :history }
+
+    it do
+      subject
+
+      expect(assigns(:entries_with_items).length).to eq(1)
     end
   end
 

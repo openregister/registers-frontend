@@ -1,6 +1,7 @@
 assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 add-item	{"name":"Abu Dhabi","official-name":"Emirate of Abu Dhabi","territory":"AE-AZ"}
 add-item	{"name":"Ascension","official-name":"Ascension Island","territory":"SH-AC"}
+add-item	{"name":"Ascension","official-name":"Ascension The New Island","territory":"SH-AC"}
 add-item	{"cardinality":"1","datatype":"string","field":"territory","phase":"beta","register":"territory","text":"The territory's ISO 3166-1 alpha3 code. Unique codes have been created for territories that don't have an existing ISO code."}
 add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"beta","text":"The date a record first became relevant to a register."}
 add-item	{"name":"territory"}
@@ -27,4 +28,5 @@ append-entry	system	field:end-date	2017-08-29T11:31:00Z	sha-256:c5845bfc15577e8c
 append-entry	system	custodian	2017-11-02T11:18:00Z	sha-256:aa98858fc2a8a9fae068c44908932d24b207defe526bdf75e3f6c049bb352927
 append-entry	user	AE-AZ	2016-12-15T12:15:07Z	sha-256:e5cf66f85cb1724d700ca35048f7a3958ad027880aecfce04adb838ea9158c6a
 append-entry	user	SH-AC	2016-12-15T12:15:07Z	sha-256:657822f3bbdbce1f6b14c6bad4a5f335237462df9af7ca9ddf4749728119118b
+append-entry	user	SH-AC	2016-12-15T12:15:07Z	sha-256:0aa0ddbd3d33ab45792251cac49014265aefb7b19cbc5e5561c36bf78e52b9e0
 assert-root-hash	sha-256:288d585cd122620ee1007ed931f411ee70514fb8caabbda59a2f3b2ad92e8f38
