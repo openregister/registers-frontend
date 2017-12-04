@@ -1,10 +1,8 @@
 $("#records-tbody").append("<%= j(render(partial: 'record', collection: @records)) %>");
-$("#load-more-records").attr("href", "<%= register_path(@register.slug, page: (@records.current_page + 1)) %>");
-
 $("#records-count").html("Showing<strong class='text-spacing'><%= @records.count + @records.offset_value %></strong><%= 'record'.pluralize(@records.count + @records.offset_value) %>")
 
 <% if @records.last_page? %>
   $("#load-more-records").hide();
 <% else %>
-  $("#load-more-records").attr("href", "<%= register_path(@register.slug, page: (@records.current_page + 1)) %>");
+  $("#load-more-records").replaceWith("<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true) %>");
 <% end %>
