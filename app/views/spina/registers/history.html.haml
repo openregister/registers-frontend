@@ -40,4 +40,4 @@
           Showing #{@entries_with_items.offset_value + 1} &ndash; #{@entries_with_items.offset_value + @entries_with_items.length} of #{@entries_with_items.total_count} records
 
       - unless @entries_with_items.last_page?
-        = link_to 'Load more', history_path(@register.slug, page: @entries_with_items.current_page + 1), id: 'load-more-entries', class: 'js-hidden', remote: true
+        = link_to_next_page @entries_with_items, 'Load more', id: 'load-more-entries', class: 'js-hidden', remote: true

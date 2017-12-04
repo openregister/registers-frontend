@@ -1,8 +1,7 @@
 $("#entries-list").append("<%= j(render(partial: 'timeline_record', collection: @entries_with_items)) %>");
-$("#load-more-entries").attr("href", "<%= history_path(@register.slug, page: (@entries_with_items.current_page + 1)) %>");
 
 <% if @entries_with_items.last_page? %>
   $("#load-more-entries").hide();
 <% else %>
-  $("#load-more-entries").attr("href", "<%= history_path(@register.slug, page: (@entries_with_items.current_page + 1)) %>");
+  $("#load-more-entries").replaceWith("<%= escape_javascript(link_to_next_page @entries_with_items, 'Load more', id: 'load-more-entries', class: 'js-hidden', remote: true) %>");
 <% end %>
