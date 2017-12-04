@@ -115,7 +115,7 @@
             %thead
               %tr
                 - @register_data.get_field_definitions.each do |field|
-                  %th= field[:item]['field']
+                  %th= link_to field[:item]['field'], register_path(@register.slug, sort_by: field[:item]['field'], sort_direction: params[:sort_direction] == "asc" && params[:sort_by] == field[:item]['field'] ? "desc" : "asc")
 
             %tbody#records-tbody
               = render partial: 'record', collection: @records
