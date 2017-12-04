@@ -43,12 +43,9 @@ module Spina
           @register_data.get_current_records
         end
 
-      if params[:sort_by]
-        records = records.sort_by { |k| k[:item][params[:sort_by]] }
-        if params[:sort_direction] == 'desc'
-          records = records.reverse
-        end
-      end
+      records =  params[:sort_by] ? records.sort_by { |k| k[:item][params[:sort_by]] } : records
+
+      records =  params[:sort_direction] == 'desc' ?  records.reverse : records
 
       @records = paginate(records)
     end
