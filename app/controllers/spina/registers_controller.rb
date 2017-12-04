@@ -26,7 +26,7 @@ module Spina
       beta_register_register = @@registers_client.get_register('register', 'beta').get_records
       alpha_register_register = @@registers_client.get_register('register', 'alpha').get_records
       discovery_register_register = @@registers_client.get_register('register', 'discovery').get_records
-      @register_registers = [beta_register_register, alpha_register_register, discovery_register_register]
+      @register_registers = beta_register_register.to_a + alpha_register_register.to_a + discovery_register_register.to_a
     end
 
     def show
