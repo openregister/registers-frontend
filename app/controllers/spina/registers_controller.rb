@@ -11,13 +11,13 @@ module Spina
     def index
       @search = Spina::Register.ransack(params[:q])
 
-      if params[:phase] == 'ready to use'
-        @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-      elsif params[:phase] == 'in progress'
-        @registers = @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-      else
-        @registers = @search.result.sort_by_phase_name_asc.by_name
-      end
+      @registers = if params[:phase] == 'ready to use'
+                     @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
+                   elsif params[:phase] == 'in progress'
+                     @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
+                   else
+                     @search.result.sort_by_phase_name_asc.by_name
+                   end
 
       @page = Spina::Page.find_by(name: 'registerspage')
       @current_phases = Spina::Register::CURRENT_PHASES
@@ -32,16 +32,23 @@ module Spina
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-      records = (case params[:status]
-                when 'closed'
-                  @register_data.get_expired_records
-                when 'all'
-                  @register_data.get_records
-                else
-                  @register_data.get_current_records
-                end).to_a
 
-      records = search(records, params[:q]) if params[:q]
+      records =
+        case params[:status]
+        when 'closed'
+          @register_data.get_expired_records
+        when 'all'
+          @register_data.get_records
+        else
+          @register_data.get_current_records
+        end
+
+      if params[:sort_by]
+        records = records.sort_by { |k| k[:item][params[:sort_by]] }
+        if params[:sort_direction] == 'desc'
+          records = records.reverse
+        end
+      end
 
       @records = paginate(records)
     end
@@ -63,7 +70,7 @@ module Spina
         current_record = records_for_key.detect { |record| record[:entry_number] == entry[:entry_number] }
         previous_record_index = records_for_key.find_index(current_record) - 1
 
-        if previous_record_index < 0
+        if previous_record_index.negative?
           changed_fields = fields
         else
           previous_record = records_for_key[previous_record_index]
@@ -81,7 +88,7 @@ module Spina
       end
     end
 
-    private
+  private
 
     def filter(entries, query)
       entries.select do |entry|
