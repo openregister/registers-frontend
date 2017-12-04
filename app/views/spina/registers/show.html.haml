@@ -125,7 +125,7 @@
             Showing #{@records.offset_value + 1} &ndash; #{@records.offset_value + @records.length} of #{@records.total_count} records
 
         - unless @records.last_page?
-          = link_to 'Load more', register_path(@register.slug, page: @records.current_page + 1), id: 'load-more-records', class: 'js-hidden', remote: true
+          = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
 
 = content_for :javascript do
   :javascript
