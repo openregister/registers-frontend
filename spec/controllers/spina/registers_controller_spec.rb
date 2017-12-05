@@ -233,7 +233,7 @@ RSpec.describe Spina::RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Sort by Name. Result: Afghanistan is first result' do
+  describe 'Request: GET #show. Descr: Sort by Name ascending. Result: Afghanistan is first result' do
     subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'asc' } }
 
     it { is_expected.to have_http_status :success }
@@ -244,6 +244,20 @@ RSpec.describe Spina::RegistersController, type: :controller do
       subject
 
       expect(assigns(:records).first[:item]['name']).to eq('Afghanistan')
+    end
+  end
+
+  describe 'Request: GET #show. Descr: Sort by name descending. Result: Zimbabwe is first result' do
+    subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'desc' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :show }
+
+    it do
+      subject
+
+      expect(assigns(:records).first[:item]['name']).to eq('Zimbabwe')
     end
   end
 end
