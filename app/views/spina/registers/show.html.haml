@@ -79,9 +79,11 @@
                 = search_field_tag 'q', nil, class: 'search-input', value: params[:q]
                 = submit_tag 'Search', class: 'search-submit', name: nil
             .column-one-third
-              .form-group.js-enabled
+              .form-group
                 = label_tag 'Show', nil, class: 'form-label', for: 'record_status'
                 = select_tag "status", options_for_select([['Existing records', 'current'], ['Closed records', 'closed'], ['Existing and closed records', 'all']], selected: params[:status]), class: "form-control", id: 'record_status'
+            .column-one-third
+              = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
         %details{role: "group"}
           %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
