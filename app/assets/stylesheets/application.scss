@@ -518,3 +518,13 @@ dl dd {
 .text-spacing {
   margin: 0 5px;
 }
+
+.filter-search-submit {
+  body.js-enabled & {
+    display: none;
+  }
+
+  @include media(tablet) {
+    margin-top: 26px;
+  }
+}
