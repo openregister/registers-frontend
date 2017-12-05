@@ -232,4 +232,18 @@ RSpec.describe Spina::RegistersController, type: :controller do
       expect(assigns(:records).length).to eq(1)
     end
   end
+
+  describe 'Request: GET #show. Descr: Sort by Name. Result: Afghanistan is first result' do
+    subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'asc' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :show }
+
+    it do
+      subject
+
+      expect(assigns(:records).first[:item]['name']).to eq('Afghanistan')
+    end
+  end
 end
