@@ -43,9 +43,7 @@ module Spina
           @register_data.get_current_records
         end
 
-      records = params[:sort_by] ? sort_by(records, params[:sort_by]) : records
-
-      records = params[:sort_direction] == 'desc' ?  records.reverse : records
+      records = params[:sort_by] ? sort_by(records, params[:sort_by], params[:sort_direction]) : records
 
       records = params[:q] ? search(records, params[:q]) : records 
 
@@ -130,11 +128,12 @@ module Spina
       false
     end
 
-    def sort_by(records, sort_by)
+    def sort_by(records, sort_by, sort_direction = 'asc')
       records.sort { |a, b|
       a_field_value = a[:item][params[:sort_by]]
       b_field_value = b[:item][params[:sort_by]]
-      a_field_value && b_field_value ? a_field_value <=> b_field_value : a_field_value ? -1 : 1  } 
+      comparator = sort_direction == 'desc' ?  b_field_value <=> a_field_value : a_field_value <=> b_field_value
+      a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  } 
     end
 
     def contain_in_array?(field_values, request_value)

@@ -260,4 +260,18 @@ RSpec.describe Spina::RegistersController, type: :controller do
       expect(assigns(:records).first[:item]['name']).to eq('Zimbabwe')
     end
   end
+
+  describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil' do
+    subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :show }
+
+    it do
+      subject
+      expect(assigns(:records).first[:item]['start-date']).to eq('2011-07-09')
+      expect(assigns(:records).last[:item]['start-date']).to be_nil
+    end
+  end
 end
