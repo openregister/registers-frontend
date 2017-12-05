@@ -46,8 +46,8 @@ module Spina
       records =  params[:sort_by] ? records.sort_by { |k| k[:item][params[:sort_by]] } : records
 
       records =  params[:sort_direction] == 'desc' ?  records.reverse : records
-
-      @records = paginate(records)
+      
+      @records = paginate(records.to_a)
     end
 
     def info
