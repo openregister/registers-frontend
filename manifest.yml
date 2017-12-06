@@ -10,4 +10,4 @@ applications:
     # postgres database
     - registers-prod
     # environment variables (persisted for blue/green deploys)
-    - registers-frontend-environment-variables
+    - registers-product-site-environment-variables
