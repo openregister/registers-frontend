@@ -38,12 +38,12 @@
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
           %dt Updated:
           %dd
-            = formatted_date(Array(@register_data.get_entries).last[:timestamp])
+            = formatted_date(Array(@register_data.get_entries).last.timestamp)
             %strong.text-spacing -
             = link_to "See all register updates", history_path(@register.slug)
 
       %h2.heading-medium About this register
-      %p= @register_data.get_register_definition[:item]['text']
+      %p= @register_data.get_register_definition.item.value['text']
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
@@ -51,8 +51,8 @@
         #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
           %dl
             - @register_data.get_field_definitions.each do |field|
-              %dt= field[:item]['field']
-              %dd= field[:item]['text']
+              %dt= field.item.value['field']
+              %dd= field.item.value['text']
 
       %h2.heading-medium Using this register
       %p There are 2 ways to use Registers. You can either:
@@ -131,7 +131,7 @@
             %thead
               %tr
                 - @register_data.get_field_definitions.each do |field|
-                  %th= field[:item]['cardinality'] == '1' ? records_table_sort_link(field[:item]['field'], request.query_parameters) : field[:item]['field']
+                  %th= field.item.value['cardinality'] == '1' ? records_table_sort_link(field.item.value['field'], request.query_parameters) : field.item.value['field']
             %tbody#records-tbody
               = render partial: 'record', collection: @records
 

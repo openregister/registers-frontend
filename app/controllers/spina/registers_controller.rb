@@ -54,23 +54,23 @@ module Spina
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
-      fields = @register_data.get_field_definitions.map { |field| field[:item]['field'] }
+      fields = @register_data.get_field_definitions.map { |field| field.item.value['field'] }
       all_records = @register_data.get_records_with_history
       entries_reversed = @register_data.get_entries.reverse_each
 
       entries_mapped_with_items = entries_reversed.map do |entry|
-        records_for_key = all_records.get_records_for_key(entry[:key])
-        current_record = records_for_key.detect { |record| record[:entry_number] == entry[:entry_number] }
+        records_for_key = all_records.get_records_for_key(entry.key)
+        current_record = records_for_key.detect { |record| record.entry.entry_number == entry.entry_number }
         previous_record_index = records_for_key.find_index(current_record) - 1
 
         if previous_record_index.negative?
           changed_fields = fields
         else
           previous_record = records_for_key[previous_record_index]
-          changed_fields = fields.reject { |f| current_record[:item][f] == previous_record[:item][f] }
+          changed_fields = fields.reject { |f| current_record.item.value[f] == previous_record.item.value[f] }
         end
 
-        { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry[:key] }
+        { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry.key }
       end
 
       if params[:q].present?
@@ -92,12 +92,12 @@ module Spina
     end
 
     def search(records, query)
-      records.select { |r| contain_value?(r, query) }
+      records.select { |r| contain_value?(r.item, query) }
     end
 
-    def contain_value_filtered_by_field_names?(item, updated_fields, query)
-      return false if item.nil?
-      item[:item].each do |field_name, field_value|
+    def contain_value_filtered_by_field_names?(record, updated_fields, query)
+      return false if record.nil?
+      record.item.value.each do |field_name, field_value|
         next unless updated_fields.include?(field_name)
 
         return true if contain?(field_name, query)
@@ -111,7 +111,7 @@ module Spina
     def contain_value?(item, query)
       return false if item.nil?
 
-      item[:item].values.any? { |value| include?(value, query) }
+      item.value.values.any? { |value| include?(value, query) }
     end
 
     def include?(value, query)

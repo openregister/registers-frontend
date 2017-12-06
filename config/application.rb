@@ -8,7 +8,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
-require "registers_client"
+require "register_client_manager"
 require "cf-app-utils"
 
 # Require the gems listed in Gemfile, including any gems
