@@ -63,11 +63,11 @@ module Spina
       DateTime.parse(date).strftime('%d/%m/%Y')
     end
 
-    def sort_link(field, query_parameters)
-      link_to field[:item]['field'], register_path(@register.slug,
+    def sort_link(field_value, query_parameters)
+      link_to field_value, register_path(@register.slug,
                                                    query_parameters.except(:sort_by, :sort_direction)
-                                                   .to_h.merge(sort_direction: params[:sort_direction] == 'asc' && params[:sort_by] == field[:item]['field'] ? 'desc' : 'asc',
-                                                   sort_by: field[:item]['field'],
+                                                   .to_h.merge(sort_direction: params[:sort_direction] == 'asc' && params[:sort_by] == field_value ? 'desc' : 'asc',
+                                                   sort_by: field_value,
                                                    anchor: 'search_wrapper'))
     end
   end

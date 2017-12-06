@@ -115,7 +115,7 @@
             %thead
               %tr
                 - @register_data.get_field_definitions.each do |field|
-                  %th= field[:item]['cardinality'] == '1' ? sort_link(field, request.query_parameters) : field[:item][:name]
+                  %th= field[:item]['cardinality'] == '1' ? sort_link(field[:item]['field'], request.query_parameters) : field[:item]['field']
             %tbody#records-tbody
               = render partial: 'record', collection: @records
 
