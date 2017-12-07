@@ -31,17 +31,13 @@ module Spina
       end
     end
 
-    def registers_client
-      RegistersClient::RegistersClientManager.new({ cache_duration: 600 })
-    end
-
     def government_organisations
-      register_data = registers_client.get_register('government-organisation', 'beta')
+      register_data = @registers_client.get_register('government-organisation', 'beta')
       register_data.get_records
     end
 
     def beta_registers
-      register_data = registers_client.get_register('register', 'beta')
+      register_data = @registers_client.get_register('register', 'beta')
       register_data.get_records
     end
 
