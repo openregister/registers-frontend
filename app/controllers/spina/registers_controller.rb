@@ -2,8 +2,6 @@
 
 module Spina
   class RegistersController < Spina::ApplicationController
-    before_action :initialize_client
-
     layout 'layouts/default/application'
 
     def index
@@ -21,15 +19,15 @@ module Spina
       @current_phases = Spina::Register::CURRENT_PHASES
 
       # Fetch the register register for each phase and get records
-      beta_register_register = @@registers_client.get_register('register', 'beta').get_records
-      alpha_register_register = @@registers_client.get_register('register', 'alpha').get_records
-      discovery_register_register = @@registers_client.get_register('register', 'discovery').get_records
+      beta_register_register = @registers_client.get_register('register', 'beta').get_records
+      alpha_register_register = @registers_client.get_register('register', 'alpha').get_records
+      discovery_register_register = @registers_client.get_register('register', 'discovery').get_records
       @register_registers = beta_register_register.to_a + alpha_register_register.to_a + discovery_register_register.to_a
     end
 
     def show
       @register = Spina::Register.find_by_slug!(params[:id])
-      @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
+      @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
       records =
         case params[:status]
@@ -54,7 +52,7 @@ module Spina
 
     def history
       @register = Spina::Register.find_by_slug!(params[:id])
-      @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
+      @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
       fields = @register_data.get_field_definitions.map { |field| field[:item]['field'] }
       all_records = @register_data.get_records_with_history
@@ -140,10 +138,6 @@ module Spina
 
     def contain?(field_value, request_value)
       field_value.downcase.include?(request_value.downcase)
-    end
-
-    def initialize_client
-      @@registers_client ||= RegistersClient::RegistersClientManager.new(cache_duration: 600)
     end
 
     def paginate(records)
