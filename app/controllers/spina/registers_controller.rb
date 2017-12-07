@@ -2,8 +2,6 @@
 
 module Spina
   class RegistersController < Spina::ApplicationController
-    helper_method :sort_column, :sort_direction
-
     before_action :initialize_client
 
     layout 'layouts/default/application'
@@ -45,7 +43,7 @@ module Spina
 
       records = params[:sort_by] ? sort_by(records, params[:sort_by], params[:sort_direction]) : records
 
-      records = params[:q] ? search(records, params[:q]) : records 
+      records = params[:q] ? search(records, params[:q]) : records
 
       @records = paginate(records.to_a)
     end
@@ -133,7 +131,7 @@ module Spina
       a_field_value = a[:item][params[:sort_by]]
       b_field_value = b[:item][params[:sort_by]]
       comparator = sort_direction == 'desc' ?  b_field_value <=> a_field_value : a_field_value <=> b_field_value
-      a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  } 
+      a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  }
     end
 
     def contain_in_array?(field_values, request_value)
