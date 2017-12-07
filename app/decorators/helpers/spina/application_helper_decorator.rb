@@ -58,7 +58,7 @@ module Spina
       DateTime.parse(date).strftime('%d/%m/%Y')
     end
 
-    def sort_link(field_value, query_parameters)
+    def records_table_sort_link(field_value, query_parameters)
       direction = params[:sort_direction] == 'asc' && params[:sort_by] == field_value ? 'desc' : 'asc'
       css_class = params[:sort_by] == field_value ? "sort-link #{direction}" : nil
 
