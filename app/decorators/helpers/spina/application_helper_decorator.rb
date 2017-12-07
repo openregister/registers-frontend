@@ -37,13 +37,12 @@ module Spina
 
     def government_organisations
       register_data = registers_client.get_register('government-organisation', 'beta')
-      return register_data.get_records
+      register_data.get_records
     end
 
     def beta_registers
       register_data = registers_client.get_register('register', 'beta')
-      beta_registers = register_data.get_records
-      return beta_registers
+      register_data.get_records
     end
 
     def phase_label(phase)
