@@ -52,6 +52,7 @@ gem 'kaminari'
 group :development, :test do
   gem 'govuk-lint', '~> 3.3'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
@@ -59,6 +60,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  
 end
 
 group :test do
@@ -67,6 +69,5 @@ group :test do
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'faker'
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.6'
   gem 'webmock'
 end
