@@ -80,5 +80,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'https://registers-staging.herokuapp.com/' }
-  config.cups_environment_variables_service_name = 'registers-product-site-environment-variables'
 end
