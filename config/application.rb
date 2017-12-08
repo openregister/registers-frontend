@@ -22,7 +22,7 @@ module RegisterStatus
     # -- all .rb files in that directory are automatically loaded.
 
     if ENV.key?('VCAP_SERVICES')
-      cups_env = CF::App::Credentials.find_by_service_name(Rails.configiration.cups_environment_variables_service_name)
+      cups_env = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')
       if cups_env.present?
         cups_env.each { |k, v| ENV[k] = v }
       end
