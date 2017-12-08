@@ -70,7 +70,7 @@
   .grid-row
     .column-one-whole
       .search-records-wrapper#search_wrapper
-        %h3.heading-medium There are #{pluralize(@register_data.get_records.count, 'Record')} in this register
+        %h3.heading-medium There are #{number_with_delimiter(@register_data.get_records.count)} #{'record'.pluralize(@register_data.get_records.count)} in this register
         .grid-row
           = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
             .column-one-third
