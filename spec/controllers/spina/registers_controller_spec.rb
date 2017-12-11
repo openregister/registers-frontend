@@ -191,8 +191,8 @@ RSpec.describe Spina::RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, all status. Result: 2 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
+  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, both status. Result: 2 rows' do
+    subject { get :show, params: { id: 'country', q: 'Germany', status: 'both' } }
 
     it { is_expected.to have_http_status :success }
 
