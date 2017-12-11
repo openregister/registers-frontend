@@ -198,6 +198,8 @@ GEM
       railties (>= 4.0.1)
     hashdiff (0.3.7)
     hashie (3.5.6)
+    health_check (2.7.0)
+      rails (>= 4.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -442,6 +444,7 @@ DEPENDENCIES
   govuk_notify_rails
   govuk_template
   haml-rails
+  health_check (~> 2.7)
   http (= 2.2.1)
   jbuilder (~> 2.5)
   jquery-rails
