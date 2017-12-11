@@ -1,5 +1,5 @@
 $("#records-tbody").append("<%= j(render(partial: 'record', collection: @records)) %>");
-$("#records-count").html('Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= @records.total_count %></strong> records <% if params[:q].present? %> for <strong>"<%= params[:q] %>"</strong> <% end %>')
+$("#records-count").html('Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= @records.total_count %></strong> records <% if params[:q].present? %>for <strong>"<%= params[:q] %>"</strong><% end %>')
 
 <% if @records.last_page? %>
   $("#load-more-records").hide();
