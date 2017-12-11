@@ -31,9 +31,9 @@ module Spina
 
       records =
         case params[:status]
-        when 'closed'
+        when 'archived'
           @register_data.get_expired_records
-        when 'all'
+        when 'both'
           @register_data.get_records
         else
           @register_data.get_current_records

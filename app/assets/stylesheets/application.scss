@@ -553,3 +553,18 @@ dl dd {
     border-top: 8px solid $govuk-blue;
   }
 }
+
+.reset-link {
+  margin-left: 10px;
+}
+
+details {
+  .form-group {
+    margin: 20px 0;
+  }
+
+  .inline {
+    float: left;
+    width: auto;
+  }
+}
