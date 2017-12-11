@@ -12,3 +12,4 @@ cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
 # Zero downtime push comes from "Autopilot" which is installed in before_deploy
 # step in Travis
 cf zero-downtime-push $APP_NAME -f manifest.yml
+cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
