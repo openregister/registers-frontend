@@ -191,9 +191,13 @@ dl dd {
     vertical-align: middle;
     word-wrap: break-word;
     white-space: normal;
+
+    a {
+      white-space: nowrap;
+    }
   }
 
-    tr {
+  tr {
     width: 100%;
   }
 
