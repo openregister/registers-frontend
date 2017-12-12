@@ -45,11 +45,27 @@
       %h2.heading-medium About this register
       %p= @register_data.get_register_definition[:item]['text']
 
+      %details{role: "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary What fields are included in this register?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %dl
+            - @register_data.get_field_definitions.each do |field|
+              %dt= field[:item]['field']
+              %dd= field[:item]['text']
+
       %h2.heading-medium Using this register
       %p There are 2 ways to use Registers. You can either:
       %ul.list-bullet
         %li use our #{link_to "(API)", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
         %li download the data for this Register and keep your own copy up-to-date
+
+      %details{role: "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary Download a copy of this register
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xls"}.
+          %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
 
     .column-third
       %aside#related
@@ -70,42 +86,42 @@
   .grid-row
     .column-one-whole
       .search-records-wrapper#search_wrapper
-        %h3.heading-medium There are #{number_with_delimiter(@register_data.get_records.count)} #{'record'.pluralize(@register_data.get_records.count)} in this register
+        %h3.heading-medium Explore this register
         .grid-row
           = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
             .column-one-third
               .records-search
-                = label_tag 'Search', nil, class: 'form-label', for: 'q'
-                = search_field_tag 'q', nil, class: 'search-input', value: params[:q]
-                = submit_tag 'Search', class: 'search-submit', name: nil
-            .column-one-third
-              .form-group
-                = label_tag 'Show', nil, class: 'form-label', for: 'record_status'
-                = select_tag "status", options_for_select([['Existing records', 'current'], ['Closed records', 'closed'], ['Existing and closed records', 'all']], selected: params[:status]), class: "form-control", id: 'record_status'
-            .column-one-third
-              = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
-
-        %details{role: "group"}
-          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
-            %span.summary Get a copy this data
-          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
-            %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xls"}.
-            %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
-
-        %details{role: "group"}
-          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
-            %span.summary What are the column headings?
-          #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
-            %dl
-              - @register_data.get_field_definitions.each do |field|
-                %dt= field[:item]['field']
-                %dd= field[:item]['text']
+                = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
+                = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                = submit_tag 'Search', name: nil, class: 'search-submit'
+            .column-one-whole
+              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+                  %span.summary Filter
+                #details-content-0{"aria-hidden" => "#{params[:status].present? ? 'false' : 'true'}"}
+                  .grid-row
+                    .column-one-whole
+                      .form-group
+                        %fieldset.inline
+                          %legend.visually-hidden Filter
+                          .multiple-choice
+                            = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                            = label_tag 'Current records', nil, for: 'status_current'
+                          .multiple-choice
+                            = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                            = label_tag 'Archived records', nil, for: 'status_archived'
+                          .multiple-choice
+                            = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                            = label_tag 'Both', nil, for: 'status_both'
+                        = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
       - if @records.present?
-        %p#records-count
-          Showing
-          %strong.text-spacing= @records.count
-          = 'record'.pluralize(@records.count)
+        %p
+          %span#records-count
+            = page_entries_info(@records, entry_name: 'record')
+            - if params[:q].present?
+              &nbsp; for <strong>"#{params[:q]}"</strong>
+          = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
       - else
         %p No records found
 
@@ -123,13 +139,13 @@
           .pager-controls
             = paginate @records, outer_window: 0, window: 3
           .pager-summary
-            Showing #{@records.offset_value + 1} &ndash; #{@records.offset_value + @records.length} of #{@records.total_count} records
+            = page_entries_info(@records, entry_name: 'record')
 
         - unless @records.last_page?
           = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
 
 = content_for :javascript do
   :javascript
-    $("#record_status").change(function () {
+    $("input[name='status']").change(function () {
       $('#search_records').submit();
     });

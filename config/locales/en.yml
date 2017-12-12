@@ -30,6 +30,18 @@ en:
       save: "Save %{scaffold_name}"
       delete_confirmation: "Are you sure you want to delete <strong>%{subject}'s</strong> register?"
   helpers:
+    page_entries_info:
+      entry:
+        zero: "entries"
+        one: "entry"
+        other: "entries"
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Showing <b>1</b> %{entry_name}"
+          other: "Showing <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Showing <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> %{entry_name}"
     label:
       support:
         email: Email address
