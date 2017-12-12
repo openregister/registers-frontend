@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  health_check_routes
   mount Spina::Engine => '/'
 
   Spina::Engine.routes.draw do

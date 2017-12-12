@@ -42,6 +42,7 @@ gem 'zendesk_api'
 
 # Cloudfoundry ruby helper
 gem 'cf-app-utils'
+gem 'health_check', '~> 2.7'
 
 # Email and Text Notifications
 gem 'govuk_notify_rails'
@@ -60,7 +61,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-  
 end
 
 group :test do
