@@ -139,6 +139,33 @@ dl dd {
   margin-top: 40px;
 }
 
+.footer-nav {
+  font-size: 14px;
+  padding: 8px 0;
+  margin-bottom: 20px;
+
+  @include media(tablet) {
+    font-size: 16px;
+    padding: 5px 0;
+  }
+
+  a {
+    display: inline-block;
+    margin-right: 15px
+  }
+}
+
+.footer-categories {
+  border-bottom: 1px solid $grey-2;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+  }
+}
+
 .phase {
   background-color: $govuk-blue;
   color: $page-colour;

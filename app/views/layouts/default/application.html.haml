@@ -30,4 +30,20 @@
   = javascript_include_tag 'application'
   = yield(:javascript)
 
+- content_for :footer_top do
+  .footer-categories
+    .grid-row
+      .column-one-quarter
+        %ul
+          %li
+            = link_to "Support", spina.support_path
+          %li
+            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank
+          %li
+            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank
+
+- content_for :footer_support_links do
+  %nav.footer-nav
+    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'} #{link_to 'Cookies', '/cookies'}
+
 = render file: 'layouts/govuk_template'
