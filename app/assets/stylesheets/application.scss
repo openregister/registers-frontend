@@ -226,22 +226,6 @@ dl dd {
 
     @include media(tablet) {
       border-top: 2px solid $grey-3;
-
-      &:nth-of-type(1) {
-        width: 285px;
-      }
-
-      &:nth-of-type(2) {
-        width: 150px;
-      }
-
-      &:nth-of-type(3) {
-        width: 100px;
-      }
-
-      &:nth-of-type(4) {
-        width: 300px;
-      }
     }
   }
 

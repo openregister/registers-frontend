@@ -74,6 +74,10 @@
     .column-one-whole
       %h3.heading-small.mq-small-only Sort by:
       %table.register-status-table.table-collapsible
+        %col{width: '40%'}
+        %col{width: '20%'}
+        %col{width: '20%'}
+        %col{width: '20%'}
         %thead
           %tr
             %th{role: "columnheader", scope: "col"}
@@ -82,7 +86,7 @@
               = sort_link(@search, :phase_name, "Status", default_order: :desc)
             %th{role: "columnheader", scope: "col"}
               = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
-            %th{role: "columnheader", scope: "col", colspan: "2"}
+            %th{role: "columnheader", scope: "col"}
         %tbody
           - @registers.each_with_index do |register, index|
             - index = index + 1
