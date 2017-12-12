@@ -126,8 +126,8 @@ module Spina
 
     def sort_by(records, sort_by, sort_direction = 'asc')
       records.sort { |a, b|
-      a_field_value = a[:item][params[:sort_by]]
-      b_field_value = b[:item][params[:sort_by]]
+      a_field_value = a.item.value[params[:sort_by]]
+      b_field_value = b.item.value[params[:sort_by]]
       comparator = sort_direction == 'desc' ?  b_field_value <=> a_field_value : a_field_value <=> b_field_value
       a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  }
     end
