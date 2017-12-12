@@ -46,10 +46,6 @@ module Spina
       @records = paginate(records.to_a)
     end
 
-    def info
-      @register = Spina::Register.find_by_slug!(params[:id])
-    end
-
     def history
       @register = Spina::Register.find_by_slug!(params[:id])
       @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
