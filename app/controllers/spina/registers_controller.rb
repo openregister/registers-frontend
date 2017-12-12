@@ -33,7 +33,7 @@ module Spina
         case params[:status]
         when 'archived'
           @register_data.get_expired_records
-        when 'both'
+        when 'all'
           @register_data.get_records
         else
           @register_data.get_current_records
