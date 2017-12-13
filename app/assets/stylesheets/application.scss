@@ -24,13 +24,11 @@
 @import 'elements/details';
 
 // From alphagov/product-page-example
-@import 'util/print';
 @import 'modules/breadcrumbs';
 @import 'modules/content-section';
 @import 'modules/header';
 @import 'modules/hero';
 @import 'modules/masthead';
-@import 'modules/phase-banner';
 @import 'modules/related-items';
 @import 'modules/skip-link';
 @import 'modules/sub-navigation';
@@ -39,16 +37,6 @@
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
-
-// From alphagov/whitewall (for govspeak)
-@import 'whitehall/colours';
-@import 'whitehall/dimensions';
-@import 'whitehall/right-to-left';
-@import 'whitehall/typography';
-@import 'whitehall/gov_speak';
-
-// From alphagov/spotlight
-@import 'spotlight/*';
 
 #main {
   display: block;
