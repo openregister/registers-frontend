@@ -33,4 +33,10 @@
               = link_to "Suggest a register", spina.new_register_path
 
     .column-two-thirds
-      != @page.content(:text)
+      .govspeak
+        = @page.content(:text)
+
+        - if @page.title == "Available registers"
+          - beta_registers.each do |register|
+            %h2= link_to register.register, register._uri, target: :blank
+            %p= register.text

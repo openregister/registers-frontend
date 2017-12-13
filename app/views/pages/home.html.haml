@@ -1,5 +1,5 @@
-- @page_title = @page.seo_title
-- @page_description = @page.description
+- @page_title = ''
+- @page_description = ''
 = content_for :body_classes, 'home-page'
 
 .masthead
@@ -27,12 +27,10 @@
   .grid-row
     .column-two-thirds
       %section.content-section
-        .govspeak
-          = govspeak(@page.content(:text))
+        %p Registers are lists of information. Each register is the most reliable list of its kind. For example, the Foreign and Commonwealth Office’s (FCO’s) #{link_to 'country register', 'https://country.register.gov.uk'} is the most accurate and up-to-date list of countries available.
 
       %section.content-section.content-section--with-top-border
-        .govspeak
-          %h2.content-section__title Who's using GOV.UK Registers
+        %h2.content-section__title Who's using GOV.UK Registers
 
         .data
           = link_to '/using-registers/services-using-registers' do
@@ -58,12 +56,11 @@
         %p #{link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk'} register
 
       %section.content-section.content-section--with-top-border
-        .govspeak
-          %h2.content-section__title Getting started
+        %h2.content-section__title Getting started
 
-          %p Registers can also help you if you collect, manage or store data for your organisation. We’ve made it really simple to find out how custodians and the GOV.UK Registers team work together to #{link_to 'create a register', 'https://www.gov.uk/guidance/creating-a-register', target: :blank}.
+        %p Registers can also help you if you collect, manage or store data for your organisation. We’ve made it really simple to find out how custodians and the GOV.UK Registers team work together to #{link_to 'create a register', 'https://www.gov.uk/guidance/creating-a-register', target: :blank}.
 
-          %p Each register has an open API you can use to access the data without any authentication. There’s more information about using the register APIs in the #{link_to 'technical documentation', "https://registers-docs.cloudapps.digital/"}
+        %p Each register has an open API you can use to access the data without any authentication. There’s more information about using the register APIs in the #{link_to 'technical documentation', "https://registers-docs.cloudapps.digital/"}
 
       %section.content-section.content-section--with-top-border
         .govspeak
@@ -79,13 +76,13 @@
       %aside.related-items
         %h2.related-items__title Registers ready to use
         %ul.related-items__list
-          - beta_registers.reject{ |r| %w{register datatype field}.include?(r.item.value['register'])}.each do |register|
-            %li= link_to register.item.value['register'], "/registers/#{register.item.value['register'].parameterize}"
+          - @beta_registers.reject{ |r| %w{register datatype field}.include?(r[:item]['register'])}.each do |register|
+            %li= link_to register[:item]['register'], "/registers/#{register[:item]['register'].parameterize}"
         %h2.related-items__title Upcoming registers
         %ul.related-items__list
           %li
-            = link_to "View all registers in progress", spina.registers_path(phase: 'in progress')
+            = link_to "View all registers in progress", registers_path(phase: 'in progress')
         %h2.related-items__title Suggest a register
         %ul.related-items__list
           %li
-            = link_to "Find out more", spina.new_register_path
+            = link_to "Find out more", new_register_path

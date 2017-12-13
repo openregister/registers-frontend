@@ -2,7 +2,7 @@
   %th{"data-title" => index, }
     %h4.heading-xsmall= register.name
     - if register.register_phase == 'Backlog'
-      %p= govspeak(register.description)
+      %p= register.description
     - else
       %p= @register_registers.select{ |r| r.entry.key == register.name.parameterize }.first.item.value['text']
   %td{"data-title" => "Phase: "}

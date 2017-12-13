@@ -90,7 +90,7 @@
         %tbody
           - @registers.each_with_index do |register, index|
             - index = index + 1
-            = render partial: 'spina/registers/register', object: register, locals: { index: index }
+            = render partial: 'registers/register', object: register, locals: { index: index }
 
       %h3.heading-medium Suggest a register
-      = link_to "Find out more", spina.new_register_path
+      = link_to "Find out more", new_register_path
