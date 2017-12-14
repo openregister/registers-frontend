@@ -1,27 +1,7 @@
 @charset "utf-8";
 
-// From alphagov/govuk_frontend_toolkit
-@import 'colours';
-@import 'measurements';
-@import 'grid_layout';
-@import 'typography';
-@import 'url-helpers';
-@import 'design-patterns/buttons';
-
-// From alphagov/govuk_elements
-@import 'elements/helpers';
-@import 'elements/govuk-template-base';
-@import 'elements/layout';
-@import 'elements/elements-typography';
-@import 'elements/buttons';
-@import 'elements/forms';
-@import 'elements/forms/form-multiple-choice';
-@import 'elements/forms/form-date';
-@import 'elements/forms/form-validation';
-@import 'elements/lists';
-@import 'elements/panels';
-@import 'elements/tables';
-@import 'elements/details';
+// GOV.UK Toolkit and GOV.UK Elements
+@import 'govuk_elements';
 
 // From alphagov/product-page-example
 @import 'modules/breadcrumbs';
