@@ -22,7 +22,7 @@
   - if params[:phase].present?
     .grid-row
       .column-full
-        %h1 Registers #{params[:phase]}
+        %h1.heading-xlarge Registers #{params[:phase]}
     .grid-row
       .column-one-third
         .data
@@ -67,8 +67,8 @@
     = search_form_for @search do |f|
       .column-one-third
         .records-search
-          = f.label :name_cont, 'Search', class: 'form-label'
-          = f.search_field :name_cont, class: 'search-input'
+          = f.label :name_cont, 'Search', class: 'visually-hidden'
+          = f.search_field :name_cont, class: 'search-input', placeholder: 'Search'
           = f.submit 'Search', class: 'search-submit'
 
     .column-one-whole

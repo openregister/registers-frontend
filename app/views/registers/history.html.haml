@@ -19,14 +19,17 @@
         %span{itemprop: "name"} Register updates
 
 %main.container{role:'main'}
-  .search-records-wrapper#search_wrapper
-    .grid-row
+  .grid-row
+    .column-full
+      %h1.heading-xlarge Register updates
+
+  .grid-row
+    .column-one-third
       = form_tag history_path(@register.slug), method: :get, id: 'search_updates' do
-        .column-one-third
-          .records-search
-            = label_tag 'Search updates', nil, class: 'form-label', for: 'q'
-            = text_field_tag 'q', nil, class: 'search-input', value: params[:q]
-            = submit_tag 'Search', class: 'search-submit', name: nil
+        .records-search
+          = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
+          = text_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
+          = submit_tag 'Search', class: 'search-submit', name: nil
 
   .grid-row
     .column-full

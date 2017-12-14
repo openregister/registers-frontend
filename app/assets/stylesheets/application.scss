@@ -28,11 +28,11 @@
 
 h1 {
   @extend .heading-xlarge;
-  margin: 0;
+  margin-top: 0;
 }
 
 .heading-xlarge {
-
+  margin-top: 0;
 }
 
 html {
@@ -254,7 +254,7 @@ dl dd {
 
 .data {
   .registers-index & {
-    margin: 40px 0;
+    margin-bottom: 40px;
   }
 
   .home-page & {
@@ -277,7 +277,7 @@ dl dd {
 }
 
 .related-container {
-  .heading-small {
+  .heading-small:first-of-type {
     margin-top: 0;
   }
 

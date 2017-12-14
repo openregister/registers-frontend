@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
 
   resources :registers, only: [:show, :index]
-  get '/registers/:id/info', to: 'registers#info', as: 'register_info'
+  get '/registers/:id/history', to: 'registers#history', as: 'history'
 
   # Support
 
