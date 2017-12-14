@@ -38,7 +38,7 @@ class RegistersController < ApplicationController
         @register_data.get_current_records
       end
 
-    records = params[:sort_by] ? sort_by(records, params[:sort_by], params[:sort_direction]) : records
+    records = sort_by(records, params[:sort_by], params[:sort_direction])
 
     records = params[:q] ? search(records, params[:q]) : records
 
@@ -123,11 +123,18 @@ private
     false
   end
 
-  def sort_by(records, sort_by, sort_direction = 'asc')
+  def sort_by(records, sort_by, sort_direction)
+    default_sort_by = lambda {
+      has_name_field = @register_data.get_field_definitions.any? { |field| field.item.value['field'] == 'name' }
+      has_name_field ? 'name' : params[:id]
+    }
+    sort_by ||= default_sort_by.call
+    sort_direction ||= 'asc'
+
     records.sort { |a, b|
-    a_field_value = a.item.value[params[:sort_by]]
-    b_field_value = b.item.value[params[:sort_by]]
-    comparator = sort_direction == 'desc' ?  b_field_value <=> a_field_value : a_field_value <=> b_field_value
+    a_field_value = a.item.value[sort_by]
+    b_field_value = b.item.value[sort_by]
+    comparator = sort_direction == 'desc' ? b_field_value <=> a_field_value : a_field_value <=> b_field_value
     a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  }
   end
 
