@@ -243,7 +243,7 @@ RSpec.describe Spina::RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).first[:item]['name']).to eq('Afghanistan')
+      expect(assigns(:records).first.item.value['name']).to eq('Afghanistan')
     end
   end
 
@@ -257,7 +257,7 @@ RSpec.describe Spina::RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).first[:item]['name']).to eq('Zimbabwe')
+      expect(assigns(:records).first.item.value['name']).to eq('Zimbabwe')
     end
   end
 
@@ -270,8 +270,8 @@ RSpec.describe Spina::RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).first[:item]['start-date']).to eq('2011-07-09')
-      expect(assigns(:records).last[:item]['start-date']).to be_nil
+      expect(assigns(:records).first.item.value['start-date']).to eq('2011-07-09')
+      expect(assigns(:records).last.item.value['start-date']).to be_nil
     end
   end
 end

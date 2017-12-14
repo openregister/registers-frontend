@@ -43,10 +43,10 @@ GIT
 
 GIT
   remote: https://github.com/openregister/registers-ruby-client.git
-  revision: d69eb0cc21d78497afb748ef86a6b6b698ac1cdf
-  tag: v0.3.2
+  revision: 072453b3993127f4c3e5adeab25d438d107c394d
+  tag: v0.4.0
   specs:
-    registers-ruby-client (0.3.2)
+    registers-ruby-client (0.4.0)
       mini_cache (~> 1.1.0)
       rest-client (~> 2)
 
