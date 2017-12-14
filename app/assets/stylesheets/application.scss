@@ -179,6 +179,8 @@ dl dd {
 }
 
 .register-status-table {
+  margin-top: 40px;
+
   td,
   th {
     font-size: 16px;
@@ -399,6 +401,7 @@ dl dd {
 
     td,
     th {
+      font-size: 16px;
       vertical-align: top;
     }
   }
@@ -449,6 +452,7 @@ dl dd {
 .entries {
   border-left: 10px solid $grey-3;
   list-style-type: none;
+  margin-top: 40px;
   padding-left: 30px;
 
   &__item {
@@ -478,7 +482,9 @@ dl dd {
     margin-top: 0;
   }
 
-  tr td {
+  tr td,
+  tr th {
+    font-size: 16px;
     width: 33.3333%;
   }
 }
@@ -542,6 +548,8 @@ dl dd {
 }
 
 details {
+  margin-top: 20px;
+
   .form-group {
     margin: 20px 0;
   }
