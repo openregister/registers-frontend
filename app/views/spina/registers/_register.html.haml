@@ -16,8 +16,3 @@
       = link_to "View register", register_path(register.slug)
   - else
     %td
-  - if register.history.present?
-    %td{class: "links", "data-title" => "View more: "}
-      = link_to "More information", register_info_path(register.slug)
-  - else
-    %td
