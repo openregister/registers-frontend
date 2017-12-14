@@ -1,0 +1,52 @@
+- content_for :page_title, "#{@page_title} - GOV.UK Registers"
+
+- content_for :inside_header do
+  %strong.phase-badge Alpha
+
+- content_for :global_header_text, 'GOV.UK <span id="product-name">Registers</span>'.html_safe
+
+- content_for :homepage_url, "/"
+
+- content_for :header_class, "with-proposition"
+
+- content_for :proposition_header do
+  .header-proposition
+    .content
+      = link_to "Menu", "#proposition-links", class: "js-header-toggle menu"
+      %nav{id: "proposition-menu"}
+        %ul#proposition-links
+          %li
+            = link_to "Using registers", using_registers_path
+          %li
+            = link_to "Registers pipeline", registers_path
+          %li
+            = link_to "Support", support_path
+          %li
+            = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank
+
+- content_for :head do
+  = stylesheet_link_tag 'application'
+  = csrf_meta_tags
+  = render partial: 'layouts/analytics' if Rails.env.production?
+
+- content_for :body_end do
+  = javascript_include_tag 'application'
+  = yield(:javascript)
+
+- content_for :footer_top do
+  .footer-categories
+    .grid-row
+      .column-one-quarter
+        %ul
+          %li
+            = link_to "Support", support_path
+          %li
+            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank
+          %li
+            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank
+
+- content_for :footer_support_links do
+  %nav.footer-nav
+    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'}
+
+= render file: 'layouts/govuk_template'

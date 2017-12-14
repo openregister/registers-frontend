@@ -1,0 +1,78 @@
+- @page_title = 'Services using registers'
+= content_for :body_classes, 'services-using-registers-page'
+
+%main.container{role:'main'}
+  .grid-row
+    .column-one-third
+      = render partial: 'pages/sidebar_nav'
+    .column-two-thirds
+      %h1.heading-large Services using registers
+      %table
+        %thead
+          %tr
+            %th Service
+            %th Department / Organisation
+            %th Register
+        %tbody
+          %tr
+            %th E-petitions
+            %td Parliamentary Digital Service
+            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+          %tr
+            %th GOV.UK Pay
+            %td Cabinet Office
+            %td
+              = link_to 'Country', 'https://country.register.gov.uk', target: :blank
+              %br
+              = link_to 'Territory', 'https://territory.register.gov.uk', target: :blank
+          %tr
+            %th Realtime Flood Monitoring
+            %td Environment Agency
+            %td= link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+          %tr
+            %th Transparency In Supply Chains
+            %td TISCReport
+            %td
+              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+              %br/
+              %a= link_to 'Government Organisation', 'https://government-organisation.register.gov.uk/'
+          %tr
+            %th MapIt
+            %td MySociety
+            %td
+              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Local Authority Scotland', 'https://local-authority-sct.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+          %tr
+            %th Civil Service Jobs
+            %td Civil Service Human Resources
+            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+          %tr
+            %th AppGov
+            %td AppGov
+            %td
+              = link_to 'Country', 'https://country.register.gov.uk', target: :blank
+              %br
+              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+          %tr
+            %th https://olib.uk/charity
+            %td CharityData
+            %td
+              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              %br/
+              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+          %th Org-ID
+          %td org-id.guide
+          %td= link_to 'Government Organisation', 'https://government-organisation.register.gov.uk', target: :blank

@@ -166,11 +166,6 @@ GEM
       activemodel (>= 4.2, < 5.2)
       activerecord (>= 4.2, < 5.2)
       request_store (~> 1.0)
-    govspeak (3.4.0)
-      htmlentities (~> 4)
-      kramdown (~> 1.5.0)
-      nokogiri (~> 1.5)
-      sanitize (~> 2.1.0)
     govuk-lint (3.3.1)
       rubocop (~> 0.51.0)
       rubocop-rspec (~> 1.16.0)
@@ -205,7 +200,6 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    htmlentities (4.3.4)
     http (2.2.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -247,7 +241,6 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    kramdown (1.5.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -360,8 +353,6 @@ GEM
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
     safe_yaml (1.0.4)
-    sanitize (2.1.0)
-      nokogiri (>= 1.4.4)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -436,7 +427,6 @@ DEPENDENCIES
   factory_bot_rails (~> 4.8, >= 4.8.2)
   faker
   fog-aws
-  govspeak (~> 3.4.0)
   govuk-lint (~> 3.3)
   govuk_elements_form_builder!
   govuk_elements_rails

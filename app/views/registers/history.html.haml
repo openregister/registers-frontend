@@ -1,0 +1,46 @@
+= content_for :page_title, "Register updates"
+
+%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
+  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+        %span{itemprop: "name"} Components
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to root_path, itemprop: "item" do
+        %span{itemprop: "name"} GOV.UK Registers
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to registers_path, itemprop: "item" do
+        %span{itemprop: "name"} Register pipeline
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to register_path(@register.slug), itemprop: "item" do
+        %span{itemprop: "name"} #{@register.name} Register
+    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"} Register updates
+
+%main.container{role:'main'}
+  .grid-row
+    .column-full
+      %h1.heading-xlarge Register updates
+
+  .grid-row
+    .column-one-third
+      = form_tag history_path(@register.slug), method: :get, id: 'search_updates' do
+        .records-search
+          = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
+          = text_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
+          = submit_tag 'Search', class: 'search-submit', name: nil
+
+  .grid-row
+    .column-full
+      %ul.entries#entries-list
+        = render partial: 'timeline_record', collection: @entries_with_items
+
+      .pager
+        .pager-controls
+          = paginate @entries_with_items, outer_window: 0, window: 3
+        .pager-summary
+          Showing #{@entries_with_items.offset_value + 1} &ndash; #{@entries_with_items.offset_value + @entries_with_items.length} of #{@entries_with_items.total_count} records
+
+      - unless @entries_with_items.last_page?
+        = link_to_next_page @entries_with_items, 'Load more', id: 'load-more-entries', class: 'js-hidden', remote: true

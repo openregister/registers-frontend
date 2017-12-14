@@ -1,0 +1,55 @@
+- @page_title = 'Case Study: TISCReport'
+
+%main.container{role:'main'}
+  .grid-row
+    .column-one-third
+      = render partial: 'pages/sidebar_nav'
+    .column-two-thirds
+      %h1.heading-large How GOV.UK Registers underpins the TISCreport.org
+      .panel.panel-border-wide
+        Jaya Chakrabarti MBE is founder of TISCreport.org - the Transparency in Supply Chains Report on modern slavery and human trafficking. This case study captures her experience of using of a number of GOV.UK Registers.
+      %p The #{link_to 'Transparency in Supply Chains (TISC) Report', 'https://tiscreport.org/', target: :blank} is the world’s largest open data initiative committed to ending modern slavery in supply chains. A supply chain is a system of  organisations, people, activities, information and resources that move a product or service from a supplier to a customer.
+      %p The Report was created to capture compliance of organisations with section 54 of the Modern Slavery Act 2015 and their supply chain data. It was announced at the Home Office Transparency in Supply Chains Event on 21 March 2016 and launched on 1 April 2016 in alignment with the Independent Anti-Slavery Commissioner’s set compliance deadline.
+      %h3.heading-medium How it works
+      %ul.list-bullet
+        %li At a basic level TISCreport.org is free to all organisations who wish to submit their statements, regardless of size. The site charges a small fee to member companies for full authentication (allowing us to definitively say that the statement comes from a valid source).
+      %p It also charges for:
+      %ul.list-bullet
+        %li Membership from companies who can afford £200 per year to support the register to be self-sustaining
+        %li Provision of additional services (supply chain and compliance data) to those companies committed to ensuring the highest possible standards of supply chain transparency
+      %p Member companies can then upload their individual #{link_to 'Modern Slavery Act Statements', 'https://tiscreport.org/organisations-with-statements', target: :blank} for anyone to view for free.
+      %p As part of our commitment, we designed our system to accept submissions of statements only being held on company websites (as directed by the Modern Slavery Act), and store them in one central register, linking those statements directly to the financial entity/entities they apply to. This means that anyone can check up on a specific organisation, without having to work out which website belongs to the organisation, or which parent organisation or brand is considered applicable. This provides a whole new level of corporate transparency without which true supply chain transparency cannot be built.
+      %p Our register allows organisations from all over the world to show they are working to ensure their supply chains only contain companies that have committed to using ethically supplied products and resources.
+      %p The proceeds of membership fees are split between:
+      %ul.list-bullet
+        %li
+          The charity Unseen, which runs the
+          = succeed "," do
+            %a{:href => "https://www.modernslaveryhelpline.org/", :rel => "external"} UK Modern Slavery Helpline
+        %li The TISCreport social enterprise, reinvested to improve the data set and connect up with others.
+      %h3#springing-into-action Springing into action
+      %p TISCreport was launched in March 2016. Anti-slavery charities, consumer groups, business groups, large organisations with complex supply chains and individual ethical consumers were involved in the initiative.
+      %p Everyone involved was aware that helping organisations to ensure they had ethical supply chains was a complex task. We knew that the only way we could hope to achieve this was by making use of pre-existing data and networks as foundations.
+      %h3.heading-medium Accessing and linking data
+      %p TISCreport relies entirely on high-quality data from multiple organisations. Our users need to know that the information they are viewing is trustworthy and that it comes from impeccable sources. This is why being able to rely on the authoritative data supplied by #{link_to "GOV.UK Registers", "https://registers.cloudapps.digital/"} is so important.
+      %p If you need high-quality authoritative data you need to go directly to the source, which is the government in some cases. Before GOV.UK Registers existed, it was often difficult to know which organisation, never mind which individual, to approach to get hold of official datasets. This was assuming that an official single list existed. Often, multiple but different lists of the same things were made available by different parts of government, each one of which was ‘official’.
+      %p In particular, we found the canonical lists of local authorities in the UK and the list of the many and varied different organisations that make up the government to be very useful. We were able to very quickly integrate our new system with the registers platform via their API and immediately begin using the data.
+      %h3.heading-medium GOV.UK Registers are different
+      %p #{link_to 'GOV.UK Registers', 'https://registers.cloudapps.digital', target: :blank} have the following unique properties that make them especially suitable for our needs:
+      %ul.list-bullet
+        %li they are the single official list of a set of data, such as countries and territories, as recognised by the UK government
+        %li they are publicly available to anyone to use for free
+        %li they are “live lists” that allow anyone using them to know that they will be working with consistently up-to-date data (we update our data caches daily)
+        %li each register has a publicly named custodian who is responsible for ensuring that the data is of a high quality and updated in a timely manner
+        %li every register is owned by the appropriate organisation in government who has the authority to curate that data, for example Ministry of Justice for prison registers or the Home Office for police registers
+        %li up-to-date register data is available through an easy-to-use API or a simple ‘picker’ web-widget that can be easily incorporated into a digital service
+        %li they are built to be easily connected to other registers and to data provided from other sources, through the use of standard identifiers
+      %p We were quickly persuaded to use registers because of their standard identifiers. We also use a lot of data from Companies House and OpenCorporates. It was vital that these varied data sets could be connected together quickly and easily using machine-readable IDs. GOV.UK Registers allowed us to do just that.
+      %p Without GOV.UK Registers, we would have spent a lot of time finding other data sources, scraping the data, improving the quality of the data and finding ways to link these different datasets together. We would have needed more staff to achieve this, so the cost savings of using registers are already obvious.
+      %p Given that the amount of data we will need to deliver our service will just keep on growing, the fact that we do not have to clean and match government data sets is an ongoing benefit for us.
+      %h3.heading-medium Achieving the goal
+      %p Using GOV.UK Registers as the glue to bind together all our other sources of data, we were able to build the first iteration of our site and start setting up our users within 10 days.
+      %p We currently have nearly 50,000 companies and organisations on whom we hold compliance and supply chain risk data, making this the largest data set in existence on Modern Slavery Act compliance globally.
+      %p Our next step will be to produce our 12-month report in September 2017 and present it to MPs, lords, senior civil servants, directors of key sector bodies and companies, as well as key members of the #{link_to 'Joint Committee on Human Rights', 'http://www.parliament.uk/business/committees/committees-a-z/joint-select/human-rights-committee/', target: :blank}
+      %p Open data is incredibly powerful when it is networked. And having trusted sources of open government data to build on gives the market confidence to make use of it to tackle some very big issues.
+      %p For more Government as a Platform (GaaP) updates, #{link_to 'subscribe to the blog', 'https://public.govdelivery.com/accounts/UKGOVUK/subscriber/new?topic_id=UKGOVUK_7975', target: :blank}. For information on GOV.UK Registers subscribe to the #{link_to 'data in government blog', 'https://data.blog.gov.uk'}.

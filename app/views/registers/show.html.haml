@@ -1,0 +1,149 @@
+- @page_title = "#{@register.name.capitalize} Register"
+- @page_description = ""
+- content_for :body_classes, 'register-show'
+
+%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
+  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
+        %span{itemprop: "name"} Components
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to root_path, itemprop: "item" do
+        %span{itemprop: "name"} GOV.UK Registers
+    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      = link_to registers_path, itemprop: "item" do
+        %span{itemprop: "name"} Register pipeline
+    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
+      %a{href: "#main", itemprop: "item"}
+        %span{itemprop: "name"}= @register.name
+
+%main.container{role:'main'}
+
+  - if @register.register_phase != 'Beta'
+    .grid-row
+      .column-two-thirds
+        .panel.panel-border-wide
+          %span.phase-badge In progress
+          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
+
+  .grid-row
+    .column-two-thirds
+
+      %h1.heading-xlarge #{@register.name} register
+
+      .govuk-metadata
+        %dl
+          %dt Managed by:
+          %dd
+            = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
+          %dt Updated:
+          %dd
+            = formatted_date(Array(@register_data.get_entries).last.timestamp)
+            %strong.text-spacing -
+            = link_to "See all register updates", history_path(@register.slug)
+
+      %h2.heading-medium About this register
+      %p= @register_data.get_register_definition.item.value['text']
+
+      %details{role: "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary What fields are included in this register?
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %dl
+            - @register_data.get_field_definitions.each do |field|
+              %dt= field.item.value['field']
+              %dd= field.item.value['text']
+
+      %h2.heading-medium Using this register
+      %p There are 2 ways to use Registers. You can either:
+      %ul.list-bullet
+        %li use our #{link_to "(API)", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
+        %li download the data for this Register and keep your own copy up-to-date
+
+      %details{role: "group"}
+        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+          %span.summary Download a copy of this register
+        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+          %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xls"}.
+          %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
+
+    .column-third
+      %aside#related
+        .related-container
+          %h4.heading-small Find out more
+          %ul
+            %li
+              = link_to "API documentation", "https://registers-docs.cloudapps.digital", target: :blank
+          %h4.heading-small Help
+          %ul
+            %li
+              = link_to "Create a register", "https://www.gov.uk/guidance/creating-a-register", target: :blank
+            %li
+              = link_to "Contact the team", "https://registers.cloudapps.digital/support", target: :blank
+
+  .grid-row
+    .column-one-whole
+      .search-records-wrapper#search_wrapper
+        %h3.heading-medium Explore this register
+        .grid-row
+          = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
+            .column-one-third
+              .records-search
+                = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
+                = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                = submit_tag 'Search', name: nil, class: 'search-submit'
+            .column-one-whole
+              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+                  %span.summary Filter
+                #details-content-0{"aria-hidden" => "#{params[:status].present? ? 'false' : 'true'}"}
+                  .grid-row
+                    .column-one-whole
+                      .form-group
+                        %fieldset.inline
+                          %legend.visually-hidden Filter
+                          .multiple-choice
+                            = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                            = label_tag 'Current records', nil, for: 'status_current'
+                          .multiple-choice
+                            = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                            = label_tag 'Archived records', nil, for: 'status_archived'
+                          .multiple-choice
+                            = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                            = label_tag 'Both', nil, for: 'status_both'
+                        = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
+
+      - if @records.present?
+        %p
+          %span#records-count
+            = page_entries_info(@records, entry_name: 'record')
+            - if params[:q].present?
+              &nbsp; for <strong>"#{params[:q]}"</strong>
+          = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+      - else
+        %p No records found
+
+      - unless @records.empty?
+        .table-scroll
+          %table.register-data-table
+            %thead
+              %tr
+                - @register_data.get_field_definitions.each do |field|
+                  %th= field.item.value['cardinality'] == '1' ? records_table_sort_link(field.item.value['field'], request.query_parameters) : field.item.value['field']
+            %tbody#records-tbody
+              = render partial: 'record', collection: @records
+
+        .pager
+          .pager-controls
+            = paginate @records, outer_window: 0, window: 3
+          .pager-summary
+            = page_entries_info(@records, entry_name: 'record')
+
+        - unless @records.last_page?
+          = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
+
+= content_for :javascript do
+  :javascript
+    $("input[name='status']").change(function () {
+      $('#search_records').submit();
+    });

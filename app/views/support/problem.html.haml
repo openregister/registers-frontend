@@ -1,0 +1,15 @@
+- @page_title = "Support - Report a problem"
+
+%main.container{role:'main'}
+  .grid-row
+    .column-one-whole
+      %h1.heading-large Report a problem
+      - if @support.errors.any?
+        = render partial: "layouts/errors", locals: { object: @support }
+
+      = form_for @support, url: support_problem_path  do |f|
+        = f.hidden_field :subject, value: "[Problem]"
+        = f.text_area :message, rows: 10
+        = f.text_field :name
+        = f.email_field :email
+        = f.submit "Submit", class: "button"

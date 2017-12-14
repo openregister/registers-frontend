@@ -17,4 +17,7 @@ Spina.configure do |config|
 
   # Note that you might need to remove cached asset after changing this value
   # config.max_page_depth = 5
+
+  # Disable frontend routes to create hardcoded pages
+  config.disable_frontend_routes = true
 end
