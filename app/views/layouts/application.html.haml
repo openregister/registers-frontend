@@ -16,7 +16,9 @@
       %nav{id: "proposition-menu"}
         %ul#proposition-links
           %li
-            = link_to "Registers", registers_path
+            = link_to "Using registers", using_registers_path
+          %li
+            = link_to "Registers pipeline", registers_path
           %li
             = link_to "Support", support_path
           %li
@@ -45,6 +47,6 @@
 
 - content_for :footer_support_links do
   %nav.footer-nav
-    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'} #{link_to 'Cookies', '/cookies'}
+    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'}
 
 = render file: 'layouts/govuk_template'

@@ -21,16 +21,5 @@
 
 %main.container{role:'main'}
   .grid-row
-    - if @page.has_children? || @page.parent.present?
-      .column-one-third
-        %nav.sub-navigation
-          %ol{itemscope: "", itemtype: "http://schema.org/ItemList"}
-            - @page.root.children.in_menu.sorted.each do |child|
-              %li{class: "sub-navigation__item #{'sub-navigation__item--active' if child == @page }", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-                = link_to child.materialized_path, itemprop: "item" do
-                  %span{itemprop: "name"}= child.seo_title
-            %li{class: "sub-navigation__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-              = link_to "Suggest a register", spina.new_register_path
-
-    .column-two-thirds
+    .column-one-whole
       != @page.content(:text)

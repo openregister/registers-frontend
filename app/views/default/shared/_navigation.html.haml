@@ -1,4 +1,0 @@
-- header_nav = Spina::Navigation.find_by(name: 'header')
-- header_nav.navigation_items.roots.sorted.each do |nav_item|
-  %li{class: "#{'active' if nav_item.page == @page}"}
-    = link_to nav_item.menu_title, nav_item.materialized_path

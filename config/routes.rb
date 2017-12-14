@@ -2,14 +2,16 @@ Rails.application.routes.draw do
   health_check_routes
 
   root 'pages#home'
-  get 'cookies', to: 'pages#cookies'
+
+  get 'using-registers', to: 'pages#using_registers', as: 'using_registers'
+  get 'roadmap', to: 'pages#roadmap', as: 'roadmap'
+  get 'services-using-registers', to: 'pages#services_using_registers', as: 'services_using_registers'
+  get 'avaliable-registers', to: 'pages#avaliable_registers', as: 'avaliable_registers'
+  get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
+  get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
 
   resources :registers, only: [:show, :index]
   get '/registers/:id/info', to: 'registers#info', as: 'register_info'
-
-  get '/*id' => 'pages#show', as: "page", controller: 'pages', constraints: lambda { |request|
-    !(Rails.env.development? && request.env['PATH_INFO'].starts_with?('/rails/') || request.env['PATH_INFO'].starts_with?("/#{Spina.config.backend_path}") || request.env['PATH_INFO'].starts_with?('/attachments/'))
-  }
 
   # Support
 
@@ -38,6 +40,10 @@ Rails.application.routes.draw do
   get 'new-register/thanks', to: 'new_register#thanks'
 
   mount Spina::Engine => '/'
+
+  get '/*id' => 'pages#show', as: "page", controller: 'pages', constraints: lambda { |request|
+    !(Rails.env.development? && request.env['PATH_INFO'].starts_with?('/rails/') || request.env['PATH_INFO'].starts_with?("/#{Spina.config.backend_path}") || request.env['PATH_INFO'].starts_with?('/attachments/'))
+  }
 
   Spina::Engine.routes.draw do
     namespace :admin do
