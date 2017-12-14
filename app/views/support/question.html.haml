@@ -1,11 +1,11 @@
 - @page_title = "Support - Ask a question or give feedback"
 
-.container
+%main.container{role:'main'}
   .grid-row
     .column-one-whole
       %h1.heading-large Ask a question or give feedback
       - if @support.errors.any?
-        = render partial: "layouts/default/errors", locals: { object: @support }
+        = render partial: "layouts/errors", locals: { object: @support }
 
       = form_for @support, url: support_question_path  do |f|
         = f.hidden_field :subject, value: "[Question or Feedback]"

@@ -1,17 +1,16 @@
 - @page_title = 'New register - Suggest a register'
 
-.container
+%main.container{role:'main'}
   .grid-row
     .column-two-thirds
-      = link_to 'Back', spina.new_register_path, class: 'link-back'
+      = link_to 'Back', new_register_path, class: 'link-back'
 
-.container
   .grid-row
     .column-one-whole
       %h1.heading-large Suggest a register
 
       - if @new_register.errors.any?
-        = render partial: 'layouts/default/errors', locals: { object: @new_register }
+        = render partial: 'layouts/errors', locals: { object: @new_register }
 
       = form_for @new_register, url: new_register_suggest_register_path  do |f|
         = f.hidden_field :subject, value: '[Suggest a Register]'
