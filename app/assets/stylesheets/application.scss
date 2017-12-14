@@ -576,11 +576,11 @@ dl dd {
     top: 7px;
   }
 
-  &.asc:after {
+  &.desc:after {
     border-bottom: 8px solid $govuk-blue;
   }
 
-  &.desc:after {
+  &.asc:after {
     border-top: 8px solid $govuk-blue;
   }
 }
