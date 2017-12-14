@@ -2,9 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Spina::RegistersController, type: :controller do
-  routes { Spina::Engine.routes }
-
+RSpec.describe RegistersController, type: :controller do
   before do
     country_data = File.read('./spec/support/country.rsf')
     register_beta_data = File.read('./spec/support/register_beta.rsf')
