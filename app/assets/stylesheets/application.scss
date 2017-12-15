@@ -23,6 +23,11 @@
   margin-bottom: $gutter * 3;
 }
 
+b,
+strong {
+  font-weight: bold;
+}
+
 // Base styles for headings
 // ==========================================================================
 
@@ -452,7 +457,7 @@ dl dd {
 .entries {
   border-left: 10px solid $grey-3;
   list-style-type: none;
-  margin-top: 40px;
+  margin: 40px 0;
   padding-left: 30px;
 
   &__item {
