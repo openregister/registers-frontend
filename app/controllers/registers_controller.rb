@@ -158,7 +158,7 @@ class RegistersController < ApplicationController
       operation_params = []
       partial = ''
 
-      fields.split(',').each { |field| partial += " data->> '#{field}' like ? or" }
+      fields.split(',').each { |field| partial += " data->> '#{field}' ilike ? or" }
       partial = partial[1, partial.length - 3]
 
       operation_params.push(partial)
