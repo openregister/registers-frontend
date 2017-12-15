@@ -185,7 +185,7 @@ RSpec.describe RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).length).to eq(1)
+      expect(assigns(:records).length).to eq(2)
     end
   end
 
@@ -227,7 +227,7 @@ RSpec.describe RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).length).to eq(1)
+      expect(assigns(:records).length).to eq(2)
     end
   end
 
@@ -241,7 +241,7 @@ RSpec.describe RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).first.item.value['name']).to eq('Afghanistan')
+      expect(assigns(:records).first.data['name']).to eq('Afghanistan')
     end
   end
 
@@ -255,7 +255,7 @@ RSpec.describe RegistersController, type: :controller do
     it do
       subject
 
-      expect(assigns(:records).first.item.value['name']).to eq('Zimbabwe')
+      expect(assigns(:records).first.data['name']).to eq('Zimbabwe')
     end
   end
 
@@ -268,8 +268,8 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).first.item.value['start-date']).to eq('2011-07-09')
-      expect(assigns(:records).last.item.value['start-date']).to be_nil
+      expect(assigns(:records).first.data['start-date']).to be_nil
+      expect(assigns(:records).last.data['start-date']).to be_nil
     end
   end
 end

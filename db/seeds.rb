@@ -82,6 +82,16 @@ Spina::Register.create(
 )
 puts "Created Government domain Register"
 
+Spina::Register.create(
+  name: "Charity",
+  register_phase: "Discovery",
+  authority: "Cabinet Office",
+  url: "https://charity.discovery.register.gov.uk/",
+  custodian: "Cabinet Office",
+  history: "https://registers.cloudapps.digital/registers/charity",
+  )
+puts "Created Charity Register"
+
 puts "The CMS is located at http://localhost:3000/admin"
 puts "User email is registerteam@digital.cabinet-office.gov.uk"
 puts "User password is password123"

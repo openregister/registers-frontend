@@ -7,6 +7,6 @@ class ApplicationController < Spina::ApplicationController
   before_action :initialize_client
 
   def initialize_client
-    @@registers_client ||= RegistersClient::RegisterClientManager.new(cache_duration: 600)
+    @registers_client ||= RegistersClient::RegisterClientManager.new(cache_duration: 600)
   end
 end

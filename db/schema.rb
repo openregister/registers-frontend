@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012151508) do
+ActiveRecord::Schema.define(version: 20171207145923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.text "hash_value"
+    t.text "entry_type"
+    t.text "key"
+    t.datetime "timestamp"
+    t.bigint "spina_register_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.text "hash_value"
+    t.text "entry_type"
+    t.text "key"
+    t.datetime "timestamp"
+    t.bigint "spina_register_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
+  end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -190,6 +214,8 @@ ActiveRecord::Schema.define(version: 20171012151508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.boolean "populated", default: false
+    t.text "fields"
   end
 
   create_table "spina_rewrite_rules", id: :serial, force: :cascade do |t|

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
+  helper_method :get_last_timestamp, :get_register_definition, :get_field_definitions
+
   layout 'layouts/default/application'
 
   def index
@@ -18,41 +20,44 @@ class RegistersController < ApplicationController
     @current_phases = Spina::Register::CURRENT_PHASES
 
     # Fetch the register register for each phase and get records
-    beta_register_register = @@registers_client.get_register('register', 'beta').get_records
-    alpha_register_register = @@registers_client.get_register('register', 'alpha').get_records
-    discovery_register_register = @@registers_client.get_register('register', 'discovery').get_records
+    beta_register_register = @registers_client.get_register('register', 'beta').get_records
+    alpha_register_register = @registers_client.get_register('register', 'alpha').get_records
+    discovery_register_register = @registers_client.get_register('register', 'discovery').get_records
     @register_registers = beta_register_register.to_a + alpha_register_register.to_a + discovery_register_register.to_a
+  end
+
+  def get_last_timestamp
+    Record.select('timestamp')
+      .where(spina_register_id: @register.id, entry_type: 'user')
+      .limit(1)
+      .order(timestamp: :desc)
+      .first[:timestamp].to_s
+  end
+
+  def get_register_definition
+    @register.slug
+  end
+
+  def get_field_definitions
+    Record.where(spina_register_id: @register.id)
+      .where("data->> 'field' is not null")
+      .where(entry_type: 'system')
+      .map { |entry| entry[:data] }
   end
 
   def show
     @register = Spina::Register.find_by_slug!(params[:id])
-    @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
 
-    records =
-      case params[:status]
-      when 'archived'
-        @register_data.get_expired_records
-      when 'all'
-        @register_data.get_records
-      else
-        @register_data.get_current_records
-      end
+    unless @register.populated
+      populate_register(@register)
+    end
 
-    records = params[:sort_by] ? sort_by(records, params[:sort_by], params[:sort_direction]) : records
-
-    records = params[:q] ? search(records, params[:q]) : records
-
-    @records = paginate(records.to_a)
-  end
-
-  def info
-    @register = Spina::Register.find_by_slug!(params[:id])
+    @records = recover_records(@register.id, @register.fields, params)
   end
 
   def history
     @register = Spina::Register.find_by_slug!(params[:id])
-    @register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase)
-
+    @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
     fields = @register_data.get_field_definitions.map { |field| field.item.value['field'] }
     all_records = @register_data.get_records_with_history
     entries_reversed = @register_data.get_entries.reverse_each
@@ -74,13 +79,110 @@ class RegistersController < ApplicationController
 
     if params[:q].present?
       filtered = filter(entries_mapped_with_items, params[:q])
-      @entries_with_items = paginate(filtered)
+      @entries_with_items = paginate_history(filtered)
     else
-      @entries_with_items = paginate(entries_mapped_with_items)
+      @entries_with_items = paginate_history(entries_mapped_with_items)
     end
   end
 
-private
+  private
+
+  def populate_register(register)
+    register_data = @registers_client.get_register(register.name.parameterize, register.register_phase)
+
+    populate_user_data(register, register_data)
+    populate_system_data(register, register_data)
+
+    register.populated = true
+    register.fields = register_data.get_field_definitions.map { |field| field.item.value['field'] }.join(',')
+    register.save
+  end
+
+  def populate_user_data(register, register_data)
+    entries = []
+    records = []
+    count = 0
+
+    register_data.get_records_with_history.each do |record|
+      record[:records].each_with_index do |value, idx|
+        count += 1
+        new_entry = Entry.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.entry.hash, entry_type: 'user', key: record[:key], data: value.item.value)
+        entries.push(new_entry)
+
+        if idx == record[:records].length - 1 # The last entry is the record
+          records.push(Record.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.entry.hash, entry_type: 'user', key: record[:key], data: value.item.value))
+        end
+      end
+
+      next unless (count % 1000).zero?
+
+      bulk_save(entries, records)
+
+      entries = []
+      records = []
+    end
+
+    # Remaining objects less than 1000
+    bulk_save(entries, records)
+  end
+
+  def populate_system_data(register, register_data)
+    entries = []
+    records = []
+
+    register_data.get_metadata_records.each do |record|
+      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name'])
+      entries.push(new_entry)
+      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name']))
+    end
+
+    bulk_save(entries, records)
+  end
+
+  def recover_records(register_id, fields, params)
+    literal, status, page, sort_by, sort_direction = params[:q], params[:status], params[:page], params[:sort_by], params[:sort_direction]
+
+    query = Record.where(spina_register_id: register_id, entry_type: 'user')
+
+    count_query = Record.select(1).where(spina_register_id: register_id, entry_type: 'user')
+
+    if status == 'archived'
+      query = query.where("data->> 'end-date' is not null")
+      count_query = query.where("data->> 'end-date' is not null")
+    elsif status == 'current'
+      query = query.where("data->> 'end-date' is null")
+      count_query = query.where("data->> 'end-date' is null")
+    end
+
+    if literal.present?
+      operation_params = []
+      partial = ''
+
+      fields.split(',').each { |field| partial += " data->> '#{field}' like ? or" }
+      partial = partial[1, partial.length - 3]
+
+      operation_params.push(partial)
+      fields.split(',').count.times { operation_params.push("%#{literal}%") }
+
+      query = query.where(operation_params)
+      count_query = query.where(operation_params)
+    end
+
+    if sort_by.present? && sort_direction.present?
+      query = query.order("data->> '#{sort_by}' #{sort_direction.upcase}")
+    end
+
+    @page_count = count_query.length
+
+    @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
+
+    query.page(page).per(100).without_count
+  end
+
+  def bulk_save(entries, records)
+    Entry.import(entries)
+    Record.import(records)
+  end
 
   def filter(entries, query)
     entries.select do |entry|
@@ -123,14 +225,6 @@ private
     false
   end
 
-  def sort_by(records, sort_by, sort_direction = 'asc')
-    records.sort { |a, b|
-    a_field_value = a.item.value[params[:sort_by]]
-    b_field_value = b.item.value[params[:sort_by]]
-    comparator = sort_direction == 'desc' ?  b_field_value <=> a_field_value : a_field_value <=> b_field_value
-    a_field_value && b_field_value ? comparator : a_field_value ? -1 : 1  }
-  end
-
   def contain_in_array?(field_values, request_value)
     field_values.any? { |value| contain?(value, request_value) }
   end
@@ -139,7 +233,8 @@ private
     field_value.downcase.include?(request_value.downcase)
   end
 
-  def paginate(records)
+  def paginate_history(records)
+    # TODO: Remove this method after migrate history functionality to DB and ORM
     Kaminari.paginate_array(records).page(params[:page]).per(100)
   end
 end
