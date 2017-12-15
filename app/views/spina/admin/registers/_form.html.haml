@@ -53,7 +53,7 @@
         .horizontal-form-label
           Authority
         .horizontal-form-content
-          = f.select :authority, government_organisations.map{|c| c[:item]['name']}, {data: { "default-value" => @register.authority }}
+          = f.select :authority, @government_organisations.map{|c| c.item.value['name']}, {data: { "default-value" => @register.authority }}
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :custodian

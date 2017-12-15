@@ -24,11 +24,6 @@ module ApplicationHelper
     end
   end
 
-  def government_organisations
-    register_data = @@registers_client.get_register('government-organisation', 'beta')
-    register_data.get_records
-  end
-
   def phase_label(phase)
     case phase
     when 'Beta'
