@@ -47,6 +47,7 @@ gem 'govuk_notify_rails'
 gem 'kaminari'
 
 group :development, :test do
+  gem 'activerecord-import'
   gem 'govuk-lint', '~> 3.3'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.6'
