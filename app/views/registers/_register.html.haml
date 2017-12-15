@@ -12,7 +12,7 @@
       %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
   - if register.url.present?
-    %td{class: "links", "data-title" => "View more: "}
+    %td{"data-title" => "View more: "}
       = link_to "View register", register_path(register.slug)
   - else
     %td
