@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  layout 'layouts/default/application'
-
   def index
     @search = Spina::Register.ransack(params[:q])
 
@@ -14,7 +12,6 @@ class RegistersController < ApplicationController
                    @search.result.sort_by_phase_name_asc.by_name
                  end
 
-    @page = Spina::Page.find_by(name: 'registerspage')
     @current_phases = Spina::Register::CURRENT_PHASES
 
     # Fetch the register register for each phase and get records

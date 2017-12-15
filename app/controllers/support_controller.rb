@@ -4,8 +4,6 @@ class SupportController < ApplicationController
 
   default_form_builder GovukElementsFormBuilder::FormBuilder
 
-  layout "layouts/default/application"
-
   def index
   end
 
