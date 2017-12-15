@@ -64,42 +64,6 @@
           Introduction
         .horizontal-form-content
           = f.text_area :history, rows: "6"
-      .horizontal-form-group#phases
-        .horizontal-form-content
-          .structure-form
-            .structure-form-menu
-              %label Phases
-              %ul
-                - f.object.phases.each_with_index do |phase, index|
-                  %li{class: ('active' if index == 0), data: {structure_item_id: phase.id}}
-                    = link_to "#structure_form_pane_#{phase.id}" do
-                      %i.icon.icon-bars.sortable-handle
-                      = phase.name
-
-              = link_to_add_association "#{icon('plus')}".html_safe, f, :phases, class: "button button-link add-steps", data: {association_insertion_node: ".phases-form-content"}
-
-            .structure-form-content
-              .phases-form-content
-                = f.fields_for :phases do |phase|
-                  = render "spina/admin/registers/phase_fields", f: phase
-      .horizontal-form-group#steps
-        .horizontal-form-content
-          .structure-form
-            .structure-form-menu
-              %label Steps
-              %ul
-                - f.object.steps.each_with_index do |step, index|
-                  %li{class: ('active' if index == 0), data: {structure_item_id: step.id}}
-                    = link_to "#structure_form_pane_#{step.id}" do
-                      %i.icon.icon-bars.sortable-handle
-                      = step.title
-
-              = link_to_add_association "#{icon('plus')}".html_safe, f, :steps, class: "button button-link add-steps", data: {association_insertion_node: ".steps-form-content"}
-
-            .structure-form-content
-              .steps-form-content
-                = f.fields_for :steps do |step|
-                  = render "spina/admin/registers/step_fields", f: step
 
   - unless @register.new_record?
     .pull-right= link_to t('spina.permanently_delete'), spina.admin_register_path(@register), method: :delete, data: {confirm: t('spina.pages.delete_confirmation', subject: @register.name) }, class: 'button button-link button-danger'
@@ -113,46 +77,4 @@
         placeholder: "Search for Authority",
         defaultValue: element.options[element.options.selectedIndex].innerHTML,
       })
-
-      $('#steps')
-        .on('cocoon:after-insert', function(e, added_task) {
-          var new_id = new Date().getTime(),
-              $link = $('<li><a href="#structure_form_pane_' + new_id + '"><i class="icon icon-bars"></i> </a></li>')
-
-          $('.steps-form-pane').removeClass('active');
-          added_task.addClass('active');
-          added_task.attr('id', 'structure_form_pane_' + new_id);
-
-          $('#steps').find('.structure-form-menu ul').append($link);
-        })
-
-        .on('cocoon:before-remove', function(e, removed_step) {
-          var pane_id = removed_step.attr('id'),
-              $link = $('a[href="#' + pane_id + '"]').parents('li'),
-              $previousLink = $link.siblings('li:visible');
-
-          $previousLink.find('a').trigger('click')
-          $link.hide();
-        })
-
-      $('#phases')
-        .on('cocoon:after-insert', function(e, added_task) {
-          var new_id = new Date().getTime(),
-            $link = $('<li><a href="#structure_form_pane_' + new_id + '"><i class="icon icon-bars"></i> </a></li>')
-
-          $('.phases-form-pane').removeClass('active');
-          added_task.addClass('active');
-          added_task.attr('id', 'structure_form_pane_' + new_id);
-
-          $('#phases').find('.structure-form-menu ul').append($link);
-        })
-
-        .on('cocoon:before-remove', function(e, removed_phase) {
-          var pane_id = removed_phase.attr('id'),
-              $link = $('a[href="#' + pane_id + '"]').parents('li'),
-              $previousLink = $link.siblings('li:visible');
-
-          $previousLink.find('a').trigger('click')
-          $link.hide();
-        })
     });
