@@ -93,7 +93,9 @@
               = render partial: 'registers/register', object: register, locals: { index: index }
       - else
         .no-search-results
-          %p No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+          %p
+            No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+            = link_to 'Reset', registers_path, class: 'reset-link'
 
       %h3.heading-medium Suggest a register
       = link_to "Find out more", new_register_path
