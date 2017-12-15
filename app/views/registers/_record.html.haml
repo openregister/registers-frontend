@@ -1,5 +1,5 @@
 %tr
-  - @register_data.get_field_definitions.each do |field|
-    - field_value = record.item.value[field.item.value['field']]
+  - get_field_definitions.each do |field|
+    - field_value = record.data[field['field']]
     %td
-      = field_value.is_a?(Array) ? field_value.join(', ') : link_to_if(field.item.value['datatype'] == 'url', field_value, field_value) || "<span class='unknown'>No data found</span>".html_safe
+      = field_value.is_a?(Array) ? field_value.join(', ') : field_value || "<span class='unknown'>No data found</span>".html_safe

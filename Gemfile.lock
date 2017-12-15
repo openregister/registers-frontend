@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/denkGroot/Spina.git
-  revision: a69ee5abcd3759b4230786a81641e886e82cdbd3
+  revision: aa1cf20d77209df246da334b9e78ac0b40f9be92
   branch: master
   specs:
     spina (0.12.0)
@@ -85,6 +85,8 @@ GEM
       activemodel (= 5.1.4)
       activesupport (= 5.1.4)
       arel (~> 8.0)
+    activerecord-import (0.21.0)
+      activerecord (>= 3.2)
     activesupport (5.1.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -101,7 +103,7 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.1.0)
-    capybara (2.15.4)
+    capybara (2.16.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
@@ -138,12 +140,12 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
-    faker (1.8.4)
-      i18n (~> 0.5)
+    faker (1.8.5)
+      i18n (~> 0.9.1)
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
-    fog-aws (1.4.1)
+    fog-aws (2.0.0)
       fog-core (~> 1.38)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -165,9 +167,9 @@ GEM
       activemodel (>= 4.2, < 5.2)
       activerecord (>= 4.2, < 5.2)
       request_store (~> 1.0)
-    govuk-lint (3.3.1)
+    govuk-lint (3.4.0)
       rubocop (~> 0.51.0)
-      rubocop-rspec (~> 1.16.0)
+      rubocop-rspec (~> 1.19.0)
       scss_lint
     govuk_elements_rails (3.1.2)
       govuk_frontend_toolkit (>= 6.0.2)
@@ -263,8 +265,8 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    notifications-ruby-client (2.4.0)
-      jwt (~> 2.1)
+    notifications-ruby-client (2.5.1)
+      jwt (>= 1.5, < 3)
     parallel (1.12.0)
     parser (2.4.0.2)
       ast (~> 2.3)
@@ -275,7 +277,7 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    pry-byebug (3.5.0)
+    pry-byebug (3.5.1)
       byebug (~> 9.1)
       pry (~> 0.10)
     public_suffix (3.0.1)
@@ -330,7 +332,7 @@ GEM
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
-    rspec-rails (3.7.1)
+    rspec-rails (3.7.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -346,8 +348,8 @@ GEM
       rainbow (>= 2.2.2, < 3.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rspec (1.16.0)
-      rubocop (>= 0.49.0)
+    rubocop-rspec (1.19.0)
+      rubocop (>= 0.51.0)
     ruby-progressbar (1.9.0)
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
@@ -388,7 +390,7 @@ GEM
     turbolinks-source (5.0.3)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
+    uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -399,7 +401,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.1.0)
+    webmock (3.1.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -419,6 +421,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   capybara
   cf-app-utils
   database_cleaner
