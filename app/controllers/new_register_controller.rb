@@ -2,8 +2,6 @@ require 'json'
 
 class NewRegisterController < ApplicationController
 
-  layout 'layouts/default/application'
-
   def index
   end
 
