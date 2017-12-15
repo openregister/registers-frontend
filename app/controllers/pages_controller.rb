@@ -25,7 +25,7 @@ class PagesController < ApplicationController
   private
 
   def get_ready_to_use_registers
-    register_data = @@registers_client.get_register('register', 'beta')
+    register_data = @registers_client.get_register('register', 'beta')
     @beta_registers = register_data.get_records
   end
 end
