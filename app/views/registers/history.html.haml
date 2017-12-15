@@ -28,7 +28,7 @@
       = form_tag history_path(@register.slug), method: :get, id: 'search_updates' do
         .records-search
           = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
-          = text_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
+          = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
           = submit_tag 'Search', class: 'search-submit', name: nil
 
   .grid-row
