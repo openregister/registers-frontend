@@ -93,10 +93,10 @@
                 = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
                 = submit_tag 'Search', name: nil, class: 'search-submit'
             .column-one-whole
-              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+              %details{role: "group", open: (params[:status].present? && @records.present? ? 'open' : nil)}
+                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? && @records.present? ? 'true' : 'false'}", role: "button"}
                   %span.summary Filter
-                #details-content-0{"aria-hidden" => "#{params[:status].present? ? 'false' : 'true'}"}
+                #details-content-0{"aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
                   .grid-row
                     .column-one-whole
                       .form-group
