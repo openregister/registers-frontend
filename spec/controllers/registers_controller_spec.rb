@@ -95,20 +95,6 @@ RSpec.describe RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #history. Descr: Check with filter. Params: Search param (field name). Result: 3 rows' do
-    subject { get :history, params: { id: 'territory', q: 'official-name' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-
-      expect(assigns(:entries_with_items).length).to eq(3)
-    end
-  end
-
   describe 'Request: GET #history. Descr: Check with filter. Params: Search param (changed field). Result: 1 rows' do
     subject { get :history, params: { id: 'territory', q: 'The New' } }
 
