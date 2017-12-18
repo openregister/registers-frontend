@@ -36,6 +36,9 @@
           %dt Managed by:
           %dd
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
+          %dt No. of records:
+          %dd
+            = @register_data.get_records.count
           %dt Updated:
           %dd
             = formatted_date(Array(@register_data.get_entries).last.timestamp)
