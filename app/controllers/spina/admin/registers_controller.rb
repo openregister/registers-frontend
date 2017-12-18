@@ -3,7 +3,6 @@ module Spina
     class RegistersController < AdminController
 
       before_action :set_breadcrumb, :set_register, only: [:edit, :update, :destroy]
-      before_action :initialize_client
       before_action :set_government_organisations, only: [:new, :edit]
 
       layout "spina/admin/admin"
@@ -53,10 +52,6 @@ module Spina
 
       def set_breadcrumb
         add_breadcrumb t('spina.registers.scaffold_name_plural'), spina.admin_registers_path
-      end
-
-      def initialize_client
-        @@registers_client ||= RegistersClient::RegisterClientManager.new(cache_duration: 600)
       end
 
       def set_government_organisations
