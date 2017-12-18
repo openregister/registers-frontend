@@ -43,7 +43,7 @@
             = link_to "See all register updates", history_path(@register.slug)
 
       %h2.heading-medium About this register
-      %p=get_register_definition
+      %p=get_register_definition['text']
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}

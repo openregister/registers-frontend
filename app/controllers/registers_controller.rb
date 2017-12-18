@@ -35,7 +35,7 @@ class RegistersController < ApplicationController
   end
 
   def get_register_definition
-    @register.slug
+    Record.find_by(spina_register_id: @register.id, key: "register:#{params[:id]}").data
   end
 
   def get_field_definitions
@@ -131,9 +131,9 @@ class RegistersController < ApplicationController
     records = []
 
     register_data.get_metadata_records.each do |record|
-      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name'])
+      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key)
       entries.push(new_entry)
-      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name']))
+      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key))
     end
 
     bulk_save(entries, records)
