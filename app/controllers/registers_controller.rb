@@ -39,9 +39,10 @@ class RegistersController < ApplicationController
   end
 
   def get_field_definitions
+    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
     Record.where(spina_register_id: @register.id)
-      .where("data->> 'field' is not null")
-      .where(entry_type: 'system')
+      .where(key: ordered_field_keys)
+      .order("position(key::text in '#{ordered_field_keys.join(',')}')")
       .map { |entry| entry[:data] }
   end
 
