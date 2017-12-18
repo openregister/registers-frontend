@@ -29,7 +29,6 @@ class RegistersController < ApplicationController
   def get_last_timestamp
     Record.select('timestamp')
       .where(spina_register_id: @register.id, entry_type: 'user')
-      .limit(1)
       .order(timestamp: :desc)
       .first[:timestamp]
       .to_s
