@@ -23,10 +23,10 @@ gem 'cocoon'
 gem 'haml-rails'
 
 # GDS Frontend Toolkit, templates and elements
+gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
+gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'govuk_elements_rails'
-gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
 gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.6.0'
 
 # Spina CMS

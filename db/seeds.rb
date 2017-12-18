@@ -24,7 +24,7 @@ puts "Created Territory Register"
 
 Spina::Register.create(
   name: "Local authority eng",
-  register_phase: "Alpha",
+  register_phase: "Beta",
   authority: "Department for Communities and Local Government",
   custodian: "Mark Coram",
   url: "https://local-authority-eng.register.gov.uk/",
