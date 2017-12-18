@@ -31,17 +31,18 @@ class RegistersController < ApplicationController
       .where(spina_register_id: @register.id, entry_type: 'user')
       .limit(1)
       .order(timestamp: :desc)
-      .first[:timestamp].to_s
+      .first[:timestamp]
+      .to_s
   end
 
   def get_register_definition
-    @register.slug
+    Record.find_by(spina_register_id: @register.id, key: "register:#{params[:id]}").data
   end
 
   def get_field_definitions
-    Record.where(spina_register_id: @register.id)
-      .where("data->> 'field' is not null")
-      .where(entry_type: 'system')
+    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
+    Record.where(spina_register_id: @register.id, key: ordered_field_keys)
+      .order("position(key::text in '#{ordered_field_keys.join(',')}')")
       .map { |entry| entry[:data] }
   end
 
@@ -131,9 +132,9 @@ class RegistersController < ApplicationController
     records = []
 
     register_data.get_metadata_records.each do |record|
-      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name'])
+      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key)
       entries.push(new_entry)
-      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.item.value['name']))
+      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key))
     end
 
     bulk_save(entries, records)
