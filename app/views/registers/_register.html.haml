@@ -11,8 +11,6 @@
     %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
       %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
-  - if register.url.present?
-    %td{"data-title" => "View more: "}
-      = link_to "View register", register_path(register.slug)
-  - else
-    %td
+  %td{class: "links", "data-title" => "View more: "}
+    = link_to "View register", register_path(register.slug)
+
