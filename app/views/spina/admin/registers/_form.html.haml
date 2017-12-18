@@ -46,19 +46,9 @@
             = f.select :register_phase, Spina::Register::CURRENT_PHASES, include_blank: 'Select current phase'
       .horizontal-form-group
         .horizontal-form-label
-          = Spina::Page.human_attribute_name :url
-        .horizontal-form-content
-          = f.text_field :url
-      .horizontal-form-group
-        .horizontal-form-label
           Authority
         .horizontal-form-content
           = f.select :authority, @government_organisations.map{|c| c.item.value['name']}, {data: { "default-value" => @register.authority }}
-      .horizontal-form-group
-        .horizontal-form-label
-          = Spina::Page.human_attribute_name :custodian
-        .horizontal-form-content
-          = f.text_field :custodian
       .horizontal-form-group
         .horizontal-form-label
           Introduction
