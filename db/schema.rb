@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012151508) do
+ActiveRecord::Schema.define(version: 20171215143047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,15 +151,6 @@ ActiveRecord::Schema.define(version: 20171012151508) do
     t.boolean "active", default: true
   end
 
-  create_table "spina_phases", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "phase_update"
-    t.integer "position"
-    t.integer "register_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "spina_photo_collections", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -181,11 +172,9 @@ ActiveRecord::Schema.define(version: 20171012151508) do
 
   create_table "spina_registers", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.string "url"
     t.text "history"
     t.string "register_phase"
     t.string "slug"
-    t.string "custodian"
     t.string "authority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -205,18 +194,6 @@ ActiveRecord::Schema.define(version: 20171012151508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plugin"], name: "index_spina_settings_on_plugin"
-  end
-
-  create_table "spina_steps", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.string "step_phase"
-    t.text "content"
-    t.boolean "completed", default: false
-    t.integer "register_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "position", default: 0, null: false
-    t.index ["register_id"], name: "index_spina_steps_on_register_id"
   end
 
   create_table "spina_structure_items", id: :serial, force: :cascade do |t|
