@@ -27,7 +27,6 @@ Spina::Register.create(
   name: "School eng",
   register_phase: "Alpha",
   authority: "Department for Education",
-  history: "https://registers.cloudapps.digital/registers/school-eng",
 )
 puts "Created School eng Register"
 
