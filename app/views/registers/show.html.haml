@@ -44,9 +44,20 @@
             = formatted_date(Array(@register_data.get_entries).last.timestamp)
             %strong.text-spacing -
             = link_to "See all register updates", history_path(@register.slug)
+          - if @register.related_registers.present?
+            %dt Related registers:
+            %dd
+              != @register.related_registers
+          - if @register.contextual_data.present?
+            %dt Contextual data:
+            %dd
+              != @register.contextual_data
 
       %h2.heading-medium About this register
-      %p= @register_data.get_register_definition.item.value['text']
+      - if @register.register_phase == 'Backlog'
+        != @register.description
+      - else
+        %p= @register_data.get_register_definition.item.value['text']
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
