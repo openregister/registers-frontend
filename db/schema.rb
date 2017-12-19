@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171215143047) do
+ActiveRecord::Schema.define(version: 20171219103147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,13 +172,14 @@ ActiveRecord::Schema.define(version: 20171215143047) do
 
   create_table "spina_registers", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.text "history"
+    t.text "contextual_data"
     t.string "register_phase"
     t.string "slug"
     t.string "authority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.text "related_registers"
   end
 
   create_table "spina_rewrite_rules", id: :serial, force: :cascade do |t|
