@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20171207145923) do
 
   create_table "entries", force: :cascade do |t|
     t.text "hash_value"
+    t.integer "entry_number"
+    t.integer "previous_entry_number"
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
@@ -29,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171207145923) do
 
   create_table "records", force: :cascade do |t|
     t.text "hash_value"
+    t.integer "entry_number"
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"

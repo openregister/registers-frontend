@@ -38,7 +38,7 @@
 
       .pager
         .pager-controls
-          = paginate @entries_with_items, outer_window: 0, window: 3
+          = paginate @entries_with_items, total_pages: @total_pages, outer_window: 0, window: 3
         .pager-summary
           Showing #{@entries_with_items.offset_value + 1} &ndash; #{@entries_with_items.offset_value + @entries_with_items.length} of #{@entries_with_items.total_count} records
 

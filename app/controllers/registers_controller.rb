@@ -57,35 +57,66 @@ class RegistersController < ApplicationController
 
   def history
     @register = Spina::Register.find_by_slug!(params[:id])
-    @register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase)
-    fields = @register_data.get_field_definitions.map { |field| field.item.value['field'] }
-    all_records = @register_data.get_records_with_history
-    entries_reversed = @register_data.get_entries.reverse_each
 
-    entries_mapped_with_items = entries_reversed.map do |entry|
-      records_for_key = all_records.get_records_for_key(entry.key)
-      current_record = records_for_key.detect { |record| record.entry.entry_number == entry.entry_number }
-      previous_record_index = records_for_key.find_index(current_record) - 1
+    unless @register.populated
+      populate_register(@register)
+    end
 
-      if previous_record_index.negative?
+    entries = recover_entries_history(@register.id, @register.fields, params)
+    fields = get_field_definitions.map { |field| field['field'] }
+
+    @entries_with_items = entries.map do |entry_history|
+      current_record = entry_history[:current_entry]
+
+      if entry_history[:previous_entry].nil?
         changed_fields = fields
       else
-        previous_record = records_for_key[previous_record_index]
-        changed_fields = fields.reject { |f| current_record.item.value[f] == previous_record.item.value[f] }
+        previous_record = entry_history[:previous_entry]
+        changed_fields = fields.reject { |f| entry_history[:current_entry].data[f] == previous_record.data[f] }
       end
 
-      { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: entry.key }
+      { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: current_record.key }
     end
 
-    if params[:q].present?
-      filtered = filter(entries_mapped_with_items, params[:q])
-      @entries_with_items = paginate_history(filtered)
-    else
-      @entries_with_items = paginate_history(entries_mapped_with_items)
-    end
+    @entries_with_items = Kaminari::paginate_array(@entries_with_items, total_count: @page_count).page(@current_page).per(100)
   end
 
   private
+
+  def recover_entries_history(register_id, fields, params)
+    literal = params[:q]
+    page = params[:page].nil? ? 1 : params[:page].to_i
+
+    if literal.present?
+      partial = ''
+      operation_params = []
+      fields.split(',').each { |field| partial += " data->> '#{field}' ilike ? or" }
+      partial = partial[1, partial.length - 3] # Remove beginning space and end 'or'
+
+      operation_params.push(partial)
+      fields.split(',').count.times { operation_params.push("%#{literal}%") }
+
+      query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
+      count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
+    else
+      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
+      count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user')
+    end
+
+    previous_entries_numbers = query.reject{ |entry| entry.previous_entry_number.nil? }.map{ |entry| entry.previous_entry_number}
+    previous_entries_query = Entry.where(spina_register_id: register_id, entry_number: previous_entries_numbers)
+
+    result = query.map do |entry|
+      previous_entry = previous_entries_query.select{ |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
+      { current_entry: entry, previous_entry: previous_entry }
+    end
+
+    @page_count = count_query.length
+    @current_page = page
+    @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
+
+    result
+  end
 
   def populate_register(register)
     register_data = @registers_client.get_register(register.name.parameterize, register.register_phase)
@@ -104,14 +135,18 @@ class RegistersController < ApplicationController
     count = 0
 
     register_data.get_records_with_history.each do |record|
+      previous_entry_number = nil
+
       record[:records].each_with_index do |value, idx|
         count += 1
-        new_entry = Entry.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.entry.hash, entry_type: 'user', key: record[:key], data: value.item.value)
+        new_entry = Entry.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, previous_entry_number: previous_entry_number, entry_type: 'user', key: record[:key], data: value.item.value)
         entries.push(new_entry)
 
         if idx == record[:records].length - 1 # The last entry is the record
-          records.push(Record.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.entry.hash, entry_type: 'user', key: record[:key], data: value.item.value))
+          records.push(Record.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_type: 'user', key: record[:key], data: value.item.value))
         end
+
+        previous_entry_number = value.entry.entry_number
       end
 
       next unless (count % 1000).zero?
@@ -131,9 +166,9 @@ class RegistersController < ApplicationController
     records = []
 
     register_data.get_metadata_records.each do |record|
-      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key)
+      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.item.hash, entry_number: record.entry.entry_number, entry_type: 'system', key: record.entry.key)
       entries.push(new_entry)
-      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.entry.hash, entry_type: 'system', key: record.entry.key))
+      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.item.hash, entry_number: record.entry.entry_number, entry_type: 'system', key: record.entry.key))
     end
 
     bulk_save(entries, records)
@@ -198,7 +233,7 @@ class RegistersController < ApplicationController
 
   def contain_value_filtered_by_field_names?(record, updated_fields, query)
     return false if record.nil?
-    record.item.value.each do |field_name, field_value|
+    record.data.each do |field_name, field_value|
       next unless updated_fields.include?(field_name)
 
       return true if contain?(field_name, query)
@@ -231,10 +266,5 @@ class RegistersController < ApplicationController
 
   def contain?(field_value, request_value)
     field_value.downcase.include?(request_value.downcase)
-  end
-
-  def paginate_history(records)
-    # TODO: Remove this method after migrate history functionality to DB and ORM
-    Kaminari.paginate_array(records).page(params[:page]).per(100)
   end
 end
