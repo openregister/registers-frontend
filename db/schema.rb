@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220104627) do
+ActiveRecord::Schema.define(version: 20180102122243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_id"
+    t.integer "entry_number"
+    t.integer "previous_entry_number"
   end
 
   create_table "records", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_id"
+    t.integer "entry_number"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
@@ -202,7 +205,6 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.datetime "updated_at", null: false
     t.string "description"
     t.text "related_registers"
-    t.boolean "populated", default: false
     t.text "fields"
   end
 
