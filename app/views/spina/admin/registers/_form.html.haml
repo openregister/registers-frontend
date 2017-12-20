@@ -37,7 +37,7 @@
         .horizontal-form-label
           Description
         .horizontal-form-content
-          = render 'spina/admin/shared/rich_text_field', f: f, field: :description
+          = f.text_field :description
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :register_phase
