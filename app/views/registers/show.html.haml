@@ -55,7 +55,7 @@
 
       %h2.heading-medium About this register
       - if @register.register_phase == 'Backlog'
-        != @register.description
+        = @register.description
       - else
         %p= @register_data.get_register_definition.item.value['text']
 
