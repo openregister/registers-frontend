@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207145923) do
+ActiveRecord::Schema.define(version: 20180102122243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entries", force: :cascade do |t|
     t.text "hash_value"
-    t.integer "entry_number"
-    t.integer "previous_entry_number"
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
@@ -26,12 +24,13 @@ ActiveRecord::Schema.define(version: 20171207145923) do
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "entry_number"
+    t.integer "previous_entry_number"
     t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
   end
 
   create_table "records", force: :cascade do |t|
     t.text "hash_value"
-    t.integer "entry_number"
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
@@ -39,6 +38,7 @@ ActiveRecord::Schema.define(version: 20171207145923) do
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "entry_number"
     t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
   end
 
@@ -217,7 +217,6 @@ ActiveRecord::Schema.define(version: 20171207145923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.boolean "populated", default: false
     t.text "fields"
   end
 
