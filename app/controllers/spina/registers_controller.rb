@@ -9,7 +9,9 @@ module Spina
     def index
       @search = Spina::Register.ransack(params[:q])
 
-      if params[:phase] == 'ready to use'
+      if params[:phase] == 'Backlog'
+        redirect_to spina.registers_path(phase: 'in progress')
+      elsif params[:phase] == 'ready to use'
         @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
       elsif params[:phase] == 'in progress'
         @registers = @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
