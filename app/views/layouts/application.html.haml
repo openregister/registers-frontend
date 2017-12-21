@@ -22,7 +22,7 @@
           %li
             = link_to "Support", support_path
           %li
-            = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank
+            = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank, rel: "noopener noreferrer"
 
 - content_for :head do
   = stylesheet_link_tag 'application'
@@ -41,14 +41,14 @@
           %li
             = link_to "Support", support_path
           %li
-            = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank
+            = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank, rel: "noopener noreferrer"
           %li
-            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank
+            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank, rel: "noopener noreferrer"
           %li
-            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank
+            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank, rel: "noopener noreferrer"
 
 - content_for :footer_support_links do
   %nav.footer-nav
-    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'}
+    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service', target: :blank, rel: "noopener noreferrer"}
 
 = render file: 'layouts/govuk_template'
