@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   before_action :get_ready_to_use_registers, only: [:home, :avaliable_registers]
 
   def home
+    @registers = Spina::Register.all
   end
 
   def roadmap
