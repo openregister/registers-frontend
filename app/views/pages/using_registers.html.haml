@@ -6,6 +6,7 @@
       = render partial: 'pages/sidebar_nav'
     .column-two-thirds
       %h1.heading-large How registers can help you build better digital services
+      %p Registers are live lists of data, each managed by a custodian from within government. They represent the government’s approved version of that data.
 
       %p All registers are classified as ‘open’, which means the data within them can be accessed, copied and used freely by anyone. You can choose to use all or some of the data in the register.
 
@@ -31,14 +32,13 @@
 
       %h2.heading-medium How to use a register
       %p Each register has a read-only API that allows you to:
-
-      %ul
+      %ul.list.list-bullet
         %li find out information about a register
         %li get all the records from a register
         %li find records that share attributes with each other
         %li download either the whole or part of a register
         %li find a single record, entry or item
 
-      %p The #{link_to 'technical documentation', 'https://registers-docs.cloudapps.digital', target: :blank} has more information.
+      %p The #{link_to 'technical documentation', 'https://registers-docs.cloudapps.digital', target: :blank, rel: 'noopener noreferrer'} has more information.
 
-      %P Alternatively, you can download a copy of the register data directly from each register’s homepage.
+      %p Alternatively, you can download a copy of the register data directly from each register’s homepage.
