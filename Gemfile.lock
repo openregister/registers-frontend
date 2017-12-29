@@ -113,7 +113,6 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     cf-app-utils (0.6)
-    cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -422,7 +421,6 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cf-app-utils
-  cocoon
   database_cleaner
   factory_bot_rails (~> 4.8, >= 4.8.2)
   faker
