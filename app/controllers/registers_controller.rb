@@ -48,9 +48,7 @@ class RegistersController < ApplicationController
   def show
     @register = Spina::Register.find_by_slug!(params[:id])
 
-    unless @register.populated
-      populate_register(@register)
-    end
+    populate_register(@register)
 
     @records = recover_records(@register.id, @register.fields, params)
   end
@@ -58,9 +56,7 @@ class RegistersController < ApplicationController
   def history
     @register = Spina::Register.find_by_slug!(params[:id])
 
-    unless @register.populated
-      populate_register(@register)
-    end
+    populate_register(@register)
 
     entries = recover_entries_history(@register.id, @register.fields, params)
     fields = get_field_definitions.map { |field| field['field'] }
@@ -103,7 +99,7 @@ class RegistersController < ApplicationController
       count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user')
     end
 
-    previous_entries_numbers = query.reject{ |entry| entry.previous_entry_number.nil? }.map{ |entry| entry.previous_entry_number}
+    previous_entries_numbers = query.reject{ |entry| entry.previous_entry_number.nil? }.map{ |entry| entry.previous_entry_number }
     previous_entries_query = Entry.where(spina_register_id: register_id, entry_number: previous_entries_numbers)
 
     result = query.map do |entry|
@@ -121,29 +117,31 @@ class RegistersController < ApplicationController
   def populate_register(register)
     register_data = @registers_client.get_register(register.name.parameterize, register.register_phase)
 
-    populate_user_data(register, register_data)
-    populate_system_data(register, register_data)
+    populate_data(register, register_data, 'user')
+    populate_data(register, register_data, 'system')
 
-    register.populated = true
     register.fields = register_data.get_field_definitions.map { |field| field.item.value['field'] }.join(',')
     register.save
   end
 
-  def populate_user_data(register, register_data)
+  def populate_data(register, register_data, entry_type)
     entries = []
     records = []
     count = 0
 
-    register_data.get_records_with_history.each do |record|
+    latest_entry = Entry.where(spina_register_id: register.id, entry_type: entry_type).order(:entry_number).reverse_order.limit(1).first
+    latest_entry_number = latest_entry.nil? ? 0 : latest_entry.entry_number
+
+    (entry_type == 'user' ? register_data.get_records_with_history(latest_entry_number) : register_data.get_metadata_records_with_history(latest_entry_number)).each do |record|
       previous_entry_number = nil
 
       record[:records].each_with_index do |value, idx|
         count += 1
-        new_entry = Entry.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, previous_entry_number: previous_entry_number, entry_type: 'user', key: record[:key], data: value.item.value)
+        new_entry = Entry.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: value.entry.key)
         entries.push(new_entry)
 
         if idx == record[:records].length - 1 # The last entry is the record
-          records.push(Record.new(spina_register: register, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_type: 'user', key: record[:key], data: value.item.value))
+          records.push(Record.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, entry_type: entry_type, key: value.entry.key))
         end
 
         previous_entry_number = value.entry.entry_number
@@ -151,27 +149,22 @@ class RegistersController < ApplicationController
 
       next unless (count % 1000).zero?
 
-      bulk_save(entries, records)
+      Record.transaction do
+        bulk_remove_existing_records(register, entry_type, records.map{ |record| record.key })
+        bulk_save(entries, records)
+      end
 
       entries = []
       records = []
     end
 
     # Remaining objects less than 1000
-    bulk_save(entries, records)
-  end
-
-  def populate_system_data(register, register_data)
-    entries = []
-    records = []
-
-    register_data.get_metadata_records.each do |record|
-      new_entry = Entry.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.item.hash, entry_number: record.entry.entry_number, entry_type: 'system', key: record.entry.key)
-      entries.push(new_entry)
-      records.push(Record.new(spina_register: register, data: record.item.value, timestamp: record.entry.timestamp, hash_value: record.item.hash, entry_number: record.entry.entry_number, entry_type: 'system', key: record.entry.key))
+    if (records.count > 0)
+      Record.transaction do
+        bulk_remove_existing_records(register, entry_type, records.map{ |record| record.key })
+        bulk_save(entries, records)
+      end
     end
-
-    bulk_save(entries, records)
   end
 
   def recover_records(register_id, fields, params)
@@ -214,9 +207,15 @@ class RegistersController < ApplicationController
     query.page(page).per(100).without_count
   end
 
+  def bulk_remove_existing_records(register, entry_type, record_keys)
+    unless record_keys.empty?
+      Record.where(spina_register_id: register.id, entry_type: entry_type, key: record_keys).delete_all
+    end
+  end
+
   def bulk_save(entries, records)
-    Entry.import(entries)
-    Record.import(records)
+    Entry.import!(entries)
+    Record.import!(records)
   end
 
   def filter(entries, query)
