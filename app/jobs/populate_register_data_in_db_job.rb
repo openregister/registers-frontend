@@ -50,26 +50,33 @@ class PopulateRegisterDataInDbJob < ApplicationJob
       end
 
       next unless (count % 1000).zero?
-      Record.transaction do
-        bulk_remove_existing_records(register, entry_type, records.map{ |record| record.key })
-        bulk_save(entries, records)
+      if latest_entry_number.positive?
+        Record.transaction do
+          bulk_remove_existing_records(register, entry_type, records.map(&:key))
+          bulk_save(entries, records)
+        end
+        else
+          bulk_save(entries, records)
       end
-
       entries = []
       records = []
     end
 
     # Remaining objects less than 1000
-    if (records.count > 0)
-      Record.transaction do
-        bulk_remove_existing_records(register, entry_type, records.map{ |record| record.key })
+    if records.count.positive?
+      if latest_entry_number.positive?
+        Record.transaction do
+          bulk_remove_existing_records(register, entry_type, records.map(&:key))
+          bulk_save(entries, records)
+        end
+      else
         bulk_save(entries, records)
       end
     end
   end
 
   def perform(*)
-    Spina::Register.all.each do |register|
+    Spina::Register.all.find_each do |register|
       logger.info("Updating #{register.name} in database")
       begin
       populate_register(register)
