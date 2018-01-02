@@ -55,8 +55,8 @@ class PopulateRegisterDataInDbJob < ApplicationJob
           bulk_remove_existing_records(register, entry_type, records.map(&:key))
           bulk_save(entries, records)
         end
-        else
-          bulk_save(entries, records)
+      else
+        bulk_save(entries, records)
       end
       entries = []
       records = []
@@ -79,10 +79,10 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     Spina::Register.find_each do |register|
       logger.info("Updating #{register.name} in database")
       begin
-      populate_register(register)
-    rescue => e
-      logger.error("failed to populate register #{register.name} due to exception #{e}")
-      next
+        populate_register(register)
+      rescue StandardError => e
+        logger.error("failed to populate register #{register.name} due to exception #{e}")
+        next
       end
     end
   end
