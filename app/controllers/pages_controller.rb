@@ -2,7 +2,7 @@
 class PagesController < ApplicationController
   layout 'layouts/application'
 
-  before_action :get_ready_to_use_registers, only: [:home, :avaliable_registers]
+  before_action :get_ready_to_use_registers, only: :avaliable_registers
 
   def home
     @registers = Spina::Register.all
