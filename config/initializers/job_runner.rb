@@ -1,4 +1,4 @@
 #TODO: Replace this with a scheduled job
-unless Rails.env.test? || !ActiveRecord::Base.connection.table_exists?('spina_registers') || File.basename($0) == 'rake'
+if File.basename($0) == 'rails'
   PopulateRegisterDataInDbJob.perform_now
 end
