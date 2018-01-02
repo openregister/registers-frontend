@@ -4,11 +4,14 @@
 @import 'govuk_elements';
 
 // From alphagov/product-page-example
+@import 'util/printable';
 @import 'modules/breadcrumbs';
 @import 'modules/content-section';
+@import 'modules/govuk-logo';
 @import 'modules/header';
 @import 'modules/hero';
 @import 'modules/masthead';
+@import 'modules/phase-banner';
 @import 'modules/related-items';
 @import 'modules/skip-link';
 @import 'modules/sub-navigation';
@@ -17,6 +20,13 @@
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
+
+html,
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  @include core-19;
+}
 
 #main {
   display: block;
@@ -58,7 +68,7 @@ a:visited {
   visibility: visible;
 }
 
-.home-page #global-header-bar {
+#global-header-bar {
   display: none;
 }
 
