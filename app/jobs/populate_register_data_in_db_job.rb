@@ -76,7 +76,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
   end
 
   def perform(*)
-    Spina::Register.all.find_each do |register|
+    Spina::Register.find_each do |register|
       logger.info("Updating #{register.name} in database")
       begin
       populate_register(register)
