@@ -31,7 +31,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     records = []
     count = 0
 
-    latest_entry = Entry.where(spina_register_id: register.id, entry_type: entry_type).order(:entry_number).reverse_order.limit(1).first
+    latest_entry = Entry.where(spina_register_id: register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
     latest_entry_number = latest_entry.nil? ? 0 : latest_entry.entry_number
 
     (entry_type == 'user' ? register_data.get_records_with_history(latest_entry_number) : register_data.get_metadata_records_with_history(latest_entry_number)).each do |record|
