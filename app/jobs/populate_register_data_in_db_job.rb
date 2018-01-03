@@ -49,7 +49,8 @@ class PopulateRegisterDataInDbJob < ApplicationJob
         previous_entry_number = value.entry.entry_number
       end
 
-      next unless (count % 1000).zero?
+      next unless (count / 1000).positive?
+      
       if latest_entry_number.positive?
         Record.transaction do
           bulk_remove_existing_records(register, entry_type, records.map(&:key))
