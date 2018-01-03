@@ -1,4 +1,7 @@
 #TODO: Replace this with a scheduled job
 if File.basename($0) == 'rails'
-  PopulateRegisterDataInDbJob.perform_now
+  Spina::Register.find_each do |register|
+    puts("Updating #{register.name} in database")
+    PopulateRegisterDataInDbJob.perform_now(register)
+  end
 end
