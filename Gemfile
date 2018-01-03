@@ -49,6 +49,9 @@ gem 'govuk_notify_rails'
 # Pagination
 gem 'kaminari'
 
+# Job Scheduling
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
+
 group :development, :test do
   gem 'activerecord-import'
   gem 'govuk-lint', '~> 3.3'
