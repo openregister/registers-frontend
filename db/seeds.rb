@@ -18,7 +18,7 @@ puts "Created Territory Register"
 
 Spina::Register.create(
   name: "Local authority eng",
-  register_phase: "Alpha",
+  register_phase: "Beta",
   authority: "Department for Communities and Local Government",
 )
 puts "Created Local authority eng Register"
@@ -39,7 +39,7 @@ puts "Created Prison Register"
 
 Spina::Register.create(
   name: "Jobcentre",
-  register_phase: "Discovery",
+  register_phase: "Alpha",
   authority: "Department for Work and Pensions",
 )
 puts "Created Jobcentre Register"
@@ -57,6 +57,13 @@ Spina::Register.create(
   authority: "Cabinet Office",
 )
 puts "Created Government domain Register"
+
+Spina::Register.create(
+  name: "Charity",
+  register_phase: "Discovery",
+  authority: "Charity Commission",
+)
+puts "Created Charity Register"
 
 puts "The CMS is located at http://localhost:3000/admin"
 puts "User email is registerteam@digital.cabinet-office.gov.uk"
