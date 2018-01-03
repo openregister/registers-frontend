@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe RegistersController, type: :controller do
-  before do
+  before(:all) do
     country_data = File.read('./spec/support/country.rsf')
     register_beta_data = File.read('./spec/support/register_beta.rsf')
     register_alpha_data = File.read('./spec/support/register_alpha.rsf')
@@ -11,51 +11,58 @@ RSpec.describe RegistersController, type: :controller do
     register_charity_data = File.read('./spec/support/charity_card_n.rsf')
     register_territory_data = File.read('./spec/support/territory_short.rsf')
 
-    @country_register = ObjectsFactory.new.create_register('country', 'Backlog', 'Ministry of Justice')
-    @charity_register = ObjectsFactory.new.create_register('charity', 'Backlog', 'Ministry of Justice')
-    @territory_register = ObjectsFactory.new.create_register('territory', 'Backlog', 'Ministry of Justice')
+    ObjectsFactory.new.create_register('country', 'Beta', 'Ministry of Justice')
+    ObjectsFactory.new.create_register('charity', 'Beta', 'Ministry of Justice')
+    ObjectsFactory.new.create_register('territory', 'Beta', 'Ministry of Justice')
 
-    allow(Spina::Register)
-      .to receive(:find_by_slug!)
-            .with('country')
-            .and_return(@country_register)
+    # RSF stubs
+    stub_request(:get, 'https://country.beta.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .to_return(status: 200, body: country_data, headers: {})
 
-    allow(Spina::Register)
-      .to receive(:find_by_slug!)
-            .with('charity')
-            .and_return(@charity_register)
+  stub_request(:get, 'https://charity.beta.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .to_return(status: 200, body: register_charity_data, headers: {})
 
-    allow(Spina::Register)
-      .to receive(:find_by_slug!)
-            .with('territory')
-            .and_return(@territory_register)
+  stub_request(:get, 'https://territory.beta.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .to_return(status: 200, body: register_territory_data, headers: {})
 
-    # History stubs
-    stub_request(:get, 'https://country.backlog.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.Backlog.openregister.org' })
-      .to_return(status: 200, body: country_data, headers: {})
+  # Index stubs
+  stub_request(:get, 'https://register.beta.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
+    .to_return(status: 200, body: register_beta_data, headers: {})
 
-    stub_request(:get, 'https://charity.backlog.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.Backlog.openregister.org' })
-      .to_return(status: 200, body: register_charity_data, headers: {})
+  stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
+    .to_return(status: 200, body: register_alpha_data, headers: {})
 
-    stub_request(:get, 'https://territory.backlog.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.Backlog.openregister.org' })
-      .to_return(status: 200, body: register_territory_data, headers: {})
+  stub_request(:get, 'https://register.discovery.openregister.org/download-rsf/0')
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
+    .to_return(status: 200, body: register_discovery_data, headers: {})
 
-    # Index stubs
-    stub_request(:get, 'https://register.beta.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'register.beta.openregister.org' })
-      .to_return(status: 200, body: register_beta_data, headers: {})
+  stub_request(:get, "https://country.beta.openregister.org/download-rsf/207").
+    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'country.beta.openregister.org'}).
+    to_return(status: 200, body: "", headers: {})
 
-    stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'register.alpha.openregister.org' })
-      .to_return(status: 200, body: register_alpha_data, headers: {})
+  stub_request(:get, "https://charity.beta.openregister.org/download-rsf/10").
+    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'charity.beta.openregister.org'}).
+    to_return(status: 200, body: "", headers: {})
 
-    stub_request(:get, 'https://register.discovery.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'register.discovery.openregister.org', 'User-Agent' => 'rest-client/2.0.2 (darwin15.6.0 x86_64) ruby/2.4.2p198' })
-      .to_return(status: 200, body: register_discovery_data, headers: {})
+  stub_request(:get, "https://territory.beta.openregister.org/download-rsf/3").
+    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'territory.beta.openregister.org'}).
+    to_return(status: 200, body: "", headers: {})
+
+    PopulateRegisterDataInDbJob.perform_now
+
+
   end
+
+  after(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+
 
   describe 'Request: GET #history. Descr: Check register consistency. Params: --. Result: Success' do
     subject { get :history, params: { id: 'country' } }
@@ -104,7 +111,6 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-
       expect(assigns(:entries_with_items).length).to eq(1)
     end
   end
@@ -155,8 +161,8 @@ RSpec.describe RegistersController, type: :controller do
     it { is_expected.to render_template :show }
 
     it do
-      subject
 
+      subject
       expect(assigns(:records).length).to eq(100)
     end
   end
