@@ -26,7 +26,7 @@ You can access the CMS via http://localhost:3000/admin
 
 ## Running with Docker
 
-Instead of the above, you can use [Docker][https://docs.docker.com] as
+Instead of the above, you can use [Docker](https://docs.docker.com) as
 follows:
 
 ```bash
