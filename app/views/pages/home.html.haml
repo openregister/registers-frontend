@@ -75,8 +75,8 @@
       %aside.related-items
         %h2.related-items__title Registers ready to use
         %ul.related-items__list
-          - @beta_registers.reject{ |r| %w{register datatype field}.include?(r.item.value['register'])}.each do |register|
-            %li= link_to register.item.value['register'], "/registers/#{register.item.value['register'].parameterize}"
+          - @beta_registers.reject{ |r| %w{register datatype field}.include?(r.name.parameterize)}.each do |register|
+            %li= link_to register.name, "/registers/#{register.name.parameterize}"
         %h2.related-items__title Upcoming registers
         %ul.related-items__list
           %li
