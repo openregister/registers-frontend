@@ -21,6 +21,11 @@ $ bundle install
 $ rails db:setup
 $ rails server
 ```
+To populate the database, in a separate terminal window run:
+
+```bash
+$ rake jobs:work
+```
 
 You can access the CMS via http://localhost:3000/admin
 

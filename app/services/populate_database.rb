@@ -16,6 +16,7 @@ class PopulateDatabase
   end
 
   def populate_register
+    Delayed::Worker.logger.info("Updating #{@register.name} in database")
     register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase.downcase)
     register_data.refresh_data
     populate_data(@register, register_data, 'user')
