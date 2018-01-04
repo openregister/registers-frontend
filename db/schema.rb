@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102122243) do
+ActiveRecord::Schema.define(version: 20171221113436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,23 +21,26 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.text "key"
     t.datetime "timestamp"
     t.jsonb "data"
+    t.bigint "spina_register_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "item_id"
     t.integer "entry_number"
     t.integer "previous_entry_number"
+    t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
   end
 
   create_table "records", force: :cascade do |t|
     t.text "hash_value"
+    t.text "entry_type"
     t.text "record_type"
     t.text "key"
     t.datetime "timestamp"
     t.jsonb "data"
+    t.bigint "spina_register_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "item_id"
     t.integer "entry_number"
+    t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
@@ -88,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.integer "account_id"
   end
 
-  create_table "spina_line_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_line_translations", force: :cascade do |t|
     t.integer "spina_line_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -99,6 +102,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
   end
 
   create_table "spina_lines", id: :serial, force: :cascade do |t|
+    t.string "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -145,7 +149,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.string "page_partable_type"
   end
 
-  create_table "spina_page_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_page_translations", force: :cascade do |t|
     t.integer "spina_page_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -160,12 +164,16 @@ ActiveRecord::Schema.define(version: 20180102122243) do
   end
 
   create_table "spina_pages", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.string "menu_title"
+    t.string "description"
     t.boolean "show_in_menu", default: true
     t.string "slug"
     t.boolean "deletable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "seo_title"
     t.boolean "skip_to_first_child", default: false
     t.string "view_template"
     t.string "layout_template"
@@ -173,6 +181,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.string "link_url"
     t.string "ancestry"
     t.integer "position"
+    t.string "materialized_path"
     t.boolean "active", default: true
   end
 
@@ -204,8 +213,8 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
-    t.text "related_registers"
     t.text "fields"
+    t.text "related_registers"
   end
 
   create_table "spina_rewrite_rules", id: :serial, force: :cascade do |t|
@@ -248,7 +257,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
     t.datetime "updated_at"
   end
 
-  create_table "spina_text_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_text_translations", force: :cascade do |t|
     t.integer "spina_text_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -259,6 +268,7 @@ ActiveRecord::Schema.define(version: 20180102122243) do
   end
 
   create_table "spina_texts", id: :serial, force: :cascade do |t|
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
