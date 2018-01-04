@@ -25,42 +25,36 @@
 
   .container
     .grid-row
-      .column-one-whole
+      .column-two-thirds
         %section.content-section
-          .grid-row
-            .column-one-half
-              %h2.heading-medium.content-section__title Accurate, consistent and managed by custodians
-              %p Registers are live lists of data, each managed by a custodian from within government. They represent the government’s approved version of that data.
+          %h2.heading-medium.content-section__title Accurate, consistent and managed by custodians
+          %p Registers are live lists of data, each managed by a custodian from within government. They represent the government’s approved version of that data.
 
-              %p For example, the #{link_to 'country register', '/registers/country'}  is managed by the Foreign and Commonwealth Office. It’s the official list of all the countries in the world that the UK government recognises.
-            .column-one-half
-              = image_tag 'https://placehold.it/465x263', class: 'content-section__image'
+          %p For example, the #{link_to 'country register', '/registers/country'}  is managed by the Foreign and Commonwealth Office. It’s the official list of all the countries in the world that the UK government recognises.
 
         %section.content-section.content-section--with-top-border
-          .grid-row
-            .column-two-thirds
-              %h2.heading-medium.content-section__title Government services benefit from using registers because they’re:
-              %ul.list.list-bullet
-                %li accurate – you can trust the data
-                %li consistent – all services are using the same data
-                %li updated for you – you can focus on your service rather than the accuracy of the data you’re using
+          %h2.heading-medium.content-section__title Government services benefit from using registers because they’re:
+          %ul.list.list-bullet
+            %li accurate – you can trust the data
+            %li consistent – all services are using the same data
+            %li updated for you – you can focus on your service rather than the accuracy of the data you’re using
 
-              %p You can #{link_to 'see all the registers available to use', registers_path(phase: 'ready to use')} or #{link_to 'check the roadmap', '/using-registers/roadmap'} to see new registers we’re working on.
+          %p You can #{link_to 'see all the registers available to use', registers_path(phase: 'ready to use')} or #{link_to 'check the roadmap', '/using-registers/roadmap'} to see new registers we’re working on.
 
         %section.content-section.content-section--with-top-border
           %h2.heading-medium.content-section__title Registers in numbers
           .grid-row
-            .column-one-quarter
+            .column-one-third
               .data
                 = link_to registers_path(phase: 'ready to use') do
                   %span.data-item.bold-xxlarge= @registers.where(register_phase: 'Beta').count
                   %span.data-item.bold-xsmall Registers ready for use
-            .column-one-quarter
+            .column-one-third
               .data
                 = link_to registers_path(phase: 'in progress') do
                   %span.data-item.bold-xxlarge= @registers.where.not(register_phase: 'Beta').count
                   %span.data-item.bold-xsmall Registers in progress
-            .column-one-quarter
+            .column-one-third
               .data
                 = link_to '/using-registers/services-using-registers' do
                   %span.data-item.bold-xxlarge 10
@@ -78,14 +72,25 @@
           %p The data will need to meet #{link_to 'the criteria needed to become a register', 'https://www.gov.uk/guidance/creating-a-register', target: :blank, rel: 'noopener noreferrer'}.
 
         %section.content-section.content-section--with-top-border
-          .grid-row
-            .column-one-half
-              %h2.heading-medium.content-section__title The team
+          %h2.heading-medium.content-section__title The team
 
-              %p GOV.UK Registers is built and supported by a full-time team at the Government Digital Service.
-              %p
-                = mail_to "registers@digital.cabinet-office.gov.uk", "Contact the team"
-                /-
-                if you have any questions about GOV.UK Registers.
-            .column-one-half
-              = image_tag 'registers-team.png', class: 'content-section__image'
+          %p GOV.UK Registers is built and supported by a full-time team at the Government Digital Service.
+          %p
+            = mail_to "registers@digital.cabinet-office.gov.uk", "Contact the team"
+            /-
+            if you have any questions about GOV.UK Registers.
+
+      .column-one-third
+        %aside.related-items
+          %h2.related-items__title Registers ready to use
+          %ul.related-items__list
+            - @beta_registers.reject{ |r| %w{register datatype field}.include?(r.item.value['register'])}.each do |register|
+              %li= link_to register.item.value['register'], "/registers/#{register.item.value['register'].parameterize}"
+          %h2.related-items__title Upcoming registers
+          %ul.related-items__list
+            %li
+              = link_to "View all registers in progress", registers_path(phase: 'in progress')
+          %h2.related-items__title Suggest a register
+          %ul.related-items__list
+            %li
+              = link_to "Find out more", new_register_path
