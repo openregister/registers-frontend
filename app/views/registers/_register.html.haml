@@ -4,7 +4,7 @@
     - if register.register_phase == 'Backlog'
       %p= register.description
     - else
-      %p= @register_registers.select{ |r| r.entry.key == register.name.parameterize }.first.item.value['text']
+      %p= get_register_definition(register.id, "register:#{register.name.parameterize}")['text']
   %td{"data-title" => "Phase: "}
     = phase_label(register.register_phase)
   %td{"data-title" => "Managed by: "}

@@ -18,12 +18,6 @@ class RegistersController < ApplicationController
 
     @page = Spina::Page.find_by(name: 'registerspage')
     @current_phases = Spina::Register::CURRENT_PHASES
-
-    # Fetch the register register for each phase and get records
-    beta_register_register = @registers_client.get_register('register', 'beta').get_records
-    alpha_register_register = @registers_client.get_register('register', 'alpha').get_records
-    discovery_register_register = @registers_client.get_register('register', 'discovery').get_records
-    @register_registers = beta_register_register.to_a + alpha_register_register.to_a + discovery_register_register.to_a
   end
 
   def get_last_timestamp
@@ -34,12 +28,12 @@ class RegistersController < ApplicationController
       .to_s
   end
 
-  def get_register_definition
-    Record.find_by(spina_register_id: @register.id, key: "register:#{params[:id]}").data
+  def get_register_definition(register_id, key)
+    Record.find_by(spina_register_id: register_id, key: key).data
   end
 
   def get_field_definitions
-    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
+    ordered_field_keys = get_register_definition(@register.id, "register:#{params[:id]}")['fields'].map { |f| "field:#{f}" }
     Record.where(spina_register_id: @register.id, key: ordered_field_keys)
       .order("position(key::text in '#{ordered_field_keys.join(',')}')")
       .map { |entry| entry[:data] }
