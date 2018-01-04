@@ -24,6 +24,11 @@ module ApplicationHelper
     end
   end
 
+  def government_organisations
+    register = Spina::Register.find_by(name: 'Government organisation')
+    Record.where(spina_register_id: register.id, entry_type: 'user')
+  end
+
   def phase_label(phase)
     case phase
     when 'Beta'
