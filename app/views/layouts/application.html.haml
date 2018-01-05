@@ -40,17 +40,18 @@
 
 - content_for :footer_top do
   .footer-categories
-    .grid-row
-      .column-one-quarter
-        %ul
-          %li
-            = link_to "Support", support_path
-          %li
-            = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank, rel: "noopener noreferrer"
-          %li
-            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank, rel: "noopener noreferrer"
-          %li
-            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank, rel: "noopener noreferrer"
+    .footer-categories-wrapper
+      .grid-row
+        .column-one-quarter
+          %ul
+            %li
+              = link_to "Support", support_path
+            %li
+              = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank, rel: "noopener noreferrer"
+            %li
+              = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank, rel: "noopener noreferrer"
+            %li
+              = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank, rel: "noopener noreferrer"
 
 - content_for :footer_support_links do
   %nav.footer-nav
