@@ -55,6 +55,9 @@ gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
 # Database
 gem 'activerecord-import'
 
+# Schedule
+gem 'clockwork'
+
 group :development, :test do
   gem 'govuk-lint', '~> 3.3'
   gem 'pry-byebug'

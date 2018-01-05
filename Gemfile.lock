@@ -115,6 +115,9 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     cf-app-utils (0.6)
+    clockwork (2.0.2)
+      activesupport
+      tzinfo
     cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -430,6 +433,7 @@ DEPENDENCIES
   activerecord-import
   capybara
   cf-app-utils
+  clockwork
   cocoon
   database_cleaner
   delayed_job_active_record (~> 4.1, >= 4.1.2)
