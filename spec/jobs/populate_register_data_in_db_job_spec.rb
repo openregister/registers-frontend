@@ -26,7 +26,10 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     to_return(status: 200, body: country_update, headers: {})
 
     ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
-    PopulateRegisterDataInDbJob.perform_now
+    
+    Spina::Register.find_each do |register|
+      PopulateRegisterDataInDbJob.perform_now(register)
+    end
   end
 
   describe 'populate register data job' do
