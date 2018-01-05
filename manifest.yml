@@ -13,3 +13,13 @@ applications:
     - registers-prod
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
+- name: registers-frontend-delayed-job
+  memory: 1GB
+  instances: 1
+  command: bundle exec 'rake environment jobs:work'
+  health-check-type: process
+  services:
+    # postgres database
+    - registers-prod
+    # environment variables (persisted for blue/green deploys)
+    - registers-product-site-environment-variables
