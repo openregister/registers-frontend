@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PopulateDatabase
   def initialize(register)
     @registers_client ||= RegistersClient::RegisterClientManager.new(cache_duration: 60)
@@ -34,47 +36,60 @@ class PopulateDatabase
     latest_entry = Entry.where(spina_register_id: register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
     latest_entry_number = latest_entry.nil? ? 0 : latest_entry.entry_number
 
-    (entry_type == 'user' ? register_data.get_records_with_history(latest_entry_number) : register_data.get_metadata_records_with_history(latest_entry_number)).each do |record|
-      previous_entry_number = nil
+    begin
+      (entry_type == 'user' ? register_data.get_records_with_history(latest_entry_number) : register_data.get_metadata_records_with_history(latest_entry_number)).each do |record|
+        previous_entry_number = nil
 
-      record[:records].each_with_index do |value, idx|
-        count += 1
-        new_entry = Entry.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: value.entry.key)
-        entries.push(new_entry)
+        record[:records].each_with_index do |value, idx|
+          count += 1
+          new_entry = Entry.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: value.entry.key)
+          entries.push(new_entry)
 
-        if idx == record[:records].length - 1 # The last entry is the record
-          records.push(Record.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, entry_type: entry_type, key: value.entry.key))
+          if idx == record[:records].length - 1 # The last entry is the record
+            records.push(Record.new(spina_register: register, data: value.item.value, timestamp: value.entry.timestamp, hash_value: value.item.hash, entry_number: value.entry.entry_number, entry_type: entry_type, key: value.entry.key))
+          end
+
+          previous_entry_number = value.entry.entry_number
         end
 
-        previous_entry_number = value.entry.entry_number
-      end
+        next unless (count / 1000).positive?
 
-      next unless (count / 1000).positive?
-
-      if latest_entry_number.positive?
-        Record.transaction do
-          bulk_remove_existing_records(register, entry_type, records.map(&:key))
+        if latest_entry_number.positive?
+          Record.transaction do
+            bulk_remove_existing_records(register, entry_type, records.map(&:key))
+            bulk_save(entries, records)
+          end
+        else
           bulk_save(entries, records)
         end
-      else
-        bulk_save(entries, records)
+
+        count = 0
+        entries = []
+        records = []
       end
 
-      count = 0
-      entries = []
-      records = []
-    end
-
-    # Remaining objects less than 1000
-    if records.count.positive?
-      if latest_entry_number.positive?
-        Record.transaction do
-          bulk_remove_existing_records(register, entry_type, records.map(&:key))
+      # Remaining objects less than 1000
+      if records.count.positive?
+        if latest_entry_number.positive?
+          Record.transaction do
+            bulk_remove_existing_records(register, entry_type, records.map(&:key))
+            bulk_save(entries, records)
+          end
+        else
           bulk_save(entries, records)
         end
-      else
-        bulk_save(entries, records)
       end
+    rescue StandardError => e
+      Delayed::Worker.logger.error("Problem found populating #{register.name}: #{e.message}")
+
+      if latest_entry.nil?
+        Record.destroy_all(spina_register_id: register.id)
+        Entry.destroy_all(spina_register_id: register.id)
+      else
+        Record.where(spina_register_id: register.id).where("entry_number > #{latest_entry_number}").destroy_all
+        Entry.where(spina_register_id: register.id).where("entry_number > #{latest_entry_number}").destroy_all
+      end
+      raise StandardError.new('PopulationError')
     end
   end
 end
