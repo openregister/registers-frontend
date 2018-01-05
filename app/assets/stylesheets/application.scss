@@ -17,6 +17,7 @@
 @import 'modules/sub-navigation';
 @import 'modules/pagination';
 @import 'modules/search';
+@import 'modules/footer-categories';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -157,17 +158,6 @@ table {
   a {
     display: inline-block;
     margin-right: 15px
-  }
-}
-
-.footer-categories {
-  border-bottom: 1px solid $grey-2;
-  margin-bottom: 20px;
-  padding-bottom: 40px;
-
-  ul {
-    margin: 0;
-    padding-left: 0;
   }
 }
 
