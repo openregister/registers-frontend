@@ -133,7 +133,8 @@
             = page_entries_info(@records, entry_name: 'record')
             - if params[:q].present?
               &nbsp; for <strong>"#{params[:q]}"</strong>
-          = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+          - if params[:q].present? ||params[:status].present?
+            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
         .table-scroll
           %table.register-data-table
