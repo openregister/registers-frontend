@@ -432,3 +432,11 @@ details {
     width: auto;
   }
 }
+
+.filter-search-submit {
+  display: block;
+
+  .js-enabled & {
+    display: none;
+  }
+}
