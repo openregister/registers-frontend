@@ -5,7 +5,7 @@ module Spina
 
     CURRENT_PHASES = ['Backlog', 'Discovery', 'Alpha', 'Beta']
 
-    validates_presence_of :name, :register_phase, :authority
+    validates_presence_of :name, :register_phase
     validates_uniqueness_of :name
     validates :slug, uniqueness: true
 

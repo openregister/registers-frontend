@@ -1,8 +1,8 @@
 %li.entries__item
   %p.entries__date
     Last updated:
-    = DateTime.parse(timeline_record[:current_record].entry.timestamp).strftime('%d/%m/%Y')
-  %h3.heading-medium= timeline_record[:current_record].entry.key
+    = DateTime.parse(timeline_record[:current_record].timestamp.to_s).strftime('%d/%m/%Y')
+  %h3.heading-medium= timeline_record[:current_record].key
   %table
     %thead
       %tr
@@ -15,9 +15,9 @@
           %td
             = field_name
           %td
-            = timeline_record[:previous_record].present? ? timeline_record[:previous_record].item.value[field_name] : "<span class='unknown'>No data found</span>".html_safe
+            = timeline_record[:previous_record].present? ? timeline_record[:previous_record].data[field_name] : "<span class='unknown'>No data found</span>".html_safe
           %td
-            - if timeline_record[:current_record].item.value[field_name].present?
-              %span.panel.panel-change-notification= timeline_record[:current_record].item.value[field_name]
+            - if timeline_record[:current_record].data[field_name].present?
+              %span.panel.panel-change-notification= timeline_record[:current_record].data[field_name]
             - else
               %span.unknown No data found
