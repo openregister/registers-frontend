@@ -10,7 +10,7 @@ namespace :registers_frontend do
       end
     end
 
-    desc 'For local envs: Add task to the queue to populate register data in the database'
+    desc 'For local envs: populate register data in the database now'
     task fetch_now: :environment do
       Spina::Register.find_each do |register|
         begin

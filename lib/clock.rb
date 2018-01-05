@@ -8,6 +8,9 @@ include Clockwork
 
 handler do |job|
   puts "Running #{job}"
+  system(job)
 end
 
-every(1.minute, 'rake registers_frontend:populate_db:fetch_later')
+every(1.minute, 'Update database') {
+  `rake registers_frontend:populate_db:fetch_later`
+}
