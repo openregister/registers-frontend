@@ -16,20 +16,20 @@ class SupportController < ApplicationController
   end
 
   def problem
-    @support = Spina::Support.new
+    @support = Support.new
   end
 
   def question
-    @support = Spina::Support.new
+    @support = Support.new
   end
 
   def create
-    @support = Spina::Support.new(support_params)
+    @support = Support.new(support_params)
 
     if @support.valid?
       @zendeskService = ZendeskFeedback.new
       @response = @zendeskService.send_feedback(support_params)
-      redirect_to spina.support_thanks_path
+      redirect_to support_thanks_path
     else
       flash[:errors] = @support.errors
       if params[:subject] == "problem"
