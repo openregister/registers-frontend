@@ -19,12 +19,8 @@ Install the gem dependencies and setup the postgresql database
 ```bash
 $ bundle install
 $ rails db:setup
+$ rake registers_frontend:populate_db:fetch_now
 $ rails server
-```
-To populate the database, in a separate terminal window run:
-
-```bash
-$ rake jobs:work
 ```
 
 You can access the CMS via http://localhost:3000/admin
