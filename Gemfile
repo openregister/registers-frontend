@@ -16,9 +16,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'http', '2.2.1'
 
-# Nested forms
-gem 'cocoon'
-
 # HAML templating
 gem 'haml-rails'
 

@@ -1,5 +1,4 @@
-- @page_title = @page.seo_title
-- @page_description = @page.description
+- @page_title = 'Registers pipeline'
 - content_for :body_classes, 'registers-index'
 
 %nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
@@ -12,7 +11,7 @@
         %span{itemprop: "name"} GOV.UK Registers
     %li{class: "breadcrumbs__item #{'breadcrumbs__item--active' unless params[:phase].present?}", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
       %a{href: "/registers", itemprop: "item"}
-        %span{itemprop: "name"}= @page.menu_title
+        %span{itemprop: "name"} Registers pipeline
     - if params[:phase].present?
       %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
         %a{href: "#main", itemprop: "item"}
@@ -73,24 +72,30 @@
 
     .column-one-whole
       %h3.heading-small.mq-small-only Sort by:
-      %table.register-status-table.table-collapsible
-        %col{width: '40%'}
-        %col{width: '20%'}
-        %col{width: '20%'}
-        %col{width: '20%'}
-        %thead
-          %tr
-            %th{role: "columnheader", scope: "col"}
-              = sort_link(@search, :name, "Register", default_order: :desc)
-            %th{role: "columnheader", scope: "col"}
-              = sort_link(@search, :phase_name, "Status", default_order: :desc)
-            %th{role: "columnheader", scope: "col"}
-              = sort_link(@search, :register_authority, "Managed by", default_order: :asc)
-            %th{role: "columnheader", scope: "col"}
-        %tbody
-          - @registers.each_with_index do |register, index|
-            - index = index + 1
-            = render partial: 'registers/register', object: register, locals: { index: index }
+      - if @registers.present?
+        %table.register-status-table.table-collapsible
+          %col{width: '40%'}
+          %col{width: '20%'}
+          %col{width: '20%'}
+          %col{width: '20%'}
+          %thead
+            %tr
+              %th{role: "columnheader", scope: "col"}
+                = sort_link(@search, :name, "Register", default_order: :desc, hide_indicator: true)
+              %th{role: "columnheader", scope: "col"}
+                = sort_link(@search, :phase_name, "Status", default_order: :desc, hide_indicator: true)
+              %th{role: "columnheader", scope: "col"}
+                = sort_link(@search, :register_authority, "Managed by", default_order: :asc, hide_indicator: true)
+              %th{role: "columnheader", scope: "col"}
+          %tbody
+            - @registers.each_with_index do |register, index|
+              - index = index + 1
+              = render partial: 'registers/register', object: register, locals: { index: index }
+      - else
+        .no-search-results
+          %p
+            No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+            = link_to 'Reset', registers_path, class: 'reset-link'
 
       %h3.heading-medium Suggest a register
       = link_to "Find out more", new_register_path

@@ -25,8 +25,8 @@ module ApplicationHelper
   end
 
   def government_organisations
-    register_data = @@registers_client.get_register('government-organisation', 'beta')
-    register_data.get_records
+    register = Spina::Register.find_by(name: 'Government organisation')
+    Record.where(spina_register_id: register.id, entry_type: 'user')
   end
 
   def phase_label(phase)

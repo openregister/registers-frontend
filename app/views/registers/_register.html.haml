@@ -4,14 +4,14 @@
     - if register.register_phase == 'Backlog'
       %p= register.description
     - else
-      %p= @register_registers.select{ |r| r.entry.key == register.name.parameterize }.first.item.value['text']
+      %p= get_register_definition(register.id, "register:#{register.name.parameterize}")['text']
   %td{"data-title" => "Phase: "}
     = phase_label(register.register_phase)
   %td{"data-title" => "Managed by: "}
     %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
       %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
         %span= register.authority
-  - if register.url.present?
+  - if register.register_phase != 'Backlog'
     %td{class: "links", "data-title" => "View more: "}
       = link_to "View register", register_path(register.slug)
   - else

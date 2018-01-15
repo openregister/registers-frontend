@@ -1,28 +1,33 @@
+- @omit_header = true
+
 - content_for :page_title, "#{@page_title} - GOV.UK Registers"
 
-- content_for :inside_header do
-  %strong.phase-badge Alpha
+- content_for :after_header do
+  %header{class: "header #{current_page?(root_path) ? 'header--without-border' : ''}"}
+    .header__container
+      .header__brand
+        = link_to root_path do
+          %span.govuk-logo
+            = image_tag 'gov_uk_logotype_crown_invert_trans.png', height: 32, width: 36, class: 'govuk-logo__printable-crown'
+            /-
+            GOV.UK
+          /-
+          %span.header__title
+            Registers
+            %span.phase-banner Alpha
 
-- content_for :global_header_text, 'GOV.UK <span id="product-name">Registers</span>'.html_safe
-
-- content_for :homepage_url, "/"
-
-- content_for :header_class, "with-proposition"
-
-- content_for :proposition_header do
-  .header-proposition
-    .content
-      = link_to "Menu", "#proposition-links", class: "js-header-toggle menu"
-      %nav{id: "proposition-menu"}
-        %ul#proposition-links
-          %li
+      = check_box_tag 'show-menu', nil, false, class: 'header__navigation-toggle-checkbox', "aria-controls" => "navigation", "aria-expanded" => "false"
+      = label_tag 'show-menu', 'Menu', class: 'header__navigation-toggle'
+      %nav{id: "navigation", class: "header__navigation", "aria-label" => "Top Level Navigation", "aria-hidden" => "true"}
+        %ul
+          %li{class: "#{'active' if current_page?(using_registers_path)}"}
             = link_to "Using registers", using_registers_path
-          %li
+          %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Registers pipeline", registers_path
-          %li
+          %li{class: "#{'active' if current_page?(support_path)}"}
             = link_to "Support", support_path
           %li
-            = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank
+            = link_to "Documentation", "https://registers-docs.cloudapps.digital/", target: :blank, rel: "noopener noreferrer"
 
 - content_for :head do
   = stylesheet_link_tag 'application'
@@ -41,12 +46,14 @@
           %li
             = link_to "Support", support_path
           %li
-            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank
+            = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank, rel: "noopener noreferrer"
           %li
-            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank
+            = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank, rel: "noopener noreferrer"
+          %li
+            = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank, rel: "noopener noreferrer"
 
 - content_for :footer_support_links do
   %nav.footer-nav
-    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service'}
+    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service', target: :blank, rel: "noopener noreferrer"}
 
 = render file: 'layouts/govuk_template'

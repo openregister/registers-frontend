@@ -2,9 +2,10 @@
 class PagesController < ApplicationController
   layout 'layouts/application'
 
-  before_action :get_ready_to_use_registers, only: [:home, :avaliable_registers]
+  before_action :get_ready_to_use_registers, only: [:avaliable_registers, :home]
 
   def home
+    @registers = Spina::Register.all
   end
 
   def roadmap
@@ -25,7 +26,6 @@ class PagesController < ApplicationController
   private
 
   def get_ready_to_use_registers
-    register_data = @registers_client.get_register('register', 'beta')
-    @beta_registers = register_data.get_records
+    @beta_registers = Spina::Register.where(register_phase: 'Beta')
   end
 end

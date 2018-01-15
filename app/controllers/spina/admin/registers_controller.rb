@@ -3,6 +3,7 @@ module Spina
     class RegistersController < AdminController
 
       before_action :set_breadcrumb, :set_register, only: [:edit, :update, :destroy]
+      before_action :set_government_organisations, only: [:new, :edit]
 
       layout "spina/admin/admin"
 
@@ -53,10 +54,13 @@ module Spina
         add_breadcrumb t('spina.registers.scaffold_name_plural'), spina.admin_registers_path
       end
 
+      def set_government_organisations
+        register_data = @@registers_client.get_register('government-organisation', 'beta')
+        @government_organisations = register_data.get_records
+      end
+
       def register_params
-        params.require(:register).permit(:name, :slug, :url, :history, :register_phase, :custodian, :authority, :description,
-                                          phases_attributes: [:name, :phase_update, :position, :_destroy, :id],
-                                          steps_attributes: [:step_phase, :title, :completed, :content, :position, :_destroy, :id])
+        params.require(:register).permit(:name, :slug, :register_phase, :authority, :description, :contextual_data, :related_registers)
       end
     end
   end

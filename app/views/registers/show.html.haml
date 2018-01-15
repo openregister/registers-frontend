@@ -36,11 +36,22 @@
           %dt Managed by:
           %dd
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
+          %dt Number of records:
+          %dd
+            = number_with_delimiter(@page_count)
           %dt Updated:
           %dd
             = formatted_date(get_last_timestamp)
             %strong.text-spacing -
             = link_to "See all register updates", history_path(@register.slug)
+          - if @register.related_registers.present?
+            %dt Related registers:
+            %dd
+              != @register.related_registers
+          - if @register.contextual_data.present?
+            %dt Contextual data:
+            %dd
+              != @register.contextual_data
 
       %h2.heading-medium About this register
       %p=get_register_definition['text']
@@ -93,10 +104,10 @@
                 = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
                 = submit_tag 'Search', name: nil, class: 'search-submit'
             .column-one-whole
-              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+              %details{role: "group", open: (params[:status].present? && @records.present? ? 'open' : nil)}
+                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? && @records.present? ? 'true' : 'false'}", role: "button"}
                   %span.summary Filter
-                #details-content-0{"aria-hidden" => "#{params[:status].present? ? 'false' : 'true'}"}
+                #details-content-0{"aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
                   .grid-row
                     .column-one-whole
                       .form-group
@@ -120,10 +131,7 @@
             - if params[:q].present?
               &nbsp; for <strong>"#{params[:q]}"</strong>
           = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
-      - else
-        %p No records found
 
-      - unless @records.empty?
         .table-scroll
           %table.register-data-table
             %thead
@@ -141,6 +149,12 @@
 
         - unless @records.last_page?
           = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
+
+      - else
+        .no-search-results
+          %p
+            No results found for <strong>"#{params[:q]}"</strong>
+            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
 = content_for :javascript do
   :javascript

@@ -4,11 +4,14 @@
 @import 'govuk_elements';
 
 // From alphagov/product-page-example
+@import 'util/printable';
 @import 'modules/breadcrumbs';
 @import 'modules/content-section';
+@import 'modules/govuk-logo';
 @import 'modules/header';
 @import 'modules/hero';
 @import 'modules/masthead';
+@import 'modules/phase-banner';
 @import 'modules/related-items';
 @import 'modules/skip-link';
 @import 'modules/sub-navigation';
@@ -18,9 +21,21 @@
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
 
+html,
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  @include core-19;
+}
+
 #main {
   display: block;
   margin-bottom: $gutter * 3;
+}
+
+b,
+strong {
+  font-weight: bold;
 }
 
 // Base styles for headings
@@ -28,7 +43,6 @@
 
 h1 {
   @extend .heading-xlarge;
-  margin-top: 0;
 }
 
 .heading-xlarge {
@@ -53,7 +67,7 @@ a:visited {
   visibility: visible;
 }
 
-.home-page #global-header-bar {
+#global-header-bar {
   display: none;
 }
 
@@ -69,7 +83,7 @@ dl dt {
   max-width: 150px;
   padding-bottom: 0.5rem;
   padding-right: 1%;
-  width: 20%
+  width: 25%
 }
 
 dl dd {
@@ -77,7 +91,30 @@ dl dd {
   margin: 0;
   max-width: 480px;
   padding-bottom: 0.5rem;
-  width: 78%
+  width: 75%
+}
+
+table {
+  thead th {
+    font-weight: normal;
+
+    @include media(tablet) {
+      border-top: 2px solid $grey-3;
+    }
+  }
+
+  td,
+  th {
+    font-size: 16px;
+    padding: 15px 40px 15px 0;
+    vertical-align: middle;
+    white-space: normal;
+    word-wrap: break-word;
+
+    a {
+      white-space: nowrap;
+    }
+  }
 }
 
 // Column full width
@@ -134,15 +171,6 @@ dl dd {
   }
 }
 
-.phase {
-  background-color: $govuk-blue;
-  color: $page-colour;
-  display: block;
-  padding-top: 4.8px;
-  padding-bottom: 4.8px;
-  text-align: center;
-}
-
 .table-scroll {
   width: 100%;
   overflow-x: scroll;
@@ -150,116 +178,34 @@ dl dd {
 
 .register-data-table {
   margin: 0 0 20px 0;
-
-  td,
-  th {
-    font-size: 16px;
-    max-width: 400px;
-    padding: 15px 40px 15px 0;
-    vertical-align: middle;
-    word-wrap: break-word;
-    white-space: normal;
-
-    a {
-      white-space: nowrap;
-    }
-  }
-
-  tr {
-    width: 100%;
-  }
-
-  thead th {
-    font-weight: normal;
-
-    @include media(tablet) {
-      border-top: 2px solid $grey-3;
-    }
-  }
 }
 
 .register-status-table {
   margin-top: 40px;
 
-  td,
-  th {
-    font-size: 16px;
-    max-width: 400px;
-    padding: 15px 40px 15px 0;
-    vertical-align: middle;
-    word-wrap: break-word;
-    white-space: normal;
-  }
-
-  tr {
-    width: 100%;
-  }
-
-  thead th {
-    font-weight: normal;
-
+  td:last-of-type {
     @include media(tablet) {
-      border-top: 2px solid $grey-3;
-    }
-  }
-
-  @include media(tablet) {
-    tbody {
-      th {
-        width: 300px;
-      }
-
-      td {
-        &:nth-of-type(1) {
-          width: 150px;
-        }
-
-        &:nth-of-type(2) {
-          width: 100px;
-        }
-
-        &:nth-of-type(3) {
-          width: 150px;
-        }
-
-        &:nth-of-type(4) {
-          width: 150px;
-        }
-      }
-    }
-  }
-
-  .links {
-    @include media(tablet) {
-      padding-right: 0;
       text-align: right;
     }
+  }
+}
 
-    a {
-      display: inline-block;
-      font-size: 14px;
+.services-using-registers-page {
+  table {
+    thead th {
+      font-weight: bold;
+    }
 
-      @include media(tablet) {
-        font-size: 16px;
-      }
-
-      &:nth-child(2) {
-        margin-left: 10px;
-
-        @include media(tablet) {
-          margin-left: 20px;
-        }
-      }
+    td,
+    th {
+      font-size: 16px;
+      vertical-align: top;
     }
   }
 }
 
 .data {
   .registers-index & {
-    margin-bottom: 40px;
-  }
-
-  .home-page & {
     margin-bottom: 40px;
   }
 
@@ -288,70 +234,10 @@ dl dd {
   }
 }
 
-.sort_link {
-  &.asc,
-  &.desc {
-    font-weight: 700;
-  }
-}
-
-.tag {
-  background-color: $govuk-blue;
-  color: $white;
-  display: inline-block;
-  line-height: 1.6;
-  padding: 2px 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-
-  .heading-medium &,
-  .heading-small & {
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
-  .phase-history & {
-    font-size: 20px;
-    margin-left: -10px;
-  }
-}
-
-.phase-history-item {
-  border-left: 3px solid $govuk-blue;
-  margin-bottom: 0;
-  padding-left: 10px;
-  padding-bottom: 10px;
-
-  h3 {
-    margin: 0 0 0 -10px;
-  }
-
-  p {
-    font-size: 16px;
-    margin: 10px 0 0;
-  }
-}
-
-.tick-list {
-  margin-left: 0;
-  padding-left: 0;
-
-  li {
-    font-size: 18px;
-    list-style-type: none;
-  }
-}
-
 @include media(tablet) {
   .mq-small-only {
     display: none;
   }
-}
-
-.new_support {
-  margin-top: 40px;
 }
 
 .error-summary {
@@ -391,20 +277,6 @@ dl dd {
   color: $grey-2;
   display: inline-block;
   margin: 0 5px;
-}
-
-.services-using-registers-page {
-  table {
-    thead th {
-      font-weight: bold;
-    }
-
-    td,
-    th {
-      font-size: 16px;
-      vertical-align: top;
-    }
-  }
 }
 
 .regiser-phase-description {
@@ -452,7 +324,7 @@ dl dd {
 .entries {
   border-left: 10px solid $grey-3;
   list-style-type: none;
-  margin-top: 40px;
+  margin: 40px 0;
   padding-left: 30px;
 
   &__item {
@@ -508,17 +380,8 @@ dl dd {
   margin: 0 5px;
 }
 
-.filter-search-submit {
-  body.js-enabled & {
-    display: none;
-  }
-
-  @include media(tablet) {
-    margin-top: 26px;
-  }
-}
-
-.sort-link {
+.sort-link,
+.sort_link {
   font-weight: bold;
   padding-right: 15px;
   position: relative;
@@ -540,6 +403,16 @@ dl dd {
 
   &.asc:after {
     border-top: 8px solid $govuk-blue;
+  }
+}
+
+// Ransack sorting
+.sort_link {
+  font-weight: normal;
+
+  &.asc,
+  &.desc {
+    font-weight: bold;
   }
 }
 

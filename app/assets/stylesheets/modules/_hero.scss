@@ -66,6 +66,11 @@
 
   &__title {
     @include bold-48;
+    margin-top: $gutter-half;
+
+    @include media(tablet) {
+      padding-right: $gutter;
+    }
   }
 
   &__description {
