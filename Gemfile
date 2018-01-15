@@ -24,7 +24,7 @@ gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/go
 gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.6.0'
+gem 'registers-ruby-client', path: '/Users/karlbaker/work/registers-ruby-client'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
