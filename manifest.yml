@@ -1,35 +1,26 @@
 ---
-applications:
-- name: registers-frontend
-  memory: 1GB
+defaults: &defaults
   buildpack: ruby_buildpack
-  instances: 2
-  domain: registers-trial.service.gov.uk
-  no-hostname: true
-  health-check-type: http
-  health-check-http-endpoint: /health_check/standard
+  memory: 1GB
   services:
     # postgres database
     - registers-frontend
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
+
+applications:
+- name: registers-frontend
+  <<: *defaults
+  instances: 2
+  health-check-type: http
+  health-check-http-endpoint: /health_check/standard
 - name: registers-frontend-queue
-  memory: 1GB
+  <<: *defaults
   instances: 1
   command: bundle exec 'rake environment jobs:work'
   health-check-type: process
-  services:
-    # postgres database
-    - registers-prod
-    # environment variables (persisted for blue/green deploys)
-    - registers-product-site-environment-variables
 - name: registers-frontend-scheduler
-  memory: 1GB
+  <<: *defaults
   instances: 1
   command: bundle exec clockwork 'lib/clock.rb'
   health-check-type: process
-  services:
-    # postgres database
-    - registers-prod
-    # environment variables (persisted for blue/green deploys)
-    - registers-product-site-environment-variables
