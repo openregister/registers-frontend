@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
-# Parse app name from manifest to ensure it matches up
-APP_NAME=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'][0]['name']")
+# Parse app names from manifest to ensure it matches up
+APP_ARRAY=$(ruby -e "require 'yaml'; config = YAML.load_file('manifest.yml'); puts config['applications'].map{|a| a['name']}.join(' ')")
 
-echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
+for APP_NAME in $APP_ARRAY
+do
+  echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
 
-# $CF env variables are set by Travis and configured in ../.travis.yml
-cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+  # $CF env variables are set by Travis and configured in ../.travis.yml
+  cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
 
-# Zero downtime push comes from "Autopilot" which is installed in before_deploy
-# step in Travis
-cf zero-downtime-push $APP_NAME -f manifest.yml
-cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
+  # Zero downtime push comes from "Autopilot" which is installed in before_deploy
+  # step in Travis
+  cf zero-downtime-push $APP_NAME -f manifest.yml
+  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT 
+done
