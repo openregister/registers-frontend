@@ -9,10 +9,10 @@ do
   echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
 
   # $CF env variables are set by Travis and configured in ../.travis.yml
-  cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+  cf login -a $CF_API -u $CF_USERNAME -o $CF_ORG -s $CF_SPACE
 
   # Zero downtime push comes from "Autopilot" which is installed in before_deploy
   # step in Travis
-  cf zero-downtime-push $APP_NAME -f manifest.yml
+  cf zero-downtime-push $APP_NAME -f manifest-staging.yml
   cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT 
 done

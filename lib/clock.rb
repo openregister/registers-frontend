@@ -11,6 +11,6 @@ handler do |job|
   system(job)
 end
 
-every(10.minute, 'Update database') {
+every(30.minute, 'Update database') {
   `rake registers_frontend:populate_db:fetch_later`
 }
