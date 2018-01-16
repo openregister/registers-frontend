@@ -2,7 +2,6 @@
 
 class PopulateDatabase
   def initialize(register)
-    @registers_client ||= RegistersClient::RegisterClientManager.new(cache_duration: 60)
     @register = register
   end
 
@@ -19,7 +18,7 @@ class PopulateDatabase
 
   def populate_register
     Delayed::Worker.logger.info("Updating #{@register.name} in database")
-    register_data = @registers_client.get_register(@register.name.parameterize, @register.register_phase.downcase)
+    register_data = @@registers_client.get_register(@register.name.parameterize, @register.register_phase.downcase)
     register_data.refresh_data
     populate_data(@register, register_data, 'user')
     populate_data(@register, register_data, 'system')

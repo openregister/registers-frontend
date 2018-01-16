@@ -14,7 +14,7 @@ RSpec.configure do |config|
 end
 
 RSpec.describe PopulateRegisterDataInDbJob, type: :job do
-  before(:each) do
+  before(:all) do
     country_data = File.read('./spec/support/country.rsf')
     stub_request(:get, "https://country.beta.openregister.org/download-rsf/0").
     with(headers: { 'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'country.beta.openregister.org' }).
