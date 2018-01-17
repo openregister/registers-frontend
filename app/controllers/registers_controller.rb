@@ -104,19 +104,19 @@ private
 
   def recover_records(register_id, fields, params, page_size = 100)
     literal = params[:q]
-    status = params[:status]
+    status = params[:status] ||= 'current'
     page = params[:page] ||= 1
     sort_by = params[:sort_by]
     sort_direction = params[:sort_direction]
 
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
-
     count_query = Record.select(1).where(spina_register_id: register_id, entry_type: 'user')
 
-    if status == 'archived'
+    case status
+    when 'archived'
       query = query.where("data->> 'end-date' is not null")
       count_query = query.where("data->> 'end-date' is not null")
-    elsif status == 'current'
+    when 'current'
       query = query.where("data->> 'end-date' is null")
       count_query = query.where("data->> 'end-date' is null")
     end
