@@ -140,8 +140,8 @@ private
     end
 
     @page_count = count_query.length
-    params[:offset] = page_size * (params[:page].to_i - 1) + 1
-    params[:offset_end] = [@page_count, page_size * params[:page].to_i].min
+    @offset = page_size * (params[:page].to_i - 1) + 1
+    @offset_end = [@page_count, page_size * params[:page].to_i].min
 
     @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
 
