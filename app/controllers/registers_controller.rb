@@ -108,8 +108,7 @@ private
     page = params[:page] ||= 1
     sort_by = params[:sort_by]
     sort_direction = params[:sort_direction]
-    params[:page_size] = page_size
-    
+
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
 
     count_query = Record.select(1).where(spina_register_id: register_id, entry_type: 'user')
@@ -141,8 +140,8 @@ private
     end
 
     @page_count = count_query.length
-    params[:offset] = params[:page_size] * (params[:page].to_i - 1) + 1
-    params[:offset_end] = [@page_count, (params[:page_size]) * params[:page].to_i].min
+    params[:offset] = page_size * (params[:page].to_i - 1) + 1
+    params[:offset_end] = [@page_count, page_size * params[:page].to_i].min
 
     @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
 
