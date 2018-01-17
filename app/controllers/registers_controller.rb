@@ -64,7 +64,7 @@ class RegistersController < ApplicationController
     @entries_with_items = Kaminari::paginate_array(@entries_with_items, total_count: @page_count).page(@current_page).per(100)
   end
 
-  private
+private
 
 
   def recover_entries_history(register_id, fields, params)
@@ -87,11 +87,11 @@ class RegistersController < ApplicationController
       count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user')
     end
 
-    previous_entries_numbers = query.reject{ |entry| entry.previous_entry_number.nil? }.map{ |entry| entry.previous_entry_number }
+    previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
     previous_entries_query = Entry.where(spina_register_id: register_id, entry_number: previous_entries_numbers)
 
     result = query.map do |entry|
-      previous_entry = previous_entries_query.select{ |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
+      previous_entry = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
       { current_entry: entry, previous_entry: previous_entry }
     end
 
@@ -102,8 +102,12 @@ class RegistersController < ApplicationController
     result
   end
 
-  def recover_records(register_id, fields, params)
-    literal, status, page, sort_by, sort_direction = params[:q], params[:status], params[:page], params[:sort_by], params[:sort_direction]
+  def recover_records(register_id, fields, params, page_size = 100)
+    literal = params[:q]
+    status = params[:status]
+    page = params[:page] ||= 1
+    sort_by = params[:sort_by]
+    sort_direction = params[:sort_direction]
 
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
 
@@ -136,10 +140,12 @@ class RegistersController < ApplicationController
     end
 
     @page_count = count_query.length
+    params[:offset] = page_size * (params[:page].to_i - 1) + 1
+    params[:offset_end] = [@page_count, page_size * params[:page].to_i].min
 
     @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
 
-    query.page(page).per(100).without_count
+    query.page(page).per(page_size).without_count
   end
 
   def filter(entries, query)
