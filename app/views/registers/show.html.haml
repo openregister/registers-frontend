@@ -54,10 +54,7 @@
               != @register.contextual_data
 
       %h2.heading-medium About this register
-      - if @register.register_phase == 'Backlog'
-        = @register.description
-      - else
-        %p= get_register_definition(@register.id, "register:#{params[:id]}")['text']
+      %p=get_register_definition['text']
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}

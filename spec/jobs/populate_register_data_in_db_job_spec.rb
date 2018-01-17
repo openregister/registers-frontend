@@ -14,7 +14,7 @@ RSpec.configure do |config|
 end
 
 RSpec.describe PopulateRegisterDataInDbJob, type: :job do
-  before(:each) do
+  before(:all) do
     country_data = File.read('./spec/support/country.rsf')
     stub_request(:get, "https://country.beta.openregister.org/download-rsf/0").
     with(headers: { 'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'country.beta.openregister.org' }).
@@ -26,7 +26,9 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     to_return(status: 200, body: country_update, headers: {})
 
     ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
-    PopulateRegisterDataInDbJob.perform_now
+    Spina::Register.find_each do |register|
+      PopulateRegisterDataInDbJob.perform_now(register)
+    end
   end
 
   describe 'populate register data job' do

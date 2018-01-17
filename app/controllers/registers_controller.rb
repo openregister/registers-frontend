@@ -3,6 +3,7 @@
 class RegistersController < ApplicationController
   helper_method :get_last_timestamp, :get_register_definition, :get_field_definitions
 
+  layout 'layouts/default/application'
 
   def index
     @search = Spina::Register.ransack(params[:q])
@@ -26,12 +27,12 @@ class RegistersController < ApplicationController
       .to_s
   end
 
-  def get_register_definition(register_id, key)
-    Record.find_by(spina_register_id: register_id, key: key).data
+  def get_register_definition
+    Record.find_by(spina_register_id: @register.id, key: "register:#{params[:id]}").data
   end
 
   def get_field_definitions
-    ordered_field_keys = get_register_definition(@register.id, "register:#{params[:id]}")['fields'].map { |f| "field:#{f}" }
+    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
     Record.where(spina_register_id: @register.id, key: ordered_field_keys)
       .order("position(key::text in '#{ordered_field_keys.join(',')}')")
       .map { |entry| entry[:data] }

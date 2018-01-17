@@ -10,18 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221113436) do
+ActiveRecord::Schema.define(version: 20180103105857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
 
   create_table "entries", force: :cascade do |t|
     t.text "hash_value"
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
-    t.jsonb "data"
     t.bigint "spina_register_id"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
@@ -32,11 +47,10 @@ ActiveRecord::Schema.define(version: 20171221113436) do
   create_table "records", force: :cascade do |t|
     t.text "hash_value"
     t.text "entry_type"
-    t.text "record_type"
     t.text "key"
     t.datetime "timestamp"
-    t.jsonb "data"
     t.bigint "spina_register_id"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
@@ -212,7 +226,7 @@ ActiveRecord::Schema.define(version: 20171221113436) do
     t.string "authority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
+    t.text "description"
     t.text "fields"
     t.text "related_registers"
   end

@@ -53,9 +53,9 @@ RSpec.describe RegistersController, type: :controller do
     with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'territory.beta.openregister.org'}).
     to_return(status: 200, body: "", headers: {})
 
-    PopulateRegisterDataInDbJob.perform_now
-
-
+    Spina::Register.find_each do |register|
+      PopulateRegisterDataInDbJob.perform_now(register)
+    end
   end
 
   after(:all) do
