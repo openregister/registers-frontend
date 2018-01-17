@@ -19,6 +19,7 @@ Install the gem dependencies and setup the postgresql database
 ```bash
 $ bundle install
 $ rails db:setup
+$ rake registers_frontend:populate_db:fetch_now
 $ rails server
 ```
 

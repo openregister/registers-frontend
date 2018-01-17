@@ -46,8 +46,16 @@ gem 'govuk_notify_rails'
 # Pagination
 gem 'kaminari'
 
+# Job Scheduling
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
+
+# Database
+gem 'activerecord-import'
+
+# Schedule
+gem 'clockwork'
+
 group :development, :test do
-  gem 'activerecord-import'
   gem 'govuk-lint', '~> 3.3'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.6'
