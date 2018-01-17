@@ -167,8 +167,8 @@ RSpec.describe RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 1 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany' } }
+  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 2 rows' do
+    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
 
     it { is_expected.to have_http_status :success }
 
@@ -210,7 +210,7 @@ RSpec.describe RegistersController, type: :controller do
   end
 
   describe 'Request: GET #show. Descr: Check with filter and cardinality N. Params: Search param. Result: 1 rows' do
-    subject { get :show, params: { id: 'charity', q: '306' } }
+    subject { get :show, params: { id: 'charity', q: '306', status: 'all' } }
 
     it { is_expected.to have_http_status :success }
 
