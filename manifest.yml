@@ -13,3 +13,5 @@ applications:
     - registers-frontend
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
+    # logging
+    - logit-ssl-drain
