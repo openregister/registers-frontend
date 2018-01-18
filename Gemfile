@@ -67,3 +67,8 @@ group :test do
   gem 'rails-controller-testing'
   gem 'webmock'
 end
+
+group :production do
+  gem 'lograge', '~> 0.9.0'
+  gem 'logstash-event', '~> 1.2', '>= 1.2.02'
+end
