@@ -95,7 +95,7 @@ private
       previous_entry = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
       { current_entry: entry, previous_entry: previous_entry }
     end
-    @result_count = count_query.length
+    @result_count = count_query.count
     @current_page = page
     @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
 
