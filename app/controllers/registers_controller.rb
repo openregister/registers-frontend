@@ -62,7 +62,7 @@ class RegistersController < ApplicationController
       { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: current_record.key }
     end
 
-    @entries_with_items = Kaminari::paginate_array(@entries_with_items, total_count: @page_count).page(@current_page).per(100)
+    @entries_with_items = Kaminari::paginate_array(@entries_with_items, total_count: @result_count).page(@current_page).per(100)
   end
 
 private
@@ -95,9 +95,9 @@ private
       previous_entry = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
       { current_entry: entry, previous_entry: previous_entry }
     end
-    @page_count = count_query.length
+    @result_count = count_query.length
     @current_page = page
-    @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
+    @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
 
     result
   end
@@ -139,11 +139,11 @@ private
     if sort_by.present? && sort_direction.present?
       query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
-    @page_count = query.count
+    @result_count = query.count
     @offset = page_size * (params[:page].to_i - 1) + 1
-    @offset_end = [@page_count, page_size * params[:page].to_i].min
+    @offset_end = [@result_count, page_size * params[:page].to_i].min
 
-    @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
+    @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
 
     query.page(page).per(page_size).without_count
   end
