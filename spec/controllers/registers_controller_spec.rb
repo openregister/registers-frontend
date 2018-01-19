@@ -251,7 +251,7 @@ RSpec.describe RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil' do
+  describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil should show nil values last' do
     subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc' } }
 
     it { is_expected.to have_http_status :success }
@@ -260,7 +260,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).first.data['start-date']).to be_nil
+      expect(assigns(:records).first.data['start-date']).to eq('2011-07-09')
       expect(assigns(:records).last.data['start-date']).to be_nil
     end
   end

@@ -103,11 +103,16 @@ private
   end
 
   def recover_records(register_id, fields, params, page_size = 100)
+    default_sort_by = lambda {
+      has_name_field = fields.split(',').include?('name')
+      has_name_field ? 'name' : params[:id]
+    }
+
     literal = params[:q]
     status = params[:status] ||= 'current'
     page = params[:page] ||= 1
-    sort_by = params[:sort_by]
-    sort_direction = params[:sort_direction]
+    sort_by = params[:sort_by] ||= default_sort_by.call
+    sort_direction = params[:sort_direction] ||= 'asc'
 
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
     count_query = Record.select(1).where(spina_register_id: register_id, entry_type: 'user')
@@ -136,7 +141,7 @@ private
     end
 
     if sort_by.present? && sort_direction.present?
-      query = query.order("data->> '#{sort_by}' #{sort_direction.upcase}")
+      query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
 
     @page_count = count_query.length
