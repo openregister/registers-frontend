@@ -69,17 +69,17 @@ private
 
 
   def recover_entries_history(register_id, fields, params)
-    literal = params[:q]
+    search_term = params[:q]
     page = params[:page].nil? ? 1 : params[:page].to_i
 
-    if literal.present?
+    if search_term.present?
       partial = ''
       operation_params = []
       fields.split(',').each { |field| partial += " data->> '#{field}' ilike ? or" }
       partial = partial[1, partial.length - 3] # Remove beginning space and end 'or'
 
       operation_params.push(partial)
-      fields.split(',').count.times { operation_params.push("%#{literal}%") }
+      fields.split(',').count.times { operation_params.push("%#{search_term}%") }
 
       query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
       count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
@@ -108,25 +108,22 @@ private
       has_name_field ? 'name' : params[:id]
     }
 
-    literal = params[:q]
+    search_term = params[:q]
     status = params[:status] ||= 'current'
     page = params[:page] ||= 1
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
 
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
-    count_query = Record.select(1).where(spina_register_id: register_id, entry_type: 'user')
 
     case status
     when 'archived'
       query = query.where("data->> 'end-date' is not null")
-      count_query = query.where("data->> 'end-date' is not null")
     when 'current'
       query = query.where("data->> 'end-date' is null")
-      count_query = query.where("data->> 'end-date' is null")
     end
 
-    if literal.present?
+    if search_term.present?
       operation_params = []
       partial = ''
 
@@ -134,16 +131,15 @@ private
       partial = partial[1, partial.length - 3]
 
       operation_params.push(partial)
-      fields.split(',').count.times { operation_params.push("%#{literal}%") }
+      fields.split(',').count.times { operation_params.push("%#{search_term}%") }
 
       query = query.where(operation_params)
-      count_query = query.where(operation_params)
     end
 
     if sort_by.present? && sort_direction.present?
       query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
-    @page_count = count_query.count
+    @page_count = query.count
     @offset = page_size * (params[:page].to_i - 1) + 1
     @offset_end = [@page_count, page_size * params[:page].to_i].min
 
