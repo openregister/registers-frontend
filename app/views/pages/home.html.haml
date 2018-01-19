@@ -4,7 +4,7 @@
 %main#main{role:'main'}
   .masthead
     %nav{class: "breadcrumbs breadcrumbs--inverse", "aria-label" => "Breadcrumbs"}
-      %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList"}
+      %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList", data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
         %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
           = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
             %span{itemprop: "name"} Components
