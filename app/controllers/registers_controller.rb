@@ -94,7 +94,6 @@ private
       previous_entry = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
       { current_entry: entry, previous_entry: previous_entry }
     end
-
     @page_count = count_query.length
     @current_page = page
     @total_pages = (@page_count / 100) + (@page_count % 100 == 0 ? 0 : 1)
@@ -143,8 +142,7 @@ private
     if sort_by.present? && sort_direction.present?
       query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
-
-    @page_count = count_query.length
+    @page_count = count_query.count
     @offset = page_size * (params[:page].to_i - 1) + 1
     @offset_end = [@page_count, page_size * params[:page].to_i].min
 
