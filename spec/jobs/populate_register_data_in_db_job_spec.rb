@@ -25,6 +25,8 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     with(headers: { 'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'country.beta.openregister.org' }).
     to_return(status: 200, body: country_update, headers: {})
 
+    @@registers_client = RegistersClient::RegisterClientManager.new(cache_duration: 600)
+
     ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
     Spina::Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
@@ -42,5 +44,9 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     it 'retains existing entries' do
       expect(Entry.where(key: 'CI').first.data['citizen-names']).to eq('Citizen of the Ivory Coast')
     end
+  end
+
+  after(:all) do
+    DatabaseCleaner.clean_with(:truncation)
   end
 end
