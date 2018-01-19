@@ -14,6 +14,8 @@ applications:
 - name: registers-frontend
   <<: *defaults
   instances: 2
+  domain: registers-trial.service.gov.uk
+  no-hostname: true
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
 - name: registers-frontend-queue
