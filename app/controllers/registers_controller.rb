@@ -113,7 +113,7 @@ private
     page = params[:page] ||= 1
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
-
+    @total_record_count = Record.where(spina_register_id: register_id, entry_type: 'user').count
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
 
     case status

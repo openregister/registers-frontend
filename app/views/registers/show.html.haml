@@ -38,7 +38,7 @@
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
           %dt Number of records:
           %dd
-            = number_with_delimiter(@page_count)
+            = number_with_delimiter(@total_record_count)
           %dt Updated:
           %dd
             = formatted_date(get_last_timestamp)
