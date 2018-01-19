@@ -27,8 +27,9 @@ class RegistersController < ApplicationController
       .to_s
   end
 
-  def get_register_definition
-    Record.find_by(spina_register_id: @register.id, key: "register:#{params[:id]}").data
+
+  def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")		 
+    Record.find_by(spina_register_id: register_id, key: key).data		 
   end
 
   def get_field_definitions
