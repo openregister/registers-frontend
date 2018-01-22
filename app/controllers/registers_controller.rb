@@ -68,9 +68,9 @@ class RegistersController < ApplicationController
 private
 
 
-  def recover_entries_history(register_id, fields, params)
+  def recover_entries_history(register_id, fields, params, page_size = 100)
     search_term = params[:q]
-    page = params[:page].nil? ? 1 : params[:page].to_i
+    page = (params[:page] ||= 1).to_i
 
     if search_term.present?
       partial = ''
@@ -81,11 +81,11 @@ private
       operation_params.push(partial)
       fields.split(',').count.times { operation_params.push("%#{search_term}%") }
 
-      query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
-      count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
+      query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(page_size).offset(page_size * (page - 1))
+      count_query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
     else
-      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
-      count_query = Entry.select(1).where(spina_register_id: register_id, entry_type: 'user')
+      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page- 1))
+      count_query = Entry.where(spina_register_id: register_id, entry_type: 'user')
     end
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
@@ -97,7 +97,7 @@ private
     end
     @result_count = count_query.count
     @current_page = page
-    @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
+    @total_pages = (@result_count / page_size) + (@result_count % page == 0 ? 0 : 1)
 
     result
   end
@@ -110,7 +110,7 @@ private
 
     search_term = params[:q]
     status = params[:status] ||= 'current'
-    page = params[:page] ||= 1
+    page = (params[:page] ||= 1).to_i
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
     @total_record_count = Record.where(spina_register_id: register_id, entry_type: 'user').count
@@ -142,8 +142,8 @@ private
       query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
     @result_count = query.count
-    @offset = page_size * (params[:page].to_i - 1) + 1
-    @offset_end = [@result_count, page_size * params[:page].to_i].min
+    @offset = page_size * (page - 1) + 1
+    @offset_end = [@result_count, page_size * page].min
 
     @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
 
