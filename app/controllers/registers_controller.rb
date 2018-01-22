@@ -116,12 +116,14 @@ private
     @total_record_count = Record.where(spina_register_id: register_id, entry_type: 'user').count
     query = Record.where(spina_register_id: register_id, entry_type: 'user')
 
-    case status
-    when 'archived'
-      query = query.where("data->> 'end-date' is not null")
-    when 'current'
-      query = query.where("data->> 'end-date' is null")
-    end
+    query = case status
+            when 'archived'
+              query.where("data->> 'end-date' is not null")
+            when 'current'
+              query.where("data->> 'end-date' is null")
+            else
+              query
+            end
 
     if search_term.present?
       operation_params = []
