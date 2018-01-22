@@ -20,11 +20,11 @@ gem 'http', '2.2.1'
 gem 'haml-rails'
 
 # GDS Frontend Toolkit, templates and elements
+gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
+gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'govuk_elements_rails'
-gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/govuk_elements_form_builder.git'
-gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.4.0'
+gem 'registers-ruby-client', git: 'https://github.com/openregister/registers-ruby-client.git', tag: 'v0.7.0'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
@@ -45,6 +45,15 @@ gem 'govuk_notify_rails'
 
 # Pagination
 gem 'kaminari'
+
+# Job Scheduling
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
+
+# Database
+gem 'activerecord-import'
+
+# Schedule
+gem 'clockwork'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.3'

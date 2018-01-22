@@ -62,7 +62,7 @@ Spina::Register.create(
   name: "Charity",
   register_phase: "Discovery",
   authority: "Charity Commission",
-)
+  )
 puts "Created Charity Register"
 
 puts "The CMS is located at http://localhost:3000/admin"

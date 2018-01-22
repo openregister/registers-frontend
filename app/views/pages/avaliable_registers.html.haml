@@ -6,6 +6,6 @@
       = render partial: 'pages/sidebar_nav'
     .column-two-thirds
       %h1.heading-large Avaliable registers
-      %ul.list-bullet
-        - @beta_registers.reject{ |r| %w{register datatype field}.include?(r[:item]['register'])}.each do |register|
-          %li= link_to register[:item]['register'], "/registers/#{register[:item]['register'].parameterize}"
+      %ul.list.list-bullet
+        - @beta_registers.reject{ |r| %w{register datatype field}.include?(r.name.parameterize)}.each do |register|
+          %li= link_to register.name, "/registers/#{register.name.parameterize}"

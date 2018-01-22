@@ -10,10 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220104627) do
+ActiveRecord::Schema.define(version: 20180103105857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.text "hash_value"
+    t.text "entry_type"
+    t.text "key"
+    t.datetime "timestamp"
+    t.bigint "spina_register_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "entry_number"
+    t.integer "previous_entry_number"
+    t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.text "hash_value"
+    t.text "entry_type"
+    t.text "key"
+    t.datetime "timestamp"
+    t.bigint "spina_register_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "entry_number"
+    t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
+  end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
     t.string "name"
@@ -63,7 +105,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.integer "account_id"
   end
 
-  create_table "spina_line_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_line_translations", force: :cascade do |t|
     t.integer "spina_line_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -74,6 +116,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
   end
 
   create_table "spina_lines", id: :serial, force: :cascade do |t|
+    t.string "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -120,7 +163,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.string "page_partable_type"
   end
 
-  create_table "spina_page_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_page_translations", force: :cascade do |t|
     t.integer "spina_page_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -135,12 +178,16 @@ ActiveRecord::Schema.define(version: 20171220104627) do
   end
 
   create_table "spina_pages", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.string "menu_title"
+    t.string "description"
     t.boolean "show_in_menu", default: true
     t.string "slug"
     t.boolean "deletable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "seo_title"
     t.boolean "skip_to_first_child", default: false
     t.string "view_template"
     t.string "layout_template"
@@ -148,6 +195,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.string "link_url"
     t.string "ancestry"
     t.integer "position"
+    t.string "materialized_path"
     t.boolean "active", default: true
   end
 
@@ -178,7 +226,8 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.string "authority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
+    t.text "description"
+    t.text "fields"
     t.text "related_registers"
   end
 
@@ -222,7 +271,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
     t.datetime "updated_at"
   end
 
-  create_table "spina_text_translations", id: :serial, force: :cascade do |t|
+  create_table "spina_text_translations", force: :cascade do |t|
     t.integer "spina_text_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -233,6 +282,7 @@ ActiveRecord::Schema.define(version: 20171220104627) do
   end
 
   create_table "spina_texts", id: :serial, force: :cascade do |t|
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

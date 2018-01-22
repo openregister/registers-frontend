@@ -38,10 +38,10 @@
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
           %dt Number of records:
           %dd
-            = number_with_delimiter(@register_data.get_records.count)
+            = number_with_delimiter(@total_record_count)
           %dt Updated:
           %dd
-            = formatted_date(Array(@register_data.get_entries).last.timestamp)
+            = formatted_date(get_last_timestamp)
             %strong.text-spacing -
             = link_to "See all register updates", history_path(@register.slug)
           - if @register.related_registers.present?
@@ -54,19 +54,16 @@
               != @register.contextual_data
 
       %h2.heading-medium About this register
-      - if @register.register_phase == 'Backlog'
-        = @register.description
-      - else
-        %p= @register_data.get_register_definition.item.value['text']
+      %p=get_register_definition['text']
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
           %span.summary What fields are included in this register?
         #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
           %dl
-            - @register_data.get_field_definitions.each do |field|
-              %dt= field.item.value['field']
-              %dd= field.item.value['text']
+            - get_field_definitions.each do |field|
+              %dt= field['field']
+              %dd= field['text']
 
       %h2.heading-medium Using this register
       %p There are 2 ways to use Registers. You can either:
@@ -130,26 +127,23 @@
       - if @records.present?
         %p
           %span#records-count
-            = page_entries_info(@records, entry_name: 'record')
-            - if params[:q].present?
-              &nbsp; for <strong>"#{params[:q]}"</strong>
-          - if params[:q].present? ||params[:status].present?
-            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+            = render partial: 'showing'
+          = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
         .table-scroll
           %table.register-data-table
             %thead
               %tr
-                - @register_data.get_field_definitions.each do |field|
-                  %th= field.item.value['cardinality'] == '1' ? records_table_sort_link(field.item.value['field'], request.query_parameters) : field.item.value['field']
+                - get_field_definitions.each do |field|
+                  %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
             %tbody#records-tbody
               = render partial: 'record', collection: @records
 
         .pager
           .pager-controls
-            = paginate @records, outer_window: 0, window: 3
+            = paginate @records, total_pages: @total_pages, outer_window: 0, window: 3
           .pager-summary
-            = page_entries_info(@records, entry_name: 'record')
+            = render partial: 'showing'
 
         - unless @records.last_page?
           = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
