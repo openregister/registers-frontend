@@ -56,7 +56,7 @@ gem 'activerecord-import'
 gem 'clockwork'
 
 group :development, :test do
-  gem 'govuk-lint', '~> 3.3'
+  gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.6'
 end
