@@ -1,9 +1,8 @@
 module Spina
   module Admin
     class RegistersController < AdminController
-
-      before_action :set_breadcrumb, :set_register, only: [:edit, :update, :destroy]
-      before_action :set_government_organisations, only: [:new, :edit]
+      before_action :set_breadcrumb, :set_register, only: %i[edit update destroy]
+      before_action :set_government_organisations, only: %i[new edit]
 
       layout "spina/admin/admin"
 
@@ -44,7 +43,7 @@ module Spina
         redirect_to spina.admin_registers_path
       end
 
-      private
+    private
 
       def set_register
         @register = Spina::Register.find(params[:id])

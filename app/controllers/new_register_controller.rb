@@ -1,9 +1,7 @@
 require 'json'
 
 class NewRegisterController < ApplicationController
-
-  def index
-  end
+  def index; end
 
   def select_request_or_suggest
     if params[:subject] == 'request'
@@ -21,15 +19,14 @@ class NewRegisterController < ApplicationController
     @new_register = NewRegister.new
   end
 
-  def thanks
-  end
+  def thanks; end
 
   def create
     @new_register = NewRegister.new(new_register_params)
 
     if @new_register.valid?
-      @zendeskService = ZendeskFeedback.new
-      @response = @zendeskService.send_feedback(new_register_params)
+      @zendesk_service = ZendeskFeedback.new
+      @response = @zendesk_service.send_feedback(new_register_params)
       redirect_to new_register_thanks_path
     else
       flash[:errors] = @new_register.errors
@@ -41,14 +38,14 @@ class NewRegisterController < ApplicationController
     end
   end
 
-  private
+private
 
-    def new_register_params
-      params.require(:new_register).permit(
-        :subject,
-        :name,
-        :email,
-        :message
-      )
-    end
+  def new_register_params
+    params.require(:new_register).permit(
+      :subject,
+      :name,
+      :email,
+      :message
+    )
+  end
 end

@@ -17,10 +17,10 @@ module Spina
       )
     end
 
-    private
+  private
 
-      def current_account
-        Spina::Account.first
-      end
+    def current_account
+      Spina::Account.first
+    end
   end
 end

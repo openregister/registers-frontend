@@ -20,38 +20,38 @@ RSpec.describe RegistersController, type: :controller do
     .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
     .to_return(status: 200, body: country_data, headers: {})
 
-  stub_request(:get, 'https://charity.beta.openregister.org/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
-    .to_return(status: 200, body: register_charity_data, headers: {})
+    stub_request(:get, 'https://charity.beta.openregister.org/download-rsf/0')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .to_return(status: 200, body: register_charity_data, headers: {})
 
-  stub_request(:get, 'https://territory.beta.openregister.org/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
-    .to_return(status: 200, body: register_territory_data, headers: {})
+    stub_request(:get, 'https://territory.beta.openregister.org/download-rsf/0')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .to_return(status: 200, body: register_territory_data, headers: {})
 
   # Index stubs
-  stub_request(:get, 'https://register.beta.openregister.org/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
-    .to_return(status: 200, body: register_beta_data, headers: {})
+    stub_request(:get, 'https://register.beta.openregister.org/download-rsf/0')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .to_return(status: 200, body: register_beta_data, headers: {})
 
-  stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
-    .to_return(status: 200, body: register_alpha_data, headers: {})
+    stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .to_return(status: 200, body: register_alpha_data, headers: {})
 
-  stub_request(:get, 'https://register.discovery.openregister.org/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate'})
-    .to_return(status: 200, body: register_discovery_data, headers: {})
+    stub_request(:get, 'https://register.discovery.openregister.org/download-rsf/0')
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .to_return(status: 200, body: register_discovery_data, headers: {})
 
-  stub_request(:get, "https://country.beta.openregister.org/download-rsf/207").
-    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'country.beta.openregister.org'}).
-    to_return(status: 200, body: "", headers: {})
+    stub_request(:get, "https://country.beta.openregister.org/download-rsf/207").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.beta.openregister.org' }).
+      to_return(status: 200, body: "", headers: {})
 
-  stub_request(:get, "https://charity.beta.openregister.org/download-rsf/10").
-    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'charity.beta.openregister.org'}).
-    to_return(status: 200, body: "", headers: {})
+    stub_request(:get, "https://charity.beta.openregister.org/download-rsf/10").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.beta.openregister.org' }).
+      to_return(status: 200, body: "", headers: {})
 
-  stub_request(:get, "https://territory.beta.openregister.org/download-rsf/3").
-    with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip, deflate', 'Host'=>'territory.beta.openregister.org'}).
-    to_return(status: 200, body: "", headers: {})
+    stub_request(:get, "https://territory.beta.openregister.org/download-rsf/3").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.beta.openregister.org' }).
+      to_return(status: 200, body: "", headers: {})
 
     Spina::Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
@@ -161,7 +161,6 @@ RSpec.describe RegistersController, type: :controller do
     it { is_expected.to render_template :show }
 
     it do
-
       subject
       expect(assigns(:records).length).to eq(100)
     end
