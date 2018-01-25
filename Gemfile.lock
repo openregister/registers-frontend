@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/openregister/govuk-lint.git
-  revision: 788b5747361fc234f595bc0e7fffb304ba55911a
+  revision: 78bddf80ad7ecca65666c0eba5044bcde26df8b3
   branch: bump-rubocop-version
   specs:
     govuk-lint (3.6.0)
