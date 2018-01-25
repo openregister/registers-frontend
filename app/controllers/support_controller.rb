@@ -1,11 +1,9 @@
 require 'json'
 
 class SupportController < ApplicationController
-
   default_form_builder GovukElementsFormBuilder::FormBuilder
 
-  def index
-  end
+  def index; end
 
   def select_support
     if params[:subject] == "problem"
@@ -27,8 +25,8 @@ class SupportController < ApplicationController
     @support = Support.new(support_params)
 
     if @support.valid?
-      @zendeskService = ZendeskFeedback.new
-      @response = @zendeskService.send_feedback(support_params)
+      @zendesk_service = ZendeskFeedback.new
+      @response = @zendesk_service.send_feedback(support_params)
       redirect_to support_thanks_path
     else
       flash[:errors] = @support.errors
@@ -40,14 +38,14 @@ class SupportController < ApplicationController
     end
   end
 
-  private
+private
 
-    def support_params
-      params.require(:support).permit(
-        :subject,
-        :name,
-        :email,
-        :message
-      )
-    end
+  def support_params
+    params.require(:support).permit(
+      :subject,
+      :name,
+      :email,
+      :message
+    )
+  end
 end

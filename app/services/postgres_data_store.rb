@@ -30,31 +30,25 @@ class PostgresDataStore
     @records[entry_type][entry.key] << db_entry
   end
 
-  def get_item(item_hash)
-  end
+  def get_item(item_hash); end
 
-  def get_items
-  end
+  def get_items; end
 
-  def get_entry(entry_type, entry_number)
-  end
+  def get_entry(entry_type, entry_number); end
 
-  def get_entries(entry_type)
-  end
+  def get_entries(entry_type); end
 
-  def get_record(entry_type, key)
-  end
+  def get_record(entry_type, key); end
 
-  def get_records(entry_type)
-  end
+  def get_records(entry_type); end
 
   def get_latest_entry_number(entry_type)
     latest_entry = Entry.where(spina_register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
-    unless (latest_entry.nil?)
-      latest_entry.entry_number
-    else
+    if latest_entry.nil?
       latest_entry = @entries[entry_type].last
       latest_entry.nil? ? 0 : latest_entry.entry_number
+    else
+      latest_entry.entry_number
     end
   end
 
@@ -64,13 +58,13 @@ class PostgresDataStore
     @items.clear
   end
 
-  private
+private
 
   def batch_update(entry_type)
     begin
       latest_entry = Entry.where(spina_register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
 
-      if (@entries[entry_type].length > 0)
+      if !@entries[entry_type].empty?
         @entries[entry_type].each_slice(1000) do |entries|
           Entry.transaction do
             Entry.import!(entries)
@@ -78,7 +72,7 @@ class PostgresDataStore
         end
       end
 
-      if (@records[entry_type].length > 0)
+      if !@records[entry_type].empty?
         Record.transaction do
           bulk_remove_existing_records(@register, entry_type, @records[entry_type].keys)
         end
@@ -97,7 +91,6 @@ class PostgresDataStore
 
       @entries[entry_type].clear
       @records[entry_type].clear
-
     rescue StandardError => e
       Delayed::Worker.logger.error("Problem found populating #{@register.name}: #{e.message}")
 

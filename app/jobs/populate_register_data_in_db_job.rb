@@ -8,7 +8,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     register_client.refresh_data
 
     metadata_records = Record.where(spina_register_id: register.id, entry_type: :system)
-    fields = metadata_records.select{|record| record.key.start_with?("field:")}
+    fields = metadata_records.select { |record| record.key.start_with?("field:") }
     register.fields = fields.map { |field| field.data['field'] }.join(',')
     register.save
   end

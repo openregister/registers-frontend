@@ -24,7 +24,6 @@ class ZendeskFeedback
     response = @client.tickets.create!(ticket)
 
     { success: true, ticket_id: response.id }
-
   rescue ZendeskAPI::Error::ClientError => e
     logger.debug("Feedback ticket creation failed with status: #{e.response.status} and content: #{e.response.body}")
 

@@ -27,9 +27,8 @@ class RegistersController < ApplicationController
       .to_s
   end
 
-
-  def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")		 
-    Record.find_by(spina_register_id: register_id, key: key).data		 
+  def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")
+    Record.find_by(spina_register_id: register_id, key: key).data
   end
 
   def get_field_definitions
@@ -84,7 +83,7 @@ private
       query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(page_size).offset(page_size * (page - 1))
       count_query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
     else
-      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page- 1))
+      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
       count_query = Entry.where(spina_register_id: register_id, entry_type: 'user')
     end
 
@@ -92,12 +91,12 @@ private
     previous_entries_query = Entry.where(spina_register_id: register_id, entry_number: previous_entries_numbers)
 
     result = query.map do |entry|
-      previous_entry = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
-      { current_entry: entry, previous_entry: previous_entry }
+      entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
+      { current_entry: entry, previous_entry: entries }
     end
     @result_count = count_query.count
     @current_page = page
-    @total_pages = (@result_count / page_size) + (@result_count % page == 0 ? 0 : 1)
+    @total_pages = (@result_count / page_size) + ((@result_count % 100).zero? ? 0 : 1)
 
     result
   end
@@ -145,7 +144,7 @@ private
     @offset = page_size * (page - 1) + 1
     @offset_end = [@result_count, page_size * page].min
 
-    @total_pages = (@result_count / 100) + (@result_count % 100 == 0 ? 0 : 1)
+    @total_pages = (@result_count / 100) + ((@result_count % 100).zero? ? 0 : 1)
 
     query.page(page).per(page_size).without_count
   end
@@ -183,12 +182,10 @@ private
 
   def include?(value, query)
     if value.is_a?(String)
-      return true if contain?(value, query)
+      value.downcase.include?(query.downcase)
     else
-      return true if contain_in_array?(value, query)
+      value.any? { |v| contain?(v, query) }
     end
-
-    false
   end
 
   def contain_in_array?(field_values, request_value)

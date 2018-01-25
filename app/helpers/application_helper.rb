@@ -43,7 +43,7 @@ module ApplicationHelper
   end
 
   def formatted_date(date)
-    DateTime.parse(date).strftime('%d/%m/%Y')
+    Date.parse(date).strftime('%d/%m/%Y')
   end
 
   def records_table_sort_link(field_value, query_parameters)
