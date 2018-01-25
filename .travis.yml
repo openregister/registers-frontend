@@ -20,6 +20,10 @@ before_install:
 before_script:
   - bundle exec rake db:setup
 
+script:
+  - bundle exec rake spec
+  - bundle exec govuk-lint-ruby app spec
+
 before_deploy:
   - export PATH=$HOME:$PATH
   # Install CloudFoundry
