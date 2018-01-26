@@ -264,4 +264,19 @@ RSpec.describe RegistersController, type: :controller do
       expect(assigns(:records).last.data['start-date']).to be_nil
     end
   end
+
+  describe 'History should show current and previous value' do
+    subject { get :history, params: { id: 'country' } }
+
+    it { is_expected.to have_http_status :success }
+
+    it { is_expected.to render_template :history }
+
+    it do
+      subject
+      expect(assigns(:entries_with_items).first[:current_record].data['official-name']).to eq("The Republic of Côte D’Ivoire")
+      expect(assigns(:entries_with_items).first[:previous_record].data['official-name']).to eq("The Republic of Cote D'Ivoire")
+      expect(assigns(:entries_with_items).first[:updated_fields]).to eq(["official-name"])
+    end
+  end
 end

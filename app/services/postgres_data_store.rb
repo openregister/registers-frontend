@@ -18,7 +18,7 @@ class PostgresDataStore
   def append_entry(entry)
     entry_type = entry.entry_type.to_sym
     item = @items[entry.item_hash]
-    previous_entry_number = @records[entry_type].has_key?(entry.key) ? @records[entry_type][entry.key].last : nil
+    previous_entry_number = @records[entry_type].has_key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
     db_entry = Entry.new(spina_register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
 
     @entries[entry_type] << db_entry
