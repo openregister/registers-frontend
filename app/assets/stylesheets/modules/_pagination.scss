@@ -1,7 +1,7 @@
 // Taken from https://github.com/trevorsaint/rural-payments-styleguide/blob/a99ba9ee34ed84452aa8fa662b3f0ba11d38c336/assets/sass/defra/_pagination.scss
 
 .pager {
-  body.js-enabled & {
+  .js-enabled & {
     display: none;
   }
 

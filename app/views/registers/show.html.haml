@@ -93,7 +93,7 @@
               = link_to "Contact the team", "https://registers.cloudapps.digital/support", target: :blank
 
   .grid-row
-    .column-one-whole
+    .column-full
       .search-records-wrapper#search_wrapper
         %h3.heading-medium Explore this register
         .grid-row
@@ -103,13 +103,13 @@
                 = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
                 = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
                 = submit_tag 'Search', name: nil, class: 'search-submit'
-            .column-one-whole
+            .column-full
               %details{role: "group", open: (params[:status].present? && @records.present? ? 'open' : nil)}
                 %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? && @records.present? ? 'true' : 'false'}", role: "button"}
                   %span.summary Filter
                 #details-content-0{"aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
                   .grid-row
-                    .column-one-whole
+                    .column-full
                       .form-group
                         %fieldset.inline
                           %legend.visually-hidden Filter

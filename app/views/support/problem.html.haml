@@ -2,7 +2,7 @@
 
 %main.container{role:'main'}
   .grid-row
-    .column-one-whole
+    .column-full
       %h1.heading-large Report a problem
       - if @support.errors.any?
         = render partial: "layouts/errors", locals: { object: @support }

@@ -1,11 +1,10 @@
 .records-search {
   .search-input {
-    border: 2px solid #0b0c0c;
+    border: 2px solid $black;
     font-size: 16px;
     height: 20px;
     padding: 7px;
-    width: 86%;
-    width: calc(100% - 56px);
+    width: 82%;
 
     &:focus {
       position: relative;
