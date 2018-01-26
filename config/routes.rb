@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
   get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
 
-  resources :registers, only: [:show, :index]
+  resources :registers, only: %i[show index]
   get '/registers/:id/history', to: 'registers#history', as: 'history'
 
   # Support

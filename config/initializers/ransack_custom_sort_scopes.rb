@@ -6,7 +6,7 @@ require "ransack/adapters/active_record/context"
 
 module Ransack
   Visitor.class_eval do
-    def visit_Ransack_Nodes_Sort(object)
+    def visit_Ransack_Nodes_Sort(object) # rubocop:disable Naming/MethodName
       # The first half of this conditional is the original implementation in
       # Ransack, as of version 1.6.6.
       #
@@ -49,11 +49,11 @@ module Ransack
             # implementation used "reorder," which was overkill since we already
             # have a clean slate after "relation.except(:order)" above.
             viz.accept(search.sorts).each do |scope_or_sort|
-              if scope_or_sort.is_a?(Symbol)
-                relation = relation.send(scope_or_sort)
-              else
-                relation = relation.order(scope_or_sort)
-              end
+              relation = if scope_or_sort.is_a?(Symbol)
+                           relation.send(scope_or_sort)
+                         else
+                           relation.order(scope_or_sort)
+                         end
             end
           end
 
