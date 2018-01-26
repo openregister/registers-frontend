@@ -1,12 +1,10 @@
 @import 'spina';
-
-textarea {
-  min-height: auto;
-
-  #page_form & {
-    min-height: 300px;
-  }
-}
+$black: #0b0c0c;
+$grey-1: #6f777b;
+$grey-2: #bfc1c3;
+$grey-3: #dee0e2;
+$grey-4: #f8f8f8;
+$white: #ffffff;
 
 .typeahead {
   &__wrapper {
@@ -22,15 +20,14 @@ textarea {
   }
 
   &__menu {
-    background-color: #FFFFFF;
-    border: 1px solid #c3c3c3;
+    background-color: $white;
+    border: 1px solid $grey-2;
     border-top: 0;
-    color: #666666;
+    color: $grey-1;
     margin: 0;
     max-height: 342px;
     overflow-x: hidden;
     padding: 0;
-    width: 100%;
     width: 100%;
   }
 
@@ -43,7 +40,7 @@ textarea {
   }
 
   &__menu--overlay {
-    box-shadow: rgba(0, 0, 0, 0.256863) 0px 2px 6px;
+    box-shadow: rgba($black, 0.256863) 0 2px 6px;
     left: 0;
     position: absolute;
     top: 100%;
@@ -55,9 +52,9 @@ textarea {
   }
 
   &__option {
-    border-bottom: solid #c3c3c3;
+    border-bottom: solid $grey-2;
     border-width: 1px 0;
-    color: #666666;
+    color: $grey-1;
     cursor: pointer;
     display: block;
     font-size: 13px;
@@ -76,26 +73,26 @@ textarea {
   }
 
   &__option--odd {
-    background-color: #f5f5fa;
+    background-color: $grey-4;
   }
 
   &__option--focused,
   &__option:hover {
-    background-color: #6865b4;
-    border-color: #6865b4;
-    color: #FFFFFF;
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $white;
     outline: none;
   }
 
   &__option--no-results {
-    background-color: #f5f5fa;
-    color: #666666;
+    background-color: $grey-4;
+    color: $grey-1;
     cursor: not-allowed;
   }
 }
 
 .register__phase {
   display: inline-block;
-  color: #9b9b9b;
+  color: $grey-2;
   margin-left: 10px;
 }
