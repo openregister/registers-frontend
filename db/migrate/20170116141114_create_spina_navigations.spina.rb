@@ -16,7 +16,7 @@ class CreateSpinaNavigations < ActiveRecord::Migration[4.2]
       t.integer "position", default: 0, null: false
       t.string "ancestry"
       t.timestamps
-      t.index ["page_id", "navigation_id"], name: "index_spina_navigation_items_on_page_id_and_navigation_id", unique: true, using: :btree
+      t.index %w[page_id navigation_id], name: "index_spina_navigation_items_on_page_id_and_navigation_id", unique: true, using: :btree
     end
   end
 end

@@ -1,5 +1,4 @@
 ::Spina::Theme.register do |theme|
-
   theme.name = 'default'
   theme.title = 'Default Theme'
 
@@ -43,5 +42,4 @@
     label: 'Header',
     auto_add_pages: true
   }]
-
 end

@@ -69,9 +69,9 @@ class CreateSpinaTables < ActiveRecord::Migration[4.2]
       t.string   "title"
       t.string   "menu_title"
       t.string   "description"
-      t.boolean  "show_in_menu",        default: true
+      t.boolean  "show_in_menu", default: true
       t.string   "slug"
-      t.boolean  "deletable",           default: true
+      t.boolean  "deletable", default: true
       t.datetime "created_at",                          null: false
       t.datetime "updated_at",                          null: false
       t.string   "name"
@@ -79,12 +79,12 @@ class CreateSpinaTables < ActiveRecord::Migration[4.2]
       t.boolean  "skip_to_first_child", default: false
       t.string   "view_template"
       t.string   "layout_template"
-      t.boolean  "draft",               default: false
+      t.boolean  "draft", default: false
       t.string   "link_url"
       t.string   "ancestry"
       t.integer  "position"
       t.string   "materialized_path"
-      t.boolean  "active",              default: true
+      t.boolean  "active", default: true
     end
 
     create_table "spina_photo_collections", force: :cascade do |t|
@@ -141,7 +141,7 @@ class CreateSpinaTables < ActiveRecord::Migration[4.2]
       t.string   "name"
       t.string   "email"
       t.string   "password_digest"
-      t.boolean  "admin",           default: false
+      t.boolean  "admin", default: false
       t.datetime "created_at",                      null: false
       t.datetime "updated_at",                      null: false
       t.datetime "last_logged_in"
