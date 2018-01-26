@@ -4,8 +4,8 @@ namespace :registers_frontend do
     Spina::Register.find_each do |register|
       entries_by_key =  Entry.where(spina_register_id: register.id).group_by(&:key)
       entries_by_key.each do |key, entries|
-        entries.each_cons(2) { |current, previous|
-          puts "register #{register.name} setting key #{key} #{current.entry_number} previous entry to #{previous.entry_number}"
+        entries.sort_by(&:entry_number).reverse.each_cons(2) { |current, previous|
+          puts "register #{register.name} setting key #{key}, entry #{current.entry_number} previous entry to #{previous.entry_number}"
           Entry.update(current.id, previous_entry_number: previous.entry_number)
         }
       end
