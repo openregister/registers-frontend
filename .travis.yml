@@ -22,7 +22,8 @@ before_script:
 
 script:
   - bundle exec rake spec
-  - bundle exec govuk-lint-ruby app spec
+  - bundle exec govuk-lint-ruby app config db lib spec --format clang
+  - bundle exec govuk-lint-sass app/assets/stylesheets
 
 before_deploy:
   - export PATH=$HOME:$PATH
