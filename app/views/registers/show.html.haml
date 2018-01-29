@@ -2,7 +2,7 @@
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
-%nav.breadcrumbs{"aria-label" => "Breadcrumb"}
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
@@ -61,7 +61,7 @@
               %dt= field['field']
               %dd= field['text']
 
-      %h2.heading-medium Using this register
+      %h3.heading-medium Using this register
       %p There are 2 ways to use Registers. You can either:
       %ul.list-bullet
         %li use our #{link_to "API", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service

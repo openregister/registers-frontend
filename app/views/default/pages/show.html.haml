@@ -2,7 +2,7 @@
 - @page_description = @page.description
 - @body_class = "#{@page.title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}-page"
 
-%nav.breadcrumbs{"aria-label" => "Breadcrumb"}
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
