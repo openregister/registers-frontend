@@ -35,12 +35,12 @@
         %dl
           %dt Updated:
           %dd
-            = DateTime.parse(@register_data.get_entries.last[:timestamp]).strftime('%d/%m/%Y')
+            = DateTime.parse(@register_data.get_entries.to_a.last.value[:timestamp]).strftime('%d/%m/%Y')
           %dt Managed by:
           %dd
             = link_to @register.authority, "https://www.gov.uk/government/organisations/#{@register.authority.parameterize}", target: :blank
 
-      %p= @register_data.get_register_definition[:item]['text']
+      %p= @register_data.get_register_definition.item.value['text']
 
       %details{:role => "group"}
         %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
@@ -99,15 +99,15 @@
           #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
             %dl
               - @register_data.get_field_definitions.each do |field|
-                %dt= field[:item]['field']
-                %dd= field[:item]['text']
+                %dt= field.item.value['field']
+                %dd= field.item.value['text']
 
       .table-scroll
         %table.register-data-table
           %thead
             %tr
               - @register_data.get_field_definitions.each do |field|
-                %th= field[:item]['field']
+                %th= field.item.value['field']
 
           %tbody
             = render partial: 'record', collection: @records
