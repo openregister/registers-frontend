@@ -13,9 +13,9 @@
             %legend.visually-hidden How can we help you?
             .multiple-choice
               = radio_button_tag :subject, :request, checked: true
-              = label_tag :subject_problem, 'Request a register that I need'
+              = label_tag :subject_request, 'Request a register that I need'
             .multiple-choice
               = radio_button_tag :subject, :suggest
-              = label_tag :subject_question, 'Suggest a register that uses my data'
+              = label_tag :subject_suggest, 'Suggest a register that uses my data'
         .form-group
           = submit_tag 'Continue', class: 'button'
