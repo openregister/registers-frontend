@@ -117,7 +117,7 @@
                             = label_tag 'Archived records', nil, for: 'status_archived'
                           .multiple-choice
                             = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                            = label_tag 'Both', nil, for: 'status_both'
+                            = label_tag 'Both', nil, for: 'status_all'
                         = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
       - if @records.present?
