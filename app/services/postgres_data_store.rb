@@ -9,6 +9,7 @@ class PostgresDataStore
     @entries = { user: [], system: [] }
     @records = { user: {}, system: {} }
     @register = register
+    @has_existing_entries_in_db = Entry.where(spina_register_id: @register.id).exists?
   end
 
   def add_item(item)
@@ -18,8 +19,19 @@ class PostgresDataStore
   def append_entry(entry)
     entry_type = entry.entry_type.to_sym
     item = @items[entry.item_hash]
-    previous_entry_number = @records[entry_type].has_key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
-    db_entry = Entry.new(register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
+    previous_entry_number_from_memory = @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
+
+    previous_entry_number_from_db =
+    if @has_existing_entries_in_db
+      latest_entry_from_db = Entry.where(spina_register_id: @register.id, entry_type: entry.entry_type.to_s, key: entry.key.to_s).order(entry_number: :desc).first
+      latest_entry_from_db ? latest_entry_from_db[:entry_number] : nil
+    else
+      nil
+    end
+    
+    previous_entry_number = previous_entry_number_from_memory || previous_entry_number_from_db
+
+    db_entry = Entry.new(spina_register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
 
     @entries[entry_type] << db_entry
 
@@ -28,7 +40,8 @@ class PostgresDataStore
     end
 
     @records[entry_type][entry.key] << db_entry
-  end
+    end
+
 
   def get_item(item_hash); end
 
