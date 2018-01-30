@@ -11,12 +11,12 @@
       %li.breadcrumbs__item
         = link_to 'Registers pipeline', registers_path
       %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to "Registers #{params[:phase]}", '#main', 'aria-current' => 'page'
+        = link_to "Registers #{params[:phase]}", '#content', 'aria-current' => 'page'
     - else
       %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to 'Registers pipeline', '#main', 'aria-current' => 'page'
+        = link_to 'Registers pipeline', '#content', 'aria-current' => 'page'
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
   - if params[:phase].present?
     .grid-row
       .column-full

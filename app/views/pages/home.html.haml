@@ -1,14 +1,14 @@
 - @page_title = 'Home'
 = content_for :body_classes, 'home-page'
 
-%main#main{role:'main'}
+%main{role:'main'}
   .masthead
     %nav.breadcrumbs.breadcrumbs--inverse{"aria-label" => "Breadcrumb"}
       %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
         %li.breadcrumbs__item
           = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
         %li.breadcrumbs__item.breadcrumbs__item--active
-          = link_to 'GOV.UK Registers', '#main', "aria-current" => "page"
+          = link_to 'GOV.UK Registers', '#content', "aria-current" => "page"
 
     .hero.hero--breaded
       .hero__content
@@ -21,7 +21,7 @@
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
-  .container
+  .container#content
     .grid-row
       .column-two-thirds
         %section.content-section

@@ -13,9 +13,9 @@
         %li.breadcrumbs__item
           = link_to ancestor.menu_title, ancestor.materialized_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to '#main', @page.menu_title, "aria-current" => "page"
+      = link_to '#content', @page.menu_title, "aria-current" => "page"
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
   .grid-row
     .column-full
       != @page.content(:text)

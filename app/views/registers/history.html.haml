@@ -11,9 +11,9 @@
     %li.breadcrumbs__item
       = link_to "#{@register.name} Register", register_path(@register.slug)
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to 'Register updates', '#main', 'aria-current' => 'page'
+      = link_to 'Register updates', '#content', 'aria-current' => 'page'
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
   .grid-row
     .column-full
       %h1.heading-xlarge Register updates

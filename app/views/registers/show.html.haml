@@ -11,9 +11,9 @@
     %li.breadcrumbs__item
       = link_to 'Registers pipeline', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.name} Register", '#main', 'aria-current' => 'page'
+      = link_to "#{@register.name} Register", '#content', 'aria-current' => 'page'
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
 
   - if @register.register_phase != 'Beta'
     .grid-row
