@@ -28,15 +28,15 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     @@registers_client = RegistersClient::RegisterClientManager.new(cache_duration: 600) # rubocop:disable Style/ClassVars
 
     ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
-    Spina::Register.find_each do |register|
+    Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
     end
   end
 
   describe 'populate register data job' do
     it 'incrementally updates data' do
-      expect(Spina::Register.count).to eq(1)
-      expect(Entry.where(spina_register_id: Spina::Register.find_by(name: 'country').id).count).to eq(220)
+      expect(Register.count).to eq(1)
+      expect(Entry.where(register_id: Register.find_by(name: 'country').id).count).to eq(220)
       expect(Record.find_by(key: 'CI').data['citizen-names']).to eq('Citizen of the Ivory Coast EDIT')
       expect(Entry.where(key: 'CI').last.data['citizen-names']).to eq('Citizen of the Ivory Coast EDIT')
     end

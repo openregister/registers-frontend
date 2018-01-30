@@ -53,7 +53,7 @@ RSpec.describe RegistersController, type: :controller do
       with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.beta.openregister.org' }).
       to_return(status: 200, body: "", headers: {})
 
-    Spina::Register.find_each do |register|
+    Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
     end
   end
@@ -71,7 +71,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it { is_expected.to render_template :history }
 
-    it { expect { subject }.to_not change(Spina::Register, :count) }
+    it { expect { subject }.to_not change(Register, :count) }
   end
 
   describe 'Request: GET #history. Descr: Check default behaviour. Params: --. Result: 100 rows' do
@@ -150,7 +150,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it { is_expected.to render_template :show }
 
-    it { expect { subject }.to_not change(Spina::Register, :count) }
+    it { expect { subject }.to_not change(Register, :count) }
   end
 
   describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 100 rows' do

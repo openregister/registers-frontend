@@ -8,12 +8,12 @@ module Spina
       layout "spina/admin/admin"
 
       def index
-        @registers = Spina::Register.by_name
+        @registers = Register.by_name
       end
 
       def new
         add_breadcrumb("New #{t('spina.registers.scaffold_name')}", spina.new_admin_register_path)
-        @register = Spina::Register.new
+        @register = Register.new
       end
 
       def edit
@@ -22,7 +22,7 @@ module Spina
 
       def create
         add_breadcrumb("New #{t('spina.registers.scaffold_name')}")
-        @register = Spina::Register.new(register_params)
+        @register = Register.new(register_params)
         if @register.save
           PopulateRegisterDataInDbJob.perform_later(@register)
           flash.now[:success] = "Successfull saved"
@@ -52,7 +52,7 @@ module Spina
     private
 
       def set_register
-        @register = Spina::Register.find(params[:id])
+        @register = Register.find(params[:id])
       end
 
       def set_breadcrumb

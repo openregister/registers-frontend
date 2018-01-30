@@ -19,7 +19,7 @@ class PostgresDataStore
     entry_type = entry.entry_type.to_sym
     item = @items[entry.item_hash]
     previous_entry_number = @records[entry_type].has_key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
-    db_entry = Entry.new(spina_register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
+    db_entry = Entry.new(register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
 
     @entries[entry_type] << db_entry
 
@@ -43,7 +43,7 @@ class PostgresDataStore
   def get_records(entry_type); end
 
   def get_latest_entry_number(entry_type)
-    latest_entry = Entry.where(spina_register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
+    latest_entry = Entry.where(register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
     if latest_entry.nil?
       latest_entry = @entries[entry_type].last
       latest_entry.nil? ? 0 : latest_entry.entry_number
@@ -62,7 +62,7 @@ private
 
   def batch_update(entry_type)
     begin
-      latest_entry = Entry.where(spina_register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
+      latest_entry = Entry.where(register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
 
       if !@entries[entry_type].empty?
         @entries[entry_type].each_slice(1000) do |entries|
@@ -82,7 +82,7 @@ private
           records.each do |record|
             entry_for_record = record[1].last
 
-            records_to_add << Record.new(spina_register: @register, data: entry_for_record.data, timestamp: entry_for_record.timestamp, hash_value: entry_for_record.hash_value, entry_number: entry_for_record.entry_number, entry_type: entry_for_record.entry_type, key: entry_for_record.key)
+            records_to_add << Record.new(register: @register, data: entry_for_record.data, timestamp: entry_for_record.timestamp, hash_value: entry_for_record.hash_value, entry_number: entry_for_record.entry_number, entry_type: entry_for_record.entry_type, key: entry_for_record.key)
           end
 
           Record.import!(records_to_add)
@@ -95,11 +95,11 @@ private
       Delayed::Worker.logger.error("Problem found populating #{@register.name}: #{e.message}")
 
       if latest_entry.nil?
-        Record.destroy_all(spina_register_id: @register.id)
-        Entry.destroy_all(spina_register_id: @register.id)
+        Record.destroy_all(register_id: @register.id)
+        Entry.destroy_all(register_id: @register.id)
       else
-        Record.where(spina_register_id: @register.id).where("entry_number > #{latest_entry.entry_number}").destroy_all
-        Entry.where(spina_register_id: @register.id).where("entry_number > #{latest_entry.entry_number}").destroy_all
+        Record.where(register_id: @register.id).where("entry_number > #{latest_entry.entry_number}").destroy_all
+        Entry.where(register_id: @register.id).where("entry_number > #{latest_entry.entry_number}").destroy_all
       end
       raise StandardError.new('PopulationError')
     end
@@ -107,7 +107,7 @@ private
 
   def bulk_remove_existing_records(register, entry_type, record_keys)
     unless record_keys.empty?
-      Record.where(spina_register_id: register.id, entry_type: entry_type, key: record_keys).delete_all
+      Record.where(register_id: register.id, entry_type: entry_type, key: record_keys).delete_all
     end
   end
 
