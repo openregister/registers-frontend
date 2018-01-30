@@ -79,8 +79,8 @@
       %aside.related-items
         %h2.related-items__title Registers ready to use
         %ul.related-items__list
-          - beta_registers.reject{ |r| %w{register datatype field}.include?(r[:item]['register'])}.each do |register|
-            %li= link_to register[:item]['register'], "https://#{register[:item]['register'].parameterize}.register.gov.uk", target: :blank
+          - beta_registers.reject{ |r| %w{register datatype field}.include?(r.item.value['register'])}.each do |register|
+            %li= link_to register.item.value['register'], "https://#{register.item.value['register'].parameterize}.register.gov.uk", target: :blank
         %h2.related-items__title Upcoming registers
         %ul.related-items__list
           %li
