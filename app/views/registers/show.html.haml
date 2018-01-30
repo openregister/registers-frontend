@@ -2,22 +2,18 @@
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
-%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
-  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList", data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
-        %span{itemprop: "name"} Components
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to root_path, itemprop: "item" do
-        %span{itemprop: "name"} GOV.UK Registers
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to registers_path, itemprop: "item" do
-        %span{itemprop: "name"} Register pipeline
-    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      %a{href: "#main", itemprop: "item"}
-        %span{itemprop: "name"}= @register.name
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item
+      = link_to 'Registers pipeline', registers_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to "#{@register.name} Register", '#content', 'aria-current' => 'page'
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
 
   - if @register.register_phase != 'Beta'
     .grid-row
@@ -57,24 +53,24 @@
       %p=get_register_definition['text']
 
       %details{role: "group"}
-        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+        %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
           %span.summary What fields are included in this register?
-        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+        #details-content-1.panel.panel-border-narrow{"aria-hidden" => "true"}
           %dl
             - get_field_definitions.each do |field|
               %dt= field['field']
               %dd= field['text']
 
-      %h2.heading-medium Using this register
+      %h3.heading-medium Using this register
       %p There are 2 ways to use Registers. You can either:
       %ul.list-bullet
         %li use our #{link_to "API", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
         %li download the data for this Register and keep your own copy up-to-date
 
       %details{role: "group"}
-        %summary{"aria-controls" => "details-content-0", "aria-expanded" => "false", :role => "button"}
+        %summary{"aria-controls" => "details-content-2", "aria-expanded" => "false", :role => "button"}
           %span.summary Download a copy of this register
-        #details-content-0.panel.panel-border-narrow{"aria-hidden" => "true"}
+        #details-content-2.panel.panel-border-narrow{"aria-hidden" => "true"}
           %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xlsx"}.
           %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
 
@@ -121,7 +117,7 @@
                             = label_tag 'Archived records', nil, for: 'status_archived'
                           .multiple-choice
                             = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                            = label_tag 'Both', nil, for: 'status_both'
+                            = label_tag 'Both', nil, for: 'status_all'
                         = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
       - if @records.present?

@@ -1,24 +1,19 @@
 = content_for :page_title, "Register updates"
 
-%nav{class: "breadcrumbs", "aria-label" => "Breadcrumbs"}
-  %ol{itemscope: "", itemtype: "http://schema.org/BreadcrumbList", data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to "https://www.gov.uk/service-toolkit#components", itemprop: "item" do
-        %span{itemprop: "name"} Components
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to root_path, itemprop: "item" do
-        %span{itemprop: "name"} GOV.UK Registers
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to registers_path, itemprop: "item" do
-        %span{itemprop: "name"} Register pipeline
-    %li{class: "breadcrumbs__item", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      = link_to register_path(@register.slug), itemprop: "item" do
-        %span{itemprop: "name"} #{@register.name} Register
-    %li{class: "breadcrumbs__item breadcrumbs__item--active", itemprop: "itemListElement", itemscope: "", itemtype: "http://schema.org/ListItem"}
-      %a{href: "#main", itemprop: "item"}
-        %span{itemprop: "name"} Register updates
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item
+      = link_to 'Registers pipeline', registers_path
+    %li.breadcrumbs__item
+      = link_to "#{@register.name} Register", register_path(@register.slug)
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Register updates', '#content', 'aria-current' => 'page'
 
-%main.container{role:'main'}
+%main#content.container{role:'main'}
   .grid-row
     .column-full
       %h1.heading-xlarge Register updates
