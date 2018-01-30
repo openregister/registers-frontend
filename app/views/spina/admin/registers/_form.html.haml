@@ -43,7 +43,7 @@
           = Spina::Page.human_attribute_name :register_phase
         .horizontal-form-content
           .select-dropdown
-            = f.select :register_phase, Spina::Register::CURRENT_PHASES, include_blank: 'Select current phase'
+            = f.select :register_phase, Register::CURRENT_PHASES, include_blank: 'Select current phase'
       .horizontal-form-group
         .horizontal-form-label
           Authority
