@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180130160640) do
     t.datetime "updated_at", null: false
     t.integer "entry_number"
     t.integer "previous_entry_number"
-    t.index ["hash_value", "entry_type", "timestamp", "spina_register_id"], name: "unique_entry_index", unique: true
+    t.index ["hash_value", "entry_type", "entry_number", "spina_register_id"], name: "unique_entry_index", unique: true
     t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
   end
 
