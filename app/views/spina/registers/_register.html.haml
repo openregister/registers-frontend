@@ -1,7 +1,7 @@
 %tr{class: "js-filter-item", "data-filter-terms" => "#{register.name}"}
   %th{"data-title" => index, }
     %h4.heading-xsmall= register.name
-    - if register.register_phase == 'Backlog'
+    - if register.register_phase == 'Backlog' || @register_registers.select{ |r| r.entry.key == register.name.parameterize }.first.nil?
       %p= govspeak(register.description)
     - else
       %p= @register_registers.select{ |r| r.entry.key == register.name.parameterize }.first.item.value['text']
