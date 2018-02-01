@@ -22,6 +22,6 @@ class PagesController < ApplicationController
 private
 
   def get_ready_to_use_registers
-    @beta_registers = Register.where(register_phase: 'Beta')
+    @beta_registers = Register.where(register_phase: 'Beta').select(&:records?)
   end
 end
