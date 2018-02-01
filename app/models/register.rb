@@ -14,6 +14,10 @@ class Register < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
 
+  def records?
+    Record.where(register_id: id).exists?
+  end
+
 private
 
   def set_slug
