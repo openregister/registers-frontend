@@ -1,23 +1,24 @@
 module Spina
   module Admin
     class RegistersController < AdminController
-      before_action :set_breadcrumb, :set_register, only: %i[edit update destroy]
+      before_action :set_register, only: %i[edit update destroy]
+      before_action :set_breadcrumb
       before_action :set_government_organisations, only: %i[new edit]
 
       layout "spina/admin/admin"
 
       def index
-        @registers = Spina::Register.by_name
+        @registers = Register.by_name
       end
 
       def new
         add_breadcrumb "New #{t('spina.registers.scaffold_name')}", spina.new_admin_register_path
-        @register = Spina::Register.new
+        @register = Register.new
       end
 
       def create
         add_breadcrumb "New #{t('spina.registers.scaffold_name')}"
-        @register = Spina::Register.new(register_params)
+        @register = Register.new(register_params)
         if @register.save
           flash.now[:success] = "Successfull saved"
           redirect_to spina.edit_admin_register_url(@register)
@@ -46,7 +47,7 @@ module Spina
     private
 
       def set_register
-        @register = Spina::Register.find(params[:id])
+        @register = Register.find(params[:id])
       end
 
       def set_breadcrumb

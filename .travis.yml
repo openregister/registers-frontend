@@ -12,11 +12,6 @@ env:
 addons:
   postgresql: "9.6"
 
-# Force update to rubygems see https://github.com/rvm/rvm/issues/4276
-before_install:
-  - gem update --system 2.7.4
-  - gem --version
-
 before_script:
   - bundle exec rake db:setup
 

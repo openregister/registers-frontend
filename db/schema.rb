@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103105857) do
+ActiveRecord::Schema.define(version: 20180130144353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20180103105857) do
     t.text "key"
     t.datetime "timestamp"
     t.jsonb "data"
-    t.bigint "spina_register_id"
+    t.bigint "register_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
     t.integer "previous_entry_number"
-    t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
+    t.index ["register_id"], name: "index_entry_on_register_id"
   end
 
   create_table "records", force: :cascade do |t|
@@ -51,11 +51,24 @@ ActiveRecord::Schema.define(version: 20180103105857) do
     t.text "key"
     t.datetime "timestamp"
     t.jsonb "data"
-    t.bigint "spina_register_id"
+    t.bigint "register_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
-    t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
+    t.index ["register_id"], name: "index_record_on_register_id"
+  end
+
+  create_table "registers", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "contextual_data"
+    t.string "register_phase"
+    t.string "slug"
+    t.string "authority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.text "fields"
+    t.text "related_registers"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
@@ -117,7 +130,6 @@ ActiveRecord::Schema.define(version: 20180103105857) do
   end
 
   create_table "spina_lines", id: :serial, force: :cascade do |t|
-    t.string "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -179,16 +191,12 @@ ActiveRecord::Schema.define(version: 20180103105857) do
   end
 
   create_table "spina_pages", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.string "menu_title"
-    t.string "description"
     t.boolean "show_in_menu", default: true
     t.string "slug"
     t.boolean "deletable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.string "seo_title"
     t.boolean "skip_to_first_child", default: false
     t.string "view_template"
     t.string "layout_template"
@@ -196,7 +204,6 @@ ActiveRecord::Schema.define(version: 20180103105857) do
     t.string "link_url"
     t.string "ancestry"
     t.integer "position"
-    t.string "materialized_path"
     t.boolean "active", default: true
   end
 
@@ -217,19 +224,6 @@ ActiveRecord::Schema.define(version: 20180103105857) do
     t.datetime "updated_at", null: false
     t.integer "media_folder_id"
     t.index ["media_folder_id"], name: "index_spina_photos_on_media_folder_id"
-  end
-
-  create_table "spina_registers", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.text "contextual_data"
-    t.string "register_phase"
-    t.string "slug"
-    t.string "authority"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "description"
-    t.text "fields"
-    t.text "related_registers"
   end
 
   create_table "spina_rewrite_rules", id: :serial, force: :cascade do |t|
@@ -283,7 +277,6 @@ ActiveRecord::Schema.define(version: 20180103105857) do
   end
 
   create_table "spina_texts", id: :serial, force: :cascade do |t|
-    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

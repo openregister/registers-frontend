@@ -7,7 +7,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     register_client = @@registers_client.get_register(register.name.parameterize, register.register_phase.downcase, PostgresDataStore.new(register))
     register_client.refresh_data
 
-    metadata_records = Record.where(spina_register_id: register.id, entry_type: :system)
+    metadata_records = Record.where(register_id: register.id, entry_type: :system)
     fields = metadata_records.select { |record| record.key.start_with?("field:") }
     register.fields = fields.map { |field| field.data['field'] }.join(',')
     register.save
