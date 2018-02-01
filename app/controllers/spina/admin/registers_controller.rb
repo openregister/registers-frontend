@@ -1,24 +1,30 @@
 module Spina
   module Admin
     class RegistersController < AdminController
-      before_action :set_breadcrumb, :set_register, only: %i[edit update destroy]
+      before_action :set_breadcrumb
+      before_action :set_register, only: %i[edit update destroy]
       before_action :set_government_organisations, only: %i[new edit]
 
       layout "spina/admin/admin"
 
       def index
-        @registers = Spina::Register.by_name
+        @registers = Register.by_name
       end
 
       def new
-        add_breadcrumb "New #{t('spina.registers.scaffold_name')}", spina.new_admin_register_path
-        @register = Spina::Register.new
+        add_breadcrumb("New #{t('spina.registers.scaffold_name')}", spina.new_admin_register_path)
+        @register = Register.new
+      end
+
+      def edit
+        add_breadcrumb(@register.name)
       end
 
       def create
-        add_breadcrumb "New #{t('spina.registers.scaffold_name')}"
-        @register = Spina::Register.new(register_params)
+        add_breadcrumb("New #{t('spina.registers.scaffold_name')}")
+        @register = Register.new(register_params)
         if @register.save
+          PopulateRegisterDataInDbJob.perform_later(@register)
           flash.now[:success] = "Successfull saved"
           redirect_to spina.edit_admin_register_url(@register)
         else
@@ -28,7 +34,7 @@ module Spina
       end
 
       def update
-        add_breadcrumb @register.name
+        add_breadcrumb(@register.name)
         if @register.update_attributes(register_params)
           flash.now[:success] = "Successfull saved"
           redirect_to spina.edit_admin_register_url(@register)
@@ -46,11 +52,11 @@ module Spina
     private
 
       def set_register
-        @register = Spina::Register.find(params[:id])
+        @register = Register.find(params[:id])
       end
 
       def set_breadcrumb
-        add_breadcrumb t('spina.registers.scaffold_name_plural'), spina.admin_registers_path
+        add_breadcrumb(t('spina.registers.scaffold_name_plural'), spina.admin_registers_path)
       end
 
       def set_government_organisations

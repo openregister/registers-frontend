@@ -10,12 +10,7 @@ env:
   - CF_USERNAME="register-design-authority@digital.cabinet-office.gov.uk"
 
 addons:
-  postgresql: "9.6"
-
-# Force update to rubygems see https://github.com/rvm/rvm/issues/4276
-before_install:
-  - gem update --system 2.7.4
-  - gem --version
+  postgresql: '9.6'
 
 before_script:
   - bundle exec rake db:setup

@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(version: 20180130160640) do
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
-    t.bigint "spina_register_id"
+    t.bigint "register_id"
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
     t.integer "previous_entry_number"
-    t.index ["hash_value", "entry_type", "entry_number", "spina_register_id", "key"], name: "unique_entry_index", unique: true
-    t.index ["spina_register_id"], name: "index_entry_on_spina_register_id"
+    t.index ["hash_value", "entry_type", "entry_number", "register_id", "key"], name: "unique_entry_index", unique: true
+    t.index ["register_id"], name: "index_entry_on_register_id"
   end
 
   create_table "records", force: :cascade do |t|
@@ -50,12 +50,25 @@ ActiveRecord::Schema.define(version: 20180130160640) do
     t.text "entry_type"
     t.text "key"
     t.datetime "timestamp"
-    t.bigint "spina_register_id"
+    t.bigint "register_id"
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "entry_number"
-    t.index ["spina_register_id"], name: "index_record_on_spina_register_id"
+    t.index ["register_id"], name: "index_record_on_register_id"
+  end
+
+  create_table "registers", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "contextual_data"
+    t.string "register_phase"
+    t.string "slug"
+    t.string "authority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.text "fields"
+    t.text "related_registers"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
@@ -217,19 +230,6 @@ ActiveRecord::Schema.define(version: 20180130160640) do
     t.datetime "updated_at", null: false
     t.integer "media_folder_id"
     t.index ["media_folder_id"], name: "index_spina_photos_on_media_folder_id"
-  end
-
-  create_table "spina_registers", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.text "contextual_data"
-    t.string "register_phase"
-    t.string "slug"
-    t.string "authority"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "description"
-    t.text "fields"
-    t.text "related_registers"
   end
 
   create_table "spina_rewrite_rules", id: :serial, force: :cascade do |t|

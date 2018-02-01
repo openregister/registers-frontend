@@ -6,7 +6,7 @@ class RegistersController < ApplicationController
   layout 'layouts/default/application'
 
   def index
-    @search = Spina::Register.ransack(params[:q])
+    @search = Register.ransack(params[:q])
 
     @registers = if params[:phase] == 'ready to use'
                    @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
@@ -16,35 +16,35 @@ class RegistersController < ApplicationController
                    @search.result.sort_by_phase_name_asc.by_name
                  end
 
-    @current_phases = Spina::Register::CURRENT_PHASES
+    @current_phases = Register::CURRENT_PHASES
   end
 
   def get_last_timestamp
     Record.select('timestamp')
-      .where(spina_register_id: @register.id, entry_type: 'user')
+      .where(register_id: @register.id, entry_type: 'user')
       .order(timestamp: :desc)
       .first[:timestamp]
       .to_s
   end
 
   def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")
-    Record.find_by(spina_register_id: register_id, key: key).data
+    Record.find_by(register_id: register_id, key: key).data
   end
 
   def get_field_definitions
     ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
-    Record.where(spina_register_id: @register.id, key: ordered_field_keys)
+    Record.where(register_id: @register.id, key: ordered_field_keys)
       .order("position(key::text in '#{ordered_field_keys.join(',')}')")
       .map { |entry| entry[:data] }
   end
 
   def show
-    @register = Spina::Register.find_by_slug!(params[:id])
+    @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.id, @register.fields, params)
   end
 
   def history
-    @register = Spina::Register.find_by_slug!(params[:id])
+    @register = Register.find_by_slug!(params[:id])
     entries = recover_entries_history(@register.id, @register.fields, params)
     fields = get_field_definitions.map { |field| field['field'] }
 
@@ -80,15 +80,15 @@ private
       operation_params.push(partial)
       fields.split(',').count.times { operation_params.push("%#{search_term}%") }
 
-      query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(page_size).offset(page_size * (page - 1))
-      count_query = Entry.where(spina_register_id: register_id, entry_type: 'user').where(operation_params)
+      query = Entry.where(register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(page_size).offset(page_size * (page - 1))
+      count_query = Entry.where(register_id: register_id, entry_type: 'user').where(operation_params)
     else
-      query = Entry.where(spina_register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
-      count_query = Entry.where(spina_register_id: register_id, entry_type: 'user')
+      query = Entry.where(register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
+      count_query = Entry.where(register_id: register_id, entry_type: 'user')
     end
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
-    previous_entries_query = Entry.where(spina_register_id: register_id, entry_number: previous_entries_numbers)
+    previous_entries_query = Entry.where(register_id: register_id, entry_number: previous_entries_numbers)
 
     result = query.map do |entry|
       entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
@@ -112,8 +112,8 @@ private
     page = (params[:page] ||= 1).to_i
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
-    @total_record_count = Record.where(spina_register_id: register_id, entry_type: 'user').count
-    query = Record.where(spina_register_id: register_id, entry_type: 'user')
+    @total_record_count = Record.where(register_id: register_id, entry_type: 'user').count
+    query = Record.where(register_id: register_id, entry_type: 'user')
 
     query = case status
             when 'archived'
