@@ -24,6 +24,7 @@ module Spina
         add_breadcrumb("New #{t('spina.registers.scaffold_name')}")
         @register = Spina::Register.new(register_params)
         if @register.save
+          PopulateRegisterDataInDbJob.perform_later(@register)
           flash.now[:success] = "Successfull saved"
           redirect_to spina.edit_admin_register_url(@register)
         else
