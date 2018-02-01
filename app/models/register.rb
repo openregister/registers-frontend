@@ -18,6 +18,10 @@ class Register < ApplicationRecord
     Record.where(register_id: id).exists?
   end
 
+  def available?
+    register_phase == 'Backlog' || records?
+  end
+
 private
 
   def set_slug
