@@ -1,0 +1,186 @@
+assert-root-hash	sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+add-item	{"name":"Saint Pierre and Miquelon","official-name":"Saint Pierre and Miquelon","territory":"PM"}
+add-item	{"cardinality":"1","datatype":"string","field":"official-name","phase":"beta","text":"The official or technical name of a record."}
+add-item	{"name":"Hong Kong","official-name":"Hong Kong Special Administrative Region","territory":"HK"}
+add-item	{"name":"Umm al-Quwain","official-name":"Emirate of Umm al-Quwain","territory":"AE-UQ"}
+add-item	{"name":"Christmas Island","official-name":"Territory of Christmas Island","territory":"CX"}
+add-item	{"name":"Jarvis Island","official-name":"Jarvis Island","territory":"UM-86"}
+add-item	{"name":"Montserrat","official-name":"Montserrat","territory":"MS"}
+add-item	{"name":"Sint Maarten (Dutch part)","official-name":"Sint Maarten","territory":"SX"}
+add-item	{"name":"British Indian Ocean Territory","official-name":"The British Indian Ocean Territory","territory":"IO"}
+add-item	{"name":"Gibraltar","official-name":"Gibraltar","territory":"GI"}
+add-item	{"name":"Réunion","official-name":"Réunion","territory":"RE"}
+add-item	{"name":"Bonaire","official-name":"Bonaire","territory":"BQ-BO"}
+add-item	{"name":"Antarctica","official-name":"Antarctica","territory":"AQ"}
+add-item	{"fields":["territory","name","official-name","start-date","end-date"],"phase":"beta","register":"territory","registry":"foreign-commonwealth-office","text":"British English-language names and descriptive terms for political, administrative and geographical entities that aren’t recognised as countries by the UK"}
+add-item	{"name":"New Caledonia","official-name":"New Caledonia","territory":"NC"}
+add-item	{"cardinality":"1","datatype":"string","field":"name","phase":"beta","text":"The commonly-used name of a record."}
+add-item	{"name":"Isle of Man","official-name":"Isle of Man","territory":"IM"}
+add-item	{"name":"Bermuda","official-name":"Bermuda","territory":"BM"}
+add-item	{"name":"Saint Barthélemy","official-name":"Saint Barthélemy","territory":"BL"}
+add-item	{"name":"Ajman","official-name":"Emirate of Ajman","territory":"AE-AJ"}
+add-item	{"name":"Puerto Rico","official-name":"Commonwealth of Puerto Rico","territory":"PR"}
+add-item	{"name":"Ras al-Khaimah","official-name":"Emirate of Ras al-Khaimah","territory":"AE-RK"}
+add-item	{"name":"British Virgin Islands","official-name":"The Virgin Islands","territory":"VG"}
+add-item	{"name":"Guadeloupe","official-name":"Guadeloupe","territory":"GP"}
+add-item	{"name":"Martinique","official-name":"Martinique","territory":"MQ"}
+add-item	{"name":"South Georgia and South Sandwich Islands","official-name":"South Georgia and the South Sandwich Islands","territory":"GS"}
+add-item	{"name":"Saint Helena","official-name":"Saint Helena","territory":"SH-HL"}
+add-item	{"name":"Guernsey","official-name":"Bailiwick of Guernsey","territory":"GG"}
+add-item	{"name":"Jersey","official-name":"Bailiwick of Jersey","territory":"JE"}
+add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"beta","text":"The date a record first became relevant to a register."}
+add-item	{"name":"Akrotiri","official-name":"Sovereign Base Areas of Akrotiri and Dhekelia","territory":"XQZ"}
+add-item	{"name":"American Samoa","official-name":"Territory of American Samoa","territory":"AS"}
+add-item	{"name":"United States Virgin Islands","official-name":"Virgin Islands of the United States","territory":"VI"}
+add-item	{"name":"Åland Islands","official-name":"Åland Islands","territory":"AX"}
+add-item	{"name":"Northern Mariana Islands","official-name":"Commonwealth of the Northern Mariana Islands","territory":"MP"}
+add-item	{"name":"Dhekelia","official-name":"Sovereign Base Areas of Akrotiri and Dhekelia","territory":"XXD"}
+add-item	{"name":"Pitcairn, Henderson, Ducie and Oeno Islands","official-name":"Pitcairn, Henderson, Ducie and Oeno Islands","territory":"PN"}
+add-item	{"name":"Faroe Islands","official-name":"Faroe Islands","territory":"FO"}
+add-item	{"name":"Melilla","official-name":"Melilla","territory":"ES-ML"}
+add-item	{"name":"Bouvet Island","official-name":"Bouvet Island","territory":"BV"}
+add-item	{"name":"Macao","official-name":"Macao Special Administrative Region","territory":"MO"}
+add-item	{"name":"Curaçao","official-name":"Country of Curaçao","territory":"CW"}
+add-item	{"name":"Norfolk Island","official-name":"Territory of Norfolk Island","territory":"NF"}
+add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"beta","text":"The date a record stopped being applicable."}
+add-item	{"cardinality":"1","datatype":"datetime","field":"end-date","phase":"beta","text":"The date a record stopped being applicable."}
+add-item	{"name":"Sharjah","official-name":"Emirate of Sharjah","territory":"AE-SH"}
+add-item	{"name":"Kingman Reef","official-name":"Kingman Reef","territory":"UM-89"}
+add-item	{"custodian":"Tony Worron"}
+add-item	{"name":"Cayman Islands","official-name":"Cayman Islands","territory":"KY"}
+add-item	{"name":"Svalbard and Jan Mayen","official-name":"Svalbard and Jan Mayen","territory":"SJ"}
+add-item	{"name":"Cocos (Keeling) Islands","official-name":"Territory of the Cocos (Keeling) Islands","territory":"CC"}
+add-item	{"name":"French Southern Territories","official-name":"French Southern Territories","territory":"TF"}
+add-item	{"name":"Midway Islands","official-name":"Midway Islands","territory":"UM-71"}
+add-item	{"name":"Johnston Atoll","official-name":"Johnston Atoll","territory":"UM-67"}
+add-item	{"name":"Wake Island","official-name":"Wake Island","territory":"UM-79"}
+add-item	{"cardinality":"1","datatype":"string","field":"territory","phase":"beta","register":"territory","text":"The territory's ISO 3166-1 alpha3 code. Unique codes have been created for territories that don't have an existing ISO code."}
+add-item	{"name":"Wallis and Futuna","official-name":"Territory of the Wallis and Futuna Islands","territory":"WF"}
+add-item	{"name":"Guam","official-name":"Territory of Guam","territory":"GU"}
+add-item	{"name":"Taiwan","official-name":"Taiwan","territory":"TW"}
+add-item	{"name":"Niue","official-name":"Niue","territory":"NU"}
+add-item	{"name":"Sint Eustatius","official-name":"Sint Eustatius","territory":"BQ-SE"}
+add-item	{"name":"French Guiana","official-name":"French Guiana","territory":"GF"}
+add-item	{"name":"Howland Island","official-name":"Howland Island","territory":"UM-84"}
+add-item	{"name":"Turks and Caicos Islands","official-name":"Turks and Caicos Islands","territory":"TC"}
+add-item	{"name":"Anguilla","official-name":"Anguilla","territory":"AI"}
+add-item	{"name":"Cook Islands","official-name":"Cook Islands","territory":"CK"}
+add-item	{"name":"Aruba","official-name":"Aruba","territory":"AW"}
+add-item	{"name":"Saint-Martin (French part)","official-name":"Collectivity of Saint Martin","territory":"MF"}
+add-item	{"name":"Tristan da Cunha","official-name":"Tristan da Cunha","territory":"SH-TA"}
+add-item	{"name":"Western Sahara","official-name":"Western Sahara","territory":"EH"}
+add-item	{"name":"French Polynesia","official-name":"French Polynesia","territory":"PF"}
+add-item	{"name":"Abu Dhabi","official-name":"Emirate of Abu Dhabi","territory":"AE-AZ"}
+add-item	{"name":"Ascension","official-name":"Ascension Island","territory":"SH-AC"}
+add-item	{"name":"Greenland","official-name":"Greenland","territory":"GL"}
+add-item	{"name":"Navassa Island","official-name":"Navassa Island","territory":"UM-76"}
+add-item	{"name":"Occupied Palestinian Territories","official-name":"The Occupied Palestinian Territories","territory":"PS"}
+add-item	{"name":"Baker Island","official-name":"Baker Island","territory":"UM-81"}
+add-item	{"name":"Saba","official-name":"Saba","territory":"BQ-SA"}
+add-item	{"name":"Ceuta","official-name":"Ceuta","territory":"ES-CE"}
+add-item	{"name":"Heard Island and McDonald Islands","official-name":"Territory of Heard Island and McDonald Islands","territory":"HM"}
+add-item	{"name":"Palmyra Atoll","official-name":"Palmyra Atoll","territory":"UM-95"}
+add-item	{"name":"British Antarctic Territory","official-name":"British Antarctic Territory","territory":"BAT"}
+add-item	{"name":"Falkland Islands","official-name":"Falkland Islands","territory":"FK"}
+add-item	{"name":"Fujairah","official-name":"Emirate of Fujairah","territory":"AE-FU"}
+add-item	{"cardinality":"1","datatype":"datetime","field":"end-date","phase":"beta","text":"The date a record stopped being applicable. For example, the date a school closed down."}
+add-item	{"name":"Tokelau","official-name":"Tokelau","territory":"TK"}
+add-item	{"name":"Cueta","official-name":"Cueta","territory":"ES-CE"}
+add-item	{"name":"territory"}
+add-item	{"name":"Mayotte","official-name":"Mayotte","territory":"YT"}
+add-item	{"cardinality":"1","datatype":"datetime","field":"start-date","phase":"beta","text":"The date a record first became relevant to a register. For example, the date a country was first recognised by the UK."}
+add-item	{"name":"Dubai","official-name":"Emirate of Dubai","territory":"AE-DU"}
+add-item	{"custodian":"David de Silva"}
+append-entry	system	name	2017-07-17T10:59:48Z	sha-256:a5565fe2b2ae7d086521576450af2808c1ce48718219cf427e07032669d9c1bb
+append-entry	system	custodian	2017-07-17T10:59:48Z	sha-256:6bdb76b1cdec0f43a88aeb91da7336dde2e57af1ecfcb0ac468a6329780f9f68
+append-entry	system	field:territory	2017-01-10T17:16:07Z	sha-256:b3a7a5f7e9e4032da268af3c0ee1a9263b8a30d858090e3269e5f81ed639d393
+append-entry	system	field:name	2017-01-10T17:16:07Z	sha-256:a7a9f2237dadcb3980f6ff8220279a3450778e9c78b6f0f12febc974d49a4a9f
+append-entry	system	field:official-name	2017-01-10T17:16:07Z	sha-256:5c4728f439f6cbc6c7eea42992b858afc78c182962ba35d169f49db2c88e1e41
+append-entry	system	field:start-date	2017-01-10T17:16:07Z	sha-256:1cff4c622577fabd35917760b04bc304af3b950e19735b60152c19f18b55e75e
+append-entry	system	field:end-date	2017-01-10T17:16:07Z	sha-256:a557fa9bf4a6ce1991717b9429406f4fa724fb8818dfe018d306694de22efbf7
+append-entry	system	register:territory	2016-12-15T15:44:11Z	sha-256:40a3400b0843f7b0a63a84ce4e9575627b2cae8154dc1f77b62c5ab75624d299
+append-entry	system	field:start-date	2017-08-29T11:30:00Z	sha-256:f09c439836eb6fccfb0680fa98dfc3d0300d1ceb2a43eb3c26b3eed01a42d2c2
+append-entry	system	field:end-date	2017-08-29T11:30:00Z	sha-256:1f5e5401f414736227b39742a8ca01e932d89e1f076e893f6b7c94e3cdf919a8
+append-entry	system	field:end-date	2017-08-29T11:31:00Z	sha-256:c5845bfc15577e8c120970ba084f1dc2c82b10e703f80d1efe4f694295a5a71d
+append-entry	system	custodian	2017-11-02T11:18:00Z	sha-256:aa98858fc2a8a9fae068c44908932d24b207defe526bdf75e3f6c049bb352927
+append-entry	user	AE-AZ	2016-12-15T12:15:07Z	sha-256:e5cf66f85cb1724d700ca35048f7a3958ad027880aecfce04adb838ea9158c6a
+append-entry	user	SH-AC	2016-12-15T12:15:07Z	sha-256:657822f3bbdbce1f6b14c6bad4a5f335237462df9af7ca9ddf4749728119118b
+append-entry	user	AE-AJ	2016-12-15T12:15:07Z	sha-256:017d035dbfd00cf3696fe5ac110455a76046e47f7c3b295d2403eb67724485ed
+append-entry	user	XQZ	2016-12-15T12:15:07Z	sha-256:c02fec9699c1a0c36691e9b63c38b2992bd5e7a07e0c88cbb0629d3b38416fc3
+append-entry	user	AX	2016-12-15T12:15:07Z	sha-256:3217c5899b8776a8dc6bf1c81a48ae528def1bef413edb8e9701b48993ac4550
+append-entry	user	AS	2016-12-15T12:15:07Z	sha-256:54111de1ca026cd2703f87d1cd9e43333264eea96c40b3a3860cc52a4f6bfd10
+append-entry	user	AI	2016-12-15T12:15:07Z	sha-256:67f5e55d8a1b58d51f34ce29dac736a8a8e936805af3f299cd9598e82c308260
+append-entry	user	AQ	2016-12-15T12:15:07Z	sha-256:dbab99104c284865b7c883c81408094df5ca733fa69bbeaee6779935f440d3fc
+append-entry	user	AW	2016-12-15T12:15:07Z	sha-256:9ca36b3733db26d072ca3453dba3709d7ff7bf1032a9b5ea79d84b0da1d0678c
+append-entry	user	UM-81	2016-12-15T12:15:07Z	sha-256:74ef1ebeed756261b39696870b0319d2a7e67b8a69d1318f107afacff8b15e3c
+append-entry	user	BM	2016-12-15T12:15:07Z	sha-256:4427df862c92d643a6ea6ad9bc8ca87ff972111578e9f95285df7302fa46b06e
+append-entry	user	BQ-BO	2016-12-15T12:15:07Z	sha-256:3d030f80c0b9b0321765b9691e7edb48c6201092f0306194bed8a7e49527dc4c
+append-entry	user	BV	2016-12-15T12:15:07Z	sha-256:30785685f36e0afaefaf9959ec4f70f27da9776a5ffb267cecb07e3a21111a9a
+append-entry	user	BAT	2016-12-15T12:15:07Z	sha-256:95bfc56f77b11e1bf6329650b05b5c14d2cc097b08d6d37d6734511e3cd9c72a
+append-entry	user	IO	2016-12-15T12:15:07Z	sha-256:19605899e6c2875dece7ff5864accec21b6de86a810f9cd110bf94d1c36e9e53
+append-entry	user	VG	2016-12-15T12:15:07Z	sha-256:f36ec9e5936b9b698331d9846edab281b46a36adc7ba4ede2b71bd5397e79a92
+append-entry	user	KY	2016-12-15T12:15:07Z	sha-256:9c1495dc3a257101debf35589dd8241567c79c81a14562055c3511a11090a414
+append-entry	user	CX	2016-12-15T12:15:07Z	sha-256:c38b8e2ed5b2960eac44e0269a39d56875a99f6164ff5d12418e108066d9c69d
+append-entry	user	CC	2016-12-15T12:15:07Z	sha-256:d05e59951135352ca7dc5ae2b782be0eed0590735921c6fb0078ce6f3b1e5677
+append-entry	user	CK	2016-12-15T12:15:07Z	sha-256:4484fe421f170ca6032db3218d9118a6438e4a98442e7fc9f469aa925e77df16
+append-entry	user	ES-CE	2016-12-15T12:15:07Z	sha-256:93a6bfec54813e2cec14fdff50708f9f06a6cda2899138ac11b1701eb5dc709a
+append-entry	user	CW	2016-12-15T12:15:07Z	sha-256:6fdc8621482597cdd970878f40a717caf7aabca2746d753585f53dca9ac16bac
+append-entry	user	XXD	2016-12-15T12:15:07Z	sha-256:e8071a2a04c0a50c166468dbe9e2fd5ccb1e1ffe4b6467b7c85a9ec71390a07e
+append-entry	user	AE-DU	2016-12-15T12:15:07Z	sha-256:ad4b80b9b74eb4555ad374ed89dcbbd5e47ae916cd56fa3d683fffe44db9b05c
+append-entry	user	FK	2016-12-15T12:15:07Z	sha-256:a276132d3eddb8ce605ac57988696560197deb7aadae8cea0e4e5e2b2a6eef13
+append-entry	user	FO	2016-12-15T12:15:07Z	sha-256:5571f4c00c918787a65c79554154f9e6c2d6a67de3c03347f1c5764304296e98
+append-entry	user	GF	2016-12-15T12:15:07Z	sha-256:56eb9a04a5e3ad948a83bf79fcf60206fd85b9285b8902fcbd02aacbc6af762a
+append-entry	user	PF	2016-12-15T12:15:07Z	sha-256:14d741de5a801d81141421a0cfefdb482e222c7fe81dface5f1724fce5854e7c
+append-entry	user	TF	2016-12-15T12:15:07Z	sha-256:a829312ea8d10bda4f2bbd3cd7bb1cd373ebaea54ca088bf2c5b4b17ec7f0936
+append-entry	user	AE-FU	2016-12-15T12:15:07Z	sha-256:f12dffa7928db5d57285cc36e7ab2ee9bd45dce4bd8acafe73a230c8fc8b4322
+append-entry	user	GI	2016-12-15T12:15:07Z	sha-256:2d93c33a0eacaf32f1e598839463c298f2bd3af31b9d2b83e9eba8468e9a1e0f
+append-entry	user	GL	2016-12-15T12:15:07Z	sha-256:57f6e93c557326e77d6f13e347aa03f0cc113f1581f8318aee36baec215104d2
+append-entry	user	GP	2016-12-15T12:15:07Z	sha-256:63aedc7387bbe2ae29a63947365dcdc80dde6565e81c65ee47fe40d38a7f6112
+append-entry	user	GU	2016-12-15T12:15:07Z	sha-256:6a3526a7f509c5959fd78071652c238e6f1982e85f6e0e46ae79e78300d42710
+append-entry	user	GG	2016-12-15T12:15:07Z	sha-256:83f980b8e375752f858f143610cb8f1edaf603aad175053d1a39233df8afb9ba
+append-entry	user	HM	2016-12-15T12:15:07Z	sha-256:a603ccf8f1a0c4633927941fbcf3bd2b51ea9ddbffc4fdf4cd1f0413aae64a44
+append-entry	user	HK	2016-12-15T12:15:07Z	sha-256:1e2a082a4c513704ebdabf869fbf1dd80818fda2cc1a153bb6f0c383ce482bd2
+append-entry	user	UM-84	2016-12-15T12:15:07Z	sha-256:6dbbd2c297b65da08636cb179314d1b83c46542c57060d861bb28a41ebdeb0b2
+append-entry	user	IM	2016-12-15T12:15:07Z	sha-256:07d9c067d979ed11e884fb4b76c38623849c3acec678f166bd0e7ed56906b77a
+append-entry	user	UM-86	2016-12-15T12:15:07Z	sha-256:164f6c155206f3c756e56ebfc0e369251dfd4335e9b90778bcc81a16dae59989
+append-entry	user	JE	2016-12-15T12:15:07Z	sha-256:5695c1e94e6ee32d4198709b715e75bf9e3aa038520a8e7dbbea666a44f69986
+append-entry	user	UM-67	2016-12-15T12:15:07Z	sha-256:aae3c5840a0120ae62ae4ec7b27b58b6e9e7163580b0030cf876cd9caea5631c
+append-entry	user	UM-89	2016-12-15T12:15:07Z	sha-256:4eecb907e508edf70e21d70b8d08ffd71b740ccd711ee1bba0d4a70c1e80b113
+append-entry	user	MO	2016-12-15T12:15:07Z	sha-256:3d0197cd607349b39dd507a1bab29dbeb2c1a246da370a0b590fffa679667848
+append-entry	user	MQ	2016-12-15T12:15:07Z	sha-256:f944baa75aa736d30b6f7f43cde118840f3b2e1848c1df686668ca592efd4972
+append-entry	user	YT	2016-12-15T12:15:07Z	sha-256:bde24bde5c86aa72ee2f2dc5b22db828e1dfbe8eab8ed68536ce4ed39e4246a3
+append-entry	user	ES-ML	2016-12-15T12:15:07Z	sha-256:e2768490e65b9a89e81984e3b14aee72ef85a1414de5dffa6a1161c0ad4fc538
+append-entry	user	UM-71	2016-12-15T12:15:07Z	sha-256:7e3879f06222f88ab0d6ac6f71cff52d6cf1224ce3ad5c030d10c06e487244e0
+append-entry	user	MS	2016-12-15T12:15:07Z	sha-256:49c28ac79060ace97951ae06dea7b45a467712b6299ca0024dbe169279c413a2
+append-entry	user	UM-76	2016-12-15T12:15:07Z	sha-256:ef29954fd59769633a9adcb6ac74aa3094f4eacb713b64cebc852767406c8825
+append-entry	user	NC	2016-12-15T12:15:07Z	sha-256:d9bea8b53a4c347bca9dc3213855541ab8340094ff1e3304caff469ebfe7e76c
+append-entry	user	NU	2016-12-15T12:15:07Z	sha-256:f09a94745fbd586fd0be1837605c54ec302fea6e92f3830ca87c2a85541cde3c
+append-entry	user	NF	2016-12-15T12:15:07Z	sha-256:02ee556ecc7c163d7a636053a7d997a4f1ac28e2a13b1849e6a9f730f36be95c
+append-entry	user	MP	2016-12-15T12:15:07Z	sha-256:66143aed76e3dbb2b6b2c8a180b0935a781bdec9f8ac11e3e0f4655476dfbeae
+append-entry	user	PS	2016-12-15T12:15:07Z	sha-256:662baed80963007b5f3ec6bd255a35cefd43bacac7fc93b70aede9e727fd3516
+append-entry	user	UM-95	2016-12-15T12:15:07Z	sha-256:d9229844f2b8a618c58bca08cda624b4af9f2cecfacb4bfc36d2f41356bef103
+append-entry	user	PN	2016-12-15T12:15:07Z	sha-256:c66a7f9d6fcd82e30fb1d7e5a9d42576e939b024a5d071f8812deb4d43362f98
+append-entry	user	PR	2016-12-15T12:15:07Z	sha-256:965e7fdd3fc872f3ff99494480ea7a909dcf81c906cef93094b1629c8c41d5d3
+append-entry	user	RE	2016-12-15T12:15:07Z	sha-256:e75d1b4e9f7d609c7de0272f3d9a36d85b8a11a9fb8cef1422be901f3052b7a7
+append-entry	user	AE-RK	2016-12-15T12:15:07Z	sha-256:9254f02b91247770d0be37e1e3bf09fad1e6563d516fa51e62062287317bdc6b
+append-entry	user	BQ-SA	2016-12-15T12:15:07Z	sha-256:b385fb447238aed284674dffbd84951245a121a1465f0ed00379c0117a07ef99
+append-entry	user	BL	2016-12-15T12:15:07Z	sha-256:7ecb1597b0edc7e76e33dae7c5dfbc25d85ad33a4108bb054f5cef35166156bd
+append-entry	user	SH-HL	2016-12-15T12:15:07Z	sha-256:9753f697abf8d665c0248754640c899c16d6cc08c375c541c23015e2db989fec
+append-entry	user	MF	2016-12-15T12:15:07Z	sha-256:e1efdc31d336749e097fe484f59bb200a229de5af62d1e1edea79cc765662f72
+append-entry	user	PM	2016-12-15T12:15:07Z	sha-256:72e4e53a7b467b9b562e35aef30fb54d60637f410faf45683c93431c2e8430e5
+append-entry	user	AE-SH	2016-12-15T12:15:07Z	sha-256:d4549b5067a19d056aa8cb713035ac625fcd2fc4f37472de0d109fd7e4ac6154
+append-entry	user	BQ-SE	2016-12-15T12:15:07Z	sha-256:b0810ac4e7779644fd9a19769f794eccd5f0db387ffc0933e2815f81de78d244
+append-entry	user	SX	2016-12-15T12:15:07Z	sha-256:79b4308ef8d7f0c163b45f88aab1bb5360ce7f7758230e3417407bcf23f94002
+append-entry	user	GS	2016-12-15T12:15:07Z	sha-256:a812317238c6347c162e14e59f5f0d86f767a938656cbcaf2c1958dfc0774747
+append-entry	user	SJ	2016-12-15T12:15:07Z	sha-256:55faa17ab901876d9e71554daae865ce912e77d223c06b6e66b0cae81bbe6ff4
+append-entry	user	TW	2016-12-15T12:15:07Z	sha-256:6b8553a1796b2415eed99f74eb49009744841489a98dfbcd1a780452bc223d8d
+append-entry	user	TK	2016-12-15T12:15:07Z	sha-256:f36e9628cd361a387e715b47cfae4849ecb4047b214a42703b89bfcf1557c9e8
+append-entry	user	SH-TA	2016-12-15T12:15:07Z	sha-256:43d1b05c54a10e35938f55ffc0dcff0277a195c5e695d306242ab3868094f843
+append-entry	user	TC	2016-12-15T12:15:07Z	sha-256:90b265781be3926762a3011f0d46738954f53efd15f33e33b9d118800dc13866
+append-entry	user	AE-UQ	2016-12-15T12:15:07Z	sha-256:ccd8c40a0554151cbd672b7c6485777fcbae54bb810659643bfb6ad57e2b3249
+append-entry	user	VI	2016-12-15T12:15:07Z	sha-256:dd2a604c7b7466f07e56a9090ed548d6aa64a6cf2c4a35d65a0141772f7f56d5
+append-entry	user	UM-79	2016-12-15T12:15:07Z	sha-256:ffcb4b18266575f5dc33b4b694080660dc0a90a430e04e5e0ef41981744117e4
+append-entry	user	WF	2016-12-15T12:15:07Z	sha-256:4bfbac4a4f8e7a33bc4fc0e5025d19705ee64360ac544109324938bcef836a02
+append-entry	user	EH	2016-12-15T12:15:07Z	sha-256:de00740c046089464d67910ae98158b573abfcd5d91e14227c3b4a3e9dc176d5
+append-entry	user	ES-CE	2016-12-16T13:10:16Z	sha-256:4f98900d23b1db3b591b95dd4f53b4c86c56c883decf539c165ab460677587f8
+assert-root-hash	sha-256:442c746ce2a3dabcf62f144b01475443bf5643ebe243c456a1aac4a4780c6fc1
