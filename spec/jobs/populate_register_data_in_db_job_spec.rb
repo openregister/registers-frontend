@@ -29,8 +29,7 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     country_proof_update = File.read('./spec/support/country_proof_update.json')
     stub_request(:get, "https://country.beta.openregister.org/proof/register/merkle:sha-256").
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.beta.openregister.org' }).
-    to_return(body: country_proof).then.
-    to_return(body: country_proof_update)
+    to_return({ body: country_proof }, body: country_proof_update)
 
 
 
