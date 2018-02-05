@@ -6,17 +6,16 @@ class RegistersController < ApplicationController
   layout 'layouts/default/application'
 
   def index
-    @search = Register.ransack(params[:q])
+    @search = Register.available.ransack(params[:q])
 
-    @registers = if params[:phase] == 'ready to use'
+    @registers = case params[:phase]
+                 when 'ready to use'
                    @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-                 elsif params[:phase] == 'in progress'
+                 when 'in progress'
                    @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
                  else
                    @search.result.sort_by_phase_name_asc.by_name
                  end
-
-    @current_phases = Register::CURRENT_PHASES
   end
 
   def get_last_timestamp
