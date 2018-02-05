@@ -52,6 +52,10 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     it 'retains existing entries' do
       expect(Entry.where(key: 'CI').first.data['citizen-names']).to eq('Citizen of the Ivory Coast')
     end
+
+    it 'populates previous entry number from database' do
+      expect(Entry.where(key: 'CI').order(entry_number: :desc).first[:previous_entry_number]).to eq(207)
+    end
   end
 
   after(:all) do

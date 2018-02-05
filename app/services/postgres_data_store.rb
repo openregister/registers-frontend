@@ -9,7 +9,6 @@ class PostgresDataStore
     @entries = { user: [], system: [] }
     @records = { user: {}, system: {} }
     @register = register
-    @has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
   end
 
   def add_item(item)
@@ -20,9 +19,9 @@ class PostgresDataStore
     entry_type = entry.entry_type.to_sym
     item = @items[entry.item_hash]
     previous_entry_number_from_memory = @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
-
+    has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
     previous_entry_number_from_db =
-      if @has_existing_entries_in_db
+      if has_existing_entries_in_db
         latest_entry_from_db = Entry.where(register_id: @register.id, entry_type: entry.entry_type.to_s, key: entry.key.to_s).order(entry_number: :desc).first
         latest_entry_from_db ? latest_entry_from_db[:entry_number] : nil
       end
