@@ -55,6 +55,9 @@ gem 'activerecord-import'
 # Schedule
 gem 'clockwork'
 
+# Full text search
+gem 'pg_search'
+
 group :development, :test do
   gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
   gem 'pry-byebug'
