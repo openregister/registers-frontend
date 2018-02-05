@@ -87,7 +87,7 @@
                 = sort_link(@search, :register_authority, "Managed by", default_order: :asc, hide_indicator: true)
               %th{role: "columnheader", scope: "col"}
           %tbody
-            - @registers.select(&:available?).each_with_index do |register, index|
+            - @registers.each_with_index do |register, index|
               - index = index + 1
               = render partial: 'registers/register', object: register, locals: { index: index }
       - else
