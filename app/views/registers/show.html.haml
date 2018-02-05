@@ -37,7 +37,7 @@
             = number_with_delimiter(@total_record_count)
           %dt Updated:
           %dd
-            = formatted_date(get_last_timestamp)
+            = formatted_date(@register.last_updated)
             %strong.text-spacing -
             = link_to "See all register updates", history_path(@register.slug)
           - if @register.related_registers.present?
