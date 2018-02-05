@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130135809) do
+ActiveRecord::Schema.define(version: 20180130160640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180130135809) do
     t.datetime "updated_at", null: false
     t.integer "entry_number"
     t.integer "previous_entry_number"
+    t.index ["hash_value", "entry_type", "entry_number", "register_id", "key"], name: "unique_entry_index", unique: true
     t.index ["register_id"], name: "index_entry_on_register_id"
   end
 
