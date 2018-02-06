@@ -80,87 +80,6 @@ RSpec.describe RegistersController, type: :controller do
     DatabaseCleaner.clean_with(:truncation)
   end
 
-
-
-  describe 'Request: GET #history. Descr: Check register consistency. Params: --. Result: Success' do
-    subject { get :history, params: { id: 'country' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it { expect { subject }.to_not change(Register, :count) }
-  end
-
-  describe 'Request: GET #history. Descr: Check default behaviour. Params: --. Result: 100 rows' do
-    subject { get :history, params: { id: 'country' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-
-      expect(assigns(:entries_with_items).length).to eq(100)
-    end
-  end
-
-  describe 'Request: GET #history. Descr: Check with filter. Params: Search param. Result: 4 rows' do
-    subject { get :history, params: { id: 'country', q: 'GM' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-
-      expect(assigns(:entries_with_items).length).to eq(4)
-    end
-  end
-
-  describe 'Request: GET #history. Descr: Check with filter. Params: Search param (changed field). Result: 1 rows' do
-    subject { get :history, params: { id: 'territory', q: 'Ceuta' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-      expect(assigns(:entries_with_items).length).to eq(1)
-    end
-  end
-
-  describe 'Request: GET #history. Descr: Check with filter. Params: Search param. Result: No matches' do
-    subject { get :history, params: { id: 'country', q: 'random' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-
-      expect(assigns(:entries_with_items).length).to eq(0)
-    end
-  end
-
-  describe 'Request: GET #history. Descr: Check with filter and cardinality N. Params: Search param. Result: 2 rows' do
-    subject { get :history, params: { id: 'charity', q: '306' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-
-      expect(assigns(:entries_with_items).length).to eq(2)
-    end
-  end
-
   describe 'Request: GET #show. Descr: Check register consistency. Params: --. Result: Success' do
     subject { get :show, params: { id: 'country' } }
 
@@ -279,21 +198,6 @@ RSpec.describe RegistersController, type: :controller do
       subject
       expect(assigns(:records).first.data['start-date']).to eq('2011-07-09')
       expect(assigns(:records).last.data['start-date']).to be_nil
-    end
-  end
-
-  describe 'History should show current and previous value' do
-    subject { get :history, params: { id: 'country' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :history }
-
-    it do
-      subject
-      expect(assigns(:entries_with_items).first[:current_record].data['official-name']).to eq("The Republic of Côte D’Ivoire")
-      expect(assigns(:entries_with_items).first[:previous_record].data['official-name']).to eq("The Republic of Cote D'Ivoire")
-      expect(assigns(:entries_with_items).first[:updated_fields]).to eq(["official-name"])
     end
   end
 end
