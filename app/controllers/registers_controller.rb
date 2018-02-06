@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  helper_method :get_register_definition, :get_field_definitions
+  before_action :set_register, only: :show
 
   layout 'layouts/default/application'
 
@@ -18,19 +18,7 @@ class RegistersController < ApplicationController
                  end
   end
 
-  def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")
-    Record.find_by(register_id: register_id, key: key).data
-  end
-
-  def get_field_definitions
-    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
-    Record.where(register_id: @register.id, key: ordered_field_keys)
-      .order("position(key::text in '#{ordered_field_keys.join(',')}')")
-      .map { |entry| entry[:data] }
-  end
-
   def show
-    @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.id, @register.fields, params)
   end
 
@@ -73,5 +61,7 @@ private
     query.page(page).per(page_size).without_count
   end
 
-
+  def set_register
+    @register = Register.find_by_slug!(params[:id])
+  end
 end

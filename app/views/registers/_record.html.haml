@@ -1,5 +1,5 @@
 %tr
-  - get_field_definitions.each do |field|
+  - @register.fields.each do |field|
     - field_value = record.data[field['field']]
     %td
       = field_value.is_a?(Array) ? field_value.join(', ') : field_value || "<span class='unknown'>No data found</span>".html_safe

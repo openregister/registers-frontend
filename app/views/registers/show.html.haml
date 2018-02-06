@@ -50,14 +50,14 @@
               != @register.contextual_data
 
       %h2.heading-medium About this register
-      %p=get_register_definition['text']
+      %p= @register.register_description
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
           %span.summary What fields are included in this register?
         #details-content-1.panel.panel-border-narrow{"aria-hidden" => "true"}
           %dl
-            - get_field_definitions.each do |field|
+            - @register.fields.each do |field|
               %dt= field['field']
               %dd= field['text']
 
@@ -130,7 +130,7 @@
           %table.register-data-table
             %thead
               %tr
-                - get_field_definitions.each do |field|
+                - @register.fields.each do |field|
                   %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
             %tbody#records-tbody
               = render partial: 'record', collection: @records
