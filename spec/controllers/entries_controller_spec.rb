@@ -22,20 +22,20 @@ RSpec.describe EntriesController, type: :controller do
     ObjectsFactory.new.create_register('territory', 'Beta', 'Ministry of Justice')
 
     # RSF stubs
-    stub_request(:get, 'https://country.beta.openregister.org/download-rsf/0')
+    stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
     .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
     .to_return(status: 200, body: country_data, headers: {})
 
-    stub_request(:get, 'https://charity.beta.openregister.org/download-rsf/0')
+    stub_request(:get, 'https://charity.register.gov.uk/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_charity_data, headers: {})
 
-    stub_request(:get, 'https://territory.beta.openregister.org/download-rsf/0')
+    stub_request(:get, 'https://territory.register.gov.uk/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_territory_data, headers: {})
 
   # Index stubs
-    stub_request(:get, 'https://register.beta.openregister.org/download-rsf/0')
+    stub_request(:get, 'https://register.register.gov.uk/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_beta_data, headers: {})
 
@@ -43,32 +43,32 @@ RSpec.describe EntriesController, type: :controller do
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_alpha_data, headers: {})
 
-    stub_request(:get, 'https://register.discovery.openregister.org/download-rsf/0')
+    stub_request(:get, 'https://register.cloudapps.digital/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_discovery_data, headers: {})
 
-    stub_request(:get, "https://country.beta.openregister.org/download-rsf/207").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.beta.openregister.org' }).
+    stub_request(:get, "https://country.register.gov.uk/download-rsf/207").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
       to_return(status: 200, body: country207, headers: {})
 
-    stub_request(:get, "https://charity.beta.openregister.org/download-rsf/10").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.beta.openregister.org' }).
+    stub_request(:get, "https://charity.register.gov.uk/download-rsf/10").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.register.gov.uk' }).
       to_return(status: 200, body: charity10, headers: {})
 
-    stub_request(:get, "https://territory.beta.openregister.org/download-rsf/80").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.beta.openregister.org' }).
+    stub_request(:get, "https://territory.register.gov.uk/download-rsf/80").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.register.gov.uk' }).
       to_return(status: 200, body: territory80, headers: {})
 
-    stub_request(:get, "https://country.beta.openregister.org/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.beta.openregister.org' }).
+    stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
       to_return(status: 200, body: country_proof, headers: {})
 
-    stub_request(:get, "https://charity.beta.openregister.org/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.beta.openregister.org' }).
+    stub_request(:get, "https://charity.register.gov.uk/proof/register/merkle:sha-256").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.register.gov.uk' }).
       to_return(status: 200, body: charity_proof, headers: {})
 
-    stub_request(:get, "https://territory.beta.openregister.org/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.beta.openregister.org' }).
+    stub_request(:get, "https://territory.register.gov.uk/proof/register/merkle:sha-256").
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.register.gov.uk' }).
       to_return(status: 200, body: territory_proof, headers: {})
 
     Register.find_each do |register|
