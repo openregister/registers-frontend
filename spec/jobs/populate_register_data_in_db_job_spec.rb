@@ -31,8 +31,6 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return({ body: country_proof }, body: country_proof_update)
 
-
-
     @@registers_client = RegistersClient::RegisterClientManager.new(cache_duration: 600) # rubocop:disable Style/ClassVars
 
     ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
@@ -51,6 +49,14 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
 
     it 'retains existing entries' do
       expect(Entry.where(key: 'CI').first.data['citizen-names']).to eq('Citizen of the Ivory Coast')
+    end
+
+    it 'populates previous entry number from current RSF' do
+      expect(Entry.where(key: 'CZ').order(entry_number: :desc).first[:previous_entry_number]).to eq(52)
+    end
+
+    it 'populates previous entry number from database' do
+      expect(Entry.where(key: 'CI').order(entry_number: :desc).first[:previous_entry_number]).to eq(207)
     end
   end
 

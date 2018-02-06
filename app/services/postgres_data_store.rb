@@ -18,8 +18,7 @@ class PostgresDataStore
   def append_entry(entry)
     entry_type = entry.entry_type.to_sym
     item = @items[entry.item_hash]
-    previous_entry_number = @records[entry_type].has_key?(entry.key) ? @records[entry_type][entry.key].last[:entry_number] : nil
-    db_entry = Entry.new(register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: previous_entry_number, entry_type: entry_type, key: entry.key)
+    db_entry = Entry.new(register: @register, data: item.value, timestamp: entry.timestamp, hash_value: item.hash, entry_number: entry.entry_number, previous_entry_number: get_previous_entry_number(entry), entry_type: entry_type, key: entry.key)
 
     @entries[entry_type] << db_entry
 
@@ -59,6 +58,18 @@ class PostgresDataStore
   end
 
 private
+
+  def get_previous_entry_number(entry)
+    entry_type = entry.entry_type.to_sym
+    existing_latest_entry_for_key = @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : Record.where(register_id: @register.id, entry_type: entry.entry_type, key: entry.key).first
+
+    previous_entry_number =
+      if existing_latest_entry_for_key != nil
+        existing_latest_entry_for_key[:entry_number]
+      end
+
+    previous_entry_number
+  end
 
   def batch_update(entry_type)
     begin
