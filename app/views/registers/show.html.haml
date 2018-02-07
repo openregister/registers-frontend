@@ -39,7 +39,7 @@
           %dd
             = formatted_date(@register.register_last_updated)
             %strong.text-spacing -
-            = link_to "See all register updates", history_path(@register.slug)
+            = link_to "See all register updates", register_entries_path(@register.slug)
           - if @register.related_registers.present?
             %dt Related registers:
             %dd

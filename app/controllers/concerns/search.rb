@@ -39,4 +39,12 @@ module Search
   def contain?(field_value, request_value)
     field_value.downcase.include?(request_value.downcase)
   end
+
+  def filter(entries, query)
+    entries.select do |entry|
+      entry[:key].downcase.include?(query.downcase) ||
+        contain_value_filtered_by_field_names?(entry[:current_record], entry[:updated_fields], query) ||
+        contain_value_filtered_by_field_names?(entry[:previous_record], entry[:updated_fields], query)
+    end
+  end
 end
