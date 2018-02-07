@@ -50,7 +50,7 @@
               != @register.contextual_data
 
       %h2.heading-medium About this register
-      %p=get_register_definition['text']
+      %p= @register.register_description
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}

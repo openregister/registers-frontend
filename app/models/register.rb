@@ -16,6 +16,10 @@ class Register < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
 
+  def register_description
+    Record.find_by(register_id: self.id, key: "register:#{self.name.parameterize}").data['text']
+  end
+
 private
 
   def set_slug
