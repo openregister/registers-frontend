@@ -19,7 +19,7 @@
     .grid-row
       .column-two-thirds
         .panel.panel-border-wide
-          %span.phase-badge In progress
+          %span.phase-banner In progress
           %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
 
   .grid-row
@@ -37,9 +37,9 @@
             = number_with_delimiter(@total_record_count)
           %dt Updated:
           %dd
-            = formatted_date(get_last_timestamp)
+            = formatted_date(@register.last_updated)
             %strong.text-spacing -
-            = link_to "See all register updates", history_path(@register.slug)
+            = link_to "See all register updates", register_entries_path(@register.slug)
           - if @register.related_registers.present?
             %dt Related registers:
             %dd
@@ -50,14 +50,14 @@
               != @register.contextual_data
 
       %h2.heading-medium About this register
-      %p=get_register_definition['text']
+      %p= @register.register_description
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
           %span.summary What fields are included in this register?
         #details-content-1.panel.panel-border-narrow{"aria-hidden" => "true"}
           %dl
-            - get_field_definitions.each do |field|
+            - @register.fields.each do |field|
               %dt= field['field']
               %dd= field['text']
 
@@ -130,7 +130,7 @@
           %table.register-data-table
             %thead
               %tr
-                - get_field_definitions.each do |field|
+                - @register.fields.each do |field|
                   %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
             %tbody#records-tbody
               = render partial: 'record', collection: @records

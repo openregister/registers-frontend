@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe RegistersController, type: :controller do
+RSpec.describe EntriesController, type: :controller do
   before(:all) do
     country_data = File.read('./spec/support/country.rsf')
     register_beta_data = File.read('./spec/support/register_beta.rsf')
@@ -80,124 +80,97 @@ RSpec.describe RegistersController, type: :controller do
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  describe 'Request: GET #show. Descr: Check register consistency. Params: --. Result: Success' do
-    subject { get :show, params: { id: 'country' } }
+  describe 'Request: GET #index. Descr: Check register consistency. Params: --. Result: Success' do
+    subject { get :index, params: { register_id: 'country' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it { expect { subject }.to_not change(Register, :count) }
   end
 
-  describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 100 rows' do
-    subject { get :show, params: { id: 'country' } }
+  describe 'Request: GET #index. Descr: Check default behaviour. Params: --. Result: 100 rows' do
+    subject { get :index, params: { register_id: 'country' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
-      expect(assigns(:records).length).to eq(100)
+
+      expect(assigns(:entries_with_items).length).to eq(100)
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 2 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
+  describe 'Request: GET #index. Descr: Check with filter. Params: Search param. Result: 4 rows' do
+    subject { get :index, params: { register_id: 'country', q: 'GM' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
 
-      expect(assigns(:records).length).to eq(2)
+      expect(assigns(:entries_with_items).length).to eq(4)
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, all status. Result: 2 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
+  describe 'Request: GET #index. Descr: Check with filter. Params: Search param (changed field). Result: 1 rows' do
+    subject { get :index, params: { register_id: 'territory', q: 'Ceuta' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
-
-      expect(assigns(:records).length).to eq(2)
+      expect(assigns(:entries_with_items).length).to eq(1)
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 0 rows' do
-    subject { get :show, params: { id: 'country', q: 'Random' } }
+  describe 'Request: GET #index. Descr: Check with filter. Params: Search param. Result: No matches' do
+    subject { get :index, params: { register_id: 'country', q: 'random' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
 
-      expect(assigns(:records).length).to eq(0)
+      expect(assigns(:entries_with_items).length).to eq(0)
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter and cardinality N. Params: Search param. Result: 1 rows' do
-    subject { get :show, params: { id: 'charity', q: '306', status: 'all' } }
+  describe 'Request: GET #index. Descr: Check with filter and cardinality N. Params: Search param. Result: 2 rows' do
+    subject { get :index, params: { register_id: 'charity', q: '306' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
 
-      expect(assigns(:records).length).to eq(1)
+      expect(assigns(:entries_with_items).length).to eq(2)
     end
   end
 
-  describe 'Request: GET #show. Descr: Sort by Name ascending. Result: Afghanistan is first result' do
-    subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'asc' } }
+  describe 'History should show current and previous value' do
+    subject { get :index, params: { register_id: 'country' } }
 
     it { is_expected.to have_http_status :success }
 
-    it { is_expected.to render_template :show }
+    it { is_expected.to render_template :index }
 
     it do
       subject
-
-      expect(assigns(:records).first.data['name']).to eq('Afghanistan')
-    end
-  end
-
-  describe 'Request: GET #show. Descr: Sort by name descending. Result: Zimbabwe is first result' do
-    subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'desc' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-
-      expect(assigns(:records).first.data['name']).to eq('Zimbabwe')
-    end
-  end
-
-  describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil should show nil values last' do
-    subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc' } }
-
-    it { is_expected.to have_http_status :success }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-      expect(assigns(:records).first.data['start-date']).to eq('2011-07-09')
-      expect(assigns(:records).last.data['start-date']).to be_nil
+      expect(assigns(:entries_with_items).first[:current_record].data['official-name']).to eq("The Republic of Côte D’Ivoire")
+      expect(assigns(:entries_with_items).first[:previous_record].data['official-name']).to eq("The Republic of Cote D'Ivoire")
+      expect(assigns(:entries_with_items).first[:updated_fields]).to eq(["official-name"])
     end
   end
 end

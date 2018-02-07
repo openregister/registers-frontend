@@ -20,7 +20,7 @@
 
   .grid-row
     .column-one-third
-      = form_tag history_path(@register.slug), method: :get, id: 'search_updates' do
+      = form_tag register_entries_path(@register.slug), method: :get, id: 'search_updates' do
         .records-search
           = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
           = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
@@ -44,4 +44,4 @@
         .no-search-results
           %p
             No results found for <strong>"#{params[:q]}"</strong>
-            = link_to 'Reset', history_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+            = link_to 'Reset', register_entries_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
