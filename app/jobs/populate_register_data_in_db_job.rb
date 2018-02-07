@@ -6,7 +6,11 @@ class PopulateRegisterDataInDbJob < ApplicationJob
       begin
       super
     rescue InvalidRegisterError
-      puts("IN RESCUE")
+      slug = @register_url.host.split('.')[0]
+      register = Register.find_by(slug: slug)
+      Record.where(register_id: register.id).destroy_all
+      Entry.where(register_id: register.id).destroy_all
+      raise StandardError.new('FrontendInvalidRegisterException')
     end
     end
   end
