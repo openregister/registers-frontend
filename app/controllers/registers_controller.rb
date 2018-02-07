@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  helper_method :get_register_definition, :get_field_definitions
-
   layout 'layouts/default/application'
 
   def index
@@ -18,17 +16,6 @@ class RegistersController < ApplicationController
                  end
   end
 
-  def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")
-    Record.find_by(register_id: register_id, key: key).data
-  end
-
-  def get_field_definitions
-    ordered_field_keys = get_register_definition['fields'].map { |f| "field:#{f}" }
-    Record.where(register_id: @register.id, key: ordered_field_keys)
-      .order("position(key::text in '#{ordered_field_keys.join(',')}')")
-      .map { |entry| entry[:data] }
-  end
-
   def show
     @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.id, @register.fields, params)
@@ -37,7 +24,7 @@ class RegistersController < ApplicationController
   def history
     @register = Register.find_by_slug!(params[:id])
     entries = recover_entries_history(@register.id, @register.fields, params)
-    fields = get_field_definitions.map { |field| field['field'] }
+    fields = @register.register_fields.map { |field| field['field'] }
 
     @entries_with_items = entries.map do |entry_history|
       current_record = entry_history[:current_entry]
