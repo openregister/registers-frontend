@@ -9,6 +9,7 @@ class PostgresDataStore
     @entries = { user: [], system: [] }
     @records = { user: {}, system: {} }
     @register = register
+    @has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
   end
 
   def add_item(item)
@@ -55,16 +56,22 @@ class PostgresDataStore
     batch_update(:user)
     batch_update(:system)
     @items.clear
+    @has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
   end
 
 private
 
   def get_previous_entry_number(entry)
     entry_type = entry.entry_type.to_sym
-    existing_latest_entry_for_key = @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : Record.where(register_id: @register.id, entry_type: entry.entry_type, key: entry.key).first
+    existing_latest_entry_for_key =
+      if @has_existing_entries_in_db
+        @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : Record.find_by(register_id: @register.id, entry_type: entry.entry_type.to_s, key: entry.key.to_s)
+      else
+        @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : nil
+      end
 
     previous_entry_number =
-      if existing_latest_entry_for_key != nil
+      unless existing_latest_entry_for_key.nil?
         existing_latest_entry_for_key[:entry_number]
       end
 
