@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  helper_method :get_last_timestamp, :get_register_definition, :get_field_definitions
+  helper_method :get_register_definition, :get_field_definitions
 
   layout 'layouts/default/application'
 
@@ -16,14 +16,6 @@ class RegistersController < ApplicationController
                  else
                    @search.result.sort_by_phase_name_asc.by_name
                  end
-  end
-
-  def get_last_timestamp
-    Record.select('timestamp')
-      .where(register_id: @register.id, entry_type: 'user')
-      .order(timestamp: :desc)
-      .first[:timestamp]
-      .to_s
   end
 
   def get_register_definition(register_id = @register.id, key = "register:#{params[:id]}")

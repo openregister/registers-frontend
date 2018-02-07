@@ -16,6 +16,14 @@ class Register < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
 
+  def register_last_updated
+    Record.select('timestamp')
+      .where(register_id: self.id, entry_type: 'user')
+      .order(timestamp: :desc)
+      .first[:timestamp]
+      .to_s
+  end
+
   def register_description
     Record.find_by(register_id: self.id, key: "register:#{self.name.parameterize}").data['text']
   end
