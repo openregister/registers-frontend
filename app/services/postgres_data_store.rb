@@ -65,7 +65,7 @@ private
     entry_type = entry.entry_type.to_sym
     existing_latest_entry_for_key =
       if @has_existing_entries_in_db
-        @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : Entry.where(register_id: @register.id, entry_type: entry.entry_type.to_s, key: entry.key.to_s).order(entry_number: :desc).first
+        @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : Record.find_by(register_id: @register.id, entry_type: entry.entry_type.to_s, key: entry.key.to_s)
       else
         @records[entry_type].key?(entry.key) ? @records[entry_type][entry.key].last : nil
       end
