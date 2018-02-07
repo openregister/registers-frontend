@@ -20,6 +20,13 @@ class Register < ApplicationRecord
     Record.find_by(register_id: self.id, key: "register:#{self.name.parameterize}").data['text']
   end
 
+  def register_fields
+    ordered_field_keys = Record.find_by(register_id: self.id, key: "register:#{self.name.parameterize}").data['fields'].map { |f| "field:#{f}" }
+    Record.where(register_id: self.id, key: ordered_field_keys)
+          .order("position(key::text in '#{ordered_field_keys.join(',')}')")
+          .map { |entry| entry[:data] }
+  end
+
 private
 
   def set_slug
