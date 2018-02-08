@@ -3,8 +3,6 @@ defaults: &defaults
   buildpack: ruby_buildpack
   memory: 1GB
   services:
-    # postgres database
-    - registers-frontend
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     # logging

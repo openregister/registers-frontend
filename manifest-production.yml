@@ -1,0 +1,9 @@
+---
+
+inherit: manifest-base.yml
+
+env:
+  UA_TRACKING_ID: 'UA-86101042-5'
+  services:
+    # postgres database
+    - registers-frontend
