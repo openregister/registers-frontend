@@ -1,16 +1,21 @@
 class PopulateRegisterDataInDbJob < ApplicationJob
   queue_as :default
 
+  module Exceptions
+    class FrontendInvalidRegisterError < StandardError; end
+  end
+
   module RegisterClientExtensions
+    include Exceptions
     def refresh_data
       begin
       super
     rescue InvalidRegisterError
-      slug = @register_url.host.split('.')[0]
-      register = Register.find_by(slug: slug)
-      Record.where(register_id: register.id).destroy_all
-      Entry.where(register_id: register.id).destroy_all
-      raise StandardError.new('FrontendInvalidRegisterException')
+      # If register data is invalid we want to delete existing entries and records to force a full reload
+      register_id = @data_store.instance_variable_get(:@register).id
+      Record.where(register_id: register_id).destroy_all
+      Entry.where(register_id: register_id).destroy_all
+      raise Exceptions::FrontendInvalidRegisterError
     end
     end
   end
