@@ -1,12 +1,5 @@
 require 'rails_helper'
 
-RSpec.configure do |config|
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-end
-
 RSpec.describe PopulateRegisterDataInDbJob, type: :job do
   describe 'handle invalid register exception' do
     before(:all) do
