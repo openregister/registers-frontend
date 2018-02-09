@@ -24,7 +24,7 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
 
     it 'throws exception when register invalid and deletes records and entries' do
       country = ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
-      expect { PopulateRegisterDataInDbJob.perform_now(country) }.to raise_error(PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError)
+      expect { PopulateRegisterDataInDbJob.perform_now(country) }.to raise_error(PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError, 'Register has been reloaded with different data - root hashes do not match')
       expect(Record.where(register_id: country.id).count).to equal(0)
       expect(Entry.where(register_id: country.id).count).to equal(0)
     end

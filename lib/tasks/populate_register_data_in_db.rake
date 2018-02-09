@@ -13,7 +13,12 @@ namespace :registers_frontend do
     task fetch_now: :environment do
       Register.find_each do |register|
         begin
+          retries ||= 0
           PopulateRegisterDataInDbJob.perform_now(register)
+        rescue PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError => e
+          retry if (retries += 1) < 2
+          puts "[Error] #{e.message}"
+          next
         rescue StandardError => e
           puts "[Error] #{e.message}"
           next

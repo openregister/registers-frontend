@@ -11,13 +11,13 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     # Initialize client and download / update data
       register_client = @@registers_client.get_register(register.name.parameterize, register.register_phase.downcase, PostgresDataStore.new(register))
       register_client.refresh_data
-    rescue InvalidRegisterError
+    rescue InvalidRegisterError => e
       # If register data is invalid we want to delete existing entries and records to force a full reload
       ActiveRecord::Base.transaction do
         Record.where(register_id: register.id).destroy_all
         Entry.where(register_id: register.id).destroy_all
       end
-      raise Exceptions::FrontendInvalidRegisterError
+      raise Exceptions::FrontendInvalidRegisterError, e
     end
 
     metadata_records = Record.where(register_id: register.id, entry_type: :system)
