@@ -20,21 +20,15 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
       to_return({ body: country_proof }, body: country_proof_update)
 
       @@registers_client = RegistersClient::RegisterClientManager.new(cache_duration: 600) # rubocop:disable Style/ClassVars
-      @country = ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
     end
 
-
-
-    it 'throws exception when register invalid' do
-      expect { PopulateRegisterDataInDbJob.perform_now(@country) }.to raise_error(PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError)
-    end
-
-    it 'deletes records and entries when register invalid' do
-      expect(Record.where(register_id: @country.id).count).to equal(0)
-      expect(Entry.where(register_id: @country.id).count).to equal(0)
+    it 'throws exception when register invalid and deletes records and entries' do
+      country = ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
+      expect { PopulateRegisterDataInDbJob.perform_now(country) }.to raise_error(PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError)
+      expect(Record.where(register_id: country.id).count).to equal(0)
+      expect(Entry.where(register_id: country.id).count).to equal(0)
     end
   end
-
 
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)
