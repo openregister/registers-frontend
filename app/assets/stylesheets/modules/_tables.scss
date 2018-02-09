@@ -1,0 +1,206 @@
+// Responsive tables from https://github.com/alphagov/spotlight/blob/master/styles/common/table.scss
+
+table {
+  &.touch-table {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: calc(100% - 2em);
+  }
+
+  @include media(desktop) {
+    &.floated-header {
+      thead {
+        display: block;
+      }
+
+      tbody {
+        display: block;
+        max-height: 28em;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          -webkit-appearance: none;
+        }
+
+        &::-webkit-scrollbar:vertical {
+          width: 11px;
+        }
+
+        &::-webkit-scrollbar:horizontal {
+          height: 11px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 8px;
+          border: 2px solid white; /* should match background, can't be transparent */
+          background-color: rgba(0, 0, 0, .5);
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: #fff;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+
+  th {
+    width: 25%;
+
+    a {
+      position: relative;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.descending a:after,
+    &.ascending a:after {
+      content: "\00a0\00a0\25BC";
+      font-size: 8px;
+      position: absolute;
+      top: 0.7em;
+    }
+
+    &.ascending a:after {
+      content: "\00a0\00a0\25B2";
+    }
+
+  }
+
+  .currency, .percent, .integer, .number {
+    text-align: right;
+  }
+
+}
+
+// Tables
+// ==========================================================================
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table th,
+table td {
+  @include core-16;
+  //padding: 0.7em 1em 0.7em 1em;
+  padding: 12px 20px 9px 0; //em(12, 16) em(20, 16) em(9, 16) 0;
+  text-align: left;
+  color: #0b0c0c;
+  border-bottom: 1px solid $border-colour;
+}
+
+table th,
+table thead th:first-child {
+  text-align: left;
+}
+
+table thead th {
+  font-weight: normal;
+  vertical-align: top;
+}
+
+// Right align headings for numeric content
+table th.numeric,
+table th.integer,
+table th.currency,
+table th.percent {
+  text-align: right;
+}
+
+// Use tabular numbers for numeric table cells
+table tbody .integer,
+table tbody .currency,
+table tbody .percent {
+  @include core-16($tabular-numbers: true);
+  text-align: right;
+}
+
+table tbody .url {
+  word-break: break-all;
+}
+
+table thead .sort-column,
+table tbody .sort-column {
+  font-weight: bold;
+}
+
+.table-no-header .sort-column {
+  font-weight: normal;
+}
+
+.table-collapsible {
+  @include media($max-width: 900px) {
+    th, td {
+      padding-right: 10px;
+    }
+  }
+
+  @include media($max-width: 641px) {
+    display: block;
+    width: auto;
+
+    tr {
+      display: block;
+      padding-bottom: 15px;
+      border-bottom: 1px solid $border-colour;
+      margin-bottom: 15px;
+    }
+
+    thead th {
+      display: block;
+      text-align: left;
+      border-bottom: 0;
+      padding: 3px 0;
+      width: 100%;
+
+      &:first-child {
+        width: 100%;
+      }
+    }
+
+    tbody th, tbody td {
+      display: block;
+      text-align: left;
+      border-bottom: 0;
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      &:before {
+        content: attr(data-title);
+        display: inline-block;
+        font-weight: bold;
+        width: 35%;
+      }
+
+      &:first-child {
+        @include core-19();
+        font-weight: bold;
+        width: 100%;
+
+        .heading-xsmall {
+          display: inline-block;
+        }
+
+        p {
+          font-weight: normal;
+          margin-bottom: 0;
+        }
+
+        &:before {
+          content: none;
+        }
+      }
+    }
+
+    .govuk-organisation-logo {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
