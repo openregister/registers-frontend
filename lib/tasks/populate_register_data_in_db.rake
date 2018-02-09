@@ -14,6 +14,7 @@ namespace :registers_frontend do
       Register.find_each do |register|
         begin
           retries ||= 0
+          puts("populating register #{register.name}")
           PopulateRegisterDataInDbJob.perform_now(register)
         rescue PopulateRegisterDataInDbJob::Exceptions::FrontendInvalidRegisterError => e
           retry if (retries += 1) < 2
