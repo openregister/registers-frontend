@@ -9,10 +9,10 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     Delayed::Worker.logger.info("Updating #{register.name} in database")
     begin
     # Initialize client and download / update data
-      register_client = @@registers_client.get_register(register.name.parameterize, register.register_phase.downcase, PostgresDataStore.new(register))
+      register_client = RegistersClientWrapper.registers_client.get_register(register.name.parameterize, register.register_phase.downcase, PostgresDataStore.new(register))
       register_client.refresh_data
     rescue InvalidRegisterError => e
-      # If register data is invalid we want to delete existing entries and records to force a full reload
+    # If register data is invalid we want to delete existing entries and records to force a full reload
       ActiveRecord::Base.transaction do
         Record.where(register_id: register.id).destroy_all
         Entry.where(register_id: register.id).destroy_all
