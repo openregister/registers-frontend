@@ -60,8 +60,9 @@ module Spina
       end
 
       def set_government_organisations
-        register_data = RegistersClientWrapper.registers_client.get_register('government-organisation', 'beta')
-        @government_organisations = register_data.get_records
+        government_organisation_register = Register.find_by(slug: 'government-organisation')
+        government_organisation_records = Record.where(register_id: government_organisation_register.id, entry_type: 'user')
+        @government_organisations = government_organisation_records.map { |go| go.data['name'] }
       end
 
       def register_params
