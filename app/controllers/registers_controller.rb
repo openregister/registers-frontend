@@ -35,8 +35,8 @@ private
     page = (params[:page] ||= 1).to_i
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
-    @total_record_count = Record.where(register_id: register_id, entry_type: 'user').count
-    query = Record.where(register_id: register_id, entry_type: 'user')
+    query = @register.records.where(entry_type: 'user')
+    @total_record_count = query.count
 
     query = case status
             when 'archived'
