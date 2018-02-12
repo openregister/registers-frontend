@@ -60,7 +60,7 @@ module Spina
       end
 
       def set_government_organisations
-        register_data = @@registers_client.get_register('government-organisation', 'beta')
+        register_data = RegistersClientWrapper.registers_client.get_register('government-organisation', 'beta')
         @government_organisations = register_data.get_records
       end
 
