@@ -63,16 +63,3 @@
 
   - unless @register.new_record?
     .pull-right= link_to t('spina.permanently_delete'), spina.admin_register_path(@register), method: :delete, data: {confirm: t('spina.pages.delete_confirmation', subject: @register.name) }, class: 'button button-link button-danger'
-
-= content_for :plugin_stylesheets do
-  = javascript_include_tag '//unpkg.com/accessible-typeahead@0.4.0', data: {turbolinks_track: true}
-
-  :javascript
-    $(document).on('turbolinks:load', function() {
-      element = document.querySelector('#register_authority')
-      AccessibleTypeahead.enhanceSelectElement({
-        selectElement: element,
-        placeholder: "Search for Authority",
-        defaultValue: element.options[element.options.selectedIndex].innerHTML,
-      })
-    });
