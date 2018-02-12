@@ -1,0 +1,47 @@
+require 'rails_helper'
+
+RSpec.feature 'View register', type: :feature do
+  before(:all) do
+    country_data = File.read('./spec/support/country.rsf')
+    stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
+    to_return(status: 200, body: country_data, headers: {})
+
+    country_update = File.read('./spec/support/country_update.rsf')
+    stub_request(:get, "https://country.register.gov.uk/download-rsf/207").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
+    to_return(status: 200, body: country_update, headers: {})
+
+    country_proof = File.read('./spec/support/country_proof.json')
+    country_proof_update = File.read('./spec/support/country_proof_update.json')
+    stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
+    to_return({ body: country_proof }, body: country_proof_update)
+
+    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
+
+    country = ObjectsFactory.new.create_register('Country', 'Beta', 'Ministry of Justice')
+    PopulateRegisterDataInDbJob.perform_now(country)
+  end
+
+  scenario 'view and sort a register' do
+    visit '/'
+    expect(page).to have_content('Registers ready to use')
+    click_link('Country')
+    expect(page).to have_content('Afghanistan')
+    click_link('name')
+    expect(page).to have_content('Zimbabwe')
+  end
+
+  scenario 'filter a register' do
+    visit('/registers/country')
+    choose('Archived records')
+    click_button('Search', match: :first)
+    expect(page).to have_current_path(/status=archived/)
+    expect(page).to have_content('USSR')
+  end
+
+  after(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+end
