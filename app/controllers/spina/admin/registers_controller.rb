@@ -61,8 +61,9 @@ module Spina
 
       def set_government_organisations
         @government_organisations = Register.find_by(slug: 'government-organisation')
-                                            .records.select("data -> 'name' as name").where(entry_type: 'user')
-                                            .map(&:name)
+                                            .records
+                                            .where(entry_type: 'user')
+                                            .pluck("data -> 'name' as name")
       end
 
       def register_params
