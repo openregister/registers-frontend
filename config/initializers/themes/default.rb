@@ -2,6 +2,8 @@
   theme.name = 'default'
   theme.title = 'Default Theme'
 
+  theme.plugins = ['registers']
+
   theme.page_parts = [
     { name: 'text', title: 'Text', partable_type: 'Spina::Text' },
     { name: 'title', title: 'Title', partable_type: 'Spina::Line' },

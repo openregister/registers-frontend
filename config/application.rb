@@ -28,5 +28,12 @@ module RegisterStatus
         cups_env.each { |k, v| ENV[k] = v }
       end
     end
+
+    config.before_initialize do
+      ::Spina::Plugin.register do |plugin|
+        plugin.name = 'registers'
+        plugin.namespace = 'registers'
+      end
+    end
   end
 end
