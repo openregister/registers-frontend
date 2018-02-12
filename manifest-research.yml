@@ -1,0 +1,8 @@
+---
+
+inherit: manifest-base.yml
+
+routes:
+  - route: registers-frontend-research.cloudapps.digital
+services:
+  - registers-frontend-research

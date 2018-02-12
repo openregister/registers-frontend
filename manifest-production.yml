@@ -1,0 +1,12 @@
+---
+
+inherit: manifest-base.yml
+domain: registers-trial.service.gov.uk
+no-hostname: true
+health-check-type: http
+health-check-http-endpoint: /health_check/standard
+env:
+  UA_TRACKING_ID: 'UA-86101042-5'
+  services:
+    # postgres database
+    - registers-frontend
