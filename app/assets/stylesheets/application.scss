@@ -19,6 +19,7 @@
 @import 'modules/search';
 @import 'modules/footer-categories';
 @import 'modules/sorting-link';
+@import 'modules/tables';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -143,11 +144,17 @@ table {
   margin: 0 0 20px 0;
 }
 
-.register-status-table {
-  margin-top: 40px;
+.records-search {
+  @include media(mobile) {
+    margin-bottom: 40px;
+  }
+}
 
-  td:last-of-type {
-    @include media(tablet) {
+.register-status-table {
+  @include media(tablet) {
+    margin-top: 40px;
+
+    td:last-of-type {
       text-align: right;
     }
   }
