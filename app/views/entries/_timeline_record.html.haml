@@ -6,9 +6,12 @@
   %table
     %thead
       %tr
-        %th Field
-        %th Previous Value
-        %th New Value
+        %th
+          %strong Field
+        %th
+          %strong Previous Value
+        %th
+          %strong New Value
     %tbody
       - timeline_record[:updated_fields].each do |field_name|
         %tr
