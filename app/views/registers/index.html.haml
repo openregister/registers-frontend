@@ -84,7 +84,7 @@
               %th{role: "columnheader", scope: "col"}
                 = sort_link(@search, :phase_name, "Status", default_order: :desc, hide_indicator: true)
               %th{role: "columnheader", scope: "col"}
-                = sort_link(@search, :register_authority, "Managed by", default_order: :asc, hide_indicator: true)
+                = sort_link(@search, :authority, "Managed by", default_order: :asc, hide_indicator: true)
               %th{role: "columnheader", scope: "col"}
           %tbody
             - @registers.each_with_index do |register, index|
