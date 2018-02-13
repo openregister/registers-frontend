@@ -67,12 +67,6 @@
         %li use our #{link_to "API", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
         %li download the data for this Register and keep your own copy up-to-date
 
-      %details{role: "group"}
-        %summary{"aria-controls" => "details-content-2", "aria-expanded" => "false", :role => "button"}
-          %span.summary Download a copy of this register
-        #details-content-2.panel.panel-border-narrow{"aria-hidden" => "true"}
-          %p Download this data as: #{link_to 'TSV', "https://#{@register.name.parameterize}.register.gov.uk/records.tsv"}, #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} or as a #{link_to 'Spreadsheet', "https://#{@register.name.parameterize}.register.gov.uk/records.xlsx"}.
-          %p Preview a sample as #{link_to 'JSON', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/json", target: :blank}, #{link_to 'YAML', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/yaml", target: :blank} or #{link_to 'TTL', "https://#{@register.name.parameterize}.register.gov.uk/preview-records/turtle", target: :blank}.
 
     .column-third
       %aside#related
