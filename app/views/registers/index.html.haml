@@ -1,4 +1,4 @@
-- @page_title = 'Registers pipeline'
+- @page_title = 'Registers collection'
 - content_for :body_classes, 'registers-index'
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
@@ -9,12 +9,12 @@
       = link_to 'GOV.UK Registers', root_path
     - if params[:phase].present?
       %li.breadcrumbs__item
-        = link_to 'Registers pipeline', registers_path
+        = link_to 'Registers collection', registers_path
       %li.breadcrumbs__item.breadcrumbs__item--active
         = link_to "Registers #{params[:phase]}", '#content', 'aria-current' => 'page'
     - else
       %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to 'Registers pipeline', '#content', 'aria-current' => 'page'
+        = link_to 'Registers collection', '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
   - if params[:phase].present?
@@ -48,7 +48,7 @@
   - else
     .grid-row
       .column-full
-        %h1.heading-xlarge Registers pipeline
+        %h1.heading-xlarge Registers collection
     .grid-row
       .column-one-quarter
         .data
