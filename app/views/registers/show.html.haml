@@ -124,7 +124,8 @@
         %p
           %span#records-count
             = render partial: 'showing'
-          = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+          - if params[:q].present? || params[:status].present?
+            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
         .table-scroll
           %table.register-data-table
@@ -148,7 +149,8 @@
         .no-search-results
           %p
             No results found for <strong>"#{params[:q]}"</strong>
-            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+            - if params[:q].present? || params[:status].present?
+              = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
 = content_for :javascript do
   :javascript
