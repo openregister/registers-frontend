@@ -70,7 +70,7 @@
             download the first 5,000 records
           - else
             download a copy of this register
-          as a #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} and keep your copy up-to-date
+          as a #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv?page-size=5000"} and keep your copy up-to-date
 
     .column-third
       %aside#related
