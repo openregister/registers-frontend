@@ -31,7 +31,7 @@ private
     }
 
     search_term = params[:q]
-    status = params[:status] ||= 'current'
+    status = params[:status]
     page = (params[:page] ||= 1).to_i
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
@@ -41,10 +41,10 @@ private
     query = case status
             when 'archived'
               query.where("data->> 'end-date' is not null")
-            when 'current'
-              query.where("data->> 'end-date' is null")
-            else
+            when 'all'
               query
+            else
+              query.where("data->> 'end-date' is null")
             end
 
     if search_term.present?
