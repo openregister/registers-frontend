@@ -65,8 +65,12 @@
       %p There are 2 ways to use Registers. You can either:
       %ul.list-bullet
         %li use our #{link_to "API", "https://registers-docs.cloudapps.digital/#api-documentation-for-registers"} to automatically pull data from a register into your service
-        %li download the data for this Register and keep your own copy up-to-date
-
+        %li
+          - if @total_record_count > 5000
+            download the first 5,000 records
+          - else
+            download a copy of this register
+          as a #{link_to 'CSV', "https://#{@register.name.parameterize}.register.gov.uk/records.csv"} and keep your copy up-to-date
 
     .column-third
       %aside#related
