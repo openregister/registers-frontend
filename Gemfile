@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'http', '2.2.1'
+gem 'gds_metrics'
 
 # Nested forms
 gem 'cocoon'
