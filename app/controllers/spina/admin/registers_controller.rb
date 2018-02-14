@@ -36,6 +36,7 @@ module Spina
       def update
         add_breadcrumb(@register.name)
         if @register.update_attributes(register_params)
+          PopulateRegisterDataInDbJob.perform_later(@register)
           flash.now[:success] = "Successfull saved"
           redirect_to spina.edit_admin_register_url(@register)
         else
