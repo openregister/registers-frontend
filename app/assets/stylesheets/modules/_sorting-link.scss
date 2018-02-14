@@ -14,11 +14,11 @@
     top: 7px;
   }
 
-  &.desc:after {
+  &.asc:after {
     border-bottom: 8px solid $govuk-blue;
   }
 
-  &.asc:after {
+  &.desc:after {
     border-top: 8px solid $govuk-blue;
   }
 }
