@@ -67,7 +67,7 @@ module Spina
       end
 
       def register_params
-        params.require(:register).permit(:name, :slug, :register_phase, :authority, :description, :contextual_data, :related_registers)
+        params.require(:register).permit(:name, :slug, :register_phase, :authority, :description, :contextual_data, :related_registers, :url)
       end
     end
   end
