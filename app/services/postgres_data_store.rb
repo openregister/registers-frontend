@@ -2,6 +2,7 @@ require 'data_store'
 
 class PostgresDataStore
   include DataStore
+  EMPTY_ROOT_HASH = 'sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'.freeze
 
   def initialize(register)
     @page_size = 100
@@ -10,7 +11,6 @@ class PostgresDataStore
     @records = { user: {}, system: {} }
     @register = register
     @has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
-    @root_hash = ''
   end
 
   def add_item(item)
@@ -65,8 +65,7 @@ class PostgresDataStore
   end
 
   def get_root_hash
-    empty_root_hash = 'sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
-    @register.root_hash ? @register.root_hash : empty_root_hash
+    @register.root_hash ? @register.root_hash : EMPTY_ROOT_HASH
   end
 
 private
