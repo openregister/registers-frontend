@@ -9,3 +9,5 @@ applications:
     - registers-prod
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
+  env:
+    PROMETHEUS_METRICS_PATH: /metrics
