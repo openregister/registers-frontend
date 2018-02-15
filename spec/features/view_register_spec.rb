@@ -7,16 +7,15 @@ RSpec.feature 'View register', type: :feature do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return(status: 200, body: country_data, headers: {})
 
-    country_update = File.read('./spec/support/country_update.rsf')
+    country_update = File.read('./spec/support/country_207.rsf')
     stub_request(:get, "https://country.register.gov.uk/download-rsf/207").
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return(status: 200, body: country_update, headers: {})
 
     country_proof = File.read('./spec/support/country_proof.json')
-    country_proof_update = File.read('./spec/support/country_proof_update.json')
     stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
-    to_return({ body: country_proof }, body: country_proof_update)
+    to_return(body: country_proof)
 
     RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
@@ -39,6 +38,14 @@ RSpec.feature 'View register', type: :feature do
     click_button('Search', match: :first)
     expect(page).to have_current_path(/status=archived/)
     expect(page).to have_content('USSR')
+  end
+
+  scenario 'view updates' do
+    visit('/registers/country/updates')
+    first_update = find('h3', match: :first)
+    expect(first_update.text).to eq('CI')
+    expect(first_update.sibling('table')).to have_content("The Republic of Côte D’Ivoire")
+    expect(first_update.sibling('table')).to have_content("The Republic of Cote D'Ivoire")
   end
 
   after(:all) do
