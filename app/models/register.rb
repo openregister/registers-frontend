@@ -10,7 +10,7 @@ class Register < ApplicationRecord
   scope :by_name, -> { order name: :asc }
   scope :sort_by_phase_name_asc, -> { order("CASE register_phase WHEN 'Beta' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Discovery' THEN 4 WHEN 'Backlog' THEN 5 END") }
   scope :sort_by_phase_name_desc, -> { order("CASE register_phase WHEN 'Backlog' THEN 1 WHEN 'Discovery' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Beta' THEN 4 END") }
-  scope :has_records, -> { where(id: Record.select(:register_id)) }
+  scope :has_records, -> { where(Record.where(id: :register_id, key: "register:#{name.parameterize}")) }
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }
 
   has_many :entries, dependent: :destroy
@@ -39,7 +39,6 @@ class Register < ApplicationRecord
     linked_register_names = register_fields.select { |f| f['register'] && f['register'] != slug }.map { |f| f['register'] }
     Register.where(slug: linked_register_names)
   end
-
 
 private
 
