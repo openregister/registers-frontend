@@ -44,6 +44,10 @@
             %dt Related registers:
             %dd
               != @register.related_registers
+          - if @register.links_to.present?
+            %dt Links to:
+            %dd
+              != @register.links_to.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
           - if @register.contextual_data.present?
             %dt Contextual data:
             %dd
