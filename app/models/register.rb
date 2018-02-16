@@ -36,7 +36,8 @@ class Register < ApplicationRecord
   end
 
   def links_to
-    register_fields.select { |f| f['register'] && f['register'] != slug }
+    linked_register_names = register_fields.select { |f| f['register'] && f['register'] != slug }.map { |f| f['register'] }
+    Register.where(slug: linked_register_names)
   end
 
 
