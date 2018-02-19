@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+
 RSpec.describe EntriesController, type: :controller do
   before(:all) do
     country_data = File.read('./spec/support/country.rsf')
@@ -16,6 +17,8 @@ RSpec.describe EntriesController, type: :controller do
     territory80 = File.read('./spec/support/territory_80.rsf')
     charity_proof = File.read('./spec/support/charity_proof.json')
     territory_proof = File.read('./spec/support/territory_proof.json')
+
+    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
     ObjectsFactory.new.create_register('country', 'Beta', 'Ministry of Justice')
     ObjectsFactory.new.create_register('charity', 'Beta', 'Ministry of Justice')
@@ -70,6 +73,7 @@ RSpec.describe EntriesController, type: :controller do
     stub_request(:get, "https://territory.register.gov.uk/proof/register/merkle:sha-256").
       with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.register.gov.uk' }).
       to_return(status: 200, body: territory_proof, headers: {})
+
 
     Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)

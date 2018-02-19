@@ -17,6 +17,8 @@ RSpec.describe RegistersController, type: :controller do
     charity_proof = File.read('./spec/support/charity_proof.json')
     territory_proof = File.read('./spec/support/territory_proof.json')
 
+    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
+
     ObjectsFactory.new.create_register('country', 'Beta', 'Ministry of Justice')
     ObjectsFactory.new.create_register('charity', 'Beta', 'Ministry of Justice')
     ObjectsFactory.new.create_register('territory', 'Beta', 'Ministry of Justice')
