@@ -15,8 +15,8 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     rescue InvalidRegisterError => e
     # If register data is invalid we want to delete existing entries and records to force a full reload
       ActiveRecord::Base.transaction do
-        Record.where(register_id: register.id).destroy_all
-        Entry.where(register_id: register.id).destroy_all
+        Record.where(register_id: register.id).delete_all
+        Entry.where(register_id: register.id).delete_all
       end
       raise Exceptions::FrontendInvalidRegisterError, e
     end
