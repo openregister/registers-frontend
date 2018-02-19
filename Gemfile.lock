@@ -281,7 +281,7 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    gds_metrics (0.0.1)
+    gds_metrics (0.0.2)
       prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -537,7 +537,7 @@ DEPENDENCIES
   cf-app-utils
   cocoon
   fog
-  gds_metrics
+  gds_metrics (~> 0.0.2)
   govspeak (~> 3.4.0)
   govuk-lint (~> 3.3)
   govuk_elements_form_builder!
