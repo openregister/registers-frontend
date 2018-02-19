@@ -25,7 +25,9 @@ class Register < ApplicationRecord
   end
 
   def register_description
-    Record.find_by(register_id: id, key: "register:#{name.parameterize}").data['text']
+    Record.where(register_id: id, key: "register:#{name.parameterize}")
+    .pluck("data -> 'text' as text")
+    .first
   end
 
   def register_fields
