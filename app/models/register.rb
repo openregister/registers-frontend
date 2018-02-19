@@ -42,6 +42,11 @@ class Register < ApplicationRecord
     Register.where(slug: linked_register_names)
   end
 
+  def links_from
+    Register.where("? = ANY(string_to_array(fields,','))", slug)
+            .where.not(id: id)
+  end
+
 private
 
   def set_slug
