@@ -43,8 +43,9 @@ class Register < ApplicationRecord
   end
 
   def links_from
-    Register.where("? = ANY(string_to_array(fields,','))", slug)
-            .where.not(id: id)
+    Register.where.not(id: id)
+    .joins(:records)
+    .where(records: { entry_type: 'system', key: "field:#{slug}" })
   end
 
 private
