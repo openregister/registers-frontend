@@ -4,14 +4,14 @@ namespace :registers_frontend do
   namespace :populate_db do
     desc 'Add task to the queue to populate register data in the database'
     task fetch_later: :environment do
-      Register.find_each do |register|
+      Register.where.not(register_phase: 'Backlog').find_each do |register|
         PopulateRegisterDataInDbJob.perform_later(register)
       end
     end
 
     desc 'For local envs: populate register data in the database now'
     task fetch_now: :environment do
-      Register.find_each do |register|
+      Register.where.not(register_phase: 'Backlog').find_each do |register|
         begin
           retries ||= 0
           puts("populating register #{register.name}")
