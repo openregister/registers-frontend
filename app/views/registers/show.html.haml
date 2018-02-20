@@ -50,6 +50,10 @@
             %dt Links to:
             %dd
               != @register.links_to.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
+          - if @register.links_from.present?
+            %dt Links from:
+            %dd
+              != @register.links_from.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
           - if @register.contextual_data.present?
             %dt Contextual data:
             %dd
