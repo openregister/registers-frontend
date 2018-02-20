@@ -45,6 +45,7 @@ class Register < ApplicationRecord
   def links_from
     Register.where.not(id: id)
     .joins(:records)
+    .where(records: { entry_type: 'system' })
     .where("data->>'register' = ?", slug)
   end
 
