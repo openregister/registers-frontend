@@ -17,10 +17,17 @@ RSpec.feature 'View register', type: :feature do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return(body: country_proof)
 
+    gov_org_data = File.read('./spec/support/government_organisation.rsf')
+    stub_request(:get, "https://government-organisation.register.gov.uk/download-rsf/0").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'government-organisation.register.gov.uk' }).
+    to_return(status: 200, body: gov_org_data, headers: {})
+
     RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
-    country = ObjectsFactory.new.create_register('Country', 'Beta', 'Ministry of Justice')
+    country = ObjectsFactory.new.create_register('Country', 'Beta', 'D587')
+    gov_org = ObjectsFactory.new.create_register('Government organisation', 'Beta', 'D587')
     PopulateRegisterDataInDbJob.perform_now(country)
+    PopulateRegisterDataInDbJob.perform_now(gov_org)
   end
 
   scenario 'view and sort a register' do

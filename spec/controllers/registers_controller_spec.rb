@@ -19,9 +19,9 @@ RSpec.describe RegistersController, type: :controller do
 
     RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
-    ObjectsFactory.new.create_register('country', 'Beta', 'Ministry of Justice')
-    ObjectsFactory.new.create_register('charity', 'Beta', 'Ministry of Justice')
-    ObjectsFactory.new.create_register('territory', 'Beta', 'Ministry of Justice')
+    ObjectsFactory.new.create_register('country', 'Beta', 'D587')
+    ObjectsFactory.new.create_register('charity', 'Beta', 'D587')
+    ObjectsFactory.new.create_register('territory', 'Beta', 'D587')
 
     # RSF stubs
     stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
