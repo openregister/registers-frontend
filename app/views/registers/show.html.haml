@@ -137,7 +137,10 @@
       - else
         .no-search-results
           %p
-            No results found for <strong>"#{params[:q]}"</strong>
+            - if params[:q].present?
+              No results found for <strong>"#{params[:q]}"</strong>
+            - else
+              No results found.
             - if params[:q].present? || params[:status].present?
               = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
