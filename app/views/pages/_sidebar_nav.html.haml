@@ -1,14 +1,10 @@
 %nav.sub-navigation{role: 'navigation', "aria-controls" => "navigation"}
   %ol
-    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(roadmap_path)}"}
-      = link_to "Roadmap", roadmap_path
-    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(services_using_registers_path)}"}
-      = link_to "Services using registers", services_using_registers_path
-    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(avaliable_registers_path)}"}
-      = link_to "Avaliable registers", avaliable_registers_path
+    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(using_registers_path)}"}
+      = link_to "Using registers", using_registers_path
     %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(combining_registers_path)}"}
       = link_to "Combining registers", combining_registers_path
+    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(services_using_registers_path)}"}
+      = link_to "Services using registers", services_using_registers_path
     %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(case_study_path)}"}
       = link_to "Case Study: TISCReport", case_study_path
-    %li{class: "sub-navigation__item #{'sub-navigation__item--active' if current_page?(new_register_path)}"}
-      = link_to "Suggest a register", new_register_path
