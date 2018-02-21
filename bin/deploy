@@ -3,7 +3,7 @@ set -e
 
 # Parse app names from manifest to ensure it matches up
 SINGLE_INSTANCE_APPS=(registers-frontend-queue registers-frontend-scheduler)
-ZERO_DOWNTIME_APPS=registers-frontend
+ZERO_DOWNTIME_APPS=registers
 
 # $CF env variables are set by Travis and configured in ../.travis.yml
 cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
@@ -14,7 +14,7 @@ do
   # Zero downtime push comes from "Autopilot" which is installed in before_deploy
   # step in Travis
   cf zero-downtime-push $APP_NAME -f manifest.yml
-  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT 
+  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
 done
 
 for APP_NAME in ${SINGLE_INSTANCE_APPS[@]}
@@ -22,5 +22,5 @@ do
   echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
   # We do not want multiple instances of these apps running so use CF PUSH
   cf push $APP_NAME -f manifest.yml
-  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT 
+  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
 done
