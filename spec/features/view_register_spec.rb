@@ -19,7 +19,7 @@ RSpec.feature 'View register', type: :feature do
 
     RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
-    country = ObjectsFactory.new.create_register('Country', 'Beta', 'Ministry of Justice')
+    country = ObjectsFactory.new.create_register('Country', 'Beta', 'D587')
     PopulateRegisterDataInDbJob.perform_now(country)
   end
 

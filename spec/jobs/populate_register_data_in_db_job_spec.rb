@@ -28,7 +28,7 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
 
     RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new(cache_duration: 600))
 
-    ObjectsFactory.new.create_register('country', 'beta', 'Ministry of Justice')
+    ObjectsFactory.new.create_register('country', 'beta', 'D587')
     Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
     end
