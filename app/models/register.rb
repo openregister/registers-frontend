@@ -50,7 +50,7 @@ class Register < ApplicationRecord
   end
 
   def register_authority
-    Register.find_by(slug: 'government-organisation').records.find_by(key: authority).data
+    Register.find_by(slug: 'government-organisation').records.find_by(key: authority)
   end
 
 private
