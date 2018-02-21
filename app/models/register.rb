@@ -50,7 +50,11 @@ class Register < ApplicationRecord
   end
 
   def register_authority
-    Register.find_by(slug: 'government-organisation').records.find_by(key: authority)
+    gov_org_register = Register.find_by(slug: 'government-organisation')
+
+    if gov_org_register.present?
+      gov_org_register.records.find_by(key: authority)
+    end
   end
 
 private
