@@ -9,6 +9,8 @@ defaults: &defaults
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
+  env:
+    PROMETHEUS_METRICS_PATH: /metrics
 
 applications:
 - name: registers-frontend
