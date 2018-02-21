@@ -48,7 +48,7 @@
         .horizontal-form-label
           Authority
         .horizontal-form-content
-          = f.select :authority, @government_organisations
+          = f.select :authority, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }
       .horizontal-form-group
         .horizontal-form-label
           = Spina::Page.human_attribute_name :contextual_data

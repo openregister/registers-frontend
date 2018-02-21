@@ -8,9 +8,9 @@
   %td{"data-title" => "Phase: "}
     = phase_label(register.register_phase)
   %td{"data-title" => "Managed by: "}
-    %div{class: "govuk-organisation-logo #{register.authority.parameterize}"}
-      %div{class: "logo-container #{crest_class_name(register.authority.parameterize)}"}
-        %span= register.authority
+    %div{class: "govuk-organisation-logo #{register.register_authority['name'].parameterize}"}
+      %div{class: "logo-container #{crest_class_name(register.register_authority['name'].parameterize)}"}
+        %span= register.register_authority['name']
   - unless ['Backlog','Discovery'].any? (register.register_phase)
     %td{class: "links", "data-title" => "View more: "}
       = link_to "View register", register_path(register.slug)

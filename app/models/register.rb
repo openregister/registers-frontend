@@ -49,6 +49,10 @@ class Register < ApplicationRecord
     .where("data->>'register' = ?", slug)
   end
 
+  def register_authority
+    Register.find_by(slug: 'government-organisation').records.find_by(key: authority).data
+  end
+
 private
 
   def set_slug
