@@ -44,7 +44,7 @@ private
             when 'all'
               query
             else
-              query.where("data->> 'end-date' is null")
+              query.current
             end
 
     if search_term.present?

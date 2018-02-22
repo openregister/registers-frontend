@@ -64,6 +64,7 @@ module Spina
         @government_organisations = Register.find_by(slug: 'government-organisation')
                                             .records
                                             .where(entry_type: 'user')
+                                            .current
       end
 
       def register_params
