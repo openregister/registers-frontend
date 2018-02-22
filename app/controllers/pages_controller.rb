@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   before_action :get_ready_to_use_registers, only: %i[avaliable_registers home]
 
   def home
-    @registers = Register.all
+    @registers = Register.available.all
   end
 
   def roadmap; end
