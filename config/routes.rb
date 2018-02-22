@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :suggest_registers, path: 'suggest-register', except: %i[show edit]
   get 'suggest-register/complete', to: 'suggest_registers#complete'
 
+  resources :request_registers, path: 'request-register', except: %i[show edit]
+  get 'request-register/complete', to: 'request_registers#complete'
+
   # Support
 
   get 'support', to: 'support#index'
