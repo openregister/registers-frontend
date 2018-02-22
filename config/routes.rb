@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :entries, path: 'updates', only: :index
   end
 
+  resources :suggest_registers, path: 'suggest-register'
+
   # Support
 
   get 'support', to: 'support#index'
