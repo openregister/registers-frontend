@@ -89,7 +89,7 @@ dl dt {
   max-width: 150px;
   padding-bottom: 0.5rem;
   padding-right: 1%;
-  width: 25%;
+  width: 24%;
 }
 
 dl dd {
@@ -156,7 +156,7 @@ table {
 
 .records-search {
   @include media(mobile) {
-    margin-bottom: 40px;
+    margin-bottom: $gutter-half;
   }
 }
 
@@ -205,6 +205,10 @@ table {
 }
 
 .related-container {
+  @include media(mobile) {
+    margin-top: $gutter;
+  }
+
   .heading-small:first-of-type {
     margin-top: 0;
   }
