@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222151523) do
+ActiveRecord::Schema.define(version: 20180226115528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20180222151523) do
     t.text "related_registers"
     t.string "url"
     t.string "root_hash"
+  end
+
+  create_table "request_registers", force: :cascade do |t|
+    t.string "email"
+    t.string "subject"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|
