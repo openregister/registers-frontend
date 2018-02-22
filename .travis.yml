@@ -34,4 +34,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: openregister/registers-frontend
-    branch: beta-assessment
+    branch: master
