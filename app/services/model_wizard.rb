@@ -3,8 +3,10 @@ class ModelWizard
   attr_reader :object
 
   def initialize(object_or_class, session, params = nil, object_params = nil)
-    @object_or_class, @session = object_or_class, session
-    @params, @object_params = params, object_params
+    @object_or_class = object_or_class
+    @session = session
+    @params = params
+    @object_params = object_params
     @param_key = ActiveModel::Naming.param_key(object_or_class)
     @session_params = "#{@param_key}_params".to_sym
   end
@@ -35,7 +37,7 @@ class ModelWizard
 private
 
   def load_object
-    class? ? @object_or_class.new(@session[@session_params]): @object_or_class
+    class? ? @object_or_class.new(@session[@session_params]) : @object_or_class
   end
 
   def class?
@@ -54,5 +56,4 @@ private
     end
     false
   end
-
 end
