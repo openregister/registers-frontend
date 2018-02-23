@@ -3,7 +3,7 @@ class Register < ApplicationRecord
 
   CURRENT_PHASES = %w[Backlog Discovery Alpha Beta].freeze
 
-  ordered_phases = "CASE register_phase #{CURRENT_PHASES.each_with_index.map { |phase, i| "WHEN '#{phase}' THEN #{i}" }.join(' ')} END"
+  ordered_phases = "CASE register_phase #{CURRENT_PHASES.reverse.each_with_index.map { |p, i| "WHEN '#{p}' THEN #{i}" }.join(' ')} END"
 
   validates_presence_of :name, :register_phase
   validates_uniqueness_of :name
@@ -11,7 +11,6 @@ class Register < ApplicationRecord
 
   scope :by_name, -> { order name: :asc }
   scope :sort_by_phase_name_asc, -> { order(ordered_phases) }
-  scope :sort_by_phase_name_desc, -> { order("CASE register_phase WHEN 'Backlog' THEN 1 WHEN 'Discovery' THEN 2 WHEN 'Alpha' THEN 3 WHEN 'Beta' THEN 4 END") }
   scope :has_records, -> { where(id: Record.select(:register_id)) }
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }
 
