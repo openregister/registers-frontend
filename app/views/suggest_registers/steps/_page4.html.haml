@@ -1,3 +1,4 @@
+- console
 .grid-row
   .column-two-thirds
     %h1.heading-large Check your answer before submiting your suggestion
@@ -9,7 +10,7 @@
         %dd.cya-answer
           = session[:suggest_register_params]['subject']
         %dd.cya-change
-          = link_to suggest_registers_path(step: '0') do
+          = link_to suggest_registers_path(session[:suggest_register_params].update({'step' => 0}).except!('current_step')) do
             Change
             %span.visually-hidden Why are you interested?
       %div
@@ -18,7 +19,7 @@
         %dd.cya-answer
           = session[:suggest_register_params]['message']
         %dd.cya-change
-          = link_to suggest_registers_path(step: '1') do
+          = link_to suggest_registers_path(session[:suggest_register_params].update({'step' => 1}).except!('current_step')) do
             Change
             %span.visually-hidden Title
       %div
@@ -27,7 +28,7 @@
         %dd.cya-answer
           = params[:suggest_register]['email']
         %dd.cya-change
-          = link_to suggest_registers_path(step: '2') do
+          = link_to suggest_registers_path(session[:suggest_register_params].update({'step' => 2}).except!('current_step')) do
             Change
             %span.visually-hidden Email address
 
