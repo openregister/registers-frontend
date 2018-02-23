@@ -137,9 +137,4 @@ private
       Record.where(register_id: register.id, entry_type: entry_type, key: record_keys).delete_all
     end
   end
-
-  def bulk_save(entries, records)
-    Entry.import!(entries)
-    Record.import!(records)
-  end
 end
