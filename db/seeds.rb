@@ -5,63 +5,63 @@ Spina::NavigationItem.create(navigation_id: Spina::Navigation.first.id, page_id:
 Register.create(
   name: "Country",
   register_phase: "Beta",
-  authority: "Foreign and Commonwealth Office",
+  authority: "D13",
 )
 puts "Created Country Register"
 
 Register.create(
   name: "Territory",
   register_phase: "Beta",
-  authority: "Foreign and Commonwealth Office",
+  authority: "D13",
 )
 puts "Created Territory Register"
 
 Register.create(
   name: "Local authority eng",
   register_phase: "Beta",
-  authority: "Department for Communities and Local Government",
+  authority: "D4",
 )
 puts "Created Local authority eng Register"
 
 Register.create(
   name: "School eng",
   register_phase: "Alpha",
-  authority: "Department for Education",
+  authority: "D6",
 )
 puts "Created School eng Register"
 
 Register.create(
   name: "Prison estate",
   register_phase: "Beta",
-  authority: "Ministry of Justice",
+  authority: "D18",
 )
 puts "Created Prison Register"
 
 Register.create(
   name: "Jobcentre",
   register_phase: "Alpha",
-  authority: "Department for Work and Pensions",
+  authority: "D10",
 )
 puts "Created Jobcentre Register"
 
 Register.create(
   name: "Government organisation",
   register_phase: "Beta",
-  authority: "Cabinet Office",
+  authority: "D2",
 )
 puts "Created Government organisation Register"
 
 Register.create(
   name: "Government domain",
   register_phase: "Beta",
-  authority: "Cabinet Office",
+  authority: "D2",
 )
 puts "Created Government domain Register"
 
 Register.create(
   name: "Charity",
   register_phase: "Discovery",
-  authority: "Charity Commission",
+  authority: "D98",
   )
 puts "Created Charity Register"
 
