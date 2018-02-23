@@ -305,8 +305,8 @@ ActiveRecord::Schema.define(version: 20180222151523) do
 
   create_table "suggest_registers", force: :cascade do |t|
     t.string "email"
-    t.string "title"
-    t.string "reason"
+    t.string "message"
+    t.string "subject"
   end
 
 end

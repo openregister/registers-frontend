@@ -1,6 +1,6 @@
 %h1.heading-large What is the title of the register?
-%div{class: "form-group #{@suggest_register.errors[:title].present? ? 'form-group-error' : ''}"}
-  = f.label :title, class: 'form-label' do
+%div{class: "form-group #{@suggest_register.errors[:message].present? ? 'form-group-error' : ''}"}
+  = f.label :message, class: 'form-label' do
     %span.visually-hidden Register title
     %span.form-hint Make this as short and clear as possible
-  = f.text_field :title, class: "form-control #{@suggest_register.errors[:title].present? ? 'form-control-error' : ''}", value: session[:suggest_register_params]['title']
+  = f.text_field :message, class: "form-control #{@suggest_register.errors[:message].present? ? 'form-control-error' : ''}", value: session[:suggest_register_params]['message']

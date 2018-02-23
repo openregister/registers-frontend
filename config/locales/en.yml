@@ -48,3 +48,4 @@ en:
   errors:
     messages:
       blank: is required
+    format: "%{message}"
