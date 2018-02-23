@@ -9,7 +9,7 @@ class SuggestRegistersController < ApplicationController
     @suggest_register = @wizard.object
 
     if @wizard.save
-      redirect_to root_path
+      redirect_to suggest_register_thanks_path
     else
       render :index
     end
