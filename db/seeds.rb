@@ -39,7 +39,7 @@ puts "Created Prison Register"
 
 Register.create(
   name: "Jobcentre",
-  register_phase: "Alpha",
+  register_phase: "Beta",
   authority: "D10",
 )
 puts "Created Jobcentre Register"
