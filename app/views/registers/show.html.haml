@@ -64,10 +64,11 @@
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
           %span.summary What fields are included in this register?
         #details-content-1.panel.panel-border-narrow{"aria-hidden" => "true"}
-          %dl
-            - @register.register_fields.each do |field|
-              %dt= field['field']
-              %dd= field['text']
+          .govuk-metadata
+            %dl
+              - @register.register_fields.each do |field|
+                %dt= field['field']
+                %dd= field['text']
 
     .column-third
       %aside#related

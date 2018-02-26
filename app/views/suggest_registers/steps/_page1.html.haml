@@ -1,0 +1,15 @@
+%h1.heading-large Why are you suggesting this register?
+
+%div{class: "form-group #{'form-group-error' if @suggest_register.errors[:title].present?}"}
+  %fieldset
+    %legend
+      %span.visually-hidden Why are you suggesting this register?
+    .multiple-choice
+      = f.radio_button :subject, 'I need this data for my work', id: 'suggest_register_reason_need_data', checked: true
+      = f.label :reason_need_data, 'I need this data for my work'
+    .multiple-choice
+      = f.radio_button :subject, 'I can provide some or all of this data', id: 'suggest_register_reason_have_data'
+      = f.label :reason_have_data, 'I can provide some or all of this data'
+    .multiple-choice
+      = f.radio_button :subject, "I'm interested in this subject", id: 'suggest_register_reason_interested'
+      = f.label :reason_interested, "I'm interested in this subject"

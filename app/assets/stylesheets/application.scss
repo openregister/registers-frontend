@@ -24,6 +24,7 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'modules/footer-categories';
 @import 'modules/sorting-link';
 @import 'modules/tables';
+@import 'modules/check-your-answers';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -77,27 +78,31 @@ a:visited {
 }
 // scss-lint:enable IdSelector
 
-dl {
+.govuk-metadata {
+  font-size: 16px;
   margin-bottom: 20px;
-  overflow: hidden;
-}
 
-dl dt {
-  clear: left;
-  float: left;
-  font-weight: bold;
-  max-width: 150px;
-  padding-bottom: 0.5rem;
-  padding-right: 1%;
-  width: 24%;
-}
+  dl {
+    overflow: hidden;
+  }
 
-dl dd {
-  float: left;
-  margin: 0;
-  max-width: 480px;
-  padding-bottom: 0.5rem;
-  width: 75%;
+  dt {
+    clear: left;
+    float: left;
+    font-weight: bold;
+    max-width: 150px;
+    padding-bottom: 0.5rem;
+    padding-right: 1%;
+    width: 24%;
+  }
+
+  dd {
+    float: left;
+    margin: 0;
+    max-width: 480px;
+    padding-bottom: 0.5rem;
+    width: 75%;
+  }
 }
 
 table {
@@ -271,19 +276,6 @@ table {
   &__list {
     list-style-type: disc;
     padding-left: 20px;
-  }
-}
-
-.govuk-metadata {
-  font-size: 16px;
-  margin: 30px 0;
-
-  dt {
-    font-weight: normal;
-  }
-
-  dl {
-    margin-bottom: 0;
   }
 }
 
