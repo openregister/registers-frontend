@@ -4,7 +4,7 @@ class SuggestRegistersController < ApplicationController
   end
 
   def index
-    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params).start(params)
+    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params).start(params[:change])
     @suggest_register = @wizard.object
   end
 
