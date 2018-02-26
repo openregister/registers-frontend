@@ -1,7 +1,3 @@
 = f.hidden_field :current_step, value: f.object.current_step
 = render "suggest_registers/steps/page#{f.object.current_step + 1}", f: f
 = f.submit f.object.last_step? ? "Accept and send suggestion" : "Continue", class: 'button'
-
-%br
-%br
-= debug session[:suggest_register_params]
