@@ -12,7 +12,7 @@ class ModelWizard
   end
 
   def start
-    @session[@session_params] = @session[@session_params].except('step')
+    @session[@session_params] = @session[@session_params] ? @session[@session_params].except('step') : {}
     @object = load_object
     @object.current_step = @params[:step].to_i
     self
