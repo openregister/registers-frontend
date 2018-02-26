@@ -1,10 +1,10 @@
 class SuggestRegistersController < ApplicationController
   def merge_from_params
-    session[:suggest_register_params] ?  session[:suggest_register_params].merge(params.permit(:email, :message, :subject)).except('step') : {}
+    session[:suggest_register_params] ? session[:suggest_register_params].merge(params.permit(:email, :message, :subject)).except('step') : {}
   end
 
   def index
-    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params).start
+    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params).start(params)
     @suggest_register = @wizard.object
   end
 
