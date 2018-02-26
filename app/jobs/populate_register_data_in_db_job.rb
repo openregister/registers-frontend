@@ -18,6 +18,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
         Record.where(register_id: register.id).delete_all
         Entry.where(register_id: register.id).delete_all
         register.root_hash = nil
+        register.save
       end
       raise Exceptions::FrontendInvalidRegisterError, e
     end
