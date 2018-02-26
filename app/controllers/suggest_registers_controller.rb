@@ -1,6 +1,6 @@
 class SuggestRegistersController < ApplicationController
   def merge_from_params
-    session[:suggest_register_params] ? session[:suggest_register_params].merge(params.permit(:email, :message, :subject)).except('step') : {}
+    session[:suggest_register_params] ? session[:suggest_register_params].except('step') : {}
   end
 
   def index

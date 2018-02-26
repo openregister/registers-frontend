@@ -11,10 +11,8 @@ class ModelWizard
     @session_params = "#{@param_key}_params".to_sym
   end
 
-  def start(params)
-    expected_params = %w[subject message email]
-    has_params = (expected_params - params.keys).empty?
-    @session[@session_params] = @session[@session_params] && has_params ? @session[@session_params].except('step') : {}
+  def start
+    @session[@session_params] = @session[@session_params] ? @session[@session_params].except('step') : {}
     @object = load_object
     @object.current_step = @params[:step].to_i
     self
