@@ -12,7 +12,7 @@ class ModelWizard
   end
 
   def start
-    @session[@session_params] = {}
+    @session[@session_params] = @session[@session_params].except('step')
     @object = load_object
     @object.current_step = @params[:step].to_i
     self
@@ -21,7 +21,7 @@ class ModelWizard
   def continue
     @session[@session_params].deep_merge!(@object_params) if @object_params
     @object = load_object
-    @object.assign_attributes(@session[@session_params]) unless class?
+    @object.assign_attributes(@session[@session_params].except('step')) unless class?
     self
   end
 

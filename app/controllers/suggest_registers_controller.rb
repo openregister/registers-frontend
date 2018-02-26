@@ -1,16 +1,21 @@
 class SuggestRegistersController < ApplicationController
+  def merge_from_params
+    session[:suggest_register_params].merge(params.permit(:email, :message, :subject)).except('step')
+  end
+
   def index
-    @wizard = ModelWizard.new(SuggestRegister, session, params).start
+    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params).start
     @suggest_register = @wizard.object
   end
 
   def create
-    @wizard = ModelWizard.new(SuggestRegister, session, params, suggest_register_params).continue
+    @wizard = ModelWizard.new(SuggestRegister.new(merge_from_params), session, params, suggest_register_params).continue
     @suggest_register = @wizard.object
 
     if @wizard.save
       @zendesk_service = ZendeskFeedback.new
       @response = @zendesk_service.send_feedback(suggest_register_params)
+      session[:suggest_register_params] = nil
       redirect_to suggest_register_complete_path
     else
       render :index
