@@ -78,27 +78,31 @@ a:visited {
 }
 // scss-lint:enable IdSelector
 
-dl {
+.govuk-metadata {
+  font-size: 16px;
   margin-bottom: 20px;
-  overflow: hidden;
-}
 
-dl dt {
-  clear: left;
-  float: left;
-  font-weight: bold;
-  max-width: 150px;
-  padding-bottom: 0.5rem;
-  padding-right: 1%;
-  width: 24%;
-}
+  dl {
+    overflow: hidden;
+  }
 
-dl dd {
-  float: left;
-  margin: 0;
-  max-width: 480px;
-  padding-bottom: 0.5rem;
-  width: 75%;
+  dt {
+    clear: left;
+    float: left;
+    font-weight: bold;
+    max-width: 150px;
+    padding-bottom: 0.5rem;
+    padding-right: 1%;
+    width: 24%;
+  }
+
+  dd {
+    float: left;
+    margin: 0;
+    max-width: 480px;
+    padding-bottom: 0.5rem;
+    width: 75%;
+  }
 }
 
 table {
