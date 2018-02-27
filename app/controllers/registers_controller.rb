@@ -39,7 +39,7 @@ private
 
     query = case status
             when 'archived'
-              query.where("data->> 'end-date' is not null")
+              query.archived
             when 'all'
               query
             else
@@ -47,16 +47,11 @@ private
             end
 
     if search_term.present?
-      operation_params = []
-      partial = ''
+      search_query = fields.split(',')
+                           .map { |f| "data->> '#{f}' ilike '%#{search_term}%'" }
+                           .join(' or ')
 
-      fields.split(',').each { |field| partial += " data->> '#{field}' ilike ? or" }
-      partial = partial[1, partial.length - 3]
-
-      operation_params.push(partial)
-      fields.split(',').count.times { operation_params.push("%#{search_term}%") }
-
-      query = query.where(operation_params)
+      query = query.where(search_query)
     end
 
     if sort_by.present? && sort_direction.present?
