@@ -58,6 +58,10 @@ class Register < ApplicationRecord
     end
   end
 
+  def number_of_records
+    Record.where(register_id: id, entry_type: 'user').count
+  end
+
 private
 
   def set_slug
