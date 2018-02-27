@@ -24,7 +24,7 @@ class RegistersController < ApplicationController
 
 private
 
-  def recover_records(fields, params, page_size = 100)
+  def recover_records(fields, params)
     default_sort_by = lambda {
       has_name_field = fields.split(',').include?('name')
       has_name_field ? 'name' : params[:id]
@@ -32,11 +32,9 @@ private
 
     search_term = params[:q]
     status = params[:status]
-    page = (params[:page] ||= 1).to_i
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
     query = @register.records.where(entry_type: 'user')
-    @total_record_count = query.count
 
     query = case status
             when 'archived'
@@ -63,12 +61,7 @@ private
     if sort_by.present? && sort_direction.present?
       query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
     end
-    @result_count = query.count
-    @offset = page_size * (page - 1) + 1
-    @offset_end = [@result_count, page_size * page].min
 
-    @total_pages = (@result_count / 100) + ((@result_count % 100).zero? ? 0 : 1)
-
-    query.page(page).per(page_size).without_count
+    query.page(params[:page]).per(100)
   end
 end
