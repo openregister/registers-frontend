@@ -30,13 +30,11 @@ private
       has_name_field ? 'name' : params[:id]
     }
 
-    search_term = params[:q]
-    status = params[:status]
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
     query = @register.records.where(entry_type: 'user')
 
-    query = case status
+    query = case params[:status]
             when 'archived'
               query.archived
             when 'all'
@@ -45,18 +43,14 @@ private
               query.current
             end
 
-    if search_term.present?
+    if params[:q].present?
       search_query = fields.split(',')
-                           .map { |f| "data->> '#{f}' ilike '%#{search_term}%'" }
+                           .map { |f| "data->> '#{f}' ilike '%#{params[:q]}%'" }
                            .join(' or ')
 
       query = query.where(search_query)
     end
 
-    if sort_by.present? && sort_direction.present?
-      query = query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
-    end
-
-    query.page(params[:page]).per(100)
+    query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last").page(params[:page]).per(100)
   end
 end
