@@ -37,7 +37,7 @@
               = link_to @register.register_authority.data['name'], @register.register_authority.data['website']
           %dt Number of records:
           %dd
-            = number_with_delimiter(@records.total_count)
+            = number_with_delimiter(@total_record_count)
           %dt Updated:
           %dd
             = formatted_date(@register.register_last_updated)
