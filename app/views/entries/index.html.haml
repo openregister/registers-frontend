@@ -36,7 +36,7 @@
           .pager-controls
             = paginate @entries_with_items, outer_window: 0, window: 3
           .pager-summary
-            Showing #{@entries_with_items.offset_value + 1} &ndash; #{@entries_with_items.offset_value + @entries_with_items.length} of #{@entries_with_items.total_count} records
+            = page_entries_info(@entries_with_items)
 
         - unless @entries_with_items.last_page?
           = link_to_next_page @entries_with_items, 'Load more', id: 'load-more-entries', class: 'js-hidden', remote: true
