@@ -40,7 +40,7 @@ private
 
     query = case status
             when 'archived'
-              query.where("data->> 'end-date' is not null")
+              query.archived
             when 'all'
               query
             else
