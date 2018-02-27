@@ -37,7 +37,7 @@
               = link_to @register.register_authority.data['name'], @register.register_authority.data['website']
           %dt Number of records:
           %dd
-            = number_with_delimiter(@total_record_count)
+            = number_with_delimiter(@records.total_count)
           %dt Updated:
           %dd
             = formatted_date(@register.register_last_updated)
@@ -128,7 +128,7 @@
 
         .pager
           .pager-controls
-            = paginate @records, total_pages: @total_pages, outer_window: 0, window: 3
+            = paginate @records, outer_window: 0, window: 3
           .pager-summary
             = render partial: 'showing'
 
