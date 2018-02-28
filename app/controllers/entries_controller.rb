@@ -5,8 +5,8 @@ class EntriesController < ApplicationController
 
   def index
     @register = Register.find_by_slug!(params[:register_id])
-    entries = recover_entries_history(@register.id, @register.fields, params)
-    fields = @register.register_fields.map { |field| field['field'] }
+    fields = @register.fields_array
+    entries = recover_entries_history(@register.id, fields, params)
 
     @entries_with_items = entries.map do |entry_history|
       current_record = entry_history[:current_entry]
@@ -31,16 +31,8 @@ private
     page = (params[:page] ||= 1).to_i
 
     if search_term.present?
-      partial = ''
-      operation_params = []
-      fields.split(',').each { |field| partial += " data->> '#{field}' ilike ? or" }
-      partial = partial[1, partial.length - 3] # Remove beginning space and end 'or'
-
-      operation_params.push(partial)
-      fields.split(',').count.times { operation_params.push("%#{search_term}%") }
-
-      query = Entry.where(register_id: register_id, entry_type: 'user').where(operation_params).order(:entry_number).reverse_order.limit(page_size).offset(page_size * (page - 1))
-      count_query = Entry.where(register_id: register_id, entry_type: 'user').where(operation_params)
+      query = Entry.where(register_id: register_id, entry_type: 'user').search_for(fields, search_term).order(:entry_number).limit(page_size).offset(page_size * (page - 1))
+      count_query = Entry.where(register_id: register_id, entry_type: 'user').search_for(fields, search_term)
     else
       query = Entry.where(register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
       count_query = Entry.where(register_id: register_id, entry_type: 'user')
@@ -49,14 +41,13 @@ private
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
     previous_entries_query = Entry.where(register_id: register_id, entry_number: previous_entries_numbers)
 
-    result = query.map do |entry|
-      entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
-      { current_entry: entry, previous_entry: entries }
-    end
     @result_count = count_query.count
     @current_page = page
     @total_pages = (@result_count / page_size) + ((@result_count % 100).zero? ? 0 : 1)
 
-    result
+    query.map do |entry|
+      entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
+      { current_entry: entry, previous_entry: entries }
+    end
   end
 end

@@ -32,7 +32,7 @@ class Register < ApplicationRecord
   end
 
   def register_fields
-    ordered_field_keys = Record.find_by(register_id: id, key: "register:#{name.parameterize}").data['fields'].map { |f| "field:#{f}" }
+    ordered_field_keys = fields_array.map { |f| "field:#{f}" }
     Record.where(register_id: id, key: ordered_field_keys)
           .order("position(key::text in '#{ordered_field_keys.join(',')}')")
           .map { |entry| entry[:data] }
