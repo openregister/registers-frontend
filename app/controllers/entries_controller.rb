@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class EntriesController < ApplicationController
-  include Search
   layout 'layouts/default/application'
 
   def index

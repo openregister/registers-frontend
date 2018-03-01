@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  include Search
   layout 'layouts/default/application'
 
   def index
