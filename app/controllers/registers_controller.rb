@@ -29,22 +29,15 @@ private
       has_name_field ? 'name' : params[:id]
     }
 
-    sort_by = params.fetch(:sort_by) { default_sort_by.call }
-    sort_direction = params.fetch(:sort_direction) { 'asc' }
-    query = @register.records
-                     .where(entry_type: 'user')
-                     .search_for(fields, params[:q])
-                     .order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
-                     .page(params[:page])
-                     .per(100)
-
-    case params[:status]
-    when 'archived'
-      query.archived
-    when 'all'
-      query
-    else
-      query.current
-    end
+    sort_by = params[:sort_by] ||= default_sort_by.call
+    sort_direction = params[:sort_direction] ||= 'asc'
+    status = params.fetch(:status) { 'current' }
+    @register.records
+             .where(entry_type: 'user')
+             .search_for(fields, params[:q])
+             .status(status)
+             .order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
+             .page(params[:page])
+             .per(100)
   end
 end
