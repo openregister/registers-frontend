@@ -29,12 +29,13 @@ private
     search_term = params[:q]
     page = params.fetch(:page) { 1 }.to_i
     user_entries = Entry.where(register_id: register_id, entry_type: 'user')
+    query = user_entries.with_limit(page, page_size)
+
     if search_term.present?
       search_query = user_entries.search_for(fields, search_term)
-      query = search_query.order(:entry_number).limit(page_size).offset(page_size * (page - 1))
+      query = search_query.with_limit(page, page_size)
       count_query = search_query
     else
-      query = user_entries.order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
       count_query = user_entries
     end
 
