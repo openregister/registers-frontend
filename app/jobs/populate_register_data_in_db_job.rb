@@ -23,9 +23,6 @@ class PopulateRegisterDataInDbJob < ApplicationJob
       raise Exceptions::FrontendInvalidRegisterError, e
     end
 
-    metadata_records = Record.where(register_id: register.id, entry_type: :system)
-    fields = metadata_records.select { |record| record.key.start_with?("field:") }
-    register.fields = fields.map { |field| field.data['field'] }.join(',')
     register.fields_array = Record.where(key: "register:#{register.slug}").pluck("data -> 'fields' as fields").first
     register.url = register_url
     register.save

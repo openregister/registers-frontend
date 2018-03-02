@@ -18,14 +18,14 @@ class RegistersController < ApplicationController
 
   def show
     @register = Register.find_by_slug!(params[:id])
-    @records = recover_records(@register.fields, params)
+    @records = recover_records(@register.fields_array, params)
   end
 
 private
 
   def recover_records(fields, params)
     default_sort_by = lambda {
-      has_name_field = fields.split(',').include?('name')
+      has_name_field = fields.include?('name')
       has_name_field ? 'name' : params[:id]
     }
 
@@ -43,11 +43,7 @@ private
             end
 
     if params[:q].present?
-      search_query = fields.split(',')
-                           .map { |f| "data->> '#{f}' ilike '%#{params[:q]}%'" }
-                           .join(' or ')
-
-      query = query.where(search_query)
+      query = query.search_for(fields, params[:q])
     end
 
     query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last").page(params[:page]).per(100)
