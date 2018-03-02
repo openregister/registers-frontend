@@ -28,13 +28,14 @@ private
   def recover_entries_history(register_id, fields, params, page_size = 100)
     search_term = params[:q]
     page = params.fetch(:page) { 1 }.to_i
-
+    user_entries = Entry.where(register_id: register_id, entry_type: 'user')
     if search_term.present?
-      query = Entry.where(register_id: register_id, entry_type: 'user').search_for(fields, search_term).order(:entry_number).limit(page_size).offset(page_size * (page - 1))
-      count_query = Entry.where(register_id: register_id, entry_type: 'user').search_for(fields, search_term)
+      search_query = user_entries.search_for(fields, search_term)
+      query = search_query.order(:entry_number).limit(page_size).offset(page_size * (page - 1))
+      count_query = search_query
     else
-      query = Entry.where(register_id: register_id, entry_type: 'user').order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
-      count_query = Entry.where(register_id: register_id, entry_type: 'user')
+      query = user_entries.order(:entry_number).reverse_order.limit(100).offset(100 * (page - 1))
+      count_query = user_entries
     end
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
