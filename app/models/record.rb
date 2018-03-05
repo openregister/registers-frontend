@@ -15,6 +15,6 @@ class Record < ApplicationRecord
   }
 
   scope :sort_by_field, lambda { |sort_by, sort_direction|
-                          order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
-                        }
+    order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
+  }
 end
