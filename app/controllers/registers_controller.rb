@@ -31,11 +31,12 @@ private
 
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
+
     @register.records
              .where(entry_type: 'user')
              .search_for(fields, params[:q])
              .status(params[:status])
-             .order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
+             .sort_by_field(sort_by, sort_direction)
              .page(params[:page])
              .per(100)
   end
