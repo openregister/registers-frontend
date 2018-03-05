@@ -31,21 +31,13 @@ private
 
     sort_by = params[:sort_by] ||= default_sort_by.call
     sort_direction = params[:sort_direction] ||= 'asc'
-    query = @register.records.where(entry_type: 'user')
 
-    query = case params[:status]
-            when 'archived'
-              query.archived
-            when 'all'
-              query
-            else
-              query.current
-            end
-
-    if params[:q].present?
-      query = query.search_for(fields, params[:q])
-    end
-
-    query.order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last").page(params[:page]).per(100)
+    @register.records
+             .where(entry_type: 'user')
+             .search_for(fields, params[:q])
+             .status(params[:status])
+             .sort_by_field(sort_by, sort_direction)
+             .page(params[:page])
+             .per(100)
   end
 end

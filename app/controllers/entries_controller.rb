@@ -26,18 +26,10 @@ class EntriesController < ApplicationController
 private
 
   def recover_entries_history(register_id, fields, params, page_size = 100)
-    search_term = params[:q]
     page = params.fetch(:page) { 1 }.to_i
     user_entries = Entry.where(register_id: register_id, entry_type: 'user')
-    query = user_entries.with_limit(page, page_size)
-
-    if search_term.present?
-      search_query = user_entries.search_for(fields, search_term)
-      query = search_query.with_limit(page, page_size)
-      count_query = search_query
-    else
-      count_query = user_entries
-    end
+    count_query = user_entries.search_for(fields, params[:q])
+    query = count_query.with_limit(page, page_size)
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
     previous_entries_query = Entry.where(register_id: register_id, entry_number: previous_entries_numbers)
