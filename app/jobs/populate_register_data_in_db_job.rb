@@ -20,10 +20,12 @@ class PopulateRegisterDataInDbJob < ApplicationJob
         register.root_hash = nil
         register.save
       end
-      raise Exceptions::FrontendInvalidRegisterError, e
+      raise Exceptions::FrontendInvalidRegisterError, "#{register.name}: #{e}"
     end
 
-    register.fields_array = Record.where(key: "register:#{register.slug}").pluck("data -> 'fields' as fields").first
+    register.fields_array = Record.where(key: "register:#{register.slug}")
+                                  .pluck("data -> 'fields' as fields")
+                                  .first
     register.url = register_url
     register.save
   end
