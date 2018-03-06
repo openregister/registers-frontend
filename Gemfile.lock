@@ -51,15 +51,6 @@ GIT
       rubocop-rspec (~> 1.19.0)
       scss_lint
 
-GIT
-  remote: https://github.com/openregister/registers-ruby-client.git
-  revision: a89614647441616ab7f530d846ac88dbe0e98407
-  tag: v0.9.1
-  specs:
-    registers-ruby-client (0.9.1)
-      mini_cache (~> 1.1.0)
-      rest-client (~> 2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -183,6 +174,8 @@ GEM
       prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    govuk-registers-api-client (1.0.0)
+      rest-client (~> 2)
     govuk_elements_rails (3.1.2)
       govuk_frontend_toolkit (>= 6.0.2)
       rails (>= 4.1.0)
@@ -272,7 +265,6 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_cache (1.1.0)
     mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -454,6 +446,7 @@ DEPENDENCIES
   fog-aws
   gds_metrics (~> 0.0.2)
   govuk-lint!
+  govuk-registers-api-client
   govuk_elements_form_builder!
   govuk_elements_rails
   govuk_frontend_toolkit
@@ -474,7 +467,6 @@ DEPENDENCIES
   rails (~> 5.1.4)
   rails-controller-testing
   ransack!
-  registers-ruby-client!
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
   spina!
