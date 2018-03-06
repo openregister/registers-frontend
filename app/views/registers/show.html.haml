@@ -38,11 +38,9 @@
           %dt Number of records:
           %dd
             = number_with_delimiter(@register.number_of_records)
-          %dt Updated:
+          %dt Last updated:
           %dd
-            = formatted_date(@register.register_last_updated)
-            %strong.text-spacing -
-            = link_to "See all register updates", register_entries_path(@register.slug)
+            = link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
           - if @register.related_registers.present?
             %dt Related registers:
             %dd
