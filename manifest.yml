@@ -9,15 +9,15 @@ defaults: &defaults
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
-  env:
-    PROMETHEUS_METRICS_PATH: /metrics
-
+    
 applications:
 - name: registers
   <<: *defaults
   instances: 2
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
+  env:
+    PROMETHEUS_METRICS_PATH: /metrics
 - name: registers-frontend-queue
   <<: *defaults
   instances: 1
