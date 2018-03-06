@@ -82,33 +82,31 @@
     .column-full
       .search-records-wrapper#search_wrapper
         %h3.heading-medium Explore this register
-        .grid-row
-          = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
-            .column-one-third
-              .records-search
-                = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
-                = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
-                = submit_tag 'Search', name: nil, class: 'search-submit'
-            .column-full
-              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
-                  %span.summary Filter
-                #details-content-0{"aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
-                  .grid-row
-                    .column-full
-                      .form-group
-                        %fieldset.inline
-                          %legend.visually-hidden Filter
-                          .multiple-choice
-                            = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
-                            = label_tag 'Current records', nil, for: 'status_current'
-                          .multiple-choice
-                            = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
-                            = label_tag 'Archived records', nil, for: 'status_archived'
-                          .multiple-choice
-                            = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                            = label_tag 'Both', nil, for: 'status_all'
-                        = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
+        %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+          %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+            %span.summary Search and filter
+          %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
+            .grid-row
+              .column-full
+                = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
+                  .records-search
+                    = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
+                    = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                    = submit_tag 'Search', name: nil, class: 'search-submit'
+
+                  .form-group
+                    %fieldset.inline
+                      %legend.visually-hidden Filter
+                      .multiple-choice
+                        = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                        = label_tag 'Current records', nil, for: 'status_current'
+                      .multiple-choice
+                        = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                        = label_tag 'Archived records', nil, for: 'status_archived'
+                      .multiple-choice
+                        = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                        = label_tag 'Both', nil, for: 'status_all'
+                    = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
       - if @records.present?
         %p
