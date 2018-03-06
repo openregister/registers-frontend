@@ -24,7 +24,7 @@ gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/go
 gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'govuk-registers-api-client'
+gem 'govuk-registers-api-client', path: '~/Git/govuk-registers-api-client'
 
 # Spina CMS
 gem 'spina', github: 'denkGroot/Spina', branch: 'master'
