@@ -1,10 +1,11 @@
 .records-search {
+  margin-top: $gutter-half;
+
   .search-input {
     border: 2px solid $black;
     font-size: 16px;
     height: 20px;
     padding: 7px;
-    width: 82%;
 
     &:focus {
       position: relative;
