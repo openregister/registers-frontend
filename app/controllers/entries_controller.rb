@@ -20,7 +20,9 @@ class EntriesController < ApplicationController
       { current_record: current_record, previous_record: previous_record, updated_fields: changed_fields, key: current_record.key }
     end
 
-    @entries_with_items = Kaminari::paginate_array(@entries_with_items, total_count: @result_count).page(@current_page).per(100)
+    @entries_with_items = Kaminari.paginate_array(@entries_with_items, total_count: @result_count)
+                                  .page(@current_page)
+                                  .per(100)
   end
 
 private
@@ -28,15 +30,13 @@ private
   def recover_entries_history(register_id, fields, params, page_size = 100)
     page = params.fetch(:page) { 1 }.to_i
     user_entries = Entry.where(register_id: register_id, entry_type: 'user')
-    count_query = user_entries.search_for(fields, params[:q])
-    query = count_query.with_limit(page, page_size)
+                        .search_for(fields, params[:q])
+    query = user_entries.with_limit(page, page_size)
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
     previous_entries_query = Entry.where(register_id: register_id, entry_number: previous_entries_numbers)
 
-    @result_count = count_query.count
-    @current_page = page
-    @total_pages = (@result_count / page_size) + ((@result_count % 100).zero? ? 0 : 1)
+    @result_count = user_entries.count
 
     query.map do |entry|
       entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
