@@ -26,8 +26,6 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return({ body: country_proof }, body: country_proof_update)
 
-    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new)
-
     ObjectsFactory.new.create_register('country', 'beta', 'D587')
     Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
