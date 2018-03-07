@@ -17,7 +17,7 @@ RSpec.feature 'View register', type: :feature do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return(body: country_proof)
 
-    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new())
+    RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new)
 
     country = ObjectsFactory.new.create_register('Country', 'Beta', 'D587')
     PopulateRegisterDataInDbJob.perform_now(country)
