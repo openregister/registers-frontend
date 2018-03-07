@@ -3,7 +3,7 @@ set -e
 
 # Parse app names from manifest to ensure it matches up
 SINGLE_INSTANCE_APPS=(registers-frontend-queue registers-frontend-scheduler)
-ZERO_DOWNTIME_APPS=registers
+ZERO_DOWNTIME_APPS=registers-frontend
 
 # $CF env variables are set by Travis and configured in ../.travis.yml
 cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
