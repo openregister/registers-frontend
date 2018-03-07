@@ -44,13 +44,12 @@ class PostgresDataStore
   def get_records(entry_type); end
 
   def get_latest_entry_number(entry_type)
-    latest_entry = Entry.where(register_id: @register.id, entry_type: entry_type).order(:entry_number).reverse_order.first
-    if latest_entry.nil?
-      latest_entry = @entries[entry_type].last
-      latest_entry.nil? ? 0 : latest_entry.entry_number
-    else
-      latest_entry.entry_number
-    end
+    Entry.where(register_id: @register.id, entry_type: entry_type)
+         .order(:entry_number)
+         .reverse_order
+         .limit(1)
+         .pluck(:entry_number)
+         .first || @entries[entry_type].last&.entry_number || 0
   end
 
   def after_load
