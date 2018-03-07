@@ -11,12 +11,11 @@ defaults: &defaults
     - logit-ssl-drain
 
 applications:
-- name: registers
+- name: registers-frontend
   <<: *defaults
   instances: 2
-  routes:
-  - route: registers.cloudapps.digital
-  - route: www.registers.service.gov.uk
+  domain: registers-trial.service.gov.uk
+  no-hostname: true
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
   services:
