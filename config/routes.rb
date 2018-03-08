@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :entries, path: 'updates', only: :index
   end
 
+  get '/registers-in-progress', to: 'registers#in_progress'
+
   resources :suggest_registers, path: 'suggest-register', except: %i[show edit]
   get 'suggest-register/complete', to: 'suggest_registers#complete'
 
