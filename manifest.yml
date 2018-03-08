@@ -4,22 +4,20 @@ defaults: &defaults
   memory: 1GB
   services:
     # postgres database
-    - registers-trial
+    - registers-frontend
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
-    
+
 applications:
-- name: registers-frontend
+- name: registers
   <<: *defaults
   instances: 2
-  domain: registers-trial.service.gov.uk
-  no-hostname: true
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
-  services:     
-    # TODO: This block overrides to add prometheus but we should do this using inheritence if possible 
+  services:
+    # TODO: This block overrides to add prometheus but we should do this using inheritence if possible
     - registers-frontend
     - registers-product-site-environment-variables
     - logit-ssl-drain
