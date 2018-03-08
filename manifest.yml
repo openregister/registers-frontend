@@ -4,18 +4,16 @@ defaults: &defaults
   memory: 1GB
   services:
     # postgres database
-    - registers-trial
+    - registers-frontend
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
 
 applications:
-- name: registers-frontend
+- name: registers
   <<: *defaults
   instances: 2
-  domain: registers-trial.service.gov.uk
-  no-hostname: true
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
   services:
