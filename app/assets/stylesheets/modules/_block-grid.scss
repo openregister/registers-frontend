@@ -27,7 +27,7 @@
   }
 
   .govuk-organisation-logo {
-      @include media(tablet) {
+    @include media(tablet) {
       bottom: 1em;
       left: 1em;
       position: absolute;
