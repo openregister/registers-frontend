@@ -9,24 +9,10 @@ defaults: &defaults
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
-    
+
 applications:
 - name: registers-frontend
   <<: *defaults
   instances: 2
   domain: registers-trial.service.gov.uk
   no-hostname: true
-  health-check-type: http
-  health-check-http-endpoint: /health_check/standard
-  env:
-    PROMETHEUS_METRICS_PATH: /metrics
-- name: registers-frontend-queue
-  <<: *defaults
-  instances: 1
-  command: bundle exec 'rake environment jobs:work'
-  health-check-type: process
-- name: registers-frontend-scheduler
-  <<: *defaults
-  instances: 1
-  command: bundle exec clockwork 'lib/clock.rb'
-  health-check-type: process
