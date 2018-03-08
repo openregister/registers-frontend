@@ -1,19 +1,19 @@
 %tr
   %th{"data-title" => index, }
-    %h4.heading-small= register.name
-    - if register.register_phase == 'Backlog'
-      %p= register.description
-    - else
-      %p= register.register_description
-  %td{"data-title" => "Phase: "}
-    = phase_label(register.register_phase)
+    %p
+      %strong= link_to_if register.register_phase == 'Alpha', register.name, register_path(register.slug)
+      %br
+      - if register.register_phase == 'Backlog'
+        = register.description
+      - else
+        = register.register_description
   %td{"data-title" => "Managed by: "}
     - if register.register_authority.present?
       %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
         %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
           %span= register.register_authority.data['name']
-  - unless ['Backlog','Discovery'].any? (register.register_phase)
-    %td{class: "links", "data-title" => "View more: "}
-      = link_to "View register", register_path(register.slug)
-  - else
-    %td
+  %td{"data-title" => "Phase: "}
+    - if register.register_phase == 'Alpha'
+      = phase_label(register.register_phase)
+    - else
+      = link_to 'Express interest', request_registers_path(register_title: register.name)
