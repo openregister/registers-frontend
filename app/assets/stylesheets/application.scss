@@ -23,6 +23,7 @@
 @import 'modules/tables';
 @import 'modules/check-your-answers';
 @import 'modules/accessible-autocomplete';
+@import 'modules/block-grid';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -46,7 +47,8 @@ strong {
   margin-top: 0;
 }
 
-.register-show {
+.register-show,
+.register-index {
   .heading-large {
     margin-top: 0;
   }
