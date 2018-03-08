@@ -5,15 +5,7 @@ class RegistersController < ApplicationController
 
   def index
     @search = Register.available.ransack(params[:q])
-
-    @registers = case params[:phase]
-                 when 'ready to use'
-                   @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-                 when 'in progress'
-                   @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-                 else
-                   @search.result.sort_by_phase_name_asc.by_name
-                 end
+    @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
   end
 
   def show
