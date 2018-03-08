@@ -105,14 +105,6 @@ a:visited {
 }
 
 table {
-  thead th {
-    font-weight: normal;
-
-    @include media(tablet) {
-      border-top: 2px solid $grey-3;
-    }
-  }
-
   td,
   th {
     font-size: 16px;
@@ -166,11 +158,7 @@ table {
 
 .register-status-table {
   @include media(tablet) {
-    margin-top: 40px;
-
-    td:last-of-type {
-      text-align: right;
-    }
+    margin: 40px 0;
   }
 }
 

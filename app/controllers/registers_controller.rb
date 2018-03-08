@@ -8,6 +8,13 @@ class RegistersController < ApplicationController
     @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
   end
 
+  def in_progress
+    @search = Register.available.ransack(params[:q])
+    @upcoming_registers = @search.result.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
+    # We don't have search on the suggested registers so no need to pass in Ransack
+    @suggested_registers = Register.available.where(register_phase: %w[Backlog Discovery]).sort_by_phase_name_asc.by_name
+  end
+
   def show
     @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
