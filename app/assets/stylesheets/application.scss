@@ -28,6 +28,7 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'modules/check-your-answers';
 @import 'modules/accessible-autocomplete';
 @import 'modules/block-grid';
+@import 'modules/tabs';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -105,6 +106,15 @@ a:visited {
     max-width: 480px;
     padding-bottom: 0.5rem;
     width: 75%;
+  }
+}
+
+.list-number-big {
+  font-size: 24px;
+  font-weight: bold;
+
+  p {
+    font-size: 19px;
   }
 }
 
@@ -271,13 +281,7 @@ table {
 }
 
 .search-records-wrapper {
-  border-top: 2px solid $grey-3;
-  margin: 40px 0 20px 0;
-  padding-top: 40px;
-
-  .heading-medium {
-    margin-top: 0;
-  }
+  margin-bottom: $gutter;
 }
 
 .form-group-wrapper {
