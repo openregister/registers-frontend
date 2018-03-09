@@ -11,7 +11,7 @@ defaults: &defaults
     - logit-ssl-drain
 
 applications:
-- name: registers-frontend
+- name: registers-trial
   <<: *defaults
   instances: 2
   domain: registers-trial.service.gov.uk
