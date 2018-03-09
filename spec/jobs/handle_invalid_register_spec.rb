@@ -18,8 +18,6 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
       stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
       with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
       to_return({ body: country_proof }, body: country_proof_update)
-
-      RegistersClientWrapper.class_variable_set(:@@registers_client, RegistersClient::RegisterClientManager.new)
     end
 
     it 'throws exception when register invalid and deletes records and entries' do
