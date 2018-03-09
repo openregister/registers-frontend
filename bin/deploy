@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# Parse app names from manifest to ensure it matches up
-SINGLE_INSTANCE_APPS=(registers-frontend-queue registers-frontend-scheduler)
 ZERO_DOWNTIME_APPS=registers-frontend
 
 # $CF env variables are set by Travis and configured in ../.travis.yml
