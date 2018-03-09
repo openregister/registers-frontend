@@ -16,11 +16,3 @@ do
   cf zero-downtime-push $APP_NAME -f manifest.yml
   cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
 done
-
-for APP_NAME in ${SINGLE_INSTANCE_APPS[@]}
-do
-  echo "Deploying ${APP_NAME} to ${CF_ORG}/${CF_SPACE}..."
-  # We do not want multiple instances of these apps running so use CF PUSH
-  cf push $APP_NAME -f manifest.yml
-  cf set-env $APP_NAME GIT_COMMIT_HASH $TRAVIS_COMMIT
-done
