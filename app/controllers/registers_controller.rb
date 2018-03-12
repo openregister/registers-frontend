@@ -6,6 +6,11 @@ class RegistersController < ApplicationController
   def index
     @search = Register.available.ransack(params[:q])
     @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
+
+    # Redirect legacy URL to ensure we don't break anyone
+    if params[:phase] == 'in progress'
+      redirect_to registers_in_progress_path
+    end
   end
 
   def in_progress
