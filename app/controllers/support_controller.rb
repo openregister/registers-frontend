@@ -6,7 +6,7 @@ class SupportController < ApplicationController
   def index; end
 
   def select_support
-    if params[:subject] == "problem"
+    if params[:subject] == '[Problem]'
       redirect_to support_problem_path
     else
       redirect_to support_question_path
@@ -30,7 +30,7 @@ class SupportController < ApplicationController
       redirect_to support_thanks_path
     else
       flash[:errors] = @support.errors
-      if params[:subject] == "problem"
+      if params[:support][:subject] == '[Problem]'
         render :problem
       else
         render :question
