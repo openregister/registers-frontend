@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/core
+//= require jquery-ui/keycode
 //= require_tree .
 
 window.GAAP.analytics.init();
