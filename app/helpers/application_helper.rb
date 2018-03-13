@@ -7,8 +7,6 @@ module ApplicationHelper
       "logo-with-crest crest-mod"
     when "hm-revenue-customs"
       "logo-with-crest crest-hmrc"
-    when "welsh-government"
-      "logo-with-crest crest-wales"
     when "department-for-business-innovation-and-skills"
       "logo-with-crest crest-bis"
     when "the-office-of-the-leader-of-the-house-of-commons"
@@ -17,7 +15,7 @@ module ApplicationHelper
       "logo-with-crest crest-so"
     when "uk-atomic-energy-authority"
       "logo-with-crest crest-ukaea"
-    when "nhs", "government-digital-service", "scottish-government"
+    when "nhs", "government-digital-service", "scottish-government", "welsh-government"
       " "
     else
       "logo-with-crest crest-org"
