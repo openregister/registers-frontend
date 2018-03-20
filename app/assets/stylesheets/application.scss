@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-// Cannot use GDS Transport font on a non GOV.UK domain due to licensing
-$toolkit-font-stack: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-$toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
-
 // GOV.UK Toolkit and GOV.UK Elements
 @import 'govuk_elements';
 
