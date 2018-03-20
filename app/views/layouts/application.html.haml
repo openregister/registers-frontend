@@ -20,6 +20,8 @@
       = label_tag 'show-menu', 'Menu', class: 'header__navigation-toggle'
       %nav{id: "navigation", class: "header__navigation", role: "Navigation", "aria-label" => "Top Level Navigation", "aria-hidden" => "true"}
         %ul{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Navigation Link Clicked"}}
+          %li{class: "#{'active' if current_page?(root_path)}"}
+            = link_to "About", root_path
           %li{class: "#{'active' if current_page?(using_registers_path)}"}
             = link_to "Using registers", using_registers_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
