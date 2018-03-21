@@ -7,14 +7,8 @@
       = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
-    - if params[:phase].present?
-      %li.breadcrumbs__item
-        = link_to 'Registers collection', registers_path
-      %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to "Registers #{params[:phase]}", '#content', 'aria-current' => 'page'
-    - else
-      %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to 'Get data', '#content', 'aria-current' => 'page'
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Get data', '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
   .grid-row
@@ -22,7 +16,7 @@
       %h1.heading-large Get data for your service
       %p See the #{link_to 'registers that are coming soon', registers_in_progress_path}
     .column-one-third
-      = search_form_for @search, class: 'records-search' do |f|
+      = search_form_for @search, url: registers_path(anchor: 'content'), class: 'records-search' do |f|
         = f.label :name_cont, 'Search', class: 'visually-hidden'
         = f.search_field :name_cont, class: 'search-input', placeholder: 'Search'
         = f.submit 'Search', class: 'search-submit'

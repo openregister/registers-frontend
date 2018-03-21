@@ -1,7 +1,8 @@
-%sorting-link {
-  font-weight: bold;
+.sort-link {
+  font-weight: normal;
   padding-right: 15px;
   position: relative;
+  text-decoration: none;
 
   &:after {
     border-left: 5px solid transparent;
@@ -14,28 +15,19 @@
     top: 7px;
   }
 
-  &.asc:after {
-    border-bottom: 8px solid $govuk-blue;
+  &.asc {
+    font-weight: bold;
+
+    &:after {
+      border-bottom: 8px solid $govuk-blue;
+    }
   }
 
-  &.desc:after {
-    border-top: 8px solid $govuk-blue;
-  }
-}
-
-.sort-link {
-  @extend %sorting-link;
-}
-
-// Ransack sorting
-// scss-lint:disable SelectorFormat
-.sort_link {
-  @extend %sorting-link;
-  font-weight: normal;
-
-  &.asc,
   &.desc {
     font-weight: bold;
+
+    &:after {
+      border-top: 8px solid $govuk-blue;
+    }
   }
 }
-// scss-lint:enable SelectorFormat

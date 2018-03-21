@@ -111,6 +111,15 @@ a:visited {
 
   p {
     font-size: 19px;
+
+    &:first-of-type {
+      margin-bottom: $gutter-half;
+    }
+  }
+
+  .heading-medium {
+    margin-bottom: $gutter / 3;
+    margin-top: 0;
   }
 }
 
@@ -157,6 +166,7 @@ table {
 }
 
 .register-data-table {
+  border-top: 1px solid $border-colour;
   margin: 0 0 20px 0;
 }
 
@@ -277,7 +287,7 @@ table {
 }
 
 .search-records-wrapper {
-  margin-bottom: $gutter;
+  margin-bottom: $gutter-half;
 }
 
 .form-group-wrapper {
@@ -347,9 +357,11 @@ table {
   margin-left: 10px;
 }
 
-details {
-  margin-top: 20px;
+.records-count {
+  margin-bottom: $gutter / 3;
+}
 
+details {
   .form-group {
     margin: 20px 0;
   }
