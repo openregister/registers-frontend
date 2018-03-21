@@ -26,7 +26,7 @@ RSpec.feature 'View register', type: :feature do
     expect(page).to have_content('Registers ready to use')
     click_link('Country')
     expect(page).to have_content('Afghanistan')
-    click_link('name')
+    click_link('Name')
     expect(page).to have_content('Zimbabwe')
   end
 

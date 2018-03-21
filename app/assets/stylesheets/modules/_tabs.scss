@@ -1,5 +1,9 @@
 // Taken from https://github.com/alphagov/static/app/assets/stylesheets/helpers/_core.scss
 
+.tabs-container {
+  margin-top: $gutter;
+}
+
 .nav-tabs {
   zoom: 1;
   background: $white;
@@ -38,8 +42,7 @@
   li,
   .tabs-nav li {
     @include core-19;
-    padding: 0;
-    margin: 0;
+    margin-right: 4px;
     float: left;
 
     @include media(mobile) {
@@ -49,10 +52,10 @@
     a {
       border: solid 1px $white;
       border-bottom: none;
+      background-color: $grey-3;
       float: left;
       height: 2.25em;
       line-height: 2.25em;
-      margin-bottom: -2px;
       padding: 0 1em 0 1em;
       position: relative;
       text-align: center;
@@ -75,6 +78,10 @@
         border-bottom: 2px solid $border-colour;
       }
 
+      @include media(desktop) {
+        min-width: 150px;
+      }
+
       &:hover {
         background-color: $border-colour;
       }
@@ -83,9 +90,9 @@
     &.active a {
       background-color: $white;
       border: solid 2px $border-colour;
-      border-bottom: solid 2px $white;
       color: $text-colour;
       font-weight: bold;
+      padding-bottom: 2px;
       position: relative;
       text-decoration: none;
       z-index: 5;
@@ -102,6 +109,21 @@
       &:hover {
         color: inherit;
       }
+
+      &:focus:after {
+        content: none;
+      }
+
+      &:after {
+        background-color: $white;
+        bottom: -4px;
+        content: "";
+        display: block;
+        height: 4px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
     }
 
     &:first-child a {
@@ -116,10 +138,6 @@
 }
 
 .tab-content {
-  @include media(mobile) {
-    margin: 0 -1em;
-  }
-
   .tab-pane {
     padding: 1em 0 0 0;
     border-top: solid 2px $border-colour;
@@ -141,7 +159,22 @@
     }
   }
 
+  p:first-child {
+    font-size: 19px;
+    margin-top: 0;
+  }
+
+  .heading-small {
+    margin-bottom: $gutter;
+    margin-top: 0;
+  }
+
+  .bold {
+    margin-bottom: 0;
+  }
+
   p {
+    font-size: 16px;
     padding: 0;
     margin-left: 0;
     margin-right: 0;
@@ -219,6 +252,8 @@
 
   @include media(mobile) {
     .js-tab-container {
+      border-left: solid 2px $border-colour;
+      border-right: solid 2px $border-colour;
       min-height: 0;
     }
 
