@@ -9,7 +9,7 @@
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item
-      = link_to 'Registers collection', registers_path
+      = link_to 'Get data', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to "#{@register.register_name} Register", '#content', 'aria-current' => 'page'
 
@@ -40,19 +40,19 @@
         .js-tabs.nav-tabs
           %ul
             %li
-              = link_to 'See the data', '#tab1'
+              = link_to 'Explore the data', '#records_tab'
             %li
-              = link_to 'API integration', '#tab2'
+              = link_to 'Use the API', '#api_tab'
             %li
-              = link_to 'More information', '#tab3'
+              = link_to 'Details', '#details_tab'
         .js-tab-content.tab-content
-          #tab1.js-tab-pane.tab-pane
-            .search-records-wrapper#search_wrapper
+          #records_tab.js-tab-pane.tab-pane
+            .search-records-wrapper#records_wrapper
               %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
                 %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
                   %span.summary Search and filter
                 %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
-                  = form_tag register_path(@register.slug), method: :get, id: 'search_records', class: 'panel panel-border' do
+                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, class: 'panel panel-border' do
                     .grid-row
                       .column-one-third
                         .records-search
@@ -75,11 +75,11 @@
                           = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
             - if @records.present?
-              %p
+              .records-count
                 %span#records-count
                   = render partial: 'showing'
                 - if params[:q].present? || params[:status].present?
-                  = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+                  = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
               .table-scroll
                 %table.register-data-table
@@ -109,7 +109,7 @@
                   - if params[:q].present? || params[:status].present?
                     = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
-          #tab2.js-tab-pane.tab-pane
+          #api_tab.js-tab-pane.tab-pane
             %p How to use this data in your service:
             %ul.list.list-number.list-number-big
               %li
@@ -127,30 +127,30 @@
                 %p We have a full set of documentation which explains how to integrate with a register.
                 %p= link_to 'See the documentation', 'https://registers-docs.cloudapps.digital/'
 
-          #tab3.js-tab-pane.tab-pane
+          #details_tab.js-tab-pane.tab-pane
             .grid-row
               .column-full
                 %h3.heading-small Details:
             .grid-row
               .column-one-half
-                %h5.heading-small Last updated:
-                = link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
+                %p.bold Last updated:
+                %p= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
 
               .column-one-half
                 - if @register.related_registers.present?
-                  %h5.heading-small Related registers:
+                  %p.bold Related registers:
                   %p
                     != @register.related_registers
                 - if @register.links_to.present?
-                  %h5.heading-small Links to:
+                  %p.bold Links to:
                   %p
                     != @register.links_to.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
                 - if @register.links_from.present?
-                  %h5.heading-small Links from:
+                  %p.bold Links from:
                   %p
                     != @register.links_from.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
                 - if @register.contextual_data.present?
-                  %h5.heading-small Contextual data:
+                  %p.bold Contextual data:
                   %p
                     != @register.contextual_data
 
@@ -162,11 +162,11 @@
               - left_column, right_column = @register.register_fields.each_slice((@register.register_fields.size / 2.0).round).to_a
               .column-one-half
                 - left_column.each do |field|
-                  %h5.heading-small= field['field']
+                  %p.bold= field['field']
                   %p= field['text']
               .column-one-half
                 - right_column.each do |field|
-                  %h5.heading-small= field['field']
+                  %p.bold= field['field']
                   %p= field['text']
 
 = content_for :javascript do
