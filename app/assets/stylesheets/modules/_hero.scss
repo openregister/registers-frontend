@@ -40,7 +40,7 @@
   padding: $gutter-half 0;
 
   @include media(tablet) {
-    padding: $gutter 0;
+    padding: $gutter 0 $gutter *2 0;
   }
 
   &--breaded {
