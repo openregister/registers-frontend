@@ -1,0 +1,16 @@
+- @page_title = "Your API Key"
+
+%main#content{role: 'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Your API Key
+
+      %code.code.code-large
+        = @user.api_key
+
+      .notice
+        %i.icon.icon-important
+          %span.visually-hidden Warning
+        %strong.bold-small You must copy your API Key now. You will not be able to see it again once you leave this page
+
+      %p= link_to 'Back to register collection', 'https://registers.cloudapps.digital/registers'
