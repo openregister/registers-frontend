@@ -6,7 +6,7 @@
     = f.label :department, class: 'form-label-bold' do
       Organisation
       %span.form-hint The organisation or government department you work for
-    = f.text_field :department, class: 'form-control'
+    = f.select :department, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
   .form-group
     = f.label :service, class: 'form-label-bold' do
       Service
@@ -17,3 +17,12 @@
       = f.label :api_key, class: 'form-label-bold'
       = f.text_field :api_key, class: 'form-control', disabled: true
   = f.submit 'Continue', class: 'button'
+
+= content_for :javascript do
+  :javascript
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.getElementById('government-organisations'),
+      showAllValues: false,
+      minLength: 2,
+      defaultValue: ''
+    });
