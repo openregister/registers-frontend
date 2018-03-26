@@ -23,11 +23,10 @@ RSpec.feature 'View register', type: :feature do
 
   scenario 'view and sort a register' do
     visit '/'
-    expect(page).to have_content('Registers ready to use')
-    click_link('Country')
-    expect(page).to have_content('Afghanistan')
-    click_link('Name')
-    expect(page).to have_content('Zimbabwe')
+    expect(page).to have_content('Build services using accurate data')
+    click_link('Get data for your service')
+    first('.register-block').click
+    expect(page).to have_content('Country register')
   end
 
   scenario 'filter a register' do
