@@ -70,12 +70,12 @@
           .data
             = link_to registers_in_progress_path do
               %span.data-item.bold-xxlarge= @upcoming_registers.count
-              %span.data-item.bold-xsmall Government services using registers
+              %span.data-item.bold-xsmall upcoming registers
         .column-one-third
           .data
             = link_to services_using_registers_path do
               %span.data-item.bold-xxlarge 11
-              %span.data-item.bold-xsmall Government services using registers
+              %span.data-item.bold-xsmall government services using registers
 
     %section.content-section.content-section--with-top-border
       .grid-row
@@ -93,6 +93,6 @@
         .column-one-half
           %h2.heading-medium.content-section__title The team
           %p GOV.UK Registers is built and supported by a full-time team at the Government Digital Service.
-          %p #{mail_to "registers@digital.cabinet-office.gov.uk", "Contact the team"} if you have any questions.
+          %p #{link_to "Contact the team", support_path} if you have any questions.
         .column-one-half
           = image_tag 'registers-team.png', class: 'image'
