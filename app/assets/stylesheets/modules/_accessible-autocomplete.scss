@@ -45,7 +45,7 @@
 
 .autocomplete__input--focused {
   outline-offset: 0;
-  outline: 3px solid $yellow;
+  outline: 3px solid $focus-colour;
 }
 
 .autocomplete__input--show-all-values {
@@ -72,7 +72,10 @@
   max-height: 342px;
   overflow-x: hidden;
   padding: 0;
+  // scss-lint:disable DuplicateProperty
   width: 100%;
+  width: calc(100% - 4px);
+  // scss-lint:enable DuplicateProperty
 }
 
 .autocomplete__menu--visible {
@@ -96,7 +99,7 @@
 }
 
 .autocomplete__option {
-  border-bottom: solid $grey-2;
+  border-bottom: solid $border-colour;
   border-width: 1px 0;
   cursor: pointer;
   display: block;
@@ -113,6 +116,18 @@
   &:last-of-type {
     border-bottom-width: 0;
   }
+}
+
+.autocomplete__option > * {
+  pointer-events: none;
+}
+
+.autocomplete__option:first-of-type {
+  border-top-width: 0;
+}
+
+.autocomplete__option:last-of-type {
+  border-bottom-width: 0;
 }
 
 .autocomplete__option--odd {

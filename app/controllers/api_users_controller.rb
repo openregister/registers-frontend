@@ -1,4 +1,6 @@
 class ApiUsersController < ApplicationController
+  before_action :set_government_organisations, only: :new
+
   def new
     @api_user = ApiUser.new
   end
@@ -23,5 +25,12 @@ private
       :service,
       :api_key
     )
+  end
+
+  def set_government_organisations
+    @government_organisations = Register.find_by(slug: 'government-organisation')
+                                        .records
+                                        .where(entry_type: 'user')
+                                        .current
   end
 end
