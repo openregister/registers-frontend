@@ -22,10 +22,10 @@
         %ul{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Navigation Link Clicked"}}
           %li{class: "#{'active' if current_page?(root_path)}"}
             = link_to "About", root_path
-          %li{class: "#{'active' if current_page?(using_registers_path)}"}
-            = link_to "Using registers", using_registers_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Get data", registers_path
+          %li{class: "#{'active' if current_page?(using_registers_path)}"}
+            = link_to "Using registers", using_registers_path
           %li{class: "#{'active' if current_page?(support_path)}"}
             = link_to "Support", support_path
           %li
