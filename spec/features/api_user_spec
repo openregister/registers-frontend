@@ -1,0 +1,19 @@
+require 'rails_helper'
+
+RSpec.feature 'Api User', type: :feature do
+  scenario 'correct information shown after valid submission' do
+    visit '/api_user/new'
+    expect(page).to have_content('Create an API key')
+    fill_in 'Email', with: 'testuser@gov.uk'
+    click_button('Submit')
+    expect(page).to have_content('Your API Key')
+  end
+
+  scenario 'correct information shown after invalid submission' do
+    visit '/api_user/new'
+    expect(page).to have_content('Create an API key')
+    fill_in 'Department', with: 'GDS'
+    click_button('Submit')
+    expect(page).to have_content('Email is required')
+  end
+end
