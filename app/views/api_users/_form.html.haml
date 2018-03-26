@@ -1,0 +1,19 @@
+= form_for @api_user do |f|
+  .form-group
+    = f.label :email, 'Email address', class: 'form-label-bold'
+    = f.text_field :email, class: 'form-control'
+  .form-group
+    = f.label :department, class: 'form-label-bold' do
+      Organisation
+      %span.form-hint The organisation or government department you work for
+    = f.text_field :department, class: 'form-control'
+  .form-group
+    = f.label :service, class: 'form-label-bold' do
+      Service
+      %span.form-hint What website or service will use registers
+    = f.text_field :service, class: 'form-control'
+  - if f.object.api_key.present?
+    .form-group
+      = f.label :api_key, class: 'form-label-bold'
+      = f.text_field :api_key, class: 'form-control', disabled: true
+  = f.submit 'Continue', class: 'button'
