@@ -1,7 +1,7 @@
 = form_for @api_user do |f|
   .form-group
     = f.label :email, 'Email address', class: 'form-label-bold'
-    = f.text_field :email, class: 'form-control'
+    = f.text_field :email, class: 'form-control', type: 'email', required: true
   .form-group
     = f.label :department, class: 'form-label-bold' do
       Organisation
