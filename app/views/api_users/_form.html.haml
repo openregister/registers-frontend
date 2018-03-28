@@ -12,10 +12,6 @@
       Service
       %span.form-hint What website or service will use registers
     = f.text_field :service, class: 'form-control'
-  - if f.object.api_key.present?
-    .form-group
-      = f.label :api_key, class: 'form-label-bold'
-      = f.text_field :api_key, class: 'form-control', disabled: true
   = f.submit 'Continue', class: 'button'
 
 = content_for :javascript do

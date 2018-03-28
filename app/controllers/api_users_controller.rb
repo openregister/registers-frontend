@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class ApiUsersController < ApplicationController
   before_action :set_government_organisations
 
@@ -8,12 +12,30 @@ class ApiUsersController < ApplicationController
   def create
     @api_user = ApiUser.new(api_user_params)
     if @api_user.valid?
-      redirect_to root_path, notice: 'New API key was successfully created.'
-      NotifyMailer.api_key_confirmation(@api_user).deliver_now
-      NotifyMailer.new_api_key_request(@api_user).deliver_now
+      post_to_endpoint(@api_user)
+      redirect_to root_path
     else
       render :new
     end
+  end
+
+  def post_to_endpoint(user)
+    #binding.pry;
+    #require.pry
+
+    uri = URI.parse("http://localhost:3000/users")
+
+    header = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+    @user = { email: user.email, department: user.department, service: user.service }
+
+    # Create the HTTP objects
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = URI.encode_www_form(@user)
+
+    # Send the request
+    response = http.request(request)
   end
 
 private
@@ -22,8 +44,7 @@ private
     params.require(:api_user).permit(
       :email,
       :department,
-      :service,
-      :api_key
+      :service
     )
   end
 
