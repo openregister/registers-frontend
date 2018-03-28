@@ -20,22 +20,8 @@ class ApiUsersController < ApplicationController
   end
 
   def post_to_endpoint(user)
-    #binding.pry;
-    #require.pry
-
-    uri = URI.parse("http://localhost:3000/users")
-
-    header = {'Content-Type': 'application/x-www-form-urlencoded'}
-
     @user = { email: user.email, department: user.department, service: user.service }
-
-    # Create the HTTP objects
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri, header)
-    request.body = URI.encode_www_form(@user)
-
-    # Send the request
-    response = http.request(request)
+    Net::HTTP.post_form(URI(Rails.configuration.self_service_api_endpoint), @user)
   end
 
 private
