@@ -12,19 +12,22 @@ class ApiUsersController < ApplicationController
   def create
     @api_user = ApiUser.new(api_user_params)
     if @api_user.valid?
-      post_to_endpoint(@api_user)
-      redirect_to root_path
-    else
-      render :new
+      response = post_to_endpoint(@api_user)
+      if response.is_a? Net::HTTPCreated
+        redirect_to root_path
+      else
+        flash.alert = 'Something went wrong'
+        render :new
+      end
     end
   end
+
+private
 
   def post_to_endpoint(user)
     @user = { email: user.email, department: user.department, service: user.service }
     Net::HTTP.post_form(URI(Rails.configuration.self_service_api_endpoint), @user)
   end
-
-private
 
   def api_user_params
     params.require(:api_user).permit(
