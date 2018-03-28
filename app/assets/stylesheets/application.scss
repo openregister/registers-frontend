@@ -379,3 +379,14 @@ details {
     display: none;
   }
 }
+
+.notice {
+  margin-bottom: $gutter;
+}
+
+.code-large {
+  display: block;
+  line-height: 1;
+  margin: $gutter 0;
+  padding: $gutter;
+}
