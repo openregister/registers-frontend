@@ -14,9 +14,10 @@ class ApiUsersController < ApplicationController
     if @api_user.valid?
       response = post_to_endpoint(@api_user)
       if response.is_a? Net::HTTPCreated
-        redirect_to root_path
+        @api_key = JSON.parse(response.body)['api_key']
+        render :show
       else
-        flash.alert = 'Something went wrong'
+        flash[:errors] = 'Something went wrong'
         render :new
       end
     end
