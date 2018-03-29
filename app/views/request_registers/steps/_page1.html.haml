@@ -1,5 +1,8 @@
 %h1.heading-large Why are you interested in this register?
 
+-# e.g. /request-register?register_title=charity
+= f.hidden_field :message, value: params[:register_title]
+
 %div{class: "form-group #{'form-group-error' if @request_register.errors[:title].present?}"}
   %fieldset
     %legend
