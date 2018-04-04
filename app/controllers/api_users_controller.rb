@@ -27,7 +27,15 @@ private
 
   def post_to_endpoint(user)
     @user = { email: user.email, department: user.department, service: user.service }
-    Net::HTTP.post_form(URI(Rails.configuration.self_service_api_endpoint), @user)
+
+    uri = URI.parse(Rails.configuration.self_service_api_endpoint)
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request.basic_auth(ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'])
+      request.set_form_data(@user)
+      http.request(request)
+    end
   end
 
   def api_user_params
