@@ -83,4 +83,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'https://registers.cloudapps.digital' }
+  config.self_service_api_endpoint = 'https://registers-selfservice.cloudapps.digital/users'
 end
