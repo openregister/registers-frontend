@@ -31,10 +31,9 @@ private
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
 
     Net::HTTP.start(uri.host, uri.port) do |http|
-      header = { 'Content-Type': 'application/x-www-form-urlencoded' }
-      request = Net::HTTP::Post.new(uri.request_uri, header)
+      request = Net::HTTP::Post.new(uri.request_uri)
       request.basic_auth(ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'])
-      request.body = URI.encode_www_form(@user)
+      request.set_form_data(@user)
       http.request(request)
     end
   end
