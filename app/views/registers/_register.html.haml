@@ -14,6 +14,6 @@
           %span= register.register_authority.data['name']
   %td{"data-title" => "Phase: "}
     - if register.register_phase == 'Alpha'
-      = phase_label(register.register_phase)
+      = link_to 'Open for feedback', support_question_path
     - else
       = link_to 'Express interest', request_registers_path(register_title: register.name)
