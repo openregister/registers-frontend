@@ -110,27 +110,21 @@
                     = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
 
           #api_tab.js-tab-pane.tab-pane
-            %p How to use this data in your service:
             %ul.list.list-number.list-number-big
+              %li
+                %h4.heading-medium Get an API Key
+                %p Sign up to get an API key and start using live data.
+                %p= link_to 'Create API key', new_api_user_path
               %li
                 %h4.heading-medium Explore the API
                 %p See all the endpoints used to interact with this register.
                 %p= link_to 'Visit the API explorer', @register.url
-
-              %li
-                %h4.heading-medium Get an API Key
-                %p See all the endpoints used to interact with this register.
-                %p= link_to 'Create API key', new_api_user_path
-
               %li
                 %h4.heading-medium Read the documentation
                 %p We have a full set of documentation which explains how to integrate with a register.
                 %p= link_to 'See the documentation', 'https://registers-docs.cloudapps.digital/'
 
           #details_tab.js-tab-pane.tab-pane
-            .grid-row
-              .column-full
-                %h3.heading-small Details:
             .grid-row
               .column-one-half
                 %p.bold Last updated:
