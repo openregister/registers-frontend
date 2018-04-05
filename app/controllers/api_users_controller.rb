@@ -31,7 +31,7 @@ private
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
 
     Net::HTTP.start(uri.host, uri.port) do |http|
-      http.use_ssl = (url.scheme == 'https')
+      http.use_ssl = (uri.scheme == 'https')
       request = Net::HTTP::Post.new(uri.request_uri)
       request.basic_auth(ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'])
       request.set_form_data(@user)
