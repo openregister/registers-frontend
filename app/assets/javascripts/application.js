@@ -18,5 +18,6 @@
 //= require accessible-autocomplete
 //= require history
 //= require tabs
+//= require govuk/show-hide-content
 
 window.GAAP.analytics.init();
