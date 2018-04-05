@@ -15,6 +15,7 @@
 //= require jquery-ui/core
 //= require jquery-ui/keycode
 //= require accessible-autocomplete
+//= require govuk/show-hide-content
 //= require_tree .
 
 window.GAAP.analytics.init();
