@@ -31,7 +31,7 @@ private
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = (uri.scheme == 'https')
 
-    http.start(uri.host, uri.port) do |http_start|
+    http.start do |http_start|
       request = Net::HTTP::Post.new(uri.request_uri)
       request.basic_auth(ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'])
       request.set_form_data(@user)
