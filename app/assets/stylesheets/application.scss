@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+// GOV.UK Template
+@import 'govuk-template';
+
 // GOV.UK Toolkit and GOV.UK Elements
 @import 'govuk_elements';
 
@@ -67,15 +70,6 @@ html {
 // Override purple colour
 a:visited {
   color: $govuk-blue;
-}
-
-.js-hidden {
-  display: none;
-}
-
-.js-enabled .js-hidden {
-  display: block;
-  visibility: visible;
 }
 
 // scss-lint:disable IdSelector
