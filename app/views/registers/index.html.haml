@@ -13,8 +13,9 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
-      %h1.heading-large Get data for your service
-      %p See the #{link_to 'registers that are coming soon', registers_in_progress_path}
+      %h1.heading-large Registers you can use
+      %p These registers are ready to use in your service.
+      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}
     .column-one-third
       = search_form_for @search, url: registers_path(anchor: 'content'), class: 'records-search' do |f|
         = f.label :name_cont, 'Search', class: 'visually-hidden'
