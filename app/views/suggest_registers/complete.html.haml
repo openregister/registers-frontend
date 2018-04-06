@@ -3,10 +3,8 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
-      .govuk-box-highlight
-        %h1.heading-xlarge Complete
-
-      %p Thank you for suggesting this register.
+      .govuk-box-highlight.govuk-box-highlight--title-only
+        %h1.heading-large Thank you for suggesting this register
 
       %h2.heading-medium What happens next
-      %p We will take a look at your register and email you when we add it to our backlog. If you have any other questions or ideas you can #{mail_to "registers@digital.cabinet-office.gov.uk", "contact the team"}.
+      %p We’ll take a look at your suggestion and email you if it’s been accepted. If you have any other questions or ideas you can #{link_to 'contact the team', support_path}.
