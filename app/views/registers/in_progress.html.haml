@@ -55,7 +55,8 @@
     .grid-row
       .column-two-thirds
         %h2.heading-medium Suggested registers
-        %p If you can't find the data you need then #{link_to 'suggest a new register', suggest_registers_path}.
+        %p You can express an interest in the suggested registers.
+        %p If you can't find the data you can also #{link_to 'suggest a new register', suggest_registers_path}.
 
     .grid-row
       .column-full
@@ -75,5 +76,3 @@
             - @suggested_registers.each_with_index do |register, index|
               - index = index + 1
               = render partial: 'registers/register', object: register, locals: { index: index }
-
-        = link_to 'Suggest a new register', suggest_registers_path
