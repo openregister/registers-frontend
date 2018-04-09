@@ -58,7 +58,7 @@ gem 'clockwork'
 gem 'gds_metrics', '~> 0.0.2'
 
 group :development, :test do
-  gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
+  gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.6'
 end
