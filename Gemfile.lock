@@ -41,16 +41,6 @@ GIT
       govuk_frontend_toolkit (>= 6.0.0)
       rails (>= 4.2)
 
-GIT
-  remote: https://github.com/openregister/govuk-lint.git
-  revision: 78bddf80ad7ecca65666c0eba5044bcde26df8b3
-  branch: bump-rubocop-version
-  specs:
-    govuk-lint (3.6.0)
-      rubocop (~> 0.52.0)
-      rubocop-rspec (~> 1.19.0)
-      scss_lint
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -173,6 +163,10 @@ GEM
       prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    govuk-lint (3.8.0)
+      rubocop (~> 0.52.0)
+      rubocop-rspec (~> 1.19.0)
+      scss_lint
     govuk-registers-api-client (1.0.1)
       rest-client (~> 2)
     govuk_elements_rails (3.1.2)
@@ -444,7 +438,7 @@ DEPENDENCIES
   faker
   fog-aws
   gds_metrics (~> 0.0.2)
-  govuk-lint!
+  govuk-lint (~> 3.8)
   govuk-registers-api-client (~> 1.0)
   govuk_elements_form_builder!
   govuk_elements_rails
