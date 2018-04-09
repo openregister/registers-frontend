@@ -17,13 +17,13 @@
         %input#not-work-for-government{name: "radio-org-group", type: "radio", value: "No"}
         %label{for: "not-work-for-government"} No
       #government-department.panel.panel-border-narrow.js-hidden
-        = f.label :department, 'Government department', class: 'form-label'
+        = f.label :department, 'Which government organisation do you work for?', class: 'form-label'
         = f.select :department, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
   .form-group
     %fieldset.inline
       %legend
         %label.form-label-bold
-          Are you using Registers in something you are building?
+          Are you using Registers to build a service?
       .multiple-choice{"data-target" => "service"}
         %input#for-a-service{name: "radio-service-group", type: "radio", value: "Yes"}
         %label{for: "for-a-service"} Yes
@@ -31,10 +31,10 @@
         %input#not-for-a-service{name: "radio-service-group", type: "radio", value: "No"}
         %label{for: "for-a-service"} No
       #service.panel.panel-border-narrow.js-hidden
-        = f.label :service, 'What is is called?', class: 'form-label'
+        = f.label :service, 'What is your service called?', class: 'form-label'
         = f.text_field :service, class: 'form-control'
 
-  = f.submit 'Continue', class: 'button'
+  = f.submit 'Create API key', class: 'button'
 
 = content_for :javascript do
   :javascript
