@@ -16,8 +16,9 @@ applications:
   instances: 2
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
-  env:
-    PROMETHEUS_METRICS_PATH: /metrics
+  services:
+    # monitoring
+    - prometheus
 - name: registers-frontend-queue
   <<: *defaults
   instances: 1
