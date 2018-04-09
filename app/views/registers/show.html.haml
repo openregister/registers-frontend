@@ -52,7 +52,7 @@
                 %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
                   %span.summary Search and filter
                 %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
-                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, class: 'panel panel-border' do
+                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'panel panel-border' do
                     .grid-row
                       .column-one-third
                         .records-search
