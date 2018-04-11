@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
-require 'net_http_exception_fix'
+require 'httparty'
 
 class ApiUsersController < ApplicationController
   before_action :set_government_organisations
@@ -14,7 +14,7 @@ class ApiUsersController < ApplicationController
     @api_user = ApiUser.new(api_user_params)
     if @api_user.valid?
       response = post_to_endpoint(@api_user)
-      if response.is_a? Net::HTTPCreated
+      if response&.code == 201
         @api_key = JSON.parse(response.body)['api_key']
         render :show
       else
@@ -29,19 +29,19 @@ private
   def post_to_endpoint(user)
     @user = { email: user.email, department: user.department, service: user.service }
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = (uri.scheme == 'https')
+    options = {
+      basic_auth: { username: ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], password: ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'] },
+      body: @user
+    }
+    error_message = 'Something went wrong'
     begin
-      http.start do |http_start|
-        request = Net::HTTP::Post.new(uri.request_uri)
-        request.basic_auth(ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'])
-        request.set_form_data(@user)
-        http_start.request(request)
-      end
-    rescue Net::HTTPBroken => e
-      logger.error("API Key POST failed with #{e}")
-      flash.alert = 'Something went wrong'
+      HTTParty.post(uri, options)
     end
+  rescue StandardError => e
+    # Fallback for socket errors etc...
+    logger.error("API Key POST failed with exception: #{e}")
+    flash.alert = error_message
+    nil
   end
 
   def api_user_params

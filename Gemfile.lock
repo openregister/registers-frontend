@@ -214,6 +214,8 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.0.0)
       concurrent-ruby (~> 1.0)
     inflection (1.0.0)
@@ -274,8 +276,8 @@ GEM
       i18n (>= 0.6.10, < 1.1)
       request_store (~> 1.0)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
-    net_http_exception_fix (1.0.1)
     netrc (0.11.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
@@ -457,6 +459,7 @@ DEPENDENCIES
   haml-rails
   health_check (~> 2.7)
   http (= 2.2.1)
+  httparty (~> 0.16.2)
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails
@@ -464,7 +467,6 @@ DEPENDENCIES
   listen (~> 3.0.5)
   lograge (~> 0.9.0)
   logstash-event (~> 1.2, >= 1.2.02)
-  net_http_exception_fix (~> 1.0)
   pg (~> 0.18)
   pry-byebug
   puma (~> 3.0)
