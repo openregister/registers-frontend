@@ -58,6 +58,9 @@ gem 'clockwork'
 
 gem 'gds_metrics', '~> 0.0.2'
 
+# HTTP
+gem 'net_http_exception_fix', '~> 1.0'
+
 group :development, :test do
   gem 'govuk-lint', github: 'openregister/govuk-lint', branch: 'bump-rubocop-version'
   gem 'pry-byebug'
