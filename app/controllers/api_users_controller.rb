@@ -31,7 +31,7 @@ private
     @user = { email: user.email, department: user.department, service: user.service }
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
     options = {
-      basic_auth: { username: ENV.fetch['SELF_SERVICE_HTTP_AUTH_USERNAME'], password: ENV.fetch['SELF_SERVICE_HTTP_AUTH_PASSWORD'] },
+      basic_auth: { username: Rails.configuration.self_service_http_auth_username, password: Rails.configuration.self_service_http_auth_password },
       body: @user
     }
     error_message = 'Something went wrong'
