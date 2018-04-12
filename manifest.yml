@@ -16,8 +16,12 @@ applications:
   instances: 2
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
-  env:
-    PROMETHEUS_METRICS_PATH: /metrics
+  services:     
+    # TODO: This block overrides to add prometheus but we should do this using inheritence if possible 
+    - registers-frontend
+    - registers-product-site-environment-variables
+    - logit-ssl-drain
+    - prometheus
 - name: registers-frontend-queue
   <<: *defaults
   instances: 1
