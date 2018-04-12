@@ -19,7 +19,7 @@ class ApiUsersController < ApplicationController
         render :show
       else
         flash.alert = 'Something went wrong'
-        logger.error("API Key POST failed with unexpected response code: #{response&.code}")
+        logger.error("API Key POST failed with unexpected response code: #{response.code}") if response&.code
         render :new
       end
     end
@@ -31,7 +31,7 @@ private
     @user = { email: user.email, department: user.department, service: user.service }
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
     options = {
-      basic_auth: { username: ENV['SELF_SERVICE_HTTP_AUTH_USERNAME'], password: ENV['SELF_SERVICE_HTTP_AUTH_PASSWORD'] },
+      basic_auth: { username: ENV.fetch['SELF_SERVICE_HTTP_AUTH_USERNAME'], password: ENV.fetch['SELF_SERVICE_HTTP_AUTH_PASSWORD'] },
       body: @user
     }
     error_message = 'Something went wrong'
