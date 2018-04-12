@@ -84,4 +84,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'https://registers.cloudapps.digital' }
   config.self_service_api_endpoint = 'https://registers-selfservice.cloudapps.digital/users'
+  config.self_service_http_auth_username = ENV.fetch('SELF_SERVICE_HTTP_AUTH_USERNAME')
+  config.self_service_http_auth_password = ENV.fetch('SELF_SERVICE_HTTP_AUTH_PASSWORD')
 end
