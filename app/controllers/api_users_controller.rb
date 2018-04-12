@@ -19,6 +19,7 @@ class ApiUsersController < ApplicationController
         render :show
       else
         flash.alert = 'Something went wrong'
+        logger.error("API Key POST failed with unexpected response code: #{response&.code}")
         render :new
       end
     end
