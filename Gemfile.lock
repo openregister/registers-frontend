@@ -154,6 +154,8 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.0.0)
       concurrent-ruby (~> 1.0)
     inflection (1.0.0)
@@ -201,6 +203,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     netrc (0.11.0)
     nio4r (2.3.0)
@@ -379,6 +382,7 @@ DEPENDENCIES
   haml-rails
   health_check (~> 2.7)
   http (= 2.2.1)
+  httparty (~> 0.16.2)
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails
