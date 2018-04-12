@@ -54,4 +54,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.self_service_api_endpoint = 'http://localhost:3001/users'
+  config.self_service_http_auth_username = 'username'
+  config.self_service_http_auth_password = 'password'
 end
