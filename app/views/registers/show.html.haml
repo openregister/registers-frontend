@@ -97,7 +97,7 @@
                   = render partial: 'showing'
 
               - unless @records.last_page?
-                = link_to_next_page @records, 'Load more', id: 'load-more-records', remote: true
+                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
 
             - else
               .no-search-results
