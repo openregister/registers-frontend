@@ -388,3 +388,12 @@ details {
 .govuk-box-highlight--title-only .heading-large {
   margin: $gutter 0;
 }
+
+.js-hidden {
+  display: none;
+}
+
+.js-enabled .js-hidden {
+  display: block;
+  visibility: visible;
+}
