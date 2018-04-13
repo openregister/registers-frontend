@@ -27,6 +27,8 @@ RSpec.feature 'View register', type: :feature do
     click_link('Get data for your service')
     first('.register-block').click
     expect(page).to have_content('Country register')
+    click_link('Name')
+    expect(page).to have_content('Zimbabwe')
   end
 
   scenario 'filter a register' do
