@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  layout 'layouts/default/application'
+  layout 'layouts/application'
 
   def index
     @search = Register.available.ransack(params[:q])

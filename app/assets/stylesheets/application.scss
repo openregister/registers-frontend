@@ -25,6 +25,7 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 @import 'modules/sorting-link';
 @import 'modules/tables';
 @import 'modules/check-your-answers';
+@import 'modules/accessible-autocomplete';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -377,5 +378,21 @@ details {
 
   .js-enabled & {
     display: none;
+  }
+}
+
+.admin {
+  table {
+    td:last-child,
+    th:last-child {
+      text-align: right;
+    }
+  }
+
+  .column-one-third {
+    .button {
+      float: right;
+      margin-top: 2.5em;
+    }
   }
 }

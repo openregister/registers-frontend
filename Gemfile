@@ -26,10 +26,6 @@ gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
 gem 'govuk-registers-api-client', '~> 1.0'
 
-# Spina CMS
-gem 'spina', github: 'denkGroot/Spina', branch: 'master'
-gem 'fog-aws'
-
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
@@ -56,6 +52,9 @@ gem 'activerecord-import'
 gem 'clockwork'
 
 gem 'gds_metrics', '~> 0.0.2'
+
+# Encrypted password
+gem 'bcrypt'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'

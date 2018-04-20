@@ -1,0 +1,15 @@
+- @page_title = 'Users | Admin'
+
+%nav.breadcrumbs{"aria-label" => "Breadcrumb"}
+  %ol
+    %li.breadcrumbs__item
+      = link_to 'Users', admin_users_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to "New user", '#content', "aria-current" => "page"
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-full
+      = render partial: "layouts/errors", locals: { object: @user } if @user.errors.any?
+      %h1.heading-xlarge New user
+      = render 'form'
