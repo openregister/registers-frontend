@@ -22,17 +22,12 @@ module RegisterStatus
     # -- all .rb files in that directory are automatically loaded.
     config.active_job.queue_adapter = :delayed_job
 
+    ActionView::Base.default_form_builder = GovukElementsFormBuilder::FormBuilder
+
     if ENV.key?('VCAP_SERVICES')
       cups_env = CF::App::Credentials.find_by_service_name('registers-product-site-environment-variables')
       if cups_env.present?
         cups_env.each { |k, v| ENV[k] = v }
-      end
-    end
-
-    config.before_initialize do
-      ::Spina::Plugin.register do |plugin|
-        plugin.name = 'registers'
-        plugin.namespace = 'registers'
       end
     end
   end

@@ -1,0 +1,20 @@
+- @page_title = 'Users | Admin'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Users
+    .column-one-third
+      = link_to 'New user', new_admin_user_path, class: 'button button-primary'
+
+  .grid-row
+    .column-full
+      - if @users.any?
+        %table
+          %thead
+            %tr
+              %th
+                %strong Email
+              %th
+          %tbody
+            = render partial: 'user', collection: @users

@@ -1,6 +1,9 @@
-%div{id: "validation-error-message-no-js", class: "error-summary form-group"}
-  %h1.heading-medium.error-summary-heading Form could not be sent
+.error-summary{"aria-labelledby" => "error-summary-heading-example-1", :role => "group", :tabindex => "-1"}
+  %h1#error-summary-heading-example-1.heading-medium.error-summary-heading
+    There was a problem
   %ul.error-summary-list
-    - object.errors.full_messages.each do |error|
+    - object.errors.each do |attr, message|
       %li
-        = error
+        %a{href: "#error_#{object.class.to_s.parameterize}_#{attr.to_s}"}
+          #{attr.to_s.humanize} #{message}
+        %span.visuallyhidden .

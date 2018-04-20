@@ -1,0 +1,28 @@
+= form_for [:admin, @register], html: { autocomplete: "off" } do |f|
+  = f.text_field :name
+  = f.text_field :description
+  .form-group
+    = f.label :register_phase, class: 'form-label'
+    = f.select :register_phase, Register::CURRENT_PHASES, {}, include_blank: 'Select current phase', class: 'form-control'
+  .form-group
+    = f.label :authority, class: 'form-label'
+    = f.select :authority, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, {}, class: 'form-control'
+  = f.text_area :contextual_data
+  = f.text_area :related_registers
+  .form-group
+    = f.submit 'Save', class: 'button'
+
+  - unless @register.new_record?
+    .pull-right= link_to 'Delete this register', admin_register_path(@register), method: :delete, data: { confirm: 'Are you sure you want to delete this register?' }
+
+= content_for :javascript do
+  :javascript
+    document.addEventListener('DOMContentLoaded', function() {
+      var element = document.getElementById('register_authority');
+
+      if (element) {
+        accessibleAutocomplete.enhanceSelectElement({
+          selectElement: element
+        });
+      }
+    });

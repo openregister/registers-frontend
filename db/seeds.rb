@@ -1,6 +1,4 @@
-Spina::User.create(name: 'admin', email: 'registerteam@digital.cabinet-office.gov.uk', password: 'password123', admin: true)
-Spina::Account.create(name: 'GOV.UK Registers', theme: 'default')
-Spina::NavigationItem.create(navigation_id: Spina::Navigation.first.id, page_id: 2)
+User.create(name: 'admin', email: 'registerteam@digital.cabinet-office.gov.uk', password: 'password123', admin: true)
 
 Register.create(
   name: "Country",
@@ -65,6 +63,6 @@ Register.create(
   )
 puts "Created Charity Register"
 
-puts "The CMS is located at http://localhost:3000/admin"
+puts "The admin interface is located at http://localhost:3000/admin"
 puts "User email is registerteam@digital.cabinet-office.gov.uk"
 puts "User password is password123"

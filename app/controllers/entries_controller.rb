@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EntriesController < ApplicationController
-  layout 'layouts/default/application'
+  layout 'layouts/application'
 
   def index
     @register = Register.find_by_slug!(params[:register_id])

@@ -46,15 +46,14 @@ Rails.application.routes.draw do
 
   get 'new-register/thanks', to: 'new_register#thanks'
 
-  mount Spina::Engine => '/'
+  namespace :admin, path: '/admin' do
+    root to: "registers#index"
 
-  get '/*id' => 'pages#show', as: "page", controller: 'pages', constraints: lambda { |request|
-    !(Rails.env.development? && request.env['PATH_INFO'].starts_with?('/rails/') || request.env['PATH_INFO'].starts_with?("/#{Spina.config.backend_path}") || request.env['PATH_INFO'].starts_with?('/attachments/'))
-  }
-
-  Spina::Engine.routes.draw do
-    namespace :admin do
-      resources :registers, except: [:show]
-    end
+    resources :registers, except: [:show]
+    resources :users
+    resources :sessions
+    get "signin" => "sessions#new"
+    get "signout" => "sessions#destroy"
+    resources :password_resets
   end
 end

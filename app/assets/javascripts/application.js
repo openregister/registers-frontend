@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require gaap-analytics
+//= require accessible-autocomplete
 
 window.GAAP.analytics.init();

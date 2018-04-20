@@ -1,0 +1,22 @@
+- @page_title = 'Registers | Admin'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Registers
+    .column-one-third
+      = link_to 'New register', new_admin_register_path, class: 'button'
+
+  .grid-row
+    .column-full
+      - if @registers.any?
+        %table
+          %thead
+            %tr
+              %th
+                %strong Register name
+              %th
+                %strong Phase
+              %th
+          %tbody
+            = render partial: 'register', collection: @registers

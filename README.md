@@ -6,8 +6,6 @@ Frontend for [GOV.UK Registers](https://registers.cloudapps.digital/)
 
 ## Prerequisites
 
-This is a Rails 5 app using [Spina CMS](https://github.com/denkGroot/Spina)
-
 1. Install Ruby 2.5.0
 2. Install Rails 5.1.4
 3. Install PostgreSQL 9.6+
