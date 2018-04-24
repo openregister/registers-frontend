@@ -9,7 +9,7 @@ defaults: &defaults
     - registers-product-site-environment-variables
     # logging
     - logit-ssl-drain
-    
+
 applications:
 - name: registers
   <<: *defaults
