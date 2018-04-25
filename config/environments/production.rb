@@ -82,5 +82,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'https://registers.service.gov.uk' }
+  config.action_mailer.default_url_options = { host: 'https://www.registers.service.gov.uk' }
 end
