@@ -44,7 +44,7 @@ RSpec.describe RegistersController, type: :controller do
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_alpha_data, headers: {})
 
-    stub_request(:get, 'https://register.cloudapps.digital/download-rsf/0')
+    stub_request(:get, 'https://registers.service.gov.uk/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_discovery_data, headers: {})
 
