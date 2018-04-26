@@ -24,7 +24,7 @@ RSpec.feature 'View register', type: :feature do
   scenario 'view and sort a register' do
     visit '/'
     expect(page).to have_content('Direct access to up-to-date government data')
-    click_link('.hero-button')
+    first('.hero-button').click
     first('.register-block').click
     expect(page).to have_content('Country register')
     click_link('Name')
