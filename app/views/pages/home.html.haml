@@ -13,13 +13,13 @@
     .hero.hero--breaded
       .hero__content
         .hero__body
-          %h1.hero__title Build services using accurate data
+          %h1.hero__title Direct access to up-to-date government data
           .hero__inline-image
             = image_tag "registers-top-image.png", role: "presentation"
           %p.hero__description
-            Registers make sure that services across government are using the same approved versions of data.
+            GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.
 
-          = link_to 'Get data for your service', registers_path, class: 'button hero-button', role: 'button'
+          = link_to 'See how to get started', registers_path, class: 'button hero-button', role: 'button'
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
@@ -27,34 +27,36 @@
     %section.content-section
       .grid-row
         .column-one-half
-          %h2.heading-medium.content-section__title Accurate, consistent and approved data
-          %p Registers are live lists of data. Each register is managed and approved by government.
-          %p For example, the #{link_to 'country register', '/registers/country'} is the official list of all countries recognised by the UK government. It is managed by a custodian in the Foreign and Commonwealth Office.
+          %h2.heading-medium.content-section__title Why your service should use registers
+          %p GOV.UK Registers helps you to:
+          %ul.list.list-bullet
+            %li build and maintain your service with accurate data that is updated for you
+            %li reduce the time and cost of sourcing data from across government
+            %li easily share data with other government departments
+        .column-one-half
+          = image_tag 'get-data.png'
+
+    %section.content-section.content-section--with-top-border
+      .grid-row
+        .column-one-half
+          %h2.heading-medium.content-section__title How registers work
+          %p Registers are live lists of information that are managed and approved by government.
+          %p Each register:
+          %ul.list.list-bullet
+            %li is the most reliable list of its kind
+            %li can be accessed and used freely by anyone
+            %li provides data in different formats including JSON and CSV
         .column-one-half
           = image_tag 'country-register.png'
 
     %section.content-section.content-section--with-top-border
       .grid-row
         .column-one-half
-          %h2.heading-medium.content-section__title Using registers
-          %p You can use registers to create features for your service. The UK government and Parliament petitions service uses the country register to help users choose their country from a drop-down menu, for instance.
-          %p= link_to 'See how your service can use registers', using_registers_path
-        .column-one-half
-          = image_tag 'get-records.png'
-
-    %section.content-section.content-section--with-top-border
-      .grid-row
-        .column-one-half
-          %h2.heading-medium.content-section__title Why your service should use registers
-          %p Your service can benefit from using registers because they’re:
-          %ul.list.list-bullet
-            %li accurate – you can trust the data and it’s updated for you
-            %li consistent – all services use the same data
-            %li approved – it’s the government’s official data
-          %p= link_to 'See all the data you can use', registers_path
+          %h2.heading-medium.content-section__title Get started
+          %p Use our quick start guide to get set up and access registers data.
+          %p= link_to 'See how to get started', using_registers_path
 
         .column-one-half
-          = image_tag 'get-data.png'
 
     %section.content-section.content-section--with-top-border
       .grid-row
@@ -77,22 +79,3 @@
               %span.data-item.bold-xxlarge 13
               %span.data-item.bold-xsmall government services using registers
 
-    %section.content-section.content-section--with-top-border
-      .grid-row
-        .column-one-half
-          %h2.heading-medium.content-section__title Combining registers
-          %p You can easily combine data from more than one register. This can be useful if you need data from different organisations.
-          %p For example, you might use data from the #{link_to 'country register', '/registers/country'} as well as the #{link_to 'territory register', '/registers/territory'} to build a feature that allows your users to find their location.
-          %p= link_to 'Read more about combining registers', combining_registers_path
-
-        .column-one-half
-          = image_tag 'combined-registers.png'
-
-    %section.content-section.content-section--with-top-border
-      .grid-row
-        .column-one-half
-          %h2.heading-medium.content-section__title The team
-          %p GOV.UK Registers is built and supported by a full-time team at the Government Digital Service.
-          %p #{link_to "Contact the team", support_path} if you have any questions.
-        .column-one-half
-          = image_tag 'registers-team.png', class: 'image'
