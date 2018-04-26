@@ -14,7 +14,6 @@ applications:
 - name: registers
   <<: *defaults
   instances: 2
-  domain: www.registers.service.gov.uk
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
   services:
