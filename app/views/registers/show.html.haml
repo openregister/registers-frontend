@@ -2,170 +2,120 @@
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
-%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
-  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
-    %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
-    %li.breadcrumbs__item
-      = link_to 'GOV.UK Registers', root_path
-    %li.breadcrumbs__item
-      = link_to 'Get data', registers_path
-    %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.name} Register", '#content', 'aria-current' => 'page'
-
 %main#content.container{role:'main'}
 
-  - if @register.register_phase != 'Beta'
+  = link_to 'Back', registers_path, class: 'link-back'
+
+  .register-meta-data
+    - if @register.register_phase != 'Beta'
+      .grid-row
+        .column-two-thirds
+          .panel.panel-border-wide
+            %span.phase-banner In progress
+            %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
+
     .grid-row
       .column-two-thirds
-        .panel.panel-border-wide
-          %span.phase-banner In progress
-          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.cloudapps.digital/support', target: :blank} to give us feedback.
+        %h1.heading-large
+          #{@register.name} register
+          %span.heading-secondary= @register.register_description
+        %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
 
-  .grid-row
-    .column-two-thirds
-      %h1.heading-large
-        #{@register.name} register
-        %span.heading-secondary= @register.register_description
-    .column-one-third
-      - if @register.register_authority.present?
-        %p.bold-small Managed by:
-        %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
-          %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
-            %span= @register.register_authority.data['name']
+      .column-one-third
+        - if @register.register_authority.present?
+          %p.bold-small Managed by:
+          %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
+            %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
+              %span= @register.register_authority.data['name']
 
   .grid-row
     .column-full
-      .tabs-container
-        .js-tabs.nav-tabs
-          %ul
-            %li
-              = link_to 'Explore the data', '#records_tab'
-            %li
-              = link_to 'Use the API', '#api_tab'
-            %li
-              = link_to 'Details', '#details_tab'
-        .js-tab-content.tab-content
-          #records_tab.js-tab-pane.tab-pane
-            .search-records-wrapper#records_wrapper
-              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
-                  %span.summary Search and filter
-                %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
-                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'panel panel-border' do
-                    .grid-row
-                      .column-one-third
-                        .records-search
-                          = label_tag 'Search', nil, for: 'q', class: 'form-label form-label-bold'
-                          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
-                          = submit_tag 'Search', name: nil, class: 'search-submit'
-                      .column-two-thirds
-                        .form-group
-                          %fieldset.inline
-                            %legend.form-label.form-label-bold Filter data:
-                            .multiple-choice
-                              = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
-                              = label_tag 'Current records', nil, for: 'status_current'
-                            .multiple-choice
-                              = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
-                              = label_tag 'Archived records', nil, for: 'status_archived'
-                            .multiple-choice
-                              = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                              = label_tag 'Both', nil, for: 'status_all'
-                          = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
+      %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
+        .subsection-wrapper
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title 1. Preview the data
+            .subsection__content.js-subsection-content#subsection_content_1
+              .search-records-wrapper#records_wrapper
+                = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
+                  .grid-row
+                    .column-one-third
+                      .records-search
+                        = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
+                        = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                        = submit_tag 'Search', name: nil, class: 'search-submit'
+                  %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+                    %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+                      %span.summary Filter
+                    %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
 
-            - if @records.present?
-              .records-count
-                %span#records-count
-                  = render partial: 'showing'
-                - if params[:q].present? || params[:status].present?
-                  = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
+                      .grid-row
+                        .column-two-thirds
+                          .form-group
+                            %fieldset.inline
+                              %legend.form-label.form-label-bold Filter data:
+                              .multiple-choice
+                                = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                                = label_tag 'Current records', nil, for: 'status_current'
+                              .multiple-choice
+                                = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                                = label_tag 'Archived records', nil, for: 'status_archived'
+                              .multiple-choice
+                                = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                                = label_tag 'Both', nil, for: 'status_all'
+                            = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
-              .table-scroll
-                %table.register-data-table
-                  %thead
-                    %tr
-                      - @register.register_fields.each do |field|
-                        %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
-                  %tbody#records-tbody
-                    = render partial: 'record', collection: @records
-
-              .pager
-                .pager-controls
-                  = paginate @records, outer_window: 0, window: 3
-                .pager-summary
-                  = render partial: 'showing'
-
-              - unless @records.last_page?
-                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
-
-            - else
-              .no-search-results
-                %p
-                  - if params[:q].present?
-                    No results found for <strong>"#{params[:q]}"</strong>
-                  - else
-                    No results found.
+              - if @records.present?
+                .records-count
+                  %span#records-count
+                    = render partial: 'showing'
                   - if params[:q].present? || params[:status].present?
-                    = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+                    = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
-          #api_tab.js-tab-pane.tab-pane
-            %ul.list.list-number.list-number-big
-              %li
-                %h4.heading-medium Get an API Key
-                %p Sign up to get an API key and start using live data.
-                %p= link_to 'Create API key', new_api_user_path
-              %li
-                %h4.heading-medium Explore the API
-                %p See all the endpoints used to interact with this register.
-                %p= link_to 'Visit the API explorer', @register.url
-              %li
-                %h4.heading-medium Read the documentation
-                %p We have a full set of documentation which explains how to integrate with a register.
-                %p= link_to 'See the documentation', 'https://registers-docs-testing.cloudapps.digital'
+                .table-scroll
+                  %table.register-data-table
+                    %thead
+                      %tr
+                        - @register.register_fields.each do |field|
+                          %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
+                    %tbody#records-tbody
+                      = render partial: 'record', collection: @records
 
-          #details_tab.js-tab-pane.tab-pane
-            .grid-row
-              .column-one-half
-                %p.bold Last updated:
-                %p= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
+                .pager.js-hidden
+                  .pager-controls
+                    = paginate @records, outer_window: 0, window: 3
+                  .pager-summary
+                    = render partial: 'showing'
 
-              .column-one-half
-                - if @register.related_registers.present?
-                  %p.bold Related registers:
-                  %p
-                    != @register.related_registers
-                - if @register.links_to.present?
-                  %p.bold Links to:
-                  %p
-                    != @register.links_to.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
-                - if @register.links_from.present?
-                  %p.bold Links from:
-                  %p
-                    != @register.links_from.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
-                - if @register.contextual_data.present?
-                  %p.bold Contextual data:
-                  %p
-                    != @register.contextual_data
+                - unless @records.last_page?
+                  = link_to_next_page @records, 'Load more', id: 'load-more-records', remote: true
 
-            %hr
-            .grid-row
-              .column-full
-                %h3.heading-small Fields included:
-            .grid-row
-              - left_column, right_column = @register.register_fields.each_slice((@register.register_fields.size / 2.0).round).to_a
-              .column-one-half
-                - left_column.each do |field|
-                  %p.bold= field['field']
-                  %p= field['text']
-              .column-one-half
-                - right_column.each do |field|
-                  %p.bold= field['field']
-                  %p= field['text']
+              - else
+                .no-search-results
+                  %p
+                    - if params[:q].present?
+                      No results found for <strong>"#{params[:q]}"</strong>
+                    - else
+                      No results found.
+                    - if params[:q].present? || params[:status].present?
+                      = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title 2. Access the data
+            .subsection__content.js-subsection-content#subsection_content_2
+              %h4.heading-medium Get an API Key
+              %p Sign up to get an API key and start using live data.
+              %p= link_to 'Create API key', new_api_user_path
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title 3. Start using the data
+            .subsection__content.js-subsection-content#subsection_content_3
+              %h4.heading-medium Read the documentation
+              %p We have a full set of documentation which explains how to integrate with a register.
+              %p= link_to 'See the documentation', 'https://registers-docs-testing.cloudapps.digital'
 
 = content_for :javascript do
   :javascript
     $("input[name='status']").change(function () {
       $('#search_records').submit();
     });
-    $('.tabs-container').tabs();

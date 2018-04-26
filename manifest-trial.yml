@@ -1,10 +1,10 @@
 applications:
-- name: registers-trial
+- name: registers-trial-v2
   buildpack: ruby_buildpack
   memory: 1GB
   instances: 2
-  domain: registers-trial.service.gov.uk
-  no-hostname: true
+  #domain: registers-trial.service.gov.uk
+  #no-hostname: true
   health-check-type: http
   health-check-http-endpoint: /health_check/standard
   services:
