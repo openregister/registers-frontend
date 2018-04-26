@@ -2,7 +2,7 @@
 
 # Registers Frontend
 
-Frontend for [GOV.UK Registers](https://registers.cloudapps.digital/)
+Frontend for [GOV.UK Registers](https://www.registers.service.gov.uk/)
 
 ## Prerequisites
 
