@@ -36,6 +36,10 @@ en:
     label:
       support:
         email: Email address
+    fieldset:
+      api_user:
+        is_government: |
+          Do you work for government?
   errors:
     messages:
       blank: is required
