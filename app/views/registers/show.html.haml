@@ -1,4 +1,4 @@
-- @page_title = "#{@register.name.capitalize} Register"
+- @page_title = "#{@register.register_name.capitalize} Register"
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
@@ -11,7 +11,7 @@
     %li.breadcrumbs__item
       = link_to 'Registers collection', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.name} Register", '#content', 'aria-current' => 'page'
+      = link_to "#{@register.register_name} Register", '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
 
@@ -26,7 +26,7 @@
     .column-two-thirds
 
       %h1.heading-large
-        #{@register.name} register
+        #{@register.register_name} register
         %span.heading-secondary= @register.register_description
 
       .govuk-metadata

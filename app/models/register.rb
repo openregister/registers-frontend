@@ -58,6 +58,12 @@ class Register < ApplicationRecord
     Record.where(register_id: id, entry_type: 'user').count
   end
 
+  def register_name
+    register_phase != 'Backlog' &&
+      Record.where(register_id: id, entry_type: 'system', key: 'register-name')
+            .pluck("data -> 'register-name' as register_name").first || name
+  end
+
 private
 
   def set_slug
