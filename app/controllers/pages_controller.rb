@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  layout 'layouts/application'
-
   def home
     @registers = Register.available.all
 
