@@ -5,21 +5,13 @@
       %span.form-hint Your API key will be sent to this email address
     = f.text_field :email, class: 'form-control', type: 'email', required: true
 
-  .form-group
     %fieldset.inline
-      %legend
-        %label.form-label-bold
-          Do you work for government?
-      .multiple-choice{"data-target" => "government-department"}
-        %input#work-for-government{name: "radio-org-group", type: "radio", value: "Yes"}
-        %label{for: "work-for-government"} Yes
-      .multiple-choice
-        %input#not-work-for-government{name: "radio-org-group", type: "radio", value: "No"}
-        %label{for: "not-work-for-government"} No
+      = f.radio_button_fieldset :is_government,
+          inline: true      
+    .form-group
       #government-department.panel.panel-border-narrow.js-hidden
         = f.label :department, 'Which government organisation do you work for?', class: 'form-label'
         = f.select :department, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
-  .form-group
     %fieldset.inline
       %legend
         %label.form-label-bold

@@ -28,7 +28,10 @@ class ApiUsersController < ApplicationController
 private
 
   def post_to_endpoint(user)
-    @user = { email: user.email, department: user.department, service: user.service }
+    @user = { email: user.email,
+              department: user.department,
+              service: user.service,
+              is_government: user.is_government == 'yes' }
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
     options = {
       basic_auth: { username: ENV.fetch('SELF_SERVICE_HTTP_AUTH_USERNAME'), password: ENV.fetch('SELF_SERVICE_HTTP_AUTH_PASSWORD') },
@@ -49,7 +52,8 @@ private
     params.require(:api_user).permit(
       :email,
       :department,
-      :service
+      :service,
+      :is_government
     )
   end
 
