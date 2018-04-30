@@ -20,16 +20,12 @@
       = label_tag 'show-menu', 'Menu', class: 'header__navigation-toggle'
       %nav{id: "navigation", class: "header__navigation", role: "Navigation", "aria-label" => "Top Level Navigation", "aria-hidden" => "true"}
         %ul{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Navigation Link Clicked"}}
-          %li{class: "#{'active' if current_page?(root_path)}"}
-            = link_to "About", root_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Get data", registers_path
-          %li{class: "#{'active' if current_page?(using_registers_path)}"}
-            = link_to "Using registers", using_registers_path
           %li{class: "#{'active' if current_page?(support_path)}"}
             = link_to "Support", support_path
           %li
-            = link_to "Documentation", "https://registers-docs-testing.cloudapps.digital", target: :blank, rel: "noopener noreferrer"
+            = link_to "Documentation", "https://docs.registers.service.gov.uk"
 
 - content_for :head do
   = stylesheet_link_tag 'application'
@@ -47,35 +43,13 @@
         .column-one-quarter
           %ul
             %li
-              = link_to "Support", support_path
-            %li
-              = link_to "System status", "http://stats.pingdom.com/j7upyz204dud", target: :blank, rel: "noopener noreferrer"
-            %li
-              = link_to "Performance", "https://www.gov.uk/performance/govuk-registers", target: :blank, rel: "noopener noreferrer"
-            %li
-              = link_to "Slack channel", "https://ukgovernmentdigital.slack.com/messages/govuk-registers", target: :blank, rel: "noopener noreferrer"
-        .column-one-quarter
-          %ul
-            %li
-              = link_to "Using registers", using_registers_path
-            %li
-              = link_to "Combining registers", combining_registers_path
+              = link_to "Get data", registers_path
             %li
               = link_to "Services using registers", services_using_registers_path
             %li
-              = link_to "Case Study: TISCReport", case_study_path
-        .column-one-quarter
-          %ul
+              = link_to "Support", support_path
             %li
-              = link_to "Get data", registers_path
-            %li
-              = link_to "Upcoming registers", registers_in_progress_path
-            %li
-              = link_to "Suggest a register", suggest_registers_path
-        .column-one-quarter
-          %ul
-            %li
-              = link_to "Documentation", "https://registers-docs-testing.cloudapps.digital", target: :blank, rel: "noopener noreferrer"
+              = link_to "Documentation", "https://docs.registers.service.gov.uk"
 
 - content_for :footer_support_links do
   %nav.footer-nav
