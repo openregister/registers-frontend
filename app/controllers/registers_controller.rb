@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  layout 'layouts/application'
-
   def index
     @search = Register.available.ransack(params[:q])
     @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
