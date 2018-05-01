@@ -3,4 +3,4 @@
   = f.label :email, class: 'form-label' do
     %span.visually-hidden Email address
     %span.form-hint We need this to update you on the register’s progress
-  = f.email_field :email, class: "form-control #{@request_register.errors[:email].present? ? 'form-control-error' : ''}", value: session[:request_register_params]['email']
+  = f.email_field :email, required: true, class: "form-control #{@request_register.errors[:email].present? ? 'form-control-error' : ''}", value: session[:request_register_params]['email']
