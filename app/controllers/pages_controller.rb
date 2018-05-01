@@ -8,8 +8,6 @@ class PagesController < ApplicationController
     @upcoming_registers = Register.available.where.not(register_phase: 'Beta')
   end
 
-  def roadmap; end
-
   def services_using_registers; end
 
   def combining_registers; end

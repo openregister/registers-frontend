@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'using-registers', to: 'pages#using_registers', as: 'using_registers'
-  get 'roadmap', to: 'pages#roadmap', as: 'roadmap'
   get 'services-using-registers', to: 'pages#services_using_registers', as: 'services_using_registers'
   get 'avaliable-registers', to: redirect('/registers', status: 301)
   get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
