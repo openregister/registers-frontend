@@ -27,8 +27,8 @@
 @import 'modules/check-your-answers';
 @import 'modules/accessible-autocomplete';
 @import 'modules/block-grid';
-@import 'modules/tabs';
 @import 'modules/accessible-autocomplete';
+@import 'modules/subsections';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -162,6 +162,10 @@ table {
 .table-scroll {
   width: 100%;
   overflow-x: scroll;
+}
+
+.register-metadata {
+  margin: $gutter 0;
 }
 
 .register-data-table {
@@ -404,13 +408,4 @@ details {
 
 .govuk-box-highlight--title-only .heading-large {
   margin: $gutter 0;
-}
-
-.js-hidden {
-  display: none;
-}
-
-.js-enabled .js-hidden {
-  display: block;
-  visibility: visible;
 }
