@@ -35,6 +35,8 @@
   }
 
   .govuk-organisation-logo {
+    margin-bottom: 0;
+
     @include media(tablet) {
       bottom: 1em;
       left: 1em;
