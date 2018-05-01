@@ -12,12 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/core
-//= require jquery-ui/keycode
+//= require govuk/modules
 //= require gaap-analytics
 //= require accessible-autocomplete
-//= require history
-//= require tabs
 //= require govuk/show-hide-content
+//= require current-location
+//= require accordion-with-descriptions
 
 window.GAAP.analytics.init();
+
+$(document).ready(function() {
+  GOVUK.modules.start();
+});
