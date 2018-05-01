@@ -12,12 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/core
-//= require jquery-ui/keycode
 //= require gaap-analytics
 //= require accessible-autocomplete
-//= require history
-//= require tabs
 //= require govuk/show-hide-content
 
 window.GAAP.analytics.init();

@@ -27,7 +27,6 @@
 @import 'modules/check-your-answers';
 @import 'modules/accessible-autocomplete';
 @import 'modules/block-grid';
-@import 'modules/tabs';
 @import 'modules/accessible-autocomplete';
 
 // From alphagov/static
@@ -286,7 +285,9 @@ table {
 }
 
 .search-records-wrapper {
+  border-top: 2px solid $border-colour;
   margin-bottom: $gutter-half;
+  padding-top: $gutter-half;
 }
 
 .form-group-wrapper {
@@ -361,6 +362,8 @@ table {
 }
 
 details {
+  margin-top: $gutter-half;
+
   .form-group {
     margin: 20px 0;
   }
