@@ -83,4 +83,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'https://www.registers.service.gov.uk' }
+
+  config.x.zendesk.url = ENV.fetch('ZENDESK_URL')
+  config.x.zendesk.username = ENV.fetch('ZENDESK_URL')
+  config.x.zendesk.token = ENV.fetch('ZENDESK_URL')
 end
