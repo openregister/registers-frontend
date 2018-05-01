@@ -13,9 +13,10 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
-      %h1.heading-large Registers you can use
-      %p These registers are ready to use in your service.
-      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
+      %h1.heading-large Registers available
+      %p Registers are live lists of information that are managed and approved by government. They are the most reliable lists of their kind.
+      %p Search our registers to find data you can use to build and maintain your service.
+      %p You can #{link_to 'see what services are already using registers.', services_using_registers_path}
     .column-one-third
       = search_form_for @search, url: registers_path(anchor: 'content'), class: 'records-search' do |f|
         = f.label :name_cont, 'Search', class: 'visually-hidden'
@@ -41,3 +42,4 @@
           %p
             No results found for <strong>"#{params[:q][:name_cont]}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
+      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
