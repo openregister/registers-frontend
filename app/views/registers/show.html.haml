@@ -1,4 +1,4 @@
-- @page_title = "#{@register.register_name.capitalize} Register"
+- @page_title = "#{@register.register_name.capitalize} register"
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
@@ -11,7 +11,7 @@
     %li.breadcrumbs__item
       = link_to 'Get data', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.register_name} Register", '#content', 'aria-current' => 'page'
+      = link_to "#{@register.register_name} register", '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
 

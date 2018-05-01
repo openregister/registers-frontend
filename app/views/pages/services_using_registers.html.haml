@@ -3,9 +3,7 @@
 
 %main#content.container{role:'main'}
   .grid-row
-    .column-one-third
-      = render partial: 'pages/sidebar_nav'
-    .column-two-thirds
+    .column-full
       %h1.heading-large Services using registers
       %table
         %thead
@@ -17,82 +15,82 @@
           %tr
             %th E-petitions
             %td Parliamentary Digital Service
-            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+            %td= link_to 'Country', '/registers/country'
           %tr
             %th GOV.UK Pay
             %td Cabinet Office
             %td
-              = link_to 'Country', 'https://country.register.gov.uk', target: :blank
+              = link_to 'Country', '/registers/country'
               %br
-              = link_to 'Territory', 'https://territory.register.gov.uk', target: :blank
+              = link_to 'Territory', '/registers/territory'
           %tr
             %th Realtime Flood Monitoring
             %td Environment Agency
-            %td= link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+            %td= link_to 'Local Authority England', '/registers/local-authority-eng'
           %tr
             %th Transparency In Supply Chains
             %td TISCReport
             %td
-              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              = link_to 'Local Authority England', '/registers/local-authority-eng'
               %br/
-              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Local Authority Scotland', '/registers/principal-local-authority'
               %br/
-              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
               %br/
-              %a= link_to 'Government Organisation', 'https://government-organisation.register.gov.uk/'
+              %a= link_to 'Government Organisation', '/registers/government-organisation'
           %tr
             %th MapIt
             %td MySociety
             %td
-              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              = link_to 'Local Authority England', '/registers/local-authority-eng'
               %br/
-              = link_to 'Local Authority Scotland', 'https://local-authority-sct.register.gov.uk', target: :blank
+              = link_to 'Local Authority Scotland', '/registers/local-authority-sct'
               %br/
-              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
           %tr
             %th Civil Service Jobs
             %td Civil Service Human Resources
-            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+            %td= link_to 'Country', '/registers/country'
           %tr
             %th AppGov
             %td AppGov
             %td
-              = link_to 'Country', 'https://country.register.gov.uk', target: :blank
+              = link_to 'Country', '/registers/country'
               %br
-              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              = link_to 'Local Authority England', '/registers/local-authority-eng'
               %br/
-              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Local Authority Scotland', '/registers/principal-local-authority'
               %br/
-              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
           %tr
             %th https://olib.uk/charity
             %td CharityData
             %td
-              = link_to 'Local Authority England', 'https://local-authority-eng.register.gov.uk', target: :blank
+              = link_to 'Local Authority England', '/registers/local-authority-eng'
               %br/
-              = link_to 'Local Authority Scotland', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Local Authority Scotland', '/registers/principal-local-authority'
               %br/
-              = link_to 'Principal Local Authority', 'https://principal-local-authority.register.gov.uk', target: :blank
+              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
           %tr
             %th Org-ID
             %td org-id.guide
-            %td= link_to 'Government Organisation', 'https://government-organisation.register.gov.uk', target: :blank
+            %td= link_to 'Government Organisation', '/registers/government-organisation'
           %tr
             %th Digital Marketplace
             %td Cabinet Office
             %td
-              = link_to 'Country', 'https://country.register.gov.uk', target: :blank
+              = link_to 'Country', '/registers/country'
               %br
-              = link_to 'Territory', 'https://territory.register.gov.uk', target: :blank
+              = link_to 'Territory', '/registers/territory'
           %tr
             %th GOV.UK Performance Platform
             %td Cabinet Office
-            %td= link_to 'Government Organisation', 'https://government-organisation.register.gov.uk', target: :blank
+            %td= link_to 'Government Organisation', '/registers/government-organisation'
           %tr
             %th Defence Academy
             %td Ministry of Defence
-            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+            %td= link_to 'Country', '/registers/country'
           %tr
             %th Prove You Can Apply
             %td Department for Work &amp; Pensions
-            %td= link_to 'Country', 'https://country.register.gov.uk', target: :blank
+            %td= link_to 'Country', '/registers/country'
