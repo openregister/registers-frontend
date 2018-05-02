@@ -28,7 +28,15 @@
         #{@register.register_name} register
         %span.heading-secondary= @register.register_description
 
-      %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
+      .govuk-metadata
+        %dl
+          - if @register.register_authority.present?
+            %dt Managed by:
+            %dd
+              = link_to @register.register_authority.data['name'], @register.register_authority.data['website']
+          %dt Last updated:
+          %dd
+            = link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
@@ -39,19 +47,17 @@
               - @register.register_fields.each do |field|
                 %dt= field['field']
                 %dd= field['text']
-
-    .column-one-third
-      - if @register.register_authority.present?
-        %h3.heading-small Managed by:
-        %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
-          %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
-            %span= @register.register_authority.data['name']
-        %h4.heading-small Use this register
-        %p= link_to "View the API", @register.url
-
+    .column-third
+      %aside#related
+        .related-container
+          %h4.heading-small Use this register
+          %ul
+            %li
+              = link_to "View the API", @register.url, target: :blank
   .grid-row
     .column-full
       .search-records-wrapper#search_wrapper
+        %h3.heading-medium Explore this register
         .grid-row
           = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
             .column-one-third
