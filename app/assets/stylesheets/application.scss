@@ -285,9 +285,17 @@ table {
 }
 
 .search-records-wrapper {
-  border-top: 2px solid $border-colour;
-  margin-bottom: $gutter-half;
-  padding-top: $gutter-half;
+  border-top: 2px solid $grey-3;
+  margin: 40px 0 20px 0;
+  padding-top: 40px;
+
+  .heading-medium {
+    margin-top: 0;
+  }
+
+  .form-control {
+    width: 100%;
+  }
 }
 
 .form-group-wrapper {
