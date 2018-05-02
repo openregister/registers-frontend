@@ -1,4 +1,4 @@
-- @page_title = "#{@register.register_name.capitalize} Register"
+- @page_title = "#{@register.register_name.capitalize} register"
 - @page_description = ""
 - content_for :body_classes, 'register-show'
 
@@ -9,9 +9,9 @@
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item
-      = link_to 'Registers collection', registers_path
+      = link_to 'Get data', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.register_name} Register", '#content', 'aria-current' => 'page'
+      = link_to "#{@register.register_name} register", '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
 
@@ -20,11 +20,10 @@
       .column-two-thirds
         .panel.panel-border-wide
           %span.phase-banner In progress
-          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', 'https://registers.service.gov.uk/support', target: :blank} to give us feedback.
+          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', support_question_path} to give us feedback.
 
   .grid-row
     .column-two-thirds
-
       %h1.heading-large
         #{@register.register_name} register
         %span.heading-secondary= @register.register_description
@@ -35,28 +34,9 @@
             %dt Managed by:
             %dd
               = link_to @register.register_authority.data['name'], @register.register_authority.data['website']
-          %dt Number of records:
-          %dd
-            = number_with_delimiter(@register.number_of_records)
           %dt Last updated:
           %dd
             = link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
-          - if @register.related_registers.present?
-            %dt Related registers:
-            %dd
-              != @register.related_registers
-          - if @register.links_to.present?
-            %dt Links to:
-            %dd
-              != @register.links_to.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
-          - if @register.links_from.present?
-            %dt Links from:
-            %dd
-              != @register.links_from.map {|r| link_to r.name, register_path(r.slug)}.join(', ')
-          - if @register.contextual_data.present?
-            %dt Contextual data:
-            %dd
-              != @register.contextual_data
 
       %details{role: "group"}
         %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
@@ -67,7 +47,6 @@
               - @register.register_fields.each do |field|
                 %dt= field['field']
                 %dd= field['text']
-
     .column-third
       %aside#related
         .related-container
@@ -75,7 +54,6 @@
           %ul
             %li
               = link_to "View the API", @register.url, target: :blank
-
   .grid-row
     .column-full
       .search-records-wrapper#search_wrapper
@@ -108,12 +86,13 @@
                             = label_tag 'Both', nil, for: 'status_all'
                         = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
+
       - if @records.present?
-        %p
+        .records-count
           %span#records-count
             = render partial: 'showing'
           - if params[:q].present? || params[:status].present?
-            = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+            = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
         .table-scroll
           %table.register-data-table
@@ -148,3 +127,4 @@
     $("input[name='status']").change(function () {
       $('#search_records').submit();
     });
+    $('.tabs-container').tabs();

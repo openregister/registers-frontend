@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
-  layout 'layouts/application'
-
   def index
     @search = Register.available.ransack(params[:q])
+    @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
 
-    @registers = case params[:phase]
-                 when 'ready to use'
-                   @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-                 when 'in progress'
-                   @search.result.where.not(register_phase: 'Beta').sort_by_phase_name_asc.by_name
-                 else
-                   @search.result.sort_by_phase_name_asc.by_name
-                 end
+    # Redirect legacy URL to ensure we don't break anyone
+    if params[:phase] == 'in progress'
+      redirect_to registers_in_progress_path
+    end
+  end
+
+  def in_progress
+    @search = Register.available.ransack(params[:q])
+    @upcoming_registers = @search.result.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
+    # We don't have search on the suggested registers so no need to pass in Ransack
+    @suggested_registers = Register.available.where(register_phase: %w[Backlog Discovery]).sort_by_phase_name_asc.by_name
   end
 
   def show

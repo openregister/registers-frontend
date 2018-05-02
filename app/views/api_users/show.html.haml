@@ -1,0 +1,13 @@
+- @page_title = "Your API key"
+
+%main#content{role: 'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Your API key
+
+      %code.code.code-large
+        = @api_key
+
+      %p Your API key has also been emailed to you.
+
+      %p Back to #{link_to 'registers you can use', registers_path}

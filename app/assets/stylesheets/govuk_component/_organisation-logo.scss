@@ -9,6 +9,7 @@
   font-size: 14px;
   line-height: (15 / 13);
   font-weight: 400;
+  margin-bottom: $gutter;
   width: 150px;
 
   @include media(tablet) {

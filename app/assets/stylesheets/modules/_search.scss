@@ -4,7 +4,10 @@
     font-size: 16px;
     height: 20px;
     padding: 7px;
+    // scss-lint:disable DuplicateProperty
     width: 82%;
+    width: calc(100% - 54px);
+    // scss-lint:enable DuplicateProperty
 
     &:focus {
       position: relative;

@@ -56,6 +56,9 @@ gem 'gds_metrics', '~> 0.0.2'
 # Encrypted password
 gem 'bcrypt'
 
+# HTTP
+gem 'httparty', '~> 0.16.2'
+
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'

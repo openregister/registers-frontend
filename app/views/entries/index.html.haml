@@ -7,7 +7,7 @@
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item
-      = link_to 'Registers collection', registers_path
+      = link_to 'Get data', registers_path
     %li.breadcrumbs__item
       = link_to "#{@register.register_name} Register", register_path(@register.slug)
     %li.breadcrumbs__item.breadcrumbs__item--active
@@ -20,8 +20,8 @@
 
   .grid-row
     .column-one-third
-      = form_tag register_entries_path(@register.slug), method: :get, id: 'search_updates' do
-        .records-search
+      = form_tag register_entries_path(@register.slug, anchor: 'updates_wrapper'), method: :get do
+        .records-search#updates_wrapper
           = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
           = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
           = submit_tag 'Search', class: 'search-submit', name: nil
