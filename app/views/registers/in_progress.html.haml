@@ -1,0 +1,78 @@
+- @page_title = 'Registers collection'
+- content_for :body_classes, 'register-index'
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item
+      = link_to 'Get data', registers_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Upcoming registers', '#content', 'aria-current' => 'page'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Upcoming registers
+      %p These registers are being worked on and are not ready to use. This means the data is still changing and open to user feedback.
+      %p You can #{link_to 'contact the GOV.UK Registers team', support_path} to give feedback on a register.
+      %p You can also see all the #{link_to 'registers you can use', registers_path}.
+
+    .column-one-third
+      = search_form_for @search, class: 'records-search' do |f|
+        = f.label :name_cont, 'Search', class: 'visually-hidden'
+        = f.search_field :name_cont, class: 'search-input', placeholder: 'Search'
+        = f.submit 'Search', class: 'search-submit'
+
+    .column-full
+      %h3.heading-small.mq-small-only Sort by:
+      - if @upcoming_registers.present?
+        %table.register-status-table.table-collapsible
+          %col{width: '60%'}
+          %col{width: '20%'}
+          %col{width: '20%'}
+          %thead
+            %tr
+              %th{role: "columnheader", scope: "col"}
+                Register
+              %th{role: "columnheader", scope: "col"}
+                Managed by
+              %th{role: "columnheader", scope: "col"}
+                Status
+          %tbody
+            - @upcoming_registers.each_with_index do |register, index|
+              - index = index + 1
+              = render partial: 'registers/register', object: register, locals: { index: index }
+      - else
+        .no-search-results
+          %p
+            No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+            = link_to 'Reset', registers_path, class: 'reset-link'
+
+  - if @suggested_registers.present?
+    .grid-row
+      .column-two-thirds
+        %h2.heading-medium Suggested registers
+        %p You can express an interest in the suggested registers.
+        %p If you can't find the data you need you can also #{link_to 'suggest a new register', suggest_registers_path}.
+
+    .grid-row
+      .column-full
+        %table.register-status-table.table-collapsible
+          %col{width: '60%'}
+          %col{width: '20%'}
+          %col{width: '20%'}
+          %thead
+            %tr
+              %th{role: "columnheader", scope: "col"}
+                Register
+              %th{role: "columnheader", scope: "col"}
+                Managed by
+              %th{role: "columnheader", scope: "col"}
+                Status
+          %tbody
+            - @suggested_registers.each_with_index do |register, index|
+              - index = index + 1
+              = render partial: 'registers/register', object: register, locals: { index: index }

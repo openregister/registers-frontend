@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+// GOV.UK Template
+@import 'govuk-template';
+
 // GOV.UK Toolkit and GOV.UK Elements
 @import 'govuk_elements';
 
@@ -10,6 +13,7 @@
 @import 'modules/govuk-logo';
 @import 'modules/header';
 @import 'modules/hero';
+@import 'modules/hero-button';
 @import 'modules/masthead';
 @import 'modules/phase-banner';
 @import 'modules/related-items';
@@ -21,6 +25,8 @@
 @import 'modules/sorting-link';
 @import 'modules/tables';
 @import 'modules/check-your-answers';
+@import 'modules/accessible-autocomplete';
+@import 'modules/block-grid';
 @import 'modules/accessible-autocomplete';
 
 // From alphagov/static
@@ -38,6 +44,10 @@ strong {
   font-weight: bold;
 }
 
+img {
+  max-width: 100%;
+}
+
 // Base styles for headings
 // ==========================================================================
 
@@ -45,7 +55,8 @@ strong {
   margin-top: 0;
 }
 
-.register-show {
+.register-show,
+.register-index {
   .heading-large {
     margin-top: 0;
   }
@@ -58,15 +69,6 @@ html {
 // Override purple colour
 a:visited {
   color: $govuk-blue;
-}
-
-.js-hidden {
-  display: none;
-}
-
-.js-enabled .js-hidden {
-  display: block;
-  visibility: visible;
 }
 
 // scss-lint:disable IdSelector
@@ -101,15 +103,25 @@ a:visited {
   }
 }
 
-table {
-  thead th {
-    font-weight: normal;
+.list-number-big {
+  font-size: 24px;
+  font-weight: bold;
 
-    @include media(tablet) {
-      border-top: 2px solid $grey-3;
+  p {
+    font-size: 19px;
+
+    &:first-of-type {
+      margin-bottom: $gutter-half;
     }
   }
 
+  .heading-medium {
+    margin-bottom: $gutter / 3;
+    margin-top: 0;
+  }
+}
+
+table {
   td,
   th {
     font-size: 16px;
@@ -152,6 +164,7 @@ table {
 }
 
 .register-data-table {
+  border-top: 1px solid $border-colour;
   margin: 0 0 20px 0;
 }
 
@@ -163,11 +176,7 @@ table {
 
 .register-status-table {
   @include media(tablet) {
-    margin-top: 40px;
-
-    td:last-of-type {
-      text-align: right;
-    }
+    margin: 40px 0;
   }
 }
 
@@ -356,8 +365,12 @@ table {
   margin-left: 10px;
 }
 
+.records-count {
+  margin-bottom: $gutter / 3;
+}
+
 details {
-  margin-top: 20px;
+  margin-top: $gutter-half;
 
   .form-group {
     margin: 20px 0;
@@ -391,4 +404,24 @@ details {
       margin-top: 2.5em;
     }
   }
+}
+
+.code-large {
+  display: block;
+  line-height: 1;
+  margin: $gutter 0;
+  padding: $gutter;
+}
+
+.govuk-box-highlight--title-only .heading-large {
+  margin: $gutter 0;
+}
+
+.js-hidden {
+  display: none;
+}
+
+.js-enabled .js-hidden {
+  display: block;
+  visibility: visible;
 }

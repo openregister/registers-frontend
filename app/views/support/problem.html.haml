@@ -9,7 +9,7 @@
 
       = form_for @support, url: support_problem_path  do |f|
         = f.hidden_field :subject, value: "[Problem]"
-        = f.text_area :message, rows: 10
-        = f.text_field :name
-        = f.email_field :email
+        = f.text_area :message, rows: 10, required:  true
+        = f.text_field :name, required: true
+        = f.email_field :email, required: true
         = f.submit "Submit", class: "button"

@@ -23,10 +23,11 @@ RSpec.feature 'View register', type: :feature do
 
   scenario 'view and sort a register' do
     visit '/'
-    expect(page).to have_content('Registers ready to use')
-    click_link('Country')
-    expect(page).to have_content('Afghanistan')
-    click_link('name')
+    expect(page).to have_content('Direct access to up-to-date government data')
+    first('.hero-button').click
+    first('.register-block').click
+    expect(page).to have_content('Country register')
+    click_link('Name')
     expect(page).to have_content('Zimbabwe')
   end
 

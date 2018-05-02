@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require gaap-analytics
 //= require accessible-autocomplete
+//= require govuk/show-hide-content
 
 window.GAAP.analytics.init();

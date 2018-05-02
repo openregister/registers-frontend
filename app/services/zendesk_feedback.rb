@@ -16,7 +16,8 @@ class ZendeskFeedback
         body: params[:message]
       },
       requester: {
-        name: params[:name],
+        # Passing Anonymous down to ZenDesk as name is not always required in our forms
+        name: params[:name].present? ? params[:name] : 'Anonymous',
         email: params[:email]
       }
     }

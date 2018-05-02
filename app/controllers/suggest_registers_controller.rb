@@ -14,7 +14,7 @@ class SuggestRegistersController < ApplicationController
 
     if @wizard.save
       @zendesk_service = ZendeskFeedback.new
-      @response = @zendesk_service.send_feedback(suggest_register_params)
+      @response = @zendesk_service.send_feedback(session[:suggest_register_params].symbolize_keys)
       session[:suggest_register_params] = nil
       redirect_to suggest_register_complete_path
     else

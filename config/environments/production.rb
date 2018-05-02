@@ -1,4 +1,4 @@
-Rails.application.configure do
+Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -83,4 +83,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'https://www.registers.service.gov.uk' }
+  config.self_service_api_endpoint = 'https://registers-selfservice.cloudapps.digital/users'
+  config.self_service_http_auth_username = ENV.fetch('SELF_SERVICE_HTTP_AUTH_USERNAME')
+  config.self_service_http_auth_password = ENV.fetch('SELF_SERVICE_HTTP_AUTH_PASSWORD')
+  config.http_auth_username = ENV.fetch('HTTP_AUTH_USERNAME')
+  config.http_auth_password = ENV.fetch('HTTP_AUTH_PASSWORD')
 end

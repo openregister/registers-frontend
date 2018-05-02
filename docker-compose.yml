@@ -15,6 +15,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      SELF_SERVICE_HTTP_AUTH_USERNAME: ${SELF_SERVICE_HTTP_AUTH_USERNAME}
+      SELF_SERVICE_HTTP_AUTH_PASSWORD: ${SELF_SERVICE_HTTP_AUTH_PASSWORD}
 
 volumes:
   data: {}
