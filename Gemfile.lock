@@ -105,7 +105,7 @@ GEM
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
-    gds_metrics (0.0.2)
+    gds_metrics (0.1.0)
       prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -369,7 +369,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.1, >= 4.1.2)
   factory_bot_rails (~> 4.8, >= 4.8.2)
   faker
-  gds_metrics (~> 0.0.2)
+  gds_metrics (~> 0.1.0)
   govuk-lint (~> 3.8)
   govuk-registers-api-client (~> 1.0)
   govuk_elements_form_builder!
