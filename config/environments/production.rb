@@ -91,6 +91,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.http_auth_password = ENV.fetch('HTTP_AUTH_PASSWORD')
 
   config.x.zendesk.url = ENV.fetch('ZENDESK_URL')
-  config.x.zendesk.username = ENV.fetch('ZENDESK_URL')
-  config.x.zendesk.token = ENV.fetch('ZENDESK_URL')
+  config.x.zendesk.username = ENV.fetch('ZENDESK_USERNAME')
+  config.x.zendesk.token = ENV.fetch('ZENDESK_TOKEN')
 end
