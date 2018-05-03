@@ -5,9 +5,16 @@
     .column-full
       - if flash.alert.present?
         %div{:class => 'error-summary', :role => 'alert'}
-          %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}  
+          %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}
             #{flash.alert}
           %p
             If the problem persists please contact #{link_to 'support', support_path}
-      %h1.heading-large Create your API key
+      %h1.heading-large
+        Create your API key
+        %span.heading-secondary Always access the most recent version of all registers.
       = render 'form', user: @user
+  .grid-row
+    .column-two-thirds
+      %hr
+      %h3.heading-medium Why we ask you to create an API key
+      %p As a government service, we want to make sure GOV.UK Registers works for everyone. By creating an API key you can help us to understand more about our users and improve our service.

@@ -4,7 +4,7 @@ require 'json'
 require 'httparty'
 
 class ApiUsersController < ApplicationController
-  before_action :set_government_organisations
+  before_action :set_government_orgs_local_authorities
 
   def new
     @api_user = ApiUser.new
@@ -57,8 +57,8 @@ private
     )
   end
 
-  def set_government_organisations
-    @government_organisations = Register.find_by(slug: 'government-organisation')
+  def set_government_orgs_local_authorities
+    @government_orgs_local_authorities = Register.find_by(slug: ['government-organisation', 'local-authority-eng', 'local-authority-sct', 'local-authority-nir', 'principal-local-authority'])
                                         .records
                                         .where(entry_type: 'user')
                                         .current

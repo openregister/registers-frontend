@@ -1,32 +1,17 @@
 = form_for @api_user do |f|
+  = f.radio_button_fieldset :is_government, inline: true do |fieldset|
+    - fieldset.radio_input :yes, panel_id: 'is_government_panel'
+    - fieldset.radio_input :no, panel_id: 'not_government_panel'
+  - f.revealing_panel :is_government_panel do |panel|
+    = f.text_field :email, type: 'email', label_options: { class: 'form-label-bold' }, required: true
+    = f.label :department, 'Which government organisation do you work for?', class: 'form-label-bold'
+    = f.select :department, @government_orgs_local_authorities.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
+  - f.revealing_panel :not_government_panel do |panel|
+    = f.text_field :email, type: 'email', label_options: { class: 'form-label-bold' }, required: true
+    = f.radio_button_fieldset :service, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
+
   .form-group
-    = f.label :email, class: 'form-label-bold' do
-      Email address
-      %span.form-hint Your API key will be sent to this email address
-    = f.text_field :email, class: 'form-control', type: 'email', required: true
-
-    %fieldset.inline
-      = f.radio_button_fieldset :is_government,
-          inline: true      
-    .form-group
-      #government-department.panel.panel-border-narrow.js-hidden
-        = f.label :department, 'Which government organisation do you work for?', class: 'form-label'
-        = f.select :department, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
-    %fieldset.inline
-      %legend
-        %label.form-label-bold
-          Are you using Registers to build a service?
-      .multiple-choice{"data-target" => "service"}
-        %input#for-a-service{name: "radio-service-group", type: "radio", value: "Yes"}
-        %label{for: "for-a-service"} Yes
-      .multiple-choice
-        %input#not-for-a-service{name: "radio-service-group", type: "radio", value: "No"}
-        %label{for: "for-a-service"} No
-      #service.panel.panel-border-narrow.js-hidden
-        = f.label :service, 'What is your service called?', class: 'form-label'
-        = f.text_field :service, class: 'form-control'
-
-  = f.submit 'Create API key', class: 'button'
+    = f.submit 'Create API key', class: 'button'
 
 = content_for :javascript do
   :javascript
