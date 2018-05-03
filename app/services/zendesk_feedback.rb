@@ -3,9 +3,9 @@ require 'zendesk_api'
 class ZendeskFeedback
   def initialize
     @client = ZendeskAPI::Client.new do |config|
-      config.url = Rails.configuration.x.zendesk.url
-      config.username = Rails.configuration.x.zendesk.username
-      config.token = Rails.configuration.x.zendesk.token
+      config.url = ENV['ZENDESK_URL']
+      config.username = ENV['ZENDESK_USERNAME']
+      config.token = ENV['ZENDESK_TOKEN']
     end
   end
 
@@ -26,7 +26,7 @@ class ZendeskFeedback
 
     { success: true, ticket_id: response.id }
   rescue ZendeskAPI::Error::ClientError => e
-    Rails.logger.error("Feedback ticket creation failed with status: #{e.response.status} and content: #{e.response.body}")
+    logger.debug("Feedback ticket creation failed with status: #{e.response.status} and content: #{e.response.body}")
 
     { success: false, message: response.body }
   end

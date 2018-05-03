@@ -83,14 +83,9 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'https://www.registers.service.gov.uk' }
-
   config.self_service_api_endpoint = 'https://registers-selfservice.cloudapps.digital/users'
   config.self_service_http_auth_username = ENV.fetch('SELF_SERVICE_HTTP_AUTH_USERNAME')
   config.self_service_http_auth_password = ENV.fetch('SELF_SERVICE_HTTP_AUTH_PASSWORD')
   config.http_auth_username = ENV.fetch('HTTP_AUTH_USERNAME')
   config.http_auth_password = ENV.fetch('HTTP_AUTH_PASSWORD')
-
-  config.x.zendesk.url = ENV.fetch('ZENDESK_URL')
-  config.x.zendesk.username = ENV.fetch('ZENDESK_URL')
-  config.x.zendesk.token = ENV.fetch('ZENDESK_URL')
 end
