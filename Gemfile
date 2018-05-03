@@ -51,7 +51,8 @@ gem 'activerecord-import'
 # Schedule
 gem 'clockwork'
 
-gem 'gds_metrics', '~> 0.0.2'
+# Monitoring
+gem 'gds_metrics', '~> 0.1.0'
 
 # Encrypted password
 gem 'bcrypt'
