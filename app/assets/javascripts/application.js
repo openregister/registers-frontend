@@ -16,4 +16,5 @@
 //= require accessible-autocomplete
 //= require govuk/show-hide-content
 
-window.GAAP.analytics.init();
+window.GAAP.analytics.eventTracking.init();
+window.GAAP.analytics.virtualPageview.init();
