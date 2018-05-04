@@ -12,15 +12,15 @@ class ApiUsersController < ApplicationController
 
   def create
     @api_user = ApiUser.new(api_user_params)
-    if @api_user.valid?
+    if !@api_user.valid?
+      flash.alert = 'Something went wrong'
+      logger.error("API Key POST failed with unexpected response code: #{response.code}") if response&.code
+      render :new
+    else
       response = post_to_endpoint(@api_user)
       if response&.code == 201
         @api_key = JSON.parse(response.body)['api_key']
         render :show
-      else
-        flash.alert = 'Something went wrong'
-        logger.error("API Key POST failed with unexpected response code: #{response.code}") if response&.code
-        render :new
       end
     end
   end
