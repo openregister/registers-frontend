@@ -54,3 +54,10 @@
         .column-full
           %h2.heading-medium.content-section__title Get started
           %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Navigation Link Clicked"}} Search all the #{link_to 'registers you can use', registers_path} to see what government data is available.
+
+= content_for :javascript do
+  :javascript
+    var heroButton = document.querySelector('.hero-button');
+    heroButton.onclick = function() {
+      ga('send', 'pageview', '/get-started');
+    }
