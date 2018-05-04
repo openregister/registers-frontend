@@ -37,7 +37,8 @@ en:
       support:
         email: Email address
       api_user:
-        email: Email address
+        email_gov: Email address
+        email_non_gov: Email address
         department: Which government organisation do you work for?
         service:
           commercial_use: Commercial use

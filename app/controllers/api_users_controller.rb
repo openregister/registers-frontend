@@ -16,9 +16,9 @@ class ApiUsersController < ApplicationController
       flash.alert = 'Please fix the errors below'
       render :new
     else
-      response = post_to_endpoint(@api_user) 
+      response = post_to_endpoint(@api_user)
       if response&.code != nil
-        case response.code 
+        case response.code
         when 422
           flash.alert = 'Please fix the errors below'
           JSON.parse(response.body).each { |k, v| @api_user.errors.add(k.to_sym, *v) }
@@ -29,19 +29,19 @@ class ApiUsersController < ApplicationController
         else
           logger.error("API Key POST failed with unexpected response code: #{response.code}")
           flash.alert = 'Something went wrong'
-          render :new 
+          render :new
         end
       else
         flash.alert = 'Something went wrong'
         render :new
-      end 
+      end
     end
   end
 
 private
 
   def post_to_endpoint(user)
-    @user = { email: user.email,
+    @user = { email: [user.email_gov, user.email_non_gov].find(&:present?),
               department: user.department,
               service: user.service,
               is_government: user.is_government == 'yes' }
@@ -63,7 +63,8 @@ private
 
   def api_user_params
     params.require(:api_user).permit(
-      :email,
+      :email_gov,
+      :email_non_gov,
       :department,
       :service,
       :is_government

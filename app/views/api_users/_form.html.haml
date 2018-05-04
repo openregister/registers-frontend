@@ -3,11 +3,11 @@
     - fieldset.radio_input :yes, panel_id: 'is_government_panel'
     - fieldset.radio_input :no, panel_id: 'not_government_panel'
   - f.revealing_panel :is_government_panel do |panel|
-    = f.text_field :email, type: 'email', label_options: { class: 'form-label-bold' }
+    = f.text_field :email_gov, type: 'email', label_options: { class: 'form-label-bold' }
     = f.label :department, 'Which government organisation do you work for?', class: 'form-label-bold'
     = f.select :department, @government_orgs_local_authorities.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
   - f.revealing_panel :not_government_panel do |panel|
-    = f.text_field :email, type: 'email', label_options: { class: 'form-label-bold' }
+    = f.text_field :email_non_gov, type: 'email', label_options: { class: 'form-label-bold' }
     = f.radio_button_fieldset :service, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
 
   .form-group
