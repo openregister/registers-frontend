@@ -43,7 +43,7 @@ private
   def post_to_endpoint(user)
     @user = { email: [user.email_gov, user.email_non_gov].find(&:present?),
               department: user.department,
-              service: user.service,
+              non_gov_use_category: user.non_gov_use_category,
               is_government: user.is_government == 'yes' }
     uri = URI.parse(Rails.configuration.self_service_api_endpoint)
     options = {
@@ -66,7 +66,7 @@ private
       :email_gov,
       :email_non_gov,
       :department,
-      :service,
+      :non_gov_use_category,
       :is_government
     )
   end
