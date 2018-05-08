@@ -30,6 +30,7 @@
 - content_for :head do
   = stylesheet_link_tag 'application'
   = csrf_meta_tags
+  %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.'}" }
   = render partial: 'layouts/analytics' if Rails.env.production?
 
 - content_for :body_end do
