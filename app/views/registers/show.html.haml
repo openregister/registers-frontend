@@ -22,105 +22,102 @@
           %span.phase-banner In progress
           %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', support_question_path} to give us feedback.
 
-  .grid-row
-    .column-two-thirds
-      %h1.heading-large
-        #{@register.register_name} register
-        %span.heading-secondary= @register.register_description
+  .register-meta-data
+    .grid-row
+      .column-two-thirds
+        %h1.heading-large
+          #{@register.name} register
+          %span.heading-secondary= @register.register_description
+        %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
 
-      .govuk-metadata
-        %dl
-          - if @register.register_authority.present?
-            %dt Managed by:
-            %dd
-              = link_to @register.register_authority.data['name'], @register.register_authority.data['website']
-          %dt Last updated:
-          %dd
-            = link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
+      .column-one-third
+        - if @register.register_authority.present?
+          %p.bold-small Managed by:
+          %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
+            %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
+              %span= @register.register_authority.data['name']
 
-      %details{role: "group"}
-        %summary{"aria-controls" => "details-content-1", "aria-expanded" => "false", :role => "button"}
-          %span.summary What fields are included in this register?
-        #details-content-1.panel.panel-border-narrow{"aria-hidden" => "true"}
-          .govuk-metadata
-            %dl
-              - @register.register_fields.each do |field|
-                %dt= field['field']
-                %dd= field['text']
-    .column-third
-      %aside#related
-        .related-container
-          %h4.heading-small Use this register
-          %ul
-            %li
-              = link_to "View the API", @register.url, target: :blank
   .grid-row
     .column-full
-      .search-records-wrapper#search_wrapper
-        %h3.heading-medium Explore this register
-        .grid-row
-          = form_tag register_path(@register.slug, anchor: 'search_wrapper'), method: :get, id: 'search_records' do
-            .column-one-third
-              .records-search
-                = label_tag 'Search', nil, class: 'visually-hidden', for: 'q'
-                = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
-                = submit_tag 'Search', name: nil, class: 'search-submit'
-            .column-full
-              %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
-                  %span.summary Filter
-                #details-content-0{"aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
+      %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
+        .subsection-wrapper
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title Preview the data
+            .subsection__content.js-subsection-content#subsection_content_1
+              .search-records-wrapper#records_wrapper
+                = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
                   .grid-row
-                    .column-full
-                      .form-group
-                        %fieldset.inline
-                          %legend.visually-hidden Filter
-                          .multiple-choice
-                            = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
-                            = label_tag 'Current records', nil, for: 'status_current'
-                          .multiple-choice
-                            = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
-                            = label_tag 'Archived records', nil, for: 'status_archived'
-                          .multiple-choice
-                            = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                            = label_tag 'Both', nil, for: 'status_all'
-                        = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
+                    .column-one-third
+                      .records-search
+                        = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
+                        = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                        = submit_tag 'Search', name: nil, class: 'search-submit'
+                  %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+                    %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+                      %span.summary Filter
+                    %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
 
+                      .grid-row
+                        .column-two-thirds
+                          .form-group
+                            %fieldset.inline
+                              %legend.form-label.form-label-bold Filter data:
+                              .multiple-choice
+                                = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                                = label_tag 'Current records', nil, for: 'status_current'
+                              .multiple-choice
+                                = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                                = label_tag 'Archived records', nil, for: 'status_archived'
+                              .multiple-choice
+                                = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                                = label_tag 'Both', nil, for: 'status_all'
+                            = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
-      - if @records.present?
-        .records-count
-          %span#records-count
-            = render partial: 'showing'
-          - if params[:q].present? || params[:status].present?
-            = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
+              - if @records.present?
+                .records-count
+                  %span#records-count
+                    = render partial: 'showing'
+                  - if params[:q].present? || params[:status].present?
+                    = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
-        .table-scroll
-          %table.register-data-table
-            %thead
-              %tr
-                - @register.register_fields.each do |field|
-                  %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
-            %tbody#records-tbody
-              = render partial: 'record', collection: @records
+                .table-scroll
+                  %table.register-data-table
+                    %thead
+                      %tr
+                        - @register.register_fields.each do |field|
+                          %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
+                    %tbody#records-tbody
+                      = render partial: 'record', collection: @records
 
-        .pager.js-hidden
-          .pager-controls
-            = paginate @records, outer_window: 0, window: 3
-          .pager-summary
-            = render partial: 'showing'
+                .pager.js-hidden
+                  .pager-controls
+                    = paginate @records, outer_window: 0, window: 3
+                  .pager-summary
+                    = render partial: 'showing'
 
-        - unless @records.last_page?
-          = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
+                - unless @records.last_page?
+                  = link_to_next_page @records, 'Load more', id: 'load-more-records', remote: true, class: 'js-load-more'
 
-      - else
-        .no-search-results
-          %p
-            - if params[:q].present?
-              No results found for <strong>"#{params[:q]}"</strong>
-            - else
-              No results found.
-            - if params[:q].present? || params[:status].present?
-              = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+              - else
+                .no-search-results
+                  %p
+                    - if params[:q].present?
+                      No results found for <strong>"#{params[:q]}"</strong>
+                    - else
+                      No results found.
+                    - if params[:q].present? || params[:status].present?
+                      = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title Access the data
+            .subsection__content.js-subsection-content#subsection_content_2
+              %ul.list
+                %li= link_to 'Create API key', new_api_user_path
+                %li Always access the most recent version of all registers through our API
+              %ul.list
+                %li= link_to 'Request a download', support_path
+                %li Get the latest version JSON, CSV, YAML or TTL of this register
 
 = content_for :javascript do
   :javascript

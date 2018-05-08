@@ -28,6 +28,7 @@
 @import 'modules/accessible-autocomplete';
 @import 'modules/block-grid';
 @import 'modules/accessible-autocomplete';
+@import 'modules/subsections';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -119,6 +120,10 @@ a:visited {
     margin-bottom: $gutter / 3;
     margin-top: 0;
   }
+}
+
+.register-meta-data {
+  margin: $gutter-half 0;
 }
 
 table {
@@ -285,9 +290,7 @@ table {
 }
 
 .search-records-wrapper {
-  border-top: 2px solid $grey-3;
-  margin: 40px 0 20px 0;
-  padding-top: 40px;
+  margin-bottom: $gutter-half;
 
   .heading-medium {
     margin-top: 0;
