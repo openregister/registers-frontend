@@ -409,7 +409,7 @@ details {
 .code-large {
   display: block;
   line-height: 1;
-  margin: $gutter 0;
+  margin: $gutter 0 $gutter-half 0;
   padding: $gutter;
 }
 
