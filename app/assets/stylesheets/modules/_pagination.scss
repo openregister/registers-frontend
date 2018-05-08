@@ -59,9 +59,9 @@
 }
 
 .js-load-more {
-  display: block;
+  display: none;
 
   .js-enabled & {
-    display: none;
+    display: block;
   }
 }
