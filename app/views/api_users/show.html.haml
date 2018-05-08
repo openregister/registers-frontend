@@ -9,3 +9,13 @@
         = @api_key
 
       %p.font-xsmall Your API key has also been emailed to you. Your key can be used for all registers.
+
+      .subsection__header
+        %h2.subsection__title= link_to 'Authenticate with your API key', 'https://docs.registers.service.gov.uk#authenticate-with-your-api-key'
+      %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
+        .subsection-wrapper
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title Give feedback
+            .subsection__content.js-subsection-content#subsection_content_2
+              %p= link_to 'Send us your feedback', support_path
