@@ -24,7 +24,7 @@ gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/go
 gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'govuk-registers-api-client', '~> 1.0'
+gem 'govuk-registers-api-client', '~> 1.1.1'
 
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'

@@ -9,8 +9,10 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     Delayed::Worker.logger.info("Updating #{register.name} in database")
     begin
     # Initialize client and download / update data
-      registers_client_manager = RegistersClient::RegisterClientManager.new
-      register_client = registers_client_manager.get_register(register.name.parameterize, register.register_phase.downcase, PostgresDataStore.new(register))
+      registers_client_manager = RegistersClient::RegisterClientManager.new({
+        api_key: Rails.configuration.try(:registers_api_key)
+      }.compact)
+      register_client = registers_client_manager.get_register(register.name.parameterize, register.register_phase.downcase, data_store: PostgresDataStore.new(register))
       register_url = register_client.instance_variable_get(:@register_url)
       register_client.refresh_data
     rescue InvalidRegisterError => e
