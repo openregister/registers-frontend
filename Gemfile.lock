@@ -18,6 +18,13 @@ GIT
       govuk_frontend_toolkit (>= 6.0.0)
       rails (>= 4.2)
 
+GIT
+  remote: https://github.com/openregister/gds_metrics_ruby.git
+  revision: b81de457bc36ce29427eed71f12d037779e22183
+  specs:
+    gds_metrics (0.1.0)
+      prometheus-client-mmap (= 0.9.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -105,8 +112,6 @@ GEM
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
-    gds_metrics (0.1.0)
-      prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     govuk-lint (3.8.0)
@@ -369,7 +374,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.1, >= 4.1.2)
   factory_bot_rails (~> 4.8, >= 4.8.2)
   faker
-  gds_metrics (~> 0.1.0)
+  gds_metrics!
   govuk-lint (~> 3.8)
   govuk-registers-api-client (~> 1.1.1)
   govuk_elements_form_builder!
