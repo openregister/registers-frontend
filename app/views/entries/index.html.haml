@@ -1,4 +1,4 @@
-= content_for :page_title, "Register updates"
+- @page_title = "#{@register.register_name} register updates"
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
@@ -9,7 +9,7 @@
     %li.breadcrumbs__item
       = link_to 'Get data', registers_path
     %li.breadcrumbs__item
-      = link_to "#{@register.register_name} Register", register_path(@register.slug)
+      = link_to "#{@register.register_name} register", register_path(@register.slug)
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to 'Register updates', '#content', 'aria-current' => 'page'
 
