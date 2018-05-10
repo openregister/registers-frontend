@@ -1,5 +1,5 @@
 = paginator.render do
-  %ul.pager-items
+  %ul.pager-items{"data-click-events" => "", "data-click-category" => "Register Table", "data-click-action" => "Pagination"}
     = prev_page_tag unless current_page.first?
     - each_page do |page|
       - if page.display_tag?
