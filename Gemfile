@@ -52,7 +52,7 @@ gem 'activerecord-import'
 gem 'clockwork'
 
 # Monitoring
-gem 'gds_metrics', '~> 0.1.0'
+ gem 'gds_metrics', github: 'openregister/gds_metrics_ruby'
 
 # Encrypted password
 gem 'bcrypt'
