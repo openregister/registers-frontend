@@ -24,3 +24,13 @@
 
     var showHideContent = new GOVUK.ShowHideContent();
     showHideContent.init();
+
+    var yesRadioButton = document.getElementById('api_user_is_government_yes');
+    yesRadioButton.onclick = function() {
+      ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
+    }
+
+    var noRadioButton = document.getElementById('api_user_is_government_no');
+    noRadioButton.onclick = function() {
+      ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
+    }
