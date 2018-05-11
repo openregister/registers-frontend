@@ -97,7 +97,7 @@
         .table-scroll
           %table.register-data-table
             %thead
-              %tr{"data-click-events" => "", "data-click-category" => "Register Table", "data-click-action" => "Sort"}
+              %tr{data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Sort"}}
                 - @register.register_fields.each do |field|
                   %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
             %tbody#records-tbody
@@ -110,7 +110,7 @@
             = render partial: 'showing'
 
         - unless @records.last_page?
-          %div{"data-click-events" => "", "data-click-category" => "Register Table", "data-click-action" => "Load More"}
+          %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
             = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
 
       - else
