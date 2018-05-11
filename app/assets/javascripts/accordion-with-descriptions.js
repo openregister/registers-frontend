@@ -145,6 +145,9 @@
           toggleIcon($(this));
           toggleState($(this).find('.subsection__button'));
           //setOpenCloseAllText();
+          if(window.ga && ga.create) {
+            fireTracking($(this));
+          }
           setSessionStorage();
           removeSessionStorage();
           return false;
@@ -272,6 +275,15 @@
         $node.attr("aria-expanded", state);
       }
 
+      function fireTracking($node) {
+        var action = ''
+        if ($($node).parent().hasClass('subsection--is-open')) {
+          action = 'Open'
+        } else {
+          action = 'Closed'
+        }
+        ga('send', 'event', 'Content', action, $node[0].innerText);
+      }
     }
   };
 })(window.GOVUK.Modules);
