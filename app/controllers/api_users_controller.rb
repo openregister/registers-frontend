@@ -13,14 +13,14 @@ class ApiUsersController < ApplicationController
   def create
     @api_user = ApiUser.new(api_user_params)
     if !@api_user.valid?
-      flash.now[:alert] = 'Please fix the errors below'
+      flash.now[:alert] = { title: 'Please fix the errors below', message: @api_user.errors.messages }
       render :new
     else
       response = post_to_endpoint(@api_user)
       if response&.code != nil
         case response.code
         when 422
-          flash.now[:alert] = 'Please fix the errors below'
+          flash.now[:alert] = { title: 'Please fix the errors below', message: @api_user.errors.messages }
           JSON.parse(response.body).each { |k, v| @api_user.errors.add(k.to_sym, *v) }
           render :new
         when 201
@@ -28,11 +28,11 @@ class ApiUsersController < ApplicationController
           render :show
         else
           logger.error("API Key POST failed with unexpected response code: #{response.code}")
-          flash.now[:alert] = 'Something went wrong'
+          flash.now[:alert] = { title: 'Something went wrong' }
           render :new
         end
       else
-        flash.now[:alert] = 'Something went wrong'
+        flash.now[:alert] = { title: 'Something went wrong' }
         render :new
       end
     end

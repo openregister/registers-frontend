@@ -1,3 +1,4 @@
+- console
 - @page_title = "Create an API key"
 - content_for :body_classes, 'api-key-page'
 
@@ -7,7 +8,7 @@
       - if flash.alert.present?
         %div{:class => 'error-summary', :role => 'alert'}
           %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}
-            #{flash.alert}
+            #{flash.alert[:title]}
             %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @api_user.errors.any?
       %h1.heading-large
         Create your API key
