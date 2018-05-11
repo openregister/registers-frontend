@@ -94,4 +94,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.x.zendesk.username = ENV.fetch('ZENDESK_USERNAME')
   config.x.zendesk.token = ENV.fetch('ZENDESK_TOKEN')
   config.registers_api_key = ENV.fetch('REGISTERS_API_KEY')
+  config.public_file_server.headers = {
+    'Cache-Control': 'public, max-age=31536000'
+  }
 end
