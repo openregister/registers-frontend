@@ -41,7 +41,7 @@ class ApiUsersController < ApplicationController
 private
 
   def post_to_endpoint(user)
-    @user = { email: [user.email_gov, user.email_non_gov].find(&:present?),
+    @user = { email: user.is_government == 'yes' ? user.email_gov : user.email_non_gov,
               department: user.department,
               non_gov_use_category: user.non_gov_use_category,
               is_government: user.is_government == 'yes' }
