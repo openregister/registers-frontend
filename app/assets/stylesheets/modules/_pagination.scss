@@ -1,10 +1,6 @@
 // Taken from https://github.com/trevorsaint/rural-payments-styleguide/blob/a99ba9ee34ed84452aa8fa662b3f0ba11d38c336/assets/sass/defra/_pagination.scss
 
 .pager {
-  .js-enabled & {
-    display: none;
-  }
-
   margin-top: em(5, 16);
   margin-bottom: em(20, 16);
 
@@ -59,5 +55,14 @@
     @include media(tablet) {
       float: right;
     }
+  }
+}
+
+.js-load-more {
+  display: none;
+
+  .js-enabled & {
+    display: block;
+    margin-bottom: 40px;
   }
 }

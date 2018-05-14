@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     resources :entries, path: 'updates', only: :index
   end
 
-  # TODO: enable this when we release the API key flow
-  # resources :api_users
+  resources :api_users
+
   get '/registers-in-progress', to: 'registers#in_progress'
 
   resources :suggest_registers, path: 'suggest-register', except: %i[show edit]

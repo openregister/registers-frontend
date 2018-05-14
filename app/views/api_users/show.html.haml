@@ -8,6 +8,21 @@
       %code.code.code-large
         = @api_key
 
-      %p Your API key has also been emailed to you.
+      %p.font-xsmall Your API key has also been emailed to you. Your key can be used for all registers.
 
-      %p Back to #{link_to 'registers you can use', registers_path}
+      .subsection__header
+        %h2.subsection__title{data: {"click-events" => true, "click-category" => "Content", "click-action" => "External Link Clicked"}}
+          = link_to 'Authenticate with your API key', 'https://docs.registers.service.gov.uk#authenticate-with-your-api-key'
+      %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
+        .subsection-wrapper
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title Give feedback
+            .subsection__content.js-subsection-content#subsection_content_2
+              %p #{link_to 'Give feedback about GOV.UK Registers', support_path} to help us improve our service.
+
+= content_for :javascript do
+  :javascript
+    ga('send', 'event', 'Form', 'Submitted', 'Create API Key Form', {
+      'dimension1': "#{@api_user.is_government} - #{@api_user.department == 'yes' ? @api_user.department : @api_user.non_gov_use_category}"
+    });

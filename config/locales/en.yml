@@ -36,10 +36,21 @@ en:
     label:
       support:
         email: Email address
+      api_user:
+        email_gov: Email address
+        email_non_gov: Email address
+        department: Which government organisation do you work for?
+        service:
+          commercial_use: Commercial use
+          non_commercial_use: Non-commercial use
+          personal: Personal
+        is_government:
+          yes: Yes
+          no: No
     fieldset:
       api_user:
-        is_government: |
-          Do you work for government?
+        is_government: Do you work for government?
+        non_gov_use_category: What are you using GOV.UK Registers for?
   errors:
     messages:
       blank: is required
