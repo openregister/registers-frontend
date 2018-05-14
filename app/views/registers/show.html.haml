@@ -116,9 +116,10 @@
               %ul.list
                 %li= link_to 'Create API key', new_api_user_path
                 %li Always access the most recent version of all registers through our API
-              %ul.list
-                %li= link_to 'Request a download', '/support/question'
-                %li Get the latest version of this register
+              -# TODO: re-add this section when download form is implemented
+              -# %ul.list
+              -#   %li= link_to 'Request a download', '/support/question'
+              -#   %li Get the latest version of this register
 
 = content_for :javascript do
   :javascript
