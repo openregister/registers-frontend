@@ -50,7 +50,7 @@ en:
     fieldset:
       api_user:
         is_government: Do you work for government?
-        service: What are you using GOV.UK Registers for?
+        non_gov_use_category: What are you using GOV.UK Registers for?
   errors:
     messages:
       blank: is required
