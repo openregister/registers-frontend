@@ -11,7 +11,8 @@
       %p.font-xsmall Your API key has also been emailed to you. Your key can be used for all registers.
 
       .subsection__header
-        %h2.subsection__title= link_to 'Authenticate with your API key', 'https://docs.registers.service.gov.uk#authenticate-with-your-api-key'
+        %h2.subsection__title{data: {"click-events" => true, "click-category" => "Content", "click-action" => "External Link Clicked"}}
+          = link_to 'Authenticate with your API key', 'https://docs.registers.service.gov.uk#authenticate-with-your-api-key'
       %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
         .subsection-wrapper
           .subsection.js-subsection
