@@ -98,7 +98,7 @@
 
                 - unless @records.last_page?
                   %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
-                    = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true
+                    = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
 
               - else
                 .no-search-results
