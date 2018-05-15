@@ -1,4 +1,4 @@
-= form_for @download, url: '/download' do |f|
+= form_for @download, url: register_download_index_path(@register.slug) do |f|
   = f.radio_button_fieldset :is_government, inline: true do |fieldset|
     - fieldset.radio_input :yes, panel_id: 'is_government_panel'
     - fieldset.radio_input :no, panel_id: 'not_government_panel'
@@ -11,7 +11,7 @@
     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
 
   .form-group
-    = f.submit 'Create API key', class: 'button'
+    = f.submit 'Download', class: 'button'
 
 = content_for :javascript do
   :javascript
