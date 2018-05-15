@@ -6,12 +6,12 @@ class DownloadController < ApplicationController
   helper_method :link_to_format
 
   def index
-    @download = Download.new
+    @download = DownloadUser.new
   end
 
   def create
-    @download = Download.new(download_params)
-    if @download.valid?
+    @download = DownloadUser.new(download_user_params)
+    if @download.save
       redirect_to register_download_success_path(@register.slug)
     else
       render :index
@@ -22,8 +22,8 @@ class DownloadController < ApplicationController
 
 private
 
-  def download_params
-    params.require(:download).permit(
+  def download_user_params
+    params.require(:download_user).permit(
       :email_gov,
       :email_non_gov,
       :department,

@@ -47,7 +47,7 @@ en:
         is_government:
           yes: Yes
           no: No
-      download:
+      download_user:
         email_gov: Email address
         email_non_gov: Email address
         department: Which government organisation do you work for?
@@ -62,7 +62,7 @@ en:
       api_user:
         is_government: Do you work for government?
         non_gov_use_category: What are you using GOV.UK Registers for?
-      download:
+      download_user:
         is_government: Do you work for government?
         non_gov_use_category: What are you using GOV.UK Registers for?
   errors:
