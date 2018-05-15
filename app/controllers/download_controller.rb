@@ -14,7 +14,6 @@ class DownloadController < ApplicationController
     if @download.valid?
       redirect_to register_download_success_path(@register.slug)
     else
-      flash.now[:alert] = { title: 'Please fix the errors below', message: @download.errors.messages }
       render :index
     end
   end
