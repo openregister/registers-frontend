@@ -9,10 +9,14 @@ class DownloadController < ApplicationController
   def create
     @download = Download.new(download_params)
     if @download.valid?
-      # DO SOMETHING
+      redirect_to register_download_success_path(@register.slug)
     else
-      # DO SOMETHING
+      flash.now[:alert] = { title: 'Please fix the errors below', message: @download.errors.messages }
+      render :index
     end
+  end
+
+  def success
   end
 
 private

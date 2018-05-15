@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :download
+    get '/download/success', to: 'download#success', as: 'download_success'
   end
 
   resources :api_users
