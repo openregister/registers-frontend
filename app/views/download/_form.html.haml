@@ -25,18 +25,18 @@
     var showHideContent = new GOVUK.ShowHideContent();
     showHideContent.init();
 
-    var yesRadioButton = document.getElementById('api_user_is_government_yes');
+    var yesRadioButton = document.getElementById('download_user_is_government_yes');
     yesRadioButton.onclick = function() {
       ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
-      var nonGovEmail = document.getElementById('api_user_email_non_gov')
+      var nonGovEmail = document.getElementById('download_user_email_non_gov')
       nonGovEmail.value = "";
-      $('input:radio[name="api_user[non_gov_use_category]"]').each(function () { $(this).prop('checked', false); });
+      $('input:radio[name="download_user[non_gov_use_category]"]').each(function () { $(this).prop('checked', false); });
     }
 
-    var noRadioButton = document.getElementById('api_user_is_government_no');
+    var noRadioButton = document.getElementById('download_user_is_government_no');
     noRadioButton.onclick = function() {
       ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
-      var govEmail = document.getElementById('api_user_email_gov')
+      var govEmail = document.getElementById('download_user_email_gov')
       govEmail.value = "";
       var govOrgs = document.getElementById('government-organisations');
       govOrgs.value = "";
