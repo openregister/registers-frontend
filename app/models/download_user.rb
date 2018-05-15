@@ -1,4 +1,5 @@
 class DownloadUser < ApplicationRecord
+  attr_accessor :email_gov, :email_non_gov
   validates :is_government, presence: true
   validates :email_gov, presence: true, if: -> { is_government == 'yes' }
   validates :department, presence: true, if: -> { is_government == 'yes' }
