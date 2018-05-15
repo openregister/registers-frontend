@@ -1,14 +1,7 @@
-module DownloadHelper
-  include ActionView::Helpers::UrlHelper
-  def link_to_format(format)
-    link_to(format.upcase, "#{@register.url}/records.#{format}?page-size=5000")
-  end
-end
-
 class DownloadController < ApplicationController
-  include DownloadHelper
   before_action :set_register
   before_action :set_government_orgs_local_authorities
+  include DownloadHelpers
 
   helper_method :link_to_format
 
