@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
+    resources :download
   end
 
   resources :api_users

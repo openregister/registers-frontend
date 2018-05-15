@@ -1,0 +1,43 @@
+= form_for @download, url: '/download' do |f|
+  = f.radio_button_fieldset :is_government, inline: true do |fieldset|
+    - fieldset.radio_input :yes, panel_id: 'is_government_panel'
+    - fieldset.radio_input :no, panel_id: 'not_government_panel'
+  - f.revealing_panel :is_government_panel do |panel|
+    = f.text_field :email_gov, type: 'email', label_options: { class: 'form-label-bold' }
+    = f.label :department, 'Which government organisation do you work for?', class: 'form-label-bold'
+    = f.select :department, @government_orgs_local_authorities, { include_blank: true }, id: 'government-organisations'
+  - f.revealing_panel :not_government_panel do |panel|
+    = f.text_field :email_non_gov, type: 'email', label_options: { class: 'form-label-bold' }
+    = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
+
+  .form-group
+    = f.submit 'Create API key', class: 'button'
+
+= content_for :javascript do
+  :javascript
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.getElementById('government-organisations'),
+      showAllValues: false,
+      minLength: 2,
+      defaultValue: ''
+    });
+
+    var showHideContent = new GOVUK.ShowHideContent();
+    showHideContent.init();
+
+    var yesRadioButton = document.getElementById('api_user_is_government_yes');
+    yesRadioButton.onclick = function() {
+      ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
+      var nonGovEmail = document.getElementById('api_user_email_non_gov')
+      nonGovEmail.value = "";
+      $('input:radio[name="api_user[non_gov_use_category]"]').each(function () { $(this).prop('checked', false); });
+    }
+
+    var noRadioButton = document.getElementById('api_user_is_government_no');
+    noRadioButton.onclick = function() {
+      ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
+      var govEmail = document.getElementById('api_user_email_gov')
+      govEmail.value = "";
+      var govOrgs = document.getElementById('government-organisations');
+      govOrgs.value = "";
+    }
