@@ -23,6 +23,7 @@ applications:
     - registers-frontend
     - registers-product-site-environment-variables
     - logit-ssl-drain
+    - prometheus
 - name: registers-frontend-queue
   <<: *defaults
   instances: 1
