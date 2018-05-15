@@ -3,7 +3,5 @@
 %main#content{role: 'main'}
   .grid-row
     .column-two-thirds
-      %h1.heading-large Download formats
-      %ul  
-        %li!=link_to_format('csv')
-        %li!=link_to_format('json')
+      %h1.heading-large Your download
+      %p The register is avaliable as #{link_to_format('csv')} and #{link_to_format('json')}
