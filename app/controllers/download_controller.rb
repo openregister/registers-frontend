@@ -1,4 +1,5 @@
 class DownloadController < ApplicationController
+  before_action :set_register
   before_action :set_government_orgs_local_authorities
 
   def index
@@ -23,6 +24,10 @@ private
       :non_gov_use_category,
       :is_government
     )
+  end
+
+  def set_register
+    @register = Register.find_by_slug!(params[:register_id])
   end
 
   def set_government_orgs_local_authorities

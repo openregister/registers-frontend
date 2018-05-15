@@ -10,8 +10,7 @@
             #{flash.alert[:title]}
             %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @api_user.errors.any?
       %h1.heading-large
-        Download
-        %span.heading-secondary Always access the most recent version of all registers.
+        Download the #{@register.register_name} register
       = render 'form', user: @user
   .grid-row
     .column-two-thirds
