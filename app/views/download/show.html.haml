@@ -1,6 +1,10 @@
-- @page_title = "Your API key"
+- console
+- @page_title = "Your Download"
 
 %main#content{role: 'main'}
   .grid-row
     .column-two-thirds
       %h1.heading-large Download formats
+      %ul  
+        %li!=link_to_format('csv')
+        %li!=link_to_format('json')
