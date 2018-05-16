@@ -10,7 +10,7 @@ class DownloadController < ApplicationController
   end
 
   def create
-    @download = DownloadUser.new(download_user_params)
+    @download = DownloadUser.new(set_is_government_boolean(download_user_params))
     if @download.save
       redirect_to register_download_success_path(@register.slug)
     else

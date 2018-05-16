@@ -16,4 +16,13 @@ module FormHelpers
       }
     }.compact.flatten(1)
   end
+
+  def set_is_government_boolean(params)
+    params.merge!(is_government: case params[:is_government]
+                                 when 'yes'
+                                   true
+                                 when 'no'
+                                   false
+                                 end)
+  end
 end

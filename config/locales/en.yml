@@ -26,7 +26,7 @@ en:
         download_user:
           attributes:
             is_government:
-              blank: 'Select if you work for government or not'
+              inclusion: 'Select if you work for government or not'
             department:
               blank: 'Enter which government organisation you work for'
             email_gov:
@@ -41,7 +41,7 @@ en:
         api_user:
           attributes:
             is_government:
-              blank: 'Select if you work for government or not'
+              inclusion: 'Select if you work for government or not'
             department:
               blank: 'Enter which government organisation you work for'
             email_gov:
