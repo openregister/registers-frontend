@@ -11,7 +11,6 @@ class DownloadController < ApplicationController
 
   def create
     @download = DownloadUser.new(download_user_params)
-    @download.email = [@download.email_non_gov, @download.email_gov].find(&:present?)
     if @download.save
       redirect_to register_download_success_path(@register.slug)
     else
