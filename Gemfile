@@ -60,6 +60,9 @@ gem 'bcrypt'
 # HTTP
 gem 'httparty', '~> 0.16.2'
 
+# Canonical meta tag
+gem 'canonical-rails'
+
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'
