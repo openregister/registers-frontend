@@ -4,7 +4,7 @@
 %main#content{role: 'main'}
   .grid-row
     .column-full
-      = GovukElementsErrorsHelper.error_summary @download, "There is a problem with the form", "Check below for more detail"
+      = GovukElementsErrorsHelper.error_summary @download, "There is a problem with the form", ""
       %h1.heading-large
         Download the #{@register.register_name} register
       = render 'form', user: @user
