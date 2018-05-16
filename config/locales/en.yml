@@ -25,14 +25,16 @@ en:
       models:
         download_user:
           attributes:
+            is_government:
+              blank: 'Select if you work for government or not'
             department:
-              blank: 'Please tell us which government organisation you work for'
+              blank: 'Enter which government organisation you work for'
             email_gov:
-              blank: 'Please enter your email address'
+              blank: 'Enter your email address'
             email_non_gov:
-              blank: 'Please enter your email address'
+              blank: 'Enter your email address'
             non_gov_use_category:
-              blank: "Please tell us what you're using GOV.UK Registers for"
+              blank: "Enter us what you're using GOV.UK Registers for"
 
   helpers:
     page_entries_info:
@@ -79,6 +81,9 @@ en:
       download_user:
         is_government: Do you work for government?
         non_gov_use_category: What are you using GOV.UK Registers for?
+    hint:
+      download_user:
+        email_gov: Enter your government email address
   errors:
     messages:
       blank: is required
