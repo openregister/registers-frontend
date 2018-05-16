@@ -14,7 +14,7 @@ class ApiUsersController < ApplicationController
   def create
     @api_user = ApiUser.new(api_user_params)
     if !@api_user.valid?
-      flash.now[:alert] = { title: 'Please fix the errors below', message: @api_user.errors.messages }
+      flash.now[:alert] = { title: 'There is a problem with the form', message: @api_user.errors.messages }
       render :new
     else
       response = post_to_endpoint(@api_user)

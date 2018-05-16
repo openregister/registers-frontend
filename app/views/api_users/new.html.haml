@@ -8,7 +8,6 @@
         %div{:class => 'error-summary', :role => 'alert'}
           %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}
             #{flash.alert[:title]}
-            %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @api_user.errors.any?
       %h1.heading-large
         Create your API key
         %span.heading-secondary Always access the most recent version of all registers.

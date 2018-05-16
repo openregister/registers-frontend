@@ -3,8 +3,8 @@
     - fieldset.radio_input :yes, panel_id: 'is_government_panel'
     - fieldset.radio_input :no, panel_id: 'not_government_panel'
   - f.revealing_panel :is_government_panel do |panel|
+    = f.collection_select :department, @government_orgs_local_authorities, :first, :last, { include_blank: true }
     = f.text_field :email_gov, type: 'email'
-    = f.collection_select :department, @government_orgs_local_authorities, :last, :first, { include_blank: true }
   - f.revealing_panel :not_government_panel do |panel|
     = f.text_field :email_non_gov, type: 'email'
     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
@@ -37,6 +37,6 @@
       ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
       var govEmail = document.getElementById('download_user_email_gov')
       govEmail.value = "";
-      var govOrgs = document.getElementById('government-organisations');
+      var govOrgs = document.getElementById('download_user_department-select');
       govOrgs.value = "";
     }

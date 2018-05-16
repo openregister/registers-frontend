@@ -11,7 +11,7 @@ module FormHelpers
     @government_orgs_local_authorities = registers.map { |k, v|
       Register.find_by(slug: k)&.records&.where(entry_type: 'user')&.current&.map { |r|
         [
-            r.data[v], "#{k}:#{r.key}"
+          "#{k}:#{r.key}", r.data[v]
         ]
       }
     }.compact.flatten(1)
