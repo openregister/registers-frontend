@@ -4,4 +4,5 @@
   .grid-row
     .column-two-thirds
       %h1.heading-large Your download
-      %p The register is avaliable as #{link_to_format('csv')} and #{link_to_format('json')}
+      %p{data: {'click-events' => true, 'click-category' => 'Content', 'click-action' => 'Register Download' }}
+        The register is avaliable as #{link_to_format('csv')} and #{link_to_format('json')}
