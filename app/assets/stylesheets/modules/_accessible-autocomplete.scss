@@ -32,6 +32,11 @@
   width: 100%;
   background-color: transparent;
   position: relative;
+
+  .form-group-error & {
+    border-color: $error-colour;
+    border-width: 4px;
+  }
 }
 
 .autocomplete__hint {
