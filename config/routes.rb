@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
   get 'new-register/thanks', to: 'new_register#thanks'
 
+  resource :sitemap, only: :show
+
   namespace :admin, path: '/admin' do
     root to: "registers#index"
 
