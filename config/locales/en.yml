@@ -34,7 +34,7 @@ en:
             email_non_gov:
               blank: 'Enter your email address'
             non_gov_use_category:
-              blank: "Enter us what you're using GOV.UK Registers for"
+              blank: "Enter what you're using GOV.UK Registers for"
 
   helpers:
     page_entries_info:
