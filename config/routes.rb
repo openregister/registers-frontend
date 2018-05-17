@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'avaliable-registers', to: redirect('/registers', status: 301)
   get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
   get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
+  get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
 
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index

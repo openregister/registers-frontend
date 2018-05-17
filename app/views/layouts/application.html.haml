@@ -54,6 +54,8 @@
 
 - content_for :footer_support_links do
   %nav.footer-nav
-    Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service', target: :blank, rel: "noopener noreferrer"}
+    %ul
+      %li Built by the #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service', target: :blank, rel: "noopener noreferrer"}
+      %li= link_to 'Privacy notice', privacy_notice_path
 
 = render file: 'layouts/govuk_template'
