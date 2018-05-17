@@ -20,33 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    errors:
-      models:
-        download_user:
-          attributes:
-            is_government:
-              inclusion: 'Select if you work for government or not'
-            department:
-              blank: 'Enter which government organisation you work for'
-            email_gov:
-              blank: 'Enter your email address'
-            email_non_gov:
-              blank: 'Enter your email address'
-            non_gov_use_category:
-              blank: "Enter what you're using GOV.UK Registers for"
-        api_user:
-          attributes:
-            is_government:
-              inclusion: 'Select if you work for government or not'
-            department:
-              blank: 'Enter which government organisation you work for'
-            email_gov:
-              blank: 'Enter your email address'
-            email_non_gov:
-              blank: 'Enter your email address'
-            non_gov_use_category:
-              blank: "Enter what you're using GOV.UK Registers for"
   helpers:
     page_entries_info:
       entry:
@@ -98,6 +71,16 @@ en:
       api_user:
         email_gov: Enter your government email address
   errors:
-    messages:
+    attributes:
+      is_government:
+        inclusion: 'Select if you work for government or not'
+      department:
+        blank: 'Enter which government organisation you work for'
+      email_gov:
+        blank: 'Enter your email address'
+      email_non_gov:
+        blank: 'Enter your email address'
+      non_gov_use_category:
+        blank: "Enter what you're using GOV.UK Registers for"
       blank: is required
     format: "%{message}"
