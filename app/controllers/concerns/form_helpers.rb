@@ -45,7 +45,7 @@ def post_to_endpoint(user, endpoint = 'users')
   end
 rescue StandardError => e
   # Fallback for socket errors etc...
-  logger.error("API Key POST failed with exception: #{e}")
+  logger.error("#{endpoint} POST failed with exception: #{e}")
   flash.now[:alert] = error_message
   nil
 end
