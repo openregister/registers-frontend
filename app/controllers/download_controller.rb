@@ -22,12 +22,12 @@ class DownloadController < ApplicationController
   def success; end
 
   def download_json
-    data  = open("#{@register.url}/records.json?page-size=5000") {|f| f.read }
+    data = open("#{@register.url}/records.json?page-size=5000", &:read)
     send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
   end
 
   def download_csv
-    data  = open("#{@register.url}/records.csv?page-size=5000") {|f| f.read }
+    data = open("#{@register.url}/records.csv?page-size=5000", &:read)
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
   end
 
