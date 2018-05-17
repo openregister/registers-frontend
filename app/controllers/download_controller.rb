@@ -1,5 +1,6 @@
+require 'open-uri'
+
 class DownloadController < ApplicationController
-  include DownloadHelpers
   include FormHelpers
   before_action :set_register
   before_action :set_government_orgs_local_authorities
@@ -19,6 +20,16 @@ class DownloadController < ApplicationController
   end
 
   def success; end
+
+  def download_json
+    data  = open("#{@register.url}/records.json?page-size=5000") {|f| f.read }
+    send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
+  end
+
+  def download_csv
+    data  = open("#{@register.url}/records.csv?page-size=5000") {|f| f.read }
+    send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
+  end
 
 private
 

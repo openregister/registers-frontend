@@ -5,4 +5,4 @@
     .column-two-thirds
       %h1.heading-large Your register download
       %p{data: {'click-events' => true, 'click-category' => 'Content', 'click-action' => 'Register Download' }}
-        You can download the latest data in this register as a #{link_to_format('csv')} and #{link_to_format('json')} file.
+        You can download the latest data in this register as a #{link_to 'CSV', register_download_csv_path(@register.slug)} and #{link_to 'JSON', register_download_json_path(@register.slug)} file.
