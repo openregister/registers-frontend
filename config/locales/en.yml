@@ -35,9 +35,6 @@ en:
               blank: 'Enter your email address'
             non_gov_use_category:
               blank: "Enter what you're using GOV.UK Registers for"
-  activemodel:
-    errors:
-      models:
         api_user:
           attributes:
             is_government:
@@ -50,7 +47,6 @@ en:
               blank: 'Enter your email address'
             non_gov_use_category:
               blank: "Enter what you're using GOV.UK Registers for"
-
   helpers:
     page_entries_info:
       entry:

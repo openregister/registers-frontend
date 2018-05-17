@@ -11,11 +11,29 @@ class DownloadController < ApplicationController
   end
 
   def create
-    @download = DownloadUser.new(set_is_government_boolean(download_user_params))
-    if @download.save
-      redirect_to register_download_success_path(@register.slug)
-    else
+    @download = DownloadUser.new(set_is_government_boolean(download_user_params).merge!(register: params[:register_id]))
+
+    if !@download.valid?
       render :index
+    else
+      response = post_to_endpoint(@download, 'download_users')
+      if response&.code != nil
+        case response.code
+        when 422
+          flash.now[:alert] = { title: 'Please fix the errors below', message: @download.errors.messages }
+          JSON.parse(response.body).each { |k, v| @download.errors.add(k.to_sym, *v) }
+          render :new
+        when 201
+          redirect_to register_download_success_path(@register.slug)
+        else
+          logger.error("Download POST failed with unexpected response code: #{response.code}")
+          flash.now[:alert] = { title: 'Something went wrong' }
+          render :new
+        end
+      else
+        flash.now[:alert] = { title: 'Something went wrong' }
+        render :index
+      end
     end
   end
 
@@ -33,17 +51,19 @@ class DownloadController < ApplicationController
 
 private
 
+
+  def set_register
+    @register = Register.find_by_slug!(params[:register_id])
+  end
+
   def download_user_params
     params.require(:download_user).permit(
       :email_gov,
       :email_non_gov,
       :department,
       :non_gov_use_category,
-      :is_government
+      :is_government,
+      :register
     )
-  end
-
-  def set_register
-    @register = Register.find_by_slug!(params[:register_id])
   end
 end

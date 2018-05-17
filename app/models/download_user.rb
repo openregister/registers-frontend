@@ -1,11 +1,6 @@
-class DownloadUser < ApplicationRecord
-  before_save :set_email
-  attr_accessor :email_gov, :email_non_gov
+class DownloadUser
+  include ActiveModel::Model
+  include ActiveModel::Translation
   include FormValidations
-
-private
-
-  def set_email
-    self.email = [email_non_gov, email_gov].find(&:present?)
-  end
+  attr_accessor :email_gov, :email_non_gov, :non_gov_use_category, :department, :is_government, :register
 end
