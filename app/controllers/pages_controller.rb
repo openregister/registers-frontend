@@ -13,4 +13,6 @@ class PagesController < ApplicationController
   def combining_registers; end
 
   def case_study; end
+
+  def privacy_notice; end
 end
