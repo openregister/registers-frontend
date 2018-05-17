@@ -61,7 +61,7 @@
         %li how that data is protected
         %li how you can find out what rights you have in relation to your data
       %p GOV.UK Registers is provided by the Government Digital Service (GDS).
-      %p The data controller for GDS is the Cabinet Office. The data controller determines the purposes and means of processing personal data. For more information see the Information Commissioner’s Office (ICO) #{link_to 'Data Protection Public Register', "https://ico.org.uk/esdwebpages/search"}.
+      %p The data controller for GDS is the Cabinet Office – a data controller determines how and why personal data is processed. #{link_to 'Read the Cabinet Office’s entry in the Data Protection Public Register', 'https://ico.org.uk/ESDWebPages/Entry/Z7414053'} for more information
 
       %h2#what-data-we-need.heading-medium What data we need
       %p The personal data we collect from our users can include:
@@ -124,22 +124,27 @@
 
       %h2#questions-and-complaints.heading-medium Questions and complaints
       %p The data controller for your personal data is the Cabinet Office.
-      %p
-        If you have any questions about anything in this document or if you consider that your personal data has been misused or mishandled you can contact the Data Protection Officer (DPO) at: #{mail_to "DPO@cabinetoffice.gov.uk", "DPO@cabinetoffice.gov.uk"}
-      %p Or by post at:
+      %p Contact the Data Protection Officer if you either:
+      %ul.list.list-bullet
+        %li have any questions about anything in this document
+        %li think that your personal data has been misused or mishandled
       %p
         Data Protection Officer
+        %br/
+        = mail_to 'DPO@cabinetoffice.gov.uk'
         %br/
         Cabinet Office
         %br/
         70 Whitehall
         %br/
         London SW1A 2AS
-      %p
-        You may also make a complaint to the Information Commissioner, who is an independent regulator. The Information Commissioner can be contacted at: #{mail_to "casework@ico.org.uk", "casework@ico.org.uk"} or on 0303 123 1113.
-      %p Or by post at:
+      %p If you have a complaint, you can also contact the #{link_to 'Information Commissioner', 'https://ico.org.uk/'}, who is an independent regulator set up to uphold information rights.
       %p
         Information Commissioner’s Office
+        %br/
+        = mail_to 'casework@ico.org.uk'
+        %br/
+        0303 123 1113
         %br/
         Wycliffe House
         %br/
