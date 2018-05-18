@@ -7,7 +7,7 @@ class ApiUsersController < ApplicationController
   include FormHelpers
   helper_method :government_orgs_local_authorities
 
-  def new
+  def index
     @api_user = ApiUser.new
 
     if params[:register].present?

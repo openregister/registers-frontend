@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
   end
 
-  resources :api_users
+  resources :api_users, path: 'create-api-key'
+  get '/api_users/new', to: redirect('/create-api-key', status: 301)
 
   get '/registers-in-progress', to: 'registers#in_progress'
 
