@@ -429,3 +429,9 @@ details {
     font-weight: normal;
   }
 }
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
