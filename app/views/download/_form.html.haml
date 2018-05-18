@@ -1,4 +1,4 @@
-= form_for @api_user do |f|
+= form_for @download, url: register_download_index_path(@register.slug) do |f|
   = f.radio_button_fieldset :is_government, inline: true do |fieldset|
     - fieldset.radio_input :yes, panel_id: 'is_government_panel'
     - fieldset.radio_input :no, panel_id: 'not_government_panel'
@@ -10,12 +10,12 @@
     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
 
   .form-group
-    = f.submit 'Create API key', class: 'button'
+    = f.submit 'Download', class: 'button'
 
 = content_for :javascript do
   :javascript
     accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.getElementById('api_user_department'),
+      selectElement: document.getElementById('download_user_department'),
       showAllValues: false,
       minLength: 2,
       defaultValue: ''
@@ -24,19 +24,21 @@
     var showHideContent = new GOVUK.ShowHideContent();
     showHideContent.init();
 
-    var yesRadioButton = document.getElementById('api_user_is_government_yes');
-    yesRadioButton.onclick = function() {
+    document.getElementById('download_user_is_government_yes').onclick = function() {
       ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
-      var nonGovEmail = document.getElementById('api_user_email_non_gov')
-      nonGovEmail.value = "";
-      $('input:radio[name="api_user[non_gov_use_category]"]').each(function () { $(this).prop('checked', false); });
+
+      document.getElementById('download_user_email_non_gov').value = '';
+
+      var categories = document.getElementsByName('download_user[non_gov_use_category]')
+      for(var i=0; i < categories.length; i++) {
+        categories[i].checked = false;
+      }
     }
 
-    var noRadioButton = document.getElementById('api_user_is_government_no');
-    noRadioButton.onclick = function() {
+    document.getElementById('download_user_is_government_no').onclick = function() {
       ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
-      var govEmail = document.getElementById('api_user_email_gov')
-      govEmail.value = "";
-      var govOrgs = document.getElementById('api_user_department-select');
-      govOrgs.value = "";
+
+      document.getElementById('download_user_email_gov').value = '';
+      document.getElementById('download_user_department-select').value = '';
+      document.getElementById('download_user_department').value = '';
     }
