@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.self_service_api_host = 'https://registers-selfservice.cloudapps.digital'
+  config.self_service_http_auth_username = 'username'
+  config.self_service_http_auth_password = 'password'
 end

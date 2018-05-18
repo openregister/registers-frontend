@@ -10,7 +10,7 @@
     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
 
   .form-group
-    = f.submit 'Create API key', class: 'button'
+    = f.submit 'Create API key', class: 'button', 'data-link-name' => 'new_api_user_submit'
 
 = content_for :javascript do
   :javascript
