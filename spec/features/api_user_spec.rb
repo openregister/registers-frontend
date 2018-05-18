@@ -21,5 +21,6 @@ RSpec.feature 'API Key Registration', type: :feature do
     choose('Yes')
     select 'Government Digital Service', from: 'Which government organisation do you work for?'
     fill_in('api_user_email_gov', with: 'test@example.com')
+    # click_on(first(:xpath, "//input"))
   end
 end
