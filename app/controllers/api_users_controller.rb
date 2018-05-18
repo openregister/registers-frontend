@@ -9,6 +9,10 @@ class ApiUsersController < ApplicationController
 
   def new
     @api_user = ApiUser.new
+
+    if params[:register].present?
+      session[:register] = params[:register]
+    end
   end
 
   def create
@@ -25,7 +29,9 @@ class ApiUsersController < ApplicationController
           render :new
         when 201
           @api_key = JSON.parse(response.body)['api_key']
+          @register = Register.find_by(slug: session[:register])
           render :show
+          session.delete(:register)
         else
           logger.error("API Key POST failed with unexpected response code: #{response.code}")
           flash.now[:alert] = { title: 'Something went wrong' }

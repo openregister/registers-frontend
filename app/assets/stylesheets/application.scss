@@ -409,6 +409,13 @@ details {
   }
 }
 
+.code-curl {
+  border: none;
+  color: $red;
+  font-size: 16px;
+  white-space: inherit;
+}
+
 .code-large {
   display: block;
   line-height: 1;

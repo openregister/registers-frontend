@@ -114,7 +114,7 @@
               %h2.subsection__title Access the data
             .subsection__content.js-subsection-content#subsection_content_2
               %ul.list
-                %li= link_to 'Create API key', new_api_user_path
+                %li= link_to 'Create API key', new_api_user_path(register: @register.slug)
                 %li Always access the most recent version of all registers through our API
               %ul.list
                 %li= link_to 'Download the data', register_download_index_path(@register.slug)
