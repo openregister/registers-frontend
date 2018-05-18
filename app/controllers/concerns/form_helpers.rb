@@ -1,5 +1,5 @@
 module FormHelpers
-  def set_government_orgs_local_authorities
+  def government_orgs_local_authorities
     registers = {
         'government-organisation': 'name',
         'local-authority-eng': 'official-name',
@@ -8,7 +8,7 @@ module FormHelpers
         'principal-local-authority': 'official-name',
     }
 
-    @government_orgs_local_authorities = registers.map { |k, v|
+    registers.map { |k, v|
       Register.find_by(slug: k)&.records&.where(entry_type: 'user')&.current&.map { |r|
         [
           "#{k}:#{r.key}", r.data[v]
@@ -39,13 +39,12 @@ def post_to_endpoint(user, endpoint = 'users')
     basic_auth: { username: Rails.configuration.self_service_http_auth_username, password: Rails.configuration.self_service_http_auth_password },
     body: @user
   }
-  error_message = 'Something went wrong'
   begin
     HTTParty.post(uri, options)
   end
 rescue StandardError => e
   # Fallback for socket errors etc...
   logger.error("#{endpoint} POST failed with exception: #{e}")
-  flash.now[:alert] = error_message
+  flash.now[:alert] = 'Something went wrong'
   nil
 end

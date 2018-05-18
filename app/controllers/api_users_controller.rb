@@ -5,7 +5,7 @@ require 'httparty'
 
 class ApiUsersController < ApplicationController
   include FormHelpers
-  before_action :set_government_orgs_local_authorities
+  helper_method :government_orgs_local_authorities
 
   def new
     @api_user = ApiUser.new
