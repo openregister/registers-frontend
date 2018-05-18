@@ -15,7 +15,7 @@
         %p
           %code.code.code-curl
             curl #{@register.url}/records.json?page-size=5000 --header "Authorization: #{@api_key}"
-        %p This data is also avaliable in other formats. Read more in our #{link_to 'technical documentation', 'https://docs.registers.service.gov.uk/#choose-a-response-format'}.
+        %p This register is also avaliable in other formats. Read more in our #{link_to 'technical documentation', 'https://docs.registers.service.gov.uk/#choose-a-response-format'}.
       - else
         .subsection__header
           %h2.subsection__title{data: {"click-events" => true, "click-category" => "Content", "click-action" => "External Link Clicked"}}
