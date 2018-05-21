@@ -18,7 +18,7 @@ class ApiUsersController < ApplicationController
   def create
     @api_user = ApiUser.new(set_is_government_boolean(api_user_params))
     if !@api_user.valid?
-      render :new
+      render :index
     else
       response = post_to_endpoint(@api_user)
       if response&.code != nil
@@ -26,7 +26,7 @@ class ApiUsersController < ApplicationController
         when 422
           flash.now[:alert] = { title: 'Please fix the errors below', message: @api_user.errors.messages }
           JSON.parse(response.body).each { |k, v| @api_user.errors.add(k.to_sym, *v) }
-          render :new
+          render :index
         when 201
           @api_key = JSON.parse(response.body)['api_key']
           @register = Register.find_by(slug: session[:register])
@@ -35,11 +35,11 @@ class ApiUsersController < ApplicationController
         else
           logger.error("API Key POST failed with unexpected response code: #{response.code}")
           flash.now[:alert] = { title: 'Something went wrong' }
-          render :new
+          render :index
         end
       else
         flash.now[:alert] = { title: 'Something went wrong' }
-        render :new
+        render :index
       end
     end
   end
