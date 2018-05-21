@@ -9,10 +9,7 @@ class ApiUsersController < ApplicationController
 
   def index
     @api_user = ApiUser.new
-
-    if params[:register].present?
-      session[:register] = params[:register]
-    end
+    session[:register] = params[:register] if params[:register].present?
   end
 
   def create
