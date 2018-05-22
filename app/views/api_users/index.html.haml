@@ -14,8 +14,10 @@
         Create your API key
         %span.heading-secondary Always access the most recent version of all registers.
       = render 'form', user: @user
+
   .grid-row
     .column-two-thirds
+      .disclaimer By creating an API key you agree to let us contact you occasionally about service status and upcoming developments. You can unsubscribe at any time.
       %hr
       %h3.heading-medium Why we ask you to create an API key
-      %p As a government service, we want to make sure GOV.UK Registers works for everyone. By creating an API key you can help us to understand more about our users and improve our service.
+      %p As a government service, we want to make sure GOV.UK Registers works for everyone. By creating an API key you can help us to understand more about our users and improve our service. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
