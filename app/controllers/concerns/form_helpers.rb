@@ -28,7 +28,7 @@ module FormHelpers
 end
 
 def post_to_endpoint(user, endpoint = 'users')
-  @user = { email: user.is_government ? user.email_gov : user.email_non_gov,
+  @user = { email: user.email,
             department: user.department,
             non_gov_use_category: user.non_gov_use_category,
             is_government: user.is_government,
