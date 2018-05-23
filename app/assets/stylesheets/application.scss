@@ -438,9 +438,11 @@ details {
 }
 
 .sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  @include media(tablet) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
 }
 
 .disclaimer {
