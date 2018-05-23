@@ -30,7 +30,7 @@
             - @registers.each do |register|
               .column-one-third
                 = link_to register_path(register.slug), class: 'register-block' do
-                  %h3.register-block__name= register.name
+                  %h3.register-block__name= register.register_name
                   %p.register-block__description= register.register_description
                   - if register.register_authority.present?
                     %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
