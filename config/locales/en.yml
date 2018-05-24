@@ -78,8 +78,10 @@ en:
         blank: 'Enter which government organisation you work for'
       email_gov:
         blank: 'Enter your email address'
+        invalid: 'Enter a valid email address'
       email_non_gov:
         blank: 'Enter your email address'
+        invalid: 'Enter a valid email address'
       non_gov_use_category:
         blank: "Enter what you're using GOV.UK Registers for"
       blank: is required
