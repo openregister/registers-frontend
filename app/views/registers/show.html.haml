@@ -119,6 +119,11 @@
               %ul.list
                 %li= link_to 'Download the data', register_download_index_path(@register.slug)
                 %li Get the latest data in this register as a CSV file
+          .subsection.js-subsection
+            .subsection__header
+              %h2.subsection__title Give feedback
+            .subsection__content.js-subsection-content#subsection_content_3
+              = render partial: 'feedback/form'
 
 = content_for :javascript do
   :javascript
