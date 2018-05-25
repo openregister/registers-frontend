@@ -5,7 +5,7 @@ class FeedbackController < ApplicationController
     @feedback = Feedback.new(feedback_params)
 
     if @feedback.valid?
-      if @feedback.email.present?
+      if @feedback.message.present?
         @zendesk_service = ZendeskFeedback.new
         @response = @zendesk_service.send_feedback(feedback_params)
       end
