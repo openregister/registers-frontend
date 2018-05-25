@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
+  include ActionView::Helpers::UrlHelper
+  helper_method :record_link_resolver
+
   def index
     @registers = Register.available
                          .in_beta
@@ -23,6 +26,10 @@ class RegistersController < ApplicationController
     @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
+  end
+
+  def field_link_resolver(field, field_value)
+    field_value.is_a?(Array) ? field_value.join(', ') : link_to_if(field['datatype'] == 'url', field_value, field_value) || "<span class='unknown'>No data</span>".html_safe
   end
 
 private
