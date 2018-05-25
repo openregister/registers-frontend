@@ -1,7 +1,9 @@
 = GovukElementsErrorsHelper.error_summary @feedback, "There is a problem with the form", ""
+- if flash[:success].present?
+  .alert--success= flash[:success]
 
 = form_for @feedback, url: register_feedback_index_path(@register.slug, anchor: 'subsection_content_3')  do |f|
-  = f.hidden_field :subject, value: "#{@register.name} register"
+  = f.hidden_field :subject, value: "[Question or Feedback] #{@register.name} register"
   = f.radio_button_fieldset :useful do |fieldset|
     - fieldset.radio_input :yes
     - fieldset.radio_input :no, panel_id: 'reason_panel'

@@ -449,3 +449,10 @@ details {
   color: $grey-1;
   font-size: 16px;
 }
+
+.alert--success {
+  background-color: $turquoise;
+  color: $white;
+  margin-bottom: $gutter;
+  padding: $gutter/2;
+}

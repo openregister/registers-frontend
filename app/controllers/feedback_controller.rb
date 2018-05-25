@@ -9,7 +9,7 @@ class FeedbackController < ApplicationController
         @zendesk_service = ZendeskFeedback.new
         @response = @zendesk_service.send_feedback(feedback_params)
       end
-
+      flash[:success] = 'Thank you for your feedback'
       redirect_to register_path(@register.slug)
     else
       render 'registers/show'
