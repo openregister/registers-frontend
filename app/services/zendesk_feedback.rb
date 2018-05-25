@@ -18,7 +18,7 @@ class ZendeskFeedback
       requester: {
         # Passing Anonymous down to ZenDesk as name is not always required in our forms
         name: params[:name].present? ? params[:name] : 'Anonymous',
-        email: params[:email] ? params[:email] : 'Anonymous'
+        email: params[:email].present? ? params[:email] : 'registerteam+anonymous@digital.cabinet-office.gov.uk'
       }
     }
 
