@@ -3,7 +3,7 @@ require 'open-uri'
 class DownloadController < ApplicationController
   include FormHelpers
   before_action :set_register
-  helper_method :link_to_format, :government_orgs_local_authorities
+  helper_method :government_orgs_local_authorities
 
   def index
     @download = DownloadUser.new
