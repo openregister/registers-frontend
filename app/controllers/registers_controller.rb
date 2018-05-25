@@ -2,7 +2,7 @@
 
 class RegistersController < ApplicationController
   include ActionView::Helpers::UrlHelper
-  helper_method :record_link_resolver
+  helper_method :field_link_resolver
 
   def index
     @registers = Register.available
@@ -29,7 +29,18 @@ class RegistersController < ApplicationController
   end
 
   def field_link_resolver(field, field_value)
-    field_value.is_a?(Array) ? field_value.join(', ') : link_to_if(field['datatype'] == 'url', field_value, field_value) || "<span class='unknown'>No data</span>".html_safe
+    if field_value.is_a?(Array)
+      field_value.join(', ')
+    elsif field['datatype'] == 'url' && field_value
+      link_to(field_value, field_value)
+    elsif field['datatype'] == 'curie' && field_value
+      curie = field_value.split(':')
+      link_to(curie[0], register_path(curie[0])) + ':' + curie[1]
+    elsif field_value.present?
+      field_value
+    else
+      "<span class='unknown'>No data</span>".html_safe
+    end
   end
 
 private
