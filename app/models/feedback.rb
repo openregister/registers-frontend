@@ -5,5 +5,5 @@ class Feedback
   attr_accessor :email, :message, :useful, :reason, :subject
 
   validates :useful, presence: true
-  validates :reason, presence: true, if: -> {useful == "no"}
+  validates :reason, presence: true, if: -> { useful == "no" }
 end
