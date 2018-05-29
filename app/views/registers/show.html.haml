@@ -44,7 +44,7 @@
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Preview the data
-            .subsection__content.js-subsection-content#subsection_content_1
+            .subsection__content.js-subsection-content#data_section
               .search-records-wrapper#records_wrapper
                 = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
                   .grid-row
@@ -112,7 +112,7 @@
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Access the data
-            .subsection__content.js-subsection-content#subsection_content_2
+            .subsection__content.js-subsection-content#access_section
               %ul.list
                 %li= link_to 'Create API key', api_users_path(register: @register.slug)
                 %li Always access the most recent version of all registers through our API
@@ -122,7 +122,7 @@
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Give feedback
-            .subsection__content.js-subsection-content#subsection_content_3
+            .subsection__content.js-subsection-content#feedback_section
               = render partial: 'feedback/form'
 
 = content_for :javascript do
