@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 xml.instruct!
 
 xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.9", "xmlns:xhtml" => "http://www.w3.org/1999/xhtml" do
@@ -43,3 +44,4 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.9", "xmlns:xhtml"
     xml.priority 0.9
   end
 end
+# rubocop:enable Metrics/BlockLength
