@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :download
+    resources :feedback
     get '/download/success', to: 'download#success', as: 'download_success'
     get '/download-json', to: 'download#download_json', as: 'download_json'
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'

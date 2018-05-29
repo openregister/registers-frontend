@@ -1,4 +1,4 @@
-Rails.application.configure do
+Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -56,4 +56,7 @@ Rails.application.configure do
   config.self_service_api_host = 'http://localhost:3001'
   config.self_service_http_auth_username = 'username'
   config.self_service_http_auth_password = 'password'
+  config.x.zendesk.url = ENV['ZENDESK_URL']
+  config.x.zendesk.username = ENV['ZENDESK_USERNAME']
+  config.x.zendesk.token = ENV['ZENDESK_TOKEN']
 end

@@ -1,0 +1,27 @@
+= GovukElementsErrorsHelper.error_summary @feedback, "There is a problem with the form", ""
+- if flash[:success].present?
+  .alert--success= flash[:success]
+
+= form_for @feedback, url: register_feedback_index_path(@register.slug, anchor: 'feedback_section')  do |f|
+  = f.hidden_field :subject, value: "[Question or Feedback] #{@register.name} register"
+  = f.radio_button_fieldset :useful do |fieldset|
+    - fieldset.radio_input :yes
+    - fieldset.radio_input :no, panel_id: 'reason_panel'
+  - f.revealing_panel :reason_panel do |panel|
+    = f.radio_button_fieldset :reason, inline: false, choices: [:cant_understand, :doesnt_meet_needs, :problem_with_data, :other]
+  = f.text_area :message, rows: 5
+  = f.email_field :email
+  = f.submit "Submit", class: "button"
+
+= content_for :javascript do
+  :javascript
+    var showHideContent = new GOVUK.ShowHideContent();
+    showHideContent.init();
+
+    document.getElementById('feedback_useful_yes').onclick = function() {
+      ga('send', 'event', 'Feedback', 'Radio - Yes', 'Is this register useful?');
+    }
+
+    document.getElementById('feedback_useful_no').onclick = function() {
+      ga('send', 'event', 'Feedback', 'Radio - No', 'Is this register useful?');
+    }

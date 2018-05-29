@@ -58,6 +58,14 @@ en:
         is_government:
           yes: Yes
           no: No
+      feedback:
+        email: Email address (optional)
+        message: Addtional comments
+        reason:
+          cant_understand: I can’t understand this data
+          doesnt_meet_needs: This data doesn’t meet my needs
+          problem_with_data: "There is a problem with this data (e.g. missing, inaccurate)"
+          other: Other
     fieldset:
       api_user:
         is_government: Do you work for government?
@@ -65,6 +73,8 @@ en:
       download_user:
         is_government: Do you work for government?
         non_gov_use_category: What are you using GOV.UK Registers for?
+      feedback:
+        useful: Is this register useful?
     hint:
       download_user:
         email_gov: Enter your government email address
@@ -82,5 +92,11 @@ en:
         blank: 'Enter your email address'
       non_gov_use_category:
         blank: "Enter what you're using GOV.UK Registers for"
+      email:
+        blank: 'Enter your email address'
+      useful:
+        inclusion: 'Select if this register is useful or not'
+      reason:
+        blank: "Select why you didn't find this register useful"
       blank: is required
     format: "%{message}"

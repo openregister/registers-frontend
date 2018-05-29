@@ -21,6 +21,7 @@ class RegistersController < ApplicationController
   def show
     @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
+    @feedback = Feedback.new
   end
 
 private
