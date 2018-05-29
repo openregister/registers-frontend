@@ -130,3 +130,6 @@
     $("input[name='status']").change(function () {
       $('#search_records').submit();
     });
+
+= content_for :head do
+  = render partial: 'registers/structured_data', locals: { register: @register }
