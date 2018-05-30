@@ -4,17 +4,18 @@
 %main#content{role: 'main'}
   .grid-row
     .column-full
-      = GovukElementsErrorsHelper.error_summary @download, "There is a problem with the form", ""
-      - if flash.alert.present?
-        %div{:class => 'error-summary', :role => 'alert'}
-          %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}= flash.alert[:title]
-          %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @download.errors.any?
-      %h1.heading-large
-        Download the #{@register.register_name} register
-      = render 'form', user: @user
+      %h1.heading-large Download the #{@register.register_name} register
+      %p You can download the latest data in this register as:
+      %ul.list.list-bullet
+        %li= link_to 'CSV', register_download_csv_path(@register.slug)
+        %li= link_to 'JSON', register_download_json_path(@register.slug)
+      .participate#participation_section
+        = GovukElementsErrorsHelper.error_summary @download, "There is a problem with the form", ""
+        - if flash.alert.present?
+          %div{:class => 'error-summary', :role => 'alert'}
+            %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}= flash.alert[:title]
+            %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @download.errors.any?
+        %h3.heading-medium Help us improve registers
+        %p.text As a government service, we want to make sure GOV.UK Registers works for everyone. By providing this information you can help us to understand more about our users and improve our service. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
 
-  .grid-row
-    .column-two-thirds
-      %hr
-      %h3.heading-medium Why we ask for this information
-      %p As a government service, we want to make sure GOV.UK Registers works for everyone. By providing this information you can help us to understand more about our users and improve our service. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
+        = render 'form', user: @user
