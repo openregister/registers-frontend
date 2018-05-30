@@ -7,6 +7,7 @@ end
 
 ruby File.read(".ruby-version").chomp
 
+gem 'email_validator', '~> 1.6'
 gem 'rails', '~> 5.1.5'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
