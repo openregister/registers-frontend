@@ -464,4 +464,8 @@ details {
   .text {
     margin-bottom: $gutter;
   }
+
+  > p {
+    margin-top: 1.875em;
+  }
 }
