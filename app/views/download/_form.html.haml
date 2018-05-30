@@ -10,9 +10,7 @@
     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal]
 
   .form-group
-    = f.submit 'Send', class: 'button'
-  .form-group
-    %p.hint-text By helping us to improve registers you agree to let us contact you occasionally about service status and upcoming developments. You can unsubscribe at any time.
+    = f.submit 'Submit', class: 'button'
 
 = content_for :javascript do
   :javascript

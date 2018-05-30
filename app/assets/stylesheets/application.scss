@@ -253,12 +253,6 @@ table {
   width: 50%;
 }
 
-.hint-text {
-  color: $grey-1;
-  font-size: 16px;
-  max-width: 30rem;
-}
-
 .form-group.error {
   margin-right: 15px;
   border-left: 4px solid $error-colour;
@@ -466,5 +460,8 @@ details {
 .participate {
   border-top: 1px solid $border-colour;
   margin-top: $gutter;
-  padding-top: $gutter-half;
+
+  .text {
+    margin-bottom: $gutter;
+  }
 }
