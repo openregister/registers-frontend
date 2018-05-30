@@ -26,8 +26,11 @@ RSpec.feature 'API Key Registration', type: :feature do
 )
   end
 
-  scenario 'valid submission generates API key' do
+  before(:each) do
     visit '/create-api-key'
+  end
+
+  scenario 'valid submission generates API key' do
     expect(page).to have_content('Create your API key')
     choose('Yes')
     select 'Government Digital Service', from: 'Which government organisation do you work for?'
@@ -38,9 +41,16 @@ RSpec.feature 'API Key Registration', type: :feature do
   end
 
   scenario 'invalid submission shows user errors' do
-    visit '/create-api-key'
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Select if you work for government or not')
     expect(page).to have_content('Enter your email address')
+  end
+
+  scenario 'invalid email shows user error' do
+    choose('Yes')
+    select 'Government Digital Service', from: 'Which government organisation do you work for?'
+    fill_in('api_user_email_gov', with: 'foo@bar')
+    first(:css, 'input[data-link-name="new_api_user_submit"]').click
+    expect(page).to have_content('Enter a valid email addres')
   end
 end
