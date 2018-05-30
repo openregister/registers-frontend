@@ -21,13 +21,13 @@ class DownloadController < ApplicationController
         when 422
           flash.now[:alert] = { title: 'Please fix the errors below', message: @download.errors.messages }
           JSON.parse(response.body).each { |k, v| @download.errors.add(k.to_sym, *v) }
-          render :new
+          render :index
         when 201
           redirect_to register_download_success_path(@register.slug)
         else
           logger.error("Download POST failed with unexpected response code: #{response.code}")
           flash.now[:alert] = { title: 'Something went wrong' }
-          render :new
+          render :index
         end
       else
         flash.now[:alert] = { title: 'Something went wrong' }

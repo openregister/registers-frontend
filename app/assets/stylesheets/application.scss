@@ -456,3 +456,16 @@ details {
   margin-bottom: $gutter;
   padding: $gutter / 2;
 }
+
+.participate {
+  border-top: 1px solid $border-colour;
+  margin-top: $gutter;
+
+  .text {
+    margin-bottom: $gutter;
+  }
+
+  > p {
+    margin-top: 1.875em;
+  }
+}

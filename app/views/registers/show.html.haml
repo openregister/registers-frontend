@@ -115,10 +115,8 @@
             .subsection__content.js-subsection-content#access_section
               %ul.list
                 %li= link_to 'Create API key', api_users_path(register: @register.slug)
-                %li Always access the most recent version of all registers through our API
-              %ul.list
-                %li= link_to 'Download the data', register_download_index_path(@register.slug)
-                %li Get the latest data in this register as a CSV file
+                %li Always access the most recent version of all registers through our API.
+              %p You can #{link_to 'download the latest data', register_download_index_path(@register.slug)} in this register as a CSV or JSON file.
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Give feedback
