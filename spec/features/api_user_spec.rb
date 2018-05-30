@@ -51,6 +51,6 @@ RSpec.feature 'API Key Registration', type: :feature do
     select 'Government Digital Service', from: 'Which government organisation do you work for?'
     fill_in('api_user_email_gov', with: 'foo@bar')
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
-    expect(page).to have_content('Enter a valid email addres')
+    expect(page).to have_content('Enter a valid email address')
   end
 end
