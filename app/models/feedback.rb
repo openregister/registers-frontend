@@ -6,4 +6,5 @@ class Feedback
 
   validates :useful, presence: true
   validates :reason, presence: true, if: -> { useful == "no" }
+  validates :email, allow_blank: true, email: true
 end

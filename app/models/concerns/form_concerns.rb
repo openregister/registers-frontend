@@ -4,15 +4,12 @@ module FormConcerns
   extend ActiveSupport::Concern
   included do
     validates :is_government, inclusion: { in: [true, false] }
-    validates :email_gov, presence: true, if: -> { is_government }
     validates :department, presence: true, if: -> { is_government }
     validates :department, absence: true, unless: -> { is_government }
-    validates :email_non_gov, presence: true, unless: -> { is_government }
     validates :non_gov_use_category, presence: true, if: -> { is_government == false }
     validates :non_gov_use_category, absence: true, if: -> { is_government }
-    validates_format_of :email_gov, :email_non_gov,
-  with: /\A(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,})\z/i
-
+    validates :email_non_gov, presence: true, email: true, unless: -> { is_government }
+    validates :email_gov, presence: true, email: true, if: -> { is_government }
 
     def email
       is_government ? email_gov : email_non_gov
