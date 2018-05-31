@@ -16,7 +16,7 @@ RSpec.feature 'API Key Registration', type: :feature do
 
     stub_request(:post, "https://registers-selfservice.cloudapps.digital/users").
     with(
-      body: "email=test%40example.com&department=government-organisation%3AOT1056&is_government=true",
+      body: "email=test%40example.com&is_government=true",
       headers: {
       'Accept' => '*/*',
       'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
@@ -33,7 +33,6 @@ RSpec.feature 'API Key Registration', type: :feature do
   scenario 'valid submission generates API key' do
     expect(page).to have_content('Create your API key')
     choose('Yes')
-    select 'Government Digital Service', from: 'Which organisation do you work for? (optional)'
     fill_in('api_user_email_gov', with: 'test@example.com')
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Your API key')
@@ -43,12 +42,10 @@ RSpec.feature 'API Key Registration', type: :feature do
   scenario 'invalid submission shows user errors' do
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Select if you work for government or not')
-    expect(page).to have_content('Enter your email address')
   end
 
   scenario 'invalid email shows user error' do
     choose('Yes')
-    select 'Government Digital Service', from: 'Which organisation do you work for? (optional)'
     fill_in('api_user_email_gov', with: 'foo@bar')
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Enter a valid email address')

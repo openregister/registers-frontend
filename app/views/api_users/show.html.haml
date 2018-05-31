@@ -31,5 +31,5 @@
 = content_for :javascript do
   :javascript
     ga('send', 'event', 'Form', 'Submitted', 'Create API Key Form', {
-      'dimension1': "#{@api_user.is_government} - #{@api_user.department == 'yes' ? @api_user.department : @api_user.non_gov_use_category}"
+      'dimension1': "#{@api_user.is_government}"
     });

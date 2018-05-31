@@ -10,7 +10,7 @@ class DownloadController < ApplicationController
   end
 
   def create
-    @download = DownloadUser.new(set_is_government_boolean(download_user_params).merge!(register: params[:register_id]))
+    @download = DownloadUser.new(download_user_params.merge!(register: params[:register_id]))
 
     if !@download.valid?
       render :index
