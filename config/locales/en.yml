@@ -38,7 +38,7 @@ en:
         email: Email address
       api_user:
         email_gov: Government email address
-        email_non_gov: Email address
+        email_non_gov: Email address (optional)
         department: Which organisation do you work for? (optional)
         non_gov_use_category:
           commercial_use: Commercial use
