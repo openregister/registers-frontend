@@ -2,5 +2,5 @@ class ApiUser
   include ActiveModel::Model
   include ActiveModel::Translation
   include FormConcerns
-  attr_accessor :email_gov, :email_non_gov, :non_gov_use_category, :department, :is_government
+  attr_accessor :email_gov, :email_non_gov, :is_government
 end
