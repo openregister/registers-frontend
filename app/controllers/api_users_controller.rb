@@ -47,7 +47,8 @@ private
     params.require(:api_user).permit(
       :email_gov,
       :email_non_gov,
-      :is_government
+      :is_government,
+      :contactable
     )
   end
 end

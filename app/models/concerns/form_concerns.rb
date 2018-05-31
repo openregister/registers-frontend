@@ -19,5 +19,14 @@ module FormConcerns
         false
       end
     end
+
+    def is_contactable_boolean
+      case contactable
+      when 'yes'
+        true
+      when 'no'
+        false
+      end
+    end
   end
 end
