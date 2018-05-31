@@ -85,7 +85,7 @@ en:
   errors:
     attributes:
       is_government:
-        inclusion: 'Select if you work for government or not'
+        blank: 'Select if you work for government or not'
       department:
         blank: 'Enter which government organisation you work for'
       email_gov:

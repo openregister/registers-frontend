@@ -3,7 +3,7 @@ require 'active_support/concern'
 module FormConcerns
   extend ActiveSupport::Concern
   included do
-    validates :is_government, inclusion: { in: %w[yes no] }
+    validates :is_government, presence: true
     validates :email_gov, presence: true, email: true, if: -> { is_government_boolean == true }
     validates :email_non_gov, allow_blank: true, email: true, if: -> { is_government_boolean == false }
 
