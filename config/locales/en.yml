@@ -60,7 +60,7 @@ en:
           no: No
       feedback:
         email: Email address (optional)
-        message: Addtional comments
+        message: Additional comments
         reason:
           cant_understand: I can’t understand this data
           doesnt_meet_needs: This data doesn’t meet my needs
