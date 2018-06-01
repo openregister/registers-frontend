@@ -16,23 +16,13 @@ module FormHelpers
       }
     }.compact.flatten(1)
   end
-
-  def set_is_government_boolean(params)
-    params.merge!(is_government: case params[:is_government]
-                                 when 'yes'
-                                   true
-                                 when 'no'
-                                   false
-                                 end)
-  end
 end
 
 def post_to_endpoint(user, endpoint = 'users')
   @user = { email: user.email,
-            department: user.department,
-            non_gov_use_category: user.non_gov_use_category,
-            is_government: user.is_government,
-            register: user.try(:register) }
+            is_government: user.is_government_boolean,
+            register: user.try(:register),
+            contactable: user.try(:is_contactable_boolean) }
             .compact
   uri = URI.parse("#{Rails.configuration.self_service_api_host}/#{endpoint}")
   options = {

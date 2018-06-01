@@ -13,7 +13,7 @@ class ApiUsersController < ApplicationController
   end
 
   def create
-    @api_user = ApiUser.new(set_is_government_boolean(api_user_params))
+    @api_user = ApiUser.new(api_user_params)
     if !@api_user.valid?
       render :index
     else
@@ -47,9 +47,8 @@ private
     params.require(:api_user).permit(
       :email_gov,
       :email_non_gov,
-      :department,
-      :non_gov_use_category,
-      :is_government
+      :is_government,
+      :contactable
     )
   end
 end

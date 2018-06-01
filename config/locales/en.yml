@@ -37,20 +37,15 @@ en:
       support:
         email: Email address
       api_user:
-        email_gov: Email address
-        email_non_gov: Email address
-        department: Which government organisation do you work for?
-        non_gov_use_category:
-          commercial_use: Commercial use
-          non_commercial_use: Non-commercial use
-          personal: Personal use
+        email_gov: Government email address
+        email_non_gov: Email address (optional)
         is_government:
           yes: Yes
           no: No
       download_user:
         email_gov: Email address
         email_non_gov: Email address
-        department: Which government organisation do you work for?
+        department: Which organisation do you work for? (optional)
         non_gov_use_category:
           commercial_use: Commercial use
           non_commercial_use: Non-commercial use
@@ -69,21 +64,24 @@ en:
     fieldset:
       api_user:
         is_government: Do you work for government?
-        non_gov_use_category: What are you using GOV.UK Registers for?
+        contactable: Can you help us improve GOV.UK Registers?
       download_user:
         is_government: Do you work for government?
-        non_gov_use_category: What are you using GOV.UK Registers for?
+        non_gov_use_category: What are you using GOV.UK Registers for? (optional)
       feedback:
         useful: Is this register useful?
     hint:
       download_user:
         email_gov: Enter your government email address
       api_user:
-        email_gov: Enter your government email address
+        email_gov: We’ll only contact you about major changes to the API that could affect how your service works
+        email_non_gov: We’ll only contact you about major changes to the API that could affect how your service works
+        contactable_html: "We’d like to contact you on occasion to ask you questions about how you use Registers. You can unsubscribe at any time. Read more in our <a href='/privacy-notice'>privacy notice</a>."
+
   errors:
     attributes:
       is_government:
-        inclusion: 'Select if you work for government or not'
+        blank: 'Select if you work for government or not'
       department:
         blank: 'Enter which government organisation you work for'
       email_gov:
@@ -100,5 +98,7 @@ en:
         inclusion: 'Select if this register is useful or not'
       reason:
         blank: "Select why you didn't find this register useful"
+      contactable:
+        blank: 'Select if you would like to help us improve GOV.UK Registers'
       blank: is required
     format: "%{message}"
