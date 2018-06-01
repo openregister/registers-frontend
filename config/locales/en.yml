@@ -98,5 +98,7 @@ en:
         inclusion: 'Select if this register is useful or not'
       reason:
         blank: "Select why you didn't find this register useful"
+      contactable:
+        blank: 'Select if you would like to help us improve GOV.UK Registers'
       blank: is required
     format: "%{message}"
