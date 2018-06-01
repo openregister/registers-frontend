@@ -16,13 +16,13 @@ RSpec.feature 'API Key Registration', type: :feature do
 
     stub_request(:post, "https://registers-selfservice.cloudapps.digital/users").
     with(
-      body: "email=test%40example.com&is_government=true",
+      body: "email=test%40example.com&is_government=true&contactable=true",
       headers: {
       'Accept' => '*/*',
       'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
       }
 ).to_return(
-  status: 201, body: "{\"email\":\"test@example.com\",\"non_gov_use_category\":null,\"department\":\"government-organisation:PB1202\",\"api_key\":\"TEST-API-KEY\",\"is_government\":true}"
+  status: 201, body: "{\"email\":\"test@example.com\",\"non_gov_use_category\":null,\"department\":\"government-organisation:PB1202\",\"api_key\":\"TEST-API-KEY\",\"is_government\":true,\"contactable\":true}"
 )
   end
 
@@ -34,6 +34,7 @@ RSpec.feature 'API Key Registration', type: :feature do
     expect(page).to have_content('Create your API key')
     choose('api_user[is_government]', option: "yes")
     fill_in('api_user_email_gov', with: 'test@example.com')
+    choose('api_user[contactable]', option: "yes")
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Your API key')
     expect(page).to have_content('TEST-API-KEY')
