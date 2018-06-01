@@ -17,4 +17,12 @@ class Record < ApplicationRecord
   scope :sort_by_field, lambda { |sort_by, sort_direction|
     order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
   }
+
+  scope :record, lambda { |record|
+    if record.present?
+      where(
+        key: record
+        )
+    end
+  }
 end
