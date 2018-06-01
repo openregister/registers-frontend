@@ -29,15 +29,13 @@ class RegistersController < ApplicationController
   def field_link_resolver(field, field_value)
     if field_value.is_a?(Array)
       field_value.join(', ')
-    elsif field['datatype'] == 'url' && field_value
+    elsif field['datatype'] == 'url'
       link_to(field_value, field_value)
-    elsif field['datatype'] == 'curie' && field_value
+    elsif field['datatype'] == 'curie'
       curie = field_value.split(':')
-      link_to(curie[0], register_path(curie[0])) + ':' + curie[1]
-    elsif field_value.present?
-      field_value
+      link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
     else
-      "<span class='unknown'>No data</span>".html_safe
+      field_value
     end
   end
 
@@ -55,6 +53,7 @@ private
     @register.records
              .where(entry_type: 'user')
              .search_for(fields, params[:q])
+             .record(params[:record])
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
              .page(params[:page])
