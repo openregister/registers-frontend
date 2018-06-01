@@ -32,7 +32,7 @@ RSpec.feature 'API Key Registration', type: :feature do
 
   scenario 'valid submission generates API key' do
     expect(page).to have_content('Create your API key')
-    choose('Yes')
+    choose('api_user[is_government]', option: "yes")
     fill_in('api_user_email_gov', with: 'test@example.com')
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Your API key')
@@ -45,7 +45,7 @@ RSpec.feature 'API Key Registration', type: :feature do
   end
 
   scenario 'invalid email shows user error' do
-    choose('Yes')
+    choose('api_user[is_government]', option: "yes")
     fill_in('api_user_email_gov', with: 'foo@bar')
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Enter a valid email address')
