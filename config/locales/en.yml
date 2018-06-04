@@ -64,7 +64,7 @@ en:
     fieldset:
       api_user:
         is_government: Do you work for government?
-        contactable: Help us improve GOV.UK Registers
+        contactable: Can you help us improve GOV.UK Registers?
       download_user:
         is_government: Do you work for government?
         non_gov_use_category: What are you using GOV.UK Registers for? (optional)
