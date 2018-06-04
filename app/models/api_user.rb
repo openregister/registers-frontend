@@ -5,6 +5,8 @@ class ApiUser
   attr_accessor :email_gov, :email_non_gov, :is_government, :contactable
 
   validates :contactable, presence: true, if: -> { is_government_boolean == true }
+  validates :email_gov, presence: true, email: true, if: -> { is_government_boolean == true }
+  validates :email_non_gov, allow_blank: true, email: true, if: -> { is_government_boolean == false }
 
   def is_contactable_boolean
     case contactable

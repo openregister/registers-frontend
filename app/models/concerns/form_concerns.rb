@@ -4,8 +4,6 @@ module FormConcerns
   extend ActiveSupport::Concern
   included do
     validates :is_government, presence: true
-    validates :email_gov, presence: true, email: true, if: -> { is_government_boolean == true }
-    validates :email_non_gov, allow_blank: true, email: true, if: -> { is_government_boolean == false }
 
     def email
       is_government_boolean ? email_gov : email_non_gov
