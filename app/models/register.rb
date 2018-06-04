@@ -64,6 +64,10 @@ class Register < ApplicationRecord
             .pluck("data -> 'register-name' as register_name").first || name
   end
 
+  def custodian
+    Record.where(register_id: id, entry_type: 'system', key: "custodian").pluck("data -> 'custodian' as text").first
+  end
+
 private
 
   def set_slug
