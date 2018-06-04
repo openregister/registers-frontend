@@ -76,7 +76,7 @@ en:
       api_user:
         email_gov: We’ll only contact you about major changes to the API that could affect how your service works
         email_non_gov: We’ll only contact you about major changes to the API that could affect how your service works
-        contactable_html: "We’d like to contact you on occasion to ask you questions about how you use Registers. You can unsubscribe at any time. Read more in our <a href='/privacy-notice'>privacy notice</a>."
+        contactable_html: "We'd like to contact you occasionally to ask you questions about how you use registers. You can unsubscribe at any time. Read more in our <a href='/privacy-notice'>privacy notice</a>."
 
   errors:
     attributes:

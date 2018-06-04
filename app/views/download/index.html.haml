@@ -15,7 +15,7 @@
           %div{:class => 'error-summary', :role => 'alert'}
             %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}= flash.alert[:title]
             %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @download.errors.any?
-        %h3.heading-medium Help us improve registers
-        %p.text We’d like to contact you on occasion to ask you questions about how you use Registers. Your feedback will help us improve our service and you can unsubscribe at any time. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
+        %h3.heading-medium Help us improve GOV.UK Registers
+        %p.text We'd like to contact you occasionally to ask you questions about how you use registers. Your feedback will help us improve our service and you can unsubscribe at any time. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
 
         = render 'form', user: @user
