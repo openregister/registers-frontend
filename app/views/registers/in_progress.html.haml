@@ -21,10 +21,10 @@
       %p You can also see all the #{link_to 'registers you can use', registers_path}.
 
     .column-one-third
-      = search_form_for @search, class: 'records-search' do |f|
-        = f.label :name_cont, 'Search', class: 'visually-hidden'
-        = f.search_field :name_cont, class: 'search-input', placeholder: 'Search'
-        = f.submit 'Search', class: 'search-submit'
+      = form_tag registers_in_progress_path(anchor: 'content'), class: 'records-search', method: 'get' do
+        = label_tag :q, 'Search', class: 'visually-hidden'
+        = search_field_tag :q, nil, class: 'search-input', placeholder: 'Search'
+        = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
       %h3.heading-small.mq-small-only Sort by:

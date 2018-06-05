@@ -18,13 +18,24 @@
       %p Search our registers to find data you can use to build and maintain your service.
       %p You can #{link_to 'see what services are already using registers.', services_using_registers_path}
     .column-one-third
-      = search_form_for @search, url: registers_path(anchor: 'content'), class: 'records-search' do |f|
-        = f.label :name_cont, 'Search', class: 'visually-hidden'
-        = f.search_field :name_cont, class: 'search-input', placeholder: 'Search'
-        = f.submit 'Search', class: 'search-submit'
+      = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
+        = label_tag :q, 'Search', class: 'visually-hidden'
+        = search_field_tag :q, nil, class: 'search-input', placeholder: 'Search'
+        = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
       - if @registers.present?
+        = form_tag registers_path(anchor: 'content'), class: 'sort-registers', method: 'get' do
+          .form-group
+            %fieldset.inline
+              %legend.form-label.form-label-bold Sort by:
+              .multiple-choice
+                = radio_button_tag 'sort', 'popularity', params[:sort] == 'popularity' || !params[:sort].present? ?  'true' : nil
+                = label_tag 'popularity', nil, for: 'sort_popularity'
+              .multiple-choice
+                = radio_button_tag 'sort', 'name', params[:sort] == 'name' ?  'true' : nil
+                = label_tag 'name', nil, for: 'sort_name'
+            = submit_tag 'Search', class: 'button filter-search-submit'
         .registers-block-grid
           .grid-row
             - @registers.each do |register|
@@ -40,6 +51,12 @@
       - else
         .no-search-results
           %p
-            No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+            No results found for <strong>"#{params[:q]}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
       %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
+
+= content_for :javascript do
+  :javascript
+    $("input[name='sort']").change(function () {
+      $('.sort-registers').submit();
+    });
