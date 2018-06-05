@@ -4,7 +4,7 @@ module Admin
     before_action :set_government_organisations, except: :index
 
     def index
-      @registers = Register.by_name
+      @registers = Register.by_position
     end
 
     def new
@@ -39,6 +39,13 @@ module Admin
       redirect_to admin_registers_path
     end
 
+    def sort
+      params[:register].each_with_index do |id, index|
+        Register.where(id: id).update_all(position: index + 1)
+      end
+      head :ok
+    end
+
   private
 
     def set_register
@@ -53,7 +60,15 @@ module Admin
     end
 
     def register_params
-      params.require(:register).permit(:name, :slug, :register_phase, :authority, :description, :contextual_data, :related_registers, :url)
+      params.require(:register).permit(:name,
+                                        :slug,
+                                        :register_phase,
+                                        :authority,
+                                        :description,
+                                        :contextual_data,
+                                        :related_registers,
+                                        :url,
+                                        :position)
     end
   end
 end

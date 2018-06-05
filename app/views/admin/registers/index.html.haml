@@ -10,13 +10,18 @@
   .grid-row
     .column-full
       - if @registers.any?
-        %table
-          %thead
-            %tr
-              %th
-                %strong Register name
-              %th
-                %strong Phase
-              %th
-          %tbody
-            = render partial: 'register', collection: @registers
+        %ul{"data-url" => "#{sort_admin_registers_path}", class: 'sortable'}
+          = render partial: 'register', collection: @registers
+
+= content_for :javascript do
+  :javascript
+    $(".sortable").sortable({
+      placeholder: "sortable-placeholder",
+      update: function(e, ui) {
+        $.ajax({
+          url: $(this).data("url"),
+          type: "PATCH",
+          data: $(this).sortable('serialize'),
+        });
+      }
+    });

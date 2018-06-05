@@ -59,7 +59,11 @@ Rails.application.routes.draw do
   namespace :admin, path: '/admin' do
     root to: "registers#index"
 
-    resources :registers, except: [:show]
+    resources :registers, except: [:show] do
+      collection do
+        patch :sort
+      end
+    end
     resources :users
     resources :sessions
     get "signin" => "sessions#new"
