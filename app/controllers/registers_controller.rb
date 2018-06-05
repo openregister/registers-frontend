@@ -9,7 +9,7 @@ class RegistersController < ApplicationController
       when 'name'
         @registers = Register.available.in_beta.by_name
       when 'popularity'
-        @registers = Register.available.in_beta.order(position: :asc)
+        @registers = Register.available.in_beta.by_popularity
       end
     else
       @registers = Register.available.in_beta

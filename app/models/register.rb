@@ -1,6 +1,6 @@
 class Register < ApplicationRecord
   include PgSearch
-  pg_search_scope :search_for, against: { name: 'A' }
+  pg_search_scope :search_for, against: :name
 
   before_validation :set_slug
 
@@ -13,7 +13,7 @@ class Register < ApplicationRecord
   validates :slug, uniqueness: true
 
   scope :by_name, -> { order name: :asc }
-  scope :by_position, -> { order position: :asc }
+  scope :by_popularity, -> { order position: :asc }
   scope :sort_by_phase_name_asc, -> { order(ordered_phases) }
   scope :has_records, -> { where(id: Record.select(:register_id)) }
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }

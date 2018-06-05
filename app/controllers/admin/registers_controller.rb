@@ -4,7 +4,7 @@ module Admin
     before_action :set_government_organisations, except: :index
 
     def index
-      @registers = Register.by_position
+      @registers = Register.by_popularity
     end
 
     def new
