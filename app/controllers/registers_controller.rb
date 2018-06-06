@@ -2,8 +2,10 @@
 
 class RegistersController < ApplicationController
   def index
-    @search = Register.available.ransack(params[:q])
-    @registers = @search.result.where(register_phase: 'Beta').sort_by_phase_name_asc.by_name
+    @registers = Register.available
+                         .in_beta
+                         .search_registers(params[:q])
+                         .sort_registers(params[:sort])
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
@@ -12,9 +14,8 @@ class RegistersController < ApplicationController
   end
 
   def in_progress
-    @search = Register.available.ransack(params[:q])
-    @upcoming_registers = @search.result.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
-    # We don't have search on the suggested registers so no need to pass in Ransack
+    @upcoming_registers = Register.available.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
+
     @suggested_registers = Register.available.where(register_phase: %w[Backlog Discovery]).sort_by_phase_name_asc.by_name
   end
 

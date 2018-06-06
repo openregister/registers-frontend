@@ -469,3 +469,29 @@ details {
     margin-top: 1.875em;
   }
 }
+
+.sortable {
+  margin: 0;
+
+  li {
+    background: $grey-3;
+    box-sizing: border-box;
+    cursor: move;
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  a {
+    float: right;
+  }
+
+  .sortable-placeholder {
+    background: none;
+    border: dashed 2px $border-colour;
+    height: 59px;
+  }
+}

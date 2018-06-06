@@ -18,6 +18,8 @@
 //= require govuk/show-hide-content
 //= require current-location
 //= require accordion-with-descriptions
+//= require jquery-ui/widget
+//= require jquery-ui/sortable
 
 $(document).ready(function() {
   GOVUK.modules.start();

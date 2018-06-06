@@ -41,11 +41,15 @@ RSpec.feature 'View register', type: :feature do
     PopulateRegisterDataInDbJob.perform_now(industrial_classification)
   end
 
+  scenario 'search for a register' do
+    visit('/registers')
+    fill_in('q', with: 'country')
+    click_button('Search', match: :first)
+    expect(page).to have_content('Country')
+  end
+
   scenario 'view and sort a register' do
-    visit '/'
-    expect(page).to have_content('Direct access to up-to-date government data')
-    first('.hero-button').click
-    first('.register-block').click
+    visit('/registers/country')
     expect(page).to have_content('Country register')
     click_link('Name')
     expect(page).to have_content('Zimbabwe')

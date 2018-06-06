@@ -9,7 +9,7 @@ RSpec.feature "Admin registers", type: :feature do
 
     it 'shows all the registers' do
       visit '/admin/registers'
-      expect(page).to have_css 'table tbody tr', count: 3
+      expect(page).to have_css '.sortable li', count: 3
     end
   end
 end

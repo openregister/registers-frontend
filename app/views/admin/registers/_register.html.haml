@@ -1,6 +1,4 @@
-%tr
-  %td
-    = register.name
-  %td= register.register_phase
-  %td
-    = link_to 'Edit', edit_admin_register_path(register)
+%li{id: dom_id(register)}
+  %span.sort-icon
+  #{register.name} (#{register.register_phase})
+  = link_to 'Edit', edit_admin_register_path(register)
