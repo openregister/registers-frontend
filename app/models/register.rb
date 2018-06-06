@@ -18,6 +18,8 @@ class Register < ApplicationRecord
   scope :has_records, -> { where(id: Record.select(:register_id)) }
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }
   scope :in_beta, -> { where(register_phase: 'Beta') }
+  scope :search_registers, -> (search_term) { search_term.present? ? search_for(search_term) : all }
+  scope :sort_registers, -> (sort_by) { sort_by == 'name' ? by_name : by_popularity }
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy

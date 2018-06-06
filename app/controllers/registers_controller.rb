@@ -2,18 +2,10 @@
 
 class RegistersController < ApplicationController
   def index
-    if params[:q].present?
-      @registers = Register.available.in_beta.search_for(params[:q])
-    elsif params[:sort].present?
-      case params[:sort]
-      when 'name'
-        @registers = Register.available.in_beta.by_name
-      when 'popularity'
-        @registers = Register.available.in_beta.by_popularity
-      end
-    else
-      @registers = Register.available.in_beta
-    end
+    @registers = Register.available
+                         .in_beta
+                         .search_registers(params[:q])
+                         .sort_registers(params[:sort])
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
