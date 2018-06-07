@@ -495,3 +495,13 @@ details {
     height: 59px;
   }
 }
+
+.sort-registers {
+  .form-label {
+    @include media(tablet) {
+      float: left;
+      font-weight: normal;
+      margin: 7px $gutter 0 0;
+    }
+  }
+}
