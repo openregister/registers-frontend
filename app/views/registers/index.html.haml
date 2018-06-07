@@ -25,17 +25,18 @@
 
     .column-full
       - if @registers.present?
-        = form_tag registers_path(anchor: 'content'), class: 'sort-registers', method: 'get' do
-          .form-group
-            %fieldset.inline
-              %legend.form-label.form-label-bold Sort by:
-              .multiple-choice
-                = radio_button_tag 'sort', 'popularity', params[:sort] == 'popularity' || !params[:sort].present? ?  'true' : nil
-                = label_tag 'popularity', nil, for: 'sort_popularity'
-              .multiple-choice
-                = radio_button_tag 'sort', 'name', params[:sort] == 'name' ?  'true' : nil
-                = label_tag 'name', nil, for: 'sort_name'
-            = submit_tag 'Search', class: 'button filter-search-submit'
+        - unless params[:q]
+          = form_tag registers_path(anchor: 'content'), class: 'sort-registers', method: 'get' do
+            .form-group
+              %fieldset.inline
+                %legend.form-label.form-label-bold Sort by:
+                .multiple-choice
+                  = radio_button_tag 'sort', 'popularity', params[:sort] == 'popularity' || !params[:sort].present? ?  'true' : nil
+                  = label_tag 'popularity', nil, for: 'sort_popularity'
+                .multiple-choice
+                  = radio_button_tag 'sort', 'name', params[:sort] == 'name' ?  'true' : nil
+                  = label_tag 'alphabetical', nil, for: 'sort_name'
+              = submit_tag 'Search', class: 'button filter-search-submit'
         .registers-block-grid
           .grid-row
             - @registers.each do |register|
