@@ -5,7 +5,7 @@ class RegistersController < ApplicationController
     @registers = Register.available
                          .in_beta
                          .search_registers(params[:q])
-                         .by_name
+                         .sort_registers(params[:sort])
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
