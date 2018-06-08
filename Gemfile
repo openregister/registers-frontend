@@ -28,9 +28,6 @@ gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
 gem 'govuk-registers-api-client', '~> 1.2.1'
 
-# Search
-gem 'pg_search'
-
 # Zendesk
 gem 'zendesk_api'
 

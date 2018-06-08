@@ -213,10 +213,6 @@ GEM
     parser (2.5.0.5)
       ast (~> 2.4.0)
     pg (0.21.0)
-    pg_search (2.1.2)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      arel (>= 6)
     powerpack (0.1.1)
     prometheus-client-mmap (0.9.1)
     pry (0.11.3)
@@ -393,7 +389,6 @@ DEPENDENCIES
   lograge (~> 0.9.0)
   logstash-event (~> 1.2, >= 1.2.02)
   pg (~> 0.18)
-  pg_search
   pry-byebug
   puma (~> 3.0)
   rails (~> 5.1.5)
