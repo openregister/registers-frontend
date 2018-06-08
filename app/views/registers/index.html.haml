@@ -13,18 +13,34 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
-      %h1.heading-large Registers available
-      %p Registers are live lists of information that are managed and approved by government. They are the most reliable lists of their kind.
-      %p Search our registers to find data you can use to build and maintain your service.
-      %p You can #{link_to 'see what services are already using registers.', services_using_registers_path}
+      %h1.heading-large
+        Registers available
+        %span.heading-secondary Registers are up-to-date lists of information that are managed and approved by government. You can use this data to build and maintain your service.
     .column-one-third
       = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
         = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, nil, class: 'search-input', placeholder: 'Search'
+        = search_field_tag :q, params[:q], class: 'search-input', placeholder: 'Search'
         = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
       - if @registers.present?
+        - if params[:q]
+          .search-results
+            %p
+              Results found for <strong>"#{params[:q]}"</strong>
+              = link_to 'Reset', registers_path, class: 'reset-link'
+        - else
+          = form_tag registers_path(anchor: 'content'), class: 'sort-registers', method: 'get' do
+            .form-group
+              %fieldset.inline
+                %legend.form-label.form-label-bold Sort by:
+                .multiple-choice
+                  = radio_button_tag 'sort', 'popularity', params[:sort] == 'popularity' || !params[:sort].present? ?  'true' : nil
+                  = label_tag 'popularity', nil, for: 'sort_popularity'
+                .multiple-choice
+                  = radio_button_tag 'sort', 'name', params[:sort] == 'name' ?  'true' : nil
+                  = label_tag 'name', nil, for: 'sort_name'
+              = submit_tag 'Search', class: 'button filter-search-submit'
         .registers-block-grid
           .grid-row
             - @registers.each do |register|
@@ -38,7 +54,7 @@
                         %span= register.register_authority.data['name']
 
       - else
-        .no-search-results
+        .search-results
           %p
             No results found for <strong>"#{params[:q]}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
