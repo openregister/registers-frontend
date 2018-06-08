@@ -34,6 +34,8 @@ class RegistersController < ApplicationController
     elsif field['datatype'] == 'curie'
       curie = field_value.split(':')
       link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
+    elsif field['register']
+      link_to(field_value, register_path(field['register'], record: field_value, anchor: 'records_wrapper'))
     else
       field_value
     end
