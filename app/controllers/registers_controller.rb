@@ -28,19 +28,23 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
   end
 
-  def field_link_resolver(field, field_value)
-    if field_value.is_a?(Array)
-      field_value.join(', ')
-    elsif field['datatype'] == 'url'
-      link_to(field_value, field_value)
-    elsif field['datatype'] == 'curie'
-      curie = field_value.split(':')
-      link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
-    elsif field['register']
-      link_to(field_value, register_path(field['register'], record: field_value, anchor: 'records_wrapper'))
-    else
-      field_value
-    end
+  def field_link_resolver(field, field_value, register_slug = @register.slug)
+    single_resolver = lambda { |f, fv|
+      if f['register'].present? && f['register'] != register_slug
+        link_to(fv, register_path(field['register'], record: field_value, anchor: 'records_wrapper'))
+      elsif f['datatype'] == 'url'
+        link_to(fv, fv)
+      elsif f['datatype'] == 'curie'
+        curie = fv.split(':')
+        link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
+      else
+        fv
+      end
+    }
+
+    cardinality_n_links = -> { field_value.map { |fv| single_resolver.call(field, fv) }.join(', ').html_safe }
+
+    field_value.is_a?(Array) ? cardinality_n_links.call : single_resolver.call(field, field_value)
   end
 
 private
