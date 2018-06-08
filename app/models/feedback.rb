@@ -2,7 +2,7 @@ class Feedback
   include ActiveModel::Model
   include ActiveModel::Translation
 
-  attr_accessor :email, :message, :useful, :reason, :subject
+  attr_accessor :email, :message, :useful, :reason, :subject, :spam
 
   validates :useful, presence: true
   validates :reason, presence: true, if: -> { useful == "no" }

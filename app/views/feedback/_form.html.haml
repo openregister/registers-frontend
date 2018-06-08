@@ -3,6 +3,7 @@
   .alert--success= flash[:success]
 
 = form_for @feedback, url: register_feedback_index_path(@register.slug, anchor: 'feedback_section')  do |f|
+  = f.hidden_field :spam
   = f.hidden_field :subject, value: "[Question or Feedback] #{@register.name} register"
   = f.radio_button_fieldset :useful do |fieldset|
     - fieldset.radio_input :yes
