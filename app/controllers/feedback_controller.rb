@@ -1,10 +1,10 @@
 class FeedbackController < ApplicationController
   before_action :set_register
+  invisible_captcha only: :create, honeypot: :spam
 
   def create
     @feedback = Feedback.new(feedback_params)
 
-    redirect_to register_path(@register.slug) and return if params[:feedback][:spam].present?
     if @feedback.valid?
       if @feedback.message.present?
         @zendesk_service = ZendeskFeedback.new
@@ -29,8 +29,7 @@ private
       :email,
       :message,
       :useful,
-      :reason,
-      :spam
+      :reason
     )
   end
 end
