@@ -42,9 +42,8 @@
               %th{role: "columnheader", scope: "col"}
                 Status
           %tbody
-            - @registers.each_with_index do |register, index|
-              - index = index + 1
-              = render partial: 'registers/register', object: register, locals: { index: index }
+            - @registers.each do |register|
+              = render partial: 'registers/register', object: register
       - else
         .no-search-results
           %p
