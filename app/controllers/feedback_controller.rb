@@ -1,5 +1,6 @@
 class FeedbackController < ApplicationController
   before_action :set_register
+  invisible_captcha only: :create, honeypot: :spam
 
   def create
     @feedback = Feedback.new(feedback_params)
