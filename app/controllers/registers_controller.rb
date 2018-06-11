@@ -14,9 +14,7 @@ class RegistersController < ApplicationController
   end
 
   def in_progress
-    @upcoming_registers = Register.available.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
-
-    @suggested_registers = Register.available.where(register_phase: %w[Backlog Discovery]).sort_by_phase_name_asc.by_name
+    @registers = Register.available.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
   end
 
   def show
