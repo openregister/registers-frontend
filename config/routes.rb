@@ -22,9 +22,6 @@ Rails.application.routes.draw do
 
   resources :api_users, path: 'create-api-key'
 
-  get '404', to: 'errors#not_found'
-  get '500', to: 'errors#internal_server_error'
-
   # Support
   get 'support', to: 'support#index'
   post 'select_support', to: 'support#select_support'
@@ -47,6 +44,9 @@ Rails.application.routes.draw do
   get 'new-register/suggest-register', to: redirect('/support', status: 301)
   get 'api_users/new', to: redirect('/create-api-key', status: 301)
   get 'avaliable-registers', to: redirect('/registers', status: 301)
+
+  get '404', to: 'errors#not_found'
+  get '500', to: 'errors#internal_server_error'
 
   # Admin paths
   namespace :admin, path: '/admin' do
