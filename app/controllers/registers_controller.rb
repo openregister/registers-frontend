@@ -30,7 +30,7 @@ class RegistersController < ApplicationController
 
   def field_link_resolver(field, field_value, register_slug = @register.slug)
     single_resolver = lambda { |f, fv|
-      if f['register'].present? && f['register'] != register_slug
+      if f['register'].present? && f['field'] != register_slug
         link_to(fv, register_path(field['register'], record: fv, anchor: 'records_wrapper'))
       elsif f['datatype'] == 'url'
         link_to(fv, fv)
