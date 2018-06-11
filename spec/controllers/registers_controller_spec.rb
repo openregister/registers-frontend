@@ -201,4 +201,42 @@ RSpec.describe RegistersController, type: :controller do
       expect(assigns(:records).last.data['start-date']).to be_nil
     end
   end
+
+  describe 'URL datatype linking' do
+    it "links to external URL" do
+      field = { "text" => "The website for a register entry.", "field" => "website", "phase" => "beta", "datatype" => "url", "cardinality" => "1" }
+      field_value = "https://www.gov.uk/government/organisations/academy-for-justice-commissioning"
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("<a href=\"https://www.gov.uk/government/organisations/academy-for-justice-commissioning\">https://www.gov.uk/government/organisations/academy-for-justice-commissioning</a>")
+    end
+  end
+
+  describe 'Register datatype linking' do
+    it "does not link primary key field" do
+      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
+      field_value = "D13"
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("D13")
+    end
+
+    it "links register type fields" do
+      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
+      field_value = "D13"
+      expect(subject.field_link_resolver(field, field_value, 'government-service')).to eq("<a href=\"/registers/government-organisation?record=D13#records_wrapper\">D13</a>")
+    end
+  end
+
+  describe 'CURIE datatype linking' do
+    it "links both sides of a CURIE" do
+      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
+      field_value = "D13"
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("D13")
+    end
+  end
+
+  describe 'Cardinality N linking' do
+    it "links each field value in cardinality N fields" do
+      field = { "text" => "The classes that a charity falls into.", "field" => "charity-classes", "phase" => "discovery", "datatype" => "string", "register" => "charity-class", "cardinality" => "n" }
+      field_value = %w[307 302 301 207 103 102 101]
+      expect(subject.field_link_resolver(field, field_value, 'charity')).to eq("<a href=\"/registers/charity-class?record=307#records_wrapper\">307</a>, <a href=\"/registers/charity-class?record=302#records_wrapper\">302</a>, <a href=\"/registers/charity-class?record=301#records_wrapper\">301</a>, <a href=\"/registers/charity-class?record=207#records_wrapper\">207</a>, <a href=\"/registers/charity-class?record=103#records_wrapper\">103</a>, <a href=\"/registers/charity-class?record=102#records_wrapper\">102</a>, <a href=\"/registers/charity-class?record=101#records_wrapper\">101</a>")
+    end
+  end
 end
