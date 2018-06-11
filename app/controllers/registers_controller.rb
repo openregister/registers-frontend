@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class RegistersController < ApplicationController
+  include ActionView::Helpers::UrlHelper
+  helper_method :field_link_resolver
+
   def index
     @registers = Register.available
                          .in_beta
@@ -25,6 +28,25 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
   end
 
+  def field_link_resolver(field, field_value, register_slug = @register.slug)
+    single_resolver = lambda { |f, fv|
+      if f['register'].present? && f['field'] != register_slug
+        link_to(fv, register_path(f['register'], record: fv, anchor: 'records_wrapper'))
+      elsif f['datatype'] == 'url'
+        link_to(fv, fv)
+      elsif f['datatype'] == 'curie'
+        curie = fv.split(':')
+        link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
+      else
+        fv
+      end
+    }
+
+    cardinality_n_links = -> { field_value.map { |fv| single_resolver.call(field, fv) }.join(', ').html_safe }
+
+    field_value.is_a?(Array) ? cardinality_n_links.call : single_resolver.call(field, field_value)
+  end
+
 private
 
   def recover_records(fields, params)
@@ -39,6 +61,7 @@ private
     @register.records
              .where(entry_type: 'user')
              .search_for(fields, params[:q])
+             .record(params[:record])
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
              .page(params[:page])
