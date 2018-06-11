@@ -28,7 +28,7 @@
 
     .column-full
       %h3.heading-small.mq-small-only Sort by:
-      - if @upcoming_registers.present?
+      - if @registers.present?
         %table.register-status-table.table-collapsible
           %col{width: '60%'}
           %col{width: '20%'}
@@ -42,37 +42,10 @@
               %th{role: "columnheader", scope: "col"}
                 Status
           %tbody
-            - @upcoming_registers.each_with_index do |register, index|
-              - index = index + 1
-              = render partial: 'registers/register', object: register, locals: { index: index }
+            - @registers.each do |register|
+              = render partial: 'registers/register', object: register
       - else
         .no-search-results
           %p
             No results found for <strong>"#{params[:q][:name_cont]}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
-
-  - if @suggested_registers.present?
-    .grid-row
-      .column-two-thirds
-        %h2.heading-medium Suggested registers
-        %p You can express an interest in the suggested registers.
-        %p If you can't find the data you need you can also #{link_to 'suggest a new register', suggest_registers_path}.
-
-    .grid-row
-      .column-full
-        %table.register-status-table.table-collapsible
-          %col{width: '60%'}
-          %col{width: '20%'}
-          %col{width: '20%'}
-          %thead
-            %tr
-              %th{role: "columnheader", scope: "col"}
-                Register
-              %th{role: "columnheader", scope: "col"}
-                Managed by
-              %th{role: "columnheader", scope: "col"}
-                Status
-          %tbody
-            - @suggested_registers.each_with_index do |register, index|
-              - index = index + 1
-              = render partial: 'registers/register', object: register, locals: { index: index }

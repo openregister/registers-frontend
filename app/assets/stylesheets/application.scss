@@ -183,6 +183,11 @@ table {
   @include media(tablet) {
     margin: 40px 0;
   }
+
+  p,
+  .govuk-organisation-logo {
+    margin-bottom: 0;
+  }
 }
 
 .services-using-registers-page {
