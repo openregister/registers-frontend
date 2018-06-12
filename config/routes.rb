@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
   get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
+  get 'cookies', to: 'pages#cookies', as: 'cookies'
 
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
