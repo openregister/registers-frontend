@@ -4,5 +4,5 @@ $("#records-count").html('Showing <strong>1 &ndash; <%= @records.count + @record
 <% if @records.last_page? %>
   $("#load-more-records").hide();
 <% else %>
-  $("#load-more-records").replaceWith("<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-hidden', remote: true) %>");
+  $("#load-more-records").replaceWith("<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true) %>");
 <% end %>
