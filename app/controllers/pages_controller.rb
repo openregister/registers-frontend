@@ -15,4 +15,6 @@ class PagesController < ApplicationController
   def case_study; end
 
   def privacy_notice; end
+
+  def cookies; end
 end
