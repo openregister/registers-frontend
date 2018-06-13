@@ -16,7 +16,7 @@ RSpec.feature 'API Key Registration', type: :feature do
 
     stub_request(:post, "https://registers-selfservice.cloudapps.digital/users").
     with(
-      body: "email=test%40example.com&is_government=true&contactable=true",
+      body: "email=test%40gov.uk&is_government=true&contactable=true",
       headers: {
       'Accept' => '*/*',
       'Authorization' => 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
@@ -33,7 +33,7 @@ RSpec.feature 'API Key Registration', type: :feature do
   scenario 'valid submission generates API key' do
     expect(page).to have_content('Create your API key')
     choose('api_user[is_government]', option: "yes")
-    fill_in('api_user_email_gov', with: 'test@example.com')
+    fill_in('api_user_email_gov', with: 'test@gov.uk')
     choose('api_user[contactable]', option: "yes")
     first(:css, 'input[data-link-name="new_api_user_submit"]').click
     expect(page).to have_content('Your API key')
