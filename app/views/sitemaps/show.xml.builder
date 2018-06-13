@@ -43,5 +43,13 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.9", "xmlns:xhtml"
     xml.changefreq "weekly"
     xml.priority 0.9
   end
+
+  xml.url do
+    xml.loc "#{request.protocol}#{request.host}/cookies"
+
+    xml.lastmod Date.today.to_date
+    xml.changefreq "weekly"
+    xml.priority 0.9
+  end
 end
 # rubocop:enable Metrics/BlockLength
