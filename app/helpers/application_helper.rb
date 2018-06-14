@@ -48,6 +48,7 @@ module ApplicationHelper
                                                  .to_h.merge(sort_direction: direction,
                                                  sort_by: field_value,
                                                  anchor: 'search_wrapper')),
-                                                 class: css_class
+                                                 class: css_class,
+                                                 rel: 'canonical'
   end
 end

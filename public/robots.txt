@@ -4,7 +4,6 @@
 # User-agent: *
 # Disallow: /
 Disallow: /admin
-Disallow: /*?*
 
 
 Sitemap: https://www.registers.service.gov.uk/sitemap.xml
