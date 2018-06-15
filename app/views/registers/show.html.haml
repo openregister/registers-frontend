@@ -1,4 +1,4 @@
-- @page_title = "#{[@register.seo_title, @register.register_name].find(&:present?)}"
+- @page_title = "#{[@register.seo_title, @register.register_name + ' register'].find(&:present?)}"
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
