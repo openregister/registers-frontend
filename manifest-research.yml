@@ -12,13 +12,3 @@ applications:
 - name: registers-frontend-research
   <<: *defaults
   instances: 2
-- name: registers-frontend-queue
-  <<: *defaults
-  instances: 1
-  command: bundle exec 'rake environment jobs:work'
-  health-check-type: process
-- name: registers-frontend-scheduler
-  <<: *defaults
-  instances: 1
-  command: bundle exec clockwork 'lib/clock.rb'
-  health-check-type: process
