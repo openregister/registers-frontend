@@ -51,6 +51,29 @@ If you need to use the Zendesk service you need to add 3 environment variables
 2. `ZENDESK_URL`
 2. `ZENDESK_USERNAME`
 
+## Populating the database with register data on PaaS
+
+Add any registers using the `/admin` UI.
+
+### prod
+
+When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.  
+### sandbox
+
+It's also possible to manually populate the database without running the `registers-frontend-scheduler` and `registers-frontend-queue` apps using `cf run-task`. This may fail for large registers if the task runs out of memory.
+We might do this for a `registers-frontend-research` app for example.
+
+```
+cf run-task registers-frontend-research "bundle exec rake registers_frontend:populate_db:fetch_now" -m 1G --name fetch
+```
+
+Then you can see the result of the task using:
+
+```
+cf tasks registers-frontend-research
+cf logs registers-frontend-research | grep fetch
+```
+
 ## License
 
 [MIT](LICENSE.txt).
