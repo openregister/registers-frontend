@@ -68,7 +68,9 @@ module Admin
                                         :contextual_data,
                                         :related_registers,
                                         :url,
-                                        :position)
+                                        :position,
+                                        :seo_title,
+                                        :meta_description)
     end
   end
 end

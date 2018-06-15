@@ -1,5 +1,5 @@
-- @page_title = "#{@register.register_name} register"
-- @page_description = @register.register_description
+- @page_title = "#{[@register.seo_title, @register.register_name + ' register'].find(&:present?)}"
+- @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}

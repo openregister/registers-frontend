@@ -9,6 +9,10 @@
     = f.select :authority, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, {}, class: 'form-control'
   = f.text_area :contextual_data
   = f.text_area :related_registers
+  %hr
+  %h2.heading-medium SEO
+  = f.text_field :seo_title
+  = f.text_area :meta_description
   .form-group
     = f.submit 'Save', class: 'button'
 

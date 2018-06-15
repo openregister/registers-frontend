@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611121537) do
+ActiveRecord::Schema.define(version: 20180614064846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20180611121537) do
     t.string "root_hash"
     t.text "fields_array", array: true
     t.integer "position"
+    t.string "seo_title"
+    t.text "meta_description"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
