@@ -22,6 +22,8 @@ def post_to_endpoint(user, endpoint = 'users')
   @user = { email: user.email,
             is_government: user.is_government_boolean,
             register: user.try(:register),
+            non_gov_use_category: user.try(:non_gov_use_category),
+            department: user.try(:department),
             contactable: user.try(:is_contactable_boolean) }
             .compact
   uri = URI.parse("#{Rails.configuration.self_service_api_host}/#{endpoint}")
