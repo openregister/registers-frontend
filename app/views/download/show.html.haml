@@ -6,7 +6,7 @@
     .column-full
       %h1.heading-large Download the #{@register.register_name} register
       %p You can download the latest data in this register as:
-      %ul.list.list-bullet
+      %ul.list.list-bullet{data: {"click-events" => true, "click-category" => "Content", "click-action" => "Register Download"}}
         %li= link_to 'CSV', register_download_csv_path(@register.slug)
         %li= link_to 'JSON', register_download_json_path(@register.slug)
       .participate
