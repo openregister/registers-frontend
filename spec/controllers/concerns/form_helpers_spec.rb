@@ -12,9 +12,8 @@ describe FormHelpers, type: :helper do
       }
     ).
     to_return(status: 201, body: "", headers: {})
-
   end
-  
+
   it 'includes all paramaters when POSTing to selfservice' do
     include helper
     post_to_endpoint(DownloadUser.new(
