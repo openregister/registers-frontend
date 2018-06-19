@@ -13,10 +13,10 @@ describe FormHelpers, type: :helper do
     ).
     to_return(status: 201, body: "", headers: {})
 
-    include FormHelpers
   end
-
+  
   it 'includes all paramaters when POSTing to selfservice' do
+    include helper
     post_to_endpoint(DownloadUser.new(
                        email_gov: 'test@gov.uk',
                        department: 'government-organisation:OT1056',
