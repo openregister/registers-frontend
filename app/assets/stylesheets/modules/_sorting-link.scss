@@ -1,33 +1,70 @@
+%sort-arrow {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  content: "";
+  display: block;
+  margin-left: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.sort-link-th {
+  background-color: $grey-3;
+  margin: 0 1px;
+  padding: 15px 30px 15px 15px;
+
+  &.active {
+    background-color: $govuk-blue;
+    color: $white;
+  }
+}
+
 .sort-link {
   font-weight: normal;
   padding-right: 15px;
   position: relative;
   text-decoration: none;
 
+  .active & {
+    color: $white;
+    font-weight: bold;
+  }
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+
+  // small top arrow
+  &:before {
+    @extend %sort-arrow;
+    border-bottom: 5px solid $govuk-blue;
+    top: 4px;
+  }
+
+  // remove small top arrow when 'active'
+  &.asc:before,
+  &.desc:before {
+    content: none;
+  }
+
+  // small bottom arrow
   &:after {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    content: "";
-    display: block;
-    margin-left: 5px;
-    position: absolute;
-    right: 0;
+    @extend %sort-arrow;
+    border-top: 5px solid $govuk-blue;
+    top: 11px;
+  }
+
+  // large active arrows
+  &.asc:after {
+    border-bottom: 8px solid $white;
+    border-top: 0;
     top: 7px;
   }
 
-  &.asc {
-    font-weight: bold;
-
-    &:after {
-      border-bottom: 8px solid $govuk-blue;
-    }
-  }
-
-  &.desc {
-    font-weight: bold;
-
-    &:after {
-      border-top: 8px solid $govuk-blue;
-    }
+  &.desc:after {
+    border-bottom: 0;
+    border-top: 8px solid $white;
+    top: 7px;
   }
 }
