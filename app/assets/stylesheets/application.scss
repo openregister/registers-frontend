@@ -171,7 +171,9 @@ table {
 .register-data-table {
   th {
     background-color: $grey-3;
-    border: 2px solid $white;
+    border-bottom: 0;
+    border-left: 2px solid $white;
+    border-right: 2px solid $white;
     font-weight: normal;
     min-width: 270px;
     padding: 15px 30px 15px 15px;

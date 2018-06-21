@@ -9,12 +9,11 @@
 }
 
 .sort-link-th {
-  margin: -15px -30px -15px -15px;
-  padding: 15px 30px 15px 15px;
-
   &.active {
     background-color: $govuk-blue;
     color: $white;
+    margin: -15px -30px -15px -15px;
+    padding: 15px 30px 15px 15px;
   }
 }
 
