@@ -182,8 +182,9 @@ table {
 
     &.start-date,
     &.end-date,
-    &.review-date {
-      min-width: 150px;
+    &.review-date,
+    &:first-child {
+      min-width: 120px;
     }
   }
 
