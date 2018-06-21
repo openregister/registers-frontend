@@ -131,7 +131,6 @@ table {
   td,
   th {
     font-size: 16px;
-    min-width: 300px;
     padding: 15px 40px 15px 0;
     vertical-align: top;
 
@@ -172,12 +171,15 @@ table {
 .register-data-table {
   th {
     background-color: $grey-3;
-    border: 1px solid $white;
+    border: 2px solid $white;
     font-weight: normal;
+    min-width: 270px;
     padding: 15px 30px 15px 15px;
     vertical-align: middle;
 
-    @include media(desktop) {
+    &.start-date,
+    &.end-date,
+    &.review-date {
       min-width: 150px;
     }
   }
