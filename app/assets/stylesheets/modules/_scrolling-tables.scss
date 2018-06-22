@@ -15,10 +15,9 @@
     background: $white;
     box-sizing: border-box;
     margin: 0 0 $gutter 0;
-    overflow: hidden;
-    overflow-y: hidden;
     padding: 0 0 0 0;
     position: relative;
+    overflow-x: scroll;
     z-index: 10;
 
     .table {
