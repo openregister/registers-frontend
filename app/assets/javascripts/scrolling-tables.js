@@ -9,7 +9,6 @@
       this.$table = this.$component.find('table');
 
       this.insertShadows();
-      this.toggleShadows();
 
       this.$scrollableTable.on('scroll', this.toggleShadows);
     };
@@ -17,7 +16,7 @@
     this.insertShadows = function () {
       _this.$table.wrap('<div class="fullscreen-scrollable-table"/>');
 
-      _this.$component.append('<div class="fullscreen-right-shadow" />');
+      _this.$component.append('<div class="fullscreen-right-shadow visible" />');
       _this.$component.prepend('<div class="fullscreen-left-shadow" />');
 
       _this.$scrollableTable = _this.$component.find('.fullscreen-scrollable-table');
