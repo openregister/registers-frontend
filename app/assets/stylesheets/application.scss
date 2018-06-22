@@ -173,7 +173,6 @@ table {
   th {
     background-color: $grey-3;
     border-bottom: 0;
-    border-left: 2px solid $white;
     border-right: 2px solid $white;
     font-weight: normal;
     min-width: 260px;
@@ -185,6 +184,10 @@ table {
     &.review-date,
     &:first-child {
       min-width: 120px;
+    }
+
+    &:last-child {
+      border-right: 0;
     }
   }
 
