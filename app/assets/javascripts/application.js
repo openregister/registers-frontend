@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require govuk/modules
+//= require scrolling-tables
 //= require gaap-analytics
 //= require accessible-autocomplete
 //= require govuk/show-hide-content
@@ -20,6 +21,15 @@
 //= require accordion-with-descriptions
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
+
+$.fn.extend({
+  scrollRight: function (val) {
+    if (val === undefined) {
+      return this[0].scrollWidth - (this[0].scrollLeft + this[0].clientWidth) + 1;
+    }
+    return this.scrollLeft(this[0].scrollWidth - this[0].clientWidth - val);
+  }
+});
 
 $(document).ready(function() {
   GOVUK.modules.start();

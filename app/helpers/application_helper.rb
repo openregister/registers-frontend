@@ -42,12 +42,15 @@ module ApplicationHelper
   def records_table_sort_link(field_value, query_parameters)
     direction = params[:sort_direction] == 'asc' && params[:sort_by] == field_value ? 'desc' : 'asc'
     css_class = params[:sort_by] == field_value ? "sort-link #{params[:sort_direction]}" : "sort-link"
+    wrapper_css_class = params[:sort_by] == field_value ? 'sort-link-th active' : 'sort-link-th'
 
-    link_to field_value.tr('-', ' ').humanize, register_path(@register.slug,
+    content_tag 'div', class: wrapper_css_class do
+      link_to field_value.tr('-', ' ').humanize, register_path(@register.slug,
                                                  query_parameters.except(:sort_by, :sort_direction)
                                                  .to_h.merge(sort_direction: direction,
                                                  sort_by: field_value,
                                                  anchor: 'search_wrapper')),
                                                  class: css_class
+    end
   end
 end

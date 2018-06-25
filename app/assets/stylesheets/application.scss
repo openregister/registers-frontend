@@ -29,6 +29,7 @@
 @import 'modules/block-grid';
 @import 'modules/accessible-autocomplete';
 @import 'modules/subsections';
+@import 'modules/scrolling-tables';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -132,9 +133,7 @@ table {
   th {
     font-size: 16px;
     padding: 15px 40px 15px 0;
-    vertical-align: middle;
-    white-space: normal;
-    word-wrap: break-word;
+    vertical-align: top;
 
     a {
       white-space: nowrap;
@@ -165,13 +164,41 @@ table {
 }
 
 .table-scroll {
+  margin-bottom: $gutter;
+  overflow-x: auto;
   width: 100%;
-  overflow-x: scroll;
 }
 
 .register-data-table {
-  border-top: 1px solid $border-colour;
-  margin: 0 0 20px 0;
+  th {
+    background-color: $grey-3;
+    border-bottom: 0;
+    border-right: 2px solid $white;
+    font-weight: normal;
+    min-width: 280px;
+    padding: 15px 30px 15px 15px;
+    vertical-align: middle;
+
+    &.start-date,
+    &.end-date,
+    &.review-date,
+    &:first-child {
+      min-width: 120px;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  td {
+    border: none;
+    padding: 15px;
+  }
+
+  tr:nth-child(even) td {
+    background: $grey-4;
+  }
 }
 
 .records-search {

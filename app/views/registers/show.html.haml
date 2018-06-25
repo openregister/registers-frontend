@@ -81,12 +81,12 @@
                   - if params[:q].present? || params[:status].present?
                     = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
-                .table-scroll
-                  %table.register-data-table
+                .fullscreen-content{data: {module: 'scrolling-tables'}}
+                  %table.table.register-data-table
                     %thead
                       %tr{data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Sort"}}
                         - @register.register_fields.each do |field|
-                          %th= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
+                          %th{class: "#{field['field']}"}= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field']
                     %tbody#records-tbody
                       = render partial: 'record', collection: @records
 
