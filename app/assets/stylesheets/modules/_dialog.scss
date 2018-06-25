@@ -59,6 +59,7 @@
 
   &__inner {
     padding: 20px;
+
     @include media(tablet) {
       padding: 30px;
     }
@@ -103,7 +104,7 @@
     }
   }
 
-  #dialog-title {
+  .heading-large {
     margin-top: 0;
   }
 }
@@ -114,10 +115,12 @@
 }
 
 // Modal dialog polyfill styles
-$dialog_backdrop_colour: rgba(0,0,0,0.8);
-$dialog_border: 5px solid black;
+$dialog-backdrop-colour: rgba(0, 0, 0, 0.8);
+$dialog-border: 5px solid $black;
+
 dialog {
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   width: -moz-fit-content;
   width: -webkit-fit-content;
   width: fit-content;
@@ -125,17 +128,20 @@ dialog {
   height: -webkit-fit-content;
   height: fit-content;
   margin: auto;
-  border: solid;
+  border-style: solid;
   padding: 1em;
-  background: white;
-  color: black;
+  background: $white;
+  color: $black;
   display: none;
-  border: $dialog_border;
+  border: $dialog-border;
 
-  & + .backdrop {
+  + .backdrop {
     position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: $dialog_backdrop_colour;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: $dialog-backdrop-colour;
   }
 
   &[open] {
@@ -144,6 +150,7 @@ dialog {
     margin: 0 auto;
     padding: 15px;
     width: 90%;
+
     @include media(tablet) {
       padding: 30px;
       margin: 30px auto;
@@ -151,13 +158,13 @@ dialog {
     }
 
     // Backdrop styles for browsers using polyfil
-    &+ .backdrop {
-      background: $dialog_backdrop_colour;
+    + .backdrop {
+      background: $dialog-backdrop-colour;
     }
     // Backdrop styles for browsers with native support
     // NB: keep these two backdrop styles separate - safari didn't work when combined
     &::backdrop {
-      background: $dialog_backdrop_colour;
+      background: $dialog-backdrop-colour;
     }
   }
 }
