@@ -14,6 +14,11 @@
     color: $white;
     margin: -15px -30px -15px -15px;
     padding: 15px 30px 15px 15px;
+
+    + .info-icon {
+      background: $white;
+      color: $govuk-blue;
+    }
   }
 }
 

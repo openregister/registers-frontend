@@ -86,7 +86,9 @@
                     %thead
                       %tr{data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Sort"}}
                         - @register.register_fields.each do |field|
-                          %th{class: "#{field['field']}"}= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
+                          %th{class: "#{field['field']}"}
+                            = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
+                            = link_to '?', register_field_path(@register.slug, field['field']), class: 'info-icon'
                     %tbody#records-tbody
                       = render partial: 'record', collection: @records
 
