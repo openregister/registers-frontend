@@ -4,5 +4,4 @@
   .grid-row
     .column-full
       = link_to 'Back', register_path(@register.slug), class: 'link-back'
-      %h1.heading-large= @field.data['field'].tr('-', ' ').humanize
-      %p= @field.data['text']
+      = render partial: 'field'
