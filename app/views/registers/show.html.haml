@@ -51,7 +51,7 @@
                     .column-one-third
                       .records-search
                         = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
-                        = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q]
+                        = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q], autocomplete: 'off'
                         = submit_tag 'Search', name: nil, class: 'search-submit'
                   %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
                     %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
