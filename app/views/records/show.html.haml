@@ -1,3 +1,4 @@
+- console
 - @page_title = "Record #{params[:id]} in the #{@register.name} register"
 - content_for :body_classes, 'records-show'
 
@@ -20,7 +21,7 @@
               %td
                 = field['field']
               %td
-                =  field_value ? field_value :  "<span class='unknown'>No data</span>".html_safe
+                =  field_value
   .grid-row
     .column-two-thirds
       %p This is a record from the #{@register.name} register

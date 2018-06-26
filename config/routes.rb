@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
   end
 
+  get 'register/:registers/:records'
+
   get '/registers-in-progress', to: 'registers#in_progress'
 
   resources :api_users, path: 'create-api-key'
