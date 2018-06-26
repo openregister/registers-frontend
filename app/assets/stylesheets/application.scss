@@ -217,6 +217,11 @@ table {
     text-decoration: none;
     top: 12px;
     width: 25px;
+
+    &:focus,
+    &:hover {
+      color: $white;
+    }
   }
 
   td {

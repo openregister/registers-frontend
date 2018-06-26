@@ -18,6 +18,11 @@
     + .info-icon {
       background: $white;
       color: $govuk-blue;
+
+      &:focus,
+      &:hover {
+        color: $govuk-blue;
+      }
     }
   }
 }
