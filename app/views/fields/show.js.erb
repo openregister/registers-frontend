@@ -2,6 +2,12 @@ var dialog = document.getElementById('modal_dialog');
 var dlalogContent = dialog.querySelectorAll('.modal-dialog__inner')[0];
 var dialogClose = dialog.querySelectorAll('.modal-dialog__close')[0];
 
+function setFocusBackOnTarget() {
+  var targetUrl = "<%= register_field_url(@register.slug, @field.data['field']) %>";
+  var targetElement = document.querySelectorAll('[href="' + targetUrl + '"]')[0];
+  targetElement.focus();
+}
+
 // Render field partial in dialog
 dlalogContent.innerHTML = "<%= escape_javascript render(partial: 'fields/field') %>";
 
@@ -21,4 +27,12 @@ dialogClose.focus();
 dialogClose.addEventListener('click', function() {
   dialog.close();
   dialog.setAttribute('aria-hidden', 'true');
+  setFocusBackOnTarget();
+});
+
+// Set focus back on clicked element on ESC key
+document.addEventListener('keyup', function(e) {
+  if (e.keyCode == 27) {
+    setFocusBackOnTarget();
+  }
 });
