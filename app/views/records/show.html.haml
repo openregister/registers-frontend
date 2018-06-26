@@ -24,5 +24,4 @@
                 =  field_value
   .grid-row
     .column-two-thirds
-      %p This is a record from the #{@register.name} register
-      %p= link_to 'View this register', register_path(@register.slug), class: 'button'
+      %p This is a record from the #{link_to @register.name, register_path(@register.slug)} register
