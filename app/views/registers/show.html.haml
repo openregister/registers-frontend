@@ -88,7 +88,10 @@
                         - @register.register_fields.each do |field|
                           %th{class: "#{field['field']}"}
                             = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
-                            = link_to '?', register_field_path(@register.slug, field['field']), class: 'info-icon', remote: true, "aria-label" => "What does #{field['field']} mean?"
+                            = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true do
+                              %span.visually-hidden
+                                What does #{field['field']} mean
+                              ?
                     %tbody#records-tbody
                       = render partial: 'record', collection: @records
 
