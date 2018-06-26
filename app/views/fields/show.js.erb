@@ -23,11 +23,22 @@ dialog.setAttribute('aria-hidden', 'false');
 // Focus on close link
 dialogClose.focus();
 
-// Function to close dialog when close link is clicked
+// Close dialog when close link is clicked
 dialogClose.addEventListener('click', function() {
   dialog.close();
   dialog.setAttribute('aria-hidden', 'true');
   setFocusBackOnTarget();
+});
+
+// Close dialog when backdrop is clicked
+// https://stackoverflow.com/questions/25864259/how-to-close-the-new-html-dialog-tag-by-clicking-on-its-backdrop
+dialog.addEventListener('click', function (event) {
+  var rect = dialog.getBoundingClientRect();
+  var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+  if (!isInDialog) {
+    dialog.close();
+    dialog.setAttribute('aria-hidden', 'true');
+  }
 });
 
 // Set focus back on clicked element on ESC key
