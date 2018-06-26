@@ -220,7 +220,7 @@ RSpec.describe RegistersController, type: :controller do
     it "links register type fields" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
       field_value = "D13"
-      expect(subject.field_link_resolver(field, field_value, 'government-service')).to eq("<a href=\"/registers/government-organisation?record=D13#records_wrapper\">D13</a>")
+      expect(subject.field_link_resolver(field, field_value, 'government-service')).to eq("<a href=\"/registers/government-organisation/records/D13\">D13</a>")
     end
   end
 
@@ -228,7 +228,7 @@ RSpec.describe RegistersController, type: :controller do
     it "resolves CURIE to record" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
       field_value = "government-organisation:D13"
-      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("<a href=\"/registers/government-organisation?record=D13#records_wrapper\">government-organisation:D13</a>")
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("<a href=\"/registers/government-organisation/records/D13\">government-organisation:D13</a>")
     end
 
     it "links one sided CURIE to register" do
@@ -242,7 +242,7 @@ RSpec.describe RegistersController, type: :controller do
     it "links each field value in cardinality N fields" do
       field = { "text" => "The classes that a charity falls into.", "field" => "charity-classes", "phase" => "discovery", "datatype" => "string", "register" => "charity-class", "cardinality" => "n" }
       field_value = %w[307 302 301 207 103 102 101]
-      expect(subject.field_link_resolver(field, field_value, 'charity')).to eq("<a href=\"/registers/charity-class?record=307#records_wrapper\">307</a>, <a href=\"/registers/charity-class?record=302#records_wrapper\">302</a>, <a href=\"/registers/charity-class?record=301#records_wrapper\">301</a>, <a href=\"/registers/charity-class?record=207#records_wrapper\">207</a>, <a href=\"/registers/charity-class?record=103#records_wrapper\">103</a>, <a href=\"/registers/charity-class?record=102#records_wrapper\">102</a>, <a href=\"/registers/charity-class?record=101#records_wrapper\">101</a>")
+      expect(subject.field_link_resolver(field, field_value, 'charity')).to eq("<a href=\"/registers/charity-class/records/307\">307</a>, <a href=\"/registers/charity-class/records/302\">302</a>, <a href=\"/registers/charity-class/records/301\">301</a>, <a href=\"/registers/charity-class/records/207\">207</a>, <a href=\"/registers/charity-class/records/103\">103</a>, <a href=\"/registers/charity-class/records/102\">102</a>, <a href=\"/registers/charity-class/records/101\">101</a>")
     end
   end
 end

@@ -19,10 +19,9 @@ class Record < ApplicationRecord
   }
 
   scope :record, lambda { |record|
-    if record.present?
-      where(
-        key: record
-        )
-    end
+    find_by(
+      key: record,
+      entry_type: 'user'
+      )
   }
 end

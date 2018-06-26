@@ -30,9 +30,9 @@ class RegistersController < ApplicationController
     single_resolver = lambda { |f, fv|
       if f['datatype'] == 'curie' && fv.include?(':')
         curie = fv.split(':')
-        curie[1].present? ? link_to(fv, register_record_path(curie[0], curie[1])) : link_to(fv, register_record_path(register_slug, curie[0]))
+        curie[1].present? ? link_to(fv, register_record_path(curie[0], curie[1])) : link_to(fv, register_path(register_slug))
       elsif f['register'].present? && f['field'] != register_slug
-        link_to(fv, register_path(f['register'], record: fv))
+        link_to(fv, register_record_path(f['register'], fv))
       elsif f['datatype'] == 'url'
         link_to(fv, fv)
       else
@@ -59,7 +59,6 @@ private
     @register.records
              .where(entry_type: 'user')
              .search_for(fields, params[:q])
-             .record(params[:record])
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
              .page(params[:page])
