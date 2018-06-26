@@ -23,7 +23,7 @@
       = form_tag register_entries_path(@register.slug, anchor: 'updates_wrapper'), method: :get do
         .records-search#updates_wrapper
           = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
-          = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search'
+          = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search', autocomplete: 'off'
           = submit_tag 'Search', class: 'search-submit', name: nil
 
   .grid-row

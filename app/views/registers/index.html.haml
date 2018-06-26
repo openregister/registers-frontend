@@ -19,7 +19,7 @@
     .column-one-third
       = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
         = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, params[:q], class: 'search-input', placeholder: 'Search'
+        = search_field_tag :q, params[:q], class: 'search-input', placeholder: 'Search', autocomplete: 'off'
         = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
