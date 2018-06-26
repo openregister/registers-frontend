@@ -22,7 +22,7 @@
               %td
                 = field['field']
               %td
-                =  field_value ? field_value :  "<span class='unknown'>No data</span>".html_safe
+                =  field_value
   .grid-row
     .column-two-thirds
       %p This is a record from the #{link_to @register.name, register_path(@register.slug)} register
