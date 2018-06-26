@@ -5,6 +5,8 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
+      - if request.referer.present?
+        = link_to "Back", :back, class: 'link-back'
       %h1.heading-large Record <strong>#{params[:id]}</strong> in the <strong>#{@register.name}</strong> register
   .grid-row
     .column-full
