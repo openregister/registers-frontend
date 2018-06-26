@@ -1,0 +1,28 @@
+- @page_title = "register updates"
+- content_for :body_classes, 'records-show'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Record <strong>#{params[:id]}</strong> in the <strong>#{@register.name}</strong> register
+  .grid-row
+    .column-full
+      %table.table
+        %thead
+          %tr
+            %th Field
+            %th Value
+        %tbody
+          - @records.each do |record|
+            - @register.register_fields.each do |field|
+              - field_value = record.data[field['field']]
+              - if field_value.present?
+                %tr
+                  %td
+                    = field['field']
+                  %td
+                    =  field_value ? field_value :  "<span class='unknown'>No data</span>".html_safe
+  .grid-row
+    .column-two-thirds
+      %p This is a record from the #{@register.name} register
+      %p= link_to 'View this register', register_path(@register.slug), class: 'button'

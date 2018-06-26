@@ -65,6 +65,12 @@ img {
   }
 }
 
+.records-show {
+  .heading-large {
+    font-weight: normal;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -161,6 +167,10 @@ table {
     display: inline-block;
     margin-right: 15px;
   }
+}
+
+.table {
+  margin-bottom: $gutter;
 }
 
 .table-scroll {
