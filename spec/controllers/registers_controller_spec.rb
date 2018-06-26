@@ -225,10 +225,16 @@ RSpec.describe RegistersController, type: :controller do
   end
 
   describe 'CURIE datatype linking' do
-    it "links both sides of a CURIE" do
-      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
-      field_value = "D13"
-      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("D13")
+    it "resolves CURIE to record" do
+      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
+      field_value = "government-organisation:D13"
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("<a href=\"/registers/government-organisation?record=D13#records_wrapper\">government-organisation:D13</a>")
+    end
+
+    it "links one sided CURIE to register" do
+      field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
+      field_value = "government-organisation:"
+      expect(subject.field_link_resolver(field, field_value, 'government-organisation')).to eq("<a href=\"/registers/government-organisation\">government-organisation:</a>")
     end
   end
 

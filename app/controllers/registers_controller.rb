@@ -30,7 +30,7 @@ class RegistersController < ApplicationController
     single_resolver = lambda { |f, fv|
       if f['datatype'] == 'curie' && fv.include?(':')
         curie = fv.split(':')
-        link_to(curie[0], register_path(curie[0])) + ':' + link_to(curie[1], register_path(curie[0], record: curie[1], anchor: 'records_wrapper'))
+        curie[1].present? ? link_to(fv, register_path(curie[0], record: curie[1], anchor: 'records_wrapper')) : link_to(fv, register_path(curie[0]))
       elsif f['register'].present? && f['field'] != register_slug
         link_to(fv, register_path(f['register'], record: fv, anchor: 'records_wrapper'))
       elsif f['datatype'] == 'url'
