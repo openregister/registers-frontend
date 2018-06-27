@@ -26,7 +26,7 @@ class Register < ApplicationRecord
 
   def register_last_updated
     Record.select('timestamp')
-      .where(register_id: id, entry_type: 'user')
+      .where(register_id: id)
       .order(timestamp: :desc)
       .first[:timestamp]
       .to_s
