@@ -76,6 +76,10 @@
     border-color: $foreign-commonwealth-office;
   }
 
+  &.government-digital-service .logo-with-crest {
+    border-color: $cabinet-office;
+  }
+
   .logo-link:link,
   .logo-link:visited {
     color: $black;

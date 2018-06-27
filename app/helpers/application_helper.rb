@@ -15,7 +15,7 @@ module ApplicationHelper
       "logo-with-crest crest-so"
     when "uk-atomic-energy-authority"
       "logo-with-crest crest-ukaea"
-    when "nhs", "government-digital-service", "scottish-government", "welsh-government"
+    when "nhs", "scottish-government", "welsh-government"
       " "
     else
       "logo-with-crest crest-org"
