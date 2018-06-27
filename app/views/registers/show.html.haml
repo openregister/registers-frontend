@@ -28,7 +28,8 @@
         %h1.heading-large
           #{@register.register_name} register
           %span.heading-secondary= @register.register_description
-        %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
+        - if @register.records.user_records.any?
+          %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
 
       .column-one-third
         - if @register.register_authority.present?
@@ -45,41 +46,43 @@
             .subsection__header
               %h2.subsection__title Preview the data
             .subsection__content.js-subsection-content#data_section
-              .search-records-wrapper#records_wrapper
-                = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
-                  .grid-row
-                    .column-one-third
-                      .records-search
-                        = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
-                        = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q], autocomplete: 'off'
-                        = submit_tag 'Search', name: nil, class: 'search-submit'
-                  %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                    %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
-                      %span.summary Filter
-                    %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
+              - if @records.user_records.any?
+                .search-records-wrapper#records_wrapper
+                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
+                    .grid-row
+                      .column-one-third
+                        .records-search
+                          = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
+                          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q], autocomplete: 'off'
+                          = submit_tag 'Search', name: nil, class: 'search-submit'
+                    %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
+                      %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
+                        %span.summary Filter
+                      %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
 
-                      .grid-row
-                        .column-two-thirds
-                          .form-group
-                            %fieldset.inline
-                              %legend.form-label.form-label-bold Filter data:
-                              .multiple-choice
-                                = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
-                                = label_tag 'Current records', nil, for: 'status_current'
-                              .multiple-choice
-                                = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
-                                = label_tag 'Archived records', nil, for: 'status_archived'
-                              .multiple-choice
-                                = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                                = label_tag 'Both', nil, for: 'status_all'
-                            = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
+                        .grid-row
+                          .column-two-thirds
+                            .form-group
+                              %fieldset.inline
+                                %legend.form-label.form-label-bold Filter data:
+                                .multiple-choice
+                                  = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
+                                  = label_tag 'Current records', nil, for: 'status_current'
+                                .multiple-choice
+                                  = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
+                                  = label_tag 'Archived records', nil, for: 'status_archived'
+                                .multiple-choice
+                                  = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
+                                  = label_tag 'Both', nil, for: 'status_all'
+                              = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
               - if @records.present?
-                .records-count
-                  %span#records-count
-                    = render partial: 'showing'
-                  - if params[:q].present? || params[:status].present?
-                    = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
+                - if @records.user_records.any?
+                  .records-count
+                    %span#records-count
+                      = render partial: 'showing'
+                    - if params[:q].present? || params[:status].present?
+                      = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
 
                 .fullscreen-content{data: {module: 'scrolling-tables'}}
                   %table.table.register-data-table
@@ -93,7 +96,13 @@
                                 What does #{field['field']} mean
                               ?
                     %tbody#records-tbody
-                      = render partial: 'record', collection: @records
+                      - if @records.user_records.any?
+                        = render partial: 'record', collection: @records
+                      - else
+                        %tr
+                          %td{colspan: @records.count}
+                            .panel.panel-border-wide
+                              %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
 
                 .pager.js-hidden
                   .pager-controls
@@ -114,14 +123,15 @@
                       No results found.
                     - if params[:q].present? || params[:status].present?
                       = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
-          .subsection.js-subsection
-            .subsection__header
-              %h2.subsection__title Access the data
-            .subsection__content.js-subsection-content#access_section
-              %ul.list
-                %li= link_to 'Create API key', api_users_path(register: @register.slug)
-                %li Always access the most recent version of all registers through our API.
-              %p You can #{link_to 'download the latest data', register_download_index_path(@register.slug)} in this register as a CSV or JSON file.
+          - if @records.user_records.any?
+            .subsection.js-subsection
+              .subsection__header
+                %h2.subsection__title Access the data
+              .subsection__content.js-subsection-content#access_section
+                %ul.list
+                  %li= link_to 'Create API key', api_users_path(register: @register.slug)
+                  %li Always access the most recent version of all registers through our API.
+                %p You can #{link_to 'download the latest data', register_download_index_path(@register.slug)} in this register as a CSV or JSON file.
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Give feedback
