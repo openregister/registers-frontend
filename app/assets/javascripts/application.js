@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dialog-polyfill
 //= require govuk/modules
 //= require scrolling-tables
 //= require gaap-analytics

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
+    resources :fields, only: :show
     resources :download
     resources :feedback
     resources :records, constraints: { id: /.*/ }, only: :show

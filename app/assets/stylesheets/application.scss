@@ -30,6 +30,7 @@
 @import 'modules/accessible-autocomplete';
 @import 'modules/subsections';
 @import 'modules/scrolling-tables';
+@import 'modules/dialog';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -186,7 +187,8 @@ table {
     border-right: 2px solid $white;
     font-weight: normal;
     min-width: 280px;
-    padding: 15px 30px 15px 15px;
+    padding: 15px 55px 15px 15px;
+    position: relative;
     vertical-align: middle;
 
     &.start-date,
@@ -198,6 +200,28 @@ table {
 
     &:last-child {
       border-right: 0;
+      padding-right: 55px;
+    }
+  }
+
+  .info-icon {
+    background-color: $govuk-blue;
+    border-radius: 50%;
+    color: $white;
+    display: inline-block;
+    font-weight: bold;
+    height: 25px;
+    line-height: 1.7;
+    position: absolute;
+    right: 12px;
+    text-align: center;
+    text-decoration: none;
+    top: 12px;
+    width: 25px;
+
+    &:focus,
+    &:hover {
+      color: $white;
     }
   }
 

@@ -86,7 +86,12 @@
                     %thead
                       %tr{data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Sort"}}
                         - @register.register_fields.each do |field|
-                          %th{class: "#{field['field']}"}= field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
+                          %th{class: "#{field['field']}"}
+                            = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
+                            = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true do
+                              %span.visually-hidden
+                                What does #{field['field']} mean
+                              ?
                     %tbody#records-tbody
                       = render partial: 'record', collection: @records
 
@@ -122,6 +127,10 @@
               %h2.subsection__title Give feedback
             .subsection__content.js-subsection-content#feedback_section
               = render partial: 'feedback/form'
+
+%dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
+  %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
+  .modal-dialog__inner
 
 = content_for :javascript do
   :javascript

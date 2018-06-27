@@ -1,0 +1,66 @@
+// TODO: Refactor into GOV.UK JS Module
+
+var dialog = document.getElementById('modal_dialog');
+var dlalogContent = dialog.querySelectorAll('.modal-dialog__inner')[0];
+var dialogClose = dialog.querySelectorAll('.modal-dialog__close')[0];
+
+function initDialog() {
+  // Render field partial in dialog
+  dlalogContent.innerHTML = "<%= escape_javascript render(partial: 'fields/field') %>";
+
+  // Fix dialog for non-supporting browsers
+  dialogPolyfill.registerDialog(dialog);
+
+  // Open dialog
+  dialog.showModal();
+
+  isDialogOpen();
+}
+
+function setFocusBackOnTarget() {
+  var targetUrl = "<%= register_field_url(@register.slug, @field.data['field']) %>";
+  var targetElement = document.querySelectorAll('[href="' + targetUrl + '"]')[0];
+  targetElement.focus();
+}
+
+function isDialogOpen() {
+  if (dialog.open) {
+    dialog.setAttribute('aria-hidden', 'false');
+
+    // Focus on close link
+    dialogClose.focus();
+  } else {
+
+    dialog.setAttribute('aria-hidden', 'true');
+
+    // Focus back on clicked element
+    setFocusBackOnTarget();
+  }
+}
+
+initDialog();
+
+// Close dialog when close link is clicked
+dialogClose.addEventListener('click', function() {
+  dialog.close();
+  isDialogOpen();
+});
+
+// Close dialog when backdrop is clicked
+// https://stackoverflow.com/questions/25864259/how-to-close-the-new-html-dialog-tag-by-clicking-on-its-backdrop
+dialog.addEventListener('click', function (event) {
+  var rect = dialog.getBoundingClientRect();
+  var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+  if (!isInDialog) {
+    dialog.close();
+    isDialogOpen();
+  }
+});
+
+// Set focus back on clicked element on ESC key
+document.addEventListener('keyup', function(e) {
+  if (e.keyCode == 27) {
+    dialog.close();
+    isDialogOpen();
+  }
+});
