@@ -97,7 +97,7 @@
                               ?
                     %tbody#records-tbody
                       - if @records.user_records.any?
-                        = render partial: 'record', collection: @records
+                        = render partial: 'record', collection: @records.user_records
                       - else
                         %tr
                           %td{colspan: @records.count}
@@ -106,13 +106,13 @@
 
                 .pager.js-hidden
                   .pager-controls
-                    = paginate @records, outer_window: 0, window: 3
+                    = paginate @records.user_records, outer_window: 0, window: 3
                   .pager-summary
                     = render partial: 'showing'
 
-                - unless @records.last_page?
+                - unless @records.user_records.last_page?
                   %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
-                    = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
+                    = link_to_next_page @records.user_records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
 
               - else
                 .no-search-results
