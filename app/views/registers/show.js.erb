@@ -1,7 +1,7 @@
 $("#records-tbody").append("<%= j(render(partial: 'record', collection: @records.user_records)) %>");
 $("#records-count").html('Showing <strong>1 &ndash; <%= @records.user_records.count + @records.user_records.offset_value %></strong> of <strong><%= @records.user_records.total_count %></strong> records <% if params[:q].present? %>for <strong>"<%= params[:q] %>"</strong><% end %>')
 
-<% if @records.last_page? %>
+<% if @records.user_records.last_page? %>
   $("#load-more-records").hide();
 <% else %>
   $("#load-more-records").replaceWith("<%= escape_javascript(link_to_next_page @records.user_records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true) %>");
