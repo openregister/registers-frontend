@@ -57,7 +57,6 @@ private
     sort_direction = params[:sort_direction] ||= 'asc'
 
     @register.records
-             .where(entry_type: 'user')
              .search_for(fields, params[:q])
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
