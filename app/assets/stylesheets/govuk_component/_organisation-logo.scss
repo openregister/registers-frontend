@@ -12,6 +12,13 @@
   margin-bottom: $gutter;
   width: 150px;
 
+  .app-c-highlight-boxes__item & {
+    bottom: $gutter-half * 1.5;
+    left: $gutter-half * 1.5;
+    margin: 0;
+    position: absolute;
+  }
+
   @include media(tablet) {
     font-size: 16px;
     line-height: 20px;

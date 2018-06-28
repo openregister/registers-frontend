@@ -27,7 +27,6 @@
         = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
-      %h3.heading-small.mq-small-only Sort by:
       - if @registers.present?
         %table.register-status-table.table-collapsible
           %col{width: '60%'}

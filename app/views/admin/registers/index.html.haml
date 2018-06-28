@@ -9,13 +9,19 @@
 
   .grid-row
     .column-full
+      - if @featured_registers.any?
+        %h3.heading-medium Featured registers
+        %ul{"data-sort-list" => true ,"data-url" => "#{sort_admin_registers_path}", class: 'sortable'}
+          = render partial: 'register', collection: @featured_registers
+
       - if @registers.any?
-        %ul{"data-url" => "#{sort_admin_registers_path}", class: 'sortable'}
+        %hr
+        %ul.sortable
           = render partial: 'register', collection: @registers
 
 = content_for :javascript do
   :javascript
-    $(".sortable").sortable({
+    $("[data-sort-list]").sortable({
       placeholder: "sortable-placeholder",
       update: function(e, ui) {
         $.ajax({

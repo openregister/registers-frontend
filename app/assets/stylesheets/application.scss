@@ -31,6 +31,7 @@
 @import 'modules/subsections';
 @import 'modules/scrolling-tables';
 @import 'modules/dialog';
+@import 'modules/highlight-boxes';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -253,6 +254,16 @@ table {
   p,
   .govuk-organisation-logo {
     margin-bottom: 0;
+  }
+
+  tbody td:before {
+    content: none;
+  }
+
+  @include media($max-width: 641px) {
+    thead {
+      display: none;
+    }
   }
 }
 
@@ -547,7 +558,6 @@ details {
   li {
     background: $grey-3;
     box-sizing: border-box;
-    cursor: move;
     display: block;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
@@ -564,6 +574,23 @@ details {
     background: none;
     border: dashed 2px $border-colour;
     height: 59px;
+  }
+}
+
+.ui-sortable-handle {
+  cursor: move;
+
+  &:before {
+    background-image: image-url('grab-icon.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    margin-right: 15px;
+    vertical-align: middle;
+    width: 15px;
   }
 }
 
