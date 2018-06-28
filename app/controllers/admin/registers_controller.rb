@@ -70,7 +70,8 @@ module Admin
                                         :url,
                                         :position,
                                         :seo_title,
-                                        :meta_description)
+                                        :meta_description,
+                                        :featured)
     end
   end
 end

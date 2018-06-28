@@ -20,6 +20,7 @@ class Register < ApplicationRecord
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, ->(search_term) { search_term.present? ? search_for(search_term) : all }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
+  scope :featured, -> { where(featured: true) }
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
