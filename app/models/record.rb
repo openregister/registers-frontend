@@ -24,7 +24,4 @@ class Record < ApplicationRecord
       entry_type: 'user'
       )
   }
-
-  scope :user_records, -> { where(entry_type: 'user') }
-  scope :system_records, -> { where(entry_type: 'system') }
 end
