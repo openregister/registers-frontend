@@ -1,7 +1,4 @@
 class Register < ApplicationRecord
-  include PgSearch
-  pg_search_scope :search_for, against: :name
-
   before_validation :set_slug
 
   CURRENT_PHASES = %w[Backlog Discovery Alpha Beta].freeze
@@ -18,7 +15,11 @@ class Register < ApplicationRecord
   scope :has_records, -> { where(id: Record.select(:register_id)) }
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }
   scope :in_beta, -> { where(register_phase: 'Beta') }
-  scope :search_registers, ->(search_term) { search_term.present? ? search_for(search_term) : all }
+  scope :search_registers, lambda { |search_term|
+                             if search_term.present?
+                               where("name ilike '%#{search_term}%'")
+                             end
+                           }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
   scope :featured, -> { where(featured: true) }
   scope :not_featured, -> { where(featured: false) }
