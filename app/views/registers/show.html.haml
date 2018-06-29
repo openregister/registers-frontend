@@ -2,18 +2,8 @@
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
-%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
-  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
-    %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
-    %li.breadcrumbs__item
-      = link_to 'GOV.UK Registers', root_path
-    %li.breadcrumbs__item
-      = link_to 'Get data', registers_path
-    %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to "#{@register.register_name} register", '#content', 'aria-current' => 'page'
-
 %main#content.container{role:'main'}
+  = link_to 'Back', registers_path, class: 'link-back'
 
   - if @register.register_phase != 'Beta'
     .grid-row
@@ -32,10 +22,11 @@
 
       .column-one-third
         - if @register.register_authority.present?
-          %p.bold-small Managed by:
-          %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
-            %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
-              %span= @register.register_authority.data['name']
+          .related-items
+            %p.bold-small Managed by:
+            %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
+              %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
+                %span= @register.register_authority.data['name']
 
   .grid-row
     .column-full

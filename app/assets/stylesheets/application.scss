@@ -58,9 +58,9 @@ img {
   margin-top: 0;
 }
 
-.register-show,
 .register-index,
-.static-content {
+.static-content,
+.entries-index {
   .heading-large {
     margin-top: 0;
   }
@@ -69,6 +69,20 @@ img {
 .records-show {
   .heading-large {
     font-weight: normal;
+  }
+}
+
+.register-show {
+  .link-back {
+    margin-bottom: 0;
+  }
+
+  .related-items {
+    border: none;
+
+    @include media(tablet) {
+      margin-top: $gutter-half * 3;
+    }
   }
 }
 
@@ -132,7 +146,7 @@ a:visited {
 }
 
 .register-meta-data {
-  margin: $gutter-half 0;
+  margin-bottom: $gutter-half;
 }
 
 table {
