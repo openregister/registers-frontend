@@ -3,8 +3,6 @@
 - content_for :body_classes, 'register-show'
 
 %main#content.container{role:'main'}
-  = link_to 'Back', registers_path, class: 'link-back'
-
   - if @register.register_phase != 'Beta'
     .grid-row
       .column-two-thirds
