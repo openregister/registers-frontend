@@ -1,5 +1,5 @@
 %tr
-  %th
+  %td
     %p
       %strong= link_to_if register.register_phase == 'Alpha', register.register_name, register_path(register.slug)
       %br
@@ -7,12 +7,12 @@
         = register.description
       - else
         = register.register_description
-  %td{"data-title" => "Managed by: "}
+  %td
     - if register.register_authority.present?
       %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
         %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
           %span= register.register_authority.data['name']
-  %td{"data-title" => "Phase: "}
+  %td
     - if register.register_phase == 'Alpha'
       = link_to 'Open for feedback', support_question_path
     - else

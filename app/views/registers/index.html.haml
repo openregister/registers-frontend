@@ -29,29 +29,45 @@
             %p
               Results found for <strong>"#{params[:q]}"</strong>
               = link_to 'Reset', registers_path, class: 'reset-link'
-        - else
-          = form_tag registers_path(anchor: 'content'), class: 'sort-registers', method: 'get' do
-            .form-group
-              %fieldset.inline
-                %legend.form-label.form-label-bold Sort by:
-                .multiple-choice
-                  = radio_button_tag 'sort', 'popularity', params[:sort] == 'popularity' || !params[:sort].present? ?  'true' : nil
-                  = label_tag 'popularity', nil, for: 'sort_popularity'
-                .multiple-choice
-                  = radio_button_tag 'sort', 'name', params[:sort] == 'name' ?  'true' : nil
-                  = label_tag 'name', nil, for: 'sort_name'
-              = submit_tag 'Search', class: 'button filter-search-submit'
-        .registers-block-grid
-          .grid-row
-            - @registers.each do |register|
-              .column-one-third
-                = link_to register_path(register.slug), class: 'register-block' do
-                  %h3.register-block__name= register.register_name
-                  %p.register-block__description= register.register_description
-                  - if register.register_authority.present?
-                    %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                      %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                        %span= register.register_authority.data['name']
+        .grid-row
+          .column-full
+            - if @registers.featured.present?
+              %h2.heading-small Featured
+              %ol.app-c-highlight-boxes
+                - @registers.featured.by_popularity.each do |register|
+                  %li.app-c-highlight-boxes__item-wrapper
+                    .app-c-highlight-boxes__item
+                      %h3.app-c-highlight-boxes__title= link_to register.register_name, register_path(register.slug)
+                      %p.app-c-highlight-boxes__description= register.register_description
+                      - if register.register_authority.present?
+                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
+                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
+                            %span= register.register_authority.data['name']
+
+
+            - if @registers.not_featured.present?
+              %table.register-status-table.table-collapsible
+                %col{width: '80%'}
+                %col{width: '20%'}
+                %thead
+                  %tr
+                    %th{role: "columnheader", scope: "col"}
+                      Register
+                    %th{role: "columnheader", scope: "col"}
+                      Managed by
+                %tbody
+                  - @registers.not_featured.by_name.each do |register|
+                    %tr
+                      %td
+                        %p
+                          %strong= link_to register.register_name, register_path(register.slug)
+                          %br
+                          = register.register_description
+                      %td
+                        - if register.register_authority.present?
+                          %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
+                            %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
+                              %span= register.register_authority.data['name']
 
       - else
         .search-results
