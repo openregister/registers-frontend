@@ -256,6 +256,10 @@ table {
     margin-bottom: 0;
   }
 
+  a {
+    white-space: normal;
+  }
+
   tbody td:before {
     content: none;
   }
