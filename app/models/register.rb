@@ -17,7 +17,7 @@ class Register < ApplicationRecord
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, lambda { |search_term|
                              if search_term.present?
-                               where("name ilike ?", "%#{search_term}%")
+                               where("name ilike ?", "%#{sanitize_sql_like(search_term)}%")
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
