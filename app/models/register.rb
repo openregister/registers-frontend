@@ -71,6 +71,10 @@ class Register < ApplicationRecord
             .pluck("data -> 'register-name' as register_name").first || name
   end
 
+  def is_empty?
+    records.where(entry_type: 'user').none?
+  end
+
 private
 
   def set_slug
