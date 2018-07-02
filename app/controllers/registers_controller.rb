@@ -23,6 +23,7 @@ class RegistersController < ApplicationController
   def show
     @register = Register.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
+    @is_empty_register = !@register.records.where(entry_type: 'user').any?
     @feedback = Feedback.new
   end
 
@@ -57,6 +58,7 @@ private
     sort_direction = params[:sort_direction] ||= 'asc'
 
     @register.records
+             .where(entry_type: 'user')
              .search_for(fields, params[:q])
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
