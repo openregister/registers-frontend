@@ -12,12 +12,14 @@ class Register < ApplicationRecord
   scope :by_name, -> { order name: :asc }
   scope :by_popularity, -> { order position: :asc }
   scope :sort_by_phase_name_asc, -> { order(ordered_phases) }
-  scope :has_records, -> { where(id: Record.select(:register_id)) }
+  scope :has_records, -> { where(id: Record.select(:register_id))
+
+}
   scope :available, -> { has_records.or(Register.where(register_phase: 'Backlog')) }
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, lambda { |search_term|
                              if search_term.present?
-                               where("name ilike '%#{search_term}%'")
+                               where("name ilike ?", "%#{search_term}%")
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
