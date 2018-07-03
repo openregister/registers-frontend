@@ -19,7 +19,8 @@ class Register < ApplicationRecord
                              if search_term.present?
                                Register.select('registers.*', "records.data")
                                        .joins("LEFT JOIN records ON records.key = 'register:' || registers.slug")
-                                       .where("name ILIKE ? OR cast(data->'text' as varchar) ILIKE ?", "%#{sanitize_sql_like(search_term)}%", "%#{sanitize_sql_like(search_term)}%")
+                                       .where(*["name ILIKE ? OR cast(data->'text' as varchar) ILIKE ?"]
+                                       .fill("%#{sanitize_sql_like(search_term)}%", 1..2))
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
