@@ -28,7 +28,7 @@ class Register < ApplicationRecord
 
   def register_last_updated
     Record.select('timestamp')
-      .where(register_id: id, entry_type: 'user')
+      .where(register_id: id)
       .order(timestamp: :desc)
       .first[:timestamp]
       .to_s
@@ -71,6 +71,10 @@ class Register < ApplicationRecord
     register_phase != 'Backlog' &&
       Record.where(register_id: id, entry_type: 'system', key: 'register-name')
             .pluck("data -> 'register-name' as register_name").first || name
+  end
+
+  def is_empty?
+    records.where(entry_type: 'user').none?
   end
 
 private

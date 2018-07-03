@@ -187,6 +187,10 @@ table {
 
 .table {
   margin-bottom: $gutter;
+
+  .panel {
+    margin: $gutter 0;
+  }
 }
 
 .table-scroll {
