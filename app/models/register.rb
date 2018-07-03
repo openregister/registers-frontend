@@ -17,7 +17,9 @@ class Register < ApplicationRecord
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, lambda { |search_term|
                              if search_term.present?
-                               where("name ilike ?", "%#{sanitize_sql_like(search_term)}%")
+                               Register.select('registers.*', "records.data")
+                                       .joins("LEFT JOIN records ON records.key = 'register:' || registers.slug")
+                                       .where("name ILIKE ? OR cast(data->'text' as varchar) ILIKE ?", "%#{sanitize_sql_like(search_term)}%", "%#{sanitize_sql_like(search_term)}%")
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
@@ -36,7 +38,7 @@ class Register < ApplicationRecord
   end
 
   def register_description
-    Record.where(register_id: id, key: "register:#{name.parameterize}")
+    Record.where(register_id: id, key: "register:#{slug}")
     .pluck("data -> 'text' as text")
     .first
   end
