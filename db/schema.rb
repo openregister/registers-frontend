@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180628112728) do
+ActiveRecord::Schema.define(version: 20180704141843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,5 +89,21 @@ ActiveRecord::Schema.define(version: 20180628112728) do
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
   end
+
+
+  create_view "register_search_results",  sql_definition: <<-SQL
+      SELECT registers.id AS register_id,
+      registers.name,
+      ((register_name_data.data -> 'register-name'::text))::character varying AS register_name,
+      ((register_description_data.data -> 'text'::text))::character varying AS register_description
+     FROM ((registers
+       LEFT JOIN ( SELECT records.register_id,
+              records.data
+             FROM records
+            WHERE ((records.key = 'register-name'::text) AND (records.entry_type = 'system'::text))) register_name_data ON ((register_name_data.register_id = registers.id)))
+       LEFT JOIN ( SELECT records.key,
+              records.data
+             FROM records) register_description_data ON ((register_description_data.key = ('register:'::text || (registers.slug)::text))));
+  SQL
 
 end
