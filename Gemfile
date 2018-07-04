@@ -30,9 +30,6 @@ gem 'govuk-registers-api-client', '~> 1.2.2'
 
 gem 'autoprefixer-rails'
 
-# Search
-gem 'pg_search'
-
 # Zendesk
 gem 'zendesk_api'
 
