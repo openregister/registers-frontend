@@ -17,10 +17,10 @@ class Register < ApplicationRecord
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, lambda { |search_term|
                              if search_term.present?
-                               Register.select('registers.*', "records.data")
-                                       .joins("LEFT JOIN records ON records.key = 'register:' || registers.slug")
-                                       .where(*["name ILIKE ? OR cast(data->'text' as varchar) ILIKE ?"]
-                                       .fill("%#{sanitize_sql_like(search_term)}%", 1..2))
+                               matching_registers = RegistersSearch.where(*['name ILIKE ? OR register_name ILIKE ? OR register_description ILIKE ?']
+                                                                   .fill("%#{sanitize_sql_like(search_term)}%", 1..3))
+                                                                   .pluck(:register_id)
+                               Register.where(id: matching_registers)
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
