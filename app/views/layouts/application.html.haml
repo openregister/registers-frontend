@@ -36,7 +36,7 @@
   = render partial: 'layouts/analytics'
 
 - content_for :after_header do
-  %aside{class: "notice"}
+  %aside.notice
     .container
       %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON or CSV from 30 September 2018. #{link_to "Read more about format changes", data_format_changes_path}
 
