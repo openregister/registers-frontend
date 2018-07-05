@@ -31,5 +31,6 @@ class PopulateRegisterDataInDbJob < ApplicationJob
                                   .first
     register.url = register_url
     register.save
+    RegisterSearchResult.refresh
   end
 end

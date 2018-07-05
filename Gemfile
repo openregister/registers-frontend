@@ -48,6 +48,7 @@ gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
 
 # Database
 gem 'activerecord-import'
+gem 'scenic', '~> 1.4', '>= 1.4.1'
 
 # Schedule
 gem 'clockwork'
