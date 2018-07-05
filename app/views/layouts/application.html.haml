@@ -3,7 +3,8 @@
 - content_for :page_title, "#{@page_title.present? ? "#{@page_title} - GOV.UK Registers" : 'GOV.UK Registers' }"
 
 - content_for :after_header do
-  %header{class: "header #{current_page?(root_path) ? 'header--without-border' : ''}"}
+  %header{class: "header #{current_page?(root_path) ? 'header--without-border' : 'header--without-border'}"}
+    -# Bring back border when notice is removed
     .header__container
       .header__brand{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Logo Clicked"}}
         = link_to root_path do
@@ -33,6 +34,11 @@
   = csrf_meta_tags
   %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.'}" }
   = render partial: 'layouts/analytics'
+
+- content_for :after_header do
+  %aside{class: "notice"}
+    .container
+      %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON or CSV from 30 September 2018. #{link_to "Read more about format changes", data_format_changes_path}
 
 - content_for :body_end do
   = javascript_include_tag 'application'

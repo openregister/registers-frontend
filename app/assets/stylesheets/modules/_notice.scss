@@ -1,0 +1,13 @@
+.notice {
+  background-color: $grey-4;
+  border-bottom: 1px solid $border-colour;
+
+  .container {
+    margin-bottom: 0;
+  }
+
+  p {
+    @include core-16;
+    margin: $gutter / 2 0;
+  }
+}
