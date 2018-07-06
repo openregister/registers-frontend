@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180704141843) do
+ActiveRecord::Schema.define(version: 20180706094206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -91,7 +92,7 @@ ActiveRecord::Schema.define(version: 20180704141843) do
   end
 
 
-  create_view "register_search_results",  sql_definition: <<-SQL
+  create_view "register_search_results", materialized: true,  sql_definition: <<-SQL
       SELECT registers.id AS register_id,
       registers.name,
       ((register_name_data.data -> 'register-name'::text))::character varying AS register_name,
@@ -105,5 +106,12 @@ ActiveRecord::Schema.define(version: 20180704141843) do
               records.data
              FROM records) register_description_data ON ((register_description_data.key = ('register:'::text || (registers.slug)::text))));
   SQL
+
+  add_index "register_search_results", "name gin_trgm_ops", name: "index_register_search_results_on_name", using: :gin
+  add_index "register_search_results", "name gin_trgm_ops", name: "register_search_results_name_idx", using: :gin
+  add_index "register_search_results", "name gin_trgm_ops", name: "register_search_results_name_idx1", using: :gin
+  add_index "register_search_results", "name gin_trgm_ops", name: "register_search_results_name_idx2", using: :gin
+  add_index "register_search_results", "name gin_trgm_ops", name: "trgrm_idx_name", using: :gin
+  add_index "register_search_results", "name gin_trgm_ops, register_name gin_trgm_ops, register_description gin_trgm_ops", name: "contacts_search_idx", using: :gin
 
 end
