@@ -17,7 +17,7 @@ class Register < ApplicationRecord
   scope :in_beta, -> { where(register_phase: 'Beta') }
   scope :search_registers, lambda { |search_term|
                              if search_term.present?
-                               RegisterSearchResult.search_for(search_term)
+                               joins(:register_search_results).merge(RegisterSearchResult.search(search_term))
                              end
                            }
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
@@ -26,6 +26,7 @@ class Register < ApplicationRecord
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
+  has_many :register_search_results
 
   def register_last_updated
     Record.select('timestamp')
