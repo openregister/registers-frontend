@@ -38,6 +38,7 @@ module Admin
 
     def destroy
       @register.destroy
+      RegisterSearchResult.refresh
       redirect_to admin_registers_path
     end
 
