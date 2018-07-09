@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180704141843) do
+ActiveRecord::Schema.define(version: 20180709102012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20180704141843) do
 
 
   create_view "register_search_results", materialized: true,  sql_definition: <<-SQL
-      SELECT registers.id AS register_id,
+      SELECT DISTINCT registers.id AS register_id,
       registers.name,
       ((register_name_data.data -> 'register-name'::text))::character varying AS register_name,
       ((register_description_data.data -> 'text'::text))::character varying AS register_description
