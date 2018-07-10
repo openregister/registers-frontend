@@ -19,7 +19,7 @@ class Record < ApplicationRecord
   }
 
   scope :record, lambda { |record|
-    find_by(
+    find_by!(
       key: record,
       entry_type: 'user'
       )
