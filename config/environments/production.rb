@@ -77,6 +77,12 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
     logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::Logger.new(STDOUT)
+
+    config.lograge.custom_options = lambda do |event|
+      {
+        error_backtrace: event.payload[:exception_object]&.backtrace&.join("\n")
+      }.compact
+    end
   end
 
   # Do not dump schema after migrations.

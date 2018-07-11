@@ -7,6 +7,7 @@ defaults: &defaults
     - registers-frontend-research
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
+    - logit-ssl-drain
 
 applications:
 - name: registers-frontend-research
