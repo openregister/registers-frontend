@@ -25,26 +25,43 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
   end
 
-  def field_link_resolver(field, field_value, register_slug = @register.slug)
-    single_resolver = lambda { |f, fv|
-      if f['datatype'] == 'curie' && fv.include?(':')
-        curie = fv.split(':')
-        curie[1].present? ? link_to(fv, register_record_path(curie[0], curie[1])) : link_to(fv, register_path(register_slug))
-      elsif f['register'].present? && f['field'] != register_slug
-        link_to(fv, register_record_path(f['register'], fv))
-      elsif f['datatype'] == 'url'
-        link_to(fv, fv)
-      else
-        fv
-      end
-    }
-
-    cardinality_n_links = -> { field_value.map { |fv| single_resolver.call(field, fv) }.join(', ').html_safe }
-
-    field_value.is_a?(Array) ? cardinality_n_links.call : single_resolver.call(field, field_value)
+  def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
+    if field_value.is_a?(Array)
+      field_value.map { |fv| resolve_single_link(field, fv, register_slug: register_slug, whitelist: whitelist) }.join(', ').html_safe
+    else
+      resolve_single_link(field, field_value, register_slug: register_slug, whitelist: whitelist)
+    end
   end
 
-private
+  private
+
+  def register_whitelist
+    @register_whitelist ||= Register.has_records.pluck(:slug)
+  end
+
+  def resolve_single_link(f, fv, register_slug: @register.slug, whitelist: register_whitelist)
+    field_register_slug = f['register']
+    field_name = f['field']
+
+    if f['datatype'] == 'curie' && fv.include?(':')
+      curie_register, curie_key = fv.split(':')
+
+      if !whitelist.include?(curie_register)
+        fv
+      elsif curie_key.present?
+        link_to(fv, register_record_path(curie_register, curie_key))
+      else
+        link_to(fv, register_path(curie_register))
+      end
+
+    elsif field_register_slug.present? && field_name != register_slug && whitelist.include?(field_register_slug)
+      link_to(fv, register_record_path(field_register_slug, fv))
+    elsif f['datatype'] == 'url'
+      link_to(fv, fv)
+    else
+      fv
+    end
+  end
 
   def recover_records(fields, params)
     default_sort_by = lambda {
