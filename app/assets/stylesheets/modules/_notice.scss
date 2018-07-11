@@ -8,6 +8,8 @@
 
   p {
     @include core-16;
-    margin: $gutter / 2 0;
+
+    margin: 0;
+    padding: ($gutter / 2) 0;
   }
 }
