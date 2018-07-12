@@ -25,26 +25,21 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
   end
 
-  def field_link_resolver(field, field_value, register_slug = @register.slug)
-    single_resolver = lambda { |f, fv|
-      if f['datatype'] == 'curie' && fv.include?(':')
-        curie = fv.split(':')
-        curie[1].present? ? link_to(fv, register_record_path(curie[0], curie[1])) : link_to(fv, register_path(register_slug))
-      elsif f['register'].present? && f['field'] != register_slug
-        link_to(fv, register_record_path(f['register'], fv))
-      elsif f['datatype'] == 'url'
-        link_to(fv, fv)
-      else
-        fv
-      end
-    }
+  def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
+    resolver = LinkResolver.new(current_register_slug: register_slug, register_whitelist: whitelist)
 
-    cardinality_n_links = -> { field_value.map { |fv| single_resolver.call(field, fv) }.join(', ').html_safe }
-
-    field_value.is_a?(Array) ? cardinality_n_links.call : single_resolver.call(field, field_value)
+    if field_value.is_a?(Array)
+      field_value.map { |fv| resolver.resolve(field, fv) }.join(', ').html_safe
+    else
+      resolver.resolve(field, field_value)
+    end
   end
 
 private
+
+  def register_whitelist
+    @register_whitelist ||= Register.has_records.pluck(:slug)
+  end
 
   def recover_records(fields, params)
     default_sort_by = lambda {
