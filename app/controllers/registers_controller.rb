@@ -5,9 +5,11 @@ class RegistersController < ApplicationController
   helper_method :field_link_resolver
 
   def index
+    search_term = params.permit(:q)[:q]
+
     @registers = Register.available
                          .in_beta
-                         .search_registers(params[:q])
+                         .search_registers(search_term)
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
