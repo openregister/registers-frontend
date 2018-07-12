@@ -12,9 +12,13 @@ class LinkResolver
     field_name = field['field']
     field_datatype = field['datatype']
 
+    foreign_key_resolvable = field_register_slug.present? && \
+      field_name != current_register_slug && \
+      register_whitelist.include?(field_register_slug)
+
     if field_datatype == 'curie' && field_value.include?(':')
       resolve_curie(field_value)
-    elsif field_register_slug.present? && field_name != current_register_slug && register_whitelist.include?(field_register_slug)
+    elsif foreign_key_resolvable
       resolve_foreign_key(field_register_slug, field_value)
     elsif field_datatype == 'url'
       link_to(field_value, field_value)
