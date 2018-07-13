@@ -45,29 +45,28 @@
                             %span= register.register_authority.data['name']
 
 
-            - if @registers.not_featured.present?
-              %table.register-status-table.table-collapsible
-                %col{width: '80%'}
-                %col{width: '20%'}
-                %thead
+            %table.register-status-table.table-collapsible
+              %col{width: '80%'}
+              %col{width: '20%'}
+              %thead
+                %tr
+                  %th{role: "columnheader", scope: "col"}
+                    Register
+                  %th{role: "columnheader", scope: "col"}
+                    Managed by
+              %tbody
+                - @registers.by_name.each do |register|
                   %tr
-                    %th{role: "columnheader", scope: "col"}
-                      Register
-                    %th{role: "columnheader", scope: "col"}
-                      Managed by
-                %tbody
-                  - @registers.not_featured.by_name.each do |register|
-                    %tr
-                      %td
-                        %p
-                          %strong= link_to register.register_name, register_path(register.slug)
-                          %br
-                          = register.register_description
-                      %td
-                        - if register.register_authority.present?
-                          %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                            %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                              %span= register.register_authority.data['name']
+                    %td
+                      %p
+                        %strong= link_to register.register_name, register_path(register.slug)
+                        %br
+                        = register.register_description
+                    %td
+                      - if register.register_authority.present?
+                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
+                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
+                            %span= register.register_authority.data['name']
 
       - else
         .search-results
