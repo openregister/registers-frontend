@@ -46,5 +46,5 @@
       - else
         .no-search-results
           %p
-            No results found for <strong>"#{params[:q][:name_cont]}"</strong>
+            No results found for <strong>"#{@search_term}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'

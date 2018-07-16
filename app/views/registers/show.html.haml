@@ -42,7 +42,7 @@
                       .column-one-third
                         .records-search
                           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
-                          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: params[:q], autocomplete: 'off'
+                          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
                           = submit_tag 'Search', name: nil, class: 'search-submit'
                     %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
                       %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
@@ -65,14 +65,14 @@
                                   = label_tag 'Both', nil, for: 'status_all'
                               = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
-              
+
               - if @records.any?
                 .records-count
                   %span#records-count
                     = render partial: 'showing'
-                  - if params[:q].present? || params[:status].present?
+                  - if @search_term.present? || params[:status].present?
                     = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-              
+
               - if @register.is_empty? || @records.any?
                 .fullscreen-content{data: {module: 'scrolling-tables'}}
                   %table.table.register-data-table
@@ -107,11 +107,11 @@
               - unless @records.any? || @register.is_empty?
                 .no-search-results
                   %p
-                    - if params[:q].present?
-                      No results found for <strong>"#{params[:q]}"</strong>
+                    - if @search_term.present?
+                      No results found for <strong>"#{@search_term}"</strong>
                     - else
                       No results found.
-                    - if params[:q].present? || params[:status].present?
+                    - if @search_term.present? || params[:status].present?
                       = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
           - if @records.any?
             .subsection.js-subsection
