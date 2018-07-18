@@ -26,9 +26,11 @@ class EntriesController < ApplicationController
 private
 
   def recover_entries_history(register_id, fields, params, page_size = 100)
+    @search_term = search_term
+
     page = params.fetch(:page) { 1 }.to_i
     user_entries = Entry.where(register_id: register_id, entry_type: 'user')
-                        .search_for(fields, params[:q])
+                        .search_for(fields, @search_term)
     query = user_entries.with_limit(page, page_size)
 
     previous_entries_numbers = query.reject { |entry| entry.previous_entry_number.nil? }.map(&:previous_entry_number)
@@ -40,5 +42,9 @@ private
       entries = previous_entries_query.select { |previous_entry| previous_entry.entry_number == entry.previous_entry_number }.first
       { current_entry: entry, previous_entry: entries }
     end
+  end
+
+  def search_term
+    params.permit(:q)[:q]
   end
 end

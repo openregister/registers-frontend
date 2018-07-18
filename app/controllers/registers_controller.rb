@@ -5,11 +5,10 @@ class RegistersController < ApplicationController
   helper_method :field_link_resolver
 
   def index
-    search_term = params.permit(:q)[:q]
-
+    @search_term = search_term
     @registers = Register.available
                          .in_beta
-                         .search_registers(search_term)
+                         .search_registers(@search_term)
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
@@ -22,6 +21,7 @@ class RegistersController < ApplicationController
   end
 
   def show
+    @search_term = search_term
     @register = Register.has_records.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
@@ -43,6 +43,10 @@ private
     @register_whitelist ||= Register.has_records.pluck(:slug)
   end
 
+  def search_term
+    params.permit(:q)[:q]
+  end
+
   def recover_records(fields, params)
     default_sort_by = lambda {
       has_name_field = fields.include?('name')
@@ -54,7 +58,7 @@ private
 
     @register.records
              .where(entry_type: 'user')
-             .search_for(fields, params[:q])
+             .search_for(fields, search_term)
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
              .page(params[:page])

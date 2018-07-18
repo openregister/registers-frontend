@@ -19,15 +19,15 @@
     .column-one-third
       = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
         = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, params[:q], class: 'search-input', placeholder: 'Search', autocomplete: 'off'
+        = search_field_tag :q, @search_term, class: 'search-input', placeholder: 'Search', autocomplete: 'off'
         = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
       - if @registers.present?
-        - if params[:q]
+        - if @search_term
           .search-results
             %p
-              Results found for <strong>"#{params[:q]}"</strong>
+              Results found for <strong>"#{@search_term}"</strong>
               = link_to 'Reset', registers_path, class: 'reset-link'
         .grid-row
           .column-full
@@ -71,7 +71,7 @@
       - else
         .search-results
           %p
-            No results found for <strong>"#{params[:q]}"</strong>
+            No results found for <strong>"#{@search_term}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
       %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
 

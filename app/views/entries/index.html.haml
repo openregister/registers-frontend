@@ -20,7 +20,7 @@
       = form_tag register_entries_path(@register.slug, anchor: 'updates_wrapper'), method: :get do
         .records-search#updates_wrapper
           = label_tag 'Search updates', nil, class: 'visually-hidden', for: 'q'
-          = search_field_tag 'q', nil, class: 'search-input', value: params[:q], placeholder: 'Search', autocomplete: 'off'
+          = search_field_tag 'q', nil, class: 'search-input', value: @search_term, placeholder: 'Search', autocomplete: 'off'
           = submit_tag 'Search', class: 'search-submit', name: nil
 
   .grid-row
@@ -40,5 +40,5 @@
       - else
         .no-search-results
           %p
-            No results found for <strong>"#{params[:q]}"</strong>
+            No results found for <strong>"#{@search_term}"</strong>
             = link_to 'Reset', register_entries_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
