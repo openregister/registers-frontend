@@ -8,7 +8,7 @@
       .column-two-thirds
         .panel.panel-border-wide
           %span.phase-banner In progress
-          %p This data is in progress and it’s not ready for use. #{link_to 'Contact the team', support_question_path} to give us feedback.
+          %p This data is in progress and it’s not ready for use.
 
   .register-meta-data
     .grid-row
@@ -65,14 +65,14 @@
                                   = label_tag 'Both', nil, for: 'status_all'
                               = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
 
-              
+
               - if @records.any?
                 .records-count
                   %span#records-count
                     = render partial: 'showing'
                   - if params[:q].present? || params[:status].present?
                     = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-              
+
               - if @register.is_empty? || @records.any?
                 .fullscreen-content{data: {module: 'scrolling-tables'}}
                   %table.table.register-data-table
