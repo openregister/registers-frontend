@@ -50,9 +50,22 @@
 
     %section.content-section.content-section--with-top-border
       .grid-row
-        .column-full
-          %h2.heading-medium.content-section__title Get started
-          %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Navigation Link Clicked"}} Search all the #{link_to 'registers you can use', registers_path} to see what government data is available.
+        %h2.heading-medium.content-section__title.column-full Registers in numbers
+        .column-one-third
+          .data
+            = link_to registers_path do
+              %span.data-item.bold-xxlarge= @ready_registers.count
+              %span.bold-xsmall registers available
+        .column-one-third
+          .data
+            = link_to registers_path do
+              %span.data-item.bold-xxlarge= @organisation_count
+              %span.bold-xsmall government organisations providing registers
+        .column-one-third
+          .data
+            = link_to services_using_registers_path do
+              %span.data-item.bold-xxlarge 13
+              %span.bold-xsmall services using registers
 
 = content_for :javascript do
   :javascript
