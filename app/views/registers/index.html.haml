@@ -15,7 +15,9 @@
     .column-two-thirds
       %h1.heading-large
         Registers available
+      %p.heading-large
         %span.heading-secondary Registers are up-to-date lists of information that are managed and approved by government. You can use this data to build and maintain your service.
+      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
     .column-one-third
       = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
         = label_tag :q, 'Search', class: 'visually-hidden'
@@ -73,7 +75,6 @@
           %p
             No results found for <strong>"#{@search_term}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
-      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
 
 = content_for :javascript do
   :javascript
