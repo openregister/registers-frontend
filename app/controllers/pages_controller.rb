@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
     @ready_registers = Register.available.where(register_phase: 'Beta')
     @upcoming_registers = Register.available.where.not(register_phase: 'Beta')
+    @organisation_count = @ready_registers.distinct.count(:authority)
   end
 
   def services_using_registers; end
