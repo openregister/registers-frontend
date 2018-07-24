@@ -1,8 +1,8 @@
 class Record < ApplicationRecord
   include SearchScope
   belongs_to :register
-  scope :current, -> { where("data->> 'end-date' is null") }
-  scope :archived, -> { where("data->> 'end-date' is not null") }
+  scope :current, -> { where("end_date is null or end_date > now() at time zone 'utc'") }
+  scope :archived, -> { where("end_date <= now() at time zone 'utc'") }
   scope :status, lambda { |status|
     case status
     when 'archived', 'current'
