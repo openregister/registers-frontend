@@ -313,8 +313,9 @@ table {
     font-size: 16px;
     text-decoration: none;
 
-    .data-item.bold-xsmall {
+    .data-item.bold-small {
       text-decoration: underline;
+      line-height: 1.3157894737;
     }
   }
 }
