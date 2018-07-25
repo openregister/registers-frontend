@@ -40,6 +40,14 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
       expect(Entry.where(key: 'CI').last.data['citizen-names']).to eq('Citizen of the Ivory Coast EDIT')
     end
 
+    it 'interprets end_date to second precision by using the start of the time period' do
+      expect(Record.find_by(key: 'DD').end_date).to eq(Time.utc(1990, 10, 2, 0, 0, 0))
+    end
+
+    it 'leaves end_date null if end-date is missing' do
+      expect(Record.find_by(key: 'GB').end_date).to be_nil
+    end
+
     it 'retains existing entries' do
       expect(Entry.where(key: 'CI').first.data['citizen-names']).to eq('Citizen of the Ivory Coast')
     end

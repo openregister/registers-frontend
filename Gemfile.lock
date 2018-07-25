@@ -161,6 +161,7 @@ GEM
     inflection (1.0.0)
     invisible_captcha (0.10.0)
       rails (>= 3.2.0)
+    iso8601 (0.11.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -390,6 +391,7 @@ DEPENDENCIES
   http (= 2.2.1)
   httparty (~> 0.16.2)
   invisible_captcha
+  iso8601 (~> 0.11.0)
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails (~> 5.0, >= 5.0.5)
