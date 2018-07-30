@@ -20,30 +20,20 @@
       %p You can also see all the #{link_to 'registers you can use', registers_path}.
 
     .column-one-third
-      = form_tag registers_in_progress_path(anchor: 'content'), class: 'records-search', method: 'get' do
-        = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, nil, class: 'search-input', placeholder: 'Search'
-        = submit_tag 'Search', name: nil, class: 'search-submit'
 
     .column-full
-      - if @registers.present?
-        %table.register-status-table.table-collapsible
-          %col{width: '60%'}
-          %col{width: '20%'}
-          %col{width: '20%'}
-          %thead
-            %tr
-              %th{role: "columnheader", scope: "col"}
-                Register
-              %th{role: "columnheader", scope: "col"}
-                Managed by
-              %th{role: "columnheader", scope: "col"}
-                Status
-          %tbody
-            - @registers.each do |register|
-              = render partial: 'registers/register', object: register
-      - else
-        .no-search-results
-          %p
-            No results found for <strong>"#{@search_term}"</strong>
-            = link_to 'Reset', registers_path, class: 'reset-link'
+      %table.register-status-table.table-collapsible
+        %col{width: '60%'}
+        %col{width: '20%'}
+        %col{width: '20%'}
+        %thead
+          %tr
+            %th{role: "columnheader", scope: "col"}
+              Register
+            %th{role: "columnheader", scope: "col"}
+              Managed by
+            %th{role: "columnheader", scope: "col"}
+              Status
+        %tbody
+          - @registers.each do |register|
+            = render partial: 'registers/register', object: register
