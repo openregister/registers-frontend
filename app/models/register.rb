@@ -49,18 +49,6 @@ class Register < ApplicationRecord
           .map { |entry| entry[:data] }
   end
 
-  def links_to
-    linked_register_names = register_fields.select { |f| f['register'] && f['register'] != slug }.map { |f| f['register'] }
-    Register.where(slug: linked_register_names)
-  end
-
-  def links_from
-    Register.where.not(id: id)
-    .joins(:records)
-    .where(records: { entry_type: 'system' })
-    .where("data->>'register' = ?", slug)
-  end
-
   def register_authority
     Register.find_by(slug: 'government-organisation')&.records&.find_by(key: authority)
   end
