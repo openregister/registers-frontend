@@ -1,10 +1,9 @@
 (function (Modules) {
-  "use strict";
+  /* globals $, ga */
+  'use strict';
 
-  Modules.AccordionWithDescriptions = function() {
-
-    this.start = function($element) {
-
+  Modules.AccordionWithDescriptions = function () {
+    this.start = function ($element) {
       // Indicate that js has worked
       $element.addClass('js-accordion-with-descriptions');
 
@@ -18,7 +17,7 @@
       var $openOrCloseAllButton;
       var GOVUKServiceManualTopic = serviceManualTopicPrefix();
 
-      //addOpenCloseAllButton();
+      // addOpenCloseAllButton();
       addButtonsToSubsections();
       addIconsToSubsections();
       addAriaControlsAttrForOpenCloseAllButton();
@@ -30,44 +29,44 @@
       bindToggleForSubsections();
       bindToggleOpenCloseAllButton();
 
-      function getserviceManualTopic() {
+      function getserviceManualTopic () {
         return $('h1').text();
       }
 
-      function replaceSpacesWithUnderscores(str) {
-        return str.replace(/\s+/g,"_");
+      function replaceSpacesWithUnderscores (str) {
+        return str.replace(/\s+/g, '_');
       }
 
-      function serviceManualTopicPrefix() {
+      function serviceManualTopicPrefix () {
         var topic = getserviceManualTopic();
         topic = replaceSpacesWithUnderscores(topic);
         topic = topic.toLowerCase();
 
-        return "GOVUK_service_manual_" + topic + "_";
+        return 'GOVUK_service_manual_' + topic + '_';
       }
 
-      function addOpenCloseAllButton() {
-        $element.prepend( '<div class="subsection-controls js-subsection-controls"><button aria-expanded="false">Open all</button></div>' );
+      function addOpenCloseAllButton () {
+        $element.prepend('<div class="subsection-controls js-subsection-controls"><button aria-expanded="false">Open all</button></div>');
       }
 
-      function addButtonsToSubsections() {
+      function addButtonsToSubsections () {
         var $subsectionTitle = $element.find('.subsection__title');
 
         // Wrap each title in a button, with aria controls matching the ID of the subsection
-        $subsectionTitle.each(function(index) {
-          $(this).wrapInner( '<button class="subsection__button" aria-expanded="false" aria-controls="subsection_content_' + index +'"></a>' );
+        $subsectionTitle.each(function (index) {
+          $(this).wrapInner('<button class="subsection__button" aria-expanded="false" aria-controls="subsection_content_' + index + '"></a>');
         });
       }
 
-      function addIconsToSubsections() {
-        $subsectionHeader.append( '<span class="subsection__icon"></span>' );
+      function addIconsToSubsections () {
+        $subsectionHeader.append('<span class="subsection__icon"></span>');
       }
 
-      function addAriaControlsAttrForOpenCloseAllButton() {
+      function addAriaControlsAttrForOpenCloseAllButton () {
         // For each of the sections, create a string with all the subsection content IDs
-        var ariaControlsValue = "";
+        var ariaControlsValue = '';
         for (var i = 0; i < totalSubsections; i++) {
-          ariaControlsValue += "subsection_content_"+i+" ";
+          ariaControlsValue += 'subsection_content_' + i + ' ';
         }
 
         $openOrCloseAllButton = $element.find('.js-subsection-controls button');
@@ -76,14 +75,14 @@
         $openOrCloseAllButton.attr('aria-controls', ariaControlsValue);
       }
 
-      function closeOpenSections() {
+      function closeOpenSections () {
         var $subsectionContent = $element.find('.subsection__content');
         closeSection($subsectionContent);
       }
 
-      function openLinkedSection() {
+      function openLinkedSection () {
         var anchor = getActiveAnchor(),
-            section;
+          section;
 
         if (!anchor.length) {
           return;
@@ -98,54 +97,53 @@
         }
       }
 
-      function getActiveAnchor() {
+      function getActiveAnchor () {
         return GOVUK.getCurrentLocation().hash;
       }
 
-      function checkSessionStorage() {
-
+      function checkSessionStorage () {
         var $subsectionContent = $element.find('.subsection__content');
 
-        $subsectionContent.each(function(index) {
+        $subsectionContent.each(function (index) {
           var subsectionContentId = $(this).attr('id');
-          if(sessionStorage.getItem(GOVUKServiceManualTopic+subsectionContentId)){
-            openStoredSections($("#"+subsectionContentId));
+          if (sessionStorage.getItem(GOVUKServiceManualTopic + subsectionContentId)) {
+            openStoredSections($('#' + subsectionContentId));
           }
         });
 
-        //setOpenCloseAllText();
+        // setOpenCloseAllText();
       }
 
-      function setSessionStorage() {
+      function setSessionStorage () {
         var isOpenSubsections = $('.subsection--is-open').length;
         if (isOpenSubsections) {
           var $openSubsections = $('.subsection--is-open');
-          $openSubsections.each(function(index) {
+          $openSubsections.each(function (index) {
             var subsectionOpenContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.setItem( GOVUKServiceManualTopic+subsectionOpenContentId , 'Opened');
+            sessionStorage.setItem(GOVUKServiceManualTopic + subsectionOpenContentId, 'Opened');
           });
         }
       }
 
-      function removeSessionStorage() {
+      function removeSessionStorage () {
         var isClosedSubsections = $('.subsection').length;
         if (isClosedSubsections) {
           var $closedSubsections = $('.subsection');
-          $closedSubsections.each(function(index) {
+          $closedSubsections.each(function (index) {
             var subsectionClosedContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.removeItem( GOVUKServiceManualTopic+subsectionClosedContentId , subsectionClosedContentId);
+            sessionStorage.removeItem(GOVUKServiceManualTopic + subsectionClosedContentId, subsectionClosedContentId);
           });
         }
       }
 
-      function bindToggleForSubsections() {
+      function bindToggleForSubsections () {
         // Add toggle functionality individual sections
-        $subsectionHeader.on('click', function(e) {
+        $subsectionHeader.on('click', function (e) {
           toggleSection($(this).next());
           toggleIcon($(this));
           toggleState($(this).find('.subsection__button'));
-          //setOpenCloseAllText();
-          if(window.ga && ga.create) {
+          // setOpenCloseAllText();
+          if (window.ga && ga.create) {
             fireTracking($(this));
           }
           setSessionStorage();
@@ -153,44 +151,44 @@
           return false;
         });
 
-        $subsectionButton.on('click', function(e) {
+        $subsectionButton.on('click', function (e) {
           toggleSection($(this).parent().parent().next());
           toggleIcon($(this).parent().parent());
           toggleState($(this));
-          //setOpenCloseAllText();
+          // setOpenCloseAllText();
           setSessionStorage();
           removeSessionStorage();
           return false;
         });
       }
 
-      function bindToggleOpenCloseAllButton() {
+      function bindToggleOpenCloseAllButton () {
         $openOrCloseAllButton = $element.find('.js-subsection-controls button');
-        $openOrCloseAllButton.on('click', function(e) {
+        $openOrCloseAllButton.on('click', function (e) {
           var action = '';
 
           // update button text
-          if ($openOrCloseAllButton.text() == "Open all") {
-            $openOrCloseAllButton.text("Close all");
-            $openOrCloseAllButton.attr("aria-expanded", "true");
+          if ($openOrCloseAllButton.text() == 'Open all') {
+            $openOrCloseAllButton.text('Close all');
+            $openOrCloseAllButton.attr('aria-expanded', 'true');
             action = 'open';
           } else {
-            $openOrCloseAllButton.text("Open all");
-            $openOrCloseAllButton.attr("aria-expanded", "false");
+            $openOrCloseAllButton.text('Open all');
+            $openOrCloseAllButton.attr('aria-expanded', 'false');
             action = 'close';
           }
 
           // Set aria-expanded for each button
-          $subsectionButton.each(function( index ) {
+          $subsectionButton.each(function (index) {
             if (action == 'open') {
-              setExpandedState($(this), "true");
+              setExpandedState($(this), 'true');
             } else {
-              setExpandedState($(this), "false");
+              setExpandedState($(this), 'false');
             }
           });
 
           // show/hide content
-          $subsectionHeader.each(function( index ) {
+          $subsectionHeader.each(function (index) {
             if (action == 'open') {
               openSection($(this).next());
               showOpenIcon($(this));
@@ -210,14 +208,14 @@
         });
       }
 
-      function openStoredSections($section) {
+      function openStoredSections ($section) {
         toggleSection($section);
         toggleIcon($section);
         toggleState($section.parent().find('.subsection__button'));
         // setOpenCloseAllText();
       }
 
-      function setOpenCloseAllText() {
+      function setOpenCloseAllText () {
         var openSubsections = $('.subsection--is-open').length;
         // Find out if the number of is-opens == total number of sections
         if (openSubsections === totalSubsections) {
@@ -227,7 +225,7 @@
         }
       }
 
-      function toggleSection($node) {
+      function toggleSection ($node) {
         if ($($node).hasClass('js-hidden')) {
           openSection($node);
         } else {
@@ -235,7 +233,7 @@
         }
       }
 
-      function toggleIcon($node) {
+      function toggleIcon ($node) {
         if ($($node).parent().hasClass('subsection--is-open')) {
           $node.parent().removeClass('subsection--is-open');
           $node.parent().addClass('subsection');
@@ -245,45 +243,41 @@
         }
       }
 
-      function toggleState($node) {
-        if ($($node).attr('aria-expanded') == "true") {
-          $node.attr("aria-expanded", "false");
+      function toggleState ($node) {
+        if ($($node).attr('aria-expanded') == 'true') {
+          $node.attr('aria-expanded', 'false');
         } else {
-          $node.attr("aria-expanded", "true");
+          $node.attr('aria-expanded', 'true');
         }
       }
 
-      function openSection($node) {
+      function openSection ($node) {
         $node.removeClass('js-hidden');
       }
 
-      function closeSection($node) {
+      function closeSection ($node) {
         $node.addClass('js-hidden');
       }
 
-      function showOpenIcon($node) {
+      function showOpenIcon ($node) {
         $node.parent().removeClass('subsection');
         $node.parent().addClass('subsection--is-open');
       }
 
-      function showCloseIcon($node) {
+      function showCloseIcon ($node) {
         $node.parent().removeClass('subsection--is-open');
         $node.parent().addClass('subsection');
       }
 
-      function setExpandedState($node, state) {
-        $node.attr("aria-expanded", state);
+      function setExpandedState ($node, state) {
+        $node.attr('aria-expanded', state);
       }
 
-      function fireTracking($node) {
-        var action = ''
+      function fireTracking ($node) {
         if ($($node).parent().hasClass('subsection--is-open')) {
-          action = 'Open'
-        } else {
-          action = 'Closed'
+          ga('send', 'event', 'Content', 'Open', $node[0].innerText);
         }
-        ga('send', 'event', 'Content', action, $node[0].innerText);
       }
-    }
+    };
   };
 })(window.GOVUK.Modules);
