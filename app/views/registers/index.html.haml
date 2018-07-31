@@ -33,7 +33,7 @@
               = link_to 'Reset', registers_path, class: 'reset-link'
         .grid-row
           .column-full
-            - if @registers.featured.present?
+            - if @registers.featured.present? && !@search_term
               %h2.heading-small Featured
               %ol.app-c-highlight-boxes
                 - @registers.featured.by_popularity.each do |register|
