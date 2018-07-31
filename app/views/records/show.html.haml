@@ -4,8 +4,7 @@
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
-      - if request.referer.present?
-        = link_to "Back", :back, class: 'link-back'
+      %div#link-back
       %h1.heading-large Record <strong>#{params[:id]}</strong> in the <strong>#{@register.register_name}</strong> register
   .grid-row
     .column-full
@@ -26,3 +25,14 @@
   .grid-row
     .column-two-thirds
       %p This is a record from the #{link_to @register.register_name, register_path(@register.slug)} register
+      = content_for :javascript do
+        :javascript
+            var isInternalReferrer = document.referrer.indexOf(location.protocol + "//" + location.host) === 0;
+            if (isInternalReferrer) {
+              var backLink = document.createElement("a");
+              backLink.setAttribute("href", "javascript:history.back()");
+              backLink.setAttribute("class", "link-back");
+              backLink.textContent = "Back";
+              document.getElementById("link-back").appendChild(backLink);
+            }
+
