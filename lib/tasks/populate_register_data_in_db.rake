@@ -18,7 +18,7 @@ namespace :registers_frontend do
     end
 
     desc 'For local envs: Force a full redownload of a single register'
-    task :force_full_register_download, [:slug] => [:environment] do |_t, args|
+    task :force_full_register_download_now, [:slug] => [:environment] do |_t, args|
       register = Register.find_by(slug: args.slug)
       puts("starting full redownload of register #{register.name}")
       ForceFullRegisterDownloadJob.perform_now(register)

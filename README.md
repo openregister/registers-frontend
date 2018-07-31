@@ -55,6 +55,8 @@ If you need to use the Zendesk service you need to add 3 environment variables
 
 Add any registers using the `/admin` UI.
 
+If you need to redownload an existing register from scratch, you can run the job `bundle exec rake registers_frontend:populate_db:force_full_register_download[SLUG]` where `SLUG` is the slug of the register.
+
 ### prod
 
 When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.  
