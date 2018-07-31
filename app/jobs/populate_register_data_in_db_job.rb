@@ -7,7 +7,7 @@ class PopulateRegisterDataInDbJob < ApplicationJob
     RegisterDownloader.download(register)
     RegisterSearchResult.refresh
   rescue InvalidRegisterError
-    logger.info "Failed to update #{register.name}, so forcing a full reload instead"
-    RedownloadRegisterJob.perform_now(register)
+    logger.info "Root hash has changed for #{register.name}, so forcing a full reload instead"
+    ForceFullRegisterDownloadJob.perform_now(register)
   end
 end

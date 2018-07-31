@@ -37,19 +37,19 @@ RSpec.describe 'handling invalid register exceptions' do
         with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
         to_return(status: 200, body: country_invalid_hash, headers: {})
 
-      expect(RedownloadRegisterJob).to receive(:perform_now)
+      expect(ForceFullRegisterDownloadJob).to receive(:perform_now)
 
       PopulateRegisterDataInDbJob.perform_now(country)
     end
   end
 
-  describe RedownloadRegisterJob, type: :job do
+  describe ForceFullRegisterDownloadJob, type: :job do
     it 'rolls back and raises an error if the register is invalid' do
       stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
         with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
         to_return(status: 200, body: country_invalid_hash, headers: {})
 
-      expect { RedownloadRegisterJob.perform_now(country) }.to raise_error(RedownloadRegisterJob::FrontendInvalidRegisterError, 'country: Register has been reloaded with different data - root hashes do not match')
+      expect { ForceFullRegisterDownloadJob.perform_now(country) }.to raise_error(InvalidRegisterError, 'Register has been reloaded with different data - root hashes do not match')
 
       expect(Record.where(register_id: country.id).count).to eq(208)
       expect(Entry.where(register_id: country.id).count).to eq(219)

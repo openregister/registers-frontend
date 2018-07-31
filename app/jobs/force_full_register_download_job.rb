@@ -1,4 +1,4 @@
-class RedownloadRegisterJob < ApplicationJob
+class ForceFullRegisterDownloadJob < ApplicationJob
   queue_as :default
 
   class FrontendInvalidRegisterError < StandardError; end
@@ -15,13 +15,7 @@ class RedownloadRegisterJob < ApplicationJob
 
       logger.info("Updating #{register.name} in database")
 
-      begin
-        RegisterDownloader.download(register)
-      rescue InvalidRegisterError => e
-        logger.error("Failed to redownload #{register.name}")
-        raise FrontendInvalidRegisterError.new("#{register.name}: #{e}")
-      end
-
+      RegisterDownloader.download(register)
       RegisterSearchResult.refresh
     end
   end
