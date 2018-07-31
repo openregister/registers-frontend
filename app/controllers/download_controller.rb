@@ -39,17 +39,16 @@ class DownloadController < ApplicationController
   def success; end
 
   def download_json
-    data = open("#{@register.url}/records.json?page-size=5000", &:read)
+    data = download_format("json")
     send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
   end
 
   def download_csv
-    data = open("#{@register.url}/records.csv?page-size=5000", &:read)
+    data = download_format("csv")
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
   end
 
 private
-
 
   def set_register
     @register = Register.find_by_slug!(params[:register_id])
@@ -64,5 +63,22 @@ private
       :is_government,
       :register
     )
+  end
+
+  def api_key
+    Rails.configuration.try(:user_download_api_key)
+  end
+
+  def download_format(format)
+    uri = "#{@register.url}/records.#{format}?page-size=5000"
+    headers = {}
+    headers['Authorization'] = api_key if api_key.present?
+
+    response = HTTParty.get(uri, headers: headers)
+    if response.code == 200
+      response.body
+    else
+      raise "#{response.status}: #{response.message}"
+    end
   end
 end
