@@ -39,17 +39,16 @@ class DownloadController < ApplicationController
   def success; end
 
   def download_json
-    data = open("#{@register.url}/records.json?page-size=5000", &:read)
+    data = RegisterDownloader.new(@register).download_format('json')
     send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
   end
 
   def download_csv
-    data = open("#{@register.url}/records.csv?page-size=5000", &:read)
+    data = RegisterDownloader.new(@register).download_format('csv')
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
   end
 
 private
-
 
   def set_register
     @register = Register.find_by_slug!(params[:register_id])

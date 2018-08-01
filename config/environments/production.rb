@@ -103,4 +103,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.public_file_server.headers = {
     'Cache-Control' => 'public, max-age=31536000'
   }
+
+  config.user_download_api_key = ENV.fetch('USER_DOWNLOAD_API_KEY')
 end
