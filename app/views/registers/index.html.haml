@@ -74,6 +74,8 @@
         .search-results
           %p
             No results found for <strong>"#{@search_term}"</strong>
+            %script
+              ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
             = link_to 'Reset', registers_path, class: 'reset-link'
 
 = content_for :javascript do

@@ -109,8 +109,14 @@
                   %p
                     - if @search_term.present?
                       No results found for <strong>"#{@search_term}"</strong>
+                      %script
+                        var selectedInput = '';
+                        var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').labels[0].innerText.toLowerCase();
+                        ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
                     - else
                       No results found.
+                      %script
+                        ga('send', 'event', 'Search', 'No results', 'Search term not present');
                     - if @search_term.present? || params[:status].present?
                       = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
           - if @records.any?
