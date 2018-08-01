@@ -39,12 +39,12 @@ class DownloadController < ApplicationController
   def success; end
 
   def download_json
-    data = RegisterDownloader.new(@register).download_format('json')
+    data = RegisterRecordsDownloader.new(@register).download_format('json')
     send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
   end
 
   def download_csv
-    data = RegisterDownloader.new(@register).download_format('csv')
+    data = RegisterRecordsDownloader.new(@register).download_format('csv')
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
   end
 
