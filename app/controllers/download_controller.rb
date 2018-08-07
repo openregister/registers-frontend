@@ -38,6 +38,15 @@ class DownloadController < ApplicationController
 
   def success; end
 
+  def help_improve
+  end
+
+  def use_api
+  end
+
+  def choose_access
+  end
+
   def download_json
     data = RegisterRecordsDownloader.new(@register).download_format('json')
     send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"

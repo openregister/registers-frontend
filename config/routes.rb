@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     get '/download/success', to: 'download#success', as: 'download_success'
     get '/download-json', to: 'download#download_json', as: 'download_json'
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
+
+    get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
+    get '/help-us-improve', to: 'download#help_improve', as: 'help_improve'
+    get '/use-the-api', to: 'download#use_api', as: 'use_api'
   end
 
   get '/registers-in-progress', to: 'registers#in_progress'
