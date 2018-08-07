@@ -77,11 +77,11 @@
                 .fullscreen-content{data: {module: 'scrolling-tables'}}
                   %table.table.register-data-table
                     %thead
-                      %tr{data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Sort"}}
+                      %tr
                         - @register.register_fields.each do |field|
                           %th{class: "#{field['field']}"}
                             = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
-                            = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true do
+                            = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true, data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Help"} do
                               %span.visually-hidden
                                 What does #{field['field']} mean
                               ?
@@ -109,8 +109,14 @@
                   %p
                     - if @search_term.present?
                       No results found for <strong>"#{@search_term}"</strong>
+                      %script
+                        var selectedInput = '';
+                        var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
+                        ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
                     - else
                       No results found.
+                      %script
+                        ga('send', 'event', 'Search', 'No results', 'Search term not present');
                     - if @search_term.present? || params[:status].present?
                       = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
           - if @records.any?
