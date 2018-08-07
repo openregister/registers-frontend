@@ -4,7 +4,7 @@ defaults: &defaults
   memory: 1GB
   services:
     # postgres database
-    - registers-frontend
+    - registers-frontend-ha-encrypted
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     # logging
