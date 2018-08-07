@@ -1,7 +1,6 @@
 - if flash[:success].present?
   .alert--success= flash[:success]
 - if flash[:alert].present?
-  - @feedback.valid?
   = GovukElementsErrorsHelper.error_summary @feedback, 'There is a problem with the form', ''
 
 
