@@ -1,6 +1,8 @@
-= GovukElementsErrorsHelper.error_summary @feedback, "There is a problem with the form", ""
 - if flash[:success].present?
   .alert--success= flash[:success]
+- if flash[:alert].present?
+  = GovukElementsErrorsHelper.error_summary @feedback, 'There is a problem with the form', ''
+
 
 = form_for @feedback, url: register_feedback_index_path(@register.slug, anchor: 'feedback_section')  do |f|
   = f.invisible_captcha :spam
