@@ -276,13 +276,9 @@
       }
 
       function fireTracking($node) {
-        var action = ''
         if ($($node).parent().hasClass('subsection--is-open')) {
-          action = 'Open'
-        } else {
-          action = 'Closed'
+          ga('send', 'event', 'Content', 'Open', $node[0].innerText);
         }
-        ga('send', 'event', 'Content', action, $node[0].innerText);
       }
     }
   };
