@@ -1,2 +1,33 @@
+- @page_title = 'Choose how to access the data'
 
-choose how to access
+%main#content.container{role:'main'}
+  .grid-row
+    .column-full
+      %header.heading-large
+        %span.heading-secondary Step 1 of 3
+        %h2 
+          %b Choose how to access the data
+
+    .column-half
+      .app-c-highlight-boxes__item
+        %h3.app-c-highlight-boxes__title
+          %a API
+        %p.app-c-highlight-boxes__description 
+          Each register has an API to access the data.
+        %ul.app-c-highlight-boxes__description.list
+          %li always use the most up-to-date data
+          %li get the data as JSON or CSV
+          %li use our quick start guide to get set up
+          %li get notifications about updates to our service, like downtime and breaking changes
+        %a Use the API
+
+    .column-half
+      .app-c-highlight-boxes__item
+        %h3.app-c-highlight-boxes__title
+          %a Download
+        %p.app-c-highlight-boxes__description 
+          You can download the data in each register.
+        %ul.app-c-highlight-boxes__description.list
+          %li get the data as JSON, CSV, and ODS
+        %a Download
+
