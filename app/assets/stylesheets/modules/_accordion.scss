@@ -1,0 +1,15 @@
+.subsection__header--not-accordionised {
+  @extend .subsection__header;
+}
+
+.subsection--not-accordionised {
+  @extend .subsection;
+}
+.subsection__header--not-accordionised {
+  @extend .subsection__header;
+}
+.subsection__title--not-accordionised {
+  @extend .subsection__title;
+
+  font-size: 19px;
+}

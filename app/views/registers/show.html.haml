@@ -114,14 +114,9 @@
                     - if @search_term.present? || params[:status].present?
                       = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
           - if @records.any?
-            .subsection.js-subsection
-              .subsection__header
-                %h2.subsection__title Access the data
-              .subsection__content.js-subsection-content#access_section
-                %ul.list
-                  %li= link_to 'Create API key', api_users_path(register: @register.slug)
-                  %li Always access the most recent version of all registers through our API.
-                %p You can #{link_to 'download the latest data', register_download_index_path(@register.slug)} in this register as a CSV or JSON file.
+            .subsection--not-active
+              .subsection__header--not-active
+                %h2.subsection__title--not-active Access the data
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Give feedback
