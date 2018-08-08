@@ -110,7 +110,6 @@
                     - if @search_term.present?
                       No results found for <strong>"#{@search_term}"</strong>
                       %script
-                        var selectedInput = '';
                         var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
                         ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
                     - else
