@@ -19,10 +19,46 @@
     var showHideContent = new GOVUK.ShowHideContent();
     showHideContent.init();
 
-    document.getElementById('feedback_useful_yes').onclick = function() {
-      ga('send', 'event', 'Feedback', 'Radio - Yes', 'Is this register useful?');
-    }
+    document.getElementById('new_feedback')
+      .addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = event.target;
 
-    document.getElementById('feedback_useful_no').onclick = function() {
-      ga('send', 'event', 'Feedback', 'Radio - No', 'Is this register useful?');
-    }
+        var checkedRadios = form.querySelectorAll('input[type="radio"]:checked');
+
+        for (var i = 0; i < checkedRadios.length; i += 1) {
+          var action = 'Radio - ' + checkedRadios[i].parentElement.querySelector('label').innerText;
+          var label = checkedRadios[i].parentElement.parentElement.querySelector('legend').innerText;
+          ga('send',  {
+            hitType: 'event',
+            eventCategory: 'Feedback',
+            eventAction: action,
+            eventLabel: label,
+            nonInteraction: true
+          });
+        }
+
+        // Lets us know whether or not the Additional comments part of the
+        // feedback form is being used.
+        var additonalComments = form.querySelector('#feedback_message');
+        var checkedUsefulInput = form.querySelector('input[name="feedback[useful]"]:checked');
+        var eventAction = '';
+
+        if (checkedUsefulInput.value === 'yes') {
+          eventAction = 'Text - useful';
+        }
+        else if (checkedUsefulInput.value === 'no') {
+          eventAction = 'Text - not useful';
+        }
+
+        if (additonalComments.value.length >= 1) {
+          ga('send',  {
+            hitType: 'event',
+            eventCategory: 'Feedback',
+            eventAction: eventAction,
+            eventLabel: 'Is this register useful?',
+            nonInteraction: true
+          });
+        }
+        form.submit();
+    })
