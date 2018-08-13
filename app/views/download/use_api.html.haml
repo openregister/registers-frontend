@@ -1,26 +1,28 @@
 - @page_title = 'Use the API'
 
 %main#content.container{role:'main'}
-  %h1.heading-large Use the API
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large Use the API
 
-  %p
-    The Register ID is: 
-    %code.code.code-curl #{@register.register_name.downcase}
+      %p
+        The Register ID is: 
+        %code.code.code-curl #{@register.register_name.downcase}
 
-  %p
-    Get this register as JSON:
-    %code.code.code-curl curl #{@register.url}/records.json?page-size=5000
+      %p
+        Get this register as JSON:
+        %code.code.code-curl curl #{@register.url}/records.json?page-size=5000
 
-  %p
-    Read our technical documentation to see #{link_to 'how to get started', 'https://docs.registers.service.gov.uk/#choose-a-response-format'}. 
+      %p
+        Read our #{link_to 'technical documentation', 'https://docs.registers.service.gov.uk/#choose-a-response-format'} to see how to get started. 
 
-  / %h2.heading-medium Stay up to date
+      %h2.heading-medium Stay up to date
 
-  / %p Get notifications about:
-  / %ul.list.list-bullet
-  /   %li changes to our service, like downtime and breaking changes
-  /   %li the latest available registers and upcoming registers
-  /   %li tips and guidance on how to get the best our of registers
+      %p Get notifications about:
+      %ul.list.list-bullet
+        %li changes to our service, like downtime and breaking changes
+        %li the latest available registers and upcoming registers
+        %li tips and guidance on how to get the best our of registers
 
-  / %p
-  /   %a Sign up for updates
+      %p
+        %a.button Sign up for updates

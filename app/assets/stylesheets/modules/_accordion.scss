@@ -1,15 +1,22 @@
-.subsection__header--not-accordionised {
-  @extend .subsection__header;
-}
-
-.subsection--not-accordionised {
-  @extend .subsection;
-}
-.subsection__header--not-accordionised {
-  @extend .subsection__header;
-}
 .subsection__title--not-accordionised {
-  @extend .subsection__title;
+  // @extend .subsection__title;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: bold;
+  border-top: 1px solid $grey-2;
 
-  font-size: 19px;
+  a {
+    color: $link-colour;
+    display: block;
+    padding: 18px 2px 17px 2px;
+  }
+
+  &:hover {
+    background: $highlight-colour;
+  }
+
+  @media screen and (min-width: 641px) {
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
 }
