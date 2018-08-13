@@ -37,3 +37,22 @@
         %tbody
           - @registers.each do |register|
             = render partial: 'registers/register', object: register
+
+    %section.content-section.content-section--with-top-border.column-full
+      .grid-row
+        %h2.heading-medium.content-section__title.column-full Registers in numbers
+        .column-one-third
+          .data
+            = link_to registers_path do
+              %span.data-item.bold-xxlarge= @ready_registers.count
+              %span.data-item.bold-small registers available
+        .column-one-third
+          .data
+            = link_to registers_path do
+              %span.data-item.bold-xxlarge= @organisation_count
+              %span.data-item.bold-small government organisations providing&nbsp;registers
+        .column-one-third
+          .data
+            = link_to services_using_registers_path do
+              %span.data-item.bold-xxlarge 13
+              %span.data-item.bold-small services using registers
