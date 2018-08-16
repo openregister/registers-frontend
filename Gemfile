@@ -8,7 +8,7 @@ end
 ruby File.read(".ruby-version").chomp
 
 gem 'email_validator', github: 'mailtop/email_validator'
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
