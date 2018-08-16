@@ -44,7 +44,7 @@ gem 'govuk_notify_rails'
 gem 'kaminari'
 
 # Job Scheduling
-gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.2'
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.3'
 
 # Database
 gem 'activerecord-import'
