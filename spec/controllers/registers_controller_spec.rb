@@ -84,7 +84,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check register consistency. Params: --. Result: Success' do
     subject { get :show, params: { id: 'country' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -94,7 +94,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 100 rows' do
     subject { get :show, params: { id: 'country' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -107,7 +107,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 2 rows' do
     subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -121,7 +121,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check with filter. Params: Search param, all status. Result: 2 rows' do
     subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -135,7 +135,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 0 rows' do
     subject { get :show, params: { id: 'country', q: 'Random' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -149,7 +149,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Check with filter and cardinality N. Params: Search param. Result: 1 rows' do
     subject { get :show, params: { id: 'charity', q: '306', status: 'all' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -163,7 +163,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Sort by Name ascending. Result: Afghanistan is first result' do
     subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'asc' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -177,7 +177,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Sort by name descending. Result: Zimbabwe is first result' do
     subject { get :show, params: { id: 'country', sort_by: 'name', sort_direction: 'desc' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
@@ -191,7 +191,7 @@ RSpec.describe RegistersController, type: :controller do
   describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil should show nil values last' do
     subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :show }
 
