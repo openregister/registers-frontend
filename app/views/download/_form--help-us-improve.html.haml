@@ -1,4 +1,4 @@
-= form_tag(@next_page) do |f|
+= form_tag(@next_page, { class: "js--ga-submit" }) do |f|
   %div{ :class => "govuk-form-group access-to-data govuk-!-padding-bottom-2" }
     %fieldset
       %legend{ class: "heading-medium govuk-!-margin-bottom-2"} Do you work for the government?
@@ -8,15 +8,15 @@
           = label_tag("is-government-conditional-1", 'Yes', class: "govuk-label govuk-radios__label")
         #conditional-is-government-conditional-1.govuk-radios__conditional.govuk-radios__conditional--hidden
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-6 govuk-!-padding-top-2" }
-            %label{ :for => "gov-what-part-of-government", :class => "govuk-label govuk-!-padding-bottom-1"} 
+            %label{ :for => "gov-what-part-of-government", :class => "govuk-label govuk-!-padding-bottom-1"}
               What part of government are you working for?
-              %span{ :class => "registers-!-faded-colour"} 
+              %span{ :class => "registers-!-faded-colour"}
                 (optional)
             = text_field_tag("help_us_improve_user[gov_what_part_of_government]", nil, class: "govuk-input govuk-!-width-one-half ")
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-3" }
-            %label{ :for => "help_us_improve_user[gov_what_are_you_using_registers_for]", :class => "govuk-label govuk-!-padding-bottom-1"} 
-              What are you using registers for? 
-              %span{ :class => "registers-!-faded-colour"} 
+            %label{ :for => "help_us_improve_user[gov_what_are_you_using_registers_for]", :class => "govuk-label govuk-!-padding-bottom-1"}
+              What are you using registers for?
+              %span{ :class => "registers-!-faded-colour"}
                 (optional)
             .govuk-radios__item
               = radio_button_tag("help_us_improve_user[gov_what_are_you_using_registers_for]", "building-a-service", false, class: "govuk-radios__input", id: "gov-building-a-service")
@@ -32,41 +32,22 @@
           = label_tag("is-government-conditional-2", 'No', class: "govuk-label govuk-radios__label")
         #conditional-is-government-conditional-2.govuk-radios__conditional.govuk-radios__conditional--hidden
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-3" }
-            %label{ :for => "what-are-you-using-registers-for", :class => "govuk-label govuk-!-padding-bottom-1"} 
-              What are you using registers for? 
+            %label{ :for => "what-are-you-using-registers-for", :class => "govuk-label govuk-!-padding-bottom-1"}
+              What are you using registers for?
               %span{ :class => "registers-!-faded-colour"} (optional)
             .govuk-radios__item
-              = radio_button_tag("help_us_improve_user[what_are_you_using_registers_for]", "commercial-use", false, class: "govuk-radios__input", id: "commercial-use")
+              = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "commercial-use", false, class: "govuk-radios__input", id: "commercial-use")
               = label_tag("commercial-use", 'Commercial use', class: "govuk-label govuk-radios__label")
             .govuk-radios__item
-              = radio_button_tag("help_us_improve_user[what_are_you_using_registers_for]", "non-commercial-use", false, class: "govuk-radios__input", id: "non-commercial-use")
+              = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "non-commercial-use", false, class: "govuk-radios__input", id: "non-commercial-use")
               = label_tag("non-commercial-use", 'Non-commercial use', class: "govuk-label govuk-radios__label")
             .govuk-radios__item
-              = radio_button_tag("help_us_improve_user[what_are_you_using_registers_for]", "personal-use", false, class: "govuk-radios__input", id: "personal-use")
+              = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "personal-use", false, class: "govuk-radios__input", id: "personal-use")
               = label_tag("personal-use", 'Personal use', class: "govuk-label govuk-radios__label")
             .govuk-radios__item
-              = radio_button_tag("help_us_improve_user[what_are_you_using_registers_for]", "other", false, class: "govuk-radios__input", id: "other")
+              = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "other", false, class: "govuk-radios__input", id: "other")
               = label_tag("other", 'Other', class: "govuk-label govuk-radios__label")
   %div{ class: "govuk-form-group access-to-data__submit-group"}
     = submit_tag("Submit", class: "button")
-    %span or  
-    = link_to "I'd prefer not to say", @next_page
-
-          
-
--# = form_for @download, url: register_download_index_path(@register.slug) do |f|
--#   = f.radio_button_fieldset :is_government, inline: false do |fieldset|
--#     .thing
--#       - fieldset.radio_input :yes, panel_id: "is_government_panel"
--#       - fieldset.radio_input :no, panel_id: "not_government_panel"
--#   - f.revealing_panel :is_government_panel do |panel|
--#     = f.collection_select :department, government_orgs_local_authorities, :first, :last, { include_blank: true }
--#     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:building_a_service, :for_data_analysis_or_reporting, :other]
--#   - f.revealing_panel :not_government_panel do |panel|
--#     = f.radio_button_fieldset :non_gov_use_category, inline: false, choices: [:commercial_use, :non_commercial_use, :personal_use, :other]
-
--#   .form-group
--#     = f.submit "Submit", class: "button"
--#     or 
--#     = link_to "I\"d prefer not to say", register_path(@register.slug) + "/use-the-api"
-
+    %span or
+    = link_to "I'd prefer not to say", @next_page, { class: 'js--ga-watch-click' }

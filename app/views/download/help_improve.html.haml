@@ -4,12 +4,112 @@
   .grid-row
     .column-full
       %header.heading-large.form-heading-with-skip
-        %h2 
+        %h2
           %b Help us improve GOV.UK registers
-        %p.step-number.heading-secondary Step 2 of 3 
-        %p.skip-this-step 
-          = link_to 'Skip this step', @next_page
+        %p.step-number.heading-secondary Step 2 of 3
+        %p.skip-this-step
+          = link_to 'Skip this step', @next_page, { class: 'js--ga-watch-click' }
         %p.heading-secondary.intro We'd like to know a bit about you. This information will give us a better understanding of how registers are used.
       %section
         = render 'form--help-us-improve'
-        
+
+= content_for :javascript do
+  :javascript
+    (function(document, window, undefined) {
+      var forms = document.querySelectorAll('.js--ga-submit')
+
+      var toTitleCase = function(string) {
+          return string.replace(/\w\S*/, function(text) {
+              return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+          })
+      }
+
+      var getValue = function(element) {
+          if (element === null) {
+            return 'Blank';
+          }
+          else if (element.value) {
+            return toTitleCase(element.value).replace(/-/g, ' ').replace(/Non comm/, 'Non-comm') ;
+          }
+
+          return false;
+      }
+
+      for (var i = 0; i < forms.length; i += 1) {
+        forms[i].addEventListener('submit', function(event) {
+          event.preventDefault()
+          var form = event.target
+
+          var isGovernment = getValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
+          var whatPartOfGovernment = getValue(form.querySelector('input[name="help_us_improve_user[gov_what_part_of_government]"'))
+          var whatAreYouUsingRegistersFor = function() {
+            if (isGovernment === "Yes") {
+              return getValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
+            }
+            else if (isGovernment === "No") {
+              return getValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
+            }
+            return false
+          }
+          var whatPartOfGovernmentAreYouWorkingFor = function() {
+            var elementValue = form.querySelector('input[name="help_us_improve_user[gov_what_part_of_government]"]').value
+
+            if (elementValue.length === 0) {
+              return 'blank'
+            }
+
+            return elementValue
+          }
+
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'Radio - ' + isGovernment,
+            eventLabel: 'Are you working for government?',
+            nonInteraction: true
+          })
+
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegistersFor(),
+            eventLabel: 'What are you using registers for?',
+            nonInteraction: true
+          })
+
+          if (isGovernment === 'Yes') {
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Form',
+              eventAction: 'Text - ' + whatAreYouUsingRegistersFor() + ' - ' + whatPartOfGovernmentAreYouWorkingFor() ,
+              eventLabel: 'What part of government are you working for?',
+              nonInteraction: true
+            })
+          }
+
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'Submit - Use the API',
+            eventLabel: 'Help us improve',
+            nonInteraction: true
+          })
+
+
+        })
+      }
+
+      var skipStepLinks = document.querySelectorAll('.js--ga-watch-click');
+      for (var j = 0; j < skipStepLinks.length; j++) {
+        skipStepLinks[j]
+          .addEventListener('click', function(event) {
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Form',
+              eventAction: 'Click - I\'d prefer not to say',
+              eventLabel: 'Help us improve',
+              nonInteraction: true
+            })
+          })
+      }
+    })(document, window)
