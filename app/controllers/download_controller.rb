@@ -17,7 +17,7 @@ class DownloadController < ApplicationController
     @download = DownloadUser.new(register: params[:register_id])
     if (cookies[:rather_not_say])
       @number_of_steps = 2
-    else
+    else  
       @number_of_steps = 3
     end
 
@@ -87,7 +87,7 @@ class DownloadController < ApplicationController
   end
   
   def post_api
-    @cookies = false
+    redirect_to register_get_api_path(@register.slug)
   end
 
   def download_json

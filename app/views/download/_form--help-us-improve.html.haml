@@ -1,5 +1,5 @@
 = form_tag(@next_page) do |f|
-  %div{ :class => "govuk-form-group govuk-!-padding-bottom-2" }
+  %div{ :class => "govuk-form-group access-to-data govuk-!-padding-bottom-2" }
     %fieldset
       %legend{ class: "heading-medium govuk-!-margin-bottom-2"} Do you work for the government?
       .govuk-radios{ "data-module" => "radios" }
@@ -47,9 +47,9 @@
             .govuk-radios__item
               = radio_button_tag("help_us_improve_user[what_are_you_using_registers_for]", "other", false, class: "govuk-radios__input", id: "other")
               = label_tag("other", 'Other', class: "govuk-label govuk-radios__label")
-  %div{ class: "govuk-form-group registers-!-vertically-centred"}
+  %div{ class: "govuk-form-group access-to-data__submit-group"}
     = submit_tag("Submit", class: "button")
-    %span{ class: "govuk-!-padding-left-2 govuk-!-padding-right-2" } or  
+    %span or  
     = link_to "I'd prefer not to say", @next_page
 
           
