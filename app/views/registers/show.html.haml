@@ -117,7 +117,8 @@
             .subsection--not-accordionised
               .subsection__header--not-accordionised
                 %h2.subsection__title--not-accordionised 
-                  %a Access the data
+                  -# = link_to_choose_access
+                  = link_to 'Access the data', register_choose_access_path(@register.slug)
           .subsection.js-subsection
             .subsection__header
               %h2.subsection__title Give feedback

@@ -1,0 +1,23 @@
+- @page_title = "Sign up for updates"
+
+%main#content{role: 'main'}
+  .grid-row
+    .column-full
+      %h1.heading-large Sign up for updates
+      %p Get notifications about:
+      %ul.list.list-bullet
+        %li changes to our service, like breaking changes
+        %li updates to registers, the latest available registers, and upcoming registers
+        %li tips and guidance on how to get the best out of registers
+
+      = form_for @sign_up_user, url: thank_you_for_signing_up_path() do |f|
+        .form-group
+          = label_tag("email-address", "Email address", class: "form-label-bold")
+          = email_field_tag("email-address", nil, class: "govuk-input govuk-!-width-one-half", required: true)
+        .form-group
+          = button_tag("Sign up for updates", class: "button")
+
+= content_for :javascript do
+  :javascript
+    ( function(document, window, undefined) {
+    })(document, window);

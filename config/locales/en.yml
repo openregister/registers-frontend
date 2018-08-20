@@ -53,6 +53,10 @@ en:
         is_government:
           yes: Yes
           no: No
+      help_us_improve_user:
+        is_government: 
+          yes: Yes
+          no: No
       feedback:
         email: Email address (optional)
         message: Additional comments
@@ -70,6 +74,8 @@ en:
         non_gov_use_category: What are you using GOV.UK Registers for? (optional)
       feedback:
         useful: Is this register useful?
+      help_us_improve_user:
+        is_government: Do you work for the government?
     hint:
       download_user:
         email_gov: Enter your government email address

@@ -1,0 +1,22 @@
+{
+  "name": "registers-frontend",
+  "version": "1.0.0",
+  "description": "The frontend for GOV.UK Registers.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openregister/registers-frontend.git"
+  },
+  "author": "https://github.com/orgs/alphagov/teams/gov-uk-registers",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/openregister/registers-frontend/issues"
+  },
+  "homepage": "https://github.com/openregister/registers-frontend#readme",
+  "private": true,
+  "dependencies": {
+    "govuk-frontend": "1.2.0"
+  }
+}

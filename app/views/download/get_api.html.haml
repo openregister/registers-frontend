@@ -2,12 +2,15 @@
 
 %main#content.container{role:'main'}
   .grid-row
+    .column-full
+      %header.heading-large
+        %span.heading-secondary Step #{@number_of_steps} of #{@number_of_steps}
+        %h2 
+          %b Use the API
     .column-two-thirds
-      %h1.heading-large Use the API
-
       %p
         The Register ID is: 
-        %code.code.code-curl #{@register.register_name.downcase}
+        %code.code.code-curl #{@register.slug}
 
       %p
         Get this register as JSON:
@@ -25,4 +28,4 @@
         %li tips and guidance on how to get the best our of registers
 
       %p
-        %a.button Sign up for updates
+        = link_to 'Sign up for updates', sign_up_for_updates_path(), class: 'button'

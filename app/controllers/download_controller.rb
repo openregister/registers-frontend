@@ -6,13 +6,29 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
-    @download = DownloadUser.new
+    if (cookies[:rather_not_say])
+      @number_of_steps = 2
+    else
+      @number_of_steps = 3
+    end
   end
 
   def create
-    @download = DownloadUser.new(download_user_params.merge!(register: params[:register_id]))
+    @download = DownloadUser.new(register: params[:register_id])
+    if (cookies[:rather_not_say])
+      @number_of_steps = 2
+    else
+      @number_of_steps = 3
+    end
 
     if !@download.valid?
+      if (!cookies[:rather_not_say])
+        cookies[:rather_not_say] = {
+          :value => true,
+          :expires => 1.week.from_now # TOO: confirm cookie length
+        }
+      end
+
       render :index
     else
       response = post_to_endpoint(@download, 'download_users')
@@ -38,13 +54,40 @@ class DownloadController < ApplicationController
 
   def success; end
 
-  def help_improve
-  end
-
-  def use_api
-  end
-
   def choose_access
+    if (cookies[:rather_not_say])
+      @number_of_steps = 2
+      @next_step_api = register_get_api_path(@register.slug)
+      @next_step_download = register_path(@register.slug) + '/download'
+    else
+      @number_of_steps = 3
+      @next_step_api = register_help_improve_api_path(@register.slug);
+      @next_step_download = register_help_improve_download_path(@register.slug)
+    end 
+  end
+
+  def help_improve
+    if (request.fullpath.match(/api$/))
+      @next_page = register_get_api_path(@register.slug)
+    else
+      @next_page = register_path(@register.slug) + '/download'
+    end
+  end
+
+  def get_api
+    if (cookies[:rather_not_say])
+      @number_of_steps = 2
+    else
+      @number_of_steps = 3
+      cookies[:rather_not_say] = {
+        :value => true,
+        :expires => 1.week.from_now
+      }
+    end
+  end
+  
+  def post_api
+    @cookies = false
   end
 
   def download_json
@@ -64,13 +107,5 @@ private
   end
 
   def download_user_params
-    params.require(:download_user).permit(
-      :email_gov,
-      :email_non_gov,
-      :department,
-      :non_gov_use_category,
-      :is_government,
-      :register
-    )
   end
 end

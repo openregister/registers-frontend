@@ -36,6 +36,11 @@
 
 @import 'modules/form--header-with-skip';
 
+@import 'components/radios/radios'; // GOV.UK design system
+@import 'components/input/input'; // GOV.UK design system
+@import 'overrides/spacing'; // GOV.UK design system
+@import 'overrides/width'; // GOV.UK design system
+
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
 
@@ -625,4 +630,14 @@ details {
       margin: 7px $gutter 0 0;
     }
   }
+}
+
+.registers-\!-faded-colour {
+  color: $grey-1;
+  padding-left: 0.25em;
+}
+
+.registers-\!-vertically-centred {
+  display: flex;
+  align-items: center;
 }

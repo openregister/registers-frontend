@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
+  
+  get 'sign-up-for-updates', to: 'sign_up#sign_up_for_updates', as: 'sign_up_for_updates'
+  post 'thank-you-for-signing-up', to: 'sign_up#thank_you_for_signing_up', as: 'thank_you_for_signing_up'
 
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
@@ -21,8 +24,10 @@ Rails.application.routes.draw do
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
 
     get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
-    get '/help-us-improve', to: 'download#help_improve', as: 'help_improve'
-    get '/use-the-api', to: 'download#use_api', as: 'use_api'
+    get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
+    get '/help-us-improve', to: 'download#help_improve', as: 'help_improve_download'
+    get '/use-the-api', to: 'download#get_api', as: 'get_api'
+    post '/use-the-api', to: 'download#post_api', as: 'post_api'
   end
 
   get '/registers-in-progress', to: 'registers#in_progress'

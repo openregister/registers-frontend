@@ -4,7 +4,7 @@
   .grid-row
     .column-full
       %header.heading-large
-        %span.heading-secondary Step 1 of 3
+        %span.heading-secondary Step 1 of #{@number_of_steps}
         %h2 
           %b Choose how to access the data
     .column-full.highlight-boxes
@@ -17,7 +17,7 @@
           %li get the data as JSON or CSV
           %li use our quick start guide to get set up
           %li get notifications about updates to our service, like downtime and breaking changes
-        %a Use the API
+        = link_to 'Use the API', @next_step_api
 
       .highlight-box
         %h3.heading-medium Download
@@ -25,5 +25,4 @@
           You can download the data in each register.
         %ul.list.list-bullet
           %li get the data as JSON, CSV, and ODS
-        %a Download
-
+        = link_to 'Download', @next_step_download

@@ -23,6 +23,9 @@
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
 
+// GOV.UK Design System
+// = require all.js
+
 $.fn.extend({
   scrollRight: function (val) {
     if (val === undefined) {
@@ -38,3 +41,9 @@ $(document).ready(function() {
 
 window.GAAP.analytics.eventTracking.init();
 window.GAAP.analytics.virtualPageview.init();
+
+var Radios = window.GOVUKFrontend.Radios
+var $radio = document.querySelector('[data-module="radios"]')
+if ($radio) {
+  new Radios($radio).init()
+}

@@ -5,8 +5,11 @@
     .column-full
       %header.heading-large.form-heading-with-skip
         %h2 
-          %b Help us improve
+          %b Help us improve GOV.UK registers
         %p.step-number.heading-secondary Step 2 of 3 
-        %p.skip-this-step Skip this step
+        %p.skip-this-step 
+          = link_to 'Skip this step', @next_page
         %p.heading-secondary.intro We'd like to know a bit about you. This information will give us a better understanding of how registers are used.
-      
+      %section
+        = render 'form--help-us-improve'
+        
