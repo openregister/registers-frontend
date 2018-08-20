@@ -14,6 +14,7 @@ COPY Gemfile /usr/src/app/Gemfile
 COPY Gemfile.lock /usr/src/app/Gemfile.lock
 COPY .ruby-version /usr/src/app/.ruby-version
 
+RUN npm install
 RUN bundle install
 COPY . /usr/src/app
 
