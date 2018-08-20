@@ -16,7 +16,7 @@ Frontend for [GOV.UK Registers](https://www.registers.service.gov.uk/)
 Download the GOV.UK frontend design system
 
 ```bash
-npm install
+$ npm install
 ```
 
 Install the gem dependencies and setup the postgresql database
