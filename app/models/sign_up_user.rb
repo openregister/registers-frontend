@@ -6,4 +6,3 @@ class SignUpUser
 
   validates :email, presence: true, email: true
 end
-  

@@ -6,26 +6,18 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
-    if (cookies[:rather_not_say])
-      @number_of_steps = 2
-    else
-      @number_of_steps = 3
-    end
+    @number_of_steps = cookies[:rather_not_say] ? 2 : 3
   end
 
   def create
     @download = DownloadUser.new(register: params[:register_id])
-    if (cookies[:rather_not_say])
-      @number_of_steps = 2
-    else  
-      @number_of_steps = 3
-    end
+    @number_of_steps = cookies[:rather_not_say] ? 2 : 3
 
     if !@download.valid?
-      if (!cookies[:rather_not_say])
+      if !cookies[:rather_not_say]
         cookies[:rather_not_say] = {
-          :value => true,
-          :expires => 1.week.from_now # TOO: confirm cookie length
+          value: true,
+          expires: 1.week.from_now # TOO: confirm cookie length
         }
       end
 
@@ -55,7 +47,7 @@ class DownloadController < ApplicationController
   def success; end
 
   def choose_access
-    if (cookies[:rather_not_say])
+    if cookies[:rather_not_say]
       @number_of_steps = 2
       @next_step_api = register_get_api_path(@register.slug)
       @next_step_download = register_path(@register.slug) + '/download'
@@ -63,29 +55,25 @@ class DownloadController < ApplicationController
       @number_of_steps = 3
       @next_step_api = register_help_improve_api_path(@register.slug);
       @next_step_download = register_help_improve_download_path(@register.slug)
-    end 
-  end
-
-  def help_improve
-    if (request.fullpath.match(/api$/))
-      @next_page = register_get_api_path(@register.slug)
-    else
-      @next_page = register_path(@register.slug) + '/download'
     end
   end
 
+  def help_improve
+    @next_page = request.fullpath.match?(/api$/) ? register_get_api_path(@register.slug) : register_path(@register.slug) + '/download'
+  end
+
   def get_api
-    if (cookies[:rather_not_say])
+    if cookies[:rather_not_say]
       @number_of_steps = 2
     else
       @number_of_steps = 3
       cookies[:rather_not_say] = {
-        :value => true,
-        :expires => 1.week.from_now
+        value: true,
+        expires: 1.week.from_now
       }
     end
   end
-  
+
   def post_api
     redirect_to register_get_api_path(@register.slug)
   end
@@ -106,6 +94,5 @@ private
     @register = Register.find_by_slug!(params[:register_id])
   end
 
-  def download_user_params
-  end
+  def download_user_params; end
 end

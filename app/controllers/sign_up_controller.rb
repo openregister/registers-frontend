@@ -5,7 +5,5 @@ class SignUpController < ApplicationController
     @sign_up_user = SignUpUser.new
   end
 
-  def thank_you_for_signing_up
-  end
-
+  def thank_you_for_signing_up; end
 end
