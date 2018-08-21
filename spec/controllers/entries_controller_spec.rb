@@ -85,7 +85,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check register consistency. Params: --. Result: Success' do
     subject { get :index, params: { register_id: 'country' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -95,7 +95,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check default behaviour. Params: --. Result: 100 rows' do
     subject { get :index, params: { register_id: 'country' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -109,7 +109,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check with filter. Params: Search param. Result: 4 rows' do
     subject { get :index, params: { register_id: 'country', q: 'GM' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -123,7 +123,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check with filter. Params: Search param (changed field). Result: 1 rows' do
     subject { get :index, params: { register_id: 'territory', q: 'Ceuta' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -136,7 +136,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check with filter. Params: Search param. Result: No matches' do
     subject { get :index, params: { register_id: 'country', q: 'random' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -150,7 +150,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'Request: GET #index. Descr: Check with filter and cardinality N. Params: Search param. Result: 2 rows' do
     subject { get :index, params: { register_id: 'charity', q: '306' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 
@@ -164,7 +164,7 @@ RSpec.describe EntriesController, type: :controller do
   describe 'History should show current and previous value' do
     subject { get :index, params: { register_id: 'country' } }
 
-    it { is_expected.to have_http_status :success }
+    it { is_expected.to be_successful }
 
     it { is_expected.to render_template :index }
 

@@ -13,7 +13,7 @@ module RegisterDownloader
     register_url = register_client.instance_variable_get(:@register_url)
 
     register.fields_array = Record.where(key: "register:#{register.slug}")
-                                .pluck("data -> 'fields' as fields")
+                                .pluck(Arel.sql("data -> 'fields' as fields"))
                                 .first
     register.url = register_url
     register.save
