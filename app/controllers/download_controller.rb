@@ -3,6 +3,7 @@ require 'open-uri'
 class DownloadController < ApplicationController
   include FormHelpers
   before_action :set_register
+  before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
   def index
@@ -60,6 +61,10 @@ class DownloadController < ApplicationController
   end
 
   def help_improve
+    @government_organisations = Register.find_by(slug: 'government-organisation')
+                                        .records
+                                        .where(entry_type: 'user')
+                                        .current
     if request.fullpath.match?(/api$/)
       @next_page = register_get_api_path(@register.slug)
       @custom_dimension = @register.register_name + ' - API'

@@ -19,7 +19,6 @@
       var forms = document.querySelectorAll('.js--ga-submit')
 
       var getValue = function(element) {
-        console.log(element)
           if (element === null) {
             return 'Blank'
           }
@@ -32,6 +31,7 @@
 
       for (var i = 0; i < forms.length; i += 1) {
         forms[i].addEventListener('submit', function(event) {
+          event.preventDefault();
           var form = event.target
 
           var isGovernment = getValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
@@ -45,12 +45,12 @@
             return false
           }
           var whatPartOfGovernmentAreYouWorkingFor = function() {
-            var elementValue = form.querySelector('input[name="help_us_improve_user[gov_what_part_of_government]"]').value
-
-            if (elementValue.length === 0) {
+            var element = form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]')
+            var governmentDept = element.options[element.selectedIndex].text
+            if (governmentDept.length === 0) {
               return 'blank'
             }
-            return 'organisation provided'
+            return governmentDept;
           }
 
           ga('send', {

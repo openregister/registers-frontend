@@ -12,7 +12,7 @@
               What part of government are you working for?
               %span{ :class => "registers-!-faded-colour"}
                 (optional)
-            = text_field_tag("help_us_improve_user[gov_what_part_of_government]", nil, class: "govuk-input govuk-!-width-one-half ")
+            = select 'help_us_improve_user', 'gov_what_part_of_government', @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-3" }
             %label{ :for => "help_us_improve_user[gov_what_are_you_using_registers_for]", :class => "govuk-label govuk-!-padding-bottom-1"}
               What are you using registers for?
@@ -51,3 +51,12 @@
     = submit_tag("Submit", class: "button")
     %span or
     = link_to "I'd prefer not to say", @next_page, { class: 'js--ga-watch-click' }
+
+= content_for :javascript do
+  :javascript
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.getElementById('government-organisations'),
+      showAllValues: false,
+      minLength: 2,
+      defaultValue: ''
+    });
