@@ -59,4 +59,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.x.zendesk.url = ENV['ZENDESK_URL']
   config.x.zendesk.username = ENV['ZENDESK_USERNAME']
   config.x.zendesk.token = ENV['ZENDESK_TOKEN']
+  config.x.mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
+  config.x.mailchimp.list_id = 'f187b8d77c'
 end

@@ -105,4 +105,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   }
 
   config.user_download_api_key = ENV.fetch('USER_DOWNLOAD_API_KEY')
+  config.x.mailchimp.api_key = ENV.fetch('MAILCHIMP_API_KEY')
+  config.x.mailchimp.list_id = '5dc9c7942c'
 end
