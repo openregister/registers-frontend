@@ -16,9 +16,7 @@
             = flash.alert
           %p!="If the problem persists please contact  #{link_to 'support', support_path}"
 
-      = form_for @sign_up_user, url: sign_up_index_path({from: params[:from], method: params[:method]}.compact), html: { class: "js--ga-submit" } do |f|
-
-
+      = form_for @sign_up_user, url: sign_up_index_path({from: @register&.slug, method: params[:method]}.compact), html: { class: "js--ga-submit" } do |f|
         .form-group
           -# = label_tag(:email, "Email address", class: "form-label-bold")
           = f.text_field(:email, nil, class: "govuk-input govuk-!-width-one-half", required: true)

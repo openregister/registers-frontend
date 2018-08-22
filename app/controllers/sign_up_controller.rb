@@ -17,16 +17,21 @@ class SignUpController < ApplicationController
     email_address = permitted_params['email']
 
     begin
+      merge_fields = {
+        REGISTER: @register&.slug
+      }.compact
+
       response = mailchimp_client.lists(list_id)
         .members(Digest::MD5.hexdigest(email_address))
         .upsert(
-          body: { email_address: email_address, status: 'pending' }
+          body: { email_address: email_address, status: 'pending', merge_fields: merge_fields }
         )
 
       if response.body[:status] == "pending"
         redirect_to sign_up_thank_you_path and return
       else
         flash.now[:alert] = 'Something went wrong while adding you to the list'
+        Rails.logger.error "Unable to add user to mailing list: status was #{response.body[:status]}"
       end
 
     rescue Gibbon::MailChimpError => e
@@ -34,6 +39,8 @@ class SignUpController < ApplicationController
         when /Please provide a valid email address/
           e.body[:detail]
         else
+          Rails.logger.error "Error adding user to mailing list: #{e.body[:status]} #{e.body[:detail]}"
+
           'Something went wrong while adding you to the list'
         end
     end
