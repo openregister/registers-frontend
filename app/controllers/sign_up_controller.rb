@@ -3,7 +3,7 @@ require 'digest'
 class SignUpController < ApplicationController
   include FormHelpers
 
-  before_action :set_register, only: [:index, :create]
+  before_action :set_register, only: %i[index create]
 
   def index
     @sign_up_user = SignUpUser.new
@@ -28,21 +28,19 @@ class SignUpController < ApplicationController
         )
 
       if response.body[:status] == "pending"
-        redirect_to sign_up_thank_you_path and return
+        redirect_to(sign_up_thank_you_path) && return
       else
         flash.now[:alert] = 'Something went wrong while adding you to the list'
         Rails.logger.error "Unable to add user to mailing list: status was #{response.body[:status]}"
       end
-
     rescue Gibbon::MailChimpError => e
       flash.now[:alert] = case e.body[:detail]
-        when /Please provide a valid email address/
-          e.body[:detail]
-        else
-          Rails.logger.error "Error adding user to mailing list: #{e.body[:status]} #{e.body[:detail]}"
-
-          'Something went wrong while adding you to the list'
-        end
+                          when /Please provide a valid email address/
+                            e.body[:detail]
+                          else
+                            Rails.logger.error "Error adding user to mailing list: #{e.body[:status]} #{e.body[:detail]}"
+                            'Something went wrong while adding you to the list'
+                          end
     end
 
     @sign_up_user = SignUpUser.new(email: email_address)
