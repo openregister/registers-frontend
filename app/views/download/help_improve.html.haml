@@ -31,7 +31,6 @@
 
       for (var i = 0; i < forms.length; i += 1) {
         forms[i].addEventListener('submit', function(event) {
-          event.preventDefault();
           var form = event.target
 
           var isGovernment = getValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
