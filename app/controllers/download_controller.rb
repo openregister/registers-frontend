@@ -63,10 +63,10 @@ class DownloadController < ApplicationController
     if request.fullpath.match?(/api$/)
       @next_page = register_get_api_path(@register.slug)
       @custom_dimension = @register.register_name + ' - API'
-  else
+    else
       @next_page = register_path(@register.slug) + '/download'
       @custom_dimension = @register.register_name + ' - download'
-  end
+    end
   end
 
   def get_api
