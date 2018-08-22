@@ -16,9 +16,12 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-# Ignore jet brains tools config
+# Ignore jet brains tools config.
 .idea
 *.iml
 
-# ignore outputs from travis
+# Ignore outputs from travis.
 /vendor
+
+# Ignore any npm installed modules.
+node_modules/*
