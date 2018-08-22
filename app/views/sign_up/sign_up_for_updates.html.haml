@@ -10,10 +10,10 @@
         %li updates to registers, the latest available registers, and upcoming registers
         %li tips and guidance on how to get the best out of registers
 
-      = form_for @sign_up_user, url: thank_you_for_signing_up_path(), html: { class: "js--ga-submit" } do |f|
+      = form_for @sign_up_user, url: thank_you_for_signing_up_path() + @params, html: { class: "js--ga-submit" } do |f|
         .form-group
           = label_tag("email-address", "Email address", class: "form-label-bold")
-          = text_field_tag("email-address", nil, class: "govuk-input govuk-!-width-one-half", required: true)
+          = email_field_tag("email-address", nil, class: "govuk-input govuk-!-width-one-half", required: true)
         .form-group
           = button_tag("Sign up for updates", class: "button")
 
@@ -22,7 +22,6 @@
     ( function(document, window, undefined) {
 
       var getValue = function(element) {
-        console.log(element)
           if (element === null) {
             return 'Blank'
           }

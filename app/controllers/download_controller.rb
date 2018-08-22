@@ -8,7 +8,7 @@ class DownloadController < ApplicationController
 
   def index
     @number_of_steps = cookies[:rather_not_say] ? 2 : 3
-    @custom_dimension = @register.register_name + ' - download'
+    @custom_dimension = @register.slug.tr('-', ' ') + ' - download'
   end
 
   def create
@@ -67,15 +67,15 @@ class DownloadController < ApplicationController
                                         .current
     if request.fullpath.match?(/api$/)
       @next_page = register_get_api_path(@register.slug)
-      @custom_dimension = @register.register_name + ' - API'
+      @custom_dimension = @register.slug.tr('-', ' ') + ' - api'
     else
       @next_page = register_path(@register.slug) + '/download'
-      @custom_dimension = @register.register_name + ' - download'
+      @custom_dimension = @register.slug.tr('-', ' ') + ' - download'
     end
   end
 
   def get_api
-    @custom_dimension = @register.register_name + ' - API'
+    @custom_dimension = @register.slug.tr('-', ' ') + ' - api'
     if cookies[:rather_not_say]
       @number_of_steps = 2
     else

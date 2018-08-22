@@ -6,7 +6,7 @@
     .column-full
       %header.heading-large
         %span.heading-secondary Step #{@number_of_steps} of #{@number_of_steps}
-        %h2 
+        %h2
           %b Download the #{@register.register_name} register
     .column-full
       %p You can download the latest data in this register as:
@@ -20,4 +20,4 @@
         %li the latest available registers and upcoming registers
         %li tips and guidance on how to get the best our of registers
       %p
-        = link_to 'Sign up for updates', sign_up_for_updates_path(), class: 'button'
+        = link_to 'Sign up for updates', sign_up_for_updates_path() + '/?from=' + @register.slug + '&method=api', class: 'button'
