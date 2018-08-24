@@ -28,7 +28,7 @@ class SignUpController < ApplicationController
         )
 
       if response.body[:status] == "pending"
-        redirect_to(sign_up_thank_you_path) && return
+        redirect_to(sign_up_thank_you_path({ from: @register&.slug, method: params[:method] }.compact)) && return
       else
         flash.now[:alert] = 'Something went wrong while adding you to the list'
         Rails.logger.error "Unable to add user to mailing list: status was #{response.body[:status]}"
