@@ -25,8 +25,8 @@ var addListener = require('./add-listener');
 
 module.exports = function (elements) {
   elements.forEach(function (element) {
-    var eventCategory = element.dataset.clickCategory;
-    var eventAction = element.dataset.clickAction;
+    var eventCategory = element.getAttribute('data-click-category');
+    var eventAction = element.getAttribute('data-click-action');
 
     switch (element.tagName) {
       case 'A':
