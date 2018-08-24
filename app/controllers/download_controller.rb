@@ -7,19 +7,19 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
-    @number_of_steps = cookies[:rather_not_say] ? 2 : 3
+    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
     @custom_dimension = @register.slug.tr('-', ' ') + ' - download'
   end
 
   def create
     @download = DownloadUser.new(register: params[:register_id])
-    @number_of_steps = cookies[:rather_not_say] ? 2 : 3
+    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
 
     if !@download.valid?
-      if !cookies[:rather_not_say]
-        cookies[:rather_not_say] = {
+      if !cookies[:seen_help_us_improve_questions]
+        cookies[:seen_help_us_improve_questions] = {
           value: true,
-          expires: 1.week.from_now # TOO: confirm cookie length
+          expires: 1.month.from_now
         }
       end
 
@@ -49,7 +49,7 @@ class DownloadController < ApplicationController
   def success; end
 
   def choose_access
-    if cookies[:rather_not_say]
+    if cookies[:seen_help_us_improve_questions]
       @number_of_steps = 2
       @next_step_api = register_get_api_path(@register.slug)
       @next_step_download = register_path(@register.slug) + '/download'
@@ -76,13 +76,13 @@ class DownloadController < ApplicationController
 
   def get_api
     @custom_dimension = @register.slug.tr('-', ' ') + ' - api'
-    if cookies[:rather_not_say]
+    if cookies[:seen_help_us_improve_questions]
       @number_of_steps = 2
     else
       @number_of_steps = 3
-      cookies[:rather_not_say] = {
+      cookies[:seen_help_us_improve_questions] = {
         value: true,
-        expires: 1.week.from_now
+        expires: 1.month.from_now
       }
     end
   end
