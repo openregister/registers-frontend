@@ -70,6 +70,9 @@ gem 'invisible_captcha'
 # Datetime parsing
 gem 'iso8601', '~> 0.11.0'
 
+# MailChimp
+gem 'gibbon', '~> 3.2'
+
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'

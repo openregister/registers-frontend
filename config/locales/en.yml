@@ -34,6 +34,8 @@ en:
       more_pages:
         display_entries: "Showing <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> %{entry_name}"
     label:
+      sign_up_user:
+        email: Email address
       support:
         email: Email address
       api_user:

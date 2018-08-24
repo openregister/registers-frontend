@@ -107,6 +107,9 @@ GEM
     ffi (1.9.23)
     gds_metrics (0.1.0)
       prometheus-client-mmap (= 0.9.1)
+    gibbon (3.2.0)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     govuk-lint (3.8.0)
@@ -379,6 +382,7 @@ DEPENDENCIES
   factory_bot_rails (~> 4.8, >= 4.8.2)
   faker
   gds_metrics (~> 0.1.0)
+  gibbon (~> 3.2)
   govuk-lint (~> 3.8)
   govuk-registers-api-client (~> 1.2.2)
   govuk_elements_form_builder!

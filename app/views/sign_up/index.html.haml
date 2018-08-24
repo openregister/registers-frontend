@@ -10,10 +10,15 @@
         %li updates to registers, the latest available registers, and upcoming registers
         %li tips and guidance on how to get the best out of registers
 
-      = form_for @sign_up_user, url: thank_you_for_signing_up_path() + @params, html: { class: "js--ga-submit" } do |f|
-        .form-group
-          = label_tag("email-address", "Email address", class: "form-label-bold")
-          = email_field_tag("email-address", nil, class: "govuk-input govuk-!-width-one-half", required: true)
+      - if flash[:alert].present?
+        %div{:class => 'error-summary', :role => 'alert'}
+          %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}
+            = flash.alert
+          %p!="If the problem persists please contact  #{link_to 'support', support_path}"
+
+      = form_for @sign_up_user, url: sign_up_index_path({from: @register&.slug, method: params[:method]}.compact), html: { class: "js--ga-submit" } do |f|
+        .sign-up-for-email
+          = f.email_field(:email, nil, class: "govuk-input govuk-!-width-one-half", spellcheck: false, autocapitalize: "off", required: true)
         .form-group
           = button_tag("Sign up for updates", class: "button")
 
