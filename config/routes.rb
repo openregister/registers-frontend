@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
 
-  # get 'sign-up-for-updates', to: 'sign_up#sign_up_for_updates', as: 'sign_up_for_updates'
-  # post 'thank-you-for-signing-up', to: 'sign_up#thank_you_for_signing_up', as: 'thank_you_for_signing_up'
-
   resources :sign_up, only: %i[create index], path: 'sign-up-for-updates' do
     # collection do
     #   get '/thank-you-for-signing-up', to: 'sign_up#thank_you', as: 'thank_you'
