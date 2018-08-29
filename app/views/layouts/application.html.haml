@@ -35,12 +35,6 @@
   %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.'}" }
   = render partial: 'layouts/analytics'
 
-- content_for :after_header do
-  %aside.notice
-    .container
-      %h2.visually-hidden Upcoming data format changes
-      %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. #{link_to "Read more about format changes", data_format_changes_path}
-
 - content_for :body_end do
   = javascript_include_tag 'application'
   = yield(:javascript)
