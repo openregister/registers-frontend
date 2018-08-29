@@ -38,14 +38,14 @@ class Register < ApplicationRecord
 
   def register_description
     Record.where(register_id: id, key: "register:#{name.parameterize}")
-    .pluck("data -> 'text' as text")
+    .pluck(Arel.sql("data -> 'text' as text"))
     .first
   end
 
   def register_fields
     ordered_field_keys = fields_array.map { |f| "field:#{f}" }
     Record.where(register_id: id, key: ordered_field_keys)
-          .order("position(key::text in '#{ordered_field_keys.join(',')}')")
+          .order(Arel.sql("position(key::text in '#{ordered_field_keys.join(',')}')"))
           .map { |entry| entry[:data] }
   end
 
@@ -60,7 +60,7 @@ class Register < ApplicationRecord
   def register_name
     register_phase != 'Backlog' &&
       Record.where(register_id: id, entry_type: 'system', key: 'register-name')
-            .pluck("data -> 'register-name' as register_name").first || name
+            .pluck(Arel.sql("data -> 'register-name' as register_name")).first || name
   end
 
   def is_empty?

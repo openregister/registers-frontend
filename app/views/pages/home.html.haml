@@ -3,7 +3,7 @@
 %main{role:'main'}
   .masthead
     %nav.breadcrumbs.breadcrumbs--inverse{"aria-label" => "Breadcrumb"}
-      %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+      %ol
         %li.breadcrumbs__item
           = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
         %li.breadcrumbs__item.breadcrumbs__item--active
@@ -12,11 +12,11 @@
     .hero.hero--breaded
       .hero__content
         .hero__body
-          %h1.hero__title Direct access to up-to-date government data
+          %h1.hero__title Build your service with government data you can&nbsp;trust
           .hero__inline-image
             = image_tag "registers-top-image.png", role: "presentation"
           %p.hero__description
-            GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.
+            GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.
 
           = link_to 'Get started', registers_path, class: 'button hero-button', role: 'button'
         .hero__aside-image
@@ -26,27 +26,26 @@
     %section.content-section
       .grid-row
         .column-one-half
-          %h2.heading-medium.content-section__title Use and share government data
-          %p GOV.UK Registers helps you to:
-          %ul.list.list-bullet
-            %li build and maintain your service with accurate data that is updated for you
-            %li reduce the time and cost of sourcing data from across government
-            %li easily share data with other government departments
+          %h2.heading-medium.content-section__title What is a register?
+          %p A register is a list of information that is managed and approved by government.
+          %p For example, the country register lists all countries recognised by the Foreign and Commonwealth Office.
+          %p You can use registers to build your service.
+          %p The UK Parliament petitions service uses the country register to help users select their country from a dropdown menu, for instance.
         .column-one-half
-          = image_tag 'get-data.png'
+          = image_tag('get-data.png', alt: 'Screenshot showing the list of registers page')
 
     %section.content-section.content-section--with-top-border
       .grid-row
         .column-one-half
-          %h2.heading-medium.content-section__title How registers work
-          %p Registers are live lists of information that are managed and approved by government. They are the most reliable lists of their kind.
-          %p Each register:
+          %h2.heading-medium.content-section__title Trusted by government services
+          %p By using registers you can: 
           %ul.list.list-bullet
-            %li can be accessed and used freely by anyone
-            %li provides data in different formats including JSON and CSV
-            %li has a full version history to ensure transparency of data changes
+            %li reduce the time and cost of sourcing data from across government
+            %li be confident that your service is using the most up&#8209;to&#8209;date government data 
+            %li receive data that is ready to use with no need for data cleansing
+
         .column-one-half
-          = image_tag 'country-register.png'
+          = image_tag('country-register.png', alt: 'Screenshot showing the country register page')
 
     %section.content-section.content-section--with-top-border
       .grid-row
