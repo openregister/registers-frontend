@@ -19,7 +19,7 @@ class DownloadController < ApplicationController
       if !cookies[:seen_help_us_improve_questions]
         cookies[:seen_help_us_improve_questions] = {
           value: true,
-          expires: 1.month.from_now
+          expires: 2.weeks.from_now
         }
       end
 
@@ -82,7 +82,7 @@ class DownloadController < ApplicationController
       @number_of_steps = 3
       cookies[:seen_help_us_improve_questions] = {
         value: true,
-        expires: 1.month.from_now
+        expires: 2.weeks.from_now
       }
     end
   end
