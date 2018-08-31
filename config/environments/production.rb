@@ -90,9 +90,6 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   config.action_mailer.default_url_options = { host: 'https://www.registers.service.gov.uk' }
 
-  config.self_service_api_host = 'https://registers-selfservice.cloudapps.digital'
-  config.self_service_http_auth_username = ENV.fetch('SELF_SERVICE_HTTP_AUTH_USERNAME')
-  config.self_service_http_auth_password = ENV.fetch('SELF_SERVICE_HTTP_AUTH_PASSWORD')
   config.http_auth_username = ENV.fetch('HTTP_AUTH_USERNAME')
   config.http_auth_password = ENV.fetch('HTTP_AUTH_PASSWORD')
 
