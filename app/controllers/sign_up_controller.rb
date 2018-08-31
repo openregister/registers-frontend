@@ -4,10 +4,10 @@ class SignUpController < ApplicationController
   include FormHelpers
 
   before_action :set_register, only: %i[index create]
+  before_action :set_custom_dimension, only: %i[index thank_you]
 
   def index
     @sign_up_user = SignUpUser.new
-    @custom_dimension = params[:from].tr('-', ' ') + ' - ' + params[:method] if params[:from].present? && params[:method].present?
   end
 
   def create
@@ -47,9 +47,7 @@ class SignUpController < ApplicationController
     render :index
   end
 
-  def thank_you
-    @custom_dimension = params[:from].tr('-', ' ') + ' - ' + params[:method] if params[:from].present? && params[:method].present?
-  end
+  def thank_you; end
 
 private
 
@@ -59,5 +57,9 @@ private
 
   def set_register
     @register = Register.find_by(slug: params[:from])
+  end
+
+  def set_custom_dimension
+    @custom_dimension = [params[:from]&.tr('-', ' '), params[:method]].compact.join(' - ').presence
   end
 end
