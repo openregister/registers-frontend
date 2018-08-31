@@ -1,3 +1,5 @@
+/* global $ */
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -24,7 +26,7 @@
 //= require jquery-ui/sortable
 
 // GOV.UK Design System
-// = require all.js
+//= require all.js
 
 $.fn.extend({
   scrollRight: function (val) {
