@@ -1,7 +1,6 @@
 {
   "name": "registers-frontend",
   "version": "1.0.0",
-  "private": true,
   "description": "The frontend for GOV.UK Registers.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
