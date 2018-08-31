@@ -12,7 +12,6 @@ class DownloadController < ApplicationController
   end
 
   def create
-    @download = DownloadUser.new(register: params[:register_id])
     @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
 
     unless cookies[:seen_help_us_improve_questions]
