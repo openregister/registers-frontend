@@ -1,0 +1,41 @@
+- @page_title = "Data Format Changes"
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large GOV.UK Registers data format changes
+      %p GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. This means we will not provide direct access to other existing formats, including TSV, Turtle, YAML, and XLSX. 
+      %p We recently looked at how registers were used between February 2016 and June 2018. In particular, we wanted to know which register formats were the most popular with our users. From this, we would be able to see which register formats should be our main focus, so we can iterate faster and deliver a better product.
+      %p This table shows a breakdown of the register formats used: 
+  .grid-row
+    .column-one-third
+      %table
+        %thead
+          %tr
+            %th Format
+            %th.numeric % of total
+        %tbody
+          %tr
+            %th JSON
+            %td.numeric 91.7%
+          %tr
+            %th CSV
+            %td.numeric 3.9%
+          %tr
+            %th TSV
+            %td.numeric 1.6%
+          %tr
+            %th Turtle
+            %td.numeric 1.4%
+          %tr
+            %th YAML
+            %td.numeric 1%
+          %tr
+            %th XSLX
+            %td.numeric 0.4%
+  .grid-row
+    .column-two-thirds
+      %br
+      %p The vast majority of registers are consumed as JSON (92%). Based on this, we have decided to focus on #{link_to('JSON', 'http://json.org')} as our main registers format. This aligns with the #{link_to('Government Digital Service API technical and data standards', 'https://www.gov.uk/guidance/gds-api-technical-and-data-standards#use-json')}. YAML is a superset of JSON, so we do not use anything from it that JSON cannot express. It also sees very limited usage so we will stop supporting YAML.
+      %p The second most used format is #{link_to('CSV', 'https://www.w3.org/TR/tabular-data-model/')} (4%). CSV, TSV and XLSX are expressions of the same data model and we get a combined usage of 6% from these formats. Whilst this is still far less than JSON, we feel that it is substantial enough to consider CSV on its own. We will stop supporting the variants TSV and XLSX.
+      %p #{link_to('Turtle', 'https://www.w3.org/TR/turtle/')} is our current approach to express registers as #{link_to('RDF', 'https://www.w3.org/RDF/')}. We think we can do better than that, but we need to improve other aspects of GOV.UK Registers first. We will stop supporting Turtle, but we plan to reintroduce RDF at a later date in the form of #{link_to('JSON-LD', 'https://json-ld.org/')} which will allow us to build on top of JSON.   
