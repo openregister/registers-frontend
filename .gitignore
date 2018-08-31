@@ -20,8 +20,5 @@
 .idea
 *.iml
 
-# Ignore outputs from travis.
-/vendor
-
 # Ignore any npm installed modules.
 node_modules/*
