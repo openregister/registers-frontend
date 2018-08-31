@@ -116,8 +116,7 @@
           - if @records.any?
             .subsection--not-accordionised
               .subsection__header--not-accordionised
-                %h2.subsection__title--not-accordionised 
-                  -# = link_to_choose_access
+                %h2.subsection__title--not-accordionised
                   = link_to 'Access the data', register_choose_access_path(@register.slug)
           .subsection.js-subsection
             .subsection__header
