@@ -1,6 +1,7 @@
 {
   "name": "registers-frontend",
   "version": "1.0.0",
+  "private": true,
   "description": "The frontend for GOV.UK Registers.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +11,7 @@
     "url": "git+https://github.com/openregister/registers-frontend.git"
   },
   "author": "https://github.com/orgs/alphagov/teams/gov-uk-registers",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/openregister/registers-frontend/issues"
   },
