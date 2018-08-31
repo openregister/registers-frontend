@@ -1,8 +1,10 @@
 class Record < ApplicationRecord
+  VALID_FIELD_NAME = /[a-zA-Z\-_\/0-9]+/
+
   include SearchScope
   belongs_to :register
-  scope :current, -> { where("data->> 'end-date' is null") }
-  scope :archived, -> { where("data->> 'end-date' is not null") }
+  scope :current, -> { where(Arel.sql("data->> 'end-date' is null")) }
+  scope :archived, -> { where(Arel.sql("data->> 'end-date' is not null")) }
   scope :status, lambda { |status|
     case status
     when 'archived', 'current'
@@ -15,7 +17,9 @@ class Record < ApplicationRecord
   }
 
   scope :sort_by_field, lambda { |sort_by, sort_direction|
-    order("data->> '#{sort_by}' #{sort_direction.upcase} nulls last")
+    if sort_by.match?(VALID_FIELD_NAME)
+      order(Arel.sql("data->> '#{sort_by}' #{sort_direction.upcase} nulls last"))
+    end
   }
 
   scope :record, lambda { |record|

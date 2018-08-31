@@ -4,7 +4,7 @@ defaults: &defaults
   memory: 1GB
   services:
     # postgres database
-    - registers-frontend
+    - registers-frontend-ha-encrypted
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     # logging
@@ -20,7 +20,7 @@ applications:
   health-check-http-endpoint: /health_check/standard
   services:
     # TODO: This block overrides to add prometheus but we should do this using inheritence if possible
-    - registers-frontend
+    - registers-frontend-ha-encrypted
     - registers-product-site-environment-variables
     - logit-ssl-drain
     - prometheus

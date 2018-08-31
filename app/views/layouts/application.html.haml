@@ -5,7 +5,7 @@
 - content_for :after_header do
   %header{class: "header #{current_page?(root_path) ? 'header--without-border' : ''}"}
     .header__container
-      .header__brand{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Logo Clicked"}}
+      .header__brand
         = link_to root_path do
           %span.govuk-logo
             = image_tag 'gov_uk_logotype_crown_invert_trans.png', height: 32, width: 36, class: 'govuk-logo__printable-crown'
@@ -19,7 +19,7 @@
       = check_box_tag 'show-menu', nil, false, class: 'header__navigation-toggle-checkbox', "aria-controls" => "navigation", "aria-expanded" => "false"
       = label_tag 'show-menu', 'Menu', class: 'header__navigation-toggle'
       %nav{id: "navigation", class: "header__navigation", role: "Navigation", "aria-label" => "Top Level Navigation", "aria-hidden" => "true"}
-        %ul{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Navigation Link Clicked"}}
+        %ul
           %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Get data", registers_path
           %li{class: "#{'active' if current_page?(support_path)}"}
@@ -31,7 +31,7 @@
   = canonical_tag
   = stylesheet_link_tag 'application'
   = csrf_meta_tags
-  %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers provides a secure API that is easy to integrate with so you can get the most up-to-date data from across government.'}" }
+  %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'Registers are lists of information that are managed and approved by government. GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.'}" }
   = render partial: 'layouts/analytics'
 
 - content_for :body_end do
@@ -43,7 +43,7 @@
     .footer-categories-wrapper
       .grid-row
         .column-one-quarter
-          %ul{data: {"click-events" => "", "click-category" => "Footer", "click-action" => "Internal Link Clicked"}}
+          %ul
             %li
               = link_to "Get data", registers_path
             %li
