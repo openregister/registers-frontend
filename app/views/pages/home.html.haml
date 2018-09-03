@@ -38,33 +38,16 @@
       .grid-row
         .column-one-half
           %h2.heading-medium.content-section__title Trusted by government services
-          %p By using registers you can: 
+          %p By using registers you can:
           %ul.list.list-bullet
             %li reduce the time and cost of sourcing data from across government
-            %li be confident that your service is using the most up&#8209;to&#8209;date government data 
+            %li be confident that your service is using the most up&#8209;to&#8209;date government data
             %li receive data that is ready to use with no need for data cleansing
 
         .column-one-half
           = image_tag('country-register.png', alt: 'Screenshot showing the country register page')
 
-    %section.content-section.content-section--with-top-border
-      .grid-row
-        %h2.heading-medium.content-section__title.column-full Registers in numbers
-        .column-one-third
-          .data
-            = link_to registers_path do
-              %span.data-item.bold-xxlarge= @ready_registers.count
-              %span.data-item.bold-small registers available
-        .column-one-third
-          .data
-            = link_to registers_path do
-              %span.data-item.bold-xxlarge= @organisation_count
-              %span.data-item.bold-small government organisations providing&nbsp;registers
-        .column-one-third
-          .data
-            = link_to services_using_registers_path do
-              %span.data-item.bold-xxlarge 13
-              %span.data-item.bold-small services using registers
+    = render partial: 'layouts/registers-in-numbers'
 
 = content_for :javascript do
   :javascript
