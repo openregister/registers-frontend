@@ -82,5 +82,4 @@ private
   def set_number_of_steps
     @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
   end
-
 end
