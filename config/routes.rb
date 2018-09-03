@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   get 'cookies', to: 'pages#cookies', as: 'cookies'
 
   resources :sign_up, only: %i[create index], path: 'sign-up-for-updates' do
-    # collection do
-    #   get '/thank-you-for-signing-up', to: 'sign_up#thank_you', as: 'thank_you'
-    # end
   end
 
   get '/sign-up-for-updates/thank-you', to: 'sign_up#thank_you', as: 'sign_up_thank_you'
