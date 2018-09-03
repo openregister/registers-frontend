@@ -3,17 +3,15 @@ require 'open-uri'
 class DownloadController < ApplicationController
   include FormHelpers
   before_action :set_register
+  before_action :set_number_of_steps
   before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
   def index
-    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
     @custom_dimension = "#{@register.name} - download"
   end
 
   def create
-    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
-
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
@@ -27,11 +25,9 @@ class DownloadController < ApplicationController
 
   def choose_access
     if cookies[:seen_help_us_improve_questions]
-      @number_of_steps = 2
       @next_step_api = register_get_api_path
       @next_step_download = register_download_index_path
     else
-      @number_of_steps = 3
       @next_step_api = register_help_improve_api_path;
       @next_step_download = register_help_improve_download_path
     end
@@ -55,10 +51,7 @@ class DownloadController < ApplicationController
 
   def get_api
     @custom_dimension = "#{@register.name} - API"
-    if cookies[:seen_help_us_improve_questions]
-      @number_of_steps = 2
-    else
-      @number_of_steps = 3
+    unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
         expires: 2.weeks.from_now
@@ -86,5 +79,8 @@ private
     @register = Register.find_by_slug!(params[:register_id])
   end
 
-  def download_user_params; end
+  def set_number_of_steps
+    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
+  end
+
 end
