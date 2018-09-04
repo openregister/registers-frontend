@@ -2,6 +2,8 @@ require 'open-uri'
 
 class DownloadController < ApplicationController
   include FormHelpers
+  include ActionView::Helpers::UrlHelper
+
   before_action :set_register
   before_action :set_number_of_steps
   before_action :set_government_organisations, only: :new
@@ -39,8 +41,7 @@ class DownloadController < ApplicationController
                                         .where(entry_type: 'user')
                                         .current
 
-    # TODO: remove the regex.
-    if request.fullpath.match?(/api$/)
+    if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
       @custom_dimension = "#{@register.name} - API"
     else
