@@ -27,6 +27,7 @@ class Register < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
   has_many :register_search_results
+  belongs_to :theme
 
   def register_last_updated
     Record.select('timestamp')
