@@ -8,6 +8,10 @@
     = f.label :authority, class: 'form-label'
     = f.select :authority, @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, {}, class: 'form-control'
   = f.text_area :contextual_data
+  .form-group
+    = f.label :theme_id, class: 'form-label'
+    = f.select :theme_id, Theme.all.pluck(:name, :id), { include_blank: 'Select theme' }, class: 'form-control'
+  = f.text_area :contextual_data
   = f.text_area :related_registers
   .form-group
     .multiple-choice
