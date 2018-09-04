@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723153312) do
+ActiveRecord::Schema.define(version: 2018_09_04_110923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(version: 20180723153312) do
     t.string "seo_title"
     t.text "meta_description"
     t.boolean "featured", default: false
+    t.bigint "theme_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "description"
+    t.uuid "taxon_content_id"
+    t.index ["slug"], name: "index_themes_on_slug", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -91,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180723153312) do
     t.datetime "password_reset_sent_at"
   end
 
+  add_foreign_key "registers", "themes"
 
   create_view "register_search_results", materialized: true,  sql_definition: <<-SQL
       SELECT DISTINCT registers.id AS register_id,
