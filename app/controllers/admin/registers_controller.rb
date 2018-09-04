@@ -74,7 +74,8 @@ module Admin
                                         :position,
                                         :seo_title,
                                         :meta_description,
-                                        :featured)
+                                        :featured,
+                                        :theme_id)
     end
   end
 end
