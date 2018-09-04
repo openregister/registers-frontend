@@ -1,7 +1,6 @@
 .form-heading-with-skip {
   display: flex;
   flex-wrap: wrap;
-  padding-top: $gutter / 2;
 
   h2 {
     width: 100%;
@@ -15,11 +14,14 @@
       width: 65%;
     }
   }
+  .step-number,
+  .skip-this-step {
+    margin: 13px 0 11px 0;
+  }
 
   .step-number {
     line-height: 16px;
     margin-bottom: 0;
-    margin: 16px 0 16px 0;
     order: 1;
     padding: 0;
     width: 50%;
@@ -28,7 +30,6 @@
   .skip-this-step {
     font-size: 16px;
     line-height: 16px;
-    margin: 16px 0 16px 0;
     order: 2;
     padding: 0;
     text-align: right;
