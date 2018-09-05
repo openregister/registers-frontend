@@ -21,7 +21,7 @@ class RegistersController < ApplicationController
     @registers = Register.available.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
 
     @registers_available = Register.available.where(register_phase: 'Beta')
-    @organisation_count = @registers_available.distinct.count(:authority)
+    @organisation_count = Register.organisation_count
   end
 
   def show

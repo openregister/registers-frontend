@@ -23,6 +23,13 @@ class Register < ApplicationRecord
   scope :sort_registers, ->(sort_by) { sort_by == 'name' ? by_name : by_popularity }
   scope :featured, -> { where(featured: true) }
   scope :not_featured, -> { where(featured: false) }
+  scope :organisation_count, lambda {
+    available
+      .in_beta
+      .distinct
+      .count(:authority)
+  }
+  scope :available_count, -> { available.in_beta.count }
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
