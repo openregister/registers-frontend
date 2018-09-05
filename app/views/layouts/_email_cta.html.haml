@@ -1,0 +1,9 @@
+%h2.heading-medium Stay up to date
+%p Get notifications about:
+%ul.list.list-bullet
+  %li changes to our service, like breaking changes
+  %li the latest available registers and upcoming registers
+  %li tips and guidance on how to get the best out of registers
+
+%p
+  = link_to 'Sign up for updates', sign_up_index_path(from: register_slug, method: method), class: 'button'
