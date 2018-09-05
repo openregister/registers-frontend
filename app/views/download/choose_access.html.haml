@@ -26,3 +26,21 @@
         %ul.list.list-bullet
           %li get the data as JSON or CSV
         = link_to 'Download', @next_step_download, { class: 'js--ga-watch-click', id: "label-download" }
+
+- if @number_of_steps == 2
+  = content_for :javascript do
+    :javascript
+      var nextSteps = document.querySelectorAll('.js--ga-watch-click')
+      for (var i = 0; i < nextSteps.length; i++) {
+        nextSteps[i]
+          .addEventListener('click', function(event) {
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Form',
+              eventAction: 'Skip - cookie',
+              eventLabel: 'Help us improve',
+              nonInteraction: true,
+              dimension2: '#{@register.name.downcase} - ' + event.target.id.replace(/label-/g, '').toLowerCase()
+            })
+          })
+      }
