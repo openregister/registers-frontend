@@ -1,5 +1,5 @@
 class AddThemeData < ActiveRecord::Migration[5.2]
-  def change
+  def up
     Theme.create!([
       { name: 'Crime, justice and law', slug: 'crime-justice-and-law', description: 'Includes prison estate', taxon_content_id: 'ba951b09-5146-43be-87af-44075eac3ae9' },
       { name: 'Digital, Data and Technology Profession Capability Framework', slug: 'digital-data-and-technology-profession-capability-framework' },
