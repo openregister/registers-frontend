@@ -13,11 +13,4 @@
       %ul.list.list-bullet{data: {"click-events" => true, "click-category" => "Content", "click-action" => "Register Download"}}
         %li= link_to 'CSV', register_download_csv_path(@register.slug)
         %li= link_to 'JSON', register_download_json_path(@register.slug)
-      %h2.heading-medium Stay up to date
-      %p Get notifications about:
-      %ul.list.list-bullet
-        %li changes to our service, like downtime and breaking changes
-        %li the latest available registers and upcoming registers
-        %li tips and guidance on how to get the best out of registers
-      %p
-        = link_to 'Sign up for updates', sign_up_index_path(from: @register&.slug, method: 'download'), class: 'button'
+    = render partial: 'layouts/email_cta', locals: {method: 'download', register_slug: @register&.slug}
