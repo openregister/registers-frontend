@@ -4,8 +4,8 @@ class PagesController < ApplicationController
   def home
     @registers = Register.available.all
 
-    @registers_available = Register.available.where(register_phase: 'Beta')
-    @organisation_count = @registers_available.distinct.count(:authority)
+    @registers_available = Register.available_count
+    @organisation_count = Register.organisation_count
   end
 
   def services_using_registers; end
