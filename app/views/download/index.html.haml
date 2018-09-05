@@ -4,18 +4,20 @@
 %main#content{role: 'main'}
   .grid-row
     .column-full
-      %h1.heading-large Download the #{@register.register_name} register
+      %header.heading-large
+        %span.heading-secondary Step #{@number_of_steps} of #{@number_of_steps}
+        %h2
+          %b Download the data
+    .column-full
       %p You can download the latest data in this register as:
       %ul.list.list-bullet{data: {"click-events" => true, "click-category" => "Content", "click-action" => "Register Download"}}
         %li= link_to 'CSV', register_download_csv_path(@register.slug)
         %li= link_to 'JSON', register_download_json_path(@register.slug)
-      .participate#participation_section
-        = GovukElementsErrorsHelper.error_summary @download, "There is a problem with the form", ""
-        - if flash.alert.present?
-          %div{:class => 'error-summary', :role => 'alert'}
-            %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}= flash.alert[:title]
-            %p!="If the problem persists please contact  #{link_to 'support', support_path}" unless @download.errors.any?
-        %h3.heading-medium Help us improve GOV.UK Registers
-        %p.text We'd like to contact you occasionally to ask you questions about how you use registers. Your feedback will help us improve our service and you can unsubscribe at any time. Read more in our #{link_to 'privacy notice', privacy_notice_path}.
-
-        = render 'form', user: @user
+      %h2.heading-medium Stay up to date
+      %p Get notifications about:
+      %ul.list.list-bullet
+        %li changes to our service, like downtime and breaking changes
+        %li the latest available registers and upcoming registers
+        %li tips and guidance on how to get the best our of registers
+      %p
+        = link_to 'Sign up for updates', sign_up_index_path(from: @register&.slug, method: 'download'), class: 'button'

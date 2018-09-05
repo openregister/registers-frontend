@@ -2,41 +2,67 @@ require 'open-uri'
 
 class DownloadController < ApplicationController
   include FormHelpers
+  include ActionView::Helpers::UrlHelper
+
   before_action :set_register
+  before_action :set_number_of_steps
+  before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
   def index
-    @download = DownloadUser.new
+    @custom_dimension = "#{@register.name} - download"
   end
 
   def create
-    @download = DownloadUser.new(download_user_params.merge!(register: params[:register_id]))
-
-    if !@download.valid?
-      render :index
-    else
-      response = post_to_endpoint(@download, 'download_users')
-      if response&.code != nil
-        case response.code
-        when 422
-          flash.now[:alert] = { title: 'Please fix the errors below', message: @download.errors.messages }
-          JSON.parse(response.body).each { |k, v| @download.errors.add(k.to_sym, *v) }
-          render :index
-        when 201
-          redirect_to register_download_success_path(@register.slug)
-        else
-          logger.error("Download POST failed with unexpected response code: #{response.code}")
-          flash.now[:alert] = { title: 'Something went wrong' }
-          render :index
-        end
-      else
-        flash.now[:alert] = { title: 'Something went wrong' }
-        render :index
-      end
+    unless cookies[:seen_help_us_improve_questions]
+      cookies[:seen_help_us_improve_questions] = {
+        value: true,
+        expires: 2.weeks.from_now
+      }
     end
+    render :index
   end
 
   def success; end
+
+  def choose_access
+    if cookies[:seen_help_us_improve_questions]
+      @next_step_api = register_get_api_path
+      @next_step_download = register_download_index_path
+    else
+      @next_step_api = register_help_improve_api_path;
+      @next_step_download = register_help_improve_download_path
+    end
+  end
+
+  def help_improve
+    @government_organisations = Register.find_by(slug: 'government-organisation')
+                                        .records
+                                        .where(entry_type: 'user')
+                                        .current
+
+    if current_page?(register_help_improve_api_path)
+      @next_page = register_get_api_path
+      @custom_dimension = "#{@register.name} - API"
+    else
+      @next_page = register_download_index_path
+      @custom_dimension = "#{@register.name} - download"
+    end
+  end
+
+  def get_api
+    @custom_dimension = "#{@register.name} - API"
+    unless cookies[:seen_help_us_improve_questions]
+      cookies[:seen_help_us_improve_questions] = {
+        value: true,
+        expires: 2.weeks.from_now
+      }
+    end
+  end
+
+  def post_api
+    redirect_to register_get_api_path(@register.slug)
+  end
 
   def download_json
     data = RegisterRecordsDownloader.new(@register).download_format('json')
@@ -54,14 +80,7 @@ private
     @register = Register.find_by_slug!(params[:register_id])
   end
 
-  def download_user_params
-    params.require(:download_user).permit(
-      :email_gov,
-      :email_non_gov,
-      :department,
-      :non_gov_use_category,
-      :is_government,
-      :register
-    )
+  def set_number_of_steps
+    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
   end
 end

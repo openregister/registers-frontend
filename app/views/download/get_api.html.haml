@@ -1,0 +1,31 @@
+- @page_title = 'Use the API'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-full
+      %header.heading-large
+        %span.heading-secondary Step #{@number_of_steps} of #{@number_of_steps}
+        %h2
+          %b Use the API
+    .column-two-thirds
+      %p
+        The Register ID is:
+        %code.code.code-curl #{@register.slug}
+
+      %p
+        Get this register as JSON:
+        %code.code.code-curl curl #{@register.url}/records.json?page-size=5000
+
+      %p
+        Read our #{link_to 'technical documentation', 'https://docs.registers.service.gov.uk/#choose-a-response-format'} to see how to get started.
+
+      %h2.heading-medium Stay up to date
+
+      %p Get notifications about:
+      %ul.list.list-bullet
+        %li changes to our service, like downtime and breaking changes
+        %li the latest available registers and upcoming registers
+        %li tips and guidance on how to get the best our of registers
+
+      %p
+        = link_to 'Sign up for updates', sign_up_index_path(from: @register&.slug, method: "api"), class: 'button'

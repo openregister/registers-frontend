@@ -53,10 +53,9 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.self_service_api_host = 'http://localhost:3001'
-  config.self_service_http_auth_username = 'username'
-  config.self_service_http_auth_password = 'password'
   config.x.zendesk.url = ENV['ZENDESK_URL']
   config.x.zendesk.username = ENV['ZENDESK_USERNAME']
   config.x.zendesk.token = ENV['ZENDESK_TOKEN']
+  config.x.mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
+  config.x.mailchimp.list_id = 'f187b8d77c'
 end

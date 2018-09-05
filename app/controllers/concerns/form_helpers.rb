@@ -17,26 +17,3 @@ module FormHelpers
     }.compact.flatten(1)
   end
 end
-
-def post_to_endpoint(user, endpoint = 'users')
-  @user = { email: user.email,
-            is_government: user.is_government_boolean,
-            register: user.try(:register),
-            non_gov_use_category: user.try(:non_gov_use_category),
-            department: user.try(:department),
-            contactable: user.try(:is_contactable_boolean) }
-            .compact
-  uri = URI.parse("#{Rails.configuration.self_service_api_host}/#{endpoint}")
-  options = {
-    basic_auth: { username: Rails.configuration.self_service_http_auth_username, password: Rails.configuration.self_service_http_auth_password },
-    body: @user
-  }
-  begin
-    HTTParty.post(uri, options)
-  end
-rescue StandardError => e
-  # Fallback for socket errors etc...
-  logger.error("#{endpoint} POST failed with exception: #{e}")
-  flash.now[:alert] = 'Something went wrong'
-  nil
-end

@@ -10,6 +10,11 @@ RUN apt-get update -qq \
 
 WORKDIR /usr/src/app
 
+COPY package.json /usr/src/app/package.json
+COPY package-lock.json /usr/src/app/package-lock.json
+
+RUN npm install
+
 COPY Gemfile /usr/src/app/Gemfile
 COPY Gemfile.lock /usr/src/app/Gemfile.lock
 COPY .ruby-version /usr/src/app/.ruby-version

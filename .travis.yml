@@ -17,6 +17,8 @@ addons:
 
 before_script:
   - bundle exec rake db:setup
+  # GOV.UK Frontend Design System installed by NPM
+  - npm install
 
 script:
   - bundle exec rake spec

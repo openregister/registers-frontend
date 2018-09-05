@@ -1,0 +1,22 @@
+.subsection__title--not-accordionised {
+  border-top: 1px solid $grey-2;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.25;
+
+  a {
+    color: $link-colour;
+    display: block;
+    padding: 18px 2px 17px 2px;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: $highlight-colour;
+  }
+
+  @media screen and (min-width: 641px) {
+    font-size: 19px;
+    line-height: 1.3157894737;
+  }
+}

@@ -10,15 +10,26 @@ Rails.application.routes.draw do
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
 
+  resources :sign_up, only: %i[create index], path: 'sign-up-for-updates' do
+  end
+
+  get '/sign-up-for-updates/thank-you', to: 'sign_up#thank_you', as: 'sign_up_thank_you'
+
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show
     resources :download
     resources :feedback, to: 'registers#create_feedback'
     resources :records, constraints: { id: /.*/ }, only: :show
-    get '/download/success', to: 'download#success', as: 'download_success'
+
     get '/download-json', to: 'download#download_json', as: 'download_json'
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
+
+    get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
+    get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
+    get '/help-us-improve', to: 'download#help_improve', as: 'help_improve_download'
+    get '/use-the-api', to: 'download#get_api', as: 'get_api'
+    post '/use-the-api', to: 'download#post_api', as: 'post_api'
   end
 
   get '/registers-in-progress', to: 'registers#in_progress'

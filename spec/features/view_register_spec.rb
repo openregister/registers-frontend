@@ -35,10 +35,21 @@ RSpec.feature 'View register', type: :feature do
       }).
     to_return(status: 200, body: "assert-root-hash\tsha-256:2183de14afa34180a48c274e60d06841facf4627afd769b7f4cf8bf4457a3129")
 
+    government_organisation_data = File.read('./spec/support/government-organisation.rsf')
+    stub_request(:get, "https://government-organisation.register.gov.uk/download-rsf/0").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'government-organisation.register.gov.uk' }).
+    to_return(status: 200, body: government_organisation_data, headers: {})
+
+    stub_request(:get, "https://government-organisation.register.gov.uk/download-rsf/1002").
+    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'government-organisation.register.gov.uk' }).
+    to_return(status: 200, body: "assert-root-hash\tsha-256:f42d8409df99cceb6c92e5b6b2eb24cd51075d1aa23924fcbdbabf57fbc4ab98")
+
     country = ObjectsFactory.new.create_register('Country', 'Beta', 'D587')
     industrial_classification = ObjectsFactory.new.create_register('industrial classification 2003', 'Discovery', 'D587')
+    government_organisation = ObjectsFactory.new.create_register('government-organisation', 'Beta', 'D587')
     PopulateRegisterDataInDbJob.perform_now(country)
     PopulateRegisterDataInDbJob.perform_now(industrial_classification)
+    PopulateRegisterDataInDbJob.perform_now(government_organisation)
   end
 
   scenario 'search for a register' do

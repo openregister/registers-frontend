@@ -32,7 +32,15 @@
 @import 'modules/scrolling-tables';
 @import 'modules/dialog';
 @import 'modules/highlight-boxes';
+@import 'modules/accordion';
+@import 'modules/form--header-with-skip';
 @import 'modules/notice';
+
+$govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack; this means design system won't load fonts.
+@import 'components/radios/radios'; // GOV.UK design system
+@import 'components/input/input'; // GOV.UK design system
+@import 'overrides/spacing'; // GOV.UK design system
+@import 'overrides/width'; // GOV.UK design system
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -514,6 +522,7 @@ details {
 .code-curl {
   border: none;
   color: $red;
+  display: inline-block;
   font-size: 16px;
   white-space: inherit;
 }
@@ -622,4 +631,25 @@ details {
       margin: 7px $gutter 0 0;
     }
   }
+}
+
+.access-to-data {
+  &__submit-group {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @media screen and (min-width: 640px) {
+      flex-direction: row;
+    }
+
+    span {
+      padding: ($gutter / 2);
+    }
+  }
+}
+
+.registers-\!-faded-colour {
+  color: $grey-1;
+  padding-left: 0.25em;
 }

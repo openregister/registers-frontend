@@ -1,21 +1,17 @@
-<!-- Google Analytics -->
 <script>
-/* global ga, window */
-window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments); };
+  /* global ga, window */
+  window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments); };
 
-var dimensions = {
-  version: {
-    dimension: 'dimension2',
-    payload: 'v1'
-  }
-};
+  ga('create', 'UA-86101042-3', 'auto')
 
-ga('create', 'UA-86101042-3', 'auto');
-ga('set', 'transport', 'beacon');
-ga('set', 'anonymizeIp', true);
-ga('set', 'displayFeaturesTask', null);
-ga('set', dimensions.version.dimension, dimensions.version.payload);
-ga('send', 'pageview');
+  <% if @custom_dimension %>
+    ga('set', 'dimension2','<%= @custom_dimension.downcase %>')
+  <% end %>
+
+  ga('set', 'anonymizeIp', true)
+  ga('set', 'displayFeaturesTask', null)
+  ga('set', 'transport', 'beacon')
+
+  ga('send', 'pageview')
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async></script>
-<!-- End Google Analytics -->

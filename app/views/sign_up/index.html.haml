@@ -1,0 +1,60 @@
+- @page_title = "Sign up for updates"
+
+%main#content{role: 'main'}
+  .grid-row
+    .column-full
+      %h1.heading-large Sign up for updates
+      %p Get notifications about:
+      %ul.list.list-bullet
+        %li changes to our service, like breaking changes
+        %li updates to registers, the latest available registers, and upcoming registers
+        %li tips and guidance on how to get the best out of registers
+
+      - if flash[:alert].present?
+        %div{:class => 'error-summary', :role => 'alert'}
+          %h2{:class => %w(heading-medium error-summary-heading), :id => 'error-summary-heading'}
+            = flash.alert
+          %p!="If the problem persists please contact  #{link_to 'support', support_path}"
+
+      = form_for @sign_up_user, url: sign_up_index_path({from: @register&.slug, method: params[:method]}.compact), html: { class: "js--ga-submit" } do |f|
+        .sign-up-for-email
+          = f.email_field(:email, nil, class: "govuk-input govuk-!-width-one-half", spellcheck: false, autocapitalize: "off", required: true)
+        .form-group
+          = button_tag("Sign up for updates", class: "button")
+
+= content_for :javascript do
+  :javascript
+    ( function(document, window, undefined) {
+
+      var getValue = function(element) {
+          if (element === null) {
+            return 'Blank'
+          }
+
+          if (element.value) {
+            var findEmailDomain = element.value.match(/(?:^.+)@(.+$)/);
+
+            if (findEmailDomain === null) {
+              return 'no email provided'
+            }
+
+            return findEmailDomain[1];
+          }
+
+          return false;
+      }
+      document.querySelector('.js--ga-submit')
+        .addEventListener('submit', function(event) {
+          var form = event.target;
+          var emailDomain = getValue(form.querySelector('input[name="email-address"]'))
+
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'Submit - ' + emailDomain ,
+            eventLabel: 'Sign up email',
+            nonInteraction: true
+          })
+
+        })
+    })(document, window);
