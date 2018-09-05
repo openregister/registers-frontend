@@ -91,14 +91,22 @@
   padding: $gutter-half * 2;
   position: relative;
   text-decoration: none;
+  // scss-lint:disable DuplicateProperty
+  // The linter is disabled for `DuplicateProperty` because we need to declare
+  // width twice to provide a reasonable fallback for browsers that don't
+  // support `calc()`.
   width: 100%;
+  width: calc(100% - #{$gutter-half / 2});
 
   @media screen and (min-width: 700px) {
+    width: 50%;
     width: calc(50% - #{$gutter-half});
   }
+  // scss-lint:enable DuplicateProperty
 
   .heading-medium {
     margin-top: 0;
     margin-bottom: 0;
   }
 }
+
