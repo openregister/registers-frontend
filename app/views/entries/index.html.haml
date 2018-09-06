@@ -1,4 +1,4 @@
-- @page_title = "#{@register.register_name} register updates"
+- @page_title = "#{@register.register_name} updates"
 - content_for :body_classes, 'entries-index'
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
@@ -6,7 +6,7 @@
     %li.breadcrumbs__item
       = link_to 'Get data', registers_path
     %li.breadcrumbs__item
-      = link_to "#{@register.register_name} register", register_path(@register.slug)
+      = link_to @register.register_name, register_path(@register.slug)
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to 'Register updates', '#content', 'aria-current' => 'page'
 
