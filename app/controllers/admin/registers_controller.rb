@@ -66,7 +66,6 @@ module Admin
       params.require(:register).permit(:name,
                                         :slug,
                                         :register_phase,
-                                        :authority,
                                         :description,
                                         :contextual_data,
                                         :related_registers,
@@ -75,7 +74,8 @@ module Admin
                                         :seo_title,
                                         :meta_description,
                                         :featured,
-                                        :theme_id)
+                                        :theme_id,
+                                        authority_attributes: %i[name id])
     end
   end
 end

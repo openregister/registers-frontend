@@ -41,10 +41,10 @@
                     .app-c-highlight-boxes__item
                       %h3.app-c-highlight-boxes__title= link_to register.register_name, register_path(register.slug)
                       %p.app-c-highlight-boxes__description= register.register_description
-                      - if register.register_authority.present?
-                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                            %span= register.register_authority.data['name']
+                      - if register.authority.present?
+                        %div{class: "govuk-organisation-logo #{register&.authority&.name.parameterize}"}
+                          %div{class: "logo-container #{crest_class_name(register&.authority&.name.parameterize)}"}
+                            %span= register&.authority&.name
 
 
             %table.register-status-table.table-collapsible
@@ -65,10 +65,10 @@
                         %br
                         = register.register_description
                     %td
-                      - if register.register_authority.present?
-                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                            %span= register.register_authority.data['name']
+                      - if register.authority.present?
+                        %div{class: "govuk-organisation-logo #{register&.authority&.name&.parameterize}"}
+                          %div{class: "logo-container #{crest_class_name(register&.authority&.name&.parameterize)}"}
+                            %span= register&.authority&.name
 
       - else
         .search-results

@@ -27,7 +27,7 @@ class Register < ApplicationRecord
     available
       .in_beta
       .distinct
-      .count(:authority)
+      .count(:authority_id)
   }
   scope :available_count, -> { available.in_beta.count }
 
@@ -35,6 +35,8 @@ class Register < ApplicationRecord
   has_many :records, dependent: :destroy
   has_many :register_search_results
   belongs_to :theme
+  belongs_to :authority
+  accepts_nested_attributes_for :authority
 
   def register_last_updated
     Record.select('timestamp')
@@ -55,10 +57,6 @@ class Register < ApplicationRecord
     Record.where(register_id: id, key: ordered_field_keys)
           .order(Arel.sql("position(key::text in '#{ordered_field_keys.join(',')}')"))
           .map { |entry| entry[:data] }
-  end
-
-  def register_authority
-    Register.find_by(slug: 'government-organisation')&.records&.find_by(key: authority)
   end
 
   def number_of_records

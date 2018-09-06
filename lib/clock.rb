@@ -10,7 +10,11 @@ module Clockwork
     system(job)
   end
 
-  every(30.minute, 'Update database') {
+  every(30.minute, 'Update register data') {
     `rake registers_frontend:populate_db:fetch_later`
+  }
+
+  every(30.minute, 'Update authorities') {
+    `rake registers_frontend:populate_authorities:fetch_later`
   }
 end

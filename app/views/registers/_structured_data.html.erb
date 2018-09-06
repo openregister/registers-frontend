@@ -3,7 +3,7 @@
   "@context": "http://schema.org",
   "@type": "Table",
   "about": "<%= register.register_name %> register",
-  "author": "<%= register.register_authority.data['name'] %>",
+  "author": "<%= register&.authority&.name %>",
   "publisher": "Government Digital Service (GDS)",
   "dateModified": "<%= formatted_date(register.register_last_updated) %>"
 }

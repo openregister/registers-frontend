@@ -20,12 +20,12 @@
           %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
 
       .column-one-third
-        - if @register.register_authority.present?
+        - if @register.authority.present?
           .related-items
             %p.bold-small Managed by:
-            %div{class: "govuk-organisation-logo #{@register.register_authority.data['name'].parameterize}"}
-              %div{class: "logo-container #{crest_class_name(@register.register_authority.data['name'].parameterize)}"}
-                %span= @register.register_authority.data['name']
+            %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
+              %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
+                %span= @register&.authority&.name
 
   .grid-row
     .column-full
