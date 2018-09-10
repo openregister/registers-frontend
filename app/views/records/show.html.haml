@@ -1,11 +1,11 @@
-- @page_title = "Record #{params[:id]} in the #{@register.register_name} register"
+- @page_title = "Record #{params[:id]} in #{@register.register_name}"
 - content_for :body_classes, 'records-show'
 
 %main#content.container{role:'main'}
   .grid-row
     .column-two-thirds
       #link-back
-      %h1.heading-large Record <strong>#{params[:id]}</strong> in the <strong>#{@register.register_name}</strong> register
+      %h1.heading-large Record <strong>#{params[:id]}</strong> in <strong>#{@register.register_name}</strong>
   .grid-row
     .column-full
       %table.table
@@ -24,7 +24,7 @@
                 =  field_value.is_a?(Array) ? field_value.join(', ') : link_to_if(field['datatype'] == 'url', field_value, field_value)
   .grid-row
     .column-two-thirds
-      %p This is a record from the #{link_to @register.register_name, register_path(@register.slug)} register
+      %p This record is part of: #{link_to @register.register_name, register_path(@register.slug)}
       = content_for :javascript do
         :javascript
             var isInternalReferrer = document.referrer.indexOf(location.protocol + "//" + location.host) === 0;
