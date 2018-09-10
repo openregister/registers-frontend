@@ -19,6 +19,9 @@ class RegistersController < ApplicationController
 
   def in_progress
     @registers = Register.available.where(register_phase: 'Alpha').sort_by_phase_name_asc.by_name
+
+    @registers_available = Register.available_count
+    @organisation_count = Register.organisation_count
   end
 
   def show
