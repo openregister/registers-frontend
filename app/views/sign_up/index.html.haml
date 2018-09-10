@@ -46,7 +46,7 @@
       document.querySelector('.js--ga-submit')
         .addEventListener('submit', function(event) {
           var form = event.target;
-          var emailDomain = getValue(form.querySelector('input[name="email-address"]'))
+          var emailDomain = getValue(form.querySelector('input[type="email"]'))
 
           ga('send', {
             hitType: 'event',
