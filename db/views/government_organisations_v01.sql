@@ -1,0 +1,1 @@
+select distinct key, data->'name' as name from records where register_id = (select id from registers where slug = 'government-organisation') and entry_type = 'user';
