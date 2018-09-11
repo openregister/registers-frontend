@@ -36,11 +36,19 @@
 @import 'modules/form--header-with-skip';
 @import 'modules/notice';
 
+// GOV.UK design system
 $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack; this means design system won't load fonts.
-@import 'components/radios/radios'; // GOV.UK design system
-@import 'components/input/input'; // GOV.UK design system
-@import 'overrides/spacing'; // GOV.UK design system
-@import 'overrides/width'; // GOV.UK design system
+@import "settings/all";
+@import "tools/all";
+@import "helpers/all";
+@import "core/typography";
+@import 'components/radios/radios';
+@import 'components/input/input';
+@import 'overrides/spacing';
+@import 'overrides/width';
+
+
+@import 'modules/register-themes';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';

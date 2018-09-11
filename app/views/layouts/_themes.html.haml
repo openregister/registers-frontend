@@ -1,0 +1,10 @@
+%ul.register-themes
+  - @registers_themes_count.each do |category|
+    %li.register-theme
+      %a{ href: category[:slug], class: "register-theme__link"  }
+        %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}= category[:name]
+        %p.register-theme__description.govuk-body-s= category[:description]
+        %p{class: "register-theme__count govuk-body-s"}= category[:count]
+        -# category.taxon_content_id
+  %li
+    %a Link at the end

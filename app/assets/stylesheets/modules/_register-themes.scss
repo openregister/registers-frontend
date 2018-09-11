@@ -1,0 +1,55 @@
+.register-themes {
+  list-style: none;
+  display: grid;
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1em;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(4, auto);
+
+  @include govuk-media-query($from: tablet) {
+  }
+
+  @include govuk-media-query($from: desktop) {
+  }
+}
+
+.register-theme {
+  width: 100%;
+  padding: 0;
+
+  @include govuk-media-query($from: tablet) {
+  }
+
+  @include govuk-media-query($from: desktop) {
+  }
+}
+
+.register-theme__link {
+  box-sizing: border-box;
+  display: block;
+  background: $grey-4;
+  text-decoration: none;
+  height: 100%;
+  border: 1px solid $govuk-border-colour;
+  padding: 1em;
+  margin: 0;
+
+  @media (hover) {
+    &:hover {
+      border-color: $govuk-link-colour;
+    }
+  }
+}
+
+.register-theme__heading {
+  text-decoration: underline;
+  color: $govuk-link-colour;
+}
+
+.register-theme__description {
+}
+
+.register-theme__count {
+  margin: 0;
+}

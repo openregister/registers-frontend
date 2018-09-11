@@ -24,6 +24,10 @@
 
   .container#content
     %section.content-section
+      %h2.heading-medium.content-section__title Register collection
+      -# %code= @register_theme.inspect
+      = render partial: 'layouts/themes'
+    %section.content-section
       .grid-row
         .column-one-half
           %h2.heading-medium.content-section__title What is a register?
