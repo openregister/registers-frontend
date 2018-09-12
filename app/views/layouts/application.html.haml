@@ -3,9 +3,9 @@
 - content_for :page_title, "#{@page_title.present? ? "#{@page_title} - GOV.UK Registers" : 'GOV.UK Registers' }"
 
 - content_for :after_header do
+  -# TODO: Bring back border when notice is removed
   -# %header{class: "header #{current_page?(root_path) ? 'header--without-border' : 'header'}"}
   %header{class: 'header header--without-border'}
-    -# Bring back border when notice is removed
     .header__container
       .header__brand
         = link_to root_path do
