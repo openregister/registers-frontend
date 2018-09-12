@@ -13,4 +13,4 @@
       %ul.list.list-bullet{data: {"click-events" => true, "click-category" => "Content", "click-action" => "Register Download"}}
         %li= link_to 'CSV', register_download_csv_path(@register.slug)
         %li= link_to 'JSON', register_download_json_path(@register.slug)
-    = render partial: 'layouts/email_cta', locals: {method: 'download', register_slug: @register&.slug}
+      = render partial: 'layouts/email_cta', locals: {method: 'download', register_slug: @register&.slug}
