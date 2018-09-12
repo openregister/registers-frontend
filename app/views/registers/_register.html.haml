@@ -9,8 +9,8 @@
         = register.register_description
   %td
     - if register.authority.present?
-      %div{class: "govuk-organisation-logo #{register.authority&.name.parameterize}"}
-        %div{class: "logo-container #{crest_class_name(register.authority&.name.parameterize)}"}
+      %div{class: "govuk-organisation-logo #{register.authority&.name&.parameterize}"}
+        %div{class: "logo-container #{crest_class_name(register.authority&.name&.parameterize)}"}
           %span= register&.authority&.name
   %td
     - if register.register_phase == 'Alpha'
