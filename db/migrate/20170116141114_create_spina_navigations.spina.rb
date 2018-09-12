@@ -7,7 +7,7 @@ class CreateSpinaNavigations < ActiveRecord::Migration[4.2]
       t.boolean "auto_add_pages", null: false, default: false
       t.integer "position", default: 0, null: false
       t.timestamps
-      t.index ["name"], name: "index_spina_navigations_on_name", unique: true, using: :btree
+      t.index %w[name], name: "index_spina_navigations_on_name", unique: true, using: :btree
     end
 
     create_table "spina_navigation_items", force: :cascade do |t|
