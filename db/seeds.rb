@@ -1,65 +1,74 @@
 User.create(name: 'admin', email: 'registerteam@digital.cabinet-office.gov.uk', password: 'password123', admin: true)
 
+d13 = Authority.find_or_create_by!(government_organisation_key: 'D13', name: 'Foreign & Commonwealth Office', registers_description: 'Includes countries and territories')
+d4 = Authority.find_or_create_by!(government_organisation_key: 'D4', name: 'Ministry of Housing, Communities and Local Government', registers_description: 'Includes local authorities in Northern Ireland')
+d6 = Authority.find_or_create_by!(government_organisation_key: 'D6', name: 'Department for Education')
+d18 = Authority.find_or_create_by!(government_organisation_key: 'D18', name: 'Ministry of Justice', registers_description: 'Includes prison estate')
+d10 = Authority.find_or_create_by!(government_organisation_key: 'D10', name: 'Department for Work and Pensions', registers_description: 'Includes jobcentres')
+d2 = Authority.find_or_create_by!(government_organisation_key: 'D2', name: 'Cabinet Office', registers_description: 'Includes government organisations and services, gov.uk domain names and a register of all registers')
+d98 = Authority.find_or_create_by!(government_organisation_key: 'D98', name: 'The Charity Commission')
+puts('Created Authorities')
+
 Register.create(
   name: "Country",
   register_phase: "Beta",
-  authority: "D13",
+  authority: d13,
 )
 puts "Created Country Register"
 
 Register.create(
   name: "Territory",
   register_phase: "Beta",
-  authority: "D13",
+  authority: d13,
 )
 puts "Created Territory Register"
 
 Register.create(
   name: "Local authority eng",
   register_phase: "Beta",
-  authority: "D4",
+  authority: d4,
 )
 puts "Created Local authority eng Register"
 
 Register.create(
   name: "School eng",
   register_phase: "Alpha",
-  authority: "D6",
+  authority: d6,
 )
 puts "Created School eng Register"
 
 Register.create(
   name: "Prison estate",
   register_phase: "Beta",
-  authority: "D18",
+  authority: d18,
 )
 puts "Created Prison Register"
 
 Register.create(
   name: "Jobcentre",
   register_phase: "Beta",
-  authority: "D10",
+  authority: d10,
 )
 puts "Created Jobcentre Register"
 
 Register.create(
   name: "Government organisation",
   register_phase: "Beta",
-  authority: "D2",
+  authority: d2,
 )
 puts "Created Government organisation Register"
 
 Register.create(
   name: "Government domain",
   register_phase: "Beta",
-  authority: "D2",
+  authority: d2,
 )
 puts "Created Government domain Register"
 
 Register.create(
   name: "Charity",
   register_phase: "Discovery",
-  authority: "D98",
+  authority: d98,
   )
 puts "Created Charity Register"
 

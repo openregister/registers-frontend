@@ -9,7 +9,7 @@ RSpec.configure do |config|
 end
 
 RSpec.describe PopulateRegisterDataInDbJob, type: :job do
-  let!(:register) { ObjectsFactory.new.create_register('country', 'beta', 'D587') }
+  let!(:register) { ObjectsFactory.new.create_register('country', 'beta') }
 
   before do
     country_data = File.read('./spec/support/country.rsf')

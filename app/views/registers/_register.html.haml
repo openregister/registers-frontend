@@ -8,10 +8,10 @@
       - else
         = register.register_description
   %td
-    - if register.register_authority.present?
-      %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-        %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-          %span= register.register_authority.data['name']
+    - if register.authority.present?
+      %div{class: "govuk-organisation-logo #{register.authority&.name&.parameterize}"}
+        %div{class: "logo-container #{crest_class_name(register.authority&.name&.parameterize)}"}
+          %span= register&.authority&.name
   %td
     - if register.register_phase == 'Alpha'
       %p Open for feedback

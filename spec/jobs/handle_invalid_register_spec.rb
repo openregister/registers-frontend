@@ -6,7 +6,6 @@ RSpec.describe 'handling invalid register exceptions' do
       :register,
       name: 'country',
       register_phase: 'beta',
-      authority: 'D587'
     )
 
     country_data = File.read('./spec/support/country.rsf')

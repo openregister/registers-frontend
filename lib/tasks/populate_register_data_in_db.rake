@@ -15,6 +15,9 @@ namespace :registers_frontend do
         puts("populating register #{register.name}")
         PopulateRegisterDataInDbJob.perform_now(register)
       end
+
+      puts('populating authorities')
+      PopulateAuthoritiesJob.perform_now
     end
 
     desc 'For local envs: Force a full redownload of a single register'

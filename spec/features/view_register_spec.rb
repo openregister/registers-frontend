@@ -44,9 +44,9 @@ RSpec.feature 'View register', type: :feature do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'government-organisation.register.gov.uk' }).
     to_return(status: 200, body: "assert-root-hash\tsha-256:f42d8409df99cceb6c92e5b6b2eb24cd51075d1aa23924fcbdbabf57fbc4ab98")
 
-    country = ObjectsFactory.new.create_register('Country', 'Beta', 'D587')
-    industrial_classification = ObjectsFactory.new.create_register('industrial classification 2003', 'Discovery', 'D587')
-    government_organisation = ObjectsFactory.new.create_register('government-organisation', 'Beta', 'D587')
+    country = ObjectsFactory.new.create_register('Country', 'Beta')
+    industrial_classification = ObjectsFactory.new.create_register('industrial classification 2003', 'Discovery')
+    government_organisation = ObjectsFactory.new.create_register('government-organisation', 'Beta')
     PopulateRegisterDataInDbJob.perform_now(country)
     PopulateRegisterDataInDbJob.perform_now(industrial_classification)
     PopulateRegisterDataInDbJob.perform_now(government_organisation)
