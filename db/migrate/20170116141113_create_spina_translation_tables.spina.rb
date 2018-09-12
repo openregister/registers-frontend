@@ -10,8 +10,8 @@ class CreateSpinaTranslationTables < ActiveRecord::Migration[4.2]
       t.string "materialized_path"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["locale"], name: "index_spina_page_translations_on_locale"
-      t.index ["spina_page_id"], name: "index_spina_page_translations_on_spina_page_id"
+      t.index %w[locale], name: "index_spina_page_translations_on_locale"
+      t.index %w[spina_page_id], name: "index_spina_page_translations_on_spina_page_id"
     end
 
     create_table "spina_line_translations", force: :cascade do |t|
@@ -20,8 +20,8 @@ class CreateSpinaTranslationTables < ActiveRecord::Migration[4.2]
       t.string "content"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["locale"], name: "index_spina_line_translations_on_locale"
-      t.index ["spina_line_id"], name: "index_spina_line_translations_on_spina_line_id"
+      t.index %w[locale], name: "index_spina_line_translations_on_locale"
+      t.index %w[spina_line_id], name: "index_spina_line_translations_on_spina_line_id"
     end
 
     create_table "spina_text_translations", force: :cascade do |t|
@@ -30,8 +30,8 @@ class CreateSpinaTranslationTables < ActiveRecord::Migration[4.2]
       t.text "content"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["locale"], name: "index_spina_text_translations_on_locale"
-      t.index ["spina_text_id"], name: "index_spina_text_translations_on_spina_text_id"
+      t.index %w[locale], name: "index_spina_text_translations_on_locale"
+      t.index %w[spina_text_id], name: "index_spina_text_translations_on_spina_text_id"
     end
   end
 
