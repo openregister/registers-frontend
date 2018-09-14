@@ -1,5 +1,5 @@
 = content_for :body_classes, 'theme-page'
-- @page_title = "#{@collection.name} register collection"
+- @page_title = "#{@authority_collection.name} register collection"
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol
@@ -10,22 +10,21 @@
     %li.breadcrumbs__item
       = link_to 'Register collection', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to @collection.name, theme_path(@collection.slug), 'aria-current' => 'page'
+      = link_to @authority_collection.name, authority_path(@authority_collection.government_organisation_key), 'aria-current' => 'page'
 
 .govuk-width-container
   %main.govuk-main-wrapper
     .govuk-grid-row
       .govuk-grid-column-one-third
-        %h2.govuk-heading-m= @collection.name
+        %h2.govuk-heading-m= @authority_collection.name
       .govuk-grid-column-two-thirds
-        - if @collection.registers_in_this_theme.present?
+        - if @authority_collection.registers_by_this_authority.present?
           %ul.list-of-registers
-            - @collection.registers_in_this_theme.each do |register|
+            - @authority_collection.registers_by_this_authority.each do |register|
               %li.list-of-registers__register
                 %h3.list-of-registers__heading
                   =link_to "#{register.name} register", register_path(register.slug), {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
                 %p.list-of-registers__description= register.register_description
-                -# %p.govuk-body-s= number_with_delimiter(register.number_of_records)
                 %p.list-of-registers__authority= register.authority.name
         - else
-          %p No registers are in this collection.
+          %p No registers are published by this organisation.

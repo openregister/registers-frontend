@@ -1,18 +1,19 @@
-%section.content-section.column-full
-  .grid-row
-    %h2.heading-medium.content-section__title.column-full GOV.UK Registers in numbers
-    .column-one-third
-      .data
-        -# = link_to registers_path do
-        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= @registers_available
-        %span.data-item.govuk-body-s registers available
-    .column-one-third
-      .data
-        -# = link_to registers_path do
-        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= @organisation_count
-        %span.data-item.govuk-body-s government organisations providing&nbsp;registers
-    .column-one-third
-      .data
-        -# = link_to services_using_registers_path do
-        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
-        %span.data-item.govuk-body-s services using registers
+.govuk-width-container
+  .govuk-main-wrapper
+    %aside{ class: "govuk-grid-row"}
+      %h2{ class: "#{current_page?(root_path) ? '' : 'govuk-!-padding-top-9' } heading-medium content-section__title govuk-grid-column-full"} GOV.UK Registers in numbers
+      .govuk-grid-column-one-third
+        .data
+          -# = link_to registers_path do
+          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.registers_available
+          %span.data-item.govuk-body-s registers available
+      .govuk-grid-column-one-third
+        .data
+          -# = link_to registers_path do
+          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.organisation_count
+          %span.data-item.govuk-body-s government organisations providing&nbsp;registers
+      .govuk-grid-column-one-third
+        .data
+          -# = link_to services_using_registers_path do
+          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
+          %span.data-item.govuk-body-s services using registers

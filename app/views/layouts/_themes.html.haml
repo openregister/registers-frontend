@@ -1,5 +1,5 @@
 %ul.register-themes
-  - @registers_themes.each do |category|
+  - @registers_collection.each do |category|
     %li.register-theme
       %a{ href: theme_path(category.slug), class: "register-theme__link"  }
         %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}= category.name

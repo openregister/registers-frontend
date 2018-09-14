@@ -1,10 +1,9 @@
 class ThemesController < ApplicationController
   def index
-    # redirect to homepage plz
+    redirect_to registers_path, status: 301
   end
 
   def show
-    @registers_collections = Theme.themes
     @collection = Theme.collection(params[:slug])
   end
 end

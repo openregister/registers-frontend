@@ -22,13 +22,12 @@
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
-  .container#content
-    %section.content-section
+  .govuk-width-container
+    %section.govuk-main-wrapper
       %h2.heading-medium.content-section__title Register collection
       -# %code= @register_theme.inspect
       = render partial: 'layouts/themes'
-
-    = render partial: 'layouts/registers-in-numbers'
+  = render partial: 'layouts/registers-in-numbers'
 
 = content_for :javascript do
   :javascript
