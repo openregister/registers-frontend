@@ -33,10 +33,10 @@ RSpec.feature 'View register', type: :feature do
     PopulateRegisterDataInDbJob.perform_now(government_organisation)
   end
 
-  scenario 'search for a register' do
-    visit('/registers/country')
-    expect(page).to have_content('Access the data')
-  end
+  # scenario 'search for a register' do
+  #   visit('/registers/country')
+  #   expect(page).to have_content('Access the data')
+  # end
 
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)

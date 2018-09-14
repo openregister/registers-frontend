@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ThemesController, type: :controller do
+RSpec.describe AuthorityController, type: :controller do
   describe "GET #index" do
     it "returns http success" do
       get :index
