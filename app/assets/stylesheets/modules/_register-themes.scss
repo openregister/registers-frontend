@@ -1,27 +1,63 @@
 .register-themes {
   list-style: none;
-  display: grid;
-  grid-column-gap: 1.5em;
-  grid-row-gap: 1em;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(4, auto);
+  width: 100%;
+  padding-bottom: 2em;
+
+  @supports (display: grid) {
+    @include govuk-media-query($from: desktop) {
+      display: grid;
+      grid-column-gap: 1.5em;
+      grid-row-gap: 0.75em;
+      grid-auto-flow: column;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: repeat(4, auto);
+      padding-bottom: 0;
+    }
+  }
 
   @include govuk-media-query($from: tablet) {
   }
 
   @include govuk-media-query($from: desktop) {
+    // columns: 3 auto;
+    // -webkit-column-break-inside: avoid;
+    // page-break-inside: avoid;
+    // break-inside: avoid;
   }
 }
 
 .register-theme {
   width: 100%;
-  padding: 0;
+  padding: 0 0 0.75em 0;
 
   @include govuk-media-query($from: tablet) {
   }
 
   @include govuk-media-query($from: desktop) {
+    display: inline-block;
+    vertical-align: top;
+    width: (96% / 3);
+
+    &:nth-child(3n + 1) {
+      margin-right: 2%;
+    }
+
+    &:nth-child(3n+3) {
+      margin-left: 2%;
+    }
+
+    @supports (display: grid) {
+      width: 100%;
+      padding: 0;
+
+      &:nth-child(3n + 1) {
+        margin-right: 0;
+      }
+
+      &:nth-child(3n+3) {
+        margin-left: 0;
+      }
+    }
   }
 }
 
@@ -35,11 +71,16 @@
   padding: 1em;
   margin: 0;
 
-  @media (hover) {
-    &:hover {
-      border-color: $govuk-link-colour;
-    }
+  // @include govuk-media-query($from: desktop) {
+    // min-height: 8.5em;
+  // }
+
+  &:hover {
+    border-color: $govuk-link-colour;
   }
+
+  // @media (hover) {
+  // }
 }
 
 .register-theme__heading {
@@ -47,9 +88,58 @@
   color: $govuk-link-colour;
 }
 
-.register-theme__description {
-}
+// .register-theme__description {
+// }
 
 .register-theme__count {
   margin: 0;
+}
+
+.register-theme__view-all {
+  &:link,
+  &:visited {
+    display: block;
+    color: $white;
+    background: $govuk-link-colour;
+    font-weight: bold;
+    padding: 1em 1em 0.9em 1em;
+    line-height: 1;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+// .list-of-registers {
+
+// }
+
+.list-of-registers__register {
+  border-top: 1px solid $govuk-border-colour;
+  padding-top: 1em;
+
+  &:first-child {
+    border: 0;
+    padding-top: 0;
+  }
+}
+
+// .list-of-registers__link {
+// }
+
+.list-of-registers__heading {
+  @extend .govuk-heading-s;
+  margin-bottom: 0;
+}
+
+.list-of-registers__description {
+  @extend .govuk-body;
+  margin-bottom: 0.5em;
+}
+
+.list-of-registers__authority {
+  @extend .govuk-body-s;
 }

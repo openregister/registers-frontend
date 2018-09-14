@@ -3,27 +3,29 @@ class Theme < ApplicationRecord
 
   scope :themes, -> { Theme.all }
 
-  scope :registers_in_a_theme, ->(theme_id) {
-    Register.where(theme_id: theme_id)
-  }
-  scope :count_the_registers_in_a_theme, ->(theme_id) {
-    registers_in_a_theme(theme_id).count
-  }
-  scope :count_of_registers_human_readable, ->(theme_id) {
-    count = registers_in_a_theme(theme_id).count
-    "#{count} #{count == 1 ? 'register' : 'registers'}"
+  # def registers_in_a_theme theme_id
+  #   Register.where(theme_id: theme_id)
+  # end
+
+  scope :collection, ->(slug) {
+    Theme.find_by(slug: slug)
   }
 
-  scope :themes_and_count, -> {
-    themes.map { |t|
-      {
-        name: t.name,
-        id: t.id,
-        taxon_content_id: t.taxon_content_id,
-        description: t.description,
-        slug: t.slug,
-        count: count_of_registers_human_readable(t.id)
-      }
-    }
-  }
+  def registers_in_this_theme
+    @registers ||= registers
+  end
+
+  def register_description
+    Record.where(register_id: id, key: "register:#{name.parameterize}")
+      .pluck(Arel.sql("data -> 'text' as text"))
+      .first
+  end
+
+  def register_count
+    @register_count ||= registers.count
+  end
+
+  def register_authority authority
+    @authority ||= registers.find_by(slug: 'government-organisation')&.records&.find_by(key: authority)
+  end
 end

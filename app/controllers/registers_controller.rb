@@ -15,6 +15,7 @@ class RegistersController < ApplicationController
     if params[:phase] == 'in progress'
       redirect_to registers_in_progress_path
     end
+    @registers_themes = Theme.themes
   end
 
   def in_progress

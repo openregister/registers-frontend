@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get '/sign-up-for-updates/thank-you', to: 'sign_up#thank_you', as: 'sign_up_thank_you'
 
+  resources :themes, only: %i[show index], param: :slug
+
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show

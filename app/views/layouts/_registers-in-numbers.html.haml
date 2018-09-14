@@ -1,18 +1,18 @@
-%section.content-section.content-section--with-top-border.column-full
+%section.content-section.column-full
   .grid-row
-    %h2.heading-medium.content-section__title.column-full Registers in numbers
+    %h2.heading-medium.content-section__title.column-full GOV.UK Registers in numbers
     .column-one-third
       .data
-        = link_to registers_path do
-          %span.data-item.bold-xxlarge= @registers_available
-          %span.data-item.bold-small registers available
+        -# = link_to registers_path do
+        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= @registers_available
+        %span.data-item.govuk-body-s registers available
     .column-one-third
       .data
-        = link_to registers_path do
-          %span.data-item.bold-xxlarge= @organisation_count
-          %span.data-item.bold-small government organisations providing&nbsp;registers
+        -# = link_to registers_path do
+        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= @organisation_count
+        %span.data-item.govuk-body-s government organisations providing&nbsp;registers
     .column-one-third
       .data
-        = link_to services_using_registers_path do
-          %span.data-item.bold-xxlarge 13
-          %span.data-item.bold-small services using registers
+        -# = link_to services_using_registers_path do
+        %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
+        %span.data-item.govuk-body-s services using registers

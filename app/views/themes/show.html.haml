@@ -1,0 +1,30 @@
+= content_for :body_classes, 'theme-page'
+- @page_title = "#{@collection.name} register collection"
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol
+    %li.breadcrumbs__item
+      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item
+      = link_to 'Register collection', registers_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to @collection.name, theme_path(@collection.slug), 'aria-current' => 'page'
+
+.govuk-width-container
+  %main.govuk-main-wrapper
+    .govuk-grid-row
+      .govuk-grid-column-one-third
+        %h2.govuk-heading-m= @collection.name
+      .govuk-grid-column-two-thirds
+        - if @collection.registers_in_this_theme.present?
+          %ul.collection-list
+            - @collection.registers_in_this_theme.each do |register|
+              %li{class: 'collection-list__item'}
+                %h3
+                  =link_to "#{register.name} register", register_path(register.slug), {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+                %p= register.register_description
+                %p.govuk-body-s= register.register_authority.data["name"]
+        - else
+          %p No registers are in this collection.

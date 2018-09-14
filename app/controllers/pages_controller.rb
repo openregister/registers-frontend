@@ -8,7 +8,6 @@ class PagesController < ApplicationController
     @organisation_count = Register.organisation_count
 
     @registers_themes = Theme.themes
-    @registers_themes_count = Theme.themes_and_count
   end
 
   def services_using_registers; end

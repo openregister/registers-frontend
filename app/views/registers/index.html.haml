@@ -8,75 +8,68 @@
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to 'Get data', '#content', 'aria-current' => 'page'
+      = link_to 'Register collection', '#content', 'aria-current' => 'page'
 
-%main#content.container{role:'main'}
-  .grid-row
-    .column-two-thirds
-      %h1.heading-large
-        Registers available
-      %p.heading-large
-        %span.heading-secondary Registers are up-to-date lists of information that are managed and approved by government. You can use this data to build and maintain your service.
-      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
-    .column-one-third
-      = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
-        = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, @search_term, class: 'search-input', placeholder: 'Search', autocomplete: 'off'
-        = submit_tag 'Search', name: nil, class: 'search-submit'
 
-    .column-full
+
+.govuk-width-container
+  %main.govuk-main-wrapper{role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h1.govuk-heading-l Registers collection
+        %p.govuk-body-l Registers are up-to-date lists of information that are managed and approved by government. You can use this data to build and maintain your service.
+      .govuk-grid-column-one-third
+        = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
+          = label_tag :q, 'Search', class: 'visually-hidden'
+          = search_field_tag :q, @search_term, class: 'search-input', placeholder: 'Search', autocomplete: 'off'
+          = submit_tag 'Search', name: nil, class: 'search-submit'
+
+
+
+    .govuk-grid-row
       - if @registers.present?
-        - if @search_term
-          .search-results
-            %p
-              Results found for <strong>"#{@search_term}"</strong>
-              = link_to 'Reset', registers_path, class: 'reset-link'
-        .grid-row
-          .column-full
-            - if @registers.featured.present? && !@search_term
-              %h2.heading-small Featured
-              %ol.app-c-highlight-boxes
-                - @registers.featured.by_popularity.each do |register|
-                  %li.app-c-highlight-boxes__item-wrapper
-                    .app-c-highlight-boxes__item
-                      %h3.app-c-highlight-boxes__title= link_to register.register_name, register_path(register.slug)
-                      %p.app-c-highlight-boxes__description= register.register_description
-                      - if register.register_authority.present?
-                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                            %span= register.register_authority.data['name']
-
-
-            %table.register-status-table.table-collapsible
-              %col{width: '80%'}
-              %col{width: '20%'}
-              %thead
-                %tr
-                  %th{role: "columnheader", scope: "col"}
-                    Register
-                  %th{role: "columnheader", scope: "col"}
-                    Managed by
-              %tbody
-                - @registers.by_name.each do |register|
-                  %tr
-                    %td
-                      %p
-                        %strong= link_to register.register_name, register_path(register.slug)
-                        %br
-                        = register.register_description
-                    %td
-                      - if register.register_authority.present?
-                        %div{class: "govuk-organisation-logo #{register.register_authority.data['name'].parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register.register_authority.data['name'].parameterize)}"}
-                            %span= register.register_authority.data['name']
+        .govuk-grid-column-two-thirds
+          - if @search_term
+            .search-results
+              %p
+                = link_to 'Reset', registers_path, class: 'reset-link'
+          .show-by
+            %form.govuk-form-group
+              %fieldset.govuk-fieldset
+                %legend.govuk-fieldset__legend.govuk-fieldset__legend--xl
+                  %h2.govuk-heading-s Show by:
+                .govuk-radios.govuk-radios--inline
+                  .govuk-radios__item
+                    %input.govuk-radios__input#show-by-1{ name: "show-by", type: "radio", value: "theme" }
+                    %label.govuk-label.govuk-radios__label{ for: "show-by-1" }
+                      Theme
+                  .govuk-radios__item
+                    %input.govuk-radios__input#show-by-2{ name: "show-by", type: "radio", value: "organisation" }
+                    %label.govuk-label.govuk-radios__label{ for: "show-by-2"}
+                      Organisation
+                  .govuk-radios__item
+                    %input.govuk-radios__input#show-by-3{ name: "show-by", type: "radio", value: "name" }
+                    %label.govuk-label.govuk-radios__label{ for: "show-by-3"}
+                      Name
+                  %button.button Submit
+        .govuk-grid-column-two-thirds
+          %ul.list-of-registers
+            - @registers.by_name.each do |register|
+              %li.list-of-registers__register
+                %h3.list-of-registers__heading= link_to register.register_name, register_path(register.slug)
+                - if register.register_description.present?
+                  %p.list-of-registers__description= register.register_description
+                - if register.register_authority.present?
+                  %p.list-of-registers__authority= register.register_authority.data['name']
+        .govuk-grid-column-full
+          = render partial: 'layouts/themes'
 
       - else
-        .search-results
-          %p
-            No results found for <strong>"#{@search_term}"</strong>
-            %script
-              ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
-            = link_to 'Reset', registers_path, class: 'reset-link'
+        %p
+          No results found for <strong>"#{@search_term}"</strong>
+          = link_to 'Reset', registers_path, class: 'reset-link'
+        %script
+          ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
 
 = content_for :javascript do
   :javascript
