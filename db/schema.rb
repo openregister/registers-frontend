@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_05_090146) do
+ActiveRecord::Schema.define(version: 2018_09_11_130514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authorities", force: :cascade do |t|
+    t.string "government_organisation_key", null: false
+    t.string "registers_description"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["government_organisation_key"], name: "index_authorities_on_government_organisation_key", unique: true
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -65,7 +74,6 @@ ActiveRecord::Schema.define(version: 2018_09_05_090146) do
     t.text "contextual_data"
     t.string "register_phase"
     t.string "slug"
-    t.string "authority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
@@ -78,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_09_05_090146) do
     t.text "meta_description"
     t.boolean "featured", default: false
     t.bigint "theme_id"
+    t.bigint "authority_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -100,6 +109,7 @@ ActiveRecord::Schema.define(version: 2018_09_05_090146) do
     t.datetime "password_reset_sent_at"
   end
 
+  add_foreign_key "registers", "authorities"
   add_foreign_key "registers", "themes"
 
   create_view "register_search_results", materialized: true,  sql_definition: <<-SQL

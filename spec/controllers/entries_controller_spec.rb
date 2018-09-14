@@ -18,9 +18,9 @@ RSpec.describe EntriesController, type: :controller do
     charity_proof = File.read('./spec/support/charity_proof.json')
     territory_proof = File.read('./spec/support/territory_proof.json')
 
-    ObjectsFactory.new.create_register('country', 'Beta', 'D587')
-    ObjectsFactory.new.create_register('charity', 'Beta', 'D587')
-    ObjectsFactory.new.create_register('territory', 'Beta', 'D587')
+    ObjectsFactory.new.create_register('country', 'Beta')
+    ObjectsFactory.new.create_register('charity', 'Beta')
+    ObjectsFactory.new.create_register('territory', 'Beta')
 
     # RSF stubs
     stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')

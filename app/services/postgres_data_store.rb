@@ -64,7 +64,7 @@ class PostgresDataStore
   end
 
   def get_root_hash
-    @register.root_hash ? @register.root_hash : EMPTY_ROOT_HASH
+    @register.root_hash || EMPTY_ROOT_HASH
   end
 
 private
