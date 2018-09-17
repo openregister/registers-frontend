@@ -18,16 +18,18 @@
           %p.hero__description
             GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.
 
-          = link_to 'Get started', registers_path, class: 'button hero-button', role: 'button'
+          = link_to 'Learn more', registers_path, class: 'button hero-button', role: 'button'
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
   .govuk-width-container
     %section.govuk-main-wrapper
-      %h2.heading-medium.content-section__title Register collection
+      %h2.heading-medium.content-section__title Government registers collection
+      %p Registers are managed and approved by government and ready to use in your service.
       -# %code= @register_theme.inspect
       = render partial: 'layouts/themes'
-  = render partial: 'layouts/registers-in-numbers'
+    %aside{class: 'govuk-!-padding-top-9 govuk-!-padding-bottom-9'}
+      = render partial: 'layouts/registers-in-numbers'
 
 = content_for :javascript do
   :javascript

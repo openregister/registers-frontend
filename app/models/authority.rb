@@ -1,7 +1,11 @@
 class Authority < ApplicationRecord
   has_many :registers
 
-  scope :authorities, -> { Authority.all }
+  scope :by_name, -> { order name: :asc }
+
+  scope :with_a_register, -> {
+    joins(:registers).by_name
+  }
 
   scope :collection, ->(id) {
     Authority.find_by(government_organisation_key: id)

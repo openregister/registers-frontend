@@ -23,7 +23,7 @@ class RegistersController < ApplicationController
     elsif params[:showby] == 'organisation'
       @show_by_selected = 'organisation'
       @show_by_layout = 'grid'
-      @registers_collection = Authority.authorities
+      @registers_collection = Authority.with_a_register
     else
       @show_by_selected = 'theme'
       @show_by_layout = 'grid'

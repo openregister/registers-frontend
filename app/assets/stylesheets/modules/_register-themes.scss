@@ -146,10 +146,11 @@
   @extend .govuk-body-s;
 }
 
-.sort-by-filter button {
-  display: none;
-}
-
-.no-js .sort-by-filter button {
-  display: inline-block;
+.js .sort-by-filter button {
+  clip: rect(1px 1px 1px 1px); // For IE6 and IE7
+  clip: rect(1px, 1px, 1px, 1px); // scss-lint:disable DuplicateProperty
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
 }

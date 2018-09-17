@@ -21,7 +21,6 @@
 @import 'modules/sub-navigation';
 @import 'modules/pagination';
 @import 'modules/search';
-@import 'modules/footer-categories';
 @import 'modules/sorting-link';
 @import 'modules/tables';
 @import 'modules/check-your-answers';
@@ -42,14 +41,16 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import "tools/all";
 @import "helpers/all";
 @import "core/typography";
+@import "core/lists";
 @import "objects/all";
 @import 'components/radios/radios';
 @import 'components/input/input';
 @import 'overrides/spacing';
 @import 'overrides/width';
-
+@import 'components/footer/footer';
 
 @import 'modules/register-themes';
+@import 'modules/registers-in-numbers';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -185,22 +186,6 @@ table {
   @extend %site-width-container;
   display: block;
   margin-bottom: $gutter * 2;
-}
-
-.footer-nav {
-  font-size: 14px;
-  padding: 8px 0;
-  margin-bottom: 20px;
-
-  @include media(tablet) {
-    font-size: 16px;
-    padding: 5px 0;
-  }
-
-  a {
-    display: inline-block;
-    margin-right: 15px;
-  }
 }
 
 .table {
@@ -658,7 +643,19 @@ details {
   }
 }
 
+.terms-and-definitions {
+  display: block;
+
+  a {
+    padding-right: 0.25em;
+  }
+}
+
 .registers-\!-faded-colour {
   color: $grey-1;
   padding-left: 0.25em;
+}
+
+.registers-\!-border-off {
+  border: 0;
 }

@@ -21,4 +21,6 @@ class PagesController < ApplicationController
   def cookies; end
 
   def data_format_changes; end
+
+  def about; end
 end

@@ -1,19 +1,18 @@
-.govuk-width-container
-  .govuk-main-wrapper
-    %aside{ class: "govuk-grid-row"}
-      %h2{ class: "#{current_page?(root_path) ? '' : 'govuk-!-padding-top-9' } heading-medium content-section__title govuk-grid-column-full"} GOV.UK Registers in numbers
-      .govuk-grid-column-one-third
-        .data
-          -# = link_to registers_path do
-          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.registers_available
-          %span.data-item.govuk-body-s registers available
-      .govuk-grid-column-one-third
-        .data
-          -# = link_to registers_path do
-          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.organisation_count
-          %span.data-item.govuk-body-s government organisations providing&nbsp;registers
-      .govuk-grid-column-one-third
-        .data
-          -# = link_to services_using_registers_path do
-          %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
-          %span.data-item.govuk-body-s services using registers
+%aside{ class: "#{current_page?(about_path) ? 'registers-in-numbers--about-page' : 'registers-in-numbers'}"}
+  %h2{ class: "#{current_page?(about_path) ? 'govuk-heading-s' : 'govuk-heading-m govuk-!-margin-bottom-1'}"} GOV.UK Registers in numbers
+  - if current_page?(about_path)
+    %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+      %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 372k
+      %a{class: 'data-item govuk-body-s govuk-!-margin-bottom-0', href: "https://www.gov.uk/performance/govuk-registers"}total API requests
+  %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to registers_path do
+    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.registers_available
+    %span{class: 'data-item govuk-body-s govuk-!-margin-bottom-0'} registers available
+  %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to registers_path do
+    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.organisation_count
+    %span{class: 'data-item govuk-body-s govuk-!-margin-bottom-0'} government organisations managing&nbsp;registers
+  %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to services_using_registers_path do
+    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
+    %span.data-item.govuk-body-s government services using&nbsp;registers
