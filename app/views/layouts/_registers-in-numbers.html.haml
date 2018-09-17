@@ -1,18 +1,18 @@
 %aside{ class: "#{current_page?(about_path) ? 'registers-in-numbers--about-page' : 'registers-in-numbers'}"}
-  %h2{ class: "#{current_page?(about_path) ? 'govuk-heading-s' : 'govuk-heading-m govuk-!-margin-bottom-1'}"} GOV.UK Registers in numbers
+  %h2{ class: "#{current_page?(about_path) ? 'govuk-heading-s' : 'govuk-heading-l govuk-!-margin-bottom-1'}"} GOV.UK Registers in numbers
   - if current_page?(about_path)
     %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
       %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 372k
       %a{class: 'data-item govuk-body-s govuk-!-margin-bottom-0', href: "https://www.gov.uk/performance/govuk-registers"}total API requests
   %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
     -# = link_to registers_path do
-    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.registers_available
-    %span{class: 'data-item govuk-body-s govuk-!-margin-bottom-0'} registers available
+    %span{class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"}= Register.registers_available
+    %span{class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government registers available
   %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
     -# = link_to registers_path do
-    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'}= Register.organisation_count
-    %span{class: 'data-item govuk-body-s govuk-!-margin-bottom-0'} government organisations managing&nbsp;registers
+    %span{class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"}= Register.organisation_count
+    %span{class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government organisations managing&nbsp;registers
   %p{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
     -# = link_to services_using_registers_path do
-    %span{class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 13
-    %span.data-item.govuk-body-s government services using&nbsp;registers
+    %span{class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"} 13
+    %span{class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government services using&nbsp;registers

@@ -46,6 +46,7 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'components/radios/radios';
 @import 'components/input/input';
 @import 'overrides/spacing';
+@import 'overrides/typography';
 @import 'overrides/width';
 @import 'components/footer/footer';
 
@@ -658,4 +659,32 @@ details {
 
 .registers-\!-border-off {
   border: 0;
+}
+
+// ============================================================================
+// Migration hacks
+// ============================================================================
+// There are things we need to override in the move from Elements to the Design
+// System, as there are sometimes clashes that need to be overridden.
+//
+// These are those hacks.
+
+.breadcrumbs {
+  margin-bottom: 0;
+}
+
+.govuk-footer__heading {
+  border: 0;
+
+  @media screen and (min-width: 640px) {
+    margin: 0;
+  }
+}
+
+.govuk-footer__list-item {
+  margin: 0 0 10px 0;
+}
+
+.govuk-footer__link {
+  padding: 5px 0;
 }

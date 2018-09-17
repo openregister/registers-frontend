@@ -60,27 +60,26 @@
       .govuk-grid-row
 
         .govuk-grid-column-one-third
-          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-7'} About
+          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} About
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Our service', about_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(showby: 'organisation'), {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
-            %li
+            %li.govuk-footer__list-item
               %a{href: "https://www.gov.uk/performance/govuk-registers"}Performance data
 
         .govuk-grid-column-one-third
-          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-7'} Use
+          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Use
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Registers collection', registers_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Upcoming registers', registers_in_progress_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
 
         .govuk-grid-column-one-third
-          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-7'} Support
+          %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Support
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
-            %li.govuk-footer__list-item
-              %li.govuk-footer__list-item= link_to 'Sign up for updates', sign_up_index_path, {class: 'govuk-footer__link'}
-              %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Sign up for updates', sign_up_index_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
 
       %hr.govuk-footer__section-break
 
