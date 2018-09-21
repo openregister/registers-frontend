@@ -1,85 +1,95 @@
 - @page_title = 'Get data'
 - content_for :body_classes, 'register-index'
 
-%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
-  %ol
-    %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb", class: "visually-hidden"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to 'Get data', '#content', 'aria-current' => 'page'
+      = link_to 'Register collection', '#content', 'aria-current' => 'page'
 
-%main#content.container{role:'main'}
-  .grid-row
-    .column-two-thirds
-      %h1.heading-large
-        Registers available
-      %p.heading-large
-        %span.heading-secondary Registers are up-to-date lists of information that are managed and approved by government. You can use this data to build and maintain your service.
-      %p You can also see #{link_to 'registers that are coming soon', registers_in_progress_path}.
-    .column-one-third
-      = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
-        = label_tag :q, 'Search', class: 'visually-hidden'
-        = search_field_tag :q, @search_term, class: 'search-input', placeholder: 'Search', autocomplete: 'off'
-        = submit_tag 'Search', name: nil, class: 'search-submit'
+.govuk-width-container
+  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2', role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h1{class: 'govuk-heading-l govuk-!-margin-bottom-1'} Government registers collection
+        - unless @search_term.present?
+          %p.govuk-body-l Find registers that are managed and approved by government to use in your service.
+      .govuk-grid-column-one-third
+        = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
+          = label_tag :q, 'Search', class: 'visually-hidden'
+          = search_field_tag :q, @search_term, class: 'search-input', placeholder: 'Search', autocomplete: 'off'
+          = submit_tag 'Search', name: nil, class: 'search-submit'
 
-    .column-full
-      - if @registers.present?
-        - if @search_term
-          .search-results
-            %p
-              Results found for <strong>"#{@search_term}"</strong>
-              = link_to 'Reset', registers_path, class: 'reset-link'
-        .grid-row
-          .column-full
-            - if @registers.featured.present? && !@search_term
-              %h2.heading-small Featured
-              %ol.app-c-highlight-boxes
-                - @registers.featured.by_popularity.each do |register|
-                  %li.app-c-highlight-boxes__item-wrapper
-                    .app-c-highlight-boxes__item
-                      %h3.app-c-highlight-boxes__title= link_to register.register_name, register_path(register.slug)
-                      %p.app-c-highlight-boxes__description= register.register_description
-                      - if register.authority.present?
-                        %div{class: "govuk-organisation-logo #{register&.authority&.name.parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register&.authority&.name.parameterize)}"}
-                            %span= register&.authority&.name
+    .govuk-grid-row#show-by
+      - if @registers_collection.present?
+        .govuk-grid-column-two-thirds
+          - if @search_term.present?
+            .search-results
+              %p
+                Results for <strong>"#{@search_term}"</strong>
+                = link_to 'Reset', registers_path, class: 'reset-link'
+          - else
+            -# Don't want this to show when there's a search
+            .show-by
+              %form.govuk-form-group.sort-by-filter{action: '#show-by'}
+                %fieldset.govuk-fieldset
+                  %legend.govuk-fieldset__legend.govuk-fieldset__legend--xl
+                    %h2{class: 'govuk-heading-s govuk-!-margin-bottom-0'} Show by:
+                  .govuk-radios.govuk-radios--inline
+                    .govuk-radios__item
+                      %input.govuk-radios__input#show-by-1{ name: "showby", type: "radio", value: "theme", checked: @show_by_selected == 'theme' ? true: false }
+                      %label.govuk-label.govuk-radios__label{ for: "show-by-1" }
+                        Category
+                    .govuk-radios__item
+                      %input.govuk-radios__input#show-by-2{ name: "showby", type: "radio", value: "organisation", checked: @show_by_selected == 'organisation' ? true: false }
+                      %label.govuk-label.govuk-radios__label{ for: "show-by-2"}
+                        Organisation
+                    .govuk-radios__item
+                      %input.govuk-radios__input#show-by-3{ name: "showby", type: "radio", value: "name", checked: @show_by_selected == 'name' ? true: false }
+                      %label.govuk-label.govuk-radios__label{ for: "show-by-3"}
+                        Name
+                    %button.button Show
+        - if @show_by_selected == 'name' || @search_term.present?
+          .govuk-grid-column-two-thirds
+            %ul.list-of-registers
+              - @registers_collection.each do |register|
+                %li.list-of-registers__register
+                  %h3.list-of-registers__heading= link_to register.register_name, register_path(register.slug)
+                  - if register.register_description.present?
+                    %p.list-of-registers__description= register.register_description
+                  - if register.authority.present?
+                    %p.list-of-registers__authority= register.authority.name
 
+        - if @show_by_selected == 'theme'
+          .govuk-grid-column-full
+            = render partial: 'layouts/themes'
 
-            %table.register-status-table.table-collapsible
-              %col{width: '80%'}
-              %col{width: '20%'}
-              %thead
-                %tr
-                  %th{role: "columnheader", scope: "col"}
-                    Register
-                  %th{role: "columnheader", scope: "col"}
-                    Managed by
-              %tbody
-                - @registers.by_name.each do |register|
-                  %tr
-                    %td
-                      %p
-                        %strong= link_to register.register_name, register_path(register.slug)
-                        %br
-                        = register.register_description
-                    %td
-                      - if register.authority.present?
-                        %div{class: "govuk-organisation-logo #{register&.authority&.name&.parameterize}"}
-                          %div{class: "logo-container #{crest_class_name(register&.authority&.name&.parameterize)}"}
-                            %span= register&.authority&.name
+        - if @show_by_selected == 'organisation'
+          .govuk-grid-column-full
+            %ul.register-themes
+              - @registers_collection.each do |authority|
+                %li.register-theme
+                  %a{ href: authority_path(authority.government_organisation_key), class: "register-theme__link"  }
+                    %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}= authority.name
+                    - if authority.registers_description.present?
+                      %p.register-theme__description.govuk-body-s= authority.registers_description
+                    - if authority.register_count.present?
+                      %p.register-theme__count.govuk-body-s= pluralize(authority.register_count, 'register')
+        %div{ class: "govuk-grid-column-full govuk-!-margin-top-9"}
+          = render partial: 'layouts/registers-in-numbers' unless @search_term.present?
 
       - else
-        .search-results
+        .govuk-grid-column-full
           %p
             No results found for <strong>"#{@search_term}"</strong>
-            %script
-              ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
             = link_to 'Reset', registers_path, class: 'reset-link'
+          %script
+            ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
+
 
 = content_for :javascript do
   :javascript
-    $("input[name='sort']").change(function () {
-      $('.sort-registers').submit();
-    });
+    $("input[name='showby']").change(function () {
+      $('.sort-by-filter').submit()
+    })

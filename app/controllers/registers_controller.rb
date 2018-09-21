@@ -7,13 +7,27 @@ class RegistersController < ApplicationController
 
   def index
     @search_term = search_term
-    @registers = Register.available
-                         .in_beta
-                         .search_registers(@search_term)
 
     # Redirect legacy URL to ensure we don't break anyone
     if params[:phase] == 'in progress'
       redirect_to registers_in_progress_path
+    end
+
+    if params[:showby] == 'name' || @search_term.present?
+      @show_by_selected = 'name'
+      @show_by_layout = 'list'
+      @registers_collection = Register.available
+                           .in_beta
+                           .search_registers(@search_term)
+                           .by_name
+    elsif params[:showby] == 'organisation'
+      @show_by_selected = 'organisation'
+      @show_by_layout = 'grid'
+      @registers_collection = Authority.with_a_register
+    else
+      @show_by_selected = 'theme'
+      @show_by_layout = 'grid'
+      @registers_collection = Theme.themes
     end
   end
 

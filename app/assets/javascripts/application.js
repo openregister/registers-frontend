@@ -28,6 +28,8 @@
 // GOV.UK Design System
 //= require all.js
 
+document.getElementsByTagName('html')[0].className += 'js'
+
 $.fn.extend({
   scrollRight: function (val) {
     if (val === undefined) {
