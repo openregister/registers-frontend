@@ -1,20 +1,18 @@
 - @page_title = 'Get data'
 - content_for :body_classes, 'register-index'
 
-%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
-  %ol
-    %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb", class: "visually-hidden"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to 'Register collection', '#content', 'aria-current' => 'page'
 
 .govuk-width-container
-  %main.govuk-main-wrapper{role:'main'}
+  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2', role:'main'}
     .govuk-grid-row
       .govuk-grid-column-two-thirds
-        %h1.govuk-heading-l Government registers collection
+        %h1{class: 'govuk-heading-l govuk-!-margin-bottom-1'} Government registers collection
         - unless @search_term.present?
           %p.govuk-body-l Find registers that are managed and approved by government to use in your service.
       .govuk-grid-column-one-third

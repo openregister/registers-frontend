@@ -1,5 +1,10 @@
 .registers-in-numbers {
   margin: 0 -15px;
+  padding-top: 0;
+
+  @media screen and (min-width: 640px) {
+    padding-top: 60px;
+  }
 
   h2 {
     padding: 0 15px;
@@ -20,7 +25,7 @@
 
 
 .registers-in-numbers--about-page {
-  border-top: 2px solid $govuk-blue;
+  border-top: 1px solid $govuk-border-colour;
   margin-top: 2em;
   padding-top: 0.75em;
 

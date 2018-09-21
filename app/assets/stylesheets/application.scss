@@ -49,6 +49,7 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'overrides/typography';
 @import 'overrides/width';
 @import 'components/footer/footer';
+@import 'components/table/table';
 
 @import 'modules/register-themes';
 @import 'modules/registers-in-numbers';
@@ -285,20 +286,6 @@ table {
   @include media($max-width: 641px) {
     thead {
       display: none;
-    }
-  }
-}
-
-.services-using-registers-page {
-  table {
-    thead th {
-      font-weight: bold;
-    }
-
-    td,
-    th {
-      font-size: 16px;
-      vertical-align: top;
     }
   }
 }
@@ -652,6 +639,16 @@ details {
   }
 }
 
+.breadcrumbs__item {
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ============================================================================
+// Overridess
+// ============================================================================
+
 .registers-\!-faded-colour {
   color: $grey-1;
   padding-left: 0.25em;
@@ -669,8 +666,25 @@ details {
 //
 // These are those hacks.
 
-.breadcrumbs {
+// Remove the margin, since the design system has the appropriate level of
+// margin at the tope of the page.
+body:not(.home-page) .breadcrumbs {
   margin-bottom: 0;
+}
+
+// Since container margin behaviour changes, we need to remove the margin
+// from elements and copy the behaviour across from design system.
+#footer .footer-wrapper { // scss-lint:disable IdSelector
+  margin: 0 auto;
+}
+
+.footer-meta {
+  @extend .govuk-width-container; // scss-lint:disable PlaceholderInExtend
+}
+
+// Avoid two lots of left and right margins
+.govuk-width-container #content { // scss-lint:disable IdSelector
+  margin: 0;
 }
 
 .govuk-footer__heading {

@@ -4,38 +4,36 @@
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
-    %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item
-      = link_to 'Get data', registers_path
+      = link_to 'Register collection', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to 'Upcoming registers', '#content', 'aria-current' => 'page'
 
-%main#content.container{role:'main'}
-  .grid-row
-    .column-two-thirds
-      %h1.heading-large Upcoming registers
-      %p These registers are being worked on and are not ready to use. This means the data is still changing and open to user feedback.
-      %p You can also see all the #{link_to 'registers you can use', registers_path}.
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h1.govuk-heading-l Upcoming registers
+        %p.govuk-body-l These registers are being worked on and are not ready to use. This means the data is still changing and open to user feedback.
+        %p.govuk-body You can also see all the #{link_to 'registers you can use', registers_path}.
 
-    .column-one-third
-
-    .column-full
-      %table.register-status-table.table-collapsible
-        %col{width: '60%'}
-        %col{width: '20%'}
-        %col{width: '20%'}
-        %thead
-          %tr
-            %th{role: "columnheader", scope: "col"}
-              Register
-            %th{role: "columnheader", scope: "col"}
-              Managed by
-            %th{role: "columnheader", scope: "col"}
-              Status
-        %tbody
-          - @registers.each do |register|
-            = render partial: 'registers/register', object: register
+    .govuk-grid-row
+      .govuk-grid-column-full
+        %table.register-status-table.table-collapsible
+          %col{width: '60%'}
+          %col{width: '20%'}
+          %col{width: '20%'}
+          %thead
+            %tr
+              %th{role: "columnheader", scope: "col"}
+                Register
+              %th{role: "columnheader", scope: "col"}
+                Managed by
+              %th{role: "columnheader", scope: "col"}
+                Status
+          %tbody
+            - @registers.each do |register|
+              = render partial: 'registers/register', object: register
 
   = render partial: 'layouts/registers-in-numbers'

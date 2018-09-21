@@ -55,18 +55,17 @@
   = yield(:javascript)
 
 - content_for :footer_top do
-  %div{class: 'govuk-footer registers-!-border-off', role: "contentinfo"}
+  %div{class: 'govuk-footer registers-!-border-off govuk-!-padding-bottom-0 govuk-!-padding-top-0', role: "contentinfo"}
     .govuk-width-container
       .govuk-grid-row
-
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} About
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Our service', about_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(showby: 'organisation'), {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Organisations managing registers', services_using_registers_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item
-              %a{href: "https://www.gov.uk/performance/govuk-registers"}Performance data
+            -# %li.govuk-footer__list-item
+              -# %a{href: "https://www.gov.uk/performance/govuk-registers"}Performance data
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Use
@@ -81,7 +80,7 @@
             %li.govuk-footer__list-item= link_to 'Sign up for updates', sign_up_index_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
 
-      %hr.govuk-footer__section-break
+      %hr
 
 - content_for :footer_support_links do
   %nav.footer-nav

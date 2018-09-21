@@ -4,10 +4,6 @@
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol
     %li.breadcrumbs__item
-      = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
-    %li.breadcrumbs__item
-      = link_to 'GOV.UK Registers', root_path
-    %li.breadcrumbs__item
       = link_to 'Register collection', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to @collection.name, theme_path(@collection.slug), 'aria-current' => 'page'

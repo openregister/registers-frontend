@@ -1,9 +1,15 @@
 - @page_title = "About registers"
 = content_for :body_classes, 'about-page'
 
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'About', '#content', "aria-current" => "page"
 
 .govuk-width-container
-  %main{class: 'govuk-main-wrapper govuk-main-wrapper--l govuk-!-padding-bottom-9', role:'main'}
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
     .govuk-grid-row
       .govuk-grid-column-full
         %h2.govuk-heading-l About registers
