@@ -90,6 +90,16 @@
 
 = content_for :javascript do
   :javascript
-    $("input[name='showby']").change(function () {
-      $('.sort-by-filter').submit()
-    })
+    (function(document, undefined) {
+      var showByTriggers = document.querySelectorAll('input[name="showby"]')
+
+      var showBy = function(target) {
+        target.addEventListener('change', function(event) {
+          event.target.form.submit();
+        })
+      }
+
+      for (var index = 0; index < showByTriggers.length; index++) {
+        showBy(showByTriggers[index])
+      }
+    })(document)
