@@ -79,9 +79,15 @@
   // }
 }
 
+.register-theme__heading,
+.register-theme__description,
+.register-theme__count {
+  pointer-events: none;
+}
+
 .register-theme__heading {
-  text-decoration: underline;
   color: $govuk-link-colour;
+  text-decoration: underline;
 }
 
 // .register-theme__description {
@@ -94,12 +100,12 @@
 .register-theme__view-all {
   &:link,
   &:visited {
-    display: block;
-    color: $white;
     background: $govuk-link-colour;
+    color: $white;
+    display: block;
     font-weight: bold;
-    padding: 1em 1em 0.9em 1em;
     line-height: 1;
+    padding: 1em 1em 0.9em 1em;
     text-decoration: none;
 
     &:hover {
@@ -129,6 +135,8 @@
 .list-of-registers__heading {
   // scss-lint:disable PlaceholderInExtend
   @extend .govuk-heading-s;
+
+  color: $govuk-link-colour;
   margin-bottom: 0;
 }
 

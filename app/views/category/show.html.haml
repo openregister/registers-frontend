@@ -1,4 +1,5 @@
-= content_for :body_classes, 'theme-page'
+- console
+= content_for :body_classes, 'category-page'
 - @page_title = "#{@collection.name} register collection"
 
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
@@ -6,7 +7,7 @@
     %li.breadcrumbs__item
       = link_to 'Register collection', registers_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to @collection.name, theme_path(@collection.slug), 'aria-current' => 'page'
+      = link_to @collection.name, category_path(@collection.slug), 'aria-current' => 'page'
 
 .govuk-width-container
   %main.govuk-main-wrapper
@@ -15,7 +16,8 @@
         %h2.govuk-heading-m= @collection.name
       .govuk-grid-column-two-thirds
         - if @collection.registers_in_this_theme.present?
-          %ul.list-of-registers
+          %ul.list-of-registers.js--list-of-registers
+
             - @collection.registers_in_this_theme.each do |register|
               %li.list-of-registers__register
                 %h3.list-of-registers__heading
@@ -25,3 +27,24 @@
                 %p.list-of-registers__authority= register.authority.name
         - else
           %p No registers are in this collection.
+
+= content_for :javascript do
+  :javascript
+    (function(document, undefined) {
+      var links = document.querySelectorAll('.js--list-of-registers a');
+
+      var sendEvent = function(event) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Show by',
+          eventAction: 'Category - #{@collection.name} - ' + event.target.innerText.replace(/\./, ''),
+          eventLabel: 'Select register',
+          nonInteraction: true
+        })
+      }
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', sendEvent )
+      }
+
+    })(document)

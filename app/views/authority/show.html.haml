@@ -15,7 +15,7 @@
         %h2.govuk-heading-m= @authority_collection.name
       .govuk-grid-column-two-thirds
         - if @authority_collection.registers_by_this_authority.present?
-          %ul.list-of-registers
+          %ul.list-of-registers.js--list-of-registers
             - @authority_collection.registers_by_this_authority.each do |register|
               %li.list-of-registers__register
                 %h3.list-of-registers__heading
@@ -24,3 +24,24 @@
                 %p.list-of-registers__authority= register.authority.name
         - else
           %p No registers are published by this organisation.
+
+= content_for :javascript do
+  :javascript
+    (function(document, undefined) {
+      var links = document.querySelectorAll('.js--list-of-registers a');
+
+      var sendEvent = function(event) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Show by',
+          eventAction: 'Organisation - #{@authority_collection.name} - ' + event.target.innerText.replace(/\./, ''),
+          eventLabel: 'Select register',
+          nonInteraction: true
+        })
+      }
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', sendEvent )
+      }
+
+    })(document)

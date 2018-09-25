@@ -1,10 +1,10 @@
-class Theme < ApplicationRecord
+class Category < ApplicationRecord
   has_many :registers
 
-  scope :themes, -> { Theme.all }
+  scope :themes, -> { Category.all }
 
   scope :collection, ->(slug) {
-    Theme.find_by(slug: slug)
+    Category.find_by(slug: slug)
   }
 
   def registers_in_this_theme

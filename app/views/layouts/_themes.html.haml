@@ -3,15 +3,11 @@
     - if category.slug == 'digital-data-and-technology-profession-capability-framework' and current_page?(root_path)
       - next
     %li.register-theme
-      %a{ href: theme_path(category.slug), class: "register-theme__link"  }
-        %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}
-          = category.name
-          %span.visually-hidden .
+      %a{ href: category_path(category.slug), class: "register-theme__link"  }
+        %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}= category.name
         -if category.description.present?
           %p.register-theme__description.govuk-body-s= "#{category.description}"
-        %p{class: "register-theme__count govuk-body-s"}
-          %span.visually-hidden &mdash;
-          = "#{pluralize(category.register_count, 'register')}"
+        %p{class: "register-theme__count govuk-body-s"}= "#{pluralize(category.register_count, 'register')}"
         -# category.taxon_content_id
   -if current_page?(root_path)
     %li.register-theme

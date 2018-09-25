@@ -23,8 +23,8 @@ class RegistersController < ApplicationController
       @show_by_selected = 'organisation'
       @registers_collection = Authority.with_a_register
     else
-      @show_by_selected = 'theme'
-      @registers_collection = Theme.themes
+      @show_by_selected = 'category'
+      @registers_collection = Category.themes
     end
   end
 

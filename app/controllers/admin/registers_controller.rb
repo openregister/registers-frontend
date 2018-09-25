@@ -74,7 +74,7 @@ module Admin
                                         :seo_title,
                                         :meta_description,
                                         :featured,
-                                        :theme_id,
+                                        :category_id,
                                         authority_attributes: %i[name id])
     end
   end
