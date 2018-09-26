@@ -30,16 +30,16 @@
         %ul
           %li{class: 'govuk-!-padding-bottom-4'}
             =link_to 'Government registers collection', registers_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
-            All the registers that are approved for use in your service
+            All the registers that are approved for use in your service.
           %li{class: 'govuk-!-padding-bottom-4'}
             =link_to 'Upcoming registers', registers_in_progress_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
-            Registers that are being created and are open for feedback
+            Registers that are being created and are open for feedback.
           %li{class: 'govuk-!-padding-bottom-4'}
             =link_to 'Services using registers', services_using_registers_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
-            Government services that are using registers
+            Government services that are using registers.
           %li{class: 'govuk-!-padding-bottom-4'}
             =link_to 'Register updates', sign_up_index_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
-            Sign up for updates to registers and changes to our service
+            Sign up for updates to registers and changes to our service.
 
       .govuk-grid-column-one-third
         = render partial: 'layouts/registers-in-numbers'
