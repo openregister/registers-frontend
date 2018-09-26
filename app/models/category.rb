@@ -1,7 +1,11 @@
 class Category < ApplicationRecord
   has_many :registers
 
-  scope :themes, -> { Category.all }
+  scope :by_name, -> { order name: :asc }
+
+  scope :with_a_register, -> {
+    joins(:registers).merge(Register.in_beta).distinct.by_name
+  }
 
   scope :collection, ->(slug) {
     Category.find_by(slug: slug)

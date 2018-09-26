@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     @registers_available = Register.available_count
     @organisation_count = Register.organisation_count
 
-    @registers_collection = Category.themes
+    @registers_collection = Category.with_a_register
   end
 
   def services_using_registers; end

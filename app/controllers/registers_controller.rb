@@ -24,7 +24,7 @@ class RegistersController < ApplicationController
       @registers_collection = Authority.with_a_register
     else
       @show_by_selected = 'category'
-      @registers_collection = Category.themes
+      @registers_collection = Category.with_a_register
     end
   end
 
