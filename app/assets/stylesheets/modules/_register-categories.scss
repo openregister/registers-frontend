@@ -131,6 +131,7 @@
 
 .list-of-registers__heading {
   // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
   @extend .govuk-heading-s;
   @extend .govuk-\!-font-size-19;
 
@@ -143,6 +144,7 @@
 
 .list-of-registers__description {
   // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
   @extend .govuk-body-s;
   @extend .govuk-\!-font-size-16;
   margin-bottom: 0.5em;
@@ -150,6 +152,7 @@
 
 .list-of-registers__authority {
   // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
   @extend .govuk-body-s;
   @extend .govuk-\!-font-size-14;
 }
