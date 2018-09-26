@@ -13,9 +13,9 @@
   .register-meta-data
     .grid-row
       .column-two-thirds
-        %h1.heading-large
+        %h1{class: "govuk-heading-l govuk-!-margin-top-7 govuk-!-margin-bottom-1"}
           #{@register.register_name} register
-          %span.heading-secondary= @register.register_description
+        %p.govuk-body-l= @register.register_description
         - unless @register.is_empty?
           %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
 

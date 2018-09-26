@@ -90,9 +90,6 @@
   text-decoration: underline;
 }
 
-// .register-theme__description {
-// }
-
 .register-theme__count {
   margin: 0;
 }
@@ -135,20 +132,22 @@
 .list-of-registers__heading {
   // scss-lint:disable PlaceholderInExtend
   @extend .govuk-heading-s;
+  @extend .govuk-\!-font-size-19;
 
-  color: $govuk-link-colour;
   margin-bottom: 0;
 }
 
 .list-of-registers__description {
   // scss-lint:disable PlaceholderInExtend
-  @extend .govuk-body;
+  @extend .govuk-body-s;
+  @extend .govuk-\!-font-size-16;
   margin-bottom: 0.5em;
 }
 
 .list-of-registers__authority {
   // scss-lint:disable PlaceholderInExtend
   @extend .govuk-body-s;
+  @extend .govuk-\!-font-size-14;
 }
 
 .js .sort-by-filter button {

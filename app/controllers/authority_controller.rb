@@ -1,6 +1,6 @@
 class AuthorityController < ApplicationController
   def index
-    redirect_to registers_path(showby: "organisation"), status: 301
+    redirect_to registers_path(show_by: "organisation"), status: 301
   end
 
   def show
