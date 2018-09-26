@@ -13,18 +13,18 @@ class RegistersController < ApplicationController
       redirect_to registers_in_progress_path
     end
 
-    if params[:showby] == 'name' || @search_term.present?
+    if params[:show_by] == 'name' || @search_term.present?
       @show_by_selected = 'name'
       @registers_collection = Register.available
                            .in_beta
                            .search_registers(@search_term)
                            .by_name
-    elsif params[:showby] == 'organisation'
+    elsif params[:show_by] == 'organisation'
       @show_by_selected = 'organisation'
       @registers_collection = Authority.with_a_register
     else
       @show_by_selected = 'category'
-      @registers_collection = Category.themes
+      @registers_collection = Category.with_a_register
     end
   end
 

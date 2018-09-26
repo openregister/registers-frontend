@@ -38,15 +38,15 @@
                     %h2{class: 'govuk-heading-s govuk-!-margin-bottom-0'} Show by:
                   .govuk-radios.govuk-radios--inline
                     .govuk-radios__item
-                      %input.govuk-radios__input#show-by-1{ name: "showby", type: "radio", value: "category", checked: @show_by_selected == 'category' ? true: false }
+                      %input.govuk-radios__input#show-by-1{ name: "show_by", type: "radio", value: "category", checked: @show_by_selected == 'category' ? true: false }
                       %label.govuk-label.govuk-radios__label{ for: "show-by-1" }
                         Category
                     .govuk-radios__item
-                      %input.govuk-radios__input#show-by-2{ name: "showby", type: "radio", value: "organisation", checked: @show_by_selected == 'organisation' ? true: false }
+                      %input.govuk-radios__input#show-by-2{ name: "show_by", type: "radio", value: "organisation", checked: @show_by_selected == 'organisation' ? true: false }
                       %label.govuk-label.govuk-radios__label{ for: "show-by-2"}
                         Organisation
                     .govuk-radios__item
-                      %input.govuk-radios__input#show-by-3{ name: "showby", type: "radio", value: "name", checked: @show_by_selected == 'name' ? true: false }
+                      %input.govuk-radios__input#show-by-3{ name: "show_by", type: "radio", value: "name", checked: @show_by_selected == 'name' ? true: false }
                       %label.govuk-label.govuk-radios__label{ for: "show-by-3"}
                         Name
                     %button.button Show
@@ -93,7 +93,7 @@
   :javascript
     (function(document, undefined) {
 
-      var showByTriggers = document.querySelectorAll('input[name="showby"]')
+      var showByTriggers = document.querySelectorAll('input[name="show_by"]')
       var showBy = function(target) {
         target.addEventListener('change', function(event){
           event.target.form.submit();
