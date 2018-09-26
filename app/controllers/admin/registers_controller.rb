@@ -75,7 +75,7 @@ module Admin
                                         :meta_description,
                                         :featured,
                                         :theme_id,
-                                        authority_attributes: %i[name id])
+                                        :authority_id)
     end
   end
 end

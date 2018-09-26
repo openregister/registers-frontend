@@ -5,9 +5,8 @@
     = f.label :register_phase, class: 'form-label'
     = f.select :register_phase, Register::CURRENT_PHASES, {}, include_blank: 'Select current phase', class: 'form-control'
   .form-group
-    = f.fields_for :authority do |authority_field|
-      = authority_field.label :name, 'Authority', class: 'form-label'
-      = authority_field.select :name, Authority.all.pluck(:name, :id), {}, class: 'form-control'
+    = f.label :authority_id, class: 'form-label'
+    = f.select :authority_id, Authority.all.pluck(:name, :id), {}, class: 'form-control'
   = f.text_area :contextual_data
   .form-group
     = f.label :theme_id, class: 'form-label'
@@ -31,7 +30,7 @@
 = content_for :javascript do
   :javascript
     document.addEventListener('DOMContentLoaded', function() {
-      var element = document.getElementById('register_authority_attributes_name');
+      var element = document.getElementById('register_authority_id');
 
       if (element) {
         accessibleAutocomplete.enhanceSelectElement({
