@@ -135,6 +135,10 @@
   @extend .govuk-\!-font-size-19;
 
   margin-bottom: 0;
+
+  .register-index & {
+    color: $govuk-link-colour;
+  }
 }
 
 .list-of-registers__description {
