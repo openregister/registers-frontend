@@ -7,6 +7,7 @@ RSpec.feature "Admin registers", type: :feature do
 
     before do
       sign_in(User.first)
+      ObjectsFactory.new.create_authority('Cabinet Office', 'D2')
       ObjectsFactory.new.create_authority('Foreign & Commonwealth Office', 'D13')
     end
 
@@ -24,6 +25,9 @@ RSpec.feature "Admin registers", type: :feature do
       select 'Foreign & Commonwealth Office', from: 'Authority'
       click_button 'Save'
       expect(Register.find(register_id).authority.name).to eq('Foreign & Commonwealth Office')
+
+      visit "/admin/registers/#{register_id}/edit"
+      expect(page).to have_select('Authority', selected: 'Foreign & Commonwealth Office')
     end
   end
 end
