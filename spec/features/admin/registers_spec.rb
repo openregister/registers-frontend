@@ -23,7 +23,7 @@ RSpec.feature "Admin registers", type: :feature do
       visit "/admin/registers/#{register_id}/edit"
       select 'Foreign & Commonwealth Office', from: 'Authority'
       click_button 'Save'
-      expect(Register.first.authority.name).to eq('Foreign & Commonwealth Office')
+      expect(Register.find(register_id).authority.name).to eq('Foreign & Commonwealth Office')
     end
   end
 end

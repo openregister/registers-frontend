@@ -1,7 +1,6 @@
 module Admin
   class RegistersController < AdminController
     before_action :set_register, only: %i[edit update destroy]
-    before_action :set_government_organisations, except: :index
 
     def index
       @featured_registers = Register.featured.by_popularity
