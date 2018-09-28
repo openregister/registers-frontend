@@ -73,6 +73,9 @@ gem 'iso8601', '~> 0.11.0'
 # MailChimp
 gem 'gibbon', '~> 3.2'
 
+# ODS
+gem 'spreadsheet_architect'
+
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'
