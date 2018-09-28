@@ -11,8 +11,8 @@ class Category < ApplicationRecord
     Category.find_by(slug: slug)
   }
 
-  def registers_in_this_theme
-    @registers_in_this_theme ||= registers.in_beta
+  def registers_by_this_collection
+    @registers_by_this_collection ||= registers.in_beta
   end
 
   def register_count

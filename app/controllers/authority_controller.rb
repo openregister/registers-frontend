@@ -4,6 +4,6 @@ class AuthorityController < ApplicationController
   end
 
   def show
-    @authority_collection = Authority.collection(params[:slug])
+    @collection = Authority.collection(params[:slug])
   end
 end

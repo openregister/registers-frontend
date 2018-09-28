@@ -11,8 +11,8 @@ class Authority < ApplicationRecord
     Authority.find_by(government_organisation_key: id)
   }
 
-  def registers_by_this_authority
-    @registers_by_this_authority ||= registers.in_beta
+  def registers_by_this_collection
+    @registers_by_this_collection ||= registers.in_beta
   end
 
   def register_count

@@ -14,16 +14,8 @@
       .govuk-grid-column-one-third
         %h2.govuk-heading-m= @collection.name
       .govuk-grid-column-two-thirds
-        - if @collection.registers_in_this_theme.present?
-          %ul.list-of-registers.js--list-of-registers
-
-            - @collection.registers_in_this_theme.each do |register|
-              %li.list-of-registers__register
-                %h3.list-of-registers__heading
-                  =link_to "#{register.name} register", register_path(register.slug), {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
-                %p.list-of-registers__description= register.register_description
-                -# %p.govuk-body-s= number_with_delimiter(register.number_of_records)
-                %p.list-of-registers__authority= register.authority.name
+        - if @collection.registers_by_this_collection.present?
+          = render partial: 'layouts/list-of-registers'
         - else
           %p There are no registers in this category.
 
