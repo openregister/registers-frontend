@@ -36,7 +36,6 @@ class Register < ApplicationRecord
   has_many :register_search_results
   belongs_to :theme
   belongs_to :authority
-  accepts_nested_attributes_for :authority
 
   def register_last_updated
     Record.select('timestamp')
