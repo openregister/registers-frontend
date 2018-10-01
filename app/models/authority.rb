@@ -8,7 +8,7 @@ class Authority < ApplicationRecord
   }
 
   scope :collection, ->(id) {
-    Authority.find_by(government_organisation_key: id)
+    Authority.find_by!(government_organisation_key: id)
   }
 
   def registers_by_this_collection

@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   }
 
   scope :collection, ->(slug) {
-    Category.find_by(slug: slug)
+    Category.find_by!(slug: slug)
   }
 
   def registers_by_this_collection
