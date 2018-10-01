@@ -1,7 +1,5 @@
 %ul.register-themes
   - @registers_collection.each do |category|
-    - if category.slug == 'digital-data-and-technology-profession-capability-framework' and current_page?(root_path)
-      - next
     %li.register-theme
       %a{ href: category_path(category.slug), class: "register-theme__link"  }
         %h3{class: "register-theme__heading govuk-heading-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-1"}= category.name
