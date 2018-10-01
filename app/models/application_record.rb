@@ -4,7 +4,4 @@ class ApplicationRecord < ActiveRecord::Base
   scope :registers_available, -> {
     Register.available_count
   }
-  scope :organisation_count, -> {
-    Register.organisation_count
-  }
 end
