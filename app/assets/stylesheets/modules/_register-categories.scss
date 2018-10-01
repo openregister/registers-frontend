@@ -13,16 +13,6 @@
       padding-bottom: 0;
     }
   }
-
-  @include govuk-media-query($from: tablet) {
-  }
-
-  @include govuk-media-query($from: desktop) {
-    // columns: 3 auto;
-    // -webkit-column-break-inside: avoid;
-    // page-break-inside: avoid;
-    // break-inside: avoid;
-  }
 }
 
 .register-theme {
@@ -74,9 +64,6 @@
     border: 1px solid $govuk-link-colour;
     box-shadow: 0 0 0 1px $govuk-link-colour;
   }
-
-  // @media (hover) {
-  // }
 }
 
 .register-theme__heading,
@@ -111,11 +98,6 @@
   }
 }
 
-
-// .list-of-registers {
-
-// }
-
 .list-of-registers__register {
   border-top: 1px solid $govuk-border-colour;
   padding-top: 1em;
@@ -125,9 +107,6 @@
     padding-top: 0;
   }
 }
-
-// .list-of-registers__link {
-// }
 
 .list-of-registers__heading {
   // scss-lint:disable PlaceholderInExtend
