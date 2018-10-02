@@ -7,7 +7,7 @@ class Category < ApplicationRecord
     joins(:registers).merge(Register.in_beta).distinct.by_name
   }
 
-  scope :with_a_register__homepage, -> {
+  scope :with_a_register__shown_on_homepage, -> {
     Category.with_a_register.reject { |r|
       r.slug == 'digital-data-and-technology-profession-capability-framework'
     }
