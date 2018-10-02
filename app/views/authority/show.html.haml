@@ -28,7 +28,7 @@
         ga('send', {
           hitType: 'event',
           eventCategory: 'Show by',
-          eventAction: 'Organisation - #{@collection.name} - ' + event.target.innerText.replace(/\./, ''),
+          eventAction: 'Organisation - #{@collection.name.html_safe} - ' + event.target.innerText,
           eventLabel: 'Select register',
           nonInteraction: true
         })
