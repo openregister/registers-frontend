@@ -1,24 +1,24 @@
 module ApplicationHelper
   def crest_class_name(authority)
     case authority
-    when "home-office"
-      "logo-with-crest crest-ho"
-    when "ministry-of-defence"
-      "logo-with-crest crest-mod"
-    when "hm-revenue-customs"
-      "logo-with-crest crest-hmrc"
-    when "department-for-business-innovation-and-skills"
-      "logo-with-crest crest-bis"
-    when "the-office-of-the-leader-of-the-house-of-commons"
-      "logo-with-crest crest-portcullis"
-    when "office-of-the-advocate-general-for-scotland"
-      "logo-with-crest crest-so"
-    when "uk-atomic-energy-authority"
-      "logo-with-crest crest-ukaea"
-    when "nhs", "scottish-government", "welsh-government"
-      " "
+    when 'home-office'
+      'logo-with-crest crest-ho'
+    when 'ministry-of-defence'
+      'logo-with-crest crest-mod'
+    when 'hm-revenue-customs'
+      'logo-with-crest crest-hmrc'
+    when 'department-for-business-innovation-and-skills'
+      'logo-with-crest crest-bis'
+    when 'the-office-of-the-leader-of-the-house-of-commons'
+      'logo-with-crest crest-portcullis'
+    when 'office-of-the-advocate-general-for-scotland'
+      'logo-with-crest crest-so'
+    when 'uk-atomic-energy-authority'
+      'logo-with-crest crest-ukaea'
+    when 'nhs', 'scottish-government', 'welsh-government', 'office-for-national-statistics'
+      ' '
     else
-      "logo-with-crest crest-org"
+      'logo-with-crest crest-org'
     end
   end
 
