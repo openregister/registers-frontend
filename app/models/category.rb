@@ -8,13 +8,11 @@ class Category < ApplicationRecord
   }
 
   scope :with_a_register__shown_on_homepage, -> {
-    Category.with_a_register.reject { |r|
-      r.slug == 'digital-data-and-technology-profession-capability-framework'
-    }
+    with_a_register.where.not(slug: 'digital-data-and-technology-profession-capability-framework')
   }
 
   scope :collection, ->(slug) {
-    Category.find_by!(slug: slug)
+    find_by!(slug: slug)
   }
 
   def registers_by_this_collection
