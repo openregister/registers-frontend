@@ -28,6 +28,11 @@
 // GOV.UK Design System
 //= require all.js
 
+// Adding a `js` class to the html element allows us to use CSS to do things
+// only when JavaScript is enabled - for example, hide the submit button for
+// the Register collection 'show by' form.
+document.getElementsByTagName('html')[0].className += 'js'
+
 $.fn.extend({
   scrollRight: function (val) {
     if (val === undefined) {

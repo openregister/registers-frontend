@@ -1,96 +1,93 @@
+- # ---------------------------------------------------------------------------
+- # REMEMBER!
+- # ---------------------------------------------------------------------------
+- # When updaing this page, make sure to update numbers in the
+- # `_registers-in-numbers` partial in `layouts`.
+- # ---------------------------------------------------------------------------
+
 - @page_title = 'Services using registers'
 = content_for :body_classes, 'services-using-registers-page'
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Services using registers', '#content', "aria-current" => "page"
 
-%main#content.container{role:'main'}
-  .grid-row
-    .column-full
-      %h1.heading-large Services using registers
-      %table
-        %thead
-          %tr
-            %th Service
-            %th Department / Organisation
-            %th Register
-        %tbody
-          %tr
-            %th E-petitions
-            %td Parliamentary Digital Service
-            %td= link_to 'Country', '/registers/country'
-          %tr
-            %th GOV.UK Pay
-            %td Cabinet Office
-            %td
-              = link_to 'Country', '/registers/country'
-              %br
-              = link_to 'Territory', '/registers/territory'
-          %tr
-            %th Realtime Flood Monitoring
-            %td Environment Agency
-            %td= link_to 'Local Authority England', '/registers/local-authority-eng'
-          %tr
-            %th Transparency In Supply Chains
-            %td TISCReport
-            %td
-              = link_to 'Local Authority England', '/registers/local-authority-eng'
-              %br/
-              = link_to 'Local Authority Scotland', '/registers/local-authority-sct'
-              %br/
-              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
-              %br/
-              %a= link_to 'Government Organisation', '/registers/government-organisation'
-          %tr
-            %th MapIt
-            %td MySociety
-            %td
-              = link_to 'Local Authority England', '/registers/local-authority-eng'
-              %br/
-              = link_to 'Local Authority Scotland', '/registers/local-authority-sct'
-              %br/
-              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
-          %tr
-            %th Civil Service Jobs
-            %td Civil Service Human Resources
-            %td= link_to 'Country', '/registers/country'
-          %tr
-            %th AppGov
-            %td AppGov
-            %td
-              = link_to 'Country', '/registers/country'
-              %br
-              = link_to 'Local Authority England', '/registers/local-authority-eng'
-              %br/
-              = link_to 'Local Authority Scotland', '/registers/principal-local-authority'
-              %br/
-              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
-          %tr
-            %th https://olib.uk/charity
-            %td CharityData
-            %td
-              = link_to 'Local Authority England', '/registers/local-authority-eng'
-              %br/
-              = link_to 'Local Authority Scotland', '/registers/principal-local-authority'
-              %br/
-              = link_to 'Principal Local Authority', '/registers/principal-local-authority'
-          %tr
-            %th Org-ID
-            %td org-id.guide
-            %td= link_to 'Government Organisation', '/registers/government-organisation'
-          %tr
-            %th Digital Marketplace
-            %td Cabinet Office
-            %td
-              = link_to 'Country', '/registers/country'
-              %br
-              = link_to 'Territory', '/registers/territory'
-          %tr
-            %th GOV.UK Performance Platform
-            %td Cabinet Office
-            %td= link_to 'Government Organisation', '/registers/government-organisation'
-          %tr
-            %th Defence Academy
-            %td Ministry of Defence
-            %td= link_to 'Country', '/registers/country'
-          %tr
-            %th Prove You Can Apply
-            %td Department for Work &amp; Pensions
-            %td= link_to 'Country', '/registers/country'
+.govuk-width-container
+  %main#content{class: "govuk-main-wrapper govuk-!-padding-bottom-9", role:"main"}
+    .govuk-grid-row
+      .govuk-grid-column-full
+        %h2.govuk-heading-l Government services using registers
+
+        %table.govuk-table
+          %caption.govuk-table__caption.visually-hidden All government services that are using registers.
+          %thead.govuk-table__head
+            %tr.govuk-table__row
+              %th.govuk-table__header{ scope: "col"} Register
+              %th.govuk-table__header{ scope: "col"} Used by
+          %tbody.govuk-table__body
+            %tr.govuk-table__row
+              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
+                =link_to 'Country', register_path('country'), {class: "list-of-registers__heading"}
+                Foreign & Commonwealth Office
+              %td.govuk-table__cell
+                %ul{ role: "list", class: "list-of-registers"}
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'Civil Service Jobs', 'https://www.civilservicejobs.service.gov.uk/', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    HR Profession
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'Defence Academy', 'https://www.da.mod.uk', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    Ministry of Defence
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'Digital Marketplace', 'https://www.digitalmarketplace.service.gov.uk', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    Cabinet Office
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'E-petitions', 'https://petition.parliament.uk', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    Parliamentary Digital Service
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'GOV.UK Pay', 'https://www.payments.service.gov.uk', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    Cabinet Office
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    %span{class: "list-of-registers__heading"} Prove You Can Apply
+                    Department for Work & Pensions
+
+
+            %tr.govuk-table__row
+              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
+                =link_to 'Territory', register_path('territory'), {class: "list-of-registers__heading"}
+                Foreign &amp; Commonwealth Office
+              %td.govuk-table__cell
+                %ul{ role: "list", class: "list-of-registers"}
+                  %li{ class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'Digital Marketplace', 'https://www.digitalmarketplace.service.gov.uk', {class: "list-of-registers__heading"}
+                    Cabinet Office
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'GOV.UK Pay', 'https://www.payments.service.gov.uk', {class: "list-of-registers__heading"}
+                    Cabinet Office
+
+            %tr.govuk-table__row
+              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
+                =link_to 'Government organisations on GOV.UK', register_path('government-organisation'), {class: "list-of-registers__heading"}
+                Cabinet Office
+              %td.govuk-table__cell
+                %ul{ role: "list", class: "list-of-registers"}
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    =link_to 'GOV.UK Performance Platform', 'https://www.gov.uk/performance', {class: "list-of-registers__heading"}
+                    %span.visually-hidden{role: "presentation"} by
+                    Cabinet Office
+
+            %tr.govuk-table__row
+              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-border-off", scope: "row"}
+                =link_to 'Local authorities in England', register_path('local-authority-eng'), {class: "list-of-registers__heading"}
+                Ministry of Housing, Communities and Local Government
+              %td{class: "govuk-table__cell registers-!-border-off"}
+                %ul{ role: "list", class: "list-of-registers"}
+                  %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
+                    %span{class: "list-of-registers__heading"} Realtime Flood Monitoring
+                    Environment Agency

@@ -1,0 +1,41 @@
+= content_for :body_classes, 'category-page'
+- @page_title = "#{@collection.name} register collection"
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol
+    %li.breadcrumbs__item
+      = link_to 'Register collection', registers_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to @collection.name, category_path(@collection.slug), 'aria-current' => 'page'
+
+.govuk-width-container
+  %main.govuk-main-wrapper
+    .govuk-grid-row
+      .govuk-grid-column-one-third
+        %h2.govuk-heading-m= @collection.name
+      .govuk-grid-column-two-thirds
+        - if @collection.registers_by_this_collection.present?
+          = render partial: 'layouts/list-of-registers'
+        - else
+          %p There are no registers in this category.
+
+= content_for :javascript do
+  :javascript
+    (function(document, undefined) {
+      var links = document.querySelectorAll('.js--list-of-registers a');
+
+      var sendEvent = function(event) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Show by',
+          eventAction: 'Category - #{@collection.name} - ' + event.target.innerText.replace(/\./, ''),
+          eventLabel: 'Select register',
+          nonInteraction: true
+        })
+      }
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', sendEvent )
+      }
+
+    })(document)

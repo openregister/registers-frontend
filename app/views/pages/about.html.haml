@@ -1,0 +1,45 @@
+- @page_title = "About registers"
+= content_for :body_classes, 'about-page'
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'About', '#content', "aria-current" => "page"
+
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-full
+        %h2.govuk-heading-l About registers
+    %div{ class: 'govuk-grid-row'}
+      .govuk-grid-column-two-thirds
+        %h3.govuk-heading-m What is a register?
+        %p A register is a list of information that is managed and approved by government.
+        %p For example, the country register lists all countries recognised by the Foreign and Commonwealth Office.
+        %p You can use registers to build your service.
+        %p The UK Parliament petitions service uses the country register to help users select their country from a dropdown menu, for instance.
+        %h3{class: 'govuk-heading-m govuk-!-padding-top-5'} Trusted by government services
+        %p By using registers you can:
+        %ul.list.list-bullet
+          %li reduce the time and cost of sourcing data from across government
+          %li be confident that your service is using the most up&ndash;to&ndash;date government data
+          %li receive data that is ready to use with no need for data cleansing
+        %h3{class: 'govuk-heading-m govuk-!-padding-top-5'} Explore GOV.UK Registers
+        %ul
+          %li{class: 'govuk-!-padding-bottom-4'}
+            =link_to 'Government registers collection', registers_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+            All the registers that are approved for use in your service.
+          %li{class: 'govuk-!-padding-bottom-4'}
+            =link_to 'Upcoming registers', registers_in_progress_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+            Registers that are being created and are open for feedback.
+          %li{class: 'govuk-!-padding-bottom-4'}
+            =link_to 'Services using registers', services_using_registers_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+            Government services that are using registers.
+          %li{class: 'govuk-!-padding-bottom-4'}
+            =link_to 'Register updates', sign_up_index_path, {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+            Sign up for updates to registers and changes to our service.
+
+      .govuk-grid-column-one-third
+        = render partial: 'layouts/registers-in-numbers'

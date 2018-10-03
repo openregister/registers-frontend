@@ -73,7 +73,7 @@ module Admin
                                         :seo_title,
                                         :meta_description,
                                         :featured,
-                                        :theme_id,
+                                        :category_id,
                                         :authority_id)
     end
   end

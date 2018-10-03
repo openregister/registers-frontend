@@ -72,7 +72,7 @@ Register.create(
   )
 puts "Created Charity Register"
 
-Theme.create!([
+Category.create!([
   { name: 'Crime, justice and law', slug: 'crime-justice-and-law', description: 'Includes prison estate', taxon_content_id: 'ba951b09-5146-43be-87af-44075eac3ae9' },
   { name: 'Digital, Data and Technology Profession Capability Framework', slug: 'digital-data-and-technology-profession-capability-framework' },
   { name: 'Education, training and skills', slug: 'education-training-and-skills', description: 'Includes qualification subject areas and assessment methods', taxon_content_id: 'c58fdadd-7743-46d6-9629-90bb3ccc4ef0' },
@@ -85,7 +85,7 @@ Theme.create!([
   { name: 'Registers data', slug: 'registers-data', description: 'Includes a register of all registers, register fields and register datatypes' },
   { name: 'Work', slug: 'work', description: 'Includes jobcentres', taxon_content_id: 'd0f1e5a3-c8f4-4780-8678-994f19104b21' }
 ])
-puts("Created Themes")
+puts("Created Categories")
 
 
 puts "The admin interface is located at http://localhost:3000/admin"

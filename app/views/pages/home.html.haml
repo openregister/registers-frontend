@@ -18,36 +18,17 @@
           %p.hero__description
             GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.
 
-          = link_to 'Get started', registers_path, class: 'button hero-button', role: 'button'
+          = link_to 'Learn more', about_path, class: 'button hero-button', role: 'button'
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
-  .container#content
-    %section.content-section
-      .grid-row
-        .column-one-half
-          %h2.heading-medium.content-section__title What is a register?
-          %p A register is a list of information that is managed and approved by government.
-          %p For example, the country register lists all countries recognised by the Foreign and Commonwealth Office.
-          %p You can use registers to build your service.
-          %p The UK Parliament petitions service uses the country register to help users select their country from a dropdown menu, for instance.
-        .column-one-half
-          = image_tag('get-data.png', alt: 'Screenshot showing the list of registers page')
-
-    %section.content-section.content-section--with-top-border
-      .grid-row
-        .column-one-half
-          %h2.heading-medium.content-section__title Trusted by government services
-          %p By using registers you can:
-          %ul.list.list-bullet
-            %li reduce the time and cost of sourcing data from across government
-            %li be confident that your service is using the most up&#8209;to&#8209;date government data
-            %li receive data that is ready to use with no need for data cleansing
-
-        .column-one-half
-          = image_tag('country-register.png', alt: 'Screenshot showing the country register page')
-
-    = render partial: 'layouts/registers-in-numbers'
+  .govuk-width-container
+    %section.govuk-main-wrapper
+      %h2{class: 'govuk-heading-m govuk-!-margin-bottom-0'} Government registers collection
+      %p Registers are managed and approved by government and ready to use in your service.
+      = render partial: 'layouts/categories'
+    %aside{class: 'govuk-!-padding-bottom-9'}
+      = render partial: 'layouts/registers-in-numbers'
 
 = content_for :javascript do
   :javascript

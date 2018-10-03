@@ -1,4 +1,4 @@
-class Authority < ApplicationRecord
+class Category < ApplicationRecord
   has_many :registers
 
   scope :by_name, -> { order name: :asc }
@@ -7,8 +7,12 @@ class Authority < ApplicationRecord
     joins(:registers).merge(Register.in_beta).distinct.by_name
   }
 
-  scope :collection, ->(id) {
-    Authority.find_by!(government_organisation_key: id)
+  scope :with_a_register__shown_on_homepage, -> {
+    with_a_register.where.not(slug: 'digital-data-and-technology-profession-capability-framework')
+  }
+
+  scope :collection, ->(slug) {
+    find_by!(slug: slug)
   }
 
   def registers_by_this_collection

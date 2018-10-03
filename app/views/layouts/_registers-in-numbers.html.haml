@@ -1,18 +1,19 @@
-%section.content-section.content-section--with-top-border.column-full
-  .grid-row
-    %h2.heading-medium.content-section__title.column-full Registers in numbers
-    .column-one-third
-      .data
-        = link_to registers_path do
-          %span.data-item.bold-xxlarge= @registers_available
-          %span.data-item.bold-small registers available
-    .column-one-third
-      .data
-        = link_to registers_path do
-          %span.data-item.bold-xxlarge= @organisation_count
-          %span.data-item.bold-small government organisations providing&nbsp;registers
-    .column-one-third
-      .data
-        = link_to services_using_registers_path do
-          %span.data-item.bold-xxlarge 13
-          %span.data-item.bold-small services using registers
+%aside{ class: "#{current_page?(about_path) ? 'registers-in-numbers--about-page' : 'registers-in-numbers'}"}
+  %h2{ class: "#{current_page?(about_path) ? 'govuk-heading-s' : 'govuk-heading-m'}"} GOV.UK Registers in numbers
+  %ul
+  - if current_page?(about_path)
+    %li{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+      %span{role: "presentation", class: 'govuk-heading-xl govuk-!-margin-bottom-0'} 372k
+      %a{role: "presentation", class: 'data-item govuk-body-s govuk-!-margin-bottom-0', href: "https://www.gov.uk/performance/govuk-registers"}total API requests
+  %li{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to registers_path do
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"}= Register.available_count
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government registers available
+  %li{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to registers_path do
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"}= Register.organisation_count
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government organisations managing&nbsp;registers
+  %li{class: 'registers-in-numbers__item govuk-!-margin-bottom-4'}
+    -# = link_to services_using_registers_path do
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-heading-xl' : 'govuk-!-font-size-80 govuk-!-font-weight-bold'} govuk-!-margin-bottom-0"} 8
+    %span{role: "presentation", class: "#{current_page?(about_path) ? 'govuk-body-s' : 'govuk-body'} govuk-!-margin-bottom-0 data-item"} government services using&nbsp;registers

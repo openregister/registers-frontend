@@ -21,7 +21,6 @@
 @import 'modules/sub-navigation';
 @import 'modules/pagination';
 @import 'modules/search';
-@import 'modules/footer-categories';
 @import 'modules/sorting-link';
 @import 'modules/tables';
 @import 'modules/check-your-answers';
@@ -36,11 +35,24 @@
 @import 'modules/form--header-with-skip';
 @import 'modules/notice';
 
+// GOV.UK design system
 $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack; this means design system won't load fonts.
-@import 'components/radios/radios'; // GOV.UK design system
-@import 'components/input/input'; // GOV.UK design system
-@import 'overrides/spacing'; // GOV.UK design system
-@import 'overrides/width'; // GOV.UK design system
+@import "settings/all";
+@import "tools/all";
+@import "helpers/all";
+@import "core/typography";
+@import "core/lists";
+@import "objects/all";
+@import 'components/radios/radios';
+@import 'components/input/input';
+@import 'overrides/spacing';
+@import 'overrides/typography';
+@import 'overrides/width';
+@import 'components/footer/footer';
+@import 'components/table/table';
+
+@import 'modules/register-categories';
+@import 'modules/registers-in-numbers';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -178,22 +190,6 @@ table {
   margin-bottom: $gutter * 2;
 }
 
-.footer-nav {
-  font-size: 14px;
-  padding: 8px 0;
-  margin-bottom: 20px;
-
-  @include media(tablet) {
-    font-size: 16px;
-    padding: 5px 0;
-  }
-
-  a {
-    display: inline-block;
-    margin-right: 15px;
-  }
-}
-
 .table {
   margin-bottom: $gutter;
 
@@ -290,20 +286,6 @@ table {
   @include media($max-width: 641px) {
     thead {
       display: none;
-    }
-  }
-}
-
-.services-using-registers-page {
-  table {
-    thead th {
-      font-weight: bold;
-    }
-
-    td,
-    th {
-      font-size: 16px;
-      vertical-align: top;
     }
   }
 }
@@ -649,7 +631,74 @@ details {
   }
 }
 
+.terms-and-definitions {
+  display: block;
+
+  a {
+    padding-right: 0.25em;
+  }
+}
+
+.breadcrumbs__item {
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ============================================================================
+// Overridess
+// ============================================================================
+
 .registers-\!-faded-colour {
   color: $grey-1;
   padding-left: 0.25em;
+}
+
+.registers-\!-border-off {
+  border: 0;
+}
+
+// ============================================================================
+// Migration hacks
+// ============================================================================
+// There are things we need to override in the move from Elements to the Design
+// System, as there are sometimes clashes that need to be overridden.
+//
+// These are those hacks.
+
+// Remove the margin, since the design system has the appropriate level of
+// margin at the tope of the page.
+body:not(.home-page) .breadcrumbs {
+  margin-bottom: 0;
+}
+
+// Since container margin behaviour changes, we need to remove the margin
+// from elements and copy the behaviour across from design system.
+#footer .footer-wrapper { // scss-lint:disable IdSelector
+  margin: 0 auto;
+}
+
+.footer-meta {
+  @extend .govuk-width-container; // scss-lint:disable PlaceholderInExtend
+}
+
+// Avoid two lots of left and right margins
+.govuk-width-container #content { // scss-lint:disable IdSelector
+  margin: 0;
+}
+
+.govuk-footer__heading {
+  border: 0;
+
+  @media screen and (min-width: 640px) {
+    margin: 0;
+  }
+}
+
+.govuk-footer__list-item {
+  margin: 0 0 10px 0;
+}
+
+.govuk-footer__link {
+  padding: 5px 0;
 }
