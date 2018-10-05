@@ -3,10 +3,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  get 'using-registers', to: 'pages#using_registers', as: 'using_registers'
   get 'services-using-registers', to: 'pages#services_using_registers', as: 'services_using_registers'
-  get 'combining-registers', to: 'pages#combining_registers', as: 'combining_registers'
-  get 'case-study-tiscreport', to: 'pages#case_study', as: 'case_study'
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
   get 'data-format-changes', to: 'pages#data_format_changes', as: 'data_format_changes'
@@ -63,6 +60,9 @@ Rails.application.routes.draw do
   get 'new-register/suggest-register', to: redirect('/support', status: 301)
   get 'api_users/new', to: redirect('/create-api-key', status: 301)
   get 'avaliable-registers', to: redirect('/registers', status: 301)
+  get 'combining-registers', to: redirect('about', status: 301)
+  get 'using-registers', to: redirect('about', status: 301)
+  get 'case-study-tiscreport', to: redirect('services-using-registers', status: 301)
 
   get '404', to: 'errors#not_found'
   get '500', to: 'errors#internal_server_error'
