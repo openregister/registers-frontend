@@ -152,14 +152,14 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    http (2.2.1)
+    http (3.3.0)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
-      http-form_data (~> 1.0.1)
+      http-form_data (~> 2.0)
       http_parser.rb (~> 0.6.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    http-form_data (1.0.3)
+    http-form_data (2.1.1)
     http_parser.rb (0.6.0)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
@@ -402,7 +402,7 @@ DEPENDENCIES
   govuk_template
   haml-rails
   health_check (~> 2.7)
-  http (= 2.2.1)
+  http (= 3.3.0)
   httparty (~> 0.16.2)
   invisible_captcha
   iso8601 (~> 0.12.0)
