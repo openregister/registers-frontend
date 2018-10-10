@@ -195,7 +195,7 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    lograge (0.9.0)
+    lograge (0.10.0)
       actionpack (>= 4)
       activesupport (>= 4)
       railties (>= 4)
@@ -411,7 +411,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 5.0, >= 5.0.5)
   kaminari
   listen (~> 3.0.5)
-  lograge (~> 0.9.0)
+  lograge (~> 0.10.0)
   logstash-event (~> 1.2, >= 1.2.02)
   pg (~> 0.18)
   pry-byebug
