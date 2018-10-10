@@ -30,7 +30,7 @@ class Register < ApplicationRecord
       .count(:authority_id)
   }
   scope :available_count, -> { available.in_beta.count }
-  scope :category, ->(category_id){
+  scope :category, ->(category_id) {
     Category.where(id: category_id).first
   }
 
