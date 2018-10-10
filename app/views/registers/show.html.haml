@@ -2,132 +2,88 @@
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
-%main#content.container{role:'main'}
-  - if @register.register_phase != 'Beta'
-    .grid-row
-      .column-two-thirds
-        .panel.panel-border-wide
-          %span.phase-banner In progress
-          %p This data is in progress and it’s not ready for use.
-
-  .register-meta-data
-    .grid-row
-      .column-two-thirds
+.govuk-width-container
+  %main#content.govuk-main-wrapper{role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        - if @register.register_phase != 'Beta'
+          .govuk-inset-text
+            %strong.govuk-tag In progress
+            %p This data is in progress and it’s not ready for use.
         %h1{class: "govuk-heading-l govuk-!-margin-top-7 govuk-!-margin-bottom-1"}
           #{@register.register_name} register
         %p.govuk-body-l= @register.register_description
-        - unless @register.is_empty?
-          %p.font-xsmall Last updated: #{link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)}
-
-      .column-one-third
-        - if @register.authority.present?
-          .related-items
-            %p.bold-small Managed by:
-            %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
-              %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
-                %span= @register&.authority&.name
-
-  .grid-row
-    .column-full
-      %div{class: "js-hidden", "data-module" => "accordion-with-descriptions"}
-        .subsection-wrapper
-          .subsection.js-subsection
-            .subsection__header
-              %h2.subsection__title Preview the data
-            .subsection__content.js-subsection-content#data_section
-              - unless @register.is_empty?
-                .search-records-wrapper#records_wrapper
-                  = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
-                    .grid-row
-                      .column-one-third
-                        .records-search
-                          = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
-                          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
-                          = submit_tag 'Search', name: nil, class: 'search-submit'
-                    %details{role: "group", open: (params[:status].present? ? 'open' : nil)}
-                      %summary{"aria-controls" => "details-content-0", "aria-expanded" => "#{params[:status].present? ? 'true' : 'false'}", role: "button"}
-                        %span.summary Filter
-                      %div{id: "details-content-0", "aria-hidden" => "#{params[:status].present? && @records.present? ? 'false' : 'true'}"}
-
-                        .grid-row
-                          .column-two-thirds
-                            .form-group
-                              %fieldset.inline
-                                %legend.form-label.form-label-bold Filter data:
-                                .multiple-choice
-                                  = radio_button_tag 'status', 'current', params[:status] == 'current' || !params[:status].present? ?  'true' : nil
-                                  = label_tag 'Current records', nil, for: 'status_current'
-                                .multiple-choice
-                                  = radio_button_tag 'status', 'archived', params[:status] == 'archived' ?  'true' : nil
-                                  = label_tag 'Archived records', nil, for: 'status_archived'
-                                .multiple-choice
-                                  = radio_button_tag 'status', 'all', params[:status] == 'all' ?  'true' : nil
-                                  = label_tag 'Both', nil, for: 'status_all'
-                              = submit_tag 'Search', name: nil, class: 'button filter-search-submit'
-
-
-              - if @records.any?
-                .records-count
-                  %span#records-count
-                    = render partial: 'showing'
-                  - if @search_term.present? || params[:status].present?
-                    = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-
-              - if @register.is_empty? || @records.any?
-                .fullscreen-content{data: {module: 'scrolling-tables'}}
-                  %table.table.register-data-table
-                    %thead
-                      %tr
-                        - @register.register_fields.each do |field|
-                          %th{class: "#{field['field']}"}
-                            = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
-                            = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true, data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Help"} do
-                              %span.visually-hidden
-                                What does #{field['field']} mean
-                              ?
-                    %tbody#records-tbody
-                      - if @register.is_empty?
-                        %tr
-                          %td{colspan: @register.register_fields.count}
-                            .panel.panel-border-wide
-                              %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
-                      - else
-                        = render partial: 'record', collection: @records
-
-              .pager.js-hidden
-                .pager-controls
-                  = paginate @records, outer_window: 0, window: 3
-                .pager-summary
-                  = render partial: 'showing'
-
-              - unless @records.last_page?
-                %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
-                  = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
-
-              - unless @records.any? || @register.is_empty?
-                .no-search-results
-                  %p
-                    - if @search_term.present?
-                      No results found for <strong>"#{@search_term}"</strong>
-                      %script
-                        var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
-                        ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
-                    - else
-                      No results found.
-                      %script
-                        ga('send', 'event', 'Search', 'No results', 'Search term not present');
-                    - if @search_term.present? || params[:status].present?
-                      = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
-          - if @records.any?
-            .subsection--not-accordionised
-              .subsection__header--not-accordionised
-                %h2.subsection__title--not-accordionised
-                  = link_to 'Access the data', register_choose_access_path(@register.slug)
-          .subsection.js-subsection
-            .subsection__header
-              %h2.subsection__title Give feedback
-            .subsection__content.js-subsection-content#feedback_section
-              = render partial: 'feedback/form'
+        %dl.govuk-metadata
+          - if @register.authority.present?
+            %dt.register-metadata__term Organisation:
+            %dd.register-metadata__definition= @register&.authority&.name
+          - if @register&.category_id&.present? or @register.register_phase != 'Beta'
+            %dt.register-metadata__term Category:
+            %dd.register-metadata__definition= link_to @register_category.name, category_path(@register_category.slug)
+          - unless @register.is_empty?
+            %dt.register-metadata__term Last updated:
+            %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
+        %p= link_to 'Access the data', register_choose_access_path(@register.slug), { class: 'registers__button--access govuk-!-margin-top-5'}
+    .govuk-grid-row#records_wrapper
+      .govuk-grid-column-two-thirds
+        %h2{class: "govuk-heading-m"}
+          About the data
+        %p This register has #{number_with_delimiter(@records.total_count)} records and #{@register.register_fields.count} fields.
+      .govuk-grid-column-one-third
+        = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
+          = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
+          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
+          = submit_tag 'Search', name: nil, class: 'search-submit'
+      .govuk-grid-column-full
+        %p{class: 'govuk-!-margin-bottom-2'}
+          - unless @search_term.present? || params[:status].present?
+            Showing
+            %strong 1 &ndash; #{@records.count + @records.offset_value}
+            of
+            %strong= @records.total_count
+            records.
+          - if @search_term.present? || params[:status].present?
+            Showing #{@records.count} records for <strong>&ldquo;#{@search_term}&rdquo;</strong>.
+            = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
+        - if @register.is_empty? || @records.any?
+          .fullscreen-content{data: {module: 'scrolling-tables'}}
+            %table.table.register-data-table
+              %thead
+                %tr
+                  - @register.register_fields.each do |field|
+                    %th{class: "#{field['field']}"}
+                      = field['cardinality'] == '1' ? records_table_sort_link(field['field'], request.query_parameters) : field['field'].tr('-', ' ').humanize
+                      = link_to register_field_url(@register.slug, field['field']), class: 'info-icon', remote: true, data: {"click-events" => true, "click-category" => "Register Table", "click-action" => "Help"} do
+                        %span.visually-hidden
+                          What does #{field['field']} mean
+                        ?
+              %tbody#records-tbody
+                - if @register.is_empty?
+                  %tr
+                    %td{colspan: @register.register_fields.count}
+                      .panel.panel-border-wide
+                        %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
+                - else
+                  = render partial: 'record', collection: @records
+        - unless @records.any? || @register.is_empty?
+          .no-search-results
+            %p
+              - if @search_term.present?
+                No results found for <strong>"#{@search_term}"</strong>
+                %script
+                  var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
+                  ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
+              - else
+                No results found.
+                %script
+                  ga('send', 'event', 'Search', 'No results', 'Search term not present');
+              - if @search_term.present? || params[:status].present?
+                = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
+    #section{class: 'govuk-!-margin-top-4 govuk-grid-row'}
+      .govuk-grid-column-full
+        %h2{class: "govuk-heading-m"}
+          Feedback
+        = render partial: 'feedback/form'
 
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
   %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close

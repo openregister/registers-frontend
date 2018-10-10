@@ -43,8 +43,11 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import "core/typography";
 @import "core/lists";
 @import "objects/all";
+@import 'components/button/button';
 @import 'components/radios/radios';
 @import 'components/input/input';
+@import 'components/inset-text/inset-text';
+@import 'components/tag/tag';
 @import 'overrides/spacing';
 @import 'overrides/typography';
 @import 'overrides/width';
@@ -652,6 +655,21 @@ details {
 .registers-\!-faded-colour {
   color: $grey-1;
   padding-left: 0.25em;
+}
+
+.registers__button--access {
+  @extend .govuk-button;
+  @extend .govuk-\!-font-size-24;
+
+  background-color: $govuk-link-colour;
+  line-height: 1 !important;
+  font-weight: 700;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+
+  &:hover {
+    background-color: $govuk-link-hover-colour;
+  }
 }
 
 .registers-\!-border-off {

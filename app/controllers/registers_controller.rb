@@ -40,6 +40,7 @@ class RegistersController < ApplicationController
     @register = Register.has_records.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
+    @register_category = Register.category(@register.category_id)
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
