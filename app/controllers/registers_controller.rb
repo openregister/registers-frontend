@@ -41,6 +41,7 @@ class RegistersController < ApplicationController
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
     @register_category = Register.category(@register.category_id)
+    @register_records_total_count = @register.records.count;
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
@@ -96,7 +97,7 @@ private
              .status(params[:status])
              .sort_by_field(sort_by, sort_direction)
              .page(params[:page])
-             .per(100)
+             .per(10)
   end
 
   def feedback_params

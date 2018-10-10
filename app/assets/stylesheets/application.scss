@@ -658,14 +658,37 @@ details {
 }
 
 .registers__button--access {
+  // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
   @extend .govuk-button;
-  @extend .govuk-\!-font-size-24;
+  @extend .govuk-\!-font-size-19;
+  // scss-lint:enable PlaceholderInExtend
+  // scss-lint:enable BangFormat
 
   background-color: $govuk-link-colour;
-  line-height: 1 !important;
   font-weight: 700;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  line-height: 1 !important;
+  padding: 0.85em 1.25em 0.65em 1.25em;
+
+  &:hover {
+    background-color: $govuk-link-hover-colour;
+  }
+}
+
+.registers__button--access-large {
+  // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
+  @extend .govuk-button;
+  @extend .govuk-\!-font-size-19;
+  // scss-lint:enable PlaceholderInExtend
+  // scss-lint:enable BangFormat
+
+  background-color: $govuk-link-colour;
+  font-weight: 700;
+  line-height: 1 !important;
+  padding: 0.85em 0.5em 0.65em 0.5em;
+  text-align: center;
+  width: 100%;
 
   &:hover {
     background-color: $govuk-link-hover-colour;
@@ -697,7 +720,8 @@ body:not(.home-page) .breadcrumbs {
 }
 
 .footer-meta {
-  @extend .govuk-width-container; // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable PlaceholderInExtend
+  @extend .govuk-width-container;
 }
 
 // Avoid two lots of left and right margins

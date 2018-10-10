@@ -3,7 +3,7 @@
 - content_for :body_classes, 'register-show'
 
 .govuk-width-container
-  %main#content.govuk-main-wrapper{role:'main'}
+  %main#content.govuk-main-wrapper{role:'main', class: 'govuk-!-padding-top-0'}
     .govuk-grid-row
       .govuk-grid-column-two-thirds
         - if @register.register_phase != 'Beta'
@@ -25,26 +25,22 @@
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), { class: 'registers__button--access govuk-!-margin-top-5'}
     .govuk-grid-row#records_wrapper
-      .govuk-grid-column-two-thirds
+      .govuk-grid-column-full
         %h2{class: "govuk-heading-m"}
           About the data
-        %p This register has #{number_with_delimiter(@records.total_count)} records and #{@register.register_fields.count} fields.
+      .govuk-grid-column-two-thirds
+        %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
       .govuk-grid-column-one-third
-        = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records' do
+        = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
           = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
           = submit_tag 'Search', name: nil, class: 'search-submit'
       .govuk-grid-column-full
-        %p{class: 'govuk-!-margin-bottom-2'}
-          - unless @search_term.present? || params[:status].present?
-            Showing
-            %strong 1 &ndash; #{@records.count + @records.offset_value}
-            of
-            %strong= @records.total_count
-            records.
-          - if @search_term.present? || params[:status].present?
-            Showing #{@records.count} records for <strong>&ldquo;#{@search_term}&rdquo;</strong>.
+        %p
+          = render partial: 'showing'
+          - if @search_term.present?
             = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
+      .govuk-grid-column-full
         - if @register.is_empty? || @records.any?
           .fullscreen-content{data: {module: 'scrolling-tables'}}
             %table.table.register-data-table
@@ -65,20 +61,22 @@
                         %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
                 - else
                   = render partial: 'record', collection: @records
+          .pager.js-hidden
+            .pager-controls
+              = paginate @records, outer_window: 0, window: 3
+      .govuk-grid-column-full
+        %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { class: 'registers__button--access-large'}
+
         - unless @records.any? || @register.is_empty?
           .no-search-results
             %p
               - if @search_term.present?
-                No results found for <strong>"#{@search_term}"</strong>
                 %script
                   var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
                   ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
               - else
-                No results found.
                 %script
                   ga('send', 'event', 'Search', 'No results', 'Search term not present');
-              - if @search_term.present? || params[:status].present?
-                = link_to 'Reset', register_path(@register.slug, anchor: 'search_wrapper'), class: 'reset-link'
     #section{class: 'govuk-!-margin-top-4 govuk-grid-row'}
       .govuk-grid-column-full
         %h2{class: "govuk-heading-m"}
