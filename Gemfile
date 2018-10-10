@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'jbuilder', '~> 2.5'
-gem 'http', '2.2.1'
+gem 'http', '3.3.0'
 
 # HAML templating
 gem 'haml-rails'
