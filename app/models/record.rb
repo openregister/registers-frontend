@@ -4,7 +4,7 @@ class Record < ApplicationRecord
   include SearchScope
   belongs_to :register
   scope :current, -> {
-    where(Arel.sql("data->> 'end-date' is null or data->> 'end-date' > '#{Date.today}'"))
+    where(Arel.sql("data->> 'end-date' is null or data->> 'end-date' >= '#{Date.today}'"))
   }
 
   scope :archived, -> {
