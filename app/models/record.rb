@@ -3,8 +3,14 @@ class Record < ApplicationRecord
 
   include SearchScope
   belongs_to :register
-  scope :current, -> { where(Arel.sql("data->> 'end-date' is null")) }
-  scope :archived, -> { where(Arel.sql("data->> 'end-date' is not null")) }
+  scope :current, -> {
+    where('end_date is null or end_date > ?', Date.today)
+  }
+
+  scope :archived, -> {
+    where('end_date <= ?', Date.today)
+  }
+
   scope :status, lambda { |status|
     case status
     when 'archived', 'current'
