@@ -1,8 +1,11 @@
-$("#records-tbody").append("<%= j(render(partial: 'record', collection: @records)) %>");
-$("#records-count").html('Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= @records.total_count %></strong> records <% if @search_term.present? %>for <strong>"<%= search_term %>"</strong><% end %>')
+document.getElementById('records-tbody').innerHTML += "<%= j(render(partial: 'record', collection: @records)) %>";
+
+document.getElementById('records-count').innerHTML = 'Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= @records.total_count %></strong> records <% if @search_term.present? %>for &ldquo;<strong><%= @search_term %></strong>&rdquo;<% end %>';
 
 <% if @records.last_page? %>
-  $("#load-more-records").hide();
+  var lmr = document.getElementById('load-more-records');
+  lmr.parentElement.removeChild(lmr);
 <% else %>
-  $("#load-more-records").replaceWith("<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true) %>");
+  var markup = "<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true) %>";
+  document.getElementById('load-more-records').parentElement.innerHTML = markup;
 <% end %>

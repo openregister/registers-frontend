@@ -37,7 +37,8 @@
           = submit_tag 'Search', name: nil, class: 'search-submit'
       .govuk-grid-column-full
         %p
-          = render partial: 'showing'
+          %span#records-count
+            = render partial: 'showing'
           - if @search_term.present?
             = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
       .govuk-grid-column-full
@@ -61,22 +62,24 @@
                         %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
                 - else
                   = render partial: 'record', collection: @records
-          .pager.js-hidden
-            .pager-controls
+          .pager
+            .pager-controls.js-hidden
               = paginate @records, outer_window: 0, window: 3
+            - unless @records.last_page?
+              %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
+                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
+
       .govuk-grid-column-full
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { class: 'registers__button--access-large'}
-
         - unless @records.any? || @register.is_empty?
-          .no-search-results
-            %p
-              - if @search_term.present?
-                %script
-                  var searchFilter = document.getElementById('search_records').querySelector('input[type="radio"]:checked').parentElement.querySelector('label').innerText.toLowerCase();
-                  ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
-              - else
-                %script
-                  ga('send', 'event', 'Search', 'No results', 'Search term not present');
+          - if @search_term.present?
+            %script
+              -# TODO: current and archived no longer present; what goes here as the filter?
+              var searchFilter = 'current'; //
+              ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
+          - else
+            %script
+              ga('send', 'event', 'Search', 'No results', 'Search term not present');
     #section{class: 'govuk-!-margin-top-4 govuk-grid-row'}
       .govuk-grid-column-full
         %h2{class: "govuk-heading-m"}
@@ -86,12 +89,6 @@
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
   %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
   .modal-dialog__inner
-
-= content_for :javascript do
-  :javascript
-    $("input[name='status']").change(function () {
-      $('#search_records').submit();
-    });
 
 = content_for :head do
   = render partial: 'registers/structured_data', locals: { register: @register }
