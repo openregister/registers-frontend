@@ -141,8 +141,11 @@
       function bindToggleForSubsections() {
         // Add toggle functionality individual sections
         $subsectionHeader.on('click', function(e) {
-          toggleSection($(this).next());
-          toggleIcon($(this));
+          $(this).parent().find('.subsection__content').each( function() {
+            toggleSection( $(this) )
+            toggleIcon($(this));
+        })
+
           toggleState($(this).find('.subsection__button'));
           //setOpenCloseAllText();
           if(window.ga && ga.create) {
