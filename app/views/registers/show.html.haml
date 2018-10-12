@@ -16,7 +16,7 @@
         %dl.govuk-metadata
           - if @register.authority.present?
             %dt.register-metadata__term Organisation:
-            %dd.register-metadata__definition= @register&.authority&.name
+            %dd.register-metadata__definition= link_to @register&.authority&.name, authority_path(@register.authority.government_organisation_key)
           - if @register&.category_id&.present? or @register.register_phase != 'Beta'
             %dt.register-metadata__term Category:
             %dd.register-metadata__definition= link_to @register_category.name, category_path(@register_category.slug)
