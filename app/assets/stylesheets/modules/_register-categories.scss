@@ -3,12 +3,15 @@
   width: 100%;
   padding-bottom: 2em;
 
-  @supports (display: grid) {
-    @include govuk-media-query($from: desktop) {
+  @include govuk-media-query($from: desktop) {
+    display: flex;
+    flex-wrap: wrap;
+
+    @supports (display: grid) {
       display: grid;
       grid-column-gap: 1.5em;
       grid-row-gap: 0.75em;
-      grid-template-columns: repeat(3, 1fr); // 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       grid-auto-rows: minmax(5em, auto);
       padding-bottom: 0;
     }
@@ -60,6 +63,14 @@
   padding: 0.75em 0.75em 0.6em 0.75em;
   text-decoration: none;
 
+  align-content: flex-start;
+  align-items: stretch;
+  // scss-lint:disable DuplicateProperty
+  display: flex;
+  // scss-lint:enable DuplicateProperty
+  flex-direction: column;
+  flex-wrap: nowrap;
+
   &:hover {
     border: 1px solid $govuk-link-colour;
     box-shadow: 0 0 0 1px $govuk-link-colour;
@@ -70,11 +81,16 @@
 .register-theme__description,
 .register-theme__count {
   pointer-events: none;
+  width: 100%;
 }
 
 .register-theme__heading {
   color: $govuk-link-colour;
   text-decoration: underline;
+}
+
+.register-theme__description {
+  flex-grow: 5;
 }
 
 .register-theme__count {
@@ -126,6 +142,8 @@
   // scss-lint:disable BangFormat
   @extend .govuk-body-s;
   @extend .govuk-\!-font-size-16;
+  // scss-lint:enable PlaceholderInExtend
+  // scss-lint:enable BangFormat
   margin-bottom: 0.5em;
 }
 
@@ -134,11 +152,15 @@
   // scss-lint:disable BangFormat
   @extend .govuk-body-s;
   @extend .govuk-\!-font-size-14;
+  // scss-lint:enable PlaceholderInExtend
+  // scss-lint:enable BangFormat
 }
 
 .js .sort-by-filter button {
+  // scss-lint:disable DuplicateProperty
   clip: rect(1px 1px 1px 1px); // For IE6 and IE7
-  clip: rect(1px, 1px, 1px, 1px); // scss-lint:disable DuplicateProperty
+  clip: rect(1px, 1px, 1px, 1px);
+  // scss-lint:enable DuplicateProperty
   height: 1px;
   overflow: hidden;
   position: absolute !important;
