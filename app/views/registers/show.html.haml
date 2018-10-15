@@ -19,29 +19,29 @@
             %dd.register-metadata__definition= link_to @register&.authority&.name, authority_path(@register.authority.government_organisation_key)
           - if @register&.category_id&.present? or @register.register_phase != 'Beta'
             %dt.register-metadata__term Category:
-            %dd.register-metadata__definition= link_to @register_category.name, category_path(@register_category.slug)
+            %dd.register-metadata__definition= link_to @register_category&.name, category_path(@register_category&.slug)
           - unless @register.is_empty?
             %dt.register-metadata__term Last updated:
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), { class: 'registers__button--access govuk-!-margin-top-5'}
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header
+      .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
           About the data
-      .govuk-grid-column-two-thirds.subsection__content
+      .govuk-grid-column-two-thirds.subsection__content#about-the-data__1
         %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
-      .govuk-grid-column-one-third.subsection__content
+      .govuk-grid-column-one-third.subsection__content#about-the-data__2
         = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
           = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
           = submit_tag 'Search', name: nil, class: 'search-submit'
-      .govuk-grid-column-full.subsection__content
+      .govuk-grid-column-full.subsection__content#about-the-data__3
         %p
           %span#records-count
             = render partial: 'showing'
           - if @search_term.present?
             = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-      .govuk-grid-column-full.subsection__content
+      .govuk-grid-column-full.subsection__content#about-the-data__4
         - if @register.is_empty? || @records.any?
           .fullscreen-content{data: {module: 'scrolling-tables'}}
             %table.table.register-data-table
@@ -69,7 +69,7 @@
               %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
 
-      .govuk-grid-column-full.subsection__content
+      .govuk-grid-column-full.subsection__content#about-the-data__5
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
@@ -80,11 +80,11 @@
           - else
             %script
               ga('send', 'event', 'Search', 'No results', 'Search term not present');
-    %section{class: 'govuk-!-margin-top-4 govuk-grid-row', data: { module: 'accordion-with-descriptions'}}
+    %section.govuk-grid-row{data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header
         %h2.govuk-heading-m.subsection__title
           Feedback
-      .govuk-grid-column-full.subsection__content
+      .govuk-grid-column-full.subsection__content#feedback__1
         = render partial: 'feedback/form'
 
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}

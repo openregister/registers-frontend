@@ -121,9 +121,12 @@
         if (isOpenSubsections) {
           var $openSubsections = $('.subsection--is-open');
           $openSubsections.each(function(index) {
-            var subsectionOpenContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.setItem( GOVUKServiceManualTopic+subsectionOpenContentId , 'Opened');
-          });
+            $(this)
+              .find('.subsection__content')
+              .each(function(i) {
+                sessionStorage.setItem( GOVUKServiceManualTopic + $(this).attr('id') , 'Opened');
+              })
+          })
         }
       }
 
@@ -132,9 +135,13 @@
         if (isClosedSubsections) {
           var $closedSubsections = $('.subsection');
           $closedSubsections.each(function(index) {
-            var subsectionClosedContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.removeItem( GOVUKServiceManualTopic+subsectionClosedContentId , subsectionClosedContentId);
-          });
+            $(this)
+              .find('.subsection__content')
+              .each(function(i) {
+                var subsectionClosedContentId = $(this).attr('id')
+                sessionStorage.removeItem( GOVUKServiceManualTopic + subsectionClosedContentId , subsectionClosedContentId);
+              })
+          })
         }
       }
 

@@ -5,11 +5,6 @@
 // scss-lint:disable SelectorFormat
 
 .subsection {
-  margin-bottom: $gutter;
-
-  @include media(tablet) {
-    margin-bottom: $gutter * 1.5;
-  }
 
   &__title {
     @include bold-24;
@@ -63,7 +58,6 @@
   // Wrapper for subsections
   .subsection-wrapper {
     @extend %contain-floats;
-    border-bottom: 1px solid $border-colour;
   }
 
   .subsection {
@@ -76,18 +70,20 @@
     &__header {
       color: $govuk-blue;
       position: relative;
+    }
+
+    &__title {
       padding-top: 14px;
       padding-bottom: 12px;
       border-top: 1px solid $border-colour;
+      margin-bottom: 0;
 
       // Change the background of the header on hover
       &:hover {
         cursor: pointer;
         background: $highlight-colour;
       }
-    }
 
-    &__title {
       button {
         color: $govuk-blue;
         cursor: pointer;
@@ -97,13 +93,6 @@
         border: 0;
         padding-left: 0;
         text-align: left;
-      }
-
-      margin-bottom: 0;
-      margin-right: $gutter-half;
-
-      @include media(tablet) {
-        margin-right: $gutter;
       }
     }
 
@@ -119,12 +108,8 @@
 
     &__icon {
       position: absolute;
+      right: 30px;
       top: 50%;
-      right: 0;
-
-      @include media (tablet) {
-        right: 15px;
-      }
 
       height: 16px;
       width: 16px;
@@ -157,7 +142,6 @@
         }
       }
     }
-
   }
 }
 
@@ -170,4 +154,10 @@
   padding: 14px 0 12px 0;
   text-align: left;
   text-decoration: none;
+}
+
+.register-show main {
+  border-bottom: 1px solid $border-colour;
+  padding-bottom: 0 !important;
+  margin-bottom: 90px !important;
 }
