@@ -3,18 +3,6 @@ class Record < ApplicationRecord
 
   include SearchScope
   belongs_to :register
-  scope :current, -> { where(Arel.sql("data->> 'end-date' is null")) }
-  scope :archived, -> { where(Arel.sql("data->> 'end-date' is not null")) }
-  scope :status, lambda { |status|
-    case status
-    when 'archived', 'current'
-      send(status)
-    when 'all'
-      nil
-    else
-      current
-    end
-  }
 
   scope :sort_by_field, lambda { |sort_by, sort_direction|
     if sort_by.match?(VALID_FIELD_NAME)

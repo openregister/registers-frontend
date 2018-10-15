@@ -6,7 +6,6 @@
         -if category.description.present?
           %p.register-theme__description.govuk-body-s= "#{category.description}"
         %p{class: "register-theme__count govuk-body-s"}= "#{pluralize(category.register_count, 'register')}"
-        -# category.taxon_content_id
   -if current_page?(root_path)
     %li.register-theme
       = link_to "View all registers", registers_path, {class: 'register-theme__view-all'}
