@@ -6,6 +6,5 @@ document.getElementById('records-count').innerHTML = 'Showing <strong>1 &ndash; 
   var lmr = document.getElementById('load-more-records');
   lmr.parentElement.removeChild(lmr);
 <% else %>
-  var markup = "<%= escape_javascript(link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true) %>";
-  document.getElementById('load-more-records').parentElement.innerHTML = markup;
+  document.getElementById('load-more-records').href = "<%= escape_javascript(path_to_next_page @records) %>"
 <% end %>

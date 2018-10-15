@@ -23,13 +23,14 @@
           - unless @register.is_empty?
             %dt.register-metadata__term Last updated:
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
-        %p= link_to 'Access the data', register_choose_access_path(@register.slug), { class: 'registers__button--access govuk-!-margin-top-5'}
+        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
           About the data
       .govuk-grid-column-two-thirds.subsection__content#about-the-data__1
         %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
+        -# = page_records_info(@records).inspect
       .govuk-grid-column-one-third.subsection__content#about-the-data__2
         = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
@@ -66,11 +67,11 @@
             .pager-controls.js-hidden
               = paginate @records, outer_window: 0, window: 3
             - unless @records.last_page?
-              %div{data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Load More" }}
+              %div
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
 
       .govuk-grid-column-full.subsection__content#about-the-data__5
-        %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { class: 'registers__button--access-large'}
+        %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
             %script
@@ -93,3 +94,40 @@
 
 = content_for :head do
   = render partial: 'registers/structured_data', locals: { register: @register }
+
+= content_for :javascript do
+  :javascript
+    var count = 0;
+    document.getElementById('load-more-records')
+      .addEventListener('click', function() {
+        count = count + 1
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Register Table',
+          eventAction: 'Load more ' + count,
+          eventLabel: 'Load more',
+          nonInteraction: true
+        })
+      })
+  :javascript
+    document.getElementById('access-the-data-from-preview')
+      .addEventListener('click', function() {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Register Table',
+          eventAction: 'Access the data from preview',
+          eventLabel: 'Access the data',
+          nonInteraction: true
+        })
+      })
+  :javascript
+    document.getElementById('access-the-data-button')
+      .addEventListener('click', function() {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Register Table',
+          eventAction: 'Access the data',
+          eventLabel: 'Access the data',
+          nonInteraction: true
+        })
+      })
