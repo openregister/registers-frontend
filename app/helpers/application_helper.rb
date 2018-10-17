@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def page_entries_info(collection, options = {})
+    raw super(collection, options).gsub(/\d{4,}/, number_with_delimiter(collection.total_count))
+  end
+
   def crest_class_name(authority)
     case authority
     when 'home-office'
