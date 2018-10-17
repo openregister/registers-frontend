@@ -74,12 +74,12 @@ RSpec.feature 'View register', type: :feature do
     expect(first_update.sibling('table')).to have_content("The Republic of Cote D'Ivoire")
   end
 
-  # scenario 'view register name' do
-  #   visit('/registers/industrial-classification-2003')
-  #   register_name = 'UK Standard Industrial Classification of Economic Activities 2003 register'
-  #   expect(find('h1')).to have_content(register_name)
-  #   expect(page.title).to have_content(register_name)
-  # end
+  scenario 'view register name' do
+    visit('/registers/industrial-classification-2003')
+    register_name = 'UK Standard Industrial Classification of Economic Activities 2003 register'
+    expect(find('h1')).to have_content(register_name)
+    expect(page.title).to have_content(register_name)
+  end
 
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)
