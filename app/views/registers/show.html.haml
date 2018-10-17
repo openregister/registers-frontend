@@ -36,7 +36,7 @@
         %h2.govuk-heading-m.subsection__title
           About the data
       .govuk-grid-column-two-thirds.subsection__content#about-the-data__1
-        %p This register has #{@register_records_total_count} records and #{@register.register_fields.count} fields
+        %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
       .govuk-grid-column-one-third.subsection__content#about-the-data__2
         = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
