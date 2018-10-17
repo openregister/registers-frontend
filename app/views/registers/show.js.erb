@@ -1,6 +1,6 @@
 document.getElementById('records-tbody').innerHTML += "<%= j(render(partial: 'record', collection: @records)) %>";
 
-document.getElementById('records-count').innerHTML = 'Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= @records.total_count %></strong> records <% if @search_term.present? %>for &ldquo;<strong><%= @search_term %></strong>&rdquo;<% end %>';
+document.getElementById('records-count').innerHTML = 'Showing <strong>1 &ndash; <%= @records.count + @records.offset_value %></strong> of <strong><%= number_with_delimiter(@records.total_count) %></strong> records <% if @search_term.present? %>for &ldquo;<strong><%= @search_term %></strong>&rdquo;<% end %>';
 
 <% if @records.last_page? %>
   var lmr = document.getElementById('load-more-records');
