@@ -130,6 +130,12 @@ a:visited {
   font-size: 16px;
   margin-bottom: 20px;
 
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-column-gap: 0.35em;
+  }
+
   dl {
     overflow: hidden;
   }
@@ -140,7 +146,6 @@ a:visited {
     max-width: 150px;
     padding-bottom: 0.5rem;
     padding-right: 1%;
-    width: 24%;
   }
 
   dd {
@@ -148,7 +153,6 @@ a:visited {
     margin: 0;
     max-width: 480px;
     padding-bottom: 0.5rem;
-    width: 75%;
   }
 }
 
