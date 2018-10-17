@@ -37,7 +37,6 @@
           About the data
       .govuk-grid-column-two-thirds.subsection__content#about-the-data__1
         %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
-        -# = page_records_info(@records).inspect
       .govuk-grid-column-one-third.subsection__content#about-the-data__2
         = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
@@ -82,12 +81,10 @@
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
             %script
-              -# TODO: current and archived no longer present; what goes here as the filter?
-              var searchFilter = 'current'; //
-              ga('send', 'event', 'Search', 'No results filtered by: ' + searchFilter, '#{@search_term}', {nonInteraction: true});
+              ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
           - else
             %script
-              ga('send', 'event', 'Search', 'No results', 'Search term not present');
+              ga('send', 'event', 'Search', 'No results', 'Search term not present', {nonInteraction: true});
     %section.govuk-grid-row{data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header
         %h2.govuk-heading-m.subsection__title
