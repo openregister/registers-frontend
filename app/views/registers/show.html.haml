@@ -18,7 +18,7 @@
           - if @register.authority.present?
             %dt.register-metadata__term Organisation:
             %dd.register-metadata__definition= link_to @register&.authority&.name, authority_path(@register.authority.government_organisation_key)
-          - if @register&.category_id&.present? or @register.register_phase != 'Beta'
+          - if @register.show_category_link?
             %dt.register-metadata__term Category:
             %dd.register-metadata__definition= link_to @register.category&.name, category_path(@register.category&.slug)
           - unless @register.is_empty?

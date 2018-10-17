@@ -73,6 +73,10 @@ class Register < ApplicationRecord
     records.where(entry_type: 'user').none?
   end
 
+  def show_category_link?
+    register_phase == 'Beta' && category.present?
+  end
+
 private
 
   def set_slug
