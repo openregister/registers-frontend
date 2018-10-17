@@ -16,7 +16,7 @@
       var totalSubsections = $element.find('.subsection__content').length;
 
       var $openOrCloseAllButton;
-      var GOVUKServiceManualTopic = serviceManualTopicPrefix();
+      var RegisterAccordionSection = serviceManualTopicPrefix();
 
       //addOpenCloseAllButton();
       addButtonsToSubsections();
@@ -108,7 +108,7 @@
 
         $subsectionContent.each(function(index) {
           var subsectionContentId = $(this).attr('id');
-          if(sessionStorage.getItem(GOVUKServiceManualTopic+subsectionContentId)){
+          if(sessionStorage.getItem(RegisterAccordionSection + subsectionContentId)){
             openStoredSections($("#"+subsectionContentId));
           }
         });
@@ -124,7 +124,7 @@
             $(this)
               .find('.subsection__content')
               .each(function(i) {
-                sessionStorage.setItem( GOVUKServiceManualTopic + $(this).attr('id') , 'Opened');
+                sessionStorage.setItem( RegisterAccordionSection + $(this).attr('id') , 'Opened');
               })
           })
         }
@@ -139,7 +139,7 @@
               .find('.subsection__content')
               .each(function(i) {
                 var subsectionClosedContentId = $(this).attr('id')
-                sessionStorage.removeItem( GOVUKServiceManualTopic + subsectionClosedContentId , subsectionClosedContentId);
+                sessionStorage.removeItem( RegisterAccordionSection + subsectionClosedContentId , subsectionClosedContentId);
               })
           })
         }
