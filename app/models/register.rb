@@ -30,7 +30,6 @@ class Register < ApplicationRecord
       .count(:authority_id)
   }
   scope :available_count, -> { available.in_beta.count }
-  scope :category, -> { first.category }
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
