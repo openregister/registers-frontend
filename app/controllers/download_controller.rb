@@ -17,7 +17,7 @@ class DownloadController < ApplicationController
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
-        expires: 2.weeks.from_now
+        expires: 24.hours.from_now
       }
     end
     render :index
@@ -55,7 +55,7 @@ class DownloadController < ApplicationController
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
-        expires: 2.weeks.from_now
+        expires: 24.hours.from_now
       }
     end
   end
