@@ -40,7 +40,6 @@ class RegistersController < ApplicationController
     @register = Register.has_records.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
-    @register_category = Register.category(@register.category_id)
     @register_records_total_count = @register.number_of_records;
   end
 

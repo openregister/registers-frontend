@@ -20,7 +20,7 @@
             %dd.register-metadata__definition= link_to @register&.authority&.name, authority_path(@register.authority.government_organisation_key)
           - if @register&.category_id&.present? or @register.register_phase != 'Beta'
             %dt.register-metadata__term Category:
-            %dd.register-metadata__definition= link_to @register_category&.name, category_path(@register_category&.slug)
+            %dd.register-metadata__definition= link_to @register.category&.name, category_path(@register.category&.slug)
           - unless @register.is_empty?
             %dt.register-metadata__term Last updated:
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)

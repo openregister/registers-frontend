@@ -30,14 +30,12 @@ class Register < ApplicationRecord
       .count(:authority_id)
   }
   scope :available_count, -> { available.in_beta.count }
-  scope :category, ->(category_id) {
-    Category.where(id: category_id).first
-  }
+  scope :category, -> { first.category }
 
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
   has_many :register_search_results
-  belongs_to :theme
+  belongs_to :category
   belongs_to :authority
 
   def register_last_updated
