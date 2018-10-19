@@ -25,7 +25,7 @@
             %dt.register-metadata__term Last updated:
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug)
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
-      .govuk-grid-column-one-third
+      .govuk-grid-column-one-third{'aria-hidden': 'true'}
         - if @register.authority.present?
           %p{class: 'govuk-!-font-weight-bold'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
@@ -44,7 +44,7 @@
           = submit_tag 'Search', name: nil, class: 'search-submit'
       .govuk-grid-column-full.subsection__content#about-the-data__3
         %p
-          %span#records-count
+          %span#records-count{'aria-live': 'polite'}
             = page_entries_info(@records)
             - if @search_term.present?
               &nbsp;for &ldquo;<strong>#{@search_term}</strong>&rdquo;
@@ -76,7 +76,7 @@
               = paginate @records, outer_window: 0, window: 3
             - unless @records.last_page?
               %div
-                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true
+                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
       .govuk-grid-column-full.subsection__content#about-the-data__5
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
