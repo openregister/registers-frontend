@@ -35,14 +35,14 @@
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
           About the data
-      .govuk-grid-column-two-thirds.subsection__content#about-the-data__1
+      .govuk-grid-column-two-thirds.subsection__content.js-accordion-subsection#about-the-data__0
         %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
-      .govuk-grid-column-one-third.subsection__content#about-the-data__2
+      .govuk-grid-column-one-third.subsection__content.js-accordion-subsection#about-the-data__1
         = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
           = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
           = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
           = submit_tag 'Search', name: nil, class: 'search-submit'
-      .govuk-grid-column-full.subsection__content#about-the-data__3
+      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__2
         %p
           %span#records-count{'aria-live': 'polite'}
             = page_entries_info(@records)
@@ -50,7 +50,7 @@
               &nbsp;for &ldquo;<strong>#{@search_term}</strong>&rdquo;
           - if @search_term.present?
             = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-      .govuk-grid-column-full.subsection__content#about-the-data__4
+      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__3
         - if @register.is_empty? || @records.any?
           .fullscreen-content{data: {module: 'scrolling-tables'}}
             %table.table.register-data-table
@@ -78,7 +78,7 @@
               %div
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
-      .govuk-grid-column-full.subsection__content#about-the-data__5
+      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
@@ -91,7 +91,7 @@
       .govuk-grid-column-full.subsection__header
         %h2.govuk-heading-m.subsection__title
           Feedback
-      .govuk-grid-column-full.subsection__content#feedback__1
+      .govuk-grid-column-full.subsection__content.js-accordion-subsection#feedback__0
         = render partial: 'feedback/form'
 
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
