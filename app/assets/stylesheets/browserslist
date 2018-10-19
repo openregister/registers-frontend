@@ -1,3 +1,10 @@
-last 2 versions
-ie > 8
-and_chr >= 2.3
+# Taken from https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices
+
+last 2 Edge versions
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 ChromeAndroid versions
+last 2 Samsung versions
+Explorer 11
+Safari >= 9
+iOS >= 9.3
