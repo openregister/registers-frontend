@@ -85,7 +85,11 @@
       }
 
       button {
+        // scss-lint:disable PlaceholderInExtend
+        // scss-lint:disable BangFormat
         @extend .govuk-\!-font-size-24;
+        // scss-lint:enable PlaceholderInExtend
+        // scss-lint:enable BangFormat
 
         background: none;
         border: 0;
@@ -115,10 +119,12 @@
       right: 30px;
       top: 50%;
       width: 16px;
+      // scss-lint:disable DuplicateProperty
       // PNG fallback for SVG
       background-image: image-url('icons-plus-minus.png');
       // SVG sprite
       background-image: image-url("icons-plus-minus.svg");
+      // scss-lint:enable DuplicateProperty
       background-repeat: no-repeat;
       background-position: 0 -16px;
     }
