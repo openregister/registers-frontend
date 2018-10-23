@@ -14,7 +14,7 @@
       .govuk-grid-column-two-thirds
         %h1{class: 'govuk-heading-l govuk-!-margin-bottom-1'} Government registers collection
         - unless @search_term.present?
-          %p.govuk-body-l Find registers that are managed and approved by government to use in your service.
+          %p.govuk-body-l Find registers that are ready to use in your government service.
       .govuk-grid-column-one-third
         = form_tag registers_path(anchor: 'content'), class: 'records-search', method: 'get' do
           = label_tag :q, 'Search', class: 'visually-hidden'
