@@ -16,7 +16,7 @@
       var totalSubsections = $element.find('.subsection__content').length;
 
       var $openOrCloseAllButton;
-      var GOVUKServiceManualTopic = serviceManualTopicPrefix();
+      var RegisterAccordionSection = serviceManualTopicPrefix();
 
       //addOpenCloseAllButton();
       addButtonsToSubsections();
@@ -51,12 +51,23 @@
       }
 
       function addButtonsToSubsections() {
-        var $subsectionTitle = $element.find('.subsection__title');
+        var $subsectionTitle = $element.find('.subsection__title')
 
-        // Wrap each title in a button, with aria controls matching the ID of the subsection
-        $subsectionTitle.each(function(index) {
-          $(this).wrapInner( '<button class="subsection__button" aria-expanded="false" aria-controls="subsection_content_' + index +'"></a>' );
-        });
+        // Wrap each title in a button, with aria controls matching the ID(s) of the subsection
+        $subsectionTitle.each( function(index) {
+          var $subsections = $(this)
+                                .closest('.js-accordion-with-descriptions')
+                                  .find('.js-accordion-subsection')
+
+          var subsectionsIds = [];
+
+          for (var i = 0; i < $subsections.length; i++) {
+            subsectionsIds.push($subsections[i].id)
+          }
+
+          $(this)
+            .wrapInner( '<button class="subsection__button" aria-expanded="false" aria-controls="' + subsectionsIds.join(' ') + '"></a>' )
+        })
       }
 
       function addIconsToSubsections() {
@@ -108,7 +119,7 @@
 
         $subsectionContent.each(function(index) {
           var subsectionContentId = $(this).attr('id');
-          if(sessionStorage.getItem(GOVUKServiceManualTopic+subsectionContentId)){
+          if(sessionStorage.getItem(RegisterAccordionSection + subsectionContentId)){
             openStoredSections($("#"+subsectionContentId));
           }
         });
@@ -121,9 +132,12 @@
         if (isOpenSubsections) {
           var $openSubsections = $('.subsection--is-open');
           $openSubsections.each(function(index) {
-            var subsectionOpenContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.setItem( GOVUKServiceManualTopic+subsectionOpenContentId , 'Opened');
-          });
+            $(this)
+              .find('.js-accordion-subsection')
+              .each(function(i) {
+                sessionStorage.setItem( RegisterAccordionSection + $(this).attr('id') , 'Opened');
+              })
+          })
         }
       }
 
@@ -132,17 +146,24 @@
         if (isClosedSubsections) {
           var $closedSubsections = $('.subsection');
           $closedSubsections.each(function(index) {
-            var subsectionClosedContentId = $(this).find('.subsection__content').attr('id');
-            sessionStorage.removeItem( GOVUKServiceManualTopic+subsectionClosedContentId , subsectionClosedContentId);
-          });
+            $(this)
+              .find('.js-accordion-subsection')
+              .each(function(i) {
+                var subsectionClosedContentId = $(this).attr('id')
+                sessionStorage.removeItem( RegisterAccordionSection + subsectionClosedContentId , subsectionClosedContentId);
+              })
+          })
         }
       }
 
       function bindToggleForSubsections() {
         // Add toggle functionality individual sections
         $subsectionHeader.on('click', function(e) {
-          toggleSection($(this).next());
-          toggleIcon($(this));
+          $(this).parent().find('.js-accordion-subsection').each( function() {
+            toggleSection( $(this) )
+            toggleIcon($(this));
+        })
+
           toggleState($(this).find('.subsection__button'));
           //setOpenCloseAllText();
           if(window.ga && ga.create) {

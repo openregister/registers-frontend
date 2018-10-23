@@ -11,7 +11,11 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+
+// GOV.UK Design System
+//= require all.js
 //
+// Elements
 //= require jquery
 //= require jquery_ujs
 //= require dialog-polyfill
@@ -24,9 +28,6 @@
 //= require accordion-with-descriptions
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
-
-// GOV.UK Design System
-//= require all.js
 
 // Adding a `js` class to the html element allows us to use CSS to do things
 // only when JavaScript is enabled - for example, hide the submit button for

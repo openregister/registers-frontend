@@ -66,14 +66,6 @@ RSpec.feature 'View register', type: :feature do
     expect(page).to have_content('Zimbabwe')
   end
 
-  scenario 'filter a register' do
-    visit('/registers/country')
-    choose('Archived records')
-    click_button('Search', match: :first)
-    expect(page).to have_current_path(/status=archived/)
-    expect(page).to have_content('USSR')
-  end
-
   scenario 'view updates' do
     visit('/registers/country/updates')
     first_update = find('h3', match: :first)

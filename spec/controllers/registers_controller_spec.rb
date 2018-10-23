@@ -91,7 +91,7 @@ RSpec.describe RegistersController, type: :controller do
     it { expect { subject }.to_not change(Register, :count) }
   end
 
-  describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 100 rows' do
+  describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 10 rows' do
     subject { get :show, params: { id: 'country' } }
 
     it { is_expected.to be_successful }
@@ -100,7 +100,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).length).to eq(100)
+      expect(assigns(:records).length).to eq(10)
     end
   end
 
@@ -188,7 +188,7 @@ RSpec.describe RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Sort by start date descending where some values are nil should show nil values last' do
+  describe "Request: GET #show. Descr: Sort by start date descending should show The Republic of South Sudan's start date" do
     subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc' } }
 
     it { is_expected.to be_successful }
@@ -198,6 +198,18 @@ RSpec.describe RegistersController, type: :controller do
     it do
       subject
       expect(assigns(:records).first.data['start-date']).to eq('2011-07-09')
+    end
+  end
+
+  describe "Request: GET #show. Descr: Sort by start date descending should show nil as the last record" do
+    subject { get :show, params: { id: 'country', sort_by: 'start-date', sort_direction: 'desc', page: 20 } }
+
+    it { is_expected.to be_successful }
+
+    it { is_expected.to render_template :show }
+
+    it do
+      subject
       expect(assigns(:records).last.data['start-date']).to be_nil
     end
   end

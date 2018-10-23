@@ -34,7 +34,7 @@ class Register < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :records, dependent: :destroy
   has_many :register_search_results
-  belongs_to :theme
+  belongs_to :category
   belongs_to :authority
 
   def register_last_updated
@@ -70,6 +70,10 @@ class Register < ApplicationRecord
 
   def is_empty?
     records.where(entry_type: 'user').none?
+  end
+
+  def show_category_link?
+    register_phase == 'Beta' && category.present?
   end
 
 private
