@@ -10,6 +10,10 @@ class Record < ApplicationRecord
     end
   }
 
+  scope :current, -> {
+    where('end_date is null or end_date > ?', Date.today)
+  }
+
   scope :record, lambda { |record|
     find_by!(
       key: record,
