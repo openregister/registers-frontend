@@ -73,10 +73,10 @@
     }
 
     &__title {
-      padding-top: 14px;
-      padding-bottom: 12px;
       border-top: 1px solid $border-colour;
       margin-bottom: 0;
+      padding-bottom: 0.65em;
+      padding-top: 0.65em;
 
       // Change the background of the header on hover
       &:hover {
@@ -85,13 +85,15 @@
       }
 
       button {
-        color: $govuk-blue;
-        cursor: pointer;
+        @extend .govuk-\!-font-size-24;
 
-        @include bold-19;
         background: none;
         border: 0;
-        padding-left: 0;
+        color: $govuk-blue;
+        cursor: pointer;
+        font-weight: bold;
+        margin: 0;
+        padding: 0.25em 0 0 0;
         text-align: left;
       }
     }
@@ -107,18 +109,16 @@
     }
 
     &__icon {
+      height: 16px;
       position: absolute;
+      margin-top: -8px;
       right: 30px;
       top: 50%;
-
-      height: 16px;
       width: 16px;
-      margin-top: -8px;
-
       // PNG fallback for SVG
       background-image: image-url('icons-plus-minus.png');
       // SVG sprite
-      background: image-url("icons-plus-minus.svg"), linear-gradient(transparent, transparent);
+      background-image: image-url("icons-plus-minus.svg");
       background-repeat: no-repeat;
       background-position: 0 -16px;
     }

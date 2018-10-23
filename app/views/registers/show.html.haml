@@ -13,7 +13,7 @@
       .govuk-grid-column-two-thirds{class: 'govuk-!-margin-top-2'}
         %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}
           #{@register.register_name} register
-        %p.govuk-body-l= @register.register_description
+        %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         %dl.govuk-metadata
           - if @register.authority.present?
             %dt.register-metadata__term Organisation:
@@ -27,7 +27,7 @@
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
       .govuk-grid-column-one-third{'aria-hidden': 'true'}
         - if @register.authority.present?
-          %p{class: 'govuk-!-font-weight-bold'} Managed by:
+          %p{class: 'govuk-!-font-weight-bold govuk-!-margin-top-2'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name

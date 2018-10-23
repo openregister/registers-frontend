@@ -666,14 +666,14 @@ details {
   // scss-lint:disable PlaceholderInExtend
   // scss-lint:disable BangFormat
   @extend .govuk-button;
-  @extend .govuk-\!-font-size-19;
+  @extend .govuk-\!-font-size-24;
   // scss-lint:enable PlaceholderInExtend
   // scss-lint:enable BangFormat
 
   background-color: $govuk-link-colour;
   font-weight: 700;
   line-height: 1 !important;
-  padding: 0.85em 1.25em 0.65em 1.25em;
+  padding: 0.75em 1.15em 0.55em 1.15em;
 
   &:hover {
     background-color: $govuk-link-hover-colour;
