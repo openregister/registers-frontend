@@ -59,11 +59,12 @@ RSpec.feature 'View register', type: :feature do
     expect(page).to have_content('Country')
   end
 
-  scenario 'view and sort a register' do
+  scenario 'view a register' do
     visit('/registers/country')
+    first_row_item = find('#records-tbody tr td', match: :first)
+    expect(first_row_item).to have_content("AF")
     expect(page).to have_content('Country register')
-    click_link('Name')
-    expect(page).to have_content('Zimbabwe')
+    expect(page).to have_content('Afghanistan')
   end
 
   scenario 'view updates' do

@@ -43,18 +43,13 @@ module ApplicationHelper
     Date.parse(date).strftime('%d/%m/%Y')
   end
 
-  def records_table_sort_link(field_value, query_parameters)
-    direction = params[:sort_direction] == 'asc' && params[:sort_by] == field_value ? 'desc' : 'asc'
-    css_class = params[:sort_by] == field_value ? "sort-link #{params[:sort_direction]}" : "sort-link"
-    wrapper_css_class = params[:sort_by] == field_value ? 'sort-link-th active' : 'sort-link-th'
+  def records_table_header(field_value)
+    wrapper_css_class = params[:sort_by] == field_value ? 'table-header active' : 'table-header'
+    what_does_this_mean = content_tag('span', "What does #{field_value} mean", class: 'visually-hidden') + '?'
 
-    content_tag 'div', class: wrapper_css_class do
-      link_to field_value.tr('-', ' ').humanize, register_path(@register.slug,
-                                                 query_parameters.except(:sort_by, :sort_direction)
-                                                 .to_h.merge(sort_direction: direction,
-                                                 sort_by: field_value,
-                                                 anchor: 'search_wrapper')),
-                                                 class: css_class
+    content_tag 'th', class: "#{field_value} #{wrapper_css_class}" do
+      content_tag('span', field_value.tr('-', ' ').humanize) +
+        link_to(what_does_this_mean, register_field_url(@register.slug, field_value), class: 'info-icon', remote: true, data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Help" })
     end
   end
 end
