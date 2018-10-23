@@ -10,14 +10,10 @@
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-6 govuk-!-padding-top-2" }
             %label{ :for => "gov-what-part-of-government", :class => "govuk-label govuk-!-padding-bottom-1"}
               What part of government are you working for?
-              %span{ :class => "registers-!-faded-colour"}
-                (optional)
             = select 'help_us_improve_user', 'gov_what_part_of_government', @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
           %div{ :class => "govuk-form-group govuk-!-padding-bottom-3" }
             %label{ :for => "help_us_improve_user[gov_what_are_you_using_registers_for]", :class => "govuk-label govuk-!-padding-bottom-1"}
               What are you using registers for?
-              %span{ :class => "registers-!-faded-colour"}
-                (optional)
             .govuk-radios__item
               = radio_button_tag("help_us_improve_user[gov_what_are_you_using_registers_for]", "Building a service", false, class: "govuk-radios__input", id: "gov-building-a-service")
               = label_tag("gov-building-a-service", 'Building a service', class: "govuk-label govuk-radios__label")
@@ -48,7 +44,9 @@
               = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "Other", false, class: "govuk-radios__input", id: "other")
               = label_tag("other", 'Other', class: "govuk-label govuk-radios__label")
   %div{ class: "govuk-form-group access-to-data__submit-group"}
-    = submit_tag("Submit", class: "button")
+    -# = submit_tag("Submit", class: "button")
+    %button.button{type: 'submit'}
+      Submit
     %span or
     = link_to "I'd prefer not to say", @next_page, { class: 'js--ga-watch-click' }
 

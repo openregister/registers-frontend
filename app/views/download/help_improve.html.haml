@@ -18,39 +18,66 @@
     (function(document, window, undefined) {
       var forms = document.querySelectorAll('.js--ga-submit')
 
-      var getValue = function(element) {
-          if (element === null) {
+      var getElementValue = function(element) {
+          if ( (element === null) || (element.tagName == 'SELECT' && element.options[element.selectedIndex].text.length === 0) ) {
             return 'Blank'
           }
-          else if (element.value) {
+
+          if (element.tagName == 'SELECT' && element.options[element.selectedIndex].text.length > 0) {
+            return element.options[element.selectedIndex].text
+          }
+
+          if (element.value) {
             return element.value
           }
 
           return false;
       }
 
-      for (var i = 0; i < forms.length; i += 1) {
-        forms[i].addEventListener('submit', function(event) {
-          var form = event.target
+      var checkForm = function(form) {
+        var isGovernment = form.querySelector('[name="help_us_improve_user[is_government]"]:checked')
 
-          var isGovernment = getValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
-          var whatAreYouUsingRegistersFor = function() {
-            if (isGovernment === "Yes") {
-              return getValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
-            }
-            else if (isGovernment === "No") {
-              return getValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
-            }
+        if (isGovernment && isGovernment.value === 'No') {
+          // no checks needed
+          return true
+        }
+
+        if (isGovernment && isGovernment.value === 'Yes') {
+          var rtrn;
+
+          if (getElementValue(form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]')) === 'Blank') {
+            rtrn = false
+          }
+          if (getElementValue(form.querySelector('[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked')) === 'Blank') {
             return false
           }
-          var whatPartOfGovernmentAreYouWorkingFor = function() {
-            var element = form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]')
-            var governmentDept = element.options[element.selectedIndex].text
-            if (governmentDept.length === 0) {
-              return 'blank'
-            }
-            return governmentDept;
-          }
+          return true
+        }
+
+        return false;
+      }
+
+      var whatAreYouUsingRegistersFor = function(form, isGovernment) {
+        if (isGovernment === "Yes") {
+          return getElementValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
+        }
+        else if (isGovernment === "No") {
+          return getElementValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
+        }
+        return false
+      }
+
+      for (var i = 0; i < forms.length; i += 1) {
+        forms[i].addEventListener('submit', function(event) {
+          event.preventDefault()
+          var form = event.target
+
+          checkForm(form)
+
+          // var formData = readForm(form); // {}
+
+          var isGovernment = getElementValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
+          var whatPartOfGovernmentAreYouWorkingFor = getElementValue(form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]'));
 
           ga('send', {
             hitType: 'event',
@@ -63,7 +90,7 @@
           ga('send', {
             hitType: 'event',
             eventCategory: 'Form',
-            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegistersFor(),
+            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegistersFor(form, isGovernment),
             eventLabel: 'What are you using registers for?',
             nonInteraction: true
           })
@@ -72,7 +99,7 @@
             ga('send', {
               hitType: 'event',
               eventCategory: 'Form',
-              eventAction: 'Text - ' + whatAreYouUsingRegistersFor() + ' - ' + whatPartOfGovernmentAreYouWorkingFor() ,
+              eventAction: 'Text - ' + whatAreYouUsingRegistersFor(form, isGovernment) + ' - ' + whatPartOfGovernmentAreYouWorkingFor,
               eventLabel: 'What part of government are you working for?',
               nonInteraction: true
             })
@@ -86,6 +113,7 @@
             nonInteraction: true
           })
 
+          // form.submit()
 
         })
       }
