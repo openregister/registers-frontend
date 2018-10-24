@@ -1,14 +1,14 @@
 = form_tag(@next_page, { class: "js--ga-submit" }) do |f|
-  %div{ :class => "govuk-form-group access-to-data govuk-!-padding-bottom-2" }
+  %div{ :class => "govuk-form-group access-to-data govuk-!-padding-bottom-2 js--work-for-gov-group" }
     %fieldset
-      %legend{ class: "heading-medium govuk-!-margin-bottom-2 govuk-!-margin-top-2 js--do-you-work"} Do you work for the government?
+      %legend{ class: "heading-medium govuk-!-margin-bottom-2 govuk-!-margin-top-2 js--work-for-gov-legend"} Do you work for the government?
       %span#do-you-work-for-government-error.govuk-error-message
       .govuk-radios{ "data-module" => "radios" }
         .govuk-radios__item
           = radio_button_tag("help_us_improve_user[is_government]", "Yes", false, class: "govuk-radios__input", id: "is-government-conditional-1", "data-aria-controls": "conditional-is-government-conditional-1", data: { required: true, children: 'help_us_improve_user[gov_what_are_you_using_registers_for] help_us_improve_user[gov_what_part_of_government]' } )
           = label_tag("is-government-conditional-1", 'Yes', class: "govuk-label govuk-radios__label")
         #conditional-is-government-conditional-1.govuk-radios__conditional.govuk-radios__conditional--hidden
-          %div{ :class => "govuk-!-padding-bottom-3 govuk-!-margin-bottom-3 govuk-!-padding-top-2 js--part-of-gov" }
+          %div{ :class => "govuk-!-padding-bottom-3 govuk-!-margin-bottom-3 govuk-!-padding-top-2 js--part-of-gov-group" }
             %label{ :for => "gov-what-part-of-government", :class => "govuk-label govuk-!-padding-bottom-1 js--part-of-gov-label"}
               Which part of government are you from?
             = select 'help_us_improve_user', 'gov_what_part_of_government', @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations', data: { required: true }

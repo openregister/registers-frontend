@@ -171,7 +171,7 @@
           if (isGovernment === true) {
             if (partOfGov(form) === false) {
               showWarning(form, {
-                classTarget: '.js--part-of-gov',
+                classTarget: '.js--part-of-gov-group',
                 messageTarget: '.js--part-of-gov-label',
                 messageText: 'Enter which part of government you’re from'
               })
@@ -193,8 +193,8 @@
 
           if (isGovernment === null) {
             showWarning(form, {
-              classTarget: '.govuk-form-group',
-              messageTarget: '.js--do-you-work',
+              classTarget: '.js--work-for-gov-group',
+              messageTarget: '.js--work-for-gov-legend',
               messageText: 'Select yes if you work for the government'
             });
           }
