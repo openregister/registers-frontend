@@ -702,3 +702,9 @@ body:not(.home-page) .breadcrumbs {
 .govuk-footer__link {
   padding: 5px 0;
 }
+
+@media screen and (min-width: 641px) {
+  .govuk-form-group--error {
+    margin-left: -20px !important;
+  }
+}

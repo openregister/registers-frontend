@@ -18,8 +18,60 @@
     (function(document, window, undefined) {
       var forms = document.querySelectorAll('.js--ga-submit')
 
+      var sendData = function(form) {
+
+        var getWhatRegistersAreBeingUsedFor = function(form) {
+          var isGovernment = isGov(form)
+          if (isGovernment === true) {
+            return getElementValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
+          }
+          else if (isGovernment === false) {
+            return getElementValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
+          }
+          return false
+        }
+
+        var isGovernment = isGov(form) === true ? 'Yes' : 'No'
+        var whatPartOfGovernmentAreYouWorkingFor = getElementValue(form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]'))
+        var whatAreYouUsingRegisterFor = getWhatRegistersAreBeingUsedFor(form)
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Form',
+          eventAction: 'Radio - ' + isGovernment,
+          eventLabel: 'Are you working for government?',
+          nonInteraction: true
+        })
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Form',
+          eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegisterFor,
+          eventLabel: 'What are you using registers for?',
+          nonInteraction: true
+        })
+
+        if (isGovernment === 'Yes') {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'Text - ' + whatAreYouUsingRegisterFor + ' - ' + whatPartOfGovernmentAreYouWorkingFor,
+            eventLabel: 'What part of government are you working for?',
+            nonInteraction: true
+          })
+        }
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Form',
+          eventAction: 'Submit - Use the API',
+          eventLabel: 'Help us improve',
+          nonInteraction: true
+        })
+      }
+
       var getElementValue = function(element) {
-          if ( (element === null) || (element.tagName == 'SELECT' && element.options[element.selectedIndex].text.length === 0) ) {
+          if ((element === null) || (element.tagName == 'SELECT' && element.options[element.selectedIndex].text.length === 0)) {
             return 'Blank'
           }
 
@@ -34,123 +86,118 @@
           return false;
       }
 
-      var checkForm = function(form) {
-        var isGovernment = form.querySelector('[name="help_us_improve_user[is_government]"]:checked')
+      var isGov = function(form) {
+        var checkedCheckbox = form.querySelector('[name="help_us_improve_user[is_government]"]:checked')
 
-        if (isGovernment) {
-          if (isGovernment.value === 'No') {
-            return true
-          }
-
-          if (isGovernment.value === 'Yes') {
-            var whatPartOfGov = getElementValue(form.querySelector('[name="help_us_improve_user[gov_what_part_of_government]"]'))
-            var usingRegisetersFor = getElementValue(form.querySelector('[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
-            var emptyRequiredQuestions = []
-
-            if (whatPartOfGov === 'Blank') {
-              emptyRequiredQuestions.push('help_us_improve_user[gov_what_part_of_government]')
-            }
-
-            if (usingRegisetersFor === 'Blank') {
-              emptyRequiredQuestions.push('help_us_improve_user[gov_what_are_you_using_registers_for]')
-              return emptyRequiredQuestions
-            }
-            else {
-              return emptyRequiredQuestions
-            }
-
-            return true
-          }
+        if (checkedCheckbox && checkedCheckbox.value === 'Yes') {
+          return true
         }
-        return [{ targetForBorder: form.querySelector('div') }];
+
+        if (checkedCheckbox && checkedCheckbox.value === 'No') {
+          return false
+        }
+
+        return null
       }
 
-      var whatAreYouUsingRegistersFor = function(form, isGovernment) {
-        if (isGovernment === "Yes") {
-          return getElementValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
+      var partOfGov = function(form) {
+        var dept = getElementValue(form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]'));
+
+        if (dept === 'Blank' || dept === false) {
+          return false;
         }
-        else if (isGovernment === "No") {
-          return getElementValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
-        }
-        return false
+
+        return true;
       }
 
-      var sendData = function(form) {
-          var isGovernment = getElementValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
-          var whatPartOfGovernmentAreYouWorkingFor = getElementValue(form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]'));
+      var govUsingReg = function(form) {
+        var usage = getElementValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
 
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Form',
-            eventAction: 'Radio - ' + isGovernment,
-            eventLabel: 'Are you working for government?',
-            nonInteraction: true
-          })
+        if (usage === 'Blank' || usage === false) {
+          return false;
+        }
 
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Form',
-            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegistersFor(form, isGovernment),
-            eventLabel: 'What are you using registers for?',
-            nonInteraction: true
-          })
-
-          if (isGovernment === 'Yes') {
-            ga('send', {
-              hitType: 'event',
-              eventCategory: 'Form',
-              eventAction: 'Text - ' + whatAreYouUsingRegistersFor(form, isGovernment) + ' - ' + whatPartOfGovernmentAreYouWorkingFor,
-              eventLabel: 'What part of government are you working for?',
-              nonInteraction: true
-            })
-          }
-
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Form',
-            eventAction: 'Submit - Use the API',
-            eventLabel: 'Help us improve',
-            nonInteraction: true
-          })
+        return true;
       }
 
       var clearAllWarnings = function(form) {
-        var warnings = form.querySelectorAll('govuk-form-group--error')
+        var warnings = form.querySelectorAll('.govuk-form-group--error')
+        var messages = form.querySelectorAll('.govuk-error-message')
 
-        for( var i = 0; i < warnings.length; i++) {
-          warnings[i].className.replace(/ govuk-form-group--error/g, '');
+        for(var i = 0; i < warnings.length; i += 1) {
+          warnings[i].className = warnings[i].className.replace(/ govuk-form-group--error/g, '');
+        }
+
+        for(var j = 0; j < messages.length; j += 1) {
+          messages[j].innerHTML = '';
         }
       }
 
-      var showWarnings = function(form) {
-        var warnings = {
-          isGov: 'Please choose yes or no',
-          partOfGov: "Choose which department you're working for",
-          usingFor: 'Please choose'
-        }
+      var showWarning = function(form, info) {
+        var classTarget = form.querySelector(info.classTarget)
+        var messageTarget = form.querySelector(info.messageTarget)
+        var messageText = document.createTextNode(info.messageText)
+
+        var message = document.createElement('span');
+        message.className = 'govuk-error-message'
+        message.appendChild(messageText)
+        messageTarget.parentNode.insertBefore(message, messageTarget.nextSibling)
+
+        classTarget.className += ' govuk-form-group--error'
       }
 
       for (var i = 0; i < forms.length; i += 1) {
         forms[i].addEventListener('change', function(event) {
-          console.log('change', event.target)
+          clearAllWarnings(event.target.form)
         })
+
+        var autocomplete = forms[i].querySelectorAll('.autocomplete__input')
+        for (var s = 0; s < autocomplete.length; s++) {
+          autocomplete[s].addEventListener('focus', function(event) {
+            clearAllWarnings(event.target.form)
+          })
+        }
 
         forms[i].addEventListener('submit', function(event) {
           event.preventDefault()
           var form = event.target
+          var isGovernment = isGov(form)
 
-          var completeFormFields = checkForm(form);
-
-          if (completeFormFields === true) {
+          if (isGovernment === false) {
             sendData(form)
-          // form.submit()
+            form.submit()
           }
-          else {
-            for( var i = 0; i < completeFormFields.length; i++) {
-              completeFormFields[i].targetForBorder.className += ' govuk-form-group--error'
+
+          if (isGovernment === true) {
+            if (partOfGov(form) === false) {
+              showWarning(form, {
+                classTarget: '.js--part-of-gov',
+                messageTarget: '.js--part-of-gov-label',
+                messageText: 'Enter which part of government you’re from'
+              })
+            }
+
+            if (govUsingReg(form) === false) {
+              showWarning(form, {
+                classTarget: '.js-registers-use-group',
+                messageTarget: '.js--registers-use-label',
+                messageText: 'Select what you’re using registers for'
+              })
+            }
+
+            if (partOfGov(form) === true && govUsingReg(form) === true) {
+              sendData(form)
+              form.submit()
             }
           }
 
+          if (isGovernment === null) {
+            showWarning(form, {
+              classTarget: '.govuk-form-group',
+              messageTarget: '.js--do-you-work',
+              messageText: 'Select yes if you work for the government'
+            });
+          }
         })
       }
 
