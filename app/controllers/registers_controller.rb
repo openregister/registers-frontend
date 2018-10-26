@@ -88,12 +88,11 @@ private
     }
 
     sort_by = params[:sort_by] ||= default_sort_by.call
-    sort_direction = params[:sort_direction] ||= 'asc'
 
     @register.records
              .where(entry_type: 'user')
              .search_for(fields, search_term)
-             .sort_by_field(sort_by, sort_direction)
+             .sort_by_field(sort_by, 'asc')
              .page(params[:page])
              .per(10)
   end
