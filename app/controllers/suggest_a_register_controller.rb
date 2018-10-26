@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class SuggestARegisterController < ApplicationController
+  include FormHelpers
+  helper_method :government_orgs_local_authorities
   invisible_captcha only: :create_feedback, honeypot: :spam
 
   def index
-    @government_organisations = Register.find_by(slug: 'local-authority-eng')
-                                        .records
-                                        .where(entry_type: 'user')
-                                        .current
+    @government_organisations = government_orgs_local_authorities
   end
 
   def check
