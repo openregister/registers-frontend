@@ -28,8 +28,8 @@
 
 = content_for :javascript do
   :javascript
-    var currentHost = window.location.protocol + '//' + window.location.hostname;
-    var links = document.getElementsByTagName('a');
+    var currentHost = window.location.protocol + '//' + window.location.hostname
+    var links = document.getElementsByTagName('a')
 
     for(var i = 0; i < links.length; i++) {
       if (links[i].href.match(currentHost) === null) {
