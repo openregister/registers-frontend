@@ -53,9 +53,11 @@
 
 = content_for :javascript do
   :javascript
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.getElementById('government-organisations'),
-      showAllValues: false,
-      minLength: 2,
-      defaultValue: ''
-    });
+    if (accessibleAutocomplete) {
+     accessibleAutocomplete.enhanceSelectElement({
+        selectElement: document.getElementById('government-organisations'),
+        showAllValues: false,
+        minLength: 2,
+        defaultValue: ''
+      });
+    }
