@@ -21,7 +21,7 @@
 
     .govuk-grid-row
       .govuk-grid-column-full
-        = form_tag do
+        = form_tag '/suggest-a-register', {class: 'js--ga-form-hook'} do
           - if flash[:summary_title].present?
             .govuk-error-summary{ 'aria-labelledby': 'error-summary-title', role: 'alert', tabindex: "-1", data: { module: 'error-summary' } }
               %h2.govuk-error-summary__title#error-summary-title= flash[:summary_title]
@@ -48,3 +48,21 @@
       minLength: 2,
       defaultValue: ''
     });
+  :javascript
+    var forms = document.querySelectorAll('.js--ga-form-hook')
+
+    for(var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function(event) {
+        var $partOfGovSelect = event.target.querySelector('select')
+        var partOfGov = $partOfGovSelect.options[$partOfGovSelect.selectedIndex].text
+        if (partOfGov.length > 0) {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Suggest a register',
+            eventAction: partOfGov,
+            eventLabel: 'What part of government?',
+            nonInteraction: true
+          })
+        }
+      })
+    }

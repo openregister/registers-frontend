@@ -17,7 +17,7 @@
         %p You need to complete our engagement form to suggest a new register.
         %p The details you provide will help us to better understand your needs for a register, the data you have to offer and whether it is suitable to become a register.
         %p.govuk-inset-text
-          = link_to 'Use our Google form', 'https://docs.google.com/forms/d/e/1FAIpQLSfw54dI5uYuF-15zH6Iu7KRQnj8lRY3Wcl9JI5hC80cENx-jw/viewform'
+          = link_to 'Use our Google form', 'https://docs.google.com/forms/d/e/1FAIpQLSfw54dI5uYuF-15zH6Iu7KRQnj8lRY3Wcl9JI5hC80cENx-jw/viewform', {data: {'ga-label': 'Suggest a register Google form'}}
           &nbsp;to suggest a new register.
 
         %h3{class: 'govuk-heading-s govuk-!-margin-bottom-1'} Can’t access Google forms?
@@ -26,3 +26,22 @@
           &nbsp;for support
 
 
+= content_for :javascript do
+  :javascript
+    var currentHost = window.location.protocol + '//' + window.location.hostname;
+    var links = document.getElementsByTagName('a');
+
+    for(var i = 0; i < links.length; i++) {
+      if (links[i].href.match(currentHost) === null) {
+        links[i].addEventListener('click', function(event) {
+          var label = event.target.getAttribute('data-ga-label') ? event.target.getAttribute('data-ga-label') : event.target.href
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Suggest a register',
+            eventAction: 'Link - ' + label,
+            eventLabel: 'Suggest a register form',
+            nonInteraction: true
+          })
+        })
+      }
+    }
