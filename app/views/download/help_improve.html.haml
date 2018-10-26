@@ -16,12 +16,12 @@
 = content_for :javascript do
   :javascript
     (function(document, window, undefined) {
-      function isIE () {
-        var myNav = navigator.userAgent.toLowerCase();
-        return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+      var isIE = function() {
+        var myNav = navigator.userAgent.toLowerCase()
+        return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false
       }
 
-      if (isIE() && isIE() >= 9) {
+      if (isIE() && isIE() >= 9 || isIE() === false ) {
         var forms = document.querySelectorAll('.js--ga-submit')
 
         var sendData = function(form) {
@@ -144,10 +144,8 @@
           var messageTarget = form.querySelector(info.messageTarget)
           var messageText = document.createTextNode(info.messageText)
 
-          var message = document.createElement('span');
-          message.className = 'govuk-error-message'
-          message.appendChild(messageText)
-          messageTarget.parentNode.insertBefore(message, messageTarget.nextSibling)
+          messageTarget.className = 'govuk-error-message'
+          messageTarget.appendChild(messageText)
 
           classTarget.className += ' govuk-form-group--error'
         }
@@ -178,7 +176,7 @@
               if (partOfGov(form) === false) {
                 showWarning(form, {
                   classTarget: '.js--part-of-gov-group',
-                  messageTarget: '.js--part-of-gov-label',
+                  messageTarget: '.js--part-of-gov-error-message',
                   messageText: 'Enter which part of government you’re from'
                 })
               }
@@ -186,7 +184,7 @@
               if (govUsingReg(form) === false) {
                 showWarning(form, {
                   classTarget: '.js-registers-use-group',
-                  messageTarget: '.js--registers-use-label',
+                  messageTarget: '.js--registers-use-error-message',
                   messageText: 'Select what you’re using registers for'
                 })
               }
@@ -200,7 +198,7 @@
             if (isGovernment === null) {
               showWarning(form, {
                 classTarget: '.js--work-for-gov-group',
-                messageTarget: '.js--work-for-gov-legend',
+                messageTarget: '.js--work-for-gov-error-message',
                 messageText: 'Select yes if you work for the government'
               });
             }
