@@ -47,7 +47,6 @@
               = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "Other", false, class: "govuk-radios__input", id: "other")
               = label_tag("other", 'Other', class: "govuk-label govuk-radios__label")
   %div{ class: "govuk-form-group access-to-data__submit-group"}
-    -# = submit_tag("Submit", class: "button")
     %button.button{type: 'submit', 'aria-controls': 'gov-using-registers-error part-of-gov-error do-you-work-for-government-error' }
       Submit
     %span or
