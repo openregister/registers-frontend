@@ -1,0 +1,50 @@
+- @page_title = 'Suggest a register'
+- content_for :body_classes, 'suggest-a-register'
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Suggest a new register', '#content', 'aria-current' => 'page'
+
+.govuk-width-container
+  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2', role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-full
+        %h1{class: 'govuk-heading-l govuk-!-margin-bottom-3'} Suggest a new register
+      .govuk-grid-column-one-half
+        %p To suggest a new register you must:
+        %ul.govuk-list.govuk-list--bullet
+          %li work for a government or public sector organisation
+          %li own the data that will be in the register - or know who owns it
+
+    .govuk-grid-row
+      .govuk-grid-column-full
+        = form_tag do
+          - if flash[:summary_title].present?
+            .govuk-error-summary{ 'aria-labelledby': 'error-summary-title', role: 'alert', tabindex: "-1", data: { module: 'error-summary' } }
+              %h2.govuk-error-summary__title#error-summary-title= flash[:summary_title]
+              .govuk-error-summary__body
+                %ul.govuk-list.govuk-error-summary__list
+                  %li
+                    %a{ href: "#government-organisations-label" }= flash[:summary_message]
+          - classes = flash[:error_message].present? ? 'govuk-form-group govuk-form-group--error' : 'govuk-form-group'
+          %fieldset{class: classes}
+            = hidden_field_tag 'token', form_authenticity_token
+            %label#government-organisations-label{class: 'govuk-!-font-weight-bold'}
+              What part of government are you from?
+            - if flash[:error_message].present?
+              %span{id: 'what-part-of-gov-error', class: 'js--what-part-of-gov-error govuk-error-message govuk-!-margin-top-2'}= flash[:error_message]
+            = select 'suggest_a_register', 'gov_what_part_of_government', @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
+          %button{ class: 'govuk-button', type: 'submit'} Continue
+
+
+= content_for :javascript do
+  :javascript
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.getElementById('government-organisations'),
+      showAllValues: false,
+      minLength: 2,
+      defaultValue: ''
+    });

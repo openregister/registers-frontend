@@ -1,0 +1,28 @@
+- @page_title = 'Suggest a register'
+- content_for :body_classes, 'suggest-a-register'
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Suggest a new register', '#content', 'aria-current' => 'page'
+
+.govuk-width-container
+  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2', role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-full
+        %h1{class: 'govuk-heading-l govuk-!-margin-bottom-3'} Suggest a new register
+      .govuk-grid-column-two-thirds
+        %p You need to complete our engagement form to suggest a new register.
+        %p The details you provide will help us to better understand your needs for a register, the data you have to offer and whether it is suitable to become a register.
+        %p.govuk-inset-text
+          = link_to 'Use our Google form', 'https://docs.google.com/forms/d/e/1FAIpQLSfw54dI5uYuF-15zH6Iu7KRQnj8lRY3Wcl9JI5hC80cENx-jw/viewform'
+          &nbsp;to suggest a new register.
+
+        %h3{class: 'govuk-heading-s govuk-!-margin-bottom-1'} Can’t access Google forms?
+        %p
+          = link_to 'Contact the GOV.UK Registers team', support_question_url
+          &nbsp;for support
+
+
