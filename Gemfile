@@ -76,7 +76,7 @@ gem 'gibbon', '~> 3.2'
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 3.6'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
