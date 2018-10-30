@@ -13,9 +13,7 @@ class SuggestARegisterController < ApplicationController
     if params['suggest_a_register']['gov_what_part_of_government'].present?
       redirect_to suggest_new_register_complete_path
     else
-      flash[:summary_title] = 'There is a problem'
-      flash[:summary_message] = 'A government department needs to be selected'
-      flash[:error_message] = 'Select a government department'
+      flash[:error_message] = 'Enter a government or public sector organisation'
       redirect_to suggest_new_register_path
     end
   end
