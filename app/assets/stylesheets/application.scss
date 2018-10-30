@@ -46,6 +46,7 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'components/button/button';
 @import 'components/radios/radios';
 @import 'components/input/input';
+@import 'components/error-summary/error-summary';
 @import 'components/inset-text/inset-text';
 @import 'components/tag/tag';
 @import 'overrides/spacing';

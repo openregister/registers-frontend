@@ -50,6 +50,11 @@ Rails.application.routes.draw do
 
   get 'support/thanks', to: 'support#thanks'
 
+  # Suggest a register
+  get 'suggest-new-register', to: 'suggest_a_register#index'
+  post 'suggest-new-register', to: 'suggest_a_register#check'
+  get 'suggest-new-register/complete', to: 'suggest_a_register#complete'
+
   resource :sitemap, only: :show
 
   # Legacy URL's so we dont break users
