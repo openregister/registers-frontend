@@ -54,9 +54,18 @@
 
 = content_for :javascript do
   :javascript
-    accessibleAutocomplete.enhanceSelectElement({
-      selectElement: document.getElementById('government-organisations'),
-      showAllValues: false,
-      minLength: 2,
-      defaultValue: ''
-    });
+    if (typeof accessibleAutocomplete === 'undefined') {
+      var hidden = document.querySelectorAll('.govuk-radios__conditional--hidden')
+
+      for (var i = 0; i < hidden.length; i++) {
+        hidden[i].className = hidden[i].className.replace(/(| )govuk-radios__conditional--hidden/g, '')
+      }
+    }
+    else {
+      accessibleAutocomplete.enhanceSelectElement({
+        selectElement: document.getElementById('government-organisations'),
+        showAllValues: false,
+        minLength: 2,
+        defaultValue: ''
+      });
+    }
