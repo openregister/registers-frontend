@@ -2,20 +2,20 @@
 
   %div{ class: 'govuk-form-group js--is-government-group access-to-data govuk-!-padding-bottom-2' }
     %fieldset
-      %legend{ class: 'heading-medium govuk-!-margin-bottom-2' } Do you work for the government?
+      %legend{ class: 'heading-medium govuk-!-margin-bottom-2 govuk-!-margin-top-3' } Do you work for the government?
       %p.js--is-government-message#do-you-work-for-the-government
       .govuk-radios{ data: { module: 'radios' }}
         .govuk-radios__item
           = radio_button_tag('help_us_improve_user[is_government]', 'Yes', false, class: 'govuk-radios__input', id: 'is-government-conditional-1', data: { 'aria-controls': 'conditional-is-government-conditional-1' })
           = label_tag('is-government-conditional-1', 'Yes', class: 'govuk-label govuk-radios__label')
         #conditional-is-government-conditional-1.govuk-radios__conditional.govuk-radios__conditional--hidden
-          %div{ class: 'govuk-form-group govuk-!-padding-bottom-6 govuk-!-padding-top-2 js--which-part-of-government-group' }
-            %label{ class: 'govuk-label govuk-!-padding-bottom-1', for: 'government-organisations' }
+          %div{ class: 'govuk-form-group govuk-!-padding-bottom-4 govuk-!-padding-top-2 js--which-part-of-government-group' }
+            %label{ class: 'govuk-label govuk-!-padding-bottom-1 govuk-!-font-weight-bold', for: 'government-organisations' }
               What part of government are you working for?
             %p.js--which-part-of-government-message#which-part-of-government
             = select 'help_us_improve_user', 'gov_what_part_of_government', @government_organisations.all.collect{ |org| [org.data['name'], org.key] }, { include_blank: true }, id: 'government-organisations'
-          %div{ class: 'govuk-form-group govuk-!-padding-bottom-3 js--gov-registers-use-group' }
-            %legend{ class: 'govuk-label govuk-!-padding-bottom-1'}
+          %div{ class: 'govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-2  js--gov-registers-use-group' }
+            %legend{ class: 'govuk-label govuk-!-padding-bottom-1 govuk-!-font-weight-bold'}
               What are you using registers for?
             %p.js--gov-registers-use-message#gov-registers-use
             .govuk-radios__item
@@ -32,7 +32,7 @@
           = label_tag("is-government-conditional-2", 'No', class: "govuk-label govuk-radios__label")
         #conditional-is-government-conditional-2.govuk-radios__conditional.govuk-radios__conditional--hidden
           %div{ class: 'govuk-form-group govuk-!-padding-bottom-3 govuk-!-padding-top-3 js--nongov-registers-use-group' }
-            %label{ for: 'what-are-you-using-registers-for', class: 'govuk-label govuk-!-padding-bottom-1'}
+            %label{ for: 'what-are-you-using-registers-for', class: 'govuk-label govuk-!-padding-bottom-1 govuk-!-font-weight-bold'}
               What are you using registers for?
             %p.js--nongov-registers-use-message#nongov-registers-use
             .govuk-radios__item
@@ -48,7 +48,7 @@
               = radio_button_tag("help_us_improve_user[nongov_what_are_you_using_registers_for]", "Other", false, class: "govuk-radios__input", id: "other")
               = label_tag("other", 'Other', class: "govuk-label govuk-radios__label")
   %div{ class: "govuk-form-group access-to-data__submit-group"}
-    %button{type: 'submit', class: 'govuk-button'} Submit
+    %button{type: 'submit', class: 'govuk-button govuk-!-margin-bottom-0'} Submit
     %span or
     = link_to "I'd prefer not to say", @next_page, { class: 'js--ga-watch-click' }
 
