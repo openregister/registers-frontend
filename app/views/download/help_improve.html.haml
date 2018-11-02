@@ -19,7 +19,8 @@
       var forms = document.querySelectorAll('.js--ga-submit')
 
       var state = {
-        errorSummary: []
+        errorSummary: [],
+        documentTitle: document.title
       }
 
       var readFormFn = {
@@ -108,7 +109,7 @@
           return $errorSummary;
         },
         showErrorSummary: function(form) {
-          document.title = 'Error - ' + document.title
+          document.title = 'Error - ' + state.documentTitle
           var $errorSummary = document.querySelector('.govuk-error-summary') ? document.querySelector('.govuk-error-summary') : errorFn.createErrorSummary(form)
 
           var $errorSummaryBodyList = document.querySelector('.govuk-error-summary__list') ? document.querySelector('.govuk-error-summary__list') : $errorSummary.querySelector('.govuk-error-summary__list');
