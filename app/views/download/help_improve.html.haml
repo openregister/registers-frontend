@@ -176,25 +176,25 @@
 
               if (partOfGov === false) {
                 state.errorSummary.push({
-                  messageShouldRead: 'Enter a government organisation',
+                  messageShouldRead: "#{t('errors.attributes.department.blank')}",
                   link: '#which-part-of-government'
                 })
                 errorFn.showErrorWarning(form, {
                   addClassTo: '.js--which-part-of-government-group',
                   putMessageIn: '.js--which-part-of-government-message',
-                  messageShouldRead:  'Enter a government organisation'
+                  messageShouldRead:  "#{t('errors.attributes.department.blank')}"
                 })
               }
 
               if (registerUse === false) {
                 state.errorSummary.push({
-                  messageShouldRead: "Select what you're using registers for",
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}",
                   link: '#gov-registers-use'
                 })
                 errorFn.showErrorWarning(form, {
                   addClassTo: '.js--gov-registers-use-group',
                   putMessageIn: '.js--gov-registers-use-message',
-                  messageShouldRead:  "Select what you're using registers for"
+                  messageShouldRead:  "#{t('errors.attributes.use_category.blank').html_safe}"
                 })
               }
 
@@ -210,13 +210,13 @@
               var registerUse = readFormFn.checkAnswer(form, 'help_us_improve_user[nongov_what_are_you_using_registers_for]')
               if (registerUse === false) {
                 state.errorSummary.push({
-                  messageShouldRead: "Select what you're using registers for",
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}",
                   link: '#nongov-registers-use'
                 })
                 errorFn.showErrorWarning(form, {
                   addClassTo: '.js--nongov-registers-use-group',
                   putMessageIn: '.js--nongov-registers-use-message',
-                  messageShouldRead: "Select what you're using registers for"
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}"
                 })
                 errorFn.showErrorSummary(form)
               }
@@ -230,10 +230,10 @@
               errorFn.showErrorWarning(form, {
                 addClassTo: '.js--is-government-group',
                 putMessageIn: '.js--is-government-message',
-                messageShouldRead: 'Select yes if you work for the government'
+                messageShouldRead: "#{t('errors.attributes.is_government.blank')}"
               })
               state.errorSummary.push({
-                messageShouldRead: 'Select yes if you work for the government',
+                messageShouldRead: "#{t('errors.attributes.is_government.blank')}",
                 link: '#do-you-work-for-the-government'
               })
               errorFn.showErrorSummary(form)
