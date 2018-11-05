@@ -1,9 +1,13 @@
 .registers-in-numbers-heading {
+  // scss-lint:disable PlaceholderInExtend
   @extend .govuk-heading-m;
+  // scss-lint:enable PlaceholderInExtend
 }
 
 .registers-in-numbers-heading--super {
+  // scss-lint:disable PlaceholderInExtend
   @extend .govuk-heading-s;
+  // scss-lint:enable PlaceholderInExtend
 
   border-top: 1px solid $govuk-border-colour;
 }
@@ -22,14 +26,18 @@
 }
 
 .registers-in-numbers__number {
+  // scss-lint:disable PlaceholderInExtend
   @extend .govuk-heading-xl;
+  // scss-lint:enable PlaceholderInExtend
 
   display: block;
   margin-bottom: 0;
 }
 
 .registers-in-numbers__caption {
+  // scss-lint:disable PlaceholderInExtend
   @extend .govuk-body-s;
+  // scss-lint:enable PlaceholderInExtend
 
   margin-bottom: 0;
 }
@@ -47,6 +55,10 @@
 
   .registers-in-numbers__number {
     font-weight: bold;
+  // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
     @extend .govuk-\!-font-size-80;
+    // scss-lint:enable PlaceholderInExtend
+    // scss-lint:enable BangFormat
   }
 }
