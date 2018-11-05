@@ -1,25 +1,37 @@
-.registers-in-numbers {
+.registers-in-numbers-heading {
+  @extend .govuk-heading-m;
+}
+
+.registers-in-numbers-heading--super {
+  @extend .govuk-heading-s;
+
+  border-top: 1px solid $govuk-border-colour;
 }
 
 .registers-in-numbers__item {
-  // govuk-!-margin-bottom-4 govuk-!-padding-right-3
   box-sizing: border-box;
   display: inline-block;
+  margin-bottom: 25px;
   vertical-align: top;
   width: 100%;
 
-  .registers-in-numbers--l & {
+  @media screen and (min-width: 640px) {
+    padding-right: 15px;
     width: 50%;
   }
 }
 
 .registers-in-numbers__number {
-  font-weight: bold;
-  // govuk-!-font-size-80 govuk-!-font-weight-bold govuk-!-margin-bottom-0
+  @extend .govuk-heading-xl;
+
+  display: block;
+  margin-bottom: 0;
 }
 
 .registers-in-numbers__caption {
-  // govuk-body-s govuk-!-margin-bottom-0
+  @extend .govuk-body-s;
+
+  margin-bottom: 0;
 }
 
 .registers-in-numbers--two-columns {
@@ -31,5 +43,10 @@
 }
 
 
-.registers-in-numbers--about-page {
+.registers-in-numbers--super {
+
+  .registers-in-numbers__number {
+    font-weight: bold;
+    @extend .govuk-\!-font-size-80;
+  }
 }

@@ -27,9 +27,11 @@
       %h2{class: 'govuk-heading-m govuk-!-margin-bottom-0'} Government registers collection
       %p Search all the registers that are ready to use in your government service.
       = render partial: 'layouts/categories'
-    .govuk-grid-row
-      %aside{class: 'govuk-grid-column-two-thirds govuk-!-margin-top-3 govuk-!-padding-bottom-9'}
-        = render partial: 'layouts/registers-in-numbers', locals: { presentation: 'l'}
+    %div{class: 'govuk-grid-row govuk-!-padding-bottom-9'}
+      %aside{class: 'govuk-grid-column-two-thirds'}
+        = render partial: 'layouts/registers-in-numbers', locals: { presentation: 'super'}
+      %nav{class: 'govuk-grid-column-one-third'}
+        = render partial: 'layouts/secondary-navigation'
 
 = content_for :javascript do
   :javascript

@@ -1,5 +1,8 @@
-%h2{ class: 'govuk-heading-m'} GOV.UK Registers in numbers
-%ul{class: "registers-in-numbers #{presentation}" }
+- list_class = defined?(presentation).nil? ? '' : " registers-in-numbers--#{presentation}"
+- heading_class = defined?(presentation).nil? ? '' : " registers-in-numbers-heading--#{presentation}"
+
+%h2{ class: "registers-in-numbers-heading#{heading_class} govuk-!-padding-top-4"} GOV.UK Registers in numbers
+%ul{class: "registers-in-numbers#{list_class}" }
   %li{class: 'registers-in-numbers__item'}
     %span{role: 'presentation', class: 'registers-in-numbers__number'} 800k
     %a{role: 'presentation', class: 'registers-in-numbers__caption', href: 'https://www.gov.uk/performance/govuk-registers'}total API requests

@@ -1,0 +1,17 @@
+%h3{class: 'govuk-heading-s govuk-!-padding-top-4 registers-!-border-top'} Explore GOV.UK Registers
+%ul.govuk-list
+  %li.govuk-body-s
+    =link_to 'Government registers collection', registers_path, {class: 'govuk-!-font-weight-bold govuk-!-margin-bottom-0'}
+    %p All the registers that are ready to use in your government service.
+  %li.govuk-body-s
+    =link_to 'Upcoming registers', registers_in_progress_path, {class: 'govuk-!-font-weight-bold govuk-!-margin-bottom-0'}
+    %p Registers that are being created and are open for feedback.
+  %li.govuk-body-s
+    =link_to 'Services using registers', services_using_registers_path, {class: 'govuk-!-font-weight-bold govuk-!-margin-bottom-0'}
+    %p Government services that are using registers.
+  %li.govuk-body-s
+    =link_to 'Register updates', sign_up_index_path, {class: 'govuk-!-font-weight-bold govuk-!-margin-bottom-0'}
+    %p Sign up for updates to registers and changes to our service.
+  %li.govuk-body-s
+    =link_to 'Suggest a new register', suggest_new_register_path, {class: 'govuk-!-font-weight-bold govuk-!-margin-bottom-0'}
+    %p Suggest a register if you work in government or the public sector.
