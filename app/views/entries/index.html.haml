@@ -8,12 +8,12 @@
     %li.breadcrumbs__item
       = link_to "#{@register.register_name} register", register_path(@register.slug)
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to 'Register updates', '#content', 'aria-current' => 'page'
+      = link_to "#{@register.register_name} register updates", '#content', 'aria-current' => 'page'
 
 %main#content.container{role:'main'}
   .grid-row
-    .column-full
-      %h1.heading-large Register updates
+    %div{class: 'column-full govuk-!-padding-top-3'}
+      %h1.heading-large= "#{@register.register_name} register updates"
 
   .grid-row
     .column-one-third

@@ -88,6 +88,10 @@
           Feedback
       .govuk-grid-column-full.subsection__content.js-accordion-subsection#feedback__0
         = render partial: 'feedback/form'
+    %section.govuk-grid-row
+      %div.govuk-grid-column-full
+        %div{class: 'registers-!-border-top govuk-!-padding-top-6'}
+          = link_to 'View all updates to this register', register_entries_path(@register.slug)
 
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
   %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
