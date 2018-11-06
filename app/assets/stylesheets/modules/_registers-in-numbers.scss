@@ -1,17 +1,3 @@
-.registers-in-numbers-heading {
-  // scss-lint:disable PlaceholderInExtend
-  @extend .govuk-heading-m;
-  // scss-lint:enable PlaceholderInExtend
-}
-
-.registers-in-numbers-heading--super {
-  // scss-lint:disable PlaceholderInExtend
-  @extend .govuk-heading-s;
-  // scss-lint:enable PlaceholderInExtend
-
-  border-top: 1px solid $govuk-border-colour;
-}
-
 .registers-in-numbers__item {
   box-sizing: border-box;
   display: inline-block;

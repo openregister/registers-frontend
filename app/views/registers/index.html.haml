@@ -77,9 +77,6 @@
                       %p.register-theme__description.govuk-body-s= authority.registers_description
                     - if authority.register_count.present?
                       %p.register-theme__count.govuk-body-s= pluralize(authority.register_count, 'register')
-        %div{ class: "govuk-grid-column-full govuk-!-margin-top-9"}
-          = render partial: 'layouts/registers-in-numbers' unless @search_term.present?
-
       - else
         .govuk-grid-column-full
           %p
@@ -87,6 +84,12 @@
             = link_to 'Reset', registers_path, class: 'reset-link'
           %script
             ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
+
+    %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
+      %aside{class: 'govuk-grid-column-two-thirds'}
+        = render partial: 'layouts/registers-in-numbers', locals: { border: true, heading: 's' }
+      %nav{class: 'govuk-grid-column-one-third'}
+        = render partial: 'layouts/secondary-navigation'
 
 
 = content_for :javascript do
