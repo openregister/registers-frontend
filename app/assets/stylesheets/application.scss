@@ -116,11 +116,6 @@ html {
   scroll-behavior: smooth;
 }
 
-// Override purple colour
-a:visited {
-  color: $govuk-blue;
-}
-
 // scss-lint:disable IdSelector
 #global-header-bar {
   display: none;
