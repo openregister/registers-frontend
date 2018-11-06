@@ -18,39 +18,35 @@
     (function(document, window, undefined) {
       var forms = document.querySelectorAll('.js--ga-submit')
 
-      var getValue = function(element) {
-          if (element === null) {
-            return 'Blank'
-          }
-          else if (element.value) {
-            return element.value
-          }
-
-          return false;
+      var state = {
+        errorSummary: [],
+        documentTitle: document.title
       }
 
-      for (var i = 0; i < forms.length; i += 1) {
-        forms[i].addEventListener('submit', function(event) {
-          var form = event.target
+      var readFormFn = {
+        checkAnswer: function(form, nameToCheck) {
+          var elementsToCheck = form.querySelectorAll('[name="' + nameToCheck + '"]');
 
-          var isGovernment = getValue(form.querySelector('input[name="help_us_improve_user[is_government]"]:checked'))
-          var whatAreYouUsingRegistersFor = function() {
-            if (isGovernment === "Yes") {
-              return getValue(form.querySelector('input[name="help_us_improve_user[gov_what_are_you_using_registers_for]"]:checked'))
+          for (var i = 0; i < elementsToCheck.length; i++) {
+            var element = elementsToCheck[i]
+            if (element === null) {
+              return false
             }
-            else if (isGovernment === "No") {
-              return getValue(form.querySelector('input[name="help_us_improve_user[nongov_what_are_you_using_registers_for]"]:checked'))
+
+            if (element.tagName === 'SELECT' && element.options[element.selectedIndex].text.length > 0) {
+              return element.options[element.selectedIndex].text
             }
-            return false
+
+            if (element.type === 'radio' && element.checked === true) {
+              return element.value
+            }
           }
-          var whatPartOfGovernmentAreYouWorkingFor = function() {
-            var element = form.querySelector('select[name="help_us_improve_user[gov_what_part_of_government]"]')
-            var governmentDept = element.options[element.selectedIndex].text
-            if (governmentDept.length === 0) {
-              return 'blank'
-            }
-            return governmentDept;
-          }
+          return false;
+        },
+        sendData: function(form) {
+          var isGovernment = readFormFn.checkAnswer(form, 'help_us_improve_user[is_government]')
+          var whatPartOfGovernmentAreYouWorkingFor = readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_part_of_government]')
+          var whatAreYouUsingRegisterFor = isGovernment === 'Yes' ? readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_part_of_government]') : readFormFn.checkAnswer(form, 'help_us_improve_user[nongov_what_are_you_using_registers_for]')
 
           ga('send', {
             hitType: 'event',
@@ -63,7 +59,7 @@
           ga('send', {
             hitType: 'event',
             eventCategory: 'Form',
-            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegistersFor(),
+            eventAction: 'Radio - ' + isGovernment + ' - ' + whatAreYouUsingRegisterFor,
             eventLabel: 'What are you using registers for?',
             nonInteraction: true
           })
@@ -72,7 +68,7 @@
             ga('send', {
               hitType: 'event',
               eventCategory: 'Form',
-              eventAction: 'Text - ' + whatAreYouUsingRegistersFor() + ' - ' + whatPartOfGovernmentAreYouWorkingFor() ,
+              eventAction: 'Text - ' + whatAreYouUsingRegisterFor + ' - ' + whatPartOfGovernmentAreYouWorkingFor,
               eventLabel: 'What part of government are you working for?',
               nonInteraction: true
             })
@@ -85,8 +81,164 @@
             eventLabel: 'Help us improve',
             nonInteraction: true
           })
+        }
+      }
 
+      var errorFn = {
+        createErrorSummary: function(form) {
+          var $errorSummary = document.createElement('div')
+            $errorSummary.className = 'govuk-error-summary'
+            $errorSummary.setAttribute('aria-labelledby', 'error-summary-title')
+            $errorSummary.setAttribute('role', 'alert')
+            $errorSummary.setAttribute('tabindex', '-1')
+            $errorSummary.setAttribute('data-module', 'error-summary')
+          var $errorSummaryTitle = document.createElement('h2')
+            $errorSummaryTitle.id = 'error-summary-title'
+            $errorSummaryTitle.className = 'govuk-error-summary__title'
+            $errorSummaryTitle.appendChild(document.createTextNode('There is a problem'))
+          var $errorSummaryBody = document.createElement('div')
+            $errorSummaryBody.className = 'govuk-error-summary__body'
+          var $errorSummaryBodyList = document.createElement('ul')
+          $errorSummaryBodyList.className = 'govuk-list govuk-error-summary__list'
 
+          $errorSummaryBody.appendChild($errorSummaryBodyList)
+
+          $errorSummary.appendChild($errorSummaryTitle)
+          $errorSummary.appendChild($errorSummaryBody)
+
+          return $errorSummary;
+        },
+        showErrorSummary: function(form) {
+          document.title = 'Error - ' + state.documentTitle
+          var $errorSummary = document.querySelector('.govuk-error-summary') ? document.querySelector('.govuk-error-summary') : errorFn.createErrorSummary(form)
+
+          var $errorSummaryBodyList = document.querySelector('.govuk-error-summary__list') ? document.querySelector('.govuk-error-summary__list') : $errorSummary.querySelector('.govuk-error-summary__list');
+
+          $errorSummaryBodyList.innerHTML = ''
+
+          for(var i = 0; i < state.errorSummary.length; i++) {
+            var content = state.errorSummary[i]
+            var $errorSummaryBodyListItem = document.createElement('li')
+            var $errorSummaryBodyListItemLink = document.createElement('a')
+              $errorSummaryBodyListItemLink.href = content.link
+              $errorSummaryBodyListItemLink.appendChild(document.createTextNode(content.messageShouldRead))
+
+            $errorSummaryBodyListItem.appendChild($errorSummaryBodyListItemLink)
+            $errorSummaryBodyList.appendChild($errorSummaryBodyListItem)
+          }
+
+          form.insertBefore($errorSummary, form.querySelector('.js--is-government-group'));
+
+          $errorSummary.focus();
+
+          state.errorSummary = [];
+        },
+        showErrorWarning: function(form, info) {
+          var classTarget = form.querySelector(info.addClassTo)
+          var messageTarget = form.querySelector(info.putMessageIn)
+          var messageText = document.createTextNode(info.messageShouldRead)
+
+          messageTarget.className += ' govuk-error-message'
+          messageTarget.innerHTML = '';
+          messageTarget.appendChild(messageText)
+
+          classTarget.className += ' govuk-form-group--error'
+        },
+        clearErrorWarnings: function(form) {
+          var existingClassTargets = form.querySelectorAll('.govuk-form-group--error')
+          for(var i = 0; i < existingClassTargets.length; i++) {
+            existingClassTargets[i].className = existingClassTargets[i].className.replace(/(| )govuk-form-group--error/g, '')
+          }
+
+          var existingWarnings = form.querySelectorAll('.govuk-error-message')
+          for(var j = 0; j < existingWarnings.length; j++) {
+            existingWarnings[j].innerHTML = '';
+            existingWarnings[j].className = existingWarnings[j].className.replace(/(| )govuk-error-message/g, '')
+          }
+        }
+      }
+
+      for (var i = 0; i < forms.length; i += 1) {
+        forms[i].addEventListener('submit', function(event) {
+          event.preventDefault()
+
+          var form = event.target
+
+          errorFn.clearErrorWarnings(form)
+
+          var isGov = readFormFn.checkAnswer(form, 'help_us_improve_user[is_government]')
+
+          switch (isGov) {
+            case 'Yes':
+              // check questions
+              var partOfGov = readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_part_of_government]')
+              var registerUse = readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_are_you_using_registers_for]')
+
+              if (partOfGov === false) {
+                state.errorSummary.push({
+                  messageShouldRead: "#{t('errors.attributes.department.blank')}",
+                  link: '#which-part-of-government'
+                })
+                errorFn.showErrorWarning(form, {
+                  addClassTo: '.js--which-part-of-government-group',
+                  putMessageIn: '.js--which-part-of-government-message',
+                  messageShouldRead:  "#{t('errors.attributes.department.blank')}"
+                })
+              }
+
+              if (registerUse === false) {
+                state.errorSummary.push({
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}",
+                  link: '#gov-registers-use'
+                })
+                errorFn.showErrorWarning(form, {
+                  addClassTo: '.js--gov-registers-use-group',
+                  putMessageIn: '.js--gov-registers-use-message',
+                  messageShouldRead:  "#{t('errors.attributes.use_category.blank').html_safe}"
+                })
+              }
+
+              if (registerUse === false || partOfGov === false) {
+                errorFn.showErrorSummary(form)
+              }
+              else {
+                readFormFn.sendData(form);
+                form.submit();
+              }
+              break
+            case 'No':
+              var registerUse = readFormFn.checkAnswer(form, 'help_us_improve_user[nongov_what_are_you_using_registers_for]')
+              if (registerUse === false) {
+                state.errorSummary.push({
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}",
+                  link: '#nongov-registers-use'
+                })
+                errorFn.showErrorWarning(form, {
+                  addClassTo: '.js--nongov-registers-use-group',
+                  putMessageIn: '.js--nongov-registers-use-message',
+                  messageShouldRead: "#{t('errors.attributes.use_category.blank').html_safe}"
+                })
+                errorFn.showErrorSummary(form)
+              }
+              else {
+                readFormFn.sendData(form);
+                form.submit();
+              }
+              break
+            case false:
+            default:
+              errorFn.showErrorWarning(form, {
+                addClassTo: '.js--is-government-group',
+                putMessageIn: '.js--is-government-message',
+                messageShouldRead: "#{t('errors.attributes.is_government.blank')}"
+              })
+              state.errorSummary.push({
+                messageShouldRead: "#{t('errors.attributes.is_government.blank')}",
+                link: '#do-you-work-for-the-government'
+              })
+              errorFn.showErrorSummary(form)
+              break
+          }
         })
       }
 
