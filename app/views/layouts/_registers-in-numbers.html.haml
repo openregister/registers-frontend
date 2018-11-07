@@ -1,21 +1,18 @@
-- list_presentation_class = defined?(presentation).nil? ? '' : " registers-in-numbers--#{presentation}"
-- heading_border_class = defined?(border).nil? ? '' : " registers-!-border-top"
-- heading_size = defined?(heading).nil? ? 'govuk-heading-m' : 'govuk-heading-s'
+- list_presentation_class =  @registers_in_numbers_style.present? ? "registers-in-numbers registers-in-numbers--#{@registers_in_numbers_style}" : 'registers-in-numbers'
+- heading_size = @registers_in_numbers_heading.present? ? @registers_in_numbers_heading : 'govuk-heading-s'
+- border = @registers_in_numbers_border.present? ? @registers_in_numbers_border : 'registers-!-border-top'
 
-%h2{ class: "#{heading_size} #{heading_border_class} govuk-!-padding-top-4"} GOV.UK Registers in numbers
-%ul{class: "registers-in-numbers#{list_presentation_class}" }
+%h2{ class: "#{heading_size} #{border} govuk-!-padding-top-4"} GOV.UK Registers in numbers
+%ul{class: "#{list_presentation_class}" }
   %li{class: 'registers-in-numbers__item'}
     %span{role: 'presentation', class: 'registers-in-numbers__number'} 800k
     %a{role: 'presentation', class: 'registers-in-numbers__caption', href: 'https://www.gov.uk/performance/govuk-registers'}total API requests
   %li{class: 'registers-in-numbers__item'}
-    -# = link_to registers_path do
     %span{role: 'presentation', class: 'registers-in-numbers__number'}= Register.available_count
     %span{role: 'presentation', class: 'registers-in-numbers__caption'} government registers available
   %li{class: 'registers-in-numbers__item'}
-    -# = link_to registers_path do
     %span{role: 'presentation', class: 'registers-in-numbers__number'}= Register.organisation_count
     %span{role: 'presentation', class: 'registers-in-numbers__caption'} government organisations managing&nbsp;registers
   %li{class: 'registers-in-numbers__item'}
-    -# = link_to services_using_registers_path do
     %span{role: 'presentation', class: 'registers-in-numbers__number'} 8
     %span{role: 'presentation', class: 'registers-in-numbers__caption'} government services using&nbsp;registers
