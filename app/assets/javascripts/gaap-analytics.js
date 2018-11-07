@@ -31,9 +31,14 @@ module.exports = function (elements) {
     switch (element.tagName) {
       case 'A':
       case 'BUTTON':
+      {
+        var label = element.getAttribute('data-click-label') ? element.getAttribute('data-click-label') : element.innerText;
+        addListener(element, eventCategory, eventAction, label);
+        break;
+      }
       case 'INPUT':
         {
-          var label = element.tagName === 'INPUT' ? element.value : element.innerText;
+          var label = element.getAttribute('data-click-label') ? element.getAttribute('data-click-label') : element.value;
           addListener(element, eventCategory, eventAction, label);
           break;
         }

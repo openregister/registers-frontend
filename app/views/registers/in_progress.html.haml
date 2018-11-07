@@ -36,4 +36,8 @@
             - @registers.each do |register|
               = render partial: 'registers/register', object: register
 
-  = render partial: 'layouts/registers-in-numbers'
+    %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
+      %aside{class: 'govuk-grid-column-two-thirds'}
+        = render partial: 'layouts/registers-in-numbers', locals: { border: true, heading: 's' }
+      %nav{class: 'govuk-grid-column-one-third'}
+        = render partial: 'layouts/secondary-navigation'

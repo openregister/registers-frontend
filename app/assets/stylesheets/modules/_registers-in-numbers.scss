@@ -1,40 +1,50 @@
-.registers-in-numbers {
-  margin: 0 -15px;
-  padding-top: 0;
-
-  @media screen and (min-width: 640px) {
-    padding-top: 60px;
-  }
-
-  h2 {
-    padding: 0 15px;
-  }
-}
-
 .registers-in-numbers__item {
   box-sizing: border-box;
   display: inline-block;
-  padding: 0 15px;
+  margin-bottom: 25px;
   vertical-align: top;
   width: 100%;
 
   @media screen and (min-width: 640px) {
-    width: (100% / 3);
+    padding-right: 15px;
+    width: 50%;
+  }
+}
+
+.registers-in-numbers__number {
+  // scss-lint:disable PlaceholderInExtend
+  @extend .govuk-heading-xl;
+  // scss-lint:enable PlaceholderInExtend
+
+  display: block;
+  margin-bottom: 0;
+}
+
+.registers-in-numbers__caption {
+  // scss-lint:disable PlaceholderInExtend
+  @extend .govuk-body-s;
+  // scss-lint:enable PlaceholderInExtend
+
+  margin-bottom: 0;
+}
+
+.registers-in-numbers--two-columns {
+  .registers-in-numbers__item {
+    @media screen and (min-width: 640px) {
+      width: (100% / 2);
+    }
   }
 }
 
 
-.registers-in-numbers--about-page {
-  border-top: 1px solid $govuk-border-colour;
-  margin-top: 2em;
-  padding-top: 0.75em;
+.registers-in-numbers--super {
 
-  @media screen and (min-width: 640px) {
-    margin-top: 0;
-  }
-
-  .registers-in-numbers__item {
-    padding: 0;
-    width: 100%;
+  .registers-in-numbers__number {
+    font-weight: bold;
+  // scss-lint:disable PlaceholderInExtend
+  // scss-lint:disable BangFormat
+    @extend .govuk-\!-font-size-80;
+    // scss-lint:enable PlaceholderInExtend
+    // scss-lint:enable BangFormat
   }
 }
