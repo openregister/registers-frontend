@@ -1,17 +1,17 @@
 %li.entries__item
   %p.entries__date
-    Last updated:
-    = DateTime.parse(timeline_record[:current_record].timestamp.to_s).strftime('%d/%m/%Y')
+    = "Last updated: #{DateTime.parse(timeline_record[:current_record].timestamp.to_s).strftime('%d/%m/%Y')}"
   %h3.heading-medium= timeline_record[:current_record].key
+
   %table
     %thead
       %tr
         %th
           %strong Field
         %th
-          %strong Previous Value
+          %strong Previous value
         %th
-          %strong New Value
+          %strong New value
     %tbody
       - timeline_record[:updated_fields].each do |field_name|
         %tr
