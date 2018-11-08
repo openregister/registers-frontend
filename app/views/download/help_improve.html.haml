@@ -46,7 +46,7 @@
         sendData: function(form) {
           var isGovernment = readFormFn.checkAnswer(form, 'help_us_improve_user[is_government]')
           var whatPartOfGovernmentAreYouWorkingFor = readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_part_of_government]')
-          var whatAreYouUsingRegisterFor = isGovernment === 'Yes' ? readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_part_of_government]') : readFormFn.checkAnswer(form, 'help_us_improve_user[nongov_what_are_you_using_registers_for]')
+          var whatAreYouUsingRegisterFor = isGovernment === 'Yes' ? readFormFn.checkAnswer(form, 'help_us_improve_user[gov_what_are_you_using_registers_for]') : readFormFn.checkAnswer(form, 'help_us_improve_user[nongov_what_are_you_using_registers_for]')
 
           ga('send', {
             hitType: 'event',
