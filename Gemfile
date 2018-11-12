@@ -60,7 +60,7 @@ gem 'gds_metrics', '~> 0.1.0'
 gem 'bcrypt'
 
 # HTTP
-gem 'httparty', '~> 0.16.2'
+gem 'httparty', '~> 0.16.3'
 
 # Canonical meta tag
 gem 'canonical-rails'
