@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     post '/use-the-api', to: 'download#post_api', as: 'post_api'
   end
 
-  get '/registers-in-progress', to: 'registers#in_progress'
+  get 'registers-in-progress', to: redirect('/registers', status: 301)
 
   resources :api_users, path: 'create-api-key'
 
