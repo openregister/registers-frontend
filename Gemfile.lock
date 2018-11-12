@@ -162,7 +162,8 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
-    httparty (0.16.2)
+    httparty (0.16.3)
+      mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
@@ -407,7 +408,7 @@ DEPENDENCIES
   haml-rails
   health_check (~> 2.7)
   http (= 2.2.1)
-  httparty (~> 0.16.2)
+  httparty (~> 0.16.3)
   invisible_captcha
   iso8601 (~> 0.12.1)
   jbuilder (~> 2.5)
