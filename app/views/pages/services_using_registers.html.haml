@@ -5,21 +5,23 @@
 - # `_registers-in-numbers` partial in `layouts`.
 - # ---------------------------------------------------------------------------
 
-- @page_title = 'Services using registers'
+- @page_title = 'Government services using registers'
 = content_for :body_classes, 'services-using-registers-page'
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
     %li.breadcrumbs__item.breadcrumbs__item--active
-      = link_to 'Services using registers', '#content', "aria-current" => "page"
+      = link_to 'Government services using GOV.UK Data Registers', '#content', "aria-current" => "page"
 
 .govuk-width-container
   %main#content{class: "govuk-main-wrapper govuk-!-padding-bottom-9", role:"main"}
     .govuk-grid-row
       .govuk-grid-column-full
-        %h2.govuk-heading-l Government services using registers
-
+        %h2.govuk-heading-l Government services using GOV.UK Data Registers
+        %p GOV.UK Data Registers are structured datasets of government information.
+        %p #{link_to 'Search our catalogue of structured data', registers_path}.
+      .govuk-grid-column-full
         %table.govuk-table
           %caption.govuk-table__caption.visually-hidden All government services that are using registers.
           %thead.govuk-table__head
@@ -28,7 +30,7 @@
               %th.govuk-table__header{ scope: "col"} Used by
           %tbody.govuk-table__body
             %tr.govuk-table__row
-              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
+              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-wrap", scope: "row"}
                 =link_to 'Country', register_path('country'), {class: "list-of-registers__heading"}
                 Foreign & Commonwealth Office
               %td.govuk-table__cell
@@ -59,7 +61,7 @@
 
 
             %tr.govuk-table__row
-              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
+              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-wrap", scope: "row"}
                 =link_to 'Territory', register_path('territory'), {class: "list-of-registers__heading"}
                 Foreign &amp; Commonwealth Office
               %td.govuk-table__cell
@@ -72,26 +74,25 @@
                     Cabinet Office
 
             %tr.govuk-table__row
-              %th{class: "govuk-table__header govuk-!-font-weight-regular", scope: "row"}
-                =link_to 'Government organisations on GOV.UK', register_path('government-organisation'), {class: "list-of-registers__heading"}
+              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-wrap", scope: "row"}
+                =link_to 'Government organisations on GOV.UK', register_path('government-organisation'), {class: "list-of-registers__heading registers-!-wrap"}
                 Cabinet Office
               %td.govuk-table__cell
                 %ul{ role: "list", class: "list-of-registers"}
                   %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
-                    =link_to 'GOV.UK Performance Platform', 'https://www.gov.uk/performance', {class: "list-of-registers__heading"}
+                    =link_to 'GOV.UK Performance Platform', 'https://www.gov.uk/performance', {class: "list-of-registers__heading registers-!-wrap"}
                     %span.visually-hidden{role: "presentation"} by
                     Cabinet Office
 
             %tr.govuk-table__row
-              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-border-off", scope: "row"}
-                =link_to 'Local authorities in England', register_path('local-authority-eng'), {class: "list-of-registers__heading"}
+              %th{class: "govuk-table__header govuk-!-font-weight-regular registers-!-border-off registers-!-wrap", scope: "row"}
+                =link_to 'Local authorities in England', register_path('local-authority-eng'), {class: "list-of-registers__heading registers-!-wrap"}
                 Ministry of Housing, Communities and Local Government
               %td{class: "govuk-table__cell registers-!-border-off"}
                 %ul{ role: "list", class: "list-of-registers"}
                   %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
                     %span{class: "list-of-registers__heading"} Realtime Flood Monitoring
                     Environment Agency
-
 
     %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
       %aside{class: 'govuk-grid-column-two-thirds'}
