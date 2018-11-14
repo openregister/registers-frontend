@@ -66,12 +66,17 @@ class DownloadController < ApplicationController
 
   def download_json
     data = RegisterRecordsDownloader.new(@register).download_format('json')
-    send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
+    send_data data, type: "application/json", disposition: "attachment; filename=#{@register.slug}.json"
   end
 
   def download_csv
     data = RegisterRecordsDownloader.new(@register).download_format('csv')
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
+  end
+
+  def download_ods
+    data = RegisterRecordsDownloader.new(@register).download_ods
+    send_data data, type: 'application/vnd.oasis.opendocument.spreadsheet', disposition: "attachment; filename=#{@register.slug}.ods"
   end
 
 private

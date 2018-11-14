@@ -19,6 +19,14 @@ class RegisterRecordsDownloader
     end
   end
 
+  def download_ods
+    headers = register.fields_array
+    data = register.records.where(entry_type: 'user').find_each.map do |r|
+      headers.map { |f| r.data[f] }
+    end
+    SpreadsheetArchitect.to_ods(headers: headers, data: data)
+  end
+
 private
 
   attr_reader :register
