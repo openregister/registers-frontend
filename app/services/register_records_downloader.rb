@@ -20,6 +20,7 @@ class RegisterRecordsDownloader
   end
 
   def download_ods
+    ods_download_to_ga
     headers = register.fields_array
     data = register.records.where(entry_type: 'user').find_each.map do |r|
       headers.map { |f| r.data[f] }
@@ -28,6 +29,20 @@ class RegisterRecordsDownloader
   end
 
 private
+
+  def ods_download_to_ga
+    params = {
+      v: 1,
+      t: 'pageview',
+      tid: Rails.configuration.x.google_analytics.api_tracking_id,
+      cid: SecureRandom.uuid,
+      aip: 1,
+      ni: 1,
+      dl: Rails.application.routes.url_helpers.register_download_ods_path(register.slug),
+      cd4: 'Registers-Frontend-Downloads'
+    }
+    HTTParty.post('https://www.google-analytics.com/collect', body: params)
+  end
 
   attr_reader :register
   attr_reader :api_key

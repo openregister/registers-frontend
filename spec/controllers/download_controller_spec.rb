@@ -15,6 +15,8 @@ RSpec.describe DownloadController, type: :controller do
     with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
     to_return(status: 200, body: country_proof, headers: {})
 
+
+
     Register.find_each do |register|
       PopulateRegisterDataInDbJob.perform_now(register)
     end
@@ -26,6 +28,7 @@ RSpec.describe DownloadController, type: :controller do
 
   describe 'ODS request' do
     before(:each) do
+      stub_request(:any, 'https://www.google-analytics.com/collect')
       get :download_ods, params: { register_id: 'country' }
     end
 
@@ -39,6 +42,13 @@ RSpec.describe DownloadController, type: :controller do
       expect(response.headers['Content-Transfer-Encoding']).to eq('binary')
       expect(response.headers['Content-Disposition']).to eq('attachment; filename=country.ods')
       expect(response.body.length).to be > 100
+    end
+
+
+    it 'triggers a google analytics request' do
+      expect(WebMock).to have_requested(:post, 'https://www.google-analytics.com/collect').with(
+        body: /v=1&t=pageview&tid=UA-86101042-1&cid=[^&]+&aip=1&ni=1&dl=%2Fregisters%2Fcountry%2Fdownload-ods&cd4=Registers-Frontend-Downloads/
+      )
     end
   end
 end
