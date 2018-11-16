@@ -40,7 +40,8 @@ private
       ni: 1,
       dl: Rails.application.routes.url_helpers.register_download_ods_path(register.slug),
       cd2: 'N/A',
-      cd4: 'Registers-Frontend-Downloads'
+      cd4: 'Registers-Frontend-Downloads',
+      cd5: 'API'
     }
     HTTParty.post('https://www.google-analytics.com/collect', body: params)
   end
