@@ -1,25 +1,10 @@
 require 'rails_helper'
+require 'country_stubs'
 
 RSpec.describe DownloadController, type: :controller do
+  include_context 'country stubs'
   before(:all) do
-    country_data = File.read('./spec/support/country.rsf')
-    country_proof = File.read('./spec/support/country_proof.json')
-    ObjectsFactory.new.create_register('country', 'Beta')
-
-    # RSF stubs
-    stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
-    .to_return(status: 200, body: country_data, headers: {})
-
-    stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
-    with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
-    to_return(status: 200, body: country_proof, headers: {})
-
-
-
-    Register.find_each do |register|
-      PopulateRegisterDataInDbJob.perform_now(register)
-    end
+    populate_db
   end
 
   after(:all) do
