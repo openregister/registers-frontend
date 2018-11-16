@@ -47,7 +47,7 @@ RSpec.describe DownloadController, type: :controller do
 
     it 'triggers a google analytics request' do
       expect(WebMock).to have_requested(:post, 'https://www.google-analytics.com/collect').with(
-        body: /v=1&t=pageview&tid=UA-86101042-1&cid=[^&]+&aip=1&ni=1&dl=%2Fregisters%2Fcountry%2Fdownload-ods&cd2=N%2FA&cd4=Registers-Frontend-Downloads/
+        body: /v=1&t=pageview&tid=UA-86101042-1&cid=[^&]+&aip=1&ni=1&dl=https%3A%2F%2Fcountry.register.gov.uk%2Fregisters%2Fcountry%2Fdownload-ods&cd2=N%2FA&cd4=Registers-Frontend-Downloads&cd5=API/
       )
     end
   end

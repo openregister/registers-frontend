@@ -38,7 +38,7 @@ private
       cid: SecureRandom.uuid,
       aip: 1,
       ni: 1,
-      dl: Rails.application.routes.url_helpers.register_download_ods_path(register.slug),
+      dl: register.url + Rails.application.routes.url_helpers.register_download_ods_path(register.slug),
       cd2: 'N/A',
       cd4: 'Registers-Frontend-Downloads',
       cd5: 'API'
