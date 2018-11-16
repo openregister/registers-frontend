@@ -24,8 +24,8 @@ Rails.application.routes.draw do
     resources :feedback, to: 'registers#create_feedback'
     resources :records, constraints: { id: /.*/ }, only: :show
 
-    get '/download-json', to: 'download#download_json', as: 'download_json'
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
+    get '/download-ods', to: 'download#download_ods', as: 'download_ods'
 
     get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
     get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
