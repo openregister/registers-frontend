@@ -64,11 +64,6 @@ class DownloadController < ApplicationController
     redirect_to register_get_api_path(@register.slug)
   end
 
-  def download_json
-    data = RegisterRecordsDownloader.new(@register).download_format('json')
-    send_data data, type: "application/json", disposition: "attachment; filename=#{@register.slug}.json"
-  end
-
   def download_csv
     data = RegisterRecordsDownloader.new(@register).download_format('csv')
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
