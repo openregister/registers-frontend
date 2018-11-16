@@ -9,7 +9,7 @@ class Register < ApplicationRecord
   validates_uniqueness_of :name
   validates :slug, uniqueness: true
 
-  scope :by_name, -> { order name: :asc }
+  scope :by_name, -> { order title: :asc }
   scope :by_popularity, -> { order position: :asc }
   scope :sort_by_phase_name_asc, -> { order(ordered_phases) }
   scope :has_records, -> { where(id: Record.select(:register_id)) }
