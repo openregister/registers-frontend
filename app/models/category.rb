@@ -1,10 +1,10 @@
 class Category < ApplicationRecord
   has_many :registers
 
-  scope :by_name, -> { order 'lower(title) asc' }
+  scope :by_category_name, -> { order name: :asc }
 
   scope :with_a_register, -> {
-    joins(:registers).merge(Register.in_beta).distinct.by_name
+    joins(:registers).merge(Register.in_beta).distinct.by_category_name
   }
 
   scope :with_a_register__shown_on_homepage, -> {
