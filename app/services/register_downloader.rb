@@ -12,9 +12,7 @@ module RegisterDownloader
     register_client = registers_client_manager.get_register(register.name.parameterize, register.register_phase.downcase, data_store: PostgresDataStore.new(register))
     register_url = register_client.instance_variable_get(:@register_url)
 
-    register.title =  register.register_phase != 'Backlog' &&
-                        Record.where(register_id: register.id, entry_type: 'system', key: 'register-name')
-                              .pluck(Arel.sql("data -> 'register-name' as register_name")).first || register.name
+    register.title =  register.register_phase != 'Backlog' && Record.where(register_id: register.id, entry_type: 'system', key: 'register-name').pluck(Arel.sql("data -> 'register-name' as register_name")).first || register.name
 
     register.fields_array = Record.where(key: "register:#{register.slug}")
                                 .pluck(Arel.sql("data -> 'fields' as fields"))
