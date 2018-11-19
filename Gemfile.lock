@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/NoRedInk/axlsx.git
+  revision: 1a4a6387bf398e2782933ee6607e5589cd15bee3
+  ref: 1a4a6387bf398e2782933ee6607e5589cd15bee3
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.2.1)
+
+GIT
   remote: https://github.com/mailtop/email_validator.git
   revision: 83fe71a4731b0a01e84d1221264cc9802196820e
   specs:
@@ -66,10 +76,6 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.3.1)
       execjs
-    axlsx (2.0.1)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
     axlsx_styler (0.2.0)
       activesupport (>= 3.1)
       axlsx (>= 2.0, < 4)
@@ -328,7 +334,7 @@ GEM
     ruby_dep (1.5.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
-    rubyzip (1.0.0)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
@@ -403,6 +409,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   autoprefixer-rails
+  axlsx!
   bcrypt
   canonical-rails
   capybara
