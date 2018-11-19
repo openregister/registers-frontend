@@ -69,7 +69,7 @@ GEM
     axlsx (2.0.1)
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.4.1)
-      rubyzip (~> 1.0.0)
+      rubyzip (>= 1.0.0)
     axlsx_styler (0.2.0)
       activesupport (>= 3.1)
       axlsx (>= 2.0, < 4)
