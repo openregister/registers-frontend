@@ -108,7 +108,7 @@ private
           records.each do |record|
             entry_for_record = record[1].last
             end_date_str = entry_for_record.data["end-date"]
-            end_date = end_date_str.nil? ? nil : ISO8601::DateTime.new(end_date_str).to_datetime
+            end_date = end_date_str.nil? ? nil : ISO8601::DateTime.new(end_date_str).to_time.utc
 
             records_to_add << Record.new(register: @register, data: entry_for_record.data, timestamp: entry_for_record.timestamp, hash_value: entry_for_record.hash_value, entry_number: entry_for_record.entry_number, entry_type: entry_for_record.entry_type, key: entry_for_record.key, end_date: end_date)
           end
