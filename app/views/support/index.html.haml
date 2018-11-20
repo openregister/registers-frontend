@@ -1,9 +1,9 @@
-- @page_title = "Support"
+- @page_title = 'Contact'
 
 %main#content.container{role:'main'}
   .grid-row
     .column-full
-      %h1.heading-large Support
+      %h1.heading-large Contact GOV.UK Registers
 
       %h3.heading-medium How can we help you?
       = form_tag select_support_path do
@@ -12,15 +12,14 @@
             %legend.visually-hidden How can we help you?
             .multiple-choice
               = radio_button_tag :subject, :problem, checked: true
-              = label_tag :subject_problem, "I want to report a problem"
+              = label_tag :subject_problem, 'I want to report a problem'
             .multiple-choice
               = radio_button_tag :subject, :question
-              = label_tag :subject_question, "I have a question or want to give feedback"
+              = label_tag :subject_question, 'I have a question or want to give feedback'
         .form-group
-          = submit_tag "Continue", class: "button"
+          = submit_tag 'Continue', class: 'button'
 
   .grid-row
     .column-two-thirds
       %p The Government Digital Service (GDS) maintains the platform behind registers and helps custodians to manage their registers and keep the data up-to-date. GDS provides operational support from 9am to 5pm, Monday to Friday.
-      %p You can #{link_to "find help", "https://docs.registers.service.gov.uk#support-and-community"} about common issues when using registers, including how to find a specific record or error codes.
-      %p If your issue isn’t included or you’re struggling to use registers in your product or service, please contact the GDS registers team at #{mail_to "registers@digital.cabinet-office.gov.uk"}.
+      %p You can #{link_to 'find technical help', 'https://docs.registers.service.gov.uk#support-and-community'} about common issues when using registers, including how to find a specific record or error codes.
