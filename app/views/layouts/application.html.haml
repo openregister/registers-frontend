@@ -51,7 +51,6 @@
       %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. #{link_to "Read more about format changes", data_format_changes_path}
 
 - content_for :body_end do
-  %code User : #{session[:current_session_user].inspect}
   = javascript_include_tag 'application'
   = yield(:javascript)
 
