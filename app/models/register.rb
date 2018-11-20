@@ -62,12 +62,6 @@ class Register < ApplicationRecord
     Record.where(register_id: id, entry_type: 'user').count
   end
 
-  def register_name
-    register_phase != 'Backlog' &&
-      Record.where(register_id: id, entry_type: 'system', key: 'register-name')
-            .pluck(Arel.sql("data -> 'register-name' as register_name")).first || name
-  end
-
   def is_empty?
     records.where(entry_type: 'user').none?
   end

@@ -77,9 +77,9 @@ RSpec.feature 'View register', type: :feature do
 
   scenario 'view register name' do
     visit('/registers/industrial-classification-2003')
-    register_name = 'UK Standard Industrial Classification of Economic Activities 2003 register'
-    expect(find('h1')).to have_content(register_name)
-    expect(page.title).to have_content(register_name)
+    title = 'UK Standard Industrial Classification of Economic Activities 2003 register'
+    expect(find('h1')).to have_content(title)
+    expect(page.title).to have_content(title)
   end
 
   after(:all) do
