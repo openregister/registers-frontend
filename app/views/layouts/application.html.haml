@@ -21,19 +21,19 @@
             GOV.UK
           /-
           %span.header__title
-            Data Registers
+            Registers
             %span.phase-banner Alpha
 
-      = check_box_tag 'show-menu', nil, false, class: 'header__navigation-toggle-checkbox', 'aria-controls': 'navigation', 'aria-expanded': 'false'
+      = check_box_tag 'show-menu', nil, false, class: 'header__navigation-toggle-checkbox', "aria-controls" => "navigation", "aria-expanded" => "false"
       = label_tag 'show-menu', 'Menu', class: 'header__navigation-toggle'
-      %nav{id: 'navigation', class: 'header__navigation', role: 'Navigation', 'aria-label': 'Top Level Navigation'}
+      %nav{id: "navigation", class: "header__navigation", role: "Navigation", "aria-label" => "Top Level Navigation", "aria-hidden" => "true"}
         %ul
           %li{class: "#{'active' if current_page?(about_path)}"}
-            = link_to 'About', about_path
+            = link_to "About", about_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
-            = link_to 'Government structured data', registers_path
-          %li{class: "#{'active' if current_page?(support_path)}"}
-            = link_to 'Contact', support_path
+            = link_to "Registers collection", registers_path
+          %li
+            = link_to "Documentation", "https://docs.registers.service.gov.uk"
 
 - content_for :head do
   = canonical_tag
@@ -46,7 +46,7 @@
   %aside.notice
     .container
       %h2.visually-hidden Upcoming data format changes
-      %p{data: {'click-events': '', 'click-category': 'Content', 'click-action': 'Notice link clicked'}} GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. #{link_to 'Read more about format changes', data_format_changes_path}
+      %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. #{link_to "Read more about format changes", data_format_changes_path}
 
 - content_for :body_end do
   = javascript_include_tag 'application'
@@ -59,24 +59,22 @@
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} About
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
-            %li.govuk-footer__list-item= link_to 'What is a data register?', about_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Organisations providing data', registers_path(show_by: "organisation"), {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item
-              %a{href: "https://www.gov.uk/performance/govuk-registers"}Performance
+            %li.govuk-footer__list-item= link_to 'Our service', about_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(show_by: "organisation"), {class: 'govuk-footer__link'}
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Use
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
-            %li.govuk-footer__list-item= link_to 'Government structured data', registers_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Registers collection', registers_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'API Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Support
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
-            %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Sign up for updates', sign_up_index_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Suggest a new register', suggest_new_register_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
+
       %hr
 
 - content_for :footer_support_links do
