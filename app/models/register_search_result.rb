@@ -1,6 +1,6 @@
 class RegisterSearchResult < ApplicationRecord
   self.primary_key = 'register_id'
-  scope :search, ->(search_term) { where(*['register_search_results.name ILIKE ? OR title ILIKE ? OR register_description ILIKE ?'].fill("%#{sanitize_sql_like(search_term)}%", 1..3)) }
+  scope :search, ->(search_term) { where(*['register_search_results.name ILIKE ? OR register_name ILIKE ? OR register_description ILIKE ?'].fill("%#{sanitize_sql_like(search_term)}%", 1..3)) }
   belongs_to :register
 
   def readonly?
