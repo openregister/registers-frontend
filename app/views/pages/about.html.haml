@@ -11,21 +11,48 @@
 .govuk-width-container
   %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
     .govuk-grid-row
-      .govuk-grid-column-full
-        %h2.govuk-heading-l About registers
-    %div{ class: 'govuk-grid-row'}
+      %section.govuk-grid-column-full
+        %h2.govuk-heading-l A quick guide to registers
+    .govuk-grid-row
       %section.govuk-grid-column-two-thirds
         %h3.govuk-heading-m What is a register?
-        %p A register is a list of information that is managed and approved by government.
-        %p For example, the country register lists all countries recognised by the Foreign and Commonwealth Office.
-        %p You can use registers to build your government service.
-        %p The UK Parliament petitions service uses the country register to help users select their country from a dropdown menu, for instance.
-        %h3{class: 'govuk-heading-m govuk-!-padding-top-5'} Trusted by government services
-        %p By using registers you can:
-        %ul.list.list-bullet
+        %p A GOV.UK register is a structured dataset of government information.
+        %p Each register:
+        %ul.govuk-list.govuk-list--bullet
+          %li only contains data on a specific subject
+          %li is kept up-to-date by a subject matter expert from the relevant government organisation
+          %li shares a common API that supports JSON and CSV
+
+        %h3.govuk-heading-m Who registers are for
+
+        %h4.govuk-heading-s Government services
+        %p Registers are designed to be used by government and public sector services.
+        %p For example, the #{link_to 'country register', register_path('country')} lists all countries recognised by the UK government. It is updated by a subject matter expert, called a custodian, at the Foreign and Commonwealth Office. GOV.UK Pay uses the country register and #{link_to 'territory register', register_path('territory')} to populate an autocomplete feature that helps users enter their location.
+        %p Services using registers can:
+        %ul.govuk-list.govuk-list--bullet
           %li reduce the time and cost of sourcing data from across government
-          %li be confident that your service is using the most up&ndash;to&ndash;date government data
           %li receive data that is ready to use with no need for data cleansing
+          %li be confident that their service is using the most up-to-date government data
+
+        %h4.govuk-heading-s Data managers
+        %p Registers can also help if you collect, manage or store data for your organisation.
+        %p Data managers who create a register:
+        %ul.govuk-list.govuk-list--bullet
+          %li only need to publish data in one place - there’s no need to update multiple lists and datasets whenever something changes
+          %li can easily share their data across government
+
+        %h3.govuk-heading-m How to access a register
+        %p All registers can be accessed and used freely by anyone.
+        %p You can #{link_to 'use our API', 'https://docs.registers.service.gov.uk/#gov-uk-registers-technical-documentation'} to automatically pull data from a register into your service. This means you’ll always use the most recent version of the data in a register.  You can also download a copy of each register.
+        %p All registers are available as JSON or CSV.
+        %p You can see all the registers that are ready to use in our #{link_to 'government registers collection', registers_path}.
+
+        %h3.govuk-heading-m Who is using registers
+        %p You can see which #{link_to 'government services', services_using_registers_path} are already using registers.
+        %p You can also find out which #{link_to 'government organisations', registers_path(show_by: "organisation")} have created a register with their data.
+
+
+
       %nav{class: 'govuk-grid-column-one-third'}
         = render partial: 'layouts/secondary-navigation'
       %aside{class: 'govuk-grid-column-two-thirds govuk-!-padding-top-4'}
