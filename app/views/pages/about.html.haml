@@ -24,8 +24,6 @@
           %li shares a common API that supports JSON and CSV
 
         %h3.govuk-heading-m Who registers are for
-
-        %h4.govuk-heading-s Government services
         %p Registers are designed to be used by government and public sector services.
         %p For example, the #{link_to 'country register', register_path('country')} lists all countries recognised by the UK government. It is updated by a subject matter expert, called a custodian, at the Foreign and Commonwealth Office. GOV.UK Pay uses the country register and #{link_to 'territory register', register_path('territory')} to populate an autocomplete feature that helps users enter their location.
         %p Services using registers can:
@@ -34,12 +32,8 @@
           %li receive data that is ready to use with no need for data cleansing
           %li be confident that their service is using the most up-to-date government data
 
-        %h4.govuk-heading-s Data managers
-        %p Registers can also help if you collect, manage or store data for your organisation.
-        %p Data managers who create a register:
-        %ul.govuk-list.govuk-list--bullet
-          %li only need to publish data in one place - there’s no need to update multiple lists and datasets whenever something changes
-          %li can easily share their data across government
+        %figure{class: 'govuk-!-margin-bottom-6 registers-aspect-3:2'}
+          = image_tag "country-picker.gif", class: 'aspect-inner'
 
         %h3.govuk-heading-m How to access a register
         %p All registers can be accessed and used freely by anyone.
@@ -52,9 +46,5 @@
         %p You can see which #{link_to 'government services', services_using_registers_path} are already using registers.
         %p You can also find out which #{link_to 'government organisations', registers_path(show_by: "organisation")} have created a register with their data.
 
-
-
       %nav{class: 'govuk-grid-column-one-third'}
         = render partial: 'layouts/secondary-navigation'
-      %aside{class: 'govuk-grid-column-two-thirds govuk-!-padding-top-4'}
-        = render partial: 'layouts/registers-in-numbers'

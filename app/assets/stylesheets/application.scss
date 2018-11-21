@@ -648,6 +648,26 @@ details {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+// ============================================================================
+// Aspect ratio
+// ============================================================================
+
+.registers-aspect-3\:2 {
+  border: 2px solid $govuk-border-colour;
+  height: 0;
+  overflow: hidden;
+  padding-top: 66%;
+  position: relative;
+  width: 100%;
+}
+
+.aspect-inner {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 
 // ============================================================================
 // Overridess
