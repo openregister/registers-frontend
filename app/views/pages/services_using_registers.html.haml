@@ -1,10 +1,3 @@
-- # ---------------------------------------------------------------------------
-- # REMEMBER!
-- # ---------------------------------------------------------------------------
-- # When updaing this page, make sure to update numbers in the
-- # `_registers-in-numbers` partial in `layouts`.
-- # ---------------------------------------------------------------------------
-
 - @page_title = 'Services using registers'
 = content_for :body_classes, 'services-using-registers-page'
 %nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
@@ -91,10 +84,3 @@
                   %li{class: "govuk-!-padding-bottom-3", role: "listitem"}
                     %span{class: "list-of-registers__heading"} Realtime Flood Monitoring
                     Environment Agency
-
-
-    %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
-      %aside{class: 'govuk-grid-column-two-thirds'}
-        = render partial: 'layouts/registers-in-numbers', locals: { border: true, heading: 's' }
-      %nav{class: 'govuk-grid-column-one-third'}
-        = render partial: 'layouts/secondary-navigation'
