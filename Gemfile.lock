@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/NoRedInk/axlsx.git
+  revision: 1a4a6387bf398e2782933ee6607e5589cd15bee3
+  ref: 1a4a6387bf398e2782933ee6607e5589cd15bee3
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.2.1)
+
+GIT
   remote: https://github.com/mailtop/email_validator.git
   revision: 83fe71a4731b0a01e84d1221264cc9802196820e
   specs:
@@ -66,13 +76,16 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.3.1)
       execjs
+    axlsx_styler (0.2.0)
+      activesupport (>= 3.1)
+      axlsx (>= 2.0, < 4)
     bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (10.0.2)
     canonical-rails (0.2.4)
       rails (>= 4.1, < 5.3)
-    capybara (3.10.1)
+    capybara (3.11.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -84,7 +97,7 @@ GEM
     clockwork (2.0.3)
       tzinfo
     coderay (1.1.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.3)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -153,6 +166,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     http (2.2.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -278,13 +292,17 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    regexp_parser (1.2.0)
+    regexp_parser (1.3.0)
     request_store (1.4.1)
       rack (>= 1.4)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rodf (1.0.0)
+      activesupport (>= 3.0)
+      builder (>= 3.0)
+      rubyzip (>= 1.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.2)
@@ -316,6 +334,7 @@ GEM
     ruby_dep (1.5.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
@@ -335,6 +354,10 @@ GEM
       rake (>= 0.9, < 13)
       sass (~> 3.5.5)
     sexp_processor (4.11.0)
+    spreadsheet_architect (3.2.0)
+      axlsx (>= 2, < 4)
+      axlsx_styler (>= 0.1.7, < 2)
+      rodf (>= 1.0.0, < 2)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -353,7 +376,7 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.19)
+    uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -386,6 +409,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   autoprefixer-rails
+  axlsx!
   bcrypt
   canonical-rails
   capybara
@@ -426,6 +450,7 @@ DEPENDENCIES
   rspec-rails (~> 3.8)
   sass-rails (~> 5.0)
   scenic (~> 1.4, >= 1.4.1)
+  spreadsheet_architect (~> 3.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   uglifier (>= 1.3.0)
