@@ -59,8 +59,8 @@ class DownloadController < ApplicationController
     #
     # Assigning it to a variable, then setting the session to `nil` allows
     # both the use and reset of the custom dimension.
-    @custom_dimension_3 = session[:last_seen_registers_stage]
-    session[:last_seen_registers_stage] = nil
+    # @custom_dimension_3 = session[:last_seen_registers_stage]
+    # session[:last_seen_registers_stage] = nil
 
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
