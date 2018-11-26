@@ -4,12 +4,12 @@
 
   ga('create', '<%= Rails.configuration.x.google_analytics.frontend_tracking_id %>', 'auto')
 
-  <% if @custom_dimension_2 %>
+  <% if @custom_dimension_2.present? %>
     ga('set', 'dimension2','<%= @custom_dimension_2.downcase %>')
   <% end %>
 
-  <% if @custom_dimension_3 %>
-    ga('set', 'dimension3','<%= @custom_dimension_3 %>')
+  <% if session[:last_seen_registers_stage].present? || @custom_dimension_3.present? %>
+    ga('set', 'dimension3','<%= session[:last_seen_registers_stage] || @custom_dimension_3 %>')
   <% end %>
 
   ga('set', 'anonymizeIp', true)

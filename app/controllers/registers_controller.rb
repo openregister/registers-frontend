@@ -43,9 +43,9 @@ class RegistersController < ApplicationController
     @register_records_total_count = @register.number_of_records;
 
     if @register.register_phase == 'Alpha'
-      @custom_dimension_3 = 'Alpha'
+      session[:last_seen_registers_stage] = 'Alpha'
     else
-      @custom_dimension_3 = 'Live'
+      session[:last_seen_registers_stage] = 'Live'
     end
   end
 

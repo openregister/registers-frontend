@@ -52,6 +52,16 @@ class DownloadController < ApplicationController
 
   def get_api
     @custom_dimension_2 = "#{@register.name} - API"
+
+    # This is the last point we need to use custom dimension 3. But
+    # setting it to `nil` here prevents it from being used in the final page
+    # of the flow.
+    #
+    # Assigning it to a variable, then setting the session to `nil` allows
+    # both the use and reset of the custom dimension.
+    @custom_dimension_3 = session[:last_seen_registers_stage]
+    session[:last_seen_registers_stage] = nil
+
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
