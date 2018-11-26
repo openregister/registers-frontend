@@ -23,11 +23,12 @@
           = image_tag "registers-top-image.png", role: "presentation"
 
   .govuk-width-container
-    %section.govuk-main-wrapper
+    %section{class: 'govuk-main-wrapper govuk-!-padding-bottom-9 govuk-!-margin-bottom-7'}
       %h2{class: 'govuk-heading-m govuk-!-margin-bottom-0'} Government registers collection
       %p Search all the registers that are ready to use in your government service.
       = render partial: 'layouts/categories'
-      %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
+
+      %div{class: 'govuk-grid-row govuk-!-padding-top-9'}
         %aside{class: 'govuk-grid-column-two-thirds'}
           %h2{ class: "govuk-heading-s registers-!-border-top govuk-!-padding-top-4"} GOV.UK Registers in numbers
           %ul{class: "registers-in-numbers registers-in-numbers--super" }
