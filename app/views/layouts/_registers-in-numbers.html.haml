@@ -1,9 +1,5 @@
-- list_presentation_class =  @registers_in_numbers_style.present? ? "registers-in-numbers registers-in-numbers--#{@registers_in_numbers_style}" : 'registers-in-numbers'
-- heading_size = @registers_in_numbers_heading.present? ? @registers_in_numbers_heading : 'govuk-heading-s'
-- border = @registers_in_numbers_border.present? ? @registers_in_numbers_border : 'registers-!-border-top'
-
-%h2{ class: "#{heading_size} #{border} govuk-!-padding-top-4"} GOV.UK Registers in numbers
-%ul{class: "#{list_presentation_class}" }
+%h2{ class: "govuk-heading-s registers-!-border-top govuk-!-padding-top-4"} GOV.UK Registers in numbers
+%ul{class: "registers-in-numbers registers-in-numbers--super" }
   %li{class: 'registers-in-numbers__item'}
     %span{role: 'presentation', class: 'registers-in-numbers__number'} 800k
     %a{role: 'presentation', class: 'registers-in-numbers__caption', href: 'https://www.gov.uk/performance/govuk-registers'}total API requests
