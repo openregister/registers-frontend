@@ -2,11 +2,9 @@ User.create(name: 'admin', email: 'registerteam@digital.cabinet-office.gov.uk', 
 
 d13 = Authority.find_or_create_by!(government_organisation_key: 'D13', name: 'Foreign & Commonwealth Office', registers_description: 'Includes countries and territories')
 d4 = Authority.find_or_create_by!(government_organisation_key: 'D4', name: 'Ministry of Housing, Communities and Local Government', registers_description: 'Includes local authorities in Northern Ireland')
-d6 = Authority.find_or_create_by!(government_organisation_key: 'D6', name: 'Department for Education')
 d18 = Authority.find_or_create_by!(government_organisation_key: 'D18', name: 'Ministry of Justice', registers_description: 'Includes prison estate')
 d10 = Authority.find_or_create_by!(government_organisation_key: 'D10', name: 'Department for Work and Pensions', registers_description: 'Includes jobcentres')
 d2 = Authority.find_or_create_by!(government_organisation_key: 'D2', name: 'Cabinet Office', registers_description: 'Includes government organisations and services, gov.uk domain names and a register of all registers')
-d98 = Authority.find_or_create_by!(government_organisation_key: 'D98', name: 'The Charity Commission')
 puts('Created Authorities')
 
 Register.create(
@@ -29,13 +27,6 @@ Register.create(
   authority: d4,
 )
 puts "Created Local authority eng Register"
-
-Register.create(
-  name: "School eng",
-  register_phase: "Alpha",
-  authority: d6,
-)
-puts "Created School eng Register"
 
 Register.create(
   name: "Prison estate",
@@ -64,13 +55,6 @@ Register.create(
   authority: d2,
 )
 puts "Created Government domain Register"
-
-Register.create(
-  name: "Charity",
-  register_phase: "Discovery",
-  authority: d98,
-  )
-puts "Created Charity Register"
 
 Category.create!([
   { name: 'Crime, justice and law', slug: 'crime-justice-and-law', description: 'Includes prison estate', taxon_content_id: 'ba951b09-5146-43be-87af-44075eac3ae9' },

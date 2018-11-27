@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   }
 
   scope :with_a_register__shown_on_homepage, -> {
-    with_a_register.where.not(slug: 'digital-data-and-technology-profession-capability-framework')
+    with_a_register.where.not(slug: ['digital-data-and-technology-profession-capability-framework', 'registers-data'])
   }
 
   scope :collection, ->(slug) {
