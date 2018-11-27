@@ -60,6 +60,6 @@ private
   end
 
   def set_custom_dimension
-    @custom_dimension_2 = [params[:from]&.tr('-', ' '), params[:method]].compact.join(' - ').presence
+    @custom_dimension2 = [params[:from]&.tr('-', ' '), params[:method]].compact.join(' - ').presence
   end
 end

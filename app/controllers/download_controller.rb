@@ -10,8 +10,8 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
-    @custom_dimension_2 = "#{@register.name} - download"
-    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension2 = "#{@register.name} - download"
+    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
   end
 
   def create
@@ -27,7 +27,7 @@ class DownloadController < ApplicationController
   def success; end
 
   def choose_access
-    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
 
     if cookies[:seen_help_us_improve_questions]
       @next_step_api = register_get_api_path
@@ -44,20 +44,20 @@ class DownloadController < ApplicationController
                                         .where(entry_type: 'user')
                                         .current
 
-    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
 
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
-      @custom_dimension_2 = "#{@register.name} - API"
+      @custom_dimension2 = "#{@register.name} - API"
     else
       @next_page = register_download_index_path
-      @custom_dimension_2 = "#{@register.name} - download"
+      @custom_dimension2 = "#{@register.name} - download"
     end
   end
 
   def get_api
-    @custom_dimension_2 = "#{@register.name} - API"
-    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension2 = "#{@register.name} - API"
+    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
 
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {

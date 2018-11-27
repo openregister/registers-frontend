@@ -42,7 +42,7 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
     @register_records_total_count = @register.number_of_records;
 
-    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
