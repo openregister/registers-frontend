@@ -8,8 +8,8 @@
     ga('set', 'dimension2','<%= @custom_dimension_2.downcase %>')
   <% end %>
 
-  <% if session[:last_seen_registers_stage].present? || @custom_dimension_3.present? %>
-    ga('set', 'dimension3','<%= session[:last_seen_registers_stage] || @custom_dimension_3 %>')
+  <% if @custom_dimension_3.present? %>
+    ga('set', 'dimension3','<%= @custom_dimension_3 %>')
   <% end %>
 
   ga('set', 'anonymizeIp', true)

@@ -42,11 +42,7 @@ class RegistersController < ApplicationController
     @feedback = Feedback.new
     @register_records_total_count = @register.number_of_records;
 
-    if @register.register_phase == 'Alpha'
-      session[:last_seen_registers_stage] = 'Alpha'
-    else
-      session[:last_seen_registers_stage] = 'Live'
-    end
+    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)

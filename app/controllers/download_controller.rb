@@ -11,6 +11,7 @@ class DownloadController < ApplicationController
 
   def index
     @custom_dimension_2 = "#{@register.name} - download"
+    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
   end
 
   def create
@@ -26,6 +27,8 @@ class DownloadController < ApplicationController
   def success; end
 
   def choose_access
+    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+
     if cookies[:seen_help_us_improve_questions]
       @next_step_api = register_get_api_path
       @next_step_download = register_download_index_path
@@ -41,6 +44,8 @@ class DownloadController < ApplicationController
                                         .where(entry_type: 'user')
                                         .current
 
+    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
       @custom_dimension_2 = "#{@register.name} - API"
@@ -52,15 +57,7 @@ class DownloadController < ApplicationController
 
   def get_api
     @custom_dimension_2 = "#{@register.name} - API"
-
-    # This is the last point we need to use custom dimension 3. But
-    # setting it to `nil` here prevents it from being used in the final page
-    # of the flow.
-    #
-    # Assigning it to a variable, then setting the session to `nil` allows
-    # both the use and reset of the custom dimension.
-    # @custom_dimension_3 = session[:last_seen_registers_stage]
-    # session[:last_seen_registers_stage] = nil
+    @custom_dimension_3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
 
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
