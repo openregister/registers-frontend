@@ -41,7 +41,6 @@ class RegistersController < ApplicationController
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
     @register_records_total_count = @register.number_of_records
-    @custom_dimension3 = @register.reported_phase
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)

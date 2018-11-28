@@ -21,8 +21,6 @@ class EntriesController < ApplicationController
     @entries_with_items = Kaminari.paginate_array(@entries_with_items, total_count: @result_count)
                                   .page(@current_page)
                                   .per(100)
-
-    @custom_dimension3 = @register.reported_phase
   end
 
 private

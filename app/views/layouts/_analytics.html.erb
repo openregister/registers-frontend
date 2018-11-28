@@ -8,8 +8,8 @@
     ga('set', 'dimension2','<%= @custom_dimension2.downcase %>')
   <% end %>
 
-  <% if @custom_dimension3.present? %>
-    ga('set', 'dimension3','<%= @custom_dimension3 %>')
+  <% if @register&.register_phase.present? %>
+    ga('set', 'dimension3','<%= @register.register_phase %>')
   <% end %>
 
   ga('set', 'anonymizeIp', true)
