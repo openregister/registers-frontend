@@ -22,7 +22,7 @@
         - if @register.category.present?
           %p{class: 'govuk-body-s govuk-!-margin-bottom-2'}
             Category: #{link_to @register.category&.name, category_path(@register.category&.slug), {class: 'govuk-!-font-weight-bold', data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name}", 'click-label' => 'Category'}}}
-      .govuk-grid-column-one-third{'aria-hidden': 'true'}
+      .govuk-grid-column-one-third
         - if @register.authority.present?
           %p{class: 'govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-2'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
