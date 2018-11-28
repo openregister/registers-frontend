@@ -11,7 +11,7 @@ class DownloadController < ApplicationController
 
   def index
     @custom_dimension2 = "#{@register.name} - download"
-    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
+    @custom_dimension3 = @register.reported_phase
   end
 
   def create
@@ -27,8 +27,7 @@ class DownloadController < ApplicationController
   def success; end
 
   def choose_access
-    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
-
+    @custom_dimension3 = @register.reported_phase
     if cookies[:seen_help_us_improve_questions]
       @next_step_api = register_get_api_path
       @next_step_download = register_download_index_path
@@ -44,8 +43,7 @@ class DownloadController < ApplicationController
                                         .where(entry_type: 'user')
                                         .current
 
-    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
-
+    @custom_dimension3 = @register.reported_phase
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
       @custom_dimension2 = "#{@register.name} - API"
@@ -57,8 +55,7 @@ class DownloadController < ApplicationController
 
   def get_api
     @custom_dimension2 = "#{@register.name} - API"
-    @custom_dimension3 = @register.register_phase == 'Alpha' ? 'Alpha' : 'Live'
-
+    @custom_dimension3 = @register.reported_phase
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,

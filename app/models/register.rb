@@ -76,6 +76,10 @@ class Register < ApplicationRecord
     register_phase == 'Beta' && category.present?
   end
 
+  def reported_phase
+    register_phase == 'Beta' ? 'Live' : register_phase
+  end
+
 private
 
   def set_slug
