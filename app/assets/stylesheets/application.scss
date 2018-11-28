@@ -121,36 +121,6 @@ html {
 }
 // scss-lint:enable IdSelector
 
-.govuk-metadata {
-  font-size: 16px;
-  margin-bottom: 20px;
-  @extend %contain-floats;
-
-  @supports (display: grid) {
-    display: grid;
-    grid-template-columns: 6.25em auto;
-    grid-column-gap: 0.35em;
-  }
-
-  dl {
-    overflow: hidden;
-  }
-
-  dt {
-    clear: left;
-    float: left;
-    max-width: 150px;
-    padding-bottom: 0.5rem;
-    padding-right: 1%;
-  }
-
-  dd {
-    float: left;
-    margin: 0;
-    max-width: 480px;
-    padding-bottom: 0.5rem;
-  }
-}
 
 .list-number-big {
   font-size: 24px;
