@@ -1,5 +1,6 @@
 class Register < ApplicationRecord
   before_validation :set_slug
+  before_create :set_initial_title
 
   CURRENT_PHASES = %w[Backlog Discovery Alpha Beta].freeze
 
@@ -76,5 +77,9 @@ private
     self.slug = name.try(:parameterize)
     self.slug += "-#{self.class.where(slug: slug).count}" if self.class.where(slug: slug).where.not(id: id).exists?
     slug
+  end
+
+  def set_initial_title
+    self.title = self.name
   end
 end
