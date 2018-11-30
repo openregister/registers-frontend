@@ -24,13 +24,20 @@
           - unless @register.is_empty?
             %dt.register-metadata__term Last updated:
             %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.register_name}", 'click-label' => 'Last updated'}}
-        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
       .govuk-grid-column-one-third{'aria-hidden': 'true'}
         - if @register.authority.present?
           %p{class: 'govuk-!-font-weight-bold govuk-!-margin-top-2'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
+      %div{class: 'govuk-grid-column-full highlight-boxes govuk-!-padding-left-0 govuk-!-padding-right-0 govuk-!-padding-top-5'}
+        %a{href: @next_step_download, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-download" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Download the data
+          %p{class: 'govuk-!-margin-bottom-0'} Get a copy of the latest data in this register in CSV and ODS formats.
+        %a{href: @next_step_api, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-API" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Use the API
+          %p{class: 'govuk-!-margin-bottom-0'} Always get the most up-to-date data in this register in JSON format.
+
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title

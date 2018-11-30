@@ -44,9 +44,11 @@ class DownloadController < ApplicationController
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
       @custom_dimension = "#{@register.name} - API"
+      @heading_caption = 'Before you use the API'
     else
       @next_page = register_download_index_path
       @custom_dimension = "#{@register.name} - download"
+      @heading_caption = 'Before you download the data'
     end
   end
 
@@ -81,6 +83,6 @@ private
   end
 
   def set_number_of_steps
-    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
+    @number_of_steps = cookies[:seen_help_us_improve_questions] ? nil : 2
   end
 end

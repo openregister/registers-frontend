@@ -41,6 +41,14 @@ class RegistersController < ApplicationController
     @records = recover_records(@register.fields_array, params)
     @feedback = Feedback.new
     @register_records_total_count = @register.number_of_records;
+
+    if cookies[:seen_help_us_improve_questions]
+      @next_step_api = register_get_api_path(@register.slug)
+      @next_step_download = register_download_index_path(@register.slug)
+    else
+      @next_step_api = register_help_improve_api_path(@register.slug)
+      @next_step_download = register_help_improve_download_path(@register.slug)
+    end
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)

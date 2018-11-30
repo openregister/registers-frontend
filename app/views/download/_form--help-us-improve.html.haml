@@ -2,7 +2,7 @@
 
   %div{ class: 'govuk-form-group js--is-government-group access-to-data govuk-!-padding-bottom-2' }
     %fieldset
-      %legend{ class: 'heading-medium govuk-!-margin-bottom-2 govuk-!-margin-top-3' } Do you work for the government?
+      %legend{ class: 'heading-medium govuk-!-margin-bottom-2 govuk-!-padding-top-3' } Do you work for the government?
       %p.js--is-government-message#do-you-work-for-the-government
       .govuk-radios{ data: { module: 'radios' }}
         .govuk-radios__item
@@ -50,7 +50,7 @@
   %div{ class: "govuk-form-group access-to-data__submit-group"}
     %button{type: 'submit', class: 'govuk-button govuk-!-margin-bottom-0'} Submit
     %span or
-    = link_to "I'd prefer not to say", @next_page, { class: 'js--ga-watch-click' }
+    = link_to "Skip this step", @next_page, { class: 'js--ga-watch-click' }
 
 = content_for :javascript do
   :javascript
