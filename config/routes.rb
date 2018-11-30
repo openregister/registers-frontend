@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show
     resources :download
-    resources :feedback, to: 'registers#create_feedback'
     resources :records, constraints: { id: /.*/ }, only: :show
 
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'

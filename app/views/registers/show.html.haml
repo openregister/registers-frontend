@@ -30,7 +30,6 @@
               %span= @register&.authority&.name
       .govuk-grid-column-full
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
-
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
@@ -73,7 +72,7 @@
               %div
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
+      #about-the-data__4{class: 'govuk-grid-column-full subsection__content js-accordion-subsection'}
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
@@ -82,16 +81,7 @@
           - else
             %script
               ga('send', 'event', 'Search', 'No results', 'Search term not present', {nonInteraction: true});
-    %section.govuk-grid-row{data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header
-        %h2.govuk-heading-m.subsection__title
-          Feedback
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#feedback__0
-        = render partial: 'feedback/form'
-    %section.govuk-grid-row
-      %div.govuk-grid-column-full
-        %div{class: 'registers-!-border-top govuk-!-padding-top-6'}
-          = link_to 'View all updates to this register', register_entries_path(@register.slug)
+    %hr{class: 'govuk-!-margin-top-0'}
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
   %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
   .modal-dialog__inner
