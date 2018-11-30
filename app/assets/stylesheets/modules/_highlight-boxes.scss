@@ -1,20 +1,25 @@
 .highlight-boxes {
-  @media screen and (min-width: map-get($govuk-breakpoints, tablet)) {
+  @media screen and (min-width: map-get($govuk-breakpoints, 'tablet')) {
     display: flex;
   }
 }
 
 .highlight-box {
-  box-sizing: border-box;
   background: govuk-colour("grey-4");
   border: 1px solid $govuk-border-colour;
+  box-sizing: border-box;
   display: block;
-  text-decoration: none;
   margin: 0 15px;
+  text-decoration: none;
 
-  @media screen and (min-width: map-get($govuk-breakpoints, tablet)) {
+  @media screen and (min-width: map-get($govuk-breakpoints, 'tablet')) {
     float: left;
     width: calc(50% - 30px);
+  }
+
+  &:hover {
+    border-color: $govuk-link-colour;
+    box-shadow: 0 0 0 1px $govuk-link-colour;
   }
 
   p {

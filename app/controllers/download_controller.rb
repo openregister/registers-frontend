@@ -25,16 +25,6 @@ class DownloadController < ApplicationController
 
   def success; end
 
-  def choose_access
-    if cookies[:seen_help_us_improve_questions]
-      @next_step_api = register_get_api_path
-      @next_step_download = register_download_index_path
-    else
-      @next_step_api = register_help_improve_api_path;
-      @next_step_download = register_help_improve_download_path
-    end
-  end
-
   def help_improve
     @government_organisations = Register.find_by(slug: 'government-organisation')
                                         .records

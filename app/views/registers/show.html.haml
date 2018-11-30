@@ -81,7 +81,6 @@
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
       .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
-        %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
             %script

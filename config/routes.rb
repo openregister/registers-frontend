@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
     get '/download-ods', to: 'download#download_ods', as: 'download_ods'
 
-    get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
     get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
     get '/help-us-improve', to: 'download#help_improve', as: 'help_improve_download'
     get '/use-the-api', to: 'download#get_api', as: 'get_api'
