@@ -82,12 +82,6 @@
           - else
             %script
               ga('send', 'event', 'Search', 'No results', 'Search term not present', {nonInteraction: true});
-    %section.govuk-grid-row{data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header
-        %h2.govuk-heading-m.subsection__title
-          Feedback
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#feedback__0
-        = render partial: 'feedback/form'
     %section.govuk-grid-row
       %div.govuk-grid-column-full
         %div{class: 'registers-!-border-top govuk-!-padding-top-6'}

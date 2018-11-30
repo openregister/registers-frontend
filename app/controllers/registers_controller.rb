@@ -3,7 +3,6 @@
 class RegistersController < ApplicationController
   include ActionView::Helpers::UrlHelper
   helper_method :field_link_resolver
-  invisible_captcha only: :create_feedback, honeypot: :spam
 
   def index
     @search_term = search_term
@@ -39,7 +38,6 @@ class RegistersController < ApplicationController
     @search_term = search_term
     @register = Register.has_records.find_by_slug!(params[:id])
     @records = recover_records(@register.fields_array, params)
-    @feedback = Feedback.new
     @register_records_total_count = @register.number_of_records
   end
 
@@ -50,24 +48,6 @@ class RegistersController < ApplicationController
       field_value.map { |fv| resolver.resolve(field, fv) }.join(', ').html_safe
     else
       resolver.resolve(field, field_value)
-    end
-  end
-
-  def create_feedback
-    @feedback = Feedback.new(feedback_params)
-
-    if @feedback.valid?
-      if @feedback.message.present?
-        @zendesk_service = ZendeskFeedback.new
-        @response = @zendesk_service.send_feedback(feedback_params)
-      end
-      flash[:success] = 'Thank you for your feedback'
-      redirect_to register_path(params[:register_id])
-    else
-      flash.now[:alert] = true
-      @register = Register.has_records.find_by_slug!(params[:register_id])
-      @records = recover_records(@register.fields_array, params)
-      render 'registers/show'
     end
   end
 
@@ -95,15 +75,5 @@ private
              .sort_by_field(sort_by, 'asc')
              .page(params[:page])
              .per(10)
-  end
-
-  def feedback_params
-    params.require(:feedback).permit(
-      :subject,
-      :email,
-      :message,
-      :useful,
-      :reason
-    )
   end
 end
