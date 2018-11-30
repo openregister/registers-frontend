@@ -15,16 +15,16 @@
           #{@register.register_name} register
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         - unless @register.is_empty?
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-2'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
             First published #{human_readable_date(@register.register_first_updated) }
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-2'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
             Last updated #{human_readable_date(@register.register_last_updated) } &mdash; #{link_to 'see all updates' , register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.register_name}", 'click-label' => 'Last updated'}}}
         - if @register.category.present?
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-2'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
             Category: #{link_to @register.category&.name, category_path(@register.category&.slug), {class: 'govuk-!-font-weight-bold', data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name}", 'click-label' => 'Category'}}}
       .govuk-grid-column-one-third
         - if @register.authority.present?
-          %p{class: 'govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-2'} Managed by:
+          %p{class: 'govuk-body-s govuk-!-margin-top-1 govuk-!-margin-bottom-0'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
