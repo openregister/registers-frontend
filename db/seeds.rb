@@ -7,55 +7,6 @@ d10 = Authority.find_or_create_by!(government_organisation_key: 'D10', name: 'De
 d2 = Authority.find_or_create_by!(government_organisation_key: 'D2', name: 'Cabinet Office', registers_description: 'Includes government organisations and services, gov.uk domain names and a register of all registers')
 puts('Created Authorities')
 
-Register.create(
-  name: "Country",
-  register_phase: "Beta",
-  authority: d13,
-)
-puts "Created Country Register"
-
-Register.create(
-  name: "Territory",
-  register_phase: "Beta",
-  authority: d13,
-)
-puts "Created Territory Register"
-
-Register.create(
-  name: "Local authority eng",
-  register_phase: "Beta",
-  authority: d4,
-)
-puts "Created Local authority eng Register"
-
-Register.create(
-  name: "Prison estate",
-  register_phase: "Beta",
-  authority: d18,
-)
-puts "Created Prison Register"
-
-Register.create(
-  name: "Jobcentre",
-  register_phase: "Beta",
-  authority: d10,
-)
-puts "Created Jobcentre Register"
-
-Register.create(
-  name: "Government organisation",
-  register_phase: "Beta",
-  authority: d2,
-)
-puts "Created Government organisation Register"
-
-Register.create(
-  name: "Government domain",
-  register_phase: "Beta",
-  authority: d2,
-)
-puts "Created Government domain Register"
-
 Category.create!([
   { name: 'Crime, justice and law', slug: 'crime-justice-and-law', description: 'Includes prison estate', taxon_content_id: 'ba951b09-5146-43be-87af-44075eac3ae9' },
   { name: 'Digital, Data and Technology Profession Capability Framework', slug: 'digital-data-and-technology-profession-capability-framework' },
@@ -70,6 +21,63 @@ Category.create!([
   { name: 'Work', slug: 'work', description: 'Includes jobcentres', taxon_content_id: 'd0f1e5a3-c8f4-4780-8678-994f19104b21' }
 ])
 puts("Created Categories")
+
+Register.create(
+  name: "Country",
+  register_phase: "Beta",
+  authority: d13,
+  category: Category.find_by!(slug: 'geography')
+)
+puts "Created Country Register"
+
+Register.create(
+  name: "Territory",
+  register_phase: "Beta",
+  authority: d13,
+  category: Category.find_by!(slug: 'geography')
+)
+puts "Created Territory Register"
+
+Register.create(
+  name: "Local authority eng",
+  register_phase: "Beta",
+  authority: d4,
+  category: Category.find_by!(slug: 'geography')
+)
+puts "Created Local authority eng Register"
+
+Register.create(
+  name: "Prison estate",
+  register_phase: "Beta",
+  authority: d18,
+  category: Category.find_by!(slug: 'crime-justice-and-law')
+)
+puts "Created Prison Register"
+
+Register.create(
+  name: "Jobcentre",
+  register_phase: "Beta",
+  authority: d10,
+  category: Category.find_by!(slug: 'work')
+)
+puts "Created Jobcentre Register"
+
+Register.create(
+  name: "Government organisation",
+  register_phase: "Beta",
+  authority: d2,
+  category: Category.find_by!(slug: 'government')
+)
+puts "Created Government organisation Register"
+
+Register.create(
+  name: "Government domain",
+  register_phase: "Beta",
+  authority: d2,
+  category: Category.find_by!(slug: 'government')
+)
+puts "Created Government domain Register"
+
 
 
 puts "The admin interface is located at http://localhost:3000/admin"
