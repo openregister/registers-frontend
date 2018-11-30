@@ -16,17 +16,31 @@
           .hero__inline-image
             = image_tag "registers-top-image.png", role: "presentation"
           %p.hero__description
-            GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.
+            GOV.UK Registers provides structured datasets of government information to help you build services on a high quality data infrastructure.
 
           = link_to 'Learn more', about_path, class: 'button hero-button', role: 'button'
         .hero__aside-image
           = image_tag "registers-top-image.png", role: "presentation"
 
   .govuk-width-container
-    %section{class: 'govuk-main-wrapper govuk-!-padding-bottom-9 govuk-!-margin-bottom-7'}
-      %h2{class: 'govuk-heading-m govuk-!-margin-bottom-0'} Government registers collection
-      %p Search all the registers that are ready to use in your government service.
-      = render partial: 'layouts/categories'
+    .govuk-main-wrapper
+      %section.govuk-grid-row
+        %div{class: 'govuk-grid-column-one-third govuk-!-padding-bottom-2'}
+          %h2{class: 'govuk-heading-l govuk-!-margin-bottom-3'} Data
+          %p Search our #{link_to 'registers collection', registers_path} to find data published by government and public sector organisations.
+        %div{class: 'govuk-grid-column-one-third govuk-!-padding-bottom-2'}
+          %h2{class: 'govuk-heading-l govuk-!-margin-bottom-3'} Download
+          %p Get a copy of the latest data in CSV and ODS formats.
+        %div{class: 'govuk-grid-column-one-third'}
+          %h2{class: 'govuk-heading-l govuk-!-margin-bottom-3'} API
+          %p Integrate with our API to always use the most up-to-date data.
+
+      %section.govuk-grid-row
+        %div{class: 'govuk-grid-column-full govuk-!-padding-bottom-9 govuk-!-margin-bottom-7'}
+          %hr.govuk-section-break.govuk-section-break--m.govuk-section-break--visible
+          %h2{class: 'govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7'} Government registers collection
+          %p{class: 'govuk-!-margin-bottom-5'} Search all the registers that are ready to use in your government service.
+          = render partial: 'layouts/categories'
 
 = content_for :javascript do
   :javascript
