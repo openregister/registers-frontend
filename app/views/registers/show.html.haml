@@ -18,7 +18,7 @@
           %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
             First published #{human_readable_date(@register.register_first_updated) }
           %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
-            Last updated #{human_readable_date(@register.register_last_updated) } &mdash; #{link_to 'see all updates' , register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.register_name}", 'click-label' => 'Last updated'}}}
+            Last updated #{human_readable_date(@register.register_last_updated) } &mdash; #{link_to 'see all updates' , register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.title}", 'click-label' => 'Last updated'}}}
         - if @register.category.present?
           %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
             Category: #{link_to @register.category&.name, category_path(@register.category&.slug), {class: 'govuk-!-font-weight-bold', data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name}", 'click-label' => 'Category'}}}
