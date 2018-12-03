@@ -4,7 +4,7 @@ class Authority < ApplicationRecord
   scope :by_authority_name, -> { order name: :asc }
 
   scope :with_a_register, -> {
-    joins(:registers).merge(Register.in_beta).distinct.by_authority_name
+    joins(:registers).merge(Register.in_beta.has_records).distinct.by_authority_name
   }
 
   scope :collection, ->(id) {
