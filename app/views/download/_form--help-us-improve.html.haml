@@ -50,7 +50,7 @@
   %div{ class: "govuk-form-group access-to-data__submit-group"}
     %button{type: 'submit', class: 'govuk-button govuk-!-margin-bottom-0'} Submit
     %span or
-    = link_to "Skip this step", @next_page, { class: 'js--ga-watch-click' }
+    = link_to 'Skip this step', @next_page, { class: 'js--ga-watch-click' }
 
 = content_for :javascript do
   :javascript
