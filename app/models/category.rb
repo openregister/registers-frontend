@@ -20,6 +20,6 @@ class Category < ApplicationRecord
   end
 
   def register_count
-    @register_count ||= registers.in_beta.count
+    @register_count ||= registers.in_beta.has_records.count
   end
 end
