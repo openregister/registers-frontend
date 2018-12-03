@@ -1,4 +1,4 @@
-- @page_title = "#{@register&.title} register updates"
+- @page_title = "#{@register.title} register updates"
 - content_for :body_classes, 'entries-index'
 
 .govuk-width-container
@@ -7,14 +7,14 @@
       %li.breadcrumbs__item
         = link_to 'Get data', registers_path
       %li.breadcrumbs__item
-        = link_to "#{@register&.title} register", register_path(@register.slug)
+        = link_to "#{@register.title} register", register_path(@register.slug)
       %li.breadcrumbs__item.breadcrumbs__item--active
-        = link_to "#{@register&.title} register updates", '#content', 'aria-current' => 'page'
+        = link_to "#{@register.title} register updates", '#content', 'aria-current' => 'page'
 
   %main#content.govuk-main-wrapper{role:'main'}
     .govuk-grid-row
       %div{class: 'govuk-grid-column-full govuk-!-padding-top-3'}
-        %h1.govuk-heading-l= "#{@register&.title} register updates"
+        %h1.govuk-heading-l= "#{@register.title} register updates"
         %p.govuk-body Search the full history of changes to this register.
     .govuk-grid-row
       .govuk-grid-column-one-third
