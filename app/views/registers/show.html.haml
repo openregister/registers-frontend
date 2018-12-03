@@ -12,7 +12,7 @@
             %p This data is in progress and it’s not ready for use.
       .govuk-grid-column-two-thirds{class: 'govuk-!-margin-top-2'}
         %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}
-          #{@register&.title} register
+          #{@register.title} register
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         %dl.govuk-metadata
           - if @register.authority.present?
@@ -23,7 +23,7 @@
             %dd.register-metadata__definition= link_to @register.category&.name, category_path(@register.category&.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name} ", 'click-label' => 'Category'}}
           - unless @register.is_empty?
             %dt.register-metadata__term Last updated:
-            %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register&.title}", 'click-label' => 'Last updated'}}
+            %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.title}", 'click-label' => 'Last updated'}}
         %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
       .govuk-grid-column-one-third{'aria-hidden': 'true'}
         - if @register.authority.present?
