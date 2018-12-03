@@ -1,5 +1,6 @@
 class Register < ApplicationRecord
   before_validation :set_slug
+  before_create :set_initial_title
 
   CURRENT_PHASES = %w[Backlog Discovery Alpha Beta].freeze
 
@@ -9,7 +10,7 @@ class Register < ApplicationRecord
   validates_uniqueness_of :name
   validates :slug, uniqueness: true
 
-  scope :by_name, -> { order name: :asc }
+  scope :by_name, -> { order(arel_table[:title].lower.asc) }
   scope :by_popularity, -> { order position: :asc }
   scope :sort_by_phase_name_asc, -> { order(ordered_phases) }
   scope :has_records, -> { where(id: Record.select(:register_id)) }
@@ -70,12 +71,6 @@ class Register < ApplicationRecord
     Record.where(register_id: id, entry_type: 'user').count
   end
 
-  def register_name
-    register_phase != 'Backlog' &&
-      Record.where(register_id: id, entry_type: 'system', key: 'register-name')
-            .pluck(Arel.sql("data -> 'register-name' as register_name")).first || name
-  end
-
   def is_empty?
     records.where(entry_type: 'user').none?
   end
@@ -90,5 +85,9 @@ private
     self.slug = name.try(:parameterize)
     self.slug += "-#{self.class.where(slug: slug).count}" if self.class.where(slug: slug).where.not(id: id).exists?
     slug
+  end
+
+  def set_initial_title
+    self.title = self.name
   end
 end
