@@ -1,10 +1,10 @@
 class Authority < ApplicationRecord
   has_many :registers
 
-  scope :by_name, -> { order name: :asc }
+  scope :by_authority_name, -> { order name: :asc }
 
   scope :with_a_register, -> {
-    joins(:registers).merge(Register.in_beta).distinct.by_name
+    joins(:registers).merge(Register.in_beta).distinct.by_authority_name
   }
 
   scope :collection, ->(id) {
@@ -12,7 +12,7 @@ class Authority < ApplicationRecord
   }
 
   def registers_by_this_collection
-    @registers_by_this_collection ||= registers.in_beta
+    @registers_by_this_collection ||= registers.in_beta.by_name
   end
 
   def register_count

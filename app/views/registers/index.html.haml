@@ -56,7 +56,7 @@
               - @registers_collection.each do |register|
                 %li.list-of-registers__register.js--list-of-registers
                   %a{href: register_path(register.slug)}
-                    %h3.list-of-registers__heading= register.register_name
+                    %h3.list-of-registers__heading= register.title
                   - if register.register_description.present?
                     %p.list-of-registers__description= register.register_description
                   - if register.authority.present?

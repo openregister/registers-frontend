@@ -2,6 +2,6 @@
   - @collection.registers_by_this_collection.each do |register|
     %li.list-of-registers__register
       %h3.list-of-registers__heading
-        =link_to "#{register.register_name} register", register_path(register.slug), {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
+        =link_to "#{register.title} register", register_path(register.slug), {class: 'govuk-heading-s govuk-!-margin-bottom-0'}
       %p.list-of-registers__description= register.register_description
       %p.list-of-registers__authority= register.authority.name
