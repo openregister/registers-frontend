@@ -12,7 +12,7 @@ class Authority < ApplicationRecord
   }
 
   def registers_by_this_collection
-    @registers_by_this_collection ||= registers.in_beta.by_name
+    @registers_by_this_collection ||= registers.in_beta.has_records.by_name
   end
 
   def register_count
