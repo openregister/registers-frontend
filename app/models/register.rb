@@ -46,6 +46,14 @@ class Register < ApplicationRecord
       .to_s
   end
 
+  def register_first_updated
+    Record.select('timestamp')
+      .where(register_id: id)
+      .order(timestamp: :asc)
+      .first[:timestamp]
+      .to_s
+  end
+
   def register_description
     Record.where(register_id: id, key: "register:#{name.parameterize}")
     .pluck(Arel.sql("data -> 'text' as text"))

@@ -9,7 +9,7 @@
       = link_to 'Register collection', '#content', 'aria-current' => 'page'
 
 .govuk-width-container
-  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2', role:'main'}
+  %main{class: 'govuk-main-wrapper govuk-!-margin-top-2 govuk-!-margin-bottom-9', role:'main'}
     .govuk-grid-row
       .govuk-grid-column-two-thirds
         %h1{class: 'govuk-heading-l govuk-!-margin-bottom-1'} Government registers collection
@@ -84,12 +84,6 @@
             = link_to 'Reset', registers_path, class: 'reset-link'
           %script
             ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
-
-    %div{class: 'govuk-grid-row govuk-!-padding-top-9 govuk-!-padding-bottom-9 govuk-!-margin-bottom-5'}
-      %aside{class: 'govuk-grid-column-two-thirds'}
-        = render partial: 'layouts/registers-in-numbers', locals: { border: true, heading: 's' }
-      %nav{class: 'govuk-grid-column-one-third'}
-        = render partial: 'layouts/secondary-navigation'
 
 
 = content_for :javascript do

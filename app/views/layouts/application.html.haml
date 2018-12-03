@@ -9,9 +9,7 @@
     document.getElementsByTagName('body')[0].className = document.getElementsByTagName('body')[0].className.replace(/no-js/, 'js')
 
 - content_for :after_header do
-  -# TODO: Bring back border when notice is removed
-  -# %header{class: "header #{current_page?(root_path) ? 'header--without-border' : 'header'}"}
-  %header{class: 'header header--without-border'}
+  %header{class: "header #{current_page?(root_path) ? 'header--without-border' : 'header'}"}
     .header__container
       .header__brand
         = link_to root_path do
@@ -32,8 +30,6 @@
             = link_to "About", about_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Registers collection", registers_path
-          %li{class: "#{'active' if current_page?(support_path)}"}
-            = link_to "Support", support_path
           %li
             = link_to "Documentation", "https://docs.registers.service.gov.uk"
 
@@ -43,12 +39,6 @@
   = csrf_meta_tags
   %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'Registers are lists of information that are managed and approved by government. GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.'}" }
   = render partial: 'layouts/analytics'
-
-- content_for :after_header do
-  %aside.notice
-    .container
-      %h2.visually-hidden Upcoming data format changes
-      %p{data: {"click-events" => "", "click-category" => "Content", "click-action" => "Notice link clicked"}} GOV.UK Registers will stop supporting data formats other than JSON and CSV from 1 December 2018. #{link_to "Read more about format changes", data_format_changes_path}
 
 - content_for :body_end do
   = javascript_include_tag 'application'
@@ -63,15 +53,12 @@
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Our service', about_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(show_by: "organisation"), {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
-            -# %li.govuk-footer__list-item
-              -# %a{href: "https://www.gov.uk/performance/govuk-registers"}Performance data
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Use
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Registers collection', registers_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Upcoming registers', registers_in_progress_path, {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
 
         .govuk-grid-column-one-third

@@ -15,7 +15,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.8'
 gem 'http', '2.2.1'
 
 # HAML templating
@@ -72,6 +72,11 @@ gem 'iso8601', '~> 0.12.1'
 
 # MailChimp
 gem 'gibbon', '~> 3.2'
+
+# ODS
+gem 'spreadsheet_architect', '~> 3.2'
+gem 'axlsx', git: 'https://github.com/NoRedInk/axlsx.git',
+             ref: '1a4a6387bf398e2782933ee6607e5589cd15bee3' # 2.1.0-pre-with-new-rubyzip, see https://github.com/randym/axlsx/issues/536
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.8'

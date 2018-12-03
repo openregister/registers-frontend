@@ -21,11 +21,10 @@ Rails.application.routes.draw do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show
     resources :download
-    resources :feedback, to: 'registers#create_feedback'
     resources :records, constraints: { id: /.*/ }, only: :show
 
-    get '/download-json', to: 'download#download_json', as: 'download_json'
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
+    get '/download-ods', to: 'download#download_ods', as: 'download_ods'
 
     get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
     get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
@@ -34,7 +33,7 @@ Rails.application.routes.draw do
     post '/use-the-api', to: 'download#post_api', as: 'post_api'
   end
 
-  get '/registers-in-progress', to: 'registers#in_progress'
+  get 'registers-in-progress', to: redirect('/registers', status: 301)
 
   resources :api_users, path: 'create-api-key'
 

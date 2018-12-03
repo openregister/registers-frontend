@@ -10,7 +10,7 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
-    @custom_dimension = "#{@register.name} - download"
+    @custom_dimension2 = "#{@register.name} - download"
   end
 
   def create
@@ -43,15 +43,15 @@ class DownloadController < ApplicationController
 
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
-      @custom_dimension = "#{@register.name} - API"
+      @custom_dimension2 = "#{@register.name} - API"
     else
       @next_page = register_download_index_path
-      @custom_dimension = "#{@register.name} - download"
+      @custom_dimension2 = "#{@register.name} - download"
     end
   end
 
   def get_api
-    @custom_dimension = "#{@register.name} - API"
+    @custom_dimension2 = "#{@register.name} - API"
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
@@ -64,14 +64,14 @@ class DownloadController < ApplicationController
     redirect_to register_get_api_path(@register.slug)
   end
 
-  def download_json
-    data = RegisterRecordsDownloader.new(@register).download_format('json')
-    send_data data, type: "application/json; header=present", disposition: "attachment; filename=#{@register.slug}.json"
-  end
-
   def download_csv
     data = RegisterRecordsDownloader.new(@register).download_format('csv')
     send_data data, type: "application/csv; header=present", disposition: "attachment; filename=#{@register.slug}.csv"
+  end
+
+  def download_ods
+    data = RegisterRecordsDownloader.new(@register).download_ods
+    send_data data, type: 'application/vnd.oasis.opendocument.spreadsheet', disposition: "attachment; filename=#{@register.slug}.ods"
   end
 
 private

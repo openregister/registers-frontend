@@ -2,10 +2,14 @@
   /* global ga, window */
   window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments); };
 
-  ga('create', 'UA-86101042-3', 'auto')
+  ga('create', '<%= Rails.configuration.x.google_analytics.frontend_tracking_id %>', 'auto')
 
-  <% if @custom_dimension %>
-    ga('set', 'dimension2','<%= @custom_dimension.downcase %>')
+  <% if @custom_dimension2.present? %>
+    ga('set', 'dimension2','<%= @custom_dimension2.downcase %>')
+  <% end %>
+
+  <% if @register&.register_phase.present? %>
+    ga('set', 'dimension3','<%= @register.register_phase %>')
   <% end %>
 
   ga('set', 'anonymizeIp', true)

@@ -40,7 +40,11 @@ module ApplicationHelper
   end
 
   def formatted_date(date)
-    Date.parse(date).strftime('%d/%m/%Y')
+    Date.parse(date).strftime('%d/%m/%Y') # eg 03/08/2015
+  end
+
+  def human_readable_date(date)
+    Date.parse(date).strftime('%e %B %Y') # eg 3 August 2015
   end
 
   def records_table_header(field_value)

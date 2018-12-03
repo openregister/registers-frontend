@@ -4,7 +4,7 @@
 
 .govuk-width-container
   %main#content.govuk-main-wrapper{role:'main', class: 'govuk-!-padding-top-0'}
-    .govuk-grid-row{class: 'govuk-!-margin-top-5'}
+    .govuk-grid-row{class: 'govuk-!-padding-top-6'}
       - if @register.register_phase != 'Beta'
         .govuk-grid-column-full
           .govuk-inset-text
@@ -14,23 +14,22 @@
         %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}
           #{@register.title} register
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
-        %dl.govuk-metadata
-          - if @register.authority.present?
-            %dt.register-metadata__term Organisation:
-            %dd.register-metadata__definition= link_to @register&.authority&.name, authority_path(@register.authority.government_organisation_key), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Organisation - #{@register&.authority&.name} ", 'click-label' => 'Organisation'}}
-          - if @register.show_category_link?
-            %dt.register-metadata__term Category:
-            %dd.register-metadata__definition= link_to @register.category&.name, category_path(@register.category&.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name} ", 'click-label' => 'Category'}}
-          - unless @register.is_empty?
-            %dt.register-metadata__term Last updated:
-            %dd.register-metadata__definition= link_to formatted_date(@register.register_last_updated), register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.title}", 'click-label' => 'Last updated'}}
-        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
-      .govuk-grid-column-one-third{'aria-hidden': 'true'}
+        - unless @register.is_empty?
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+            First published #{human_readable_date(@register.register_first_updated) }
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+            Last updated #{human_readable_date(@register.register_last_updated) } &mdash; #{link_to 'see all updates' , register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.register_name}", 'click-label' => 'Last updated'}}}
+        - if @register.category.present?
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+            Category: #{link_to @register.category&.name, category_path(@register.category&.slug), {class: 'govuk-!-font-weight-bold', data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name}", 'click-label' => 'Category'}}}
+      .govuk-grid-column-one-third
         - if @register.authority.present?
-          %p{class: 'govuk-!-font-weight-bold govuk-!-margin-top-2'} Managed by:
+          %p{class: 'govuk-body-s govuk-!-margin-top-1 govuk-!-margin-bottom-0'} Managed by:
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
+      .govuk-grid-column-full
+        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
@@ -73,7 +72,7 @@
               %div
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
+      #about-the-data__4{class: 'govuk-grid-column-full subsection__content js-accordion-subsection'}
         %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
@@ -82,16 +81,7 @@
           - else
             %script
               ga('send', 'event', 'Search', 'No results', 'Search term not present', {nonInteraction: true});
-    %section.govuk-grid-row{data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header
-        %h2.govuk-heading-m.subsection__title
-          Feedback
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#feedback__0
-        = render partial: 'feedback/form'
-    %section.govuk-grid-row
-      %div.govuk-grid-column-full
-        %div{class: 'registers-!-border-top govuk-!-padding-top-6'}
-          = link_to 'View all updates to this register', register_entries_path(@register.slug)
+    %hr{class: 'govuk-!-margin-top-0'}
 %dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
   %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
   .modal-dialog__inner
