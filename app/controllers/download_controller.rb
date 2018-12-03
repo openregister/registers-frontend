@@ -5,22 +5,17 @@ class DownloadController < ApplicationController
   include ActionView::Helpers::UrlHelper
 
   before_action :set_register
-  before_action :set_number_of_steps
   before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
   def index
-    @custom_dimension = "#{@register.name} - download"
-  end
-
-  def create
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
         expires: 24.hours.from_now
       }
     end
-    render :index
+    @custom_dimension = "#{@register.name} - download"
   end
 
   def success; end
@@ -70,9 +65,5 @@ private
 
   def set_register
     @register = Register.find_by_slug!(params[:register_id])
-  end
-
-  def set_number_of_steps
-    @number_of_steps = cookies[:seen_help_us_improve_questions] ? nil : 2
   end
 end
