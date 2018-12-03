@@ -9,13 +9,13 @@ class DownloadController < ApplicationController
   helper_method :government_orgs_local_authorities
 
   def index
+    @custom_dimension2 = "#{@register.name} - download"
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
         expires: 24.hours.from_now
       }
     end
-    @custom_dimension = "#{@register.name} - download"
   end
 
   def success; end
@@ -28,17 +28,17 @@ class DownloadController < ApplicationController
 
     if current_page?(register_help_improve_api_path)
       @next_page = register_get_api_path
-      @custom_dimension = "#{@register.name} - API"
+      @custom_dimension2 = "#{@register.name} - API"
       @heading_caption = 'Before you use the API'
     else
       @next_page = register_download_index_path
-      @custom_dimension = "#{@register.name} - download"
+      @custom_dimension2 = "#{@register.name} - download"
       @heading_caption = 'Before you download the data'
     end
   end
 
   def get_api
-    @custom_dimension = "#{@register.name} - API"
+    @custom_dimension2 = "#{@register.name} - API"
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
