@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show
-    resources :download
     resources :records, constraints: { id: /.*/ }, only: :show
 
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
@@ -28,8 +27,12 @@ Rails.application.routes.draw do
 
     get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
     get '/help-us-improve', to: 'download#help_improve', as: 'help_improve_download'
-    get '/use-the-api', to: 'download#get_api', as: 'get_api'
-    post '/use-the-api', to: 'download#post_api', as: 'post_api'
+
+    get '/download', to: 'download#download'
+    post '/download', to: 'download#download'
+
+    get '/use-the-api', to: 'download#api'
+    post '/use-the-api', to: 'download#api'
   end
 
   get 'registers-in-progress', to: redirect('/registers', status: 301)

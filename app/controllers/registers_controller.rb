@@ -41,8 +41,8 @@ class RegistersController < ApplicationController
     @register_records_total_count = @register.number_of_records
 
     if cookies[:seen_help_us_improve_questions]
-      @next_step_api = register_get_api_path(@register.slug)
-      @next_step_download = register_download_index_path(@register.slug)
+      @next_step_api = register_use_the_api_path(@register.slug)
+      @next_step_download = register_download_path(@register.slug)
     else
       @next_step_api = register_help_improve_api_path(@register.slug)
       @next_step_download = register_help_improve_download_path(@register.slug)

@@ -8,15 +8,7 @@ class DownloadController < ApplicationController
   before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
-  def index
-    @custom_dimension2 = "#{@register.name} - download"
-    unless cookies[:seen_help_us_improve_questions]
-      cookies[:seen_help_us_improve_questions] = {
-        value: true,
-        expires: 24.hours.from_now
-      }
-    end
-  end
+  def index; end
 
   def success; end
 
@@ -27,18 +19,18 @@ class DownloadController < ApplicationController
                                         .current
 
     if current_page?(register_help_improve_api_path)
-      @next_page = register_get_api_path
+      @next_page = register_use_the_api_path
       @custom_dimension2 = "#{@register.name} - API"
       @heading_caption = 'Before you use the API'
     else
-      @next_page = register_download_index_path
+      @next_page = register_download_path
       @custom_dimension2 = "#{@register.name} - download"
       @heading_caption = 'Before you download the data'
     end
   end
 
-  def get_api
-    @custom_dimension2 = "#{@register.name} - API"
+  def download
+    @custom_dimension2 = "#{@register.name} - download"
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
@@ -47,8 +39,14 @@ class DownloadController < ApplicationController
     end
   end
 
-  def post_api
-    redirect_to register_get_api_path(@register.slug)
+  def api
+    @custom_dimension2 = "#{@register.name} - API"
+    unless cookies[:seen_help_us_improve_questions]
+      cookies[:seen_help_us_improve_questions] = {
+        value: true,
+        expires: 24.hours.from_now
+      }
+    end
   end
 
   def download_csv
