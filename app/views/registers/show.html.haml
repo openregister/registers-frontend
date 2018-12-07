@@ -37,8 +37,9 @@
           %p{class: 'govuk-!-margin-bottom-0'} Always get the most up-to-date data in this register in JSON format.
 
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header#search_wrapper
-        %h2.govuk-heading-m.subsection__title About the data
+      .govuk-grid-column-full
+        %hr{class: 'govuk-!-margin-top-0'}
+        %h2.govuk-heading-m About the data
       %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-bottom-3'}
         %p
           There are
@@ -70,7 +71,7 @@
                         %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
                 - else
                   = render partial: 'record', collection: @records
-                  
+
           - if @show_load_more == true
             .pager
               .pager-controls.js-hidden
@@ -86,38 +87,19 @@
   = render partial: 'registers/structured_data', locals: { register: @register }
 
 = content_for :javascript do
-  :javascript
-    document.getElementById('access-the-data-button')
-      .addEventListener('click', function() {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Preview the data',
-          eventAction: 'Access the data',
-          eventLabel: 'Access the data',
-          nonInteraction: true
-        })
-      })
-  :javascript
-    var count = 0;
-    document.getElementById('load-more-records')
-      .addEventListener('click', function() {
-        count = count + 1
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Register Table',
-          eventAction: 'Load more ' + count,
-          eventLabel: 'Load more',
-          nonInteraction: true
-        })
-      })
-  :javascript
-    document.getElementById('access-the-data-from-preview')
-      .addEventListener('click', function() {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Register Table',
-          eventAction: 'Access the data from preview',
-          eventLabel: 'Access the data',
-          nonInteraction: true
-        })
-      })
+  - if @show_load_more == true
+    :javascript
+      var count = 0;
+      if (document.getElementById('load-more-records') !== null) {
+        document.getElementById('load-more-records')
+          .addEventListener('click', function() {
+            count = count + 1
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Register Table',
+              eventAction: 'Load more ' + count,
+              eventLabel: 'Load more',
+              nonInteraction: true
+            })
+          })
+      };

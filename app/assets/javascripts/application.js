@@ -25,7 +25,6 @@
 //= require accessible-autocomplete
 //= require govuk/show-hide-content
 //= require current-location
-//= require accordion-with-descriptions
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
 

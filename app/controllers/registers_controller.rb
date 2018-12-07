@@ -43,9 +43,9 @@ class RegistersController < ApplicationController
     @register_fields_with_examples = @register.fields_with_examples
 
     @register_records_total_count = @register.number_of_records
-    
+
     @show_load_more = @register.is_register_published_by_dcms? # only show 'Load more' for registers published by DCMS
-    
+
     if cookies[:seen_help_us_improve_questions]
       @next_step_api = register_use_the_api_path(@register.slug)
       @next_step_download = register_download_path(@register.slug)
