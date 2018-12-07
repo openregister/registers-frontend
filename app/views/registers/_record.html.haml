@@ -2,4 +2,4 @@
   - @register.register_fields.each do |field|
     - field_value = record.data[field['field']]
     %td
-      =  field_value ? field_link_resolver(field, field_value) :  "<span class='unknown'>No data</span>".html_safe
+      = field_value ? field_link_resolver(field, field_value) :  "<span class='unknown'>No data</span>".html_safe

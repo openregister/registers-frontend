@@ -49,11 +49,9 @@ module ApplicationHelper
 
   def records_table_header(field_value)
     wrapper_css_class = params[:sort_by] == field_value ? 'table-header active' : 'table-header'
-    what_does_this_mean = content_tag('span', "What does #{field_value} mean", class: 'visually-hidden') + '?'
 
     content_tag 'th', class: "#{field_value} #{wrapper_css_class}" do
-      content_tag('span', field_value.tr('-', ' ').humanize) +
-        link_to(what_does_this_mean, register_field_url(@register.slug, field_value), class: 'info-icon', remote: true, data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Help" })
+      field_value.tr('-', ' ').humanize
     end
   end
 end

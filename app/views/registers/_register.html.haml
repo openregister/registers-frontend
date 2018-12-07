@@ -2,7 +2,6 @@
   %td
     %p
       %strong= link_to_if register.register_phase == 'Alpha', register.title, register_path(register.slug)
-      %br
       - if register.register_phase == 'Backlog'
         = register.description
       - else

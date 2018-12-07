@@ -21,8 +21,6 @@
 @import 'modules/sub-navigation';
 @import 'modules/pagination';
 @import 'modules/search';
-@import 'modules/sorting-link';
-@import 'modules/tables';
 @import 'modules/check-your-answers';
 @import 'modules/accessible-autocomplete';
 @import 'modules/block-grid';
@@ -53,9 +51,9 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'overrides/typography';
 @import 'overrides/width';
 @import 'components/footer/footer';
-@import 'components/table/table';
 
 @import 'modules/register-categories';
+@import 'modules/tables';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';
@@ -144,92 +142,12 @@ html {
   margin-bottom: $gutter-half;
 }
 
-table {
-  td,
-  th {
-    font-size: 16px;
-    padding: 15px 40px 15px 0;
-    vertical-align: top;
 
-    a {
-      white-space: nowrap;
-    }
-  }
-}
 
 .container {
   @extend %site-width-container;
   display: block;
   margin-bottom: $gutter * 2;
-}
-
-.table {
-  margin-bottom: $gutter;
-
-  .panel {
-    margin: $gutter 0;
-  }
-}
-
-.table-scroll {
-  margin-bottom: $gutter;
-  overflow-x: auto;
-  width: 100%;
-}
-
-.register-data-table {
-  th {
-    background-color: $grey-3;
-    border-bottom: 0;
-    border-right: 2px solid $white;
-    font-weight: normal;
-    min-width: 280px;
-    padding: 15px 55px 15px 15px;
-    position: relative;
-    vertical-align: middle;
-
-    &.start-date,
-    &.end-date,
-    &.review-date,
-    &:first-child {
-      min-width: 120px;
-    }
-
-    &:last-child {
-      border-right: 0;
-      padding-right: 55px;
-    }
-  }
-
-  .info-icon {
-    background-color: $govuk-blue;
-    border-radius: 50%;
-    color: $white;
-    display: inline-block;
-    font-weight: bold;
-    height: 25px;
-    line-height: 1.7;
-    position: absolute;
-    right: 12px;
-    text-align: center;
-    text-decoration: none;
-    top: 12px;
-    width: 25px;
-
-    &:focus,
-    &:hover {
-      color: $white;
-    }
-  }
-
-  td {
-    border: none;
-    padding: 15px;
-  }
-
-  tr:nth-child(even) td {
-    background: $grey-4;
-  }
 }
 
 .records-search {

@@ -35,10 +35,16 @@ class RegistersController < ApplicationController
   end
 
   def show
-    @search_term = search_term
     @register = Register.has_records.find_by_slug!(params[:id])
+
     @records = recover_records(@register.fields_array, params)
+    @records_unfiltered = recover_records(@register.fields_array, params, true)
+
+    @register_fields_with_examples = @register.fields_with_examples
+
     @register_records_total_count = @register.number_of_records
+
+    @show_load_more = @register.is_register_published_by_dcms? # only show 'Load more' for registers published by DCMS
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
@@ -61,19 +67,25 @@ private
     params.permit(:q)[:q]
   end
 
-  def recover_records(fields, params)
+  def recover_records(fields, params, unfiltered = false)
     default_sort_by = lambda {
-      has_name_field = fields.include?('name')
-      has_name_field ? 'name' : params[:id]
+      fields.include?('name') ? 'name' : params[:id]
     }
 
     sort_by = params[:sort_by] ||= default_sort_by.call
 
-    @register.records
+    amount = @register.is_register_published_by_dcms? ? 10 : 5
+
+    if unfiltered == true
+      @register.records
              .where(entry_type: 'user')
-             .search_for(fields, search_term)
              .sort_by_field(sort_by, 'asc')
-             .page(params[:page])
-             .per(10)
+    else
+      @register.records
+              .where(entry_type: 'user')
+              .sort_by_field(sort_by, 'asc')
+              .page(params[:page])
+              .per(amount)
+    end
   end
 end
