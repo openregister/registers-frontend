@@ -1,0 +1,13 @@
+- @page_title = "Download - #{@register.title} register"
+- content_for :body_classes, 'api-page'
+.govuk-width-container
+  %main#content.govuk-main-wrapper{role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h2{class: 'govuk-heading-l govuk-!-padding-top-1'}
+          Download the data
+        %p You can download the latest data in this register as:
+        %ul.list.list-bullet{data: {"click-events" => true, "click-category" => "Content", "click-action" => "Register Download"}}
+          %li= link_to 'ODS (Excel compatible)', register_download_ods_path(@register.slug), rel: 'nofollow'
+          %li= link_to 'CSV', register_download_csv_path(@register.slug), rel: 'nofollow'
+        = render partial: 'layouts/email_cta', locals: {method: 'download', register_slug: @register&.slug}

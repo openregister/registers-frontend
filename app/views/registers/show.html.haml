@@ -28,13 +28,17 @@
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
-      .govuk-grid-column-full
-        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
-    %section#records_wrapper.govuk-grid-row
-      .govuk-grid-column-full
-        %hr
-        %h2{class: 'govuk-heading-m govuk-!-margin-bottom-3'}
-          About the data
+      %div{class: 'govuk-grid-column-full highlight-boxes govuk-!-padding-left-0 govuk-!-padding-right-0 govuk-!-padding-top-5'}
+        %a{href: @next_step_download, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-download" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Download the data
+          %p{class: 'govuk-!-margin-bottom-0'} Get a copy of the latest data in this register in CSV and ODS formats.
+        %a{href: @next_step_api, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-API" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Use the API
+          %p{class: 'govuk-!-margin-bottom-0'} Always get the most up-to-date data in this register in JSON format.
+
+    %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
+      .govuk-grid-column-full.subsection__header#search_wrapper
+        %h2.govuk-heading-m.subsection__title About the data
       %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-bottom-3'}
         %p
           There are
@@ -66,19 +70,17 @@
                         %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
                 - else
                   = render partial: 'record', collection: @records
-
+                  
           - if @show_load_more == true
             .pager
               .pager-controls.js-hidden
                 = paginate @records, outer_window: 0, window: 3
               - unless @records.last_page?
-                %b
-                  = link_to_next_page @records, 'Load more records', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
+                %b= link_to_next_page @records, 'Load more records', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
       .govuk-grid-column-full
         - if @register.is_empty? || @records.any?
           = render partial: 'registers/fields', locals: { register: @register, records: @records }
-
 
 = content_for :head do
   = render partial: 'registers/structured_data', locals: { register: @register }

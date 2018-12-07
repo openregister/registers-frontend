@@ -37,20 +37,27 @@ RSpec.feature 'View register', type: :feature do
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  scenario 'shows Access to data correctly' do
+  scenario 'shows download and API options correctly' do
     visit('/registers/country')
-    expect(page).to have_content('Access the data')
+
+    expect(page).to have_css '.highlight-box', count: 2
+
+    expect(page).to have_content('Download the data')
+    expect(page).to have_content('Use the API')
   end
 
-  scenario 'goes to choose how to access correctly' do
+  scenario 'goes to questionnaire correctly when download option chosen' do
     visit('/registers/country')
-    click_link('Access the data')
+    click_link('Download the data')
 
-    expect(page).to have_content('Choose how to access the data')
-    expect(page).to have_css '.highlight-box', count: 2
-    expect(page).to have_css '.highlight-box a', count: 2
+    expect(page).to have_content('Before you download the data')
+    expect(page).to have_content('Help us improve GOV.UK Registers')
+  end
 
-    expect(page).to have_content('API')
-    expect(page).to have_content('Download')
+  scenario 'goes to questionnaire correctly when API option chosen' do
+    visit('/registers/country')
+    click_link('Use the API')
+    expect(page).to have_content('Before you use the API')
+    expect(page).to have_content('Help us improve GOV.UK Registers')
   end
 end
