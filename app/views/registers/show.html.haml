@@ -1,4 +1,4 @@
-- @page_title = [[@register.seo_title, @register.title, @register.name].find(&:present?), 'register'].compact.join(' ')
+- @page_title = @register.safe_name
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
@@ -11,8 +11,7 @@
             %strong.govuk-tag In progress
             %p This data is in progress and it’s not ready for use.
       %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-top-2'}
-        %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}
-          #{@register.title} register
+        %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}= @register.safe_name
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         - unless @register.is_empty?
           %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}

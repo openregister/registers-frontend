@@ -105,6 +105,14 @@ class Register < ApplicationRecord
     end
   end
 
+  def safe_name
+    [[title, seo_title, name]
+      .find(&:present?), 'register']
+        .compact
+        .join(' ')
+        .gsub('register register', 'register')
+  end
+
 private
 
   def set_slug
