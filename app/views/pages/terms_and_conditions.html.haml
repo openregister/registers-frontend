@@ -1,0 +1,122 @@
+- @page_title = "Terms and conditions"
+= content_for :body_classes, 'terms-and-conditions-page'
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Terms and conditions', '#content', "aria-current" => "page"
+
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      %section.govuk-grid-column-two-thirds#content
+        %h2.govuk-heading-l Terms and conditions
+        %p This page and any pages it links to explains the terms of use of GOV.UK Registers. You must agree to these to use GOV.UK Registers.
+
+        %h2.govuk-heading-m Who we are
+        %p GOV.UK Registers is managed by #{link_to 'Government Digital Service', 'https://www.gov.uk/government/organisations/government-digital-service/'} (GDS) on behalf of the Crown. GDS is part of the Cabinet Office and will be referred to as 'we' from now on
+
+        %h2.govuk-heading-m Using GOV.UK Registers
+        %p You agree to use GOV.UK Registers only for lawful purposes. You must also use it in a way that does not infringe the rights of, or restrict or inhibit the use and enjoyment of, this site by anyone else.
+        %p We update GOV.UK Registers all the time. We can change or remove content at any time without notice.
+
+        %h2.govuk-heading-m Dataset services
+        %p You can use GOV.UK Registers to access datasets that can be managed by GDS or another government department or agency.
+
+        %h2.govuk-heading-m Linking to GOV.UK Registers
+        %p We welcome and encourage other websites to link to GOV.UK Registers.
+        %p You must #{link_to 'contact us', support_path} for permission if you want to either:
+        %ul.govuk-list.govuk-list--bullet
+          %li charge your website’s users to click on a link to any page on GOV.UK Registers
+          %li say your website is associated with or endorsed by GOV.UK Registers or another government department or agency
+
+        %h2.govuk-heading-m Using GOV.UK Registers content
+        %p Most content on GOV.UK Registers is subject to #{link_to 'Crown copyright protection', 'https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/'} and is published under the Open Government Licence (OGL).
+        %p Some content is exempt from the OGL - check the #{link_to 'list of exemptions', 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/1/open-government-licence.htm'}.
+        %p Departmental logos and crests are also exempt from the OGL, except when they form an integral part of a document or dataset.
+        %p If any content is not subject to Crown copyright protection or published under the OGL, we’ll usually credit the author or copyright holder.
+        %p You can reproduce content published on GOV.UK Registers under the OGL as long as you follow the licence’s conditions.
+        %p #{link_to 'Contact us', support_path} if you want to reproduce a piece of content but are not sure if it’s covered by Crown copyright or the OGL.
+        %p We make most of the data on GOV.UK Registers available through downloads or APIs for other websites and applications to use. The websites and applications that use our data are not our products, and they might use versions of our data that have been edited and stored for later use (‘cached’).
+        %p We do not give any guarantees, conditions or warranties about the accuracy or completeness of any dataset we do not own. We’re not liable for any loss or damage that may come from your use of these datasets.
+        %p The most up-to-date version of the datasets we show will always be on the original register.
+
+        %h2.govuk-heading-m Reliance
+        %p You agree and acknowledge that we provide the Unique Property Reference Numbers (UPRN) in the DWP jobcentre register:
+        %ol.govuk-list.govuk-list--number{style:'list-style: lower-roman'}
+          %li for illustrative purposes;
+          %li subject to any third party intellectual property rights which we are or may not be authorised to licence under the Open Government Licence and that you will determine and comply with any applicable restrictions before using the UPRNs; and
+          %li for public sector use only.
+
+        %h2.govuk-heading-m Disclaimer
+        %p If the need arises, we reserve the right to amend, delete, suspend or withdraw all or any part of this website without notice. GOV.UK Registers will not be liable if for any reason this website or any parts are unavailable at any time.
+        %p While we make every effort to keep GOV.UK Registers up to date, we do not provide any guarantees, conditions or warranties that the information will be:
+        %ul.govuk-list.govuk-list--bullet
+          %li current
+          %li secure
+          %li accurate
+          %li complete
+          %li free from bugs or viruses
+        %p We’re not liable for any loss or damage that may come from using GOV.UK Registers. This includes but is not limited to:
+        %ul.govuk-list.govuk-list--bullet
+          %li any direct, indirect or consequential losses
+          %li any loss or damage caused by civil wrongs (‘tort’, including negligence), breach of contract or otherwise
+          %li the use of GOV.UK Registers and any websites that are linked to it
+          %li the inability to use GOV.UK Registers and any websites that are linked to it
+        %p This applies if the loss or damage was foreseeable, arose in the normal course of things or you advised us that it might happen.
+        %p This includes (but is not limited to) the loss of your:
+        %ul.govuk-list.govuk-list--bullet
+          %li income or revenue
+          %li salary, benefits or other payments
+          %li business profits or contracts
+          %li opportunity
+          %li anticipated savings
+          %li data
+          %li goodwill or reputation
+          %li tangible property
+          %li intangible property, including loss, corruption or damage to data or any computer system
+          %li wasted management or office time
+        %p We may still be liable for:
+        %ul.govuk-list.govuk-list--bullet
+          %li death or personal injury arising from our negligence
+          %li fraudulent misrepresentation
+          %li any other liability which cannot be excluded or limited under applicable law
+
+        %h2.govuk-heading-m Requests to remove content
+        %p You can ask for content to be removed from GOV.UK Registers. We’ll remove content:
+        %ul.govuk-list.govuk-list--bullet
+          %li in order to comply with data protection legislation covering the rights and freedoms of individuals
+          %li if it breaches copyright laws, contains sensitive personal data or material that may be considered obscene or defamatory
+        %p We do not own the data in a register. In order to remove data from a register, we’ll need to contact the relevant data owner on your behalf.
+        %p #{link_to 'Contact us', support_path} to ask for content to be removed. You’ll need to send us the web address (URL) of the content and explain why you think it should be removed. We’ll reply to let you know whether we’ll remove it.
+        %p We remove content at our discretion in discussion with the department or agency responsible for it. You can still request information under the #{link_to 'Freedom of Information Act', 'https://www.gov.uk/make-a-freedom-of-information-request'} and the #{link_to 'Data Protection Act', 'https://www.gov.uk/data-protection'}.
+
+        %h2.govuk-heading-m Information about you and your visits to GOV.UK Registers
+        %p We collect information about you in accordance with our #{link_to 'privacy policy', privacy_notice_path} and our #{link_to 'cookie policy', cookies_path}. By using GOV.UK Registers, you agree to us collecting this information and confirm that any data you provide is accurate.
+
+        %h2.govuk-heading-m Virus protection
+        %p We make every effort to check and test GOV.UK Registers for viruses at every stage of production. You must make sure that the way you use GOV.UK Registers does not expose you to the risk of viruses, malicious computer code or other forms of interference which can damage your computer system.
+        %p We’re not responsible for any loss, disruption or damage to your data or computer system that might happen when you use GOV.UK Registers.
+
+        %h2.govuk-heading-m Viruses, hacking and other offences
+        %p When using GOV.UK Registers, you must not introduce viruses, trojans, worms, logic bombs or any other material that’s malicious or technologically harmful.
+        %p You must not try to gain unauthorised access to GOV.UK Registers, the server on which it’s stored or any server, computer or database connected to it.
+        %p You must not attack GOV.UK Registers in any way. This includes denial-of-service attacks.
+        %p We’ll report any attacks or attempts to gain unauthorised access to GOV.UK Registers to the relevant law enforcement authorities and share information about you with them.
+
+        %h2.govuk-heading-m Governing law
+        %p These terms and conditions are governed by and construed in accordance with the laws of England and Wales.
+        %p Any dispute you have which relates to these terms and conditions, or your use of GOV.UK Registers (whether it be contractual or non-contractual), will be subject to the exclusive jurisdiction of the courts of England and Wales.
+
+        %h2.govuk-heading-m General
+        %p We're not liable if we fail to comply with these terms and conditions because of circumstances beyond our reasonable control.
+        %p We might decide not to exercise or enforce any right available to us under these terms and conditions. We can always decide to exercise or enforce that right at a later date.
+        %p Doing this once will not mean we automatically waive the right on any other occasion.
+        %p If any of these terms and conditions are held to be invalid, unenforceable or illegal for any reason, the remaining terms and conditions will still apply.
+
+        %h2.govuk-heading-m Changes to these terms and conditions
+        %p Please check these terms and conditions regularly. We can update them at any time without notice.
+
+        %p You’ll agree to any changes if you continue to use GOV.UK Registers after the terms and conditions have been updated.
