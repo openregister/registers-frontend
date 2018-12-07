@@ -1,112 +1,28 @@
-// From GOV.UK https://github.com/alphagov/collections/blob/master/app/assets/stylesheets/components/_highlight-boxes.scss
-
-.app-c-highlight-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: $gutter-half;
-
-  @include media(tablet) {
-    margin-right: -25px;
-  }
-}
-
-.app-c-highlight-boxes__item-wrapper {
-  @include core-19;
-  @include box-sizing(border-box);
-  list-style-type: none;
-  padding: ($gutter / 6) $gutter-one-third ($gutter-half + $gutter-one-third) 0;
-  width: 100%;
-
-  @include media(tablet) {
-    width: 50%;
-    padding: ($gutter / 6) ($gutter-half + $gutter-one-third) ($gutter-half + $gutter-one-third) 0;
-  }
-
-  @include media(desktop) {
-    width: (1 / 3) * 100%;
-    padding: ($gutter / 6) ($gutter-half + $gutter-one-third) ($gutter-half + $gutter-one-third) 0;
-  }
-}
-
-.app-c-highlight-boxes__item {
-  @include box-sizing(border-box);
-  border: 1px solid $grey-2;
-  padding: $gutter-half * 1.5;
-  height: 100%;
-  box-shadow: 7px 7px 0 $white, 8px 8px 0 $grey-2;
-  text-decoration: none;
-  position: relative;
-}
-
-.app-c-highlight-boxes--inverse {
-  background-color: $govuk-blue;
-  border: 0;
-  color: $white;
-}
-
-.app-c-highlight-boxes--inverse .app-c-highlight-boxes__title {
-  color: $white;
-}
-
-.app-c-highlight-boxes__title {
-  @include bold-19;
-  display: block;
-  text-decoration: underline;
-  margin-bottom: 5px;
-}
-
-.app-c-highlight-boxes__title--featured {
-  @include bold-24;
-}
-
-.app-c-highlight-boxes__description {
-  color: $black;
-  font-size: 16px;
-  margin-bottom: $gutter * 4;
-}
-
-.app-c-highlight-boxes__metadata {
-  @include core-16;
-  display: inline-block;
-  margin-right: $gutter-half;
-}
-
-// Edited highlight boxes, since the `app-c-highlight-boxes` have quite a
-// specific use case and formatting.
-
 .highlight-boxes {
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: map-get($govuk-breakpoints, 'tablet')) {
     display: flex;
-    justify-content: space-between;
   }
 }
 
 .highlight-box {
-  @include box-sizing(border-box);
-  border: 1px solid $grey-2;
-  box-shadow: 7px 7px 0 $white, 8px 8px 0 $grey-2;
-  display: flex;
-  flex-direction: column;
-  margin: 0 ($gutter-half / 2) $gutter 0;
-  padding: $gutter-half * 2;
-  position: relative;
+  background: govuk-colour("grey-4");
+  border: 1px solid $govuk-border-colour;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 15px;
   text-decoration: none;
-  // scss-lint:disable DuplicateProperty
-  // The linter is disabled for `DuplicateProperty` because we need to declare
-  // width twice to provide a reasonable fallback for browsers that don't
-  // support `calc()`.
-  width: 100%;
-  width: calc(100% - #{$gutter-half / 2});
 
-  @media screen and (min-width: 700px) {
-    width: 50%;
-    width: calc(50% - #{$gutter-half});
+  @media screen and (min-width: map-get($govuk-breakpoints, 'tablet')) {
+    float: left;
+    width: calc(50% - 30px);
   }
-  // scss-lint:enable DuplicateProperty
 
-  .heading-medium {
-    margin-top: 0;
-    margin-bottom: 0;
+  &:hover {
+    border-color: $govuk-link-colour;
+    box-shadow: 0 0 0 1px $govuk-link-colour;
+  }
+
+  p {
+    color: $govuk-text-colour;
   }
 }
-

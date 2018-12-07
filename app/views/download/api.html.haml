@@ -1,0 +1,19 @@
+- @page_title = 'Use the API'
+
+
+.govuk-width-container
+  %main#content.govuk-main-wrapper{role:'main'}
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h2{class: 'govuk-heading-l govuk-!-padding-top-1'} Use the API
+        %p
+          The register ID is:
+          %code.code.code-curl #{@register.slug}
+
+        %p
+          Get this register as JSON:
+          %code.code.code-curl curl #{@register.url}/records.json?page-size=5000
+
+        %p
+          Read our #{link_to 'technical documentation', 'https://docs.registers.service.gov.uk/#choose-a-response-format'} to see how to get started.
+    = render partial: 'layouts/email_cta', locals: {method: 'api', register_slug: @register&.slug}

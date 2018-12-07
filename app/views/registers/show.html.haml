@@ -28,8 +28,14 @@
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
-      .govuk-grid-column-full
-        %p= link_to 'Access the data', register_choose_access_path(@register.slug), {id: 'access-the-data-button', class: 'registers__button--access govuk-!-margin-top-5'}
+      %div{class: 'govuk-grid-column-full highlight-boxes govuk-!-padding-left-0 govuk-!-padding-right-0 govuk-!-padding-top-5'}
+        %a{href: @next_step_download, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-download" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Download the data
+          %p{class: 'govuk-!-margin-bottom-0'} Get a copy of the latest data in this register in CSV and ODS formats.
+        %a{href: @next_step_api, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-API" }
+          %h3{class: 'heading-medium govuk-!-margin-top-0'} Use the API
+          %p{class: 'govuk-!-margin-bottom-0'} Always get the most up-to-date data in this register in JSON format.
+
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
       .govuk-grid-column-full.subsection__header#search_wrapper
         %h2.govuk-heading-m.subsection__title
@@ -72,8 +78,7 @@
               %div
                 = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
-      #about-the-data__4{class: 'govuk-grid-column-full subsection__content js-accordion-subsection'}
-        %p= link_to 'Access all the data in this register', register_choose_access_path(@register.slug), { id: 'access-the-data-from-preview', class: 'registers__button--access-large'}
+      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
         - unless @records.any? || @register.is_empty?
           - if @search_term.present?
             %script
