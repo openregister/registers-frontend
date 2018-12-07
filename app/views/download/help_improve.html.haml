@@ -1,15 +1,15 @@
 - @page_title = 'Help us improve'
 
-%main#content.container{role:'main'}
-  .grid-row
-    .column-full
-      %header.heading-large.form-heading-with-skip
-        %h2
-          %b Help us improve GOV.UK Registers
-        %p.step-number.heading-secondary Step 2 of 3
-        %p.skip-this-step
-          = link_to 'Skip this step', @next_page, { class: 'js--ga-watch-click' }
-        %p.heading-secondary.intro We'd like to know a bit about you. This information will give us a better understanding of how registers are used.
+.govuk-width-container
+  %main#content.govuk-main-wrapper{role:'main'}
+    %header
+      .govuk-grid-row
+        .govuk-grid-column-one-half
+          %p.govuk-caption-xl= @heading_caption
+          %h2.govuk-heading-l Help us improve GOV.UK Registers
+      .govuk-grid-row
+        .govuk-grid-column-two-thirds
+          %p We'd like to know a bit about you. This information will give us a better understanding of how registers are used.
       %section
         = render 'form--help-us-improve'
 

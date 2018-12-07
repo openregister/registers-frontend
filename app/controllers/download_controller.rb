@@ -5,35 +5,12 @@ class DownloadController < ApplicationController
   include ActionView::Helpers::UrlHelper
 
   before_action :set_register
-  before_action :set_number_of_steps
   before_action :set_government_organisations, only: :new
   helper_method :government_orgs_local_authorities
 
-  def index
-    @custom_dimension2 = "#{@register.name} - download"
-  end
-
-  def create
-    unless cookies[:seen_help_us_improve_questions]
-      cookies[:seen_help_us_improve_questions] = {
-        value: true,
-        expires: 24.hours.from_now
-      }
-    end
-    render :index
-  end
+  def index; end
 
   def success; end
-
-  def choose_access
-    if cookies[:seen_help_us_improve_questions]
-      @next_step_api = register_get_api_path
-      @next_step_download = register_download_index_path
-    else
-      @next_step_api = register_help_improve_api_path;
-      @next_step_download = register_help_improve_download_path
-    end
-  end
 
   def help_improve
     @government_organisations = Register.find_by(slug: 'government-organisation')
@@ -42,16 +19,18 @@ class DownloadController < ApplicationController
                                         .current
 
     if current_page?(register_help_improve_api_path)
-      @next_page = register_get_api_path
+      @next_page = register_use_the_api_path
       @custom_dimension2 = "#{@register.name} - API"
+      @heading_caption = 'Before you use the API'
     else
-      @next_page = register_download_index_path
+      @next_page = register_download_path
       @custom_dimension2 = "#{@register.name} - download"
+      @heading_caption = 'Before you download the data'
     end
   end
 
-  def get_api
-    @custom_dimension2 = "#{@register.name} - API"
+  def download
+    @custom_dimension2 = "#{@register.name} - download"
     unless cookies[:seen_help_us_improve_questions]
       cookies[:seen_help_us_improve_questions] = {
         value: true,
@@ -60,8 +39,14 @@ class DownloadController < ApplicationController
     end
   end
 
-  def post_api
-    redirect_to register_get_api_path(@register.slug)
+  def api
+    @custom_dimension2 = "#{@register.name} - API"
+    unless cookies[:seen_help_us_improve_questions]
+      cookies[:seen_help_us_improve_questions] = {
+        value: true,
+        expires: 24.hours.from_now
+      }
+    end
   end
 
   def download_csv
@@ -78,9 +63,5 @@ private
 
   def set_register
     @register = Register.find_by_slug!(params[:register_id])
-  end
-
-  def set_number_of_steps
-    @number_of_steps = cookies[:seen_help_us_improve_questions] ? 2 : 3
   end
 end

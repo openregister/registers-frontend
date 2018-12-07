@@ -28,9 +28,7 @@
 @import 'modules/subsections';
 @import 'modules/scrolling-tables';
 @import 'modules/dialog';
-@import 'modules/highlight-boxes';
 @import 'modules/accordion';
-@import 'modules/form--header-with-skip';
 
 // GOV.UK design system
 $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack; this means design system won't load fonts.
@@ -52,8 +50,10 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'overrides/width';
 @import 'components/footer/footer';
 
+// Custom for Registers
 @import 'modules/register-categories';
 @import 'modules/tables';
+@import 'modules/highlight-boxes';
 
 // From alphagov/static
 @import 'govuk_component/organisation-logo';

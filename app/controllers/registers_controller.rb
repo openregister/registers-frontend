@@ -43,8 +43,16 @@ class RegistersController < ApplicationController
     @register_fields_with_examples = @register.fields_with_examples
 
     @register_records_total_count = @register.number_of_records
-
+    
     @show_load_more = @register.is_register_published_by_dcms? # only show 'Load more' for registers published by DCMS
+    
+    if cookies[:seen_help_us_improve_questions]
+      @next_step_api = register_use_the_api_path(@register.slug)
+      @next_step_download = register_download_path(@register.slug)
+    else
+      @next_step_api = register_help_improve_api_path(@register.slug)
+      @next_step_download = register_help_improve_download_path(@register.slug)
+    end
   end
 
   def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)

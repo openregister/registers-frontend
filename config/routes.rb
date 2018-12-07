@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'services-using-registers', to: 'pages#services_using_registers', as: 'services_using_registers'
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
+  get 'terms-and-conditions', to: 'pages#terms_and_conditions', as: 'terms_and_conditions'
   get 'data-format-changes', to: 'pages#data_format_changes', as: 'data_format_changes'
   get 'about', to: 'pages#about', as: 'about'
 
@@ -20,17 +21,19 @@ Rails.application.routes.draw do
   resources :registers, only: %i[show index] do
     resources :entries, path: 'updates', only: :index
     resources :fields, only: :show
-    resources :download
     resources :records, constraints: { id: /.*/ }, only: :show
 
     get '/download-csv', to: 'download#download_csv', as: 'download_csv'
     get '/download-ods', to: 'download#download_ods', as: 'download_ods'
 
-    get '/choose-how-to-access', to: 'download#choose_access', as: 'choose_access'
     get '/help-us-improve-the-api', to: 'download#help_improve', as: 'help_improve_api'
     get '/help-us-improve', to: 'download#help_improve', as: 'help_improve_download'
-    get '/use-the-api', to: 'download#get_api', as: 'get_api'
-    post '/use-the-api', to: 'download#post_api', as: 'post_api'
+
+    get '/download', to: 'download#download'
+    post '/download', to: 'download#download'
+
+    get '/use-the-api', to: 'download#api'
+    post '/use-the-api', to: 'download#api'
   end
 
   get 'registers-in-progress', to: redirect('/registers', status: 301)
