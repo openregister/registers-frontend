@@ -100,7 +100,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).length).to eq(10)
+      expect(assigns(:records).length).to eq(5)
     end
   end
 
