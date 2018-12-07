@@ -104,62 +104,6 @@ RSpec.describe RegistersController, type: :controller do
     end
   end
 
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 2 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
-
-    it { is_expected.to be_successful }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-
-      expect(assigns(:records).length).to eq(2)
-    end
-  end
-
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, all status. Result: 2 rows' do
-    subject { get :show, params: { id: 'country', q: 'Germany', status: 'all' } }
-
-    it { is_expected.to be_successful }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-
-      expect(assigns(:records).length).to eq(2)
-    end
-  end
-
-  describe 'Request: GET #show. Descr: Check with filter. Params: Search param, default status. Result: 0 rows' do
-    subject { get :show, params: { id: 'country', q: 'Random' } }
-
-    it { is_expected.to be_successful }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-
-      expect(assigns(:records).length).to eq(0)
-    end
-  end
-
-  describe 'Request: GET #show. Descr: Check with filter and cardinality N. Params: Search param. Result: 1 rows' do
-    subject { get :show, params: { id: 'charity', q: '306', status: 'all' } }
-
-    it { is_expected.to be_successful }
-
-    it { is_expected.to render_template :show }
-
-    it do
-      subject
-
-      expect(assigns(:records).length).to eq(2)
-    end
-  end
-
   describe 'Request: GET #show. Descr: Afghanistan is first result' do
     subject { get :show, params: { id: 'country' } }
 
