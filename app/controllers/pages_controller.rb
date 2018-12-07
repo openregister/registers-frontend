@@ -23,4 +23,6 @@ class PagesController < ApplicationController
   def data_format_changes; end
 
   def about; end
+
+  def terms_and_conditions; end
 end
