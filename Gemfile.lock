@@ -81,6 +81,7 @@ GEM
       axlsx (>= 2.0, < 4)
     bcrypt (3.1.12)
     bindex (0.5.0)
+    bluecloth (2.2.0)
     builder (3.2.3)
     byebug (10.0.2)
     canonical-rails (0.2.4)
@@ -411,6 +412,7 @@ DEPENDENCIES
   autoprefixer-rails
   axlsx!
   bcrypt
+  bluecloth
   canonical-rails
   capybara
   cf-app-utils
