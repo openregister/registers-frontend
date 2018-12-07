@@ -9,14 +9,13 @@
 
   %thead.registers-secondary-table__head
     %tr.registers-secondary-table__row
-      %th.registers-secondary-table__header{scope: 'col'} Field names and descriptions
-      %th.registers-secondary-table__header{scope: 'col'} Sample record
+      %th.registers-secondary-table__header{scope: 'col'} Field name
+      %th.registers-secondary-table__header{scope: 'col'} Field description
   %tbody.registers-secondary-table__body
-  - @register_fields_with_examples.each do |field|
-    %tr.registers-secondary-table__row
-      %td.registers-secondary-table__cell
-        %p{class: 'govuk-!-margin-bottom-0'}
-          %b= field['field']
-        %p{class: 'govuk-!-margin-bottom-0'}= field['text']
-      %td.registers-secondary-table__cell
-        %p= field['example']
+    - @register.fields_readable.each do |field|
+      %tr.registers-secondary-table__row
+        %td.registers-secondary-table__cell
+          %p{class: 'govuk-!-margin-bottom-0'}
+            %b= field['field_readable']
+        %td.registers-secondary-table__cell
+          %p{class: 'govuk-!-margin-bottom-0'}= field['text']

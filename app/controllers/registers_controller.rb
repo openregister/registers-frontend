@@ -40,8 +40,6 @@ class RegistersController < ApplicationController
     @records = recover_records(@register.fields_array, params)
     @records_unfiltered = recover_records(@register.fields_array, params, true)
 
-    @register_fields_with_examples = @register.fields_with_examples
-
     @register_records_total_count = @register.number_of_records
 
     @show_load_more = @register.is_register_published_by_dcms? # only show 'Load more' for registers published by DCMS

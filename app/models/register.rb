@@ -83,23 +83,10 @@ class Register < ApplicationRecord
     Authority.where(id: authority_id).first&.government_organisation_key === 'D5'
   end
 
-  def fields_with_examples
+  def fields_readable
     register_fields.map do |field|
-      this_field = field['field']
-
-      # Get the first entry for this field. If there are no entries at all for
-      # this field, `nil` will be returned. Thus we still need to check the
-      # variable before we use it.
-      non_empty_record = Record
-                          .where(register_id: id, entry_type: 'user')
-                          .where("(data ->> '#{this_field}') IS NOT NULL")
-                          .first
-
-      field['example'] = non_empty_record.nil? ? 'No sample record exists for this field.' : non_empty_record['data'][this_field]
-
       # Make it human readable
-      field['field'] = field['field'].humanize.tr('-', ' ')
-
+      field['field_readable'] = field['field'].humanize.tr('-', ' ')
       # Returns
       field
     end
