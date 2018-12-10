@@ -50,6 +50,8 @@ $govuk-font-family: "nta", Helvetica, Arial, sans-serif; // "Custom" font stack;
 @import 'overrides/width';
 @import 'components/footer/footer';
 
+@import 'utilities/all';
+
 // Custom for Registers
 @import 'modules/register-categories';
 @import 'modules/tables';

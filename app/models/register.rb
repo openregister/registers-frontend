@@ -87,6 +87,9 @@ class Register < ApplicationRecord
     register_fields.map do |field|
       # Make it human readable
       field['field_readable'] = field['field'].humanize.tr('-', ' ')
+      # GOV UK URLs are the only thing that seems to break the table; this inserts
+      # zero-width breaking spaces to allow a URL to wrap in a narrow table cell.
+      field['text_readable'] = field['text'].gsub('.service.', '&#8203;.service.&#8203;').html_safe
       # Returns
       field
     end

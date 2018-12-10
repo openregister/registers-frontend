@@ -96,11 +96,12 @@
 .registers-secondary-table__cell {
   background: govuk-colour("grey-4");
   font-size: 16px;
-  padding: 0.65em 1em;
+  padding: 0;
   vertical-align: top;
 
   &:last-child {
-    padding-right: 15px;
+    padding-right: 0;
+    width: 66%;
   }
 }
 
