@@ -85,22 +85,29 @@ class Register < ApplicationRecord
 
   def fields_readable
     register_fields.map do |field|
-      # Make it human readable
-      field['field_readable'] = field['field'].humanize.tr('-', ' ')
-      # GOV UK URLs are the only thing that seems to break the table; this inserts
-      # zero-width breaking spaces to allow a URL to wrap in a narrow table cell.
-      field['text_readable'] = field['text'].gsub('.service.', '&#8203;.service.&#8203;').html_safe
-      # Returns
+      # Make the field more readable.
+      field['field_readable'] = field['field']
+                                  .humanize
+                                  .tr('-', ' ')
+
+      # GOV UK URLs are the only thing that seems to break the table on small
+      # screens. This inserts zero-width breaking spaces (`&#8203;`) to allow
+      # a URL to wrap in a narrow table cell.
+      field['text_readable'] = field['text']
+                                .gsub('.service.', '&#8203;.service.&#8203;')
+                                .html_safe
+
       field
     end
   end
 
   def safe_name
-    [[title, seo_title, name]
-      .find(&:present?), 'register']
-        .compact
-        .join(' ')
-        .gsub('register register', 'register')
+    # `seo_title` already has 'register' in it. So we need to replace 'register
+    # register' with a 'register'.
+    [[title, seo_title, name].find(&:present?), 'register']
+      .compact
+      .join(' ')
+      .gsub('register register', 'register')
   end
 
 private
