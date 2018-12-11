@@ -28,11 +28,11 @@ en:
         other: "entries"
       one_page:
         display_entries:
-          zero: "No %{entry_name} found"
-          one: "Showing <b>1</b> %{entry_name}"
-          other: "Showing <b>%{count}</b> %{entry_name}"
+          zero: "<b>No %{entry_name} found</b>"
+          one: "<b>Showing 1 %{entry_name}</b>"
+          other: "<b> Showing %{count} %{entry_name}</b>"
       more_pages:
-        display_entries: "<b>Preview of records %{first} &ndash; %{last}</b>"
+        display_entries: "<b>Preview of %{last} %{entry_name}</b>"
     label:
       sign_up_user:
         email: Email address

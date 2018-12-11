@@ -107,7 +107,7 @@ class Register < ApplicationRecord
     [[title, seo_title, name].find(&:present?), 'register']
       .compact
       .join(' ')
-      .gsub('register register', 'register')
+      .gsub(/register register$/i, 'register')
   end
 
 private

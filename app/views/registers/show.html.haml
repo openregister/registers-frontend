@@ -71,7 +71,7 @@
                 - else
                   = render partial: 'record', collection: @records
 
-          - if @show_load_more == true
+          - if @show_load_more
             .pager
               .pager-controls.js-hidden
                 = paginate @records, outer_window: 0, window: 3
@@ -86,7 +86,7 @@
   = render partial: 'registers/structured_data', locals: { register: @register }
 
 = content_for :javascript do
-  - if @show_load_more == true
+  - if @show_load_more
     :javascript
       var count = 0;
       if (document.getElementById('load-more-records') !== null) {
