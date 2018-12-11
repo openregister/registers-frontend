@@ -38,7 +38,6 @@ class RegistersController < ApplicationController
     @register = Register.has_records.find_by_slug!(params[:id])
 
     @records = recover_records(@register.fields_array, params)
-    @records_unfiltered = recover_records(@register.fields_array, params, true)
 
     @register_records_total_count = @register.number_of_records
 
@@ -73,7 +72,7 @@ private
     params.permit(:q)[:q]
   end
 
-  def recover_records(fields, params, unfiltered = false)
+  def recover_records(fields, params)
     default_sort_by = lambda {
       fields.include?('name') ? 'name' : params[:id]
     }
@@ -82,16 +81,10 @@ private
 
     amount = @register.is_register_published_by_dcms? ? 10 : 5
 
-    if unfiltered == true
-      @register.records
-             .where(entry_type: 'user')
-             .sort_by_field(sort_by, 'asc')
-    else
-      @register.records
-              .where(entry_type: 'user')
-              .sort_by_field(sort_by, 'asc')
-              .page(params[:page])
-              .per(amount)
-    end
+    @register.records
+            .where(entry_type: 'user')
+            .sort_by_field(sort_by, 'asc')
+            .page(params[:page])
+            .per(amount)
   end
 end
