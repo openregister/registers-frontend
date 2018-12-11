@@ -83,24 +83,6 @@ class Register < ApplicationRecord
     Authority.where(id: authority_id).first&.government_organisation_key === 'D5'
   end
 
-  def fields_readable
-    register_fields.map do |field|
-      # Make the field more readable.
-      field['field_readable'] = field['field']
-                                  .humanize
-                                  .tr('-', ' ')
-
-      # GOV UK URLs are the only thing that seems to break the table on small
-      # screens. This inserts zero-width breaking spaces (`&#8203;`) to allow
-      # a URL to wrap in a narrow table cell.
-      field['text_readable'] = field['text']
-                                .gsub('.service.', '&#8203;.service.&#8203;')
-                                .html_safe
-
-      field
-    end
-  end
-
   def safe_name
     # `seo_title` already has 'register' in it. So we need to replace 'register
     # register' with a 'register'.
