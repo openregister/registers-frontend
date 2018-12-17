@@ -52,6 +52,19 @@ RSpec.feature 'View register', type: :feature do
 
     expect(page).to have_content('Before you download the data')
     expect(page).to have_content('Help us improve GOV.UK Registers')
+
+    expect(page).to have_content('What part of government are you working for?')
+    expect(page).to have_content('What are you using registers for?')
+    expect(page).to have_content('Yes')
+    expect(page).to have_content('Building a service')
+    expect(page).to have_content('For data analysis or reporting')
+    expect(page).to have_content('Other')
+    expect(page).to have_content('No')
+    expect(page).to have_content('Commercial use')
+    expect(page).to have_content('Non-commercial use')
+    expect(page).to have_content('Personal use')
+
+    click_button('Submit')
   end
 
   scenario 'goes to questionnaire correctly when API option chosen' do
@@ -59,5 +72,56 @@ RSpec.feature 'View register', type: :feature do
     click_link('Use the API')
     expect(page).to have_content('Before you use the API')
     expect(page).to have_content('Help us improve GOV.UK Registers')
+    expect(page).to have_content('What part of government are you working for?')
+    expect(page).to have_content('What are you using registers for?')
+  end
+
+  scenario 'goes to download page correctly when questionnaire is skipped' do
+    visit('/registers/country')
+    click_link('Download the data')
+    click_link('Skip this step')
+    expect(page).to have_content('Download the data')
+  end
+
+  scenario 'goes to download page correctly when questionnaire is submitted' do
+    visit('/registers/country')
+    click_link('Download the data')
+    click_button('Submit') # No JavaScript, so the empty form should just submit and go to the next page.
+    expect(page).to have_content('Download the data')
+  end
+
+  scenario "download link skips the questionnaire if it's already been seen" do
+    visit('/registers/country')
+    click_link('Download the data')
+    click_link('Skip this step')
+    visit('/registers/country')
+    click_link('Download the data')
+    expect(page).to have_content('Download the data')
+    expect(page).to have_content('ODS (Excel compatible)')
+    expect(page).to have_content('CSV')
+  end
+
+  scenario 'goes to API page correctly when questionnaire is skipped' do
+    visit('/registers/country')
+    click_link('Use the API')
+    click_link('Skip this step')
+    expect(page).to have_content('Use the API')
+  end
+
+  scenario 'goes to API page correctly when questionnaire is submitted' do
+    visit('/registers/country')
+    click_link('Use the API')
+    click_button('Submit') # No JavaScript, so the empty form should just submit and go to the next page.
+    expect(page).to have_content('Use the API')
+  end
+
+  scenario "API access link skips the questionnaire if it's already been seen" do
+    visit('/registers/country')
+    click_link('Use the API')
+    click_link('Skip this step')
+    visit('/registers/country')
+    click_link('Use the API')
+    expect(page).to have_content('Use the API')
+    expect(page).to have_content('register.gov.uk/records.json?page-size=5000')
   end
 end
