@@ -40,16 +40,7 @@
         %hr{class: 'govuk-!-margin-top-0'}
         %h2.govuk-heading-m About the data
       %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-bottom-3'}
-        %p
-          There are
-          <!-- -->
-          %b #{number_with_delimiter(@register_records_total_count)} records
-          <!-- -->
-          and
-          <!-- -->
-          %b #{@register.register_fields.count} fields
-          <!-- -->
-          in this register
+        %p There are <b>#{number_with_delimiter(@register_records_total_count)} records</b> and <b>#{@register.register_fields.count} fields</b> in this register
       .govuk-grid-column-full
         %p
           %span#records-count{'aria-live': 'polite'}
