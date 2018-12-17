@@ -73,6 +73,9 @@ gem 'iso8601', '~> 0.12.1'
 # MailChimp
 gem 'gibbon', '~> 3.2'
 
+# Markdown rendering
+gem 'bluecloth'
+
 # ODS
 gem 'spreadsheet_architect', '~> 3.2'
 gem 'axlsx', git: 'https://github.com/NoRedInk/axlsx.git',

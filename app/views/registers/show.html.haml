@@ -1,18 +1,17 @@
-- @page_title = [[@register.seo_title, @register.title, @register.name].find(&:present?), 'register'].compact.join(' ')
+- @page_title = @register.safe_name
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
 .govuk-width-container
   %main#content.govuk-main-wrapper{role:'main', class: 'govuk-!-padding-top-0'}
-    .govuk-grid-row{class: 'govuk-!-padding-top-6'}
+    %div{class: 'govuk-grid-row govuk-!-padding-top-6'}
       - if @register.register_phase != 'Beta'
         .govuk-grid-column-full
           .govuk-inset-text
             %strong.govuk-tag In progress
             %p This data is in progress and it’s not ready for use.
-      .govuk-grid-column-two-thirds{class: 'govuk-!-margin-top-2'}
-        %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}
-          #{@register.title} register
+      %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-top-2'}
+        %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}= @register.safe_name
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         - unless @register.is_empty?
           %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
@@ -37,25 +36,16 @@
           %p{class: 'govuk-!-margin-bottom-0'} Always get the most up-to-date data in this register in JSON format.
 
     %section.govuk-grid-row#records_wrapper{ data: { module: 'accordion-with-descriptions'}}
-      .govuk-grid-column-full.subsection__header#search_wrapper
-        %h2.govuk-heading-m.subsection__title
-          About the data
-      .govuk-grid-column-two-thirds.subsection__content.js-accordion-subsection#about-the-data__0
-        %p This register has #{number_with_delimiter(@register_records_total_count)} records and #{@register.register_fields.count} fields
-      .govuk-grid-column-one-third.subsection__content.js-accordion-subsection#about-the-data__1
-        = form_tag register_path(@register.slug, anchor: 'records_wrapper'), method: :get, id: 'search_records', class: 'records-search' do
-          = label_tag 'Search', nil, for: 'q', class: 'visually-hidden'
-          = search_field_tag 'q', nil, class: 'search-input', placeholder: 'Search', value: @search_term, autocomplete: 'off'
-          = submit_tag 'Search', name: nil, class: 'search-submit'
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__2
+      .govuk-grid-column-full
+        %hr{class: 'govuk-!-margin-top-0'}
+        %h2.govuk-heading-m About the data
+      %div{class: 'govuk-grid-column-two-thirds govuk-!-margin-bottom-3'}
+        %p There are <b>#{number_with_delimiter(@register_records_total_count)} records</b> and <b>#{@register.register_fields.count} fields</b> in this register
+      .govuk-grid-column-full
         %p
           %span#records-count{'aria-live': 'polite'}
             = page_entries_info(@records)
-            - if @search_term.present?
-              &nbsp;for &ldquo;<strong>#{@search_term}</strong>&rdquo;
-          - if @search_term.present?
-            = link_to 'Reset', register_path(@register.slug, anchor: 'records_wrapper'), class: 'reset-link'
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__3
+      %div{class: 'govuk-grid-column-full govuk-!-padding-bottom-9'}
         - if @register.is_empty? || @records.any?
           .fullscreen-content{data: {module: 'scrolling-tables'}}
             %table.table.register-data-table
@@ -71,62 +61,35 @@
                         %p This register currently has no data. The owner of the register will publish the data once it has been gathered.
                 - else
                   = render partial: 'record', collection: @records
-          .pager
-            .pager-controls.js-hidden
-              = paginate @records, outer_window: 0, window: 3
-            - unless @records.last_page?
-              %div
-                = link_to_next_page @records, 'Load more', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
 
-      .govuk-grid-column-full.subsection__content.js-accordion-subsection#about-the-data__4
-        - unless @records.any? || @register.is_empty?
-          - if @search_term.present?
-            %script
-              ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
-          - else
-            %script
-              ga('send', 'event', 'Search', 'No results', 'Search term not present', {nonInteraction: true});
-    %hr{class: 'govuk-!-margin-top-0'}
-%dialog#modal_dialog.modal-dialog.dialog{role: "dialog", "aria-hidden" => "true", "aria-labelledby" => "dialog-title"}
-  %button{type: 'button', class: 'modal-dialog__close', "aria-label" => "Close dialog"} Close
-  .modal-dialog__inner
+          - if @show_load_more
+            .pager
+              .pager-controls.js-hidden
+                = paginate @records, outer_window: 0, window: 3
+              - unless @records.last_page?
+                %b= link_to_next_page @records, 'Load more records', id: 'load-more-records', class: 'js-load-more', remote: true, 'aria-controls': 'records-count'
+
+      .govuk-grid-column-full
+        - if @register.is_empty? || @records.any?
+          = render partial: 'registers/fields', locals: { register: @register, records: @records }
 
 = content_for :head do
   = render partial: 'registers/structured_data', locals: { register: @register }
 
 = content_for :javascript do
-  :javascript
-    document.getElementById('access-the-data-button')
-      .addEventListener('click', function() {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Preview the data',
-          eventAction: 'Access the data',
-          eventLabel: 'Access the data',
-          nonInteraction: true
-        })
-      })
-  :javascript
-    var count = 0;
-    document.getElementById('load-more-records')
-      .addEventListener('click', function() {
-        count = count + 1
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Register Table',
-          eventAction: 'Load more ' + count,
-          eventLabel: 'Load more',
-          nonInteraction: true
-        })
-      })
-  :javascript
-    document.getElementById('access-the-data-from-preview')
-      .addEventListener('click', function() {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Register Table',
-          eventAction: 'Access the data from preview',
-          eventLabel: 'Access the data',
-          nonInteraction: true
-        })
-      })
+  - if @show_load_more
+    :javascript
+      var count = 0;
+      if (document.getElementById('load-more-records') !== null) {
+        document.getElementById('load-more-records')
+          .addEventListener('click', function() {
+            count = count + 1
+            ga('send', {
+              hitType: 'event',
+              eventCategory: 'Register Table',
+              eventAction: 'Load more ' + count,
+              eventLabel: 'Load more',
+              nonInteraction: true
+            })
+          })
+      };

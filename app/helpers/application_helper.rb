@@ -47,13 +47,30 @@ module ApplicationHelper
     Date.parse(date).strftime('%e %B %Y') # eg 3 August 2015
   end
 
+  def humanize_with_dashes(string)
+    string
+      .humanize
+      .tr('-', ' ')
+  end
+
+  def make_urls_wrappable(string)
+    # Assumes a full stop with a lowercase letter, number, or an underscore on
+    # both sides is part of a URL; then adds an invisible breaking space to
+    # allow wrapping.
+    # eg:
+    #  - Apples. Oranges. Pears. => Apples. Oranges. Pears.
+    #  - GOV.UK => GOV.UK
+    #  - registers.service.gov.uk => registers.&#8203;service.&#8203;gov.&#8203;uk
+    string
+      .gsub(/([a-z0-9_])\.([a-z0-9_])/, '\1.&#8203;\2')
+      .html_safe
+  end
+
   def records_table_header(field_value)
     wrapper_css_class = params[:sort_by] == field_value ? 'table-header active' : 'table-header'
-    what_does_this_mean = content_tag('span', "What does #{field_value} mean", class: 'visually-hidden') + '?'
 
     content_tag 'th', class: "#{field_value} #{wrapper_css_class}" do
-      content_tag('span', field_value.tr('-', ' ').humanize) +
-        link_to(what_does_this_mean, register_field_url(@register.slug, field_value), class: 'info-icon', remote: true, data: { "click-events" => true, "click-category" => "Register Table", "click-action" => "Help" })
+      field_value.tr('-', ' ').humanize
     end
   end
 end

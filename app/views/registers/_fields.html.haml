@@ -1,0 +1,19 @@
+
+%table.registers-secondary-table
+  %caption.registers-secondary-table__caption
+    The <b>#{@register.register_fields.count} fields</b> in this register
+
+  %thead.registers-secondary-table__head
+    %tr.registers-secondary-table__row
+      %th{class: 'registers-secondary-table__header govuk-!-padding-0', scope: 'col'}
+        %p{class: 'govuk-!-margin-bottom-0 govuk-!-padding-3'} Field name
+      %th{class: 'registers-secondary-table__header govuk-!-padding-0', scope: 'col'}
+        %p{class: 'govuk-!-margin-bottom-0 govuk-!-padding-3'} Field description
+  %tbody.registers-secondary-table__body
+    - @register.register_fields.each do |field|
+      %tr.registers-secondary-table__row
+        %td{class: 'govuk-!-padding-0 registers-secondary-table__cell'}
+          %p{class: 'govuk-!-margin-bottom-0 govuk-!-padding-3'}
+            %b= humanize_with_dashes(field['field'])
+        %td{class: 'govuk-!-padding-0 registers-secondary-table__cell'}
+          %p{class: 'govuk-!-margin-bottom-0 govuk-!-padding-3'}= make_urls_wrappable(field['text'])

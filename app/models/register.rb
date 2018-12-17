@@ -79,6 +79,19 @@ class Register < ApplicationRecord
     register_phase == 'Beta' && category.present?
   end
 
+  def is_register_published_by_dcms?
+    authority&.government_organisation_key == 'D5'
+  end
+
+  def safe_name
+    # `seo_title` already has 'register' in it. So we need to replace 'register
+    # register' with a 'register'.
+    [[title, seo_title, name].find(&:present?), 'register']
+      .compact
+      .join(' ')
+      .gsub(/register register$/i, 'register')
+  end
+
 private
 
   def set_slug

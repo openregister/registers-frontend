@@ -1,207 +1,110 @@
-// Responsive tables from https://github.com/alphagov/spotlight/blob/master/styles/common/table.scss
 
-table {
-  &.touch-table {
-    margin-left: 1em;
-    margin-right: 1em;
-    width: calc(100% - 2em);
+
+// ----------------------------------------------------------------------------
+// Register data table for showing the contents of a register
+// ----------------------------------------------------------------------------
+
+.table {
+  margin-bottom: $gutter;
+
+  .panel {
+    margin: $gutter 0;
   }
 
-  @include media(desktop) {
-    &.floated-header {
-      thead {
-        display: block;
-      }
+  td {
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
+}
 
-      tbody {
-        display: block;
-        max-height: 28em;
-        overflow-y: auto;
+.table-scroll {
+  margin-bottom: $gutter;
+  overflow-x: auto;
+  width: 100%;
+}
 
-        &::-webkit-scrollbar {
-          -webkit-appearance: none;
-        }
+.register-data-table {
+  th,
+  td {
+    font-size: 16px;
+    padding: 15px;
+    vertical-align: top;
 
-        &::-webkit-scrollbar:vertical {
-          width: 11px;
-        }
+    a {
+      white-space: nowrap;
+    }
 
-        &::-webkit-scrollbar:horizontal {
-          height: 11px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 8px;
-          border: 2px solid $white; // should match background, can't be transparent
-          background-color: rgba($black, 0.5);
-        }
-
-        &::-webkit-scrollbar-track {
-          background-color: $white;
-          border-radius: 8px;
-        }
-      }
+    p {
+      margin: 0;
     }
   }
 
   th {
-    width: 25%;
+    background-color: $grey-3;
+    border-bottom: 0;
+    border-right: 2px solid $white;
+    font-weight: normal;
+    min-width: 280px;
+    position: relative;
+    vertical-align: middle;
 
-    a {
-      position: relative;
+    &.start-date,
+    &.end-date,
+    &.review-date,
+    &:first-child {
+      min-width: 120px;
     }
-
-    &.descending a:after,
-    &.ascending a:after {
-      content: "\00a0\00a0\25BC";
-      font-size: 8px;
-      position: absolute;
-      top: 0.7em;
-    }
-
-    &.ascending a:after {
-      content: "\00a0\00a0\25B2";
-    }
-
   }
 
-  .currency,
-  .percent,
-  .integer,
-  .number {
-    text-align: right;
+  td {
+    border: none;
   }
 
-}
+  tr:nth-child(even) td {
+    background: $grey-4;
+  }
 
-// Tables
-// ==========================================================================
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-}
-
-table th,
-table td {
-  @include core-16;
-  //padding: 0.7em 1em 0.7em 1em;
-  padding: 12px 20px 9px 0; //em(12, 16) em(20, 16) em(9, 16) 0;
-  text-align: left;
-  color: $black;
-  border-bottom: 1px solid $border-colour;
-}
-
-table th,
-table thead th:first-child {
-  text-align: left;
-}
-
-table thead th {
-  vertical-align: top;
-}
-
-// Right align headings for numeric content
-table th {
-  &.numeric,
-  &.integer,
-  &.currency,
-  &.percent {
-    text-align: right;
+  .table-header {
+    &.active {
+      background-color: $govuk-blue;
+      color: $white;
+      font-weight: bold;
+    }
   }
 }
 
-// Use tabular numbers for numeric table cells
-table tbody .integer,
-table tbody .currency,
-table tbody .percent {
-  @include core-16($tabular-numbers: true);
-  text-align: right;
+// ----------------------------------------------------------------------------
+// Secondary table type used for showing example fields
+// ----------------------------------------------------------------------------
+.registers-secondary-table {
+  p {
+    margin: 0;
+  }
 }
 
-table tbody .url {
-  word-break: break-all;
-}
-
-table thead .sort-column,
-table tbody .sort-column {
-  font-weight: bold;
-}
-
-.table-no-header .sort-column {
+.registers-secondary-table__caption {
   font-weight: normal;
+  padding: 0 0 1em 0;
 }
 
-.table-collapsible {
-  @include media($max-width: 900px) {
-    th,
-    td {
-      padding-right: 10px;
-    }
+.registers-secondary-table__row {
+  border: 1px solid $govuk-border-colour;
+}
+
+.registers-secondary-table__header,
+.registers-secondary-table__cell {
+  background: govuk-colour("grey-4");
+  font-size: 16px;
+  padding: 0;
+  vertical-align: top;
+
+  &:last-child {
+    padding-right: 0;
+    width: 66%;
   }
+}
 
-  @include media($max-width: 641px) {
-    display: block;
-    width: auto;
-
-    tr {
-      display: block;
-      padding-bottom: 15px;
-      border-bottom: 1px solid $border-colour;
-      margin-bottom: 15px;
-    }
-
-    thead th {
-      display: block;
-      text-align: left;
-      border-bottom: 0;
-      padding: 3px 0;
-      width: 100%;
-
-      &:first-child {
-        width: 100%;
-      }
-    }
-
-    tbody th,
-    tbody td {
-      display: block;
-      text-align: left;
-      border-bottom: 0;
-      padding-top: 5px;
-      padding-bottom: 5px;
-
-      &:before {
-        content: attr(data-title);
-        display: inline-block;
-        font-weight: bold;
-        width: 35%;
-      }
-
-      &:first-child {
-        @include core-19();
-        font-weight: bold;
-        width: 100%;
-
-        .heading-xsmall {
-          display: inline-block;
-        }
-
-        p {
-          font-weight: normal;
-          margin-bottom: 0;
-        }
-
-        &:before {
-          content: none;
-        }
-      }
-    }
-
-    .govuk-organisation-logo {
-      display: inline-block;
-      vertical-align: top;
-    }
-  }
+.registers-secondary-table__header {
+  background: govuk-colour("grey-3");
 }

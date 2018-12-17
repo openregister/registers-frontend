@@ -35,10 +35,13 @@ class RegistersController < ApplicationController
   end
 
   def show
-    @search_term = search_term
     @register = Register.has_records.find_by_slug!(params[:id])
+
     @records = recover_records(@register.fields_array, params)
+
     @register_records_total_count = @register.number_of_records
+
+    @show_load_more = @register.is_register_published_by_dcms? # only show 'Load more' for registers published by DCMS
 
     if cookies[:seen_help_us_improve_questions]
       @next_step_api = register_use_the_api_path(@register.slug)
@@ -71,17 +74,17 @@ private
 
   def recover_records(fields, params)
     default_sort_by = lambda {
-      has_name_field = fields.include?('name')
-      has_name_field ? 'name' : params[:id]
+      fields.include?('name') ? 'name' : params[:id]
     }
 
     sort_by = params[:sort_by] ||= default_sort_by.call
 
+    amount = @register.is_register_published_by_dcms? ? 10 : 5
+
     @register.records
-             .where(entry_type: 'user')
-             .search_for(fields, search_term)
-             .sort_by_field(sort_by, 'asc')
-             .page(params[:page])
-             .per(10)
+            .where(entry_type: 'user')
+            .sort_by_field(sort_by, 'asc')
+            .page(params[:page])
+            .per(amount)
   end
 end
