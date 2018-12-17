@@ -14,12 +14,12 @@
         %h1{class: "govuk-heading-l govuk-!-margin-bottom-1"}= @register.safe_name
         %p{class: 'govuk-body-l govuk-!-padding-top-2'}= @register.register_description
         - unless @register.is_empty?
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-2'}
             First published #{human_readable_date(@register.register_first_updated) }
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-2'}
             Last updated #{human_readable_date(@register.register_last_updated) } &mdash; #{link_to 'see all updates' , register_entries_path(@register.slug), {data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Last updated - #{@register.title}", 'click-label' => 'Last updated'}}}
         - if @register.category.present?
-          %p{class: 'govuk-body-s govuk-!-margin-bottom-1'}
+          %p{class: 'govuk-body-s govuk-!-margin-bottom-0 govuk-!-padding-bottom-7'}
             Category: #{link_to @register.category&.name, category_path(@register.category&.slug), {class: 'govuk-!-font-weight-bold', data: { 'click-events' => '', 'click-category' => 'Register metadata', 'click-action' => "Category - #{@register&.category&.name}", 'click-label' => 'Category'}}}
       .govuk-grid-column-one-third
         - if @register.authority.present?
