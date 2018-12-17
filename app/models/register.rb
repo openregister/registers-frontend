@@ -80,7 +80,7 @@ class Register < ApplicationRecord
   end
 
   def is_register_published_by_dcms?
-    Authority.where(id: authority_id).first&.government_organisation_key === 'D5'
+    authority&.government_organisation_key == 'D5'
   end
 
   def safe_name
