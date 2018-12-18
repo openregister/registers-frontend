@@ -39,11 +39,31 @@ RSpec.feature 'View register', type: :feature do
 
   scenario 'shows download and API options correctly' do
     visit('/registers/country')
-
     expect(page).to have_css '.highlight-box', count: 2
-
     expect(page).to have_content('Download the data')
     expect(page).to have_content('Use the API')
+  end
+
+  scenario 'the states for all pages in API flow are 200' do
+    visit('/registers/country')
+    expect(page.status_code).to eq(200)
+
+    click_link('Use the API')
+    expect(page.status_code).to eq(200)
+
+    click_link('Skip this step')
+    expect(page.status_code).to eq(200)
+  end
+
+  scenario 'the states for all pages in download flow are 200' do
+    visit('/registers/country')
+    expect(page.status_code).to eq(200)
+
+    click_link('Download the data')
+    expect(page.status_code).to eq(200)
+
+    click_link('Skip this step')
+    expect(page.status_code).to eq(200)
   end
 
   scenario 'goes to questionnaire correctly when download option chosen' do
