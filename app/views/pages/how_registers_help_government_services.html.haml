@@ -4,6 +4,8 @@
   %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
     %li.breadcrumbs__item
       = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item
+      = link_to 'About', about_path
     %li.breadcrumbs__item.breadcrumbs__item--active
       = link_to 'How registers help government services', '#content', "aria-current" => "page"
 
@@ -32,5 +34,5 @@
 
         %h3.govuk-heading-m Clean data
         %p.govuk-body The need to clean data in a register is greatly reduced. A register, by its very nature, should contain complete, accurate and relevant data.
-        %p.govuk-body Custodians must adhere to strict guidelines when #{link_to 'creating a register', creating_a_register_path}. This includes removing acronyms and duplicates entries, filling in any gaps, using the government’s open standard for dates, and flattening hierarchies.
+        %p.govuk-body Custodians must adhere to strict guidelines when creating a register. This includes removing acronyms and duplicates entries, filling in any gaps, using the government’s open standard for dates, and flattening hierarchies.
         %p.govuk-body The GOV.UK Registers team provides support to custodians when creating and updating a register to ensure that the data meets the appropriate standards.

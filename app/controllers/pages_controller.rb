@@ -28,15 +28,5 @@ class PagesController < ApplicationController
 
   def how_registers_help_government_services; end
 
-  def creating_a_register; end
-
-  def decide_if_your_data_could_be_a_register; end
-
-  def designing_and_shaping_the_register; end
-
-  def data_cleansing_and_preparing_the_register; end
-
-  def publishing_the_register; end
-
   def terms_and_conditions; end
 end
