@@ -35,7 +35,7 @@ gem 'zendesk_api'
 
 # Cloudfoundry ruby helper
 gem 'cf-app-utils'
-gem 'health_check', '~> 2.7'
+gem 'health_check', '~> 3.0'
 
 # Email and Text Notifications
 gem 'govuk_notify_rails'
