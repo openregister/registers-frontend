@@ -1,0 +1,17 @@
+- @page_title = 'Creating a register'
+
+%nav.breadcrumbs{role: 'Navigation', 'aria-label' => 'Breadcrumb'}
+  %ol{data: {'click-events' => '', 'click-category' => 'Header', 'click-action' => 'Breadcrumb Clicked'}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Creating a register', '#content', "aria-current" => "page"
+
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      = render partial: 'pages/creating_a_register__navigation'
+      %section.govuk-grid-column-two-thirds
+        %h2.govuk-heading-l Creating a register
+        %p.govuk-body This guidance will help you understand how government teams can design, prepare and publish data in a register.
+        %p.govuk-body You can also see our guidance on the #{link_to 'characteristics of a register', characteristics_of_a_register_path} and #{link_to 'how registers help government services', how_registers_help_government_services_path}.

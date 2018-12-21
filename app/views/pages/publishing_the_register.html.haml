@@ -1,0 +1,27 @@
+- @page_title = 'Publishing the register'
+
+%nav.breadcrumbs{role: 'Navigation', 'aria-label' => 'Breadcrumb'}
+  %ol{data: {'click-events' => '', 'click-category' => 'Header', 'click-action' => 'Breadcrumb Clicked'}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item
+      = link_to 'Creating a register', creating_a_register_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'Publishing the register', '#content', "aria-current" => "page"
+
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      = render partial: 'pages/creating_a_register__navigation'
+      %section.govuk-grid-column-two-thirds
+        %h2.govuk-heading-l Publishing the register
+
+        %p.govuk-body Once the shape of the register has been agreed and the data has been prepared, the GOV.UK Registers team can begin to build a prototype of the register.
+        %p.govuk-body The prototype will be shared with the custodian and any interested stakeholders for feedback. The custodian will be able to respond to feedback and the registers team will make any necessary amends to the register.
+
+        %h3.govuk-heading-m Ready to use
+        %p.govuk-body Once the register has been given final approval by the custodian, it will be published in our #{link_to 'registers collection', register_path('registers')} and available for public use.
+        %p.govuk-body From this point:
+        %ul.govuk-list.govuk-list--bullet
+          %li the structure of the register cannot be changed – this includes removing or adding fields
+          %li data cannot be removed, including the name of the custodian – it can only be amended or marked as out of date

@@ -8,7 +8,20 @@ Rails.application.routes.draw do
   get 'cookies', to: 'pages#cookies', as: 'cookies'
   get 'terms-and-conditions', to: 'pages#terms_and_conditions', as: 'terms_and_conditions'
   get 'data-format-changes', to: 'pages#data_format_changes', as: 'data_format_changes'
-  get 'about', to: 'pages#about', as: 'about'
+
+  scope 'about' do
+    root 'pages#about', as: 'about'
+    get 'characteristics-of-a-register', to: 'pages#characteristics_of_a_register', as: 'characteristics_of_a_register'
+    get 'how-registers-help-government-services', to: 'pages#how_registers_help_government_services', as: 'how_registers_help_government_services'
+  end
+
+  scope 'creating-a-register' do
+    root 'pages#creating_a_register', as: 'creating_a_register'
+    get 'decide-if-your-data-could-be-a-register', to: 'pages#decide_if_your_data_could_be_a_register', as: 'decide_if_your_data_could_be_a_register'
+    get 'designing-and-shaping-the-register', to: 'pages#designing_and_shaping_the_register', as: 'designing_and_shaping_the_register'
+    get 'data-cleansing-and-preparing-the-register', to: 'pages#data_cleansing_and_preparing_the_register', as: 'data_cleansing_and_preparing_the_register'
+    get 'publishing-the-register', to: 'pages#publishing_the_register', as: 'publishing_the_register'
+  end
 
   resources :sign_up, only: %i[create index], path: 'sign-up-for-updates' do
   end

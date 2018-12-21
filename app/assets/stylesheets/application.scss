@@ -409,6 +409,14 @@ details {
   padding: $gutter;
 }
 
+.code-highlighted {
+  background-color: govuk-colour("grey-3");
+  display: inline-block;
+  border-radius: 3px;
+  margin: 0 0 $gutter 0;
+  padding: 3px 6px 3px 6px;
+}
+
 .govuk-box-highlight--title-only .heading-large {
   margin: $gutter 0;
 }
@@ -552,7 +560,7 @@ details {
 }
 
 // ============================================================================
-// Overridess
+// Overrides
 // ============================================================================
 
 .registers-\!-faded-colour {
@@ -604,6 +612,18 @@ details {
 
 .registers-\!-border-top {
   border-top: 1px solid $govuk-border-colour;
+}
+
+.registers-\!-border-bottom {
+  border-bottom: 1px solid $govuk-border-colour;
+}
+
+.registers-\!-no-underline {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 // ============================================================================
