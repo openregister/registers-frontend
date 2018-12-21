@@ -37,7 +37,7 @@
   = canonical_tag
   = stylesheet_link_tag 'application'
   = csrf_meta_tags
-  %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'Registers are lists of information that are managed and approved by government. GOV.UK Registers helps government design and build services on a consistent and high quality data infrastructure via our secure API.'}" }
+  %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers are structured datasets of government information. Designed to ensure government services run on the best quality data infrastructure, registers are accessible through a secure API that is easy to integrate with.'}" }
   = render partial: 'layouts/analytics'
 
 - content_for :body_end do
@@ -52,19 +52,21 @@
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} About
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Our service', about_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(show_by: "organisation"), {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Terms and conditions', terms_and_conditions_path
+            %li.govuk-footer__list-item= link_to 'Performance', 'https://www.gov.uk/performance/govuk-registers'
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Use
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
             %li.govuk-footer__list-item= link_to 'Registers collection', registers_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to "Services using registers", services_using_registers_path, {class: 'govuk-footer__link'}
-            %li.govuk-footer__list-item= link_to 'Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
+            %li.govuk-footer__list-item= link_to 'Organisations managing registers', registers_path(show_by: "organisation"), {class: 'govuk-footer__link'}
+
 
         .govuk-grid-column-one-third
           %h2{class: 'govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-0'} Support
           %ul{class: 'govuk-footer__list govuk-!-padding-bottom-7'}
+            %li.govuk-footer__list-item= link_to 'Documentation', 'https://docs.registers.service.gov.uk', {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Sign up for updates', sign_up_index_path, {class: 'govuk-footer__link'}
             %li.govuk-footer__list-item= link_to 'Contact', support_path, {class: 'govuk-footer__link'}
 
