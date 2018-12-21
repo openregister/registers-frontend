@@ -1,0 +1,38 @@
+- @page_title = "How registers help government services"
+
+%nav.breadcrumbs{role: "Navigation", "aria-label" => "Breadcrumb"}
+  %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+    %li.breadcrumbs__item
+      = link_to 'GOV.UK Registers', root_path
+    %li.breadcrumbs__item.breadcrumbs__item
+      = link_to 'About', about_path
+    %li.breadcrumbs__item.breadcrumbs__item--active
+      = link_to 'How registers help government services', '#content', "aria-current" => "page"
+
+.govuk-width-container
+  %main#content{class: 'govuk-main-wrapper govuk-!-padding-bottom-9', role:'main'}
+    .govuk-grid-row
+      = render partial: 'pages/about__navigation'
+      %section.govuk-grid-column-two-thirds
+        %h2.govuk-heading-l How registers help government services
+        %p.govuk-body Registers look to solve common data issues faced by government and public sector organisations.
+        %p.govuk-body Teams across government often need data to help build their service. However, service teams often find that:
+        %ul.govuk-list.govuk-list--bullet
+          %li sourcing data from across government is time-consuming
+          %li data can quickly become out of date and cannot be fully trusted
+          %li data needs to be cleaned before it can be used
+          %li Data in one place
+
+        %p.govuk-body The #{link_to 'registers collection', register_path('register')} brings structured datasets of government information together in one place.
+        %p.govuk-body You can browse registers by their categories – for example, the #{link_to 'regional and local government', category_path('regional-and-local-government')} category includes registers on subjects such as #{link_to 'local authorities in England', register_path('local-authority-eng')}.
+        %p.govuk-body You can also search for registers by the government organisation that owns them, like Cabinet Office and Ofqual.
+        %p.govuk-body All registers are open and can be accessed, copied and used freely by anyone - and everyone will see the same data. You can read our #{link_to 'terms and conditions', terms_and_conditions_path} for more details.
+
+        %h3.govuk-heading-m Up-to-date data
+        %p.govuk-body All of the data in a register is up-to-date and ready to use. Each register can be accessed via a common API. If you integrate with the API for a register, you won’t have to periodically check if the data has changed.
+        %p.govuk-body You can download a copy of the latest data in a register in CSV and ODS formats and manually upload it into your service. If you use the API, however, any updates made to a register will be automatically reflected in your service.
+
+        %h3.govuk-heading-m Clean data
+        %p.govuk-body The need to clean data in a register is greatly reduced. A register, by its very nature, should contain complete, accurate and relevant data.
+        %p.govuk-body Custodians must adhere to strict guidelines when creating a register. This includes removing acronyms and duplicates entries, filling in any gaps, using the government’s open standard for dates, and flattening hierarchies.
+        %p.govuk-body The GOV.UK Registers team provides support to custodians when creating and updating a register to ensure that the data meets the appropriate standards.

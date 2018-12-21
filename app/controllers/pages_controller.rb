@@ -24,5 +24,9 @@ class PagesController < ApplicationController
 
   def about; end
 
+  def characteristics_of_a_register; end
+
+  def how_registers_help_government_services; end
+
   def terms_and_conditions; end
 end

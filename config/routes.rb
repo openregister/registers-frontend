@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   get 'cookies', to: 'pages#cookies', as: 'cookies'
   get 'terms-and-conditions', to: 'pages#terms_and_conditions', as: 'terms_and_conditions'
   get 'data-format-changes', to: 'pages#data_format_changes', as: 'data_format_changes'
-  get 'about', to: 'pages#about', as: 'about'
+
+  scope 'about' do
+    root 'pages#about', as: 'about'
+    get 'characteristics-of-a-register', to: 'pages#characteristics_of_a_register', as: 'characteristics_of_a_register'
+    get 'how-registers-help-government-services', to: 'pages#how_registers_help_government_services', as: 'how_registers_help_government_services'
+  end
 
   resources :sign_up, only: %i[create index], path: 'sign-up-for-updates' do
   end
