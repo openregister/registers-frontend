@@ -30,8 +30,6 @@
             = link_to "About", about_path
           %li{class: "#{'active' if current_page?(registers_path)}"}
             = link_to "Registers collection", registers_path
-          %li
-            = link_to "Documentation", "https://docs.registers.service.gov.uk"
 
 - content_for :head do
   = canonical_tag
