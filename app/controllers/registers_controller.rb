@@ -4,6 +4,7 @@ class RegistersController < ApplicationController
   include ActionView::Helpers::UrlHelper
   helper_method :field_link_resolver
 
+
   def index
     @search_term = search_term
 
@@ -56,9 +57,11 @@ class RegistersController < ApplicationController
     resolver = LinkResolver.new(current_register_slug: register_slug, register_whitelist: whitelist)
 
     if field_value.is_a?(Array)
-      field_value.map { |fv| resolver.resolve(field, fv) }.join(', ').html_safe
+      list = field_value.map { |fv| resolver.resolve(field, fv) }.join(', ')
+      BlueCloth.new(list, auto_links: false).to_html
     else
-      resolver.resolve(field, field_value)
+      text = resolver.resolve(field, field_value)
+      BlueCloth.new(text, auto_links: false).to_html
     end
   end
 
