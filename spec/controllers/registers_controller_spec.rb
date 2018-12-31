@@ -122,7 +122,7 @@ RSpec.describe RegistersController, type: :controller do
     it "links to external URL" do
       field = { "text" => "The website for a register entry.", "field" => "website", "phase" => "beta", "datatype" => "url", "cardinality" => "1" }
       field_value = "https://www.gov.uk/government/organisations/academy-for-justice-commissioning"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-organisation')).to eq("<p><a href=\"https://www.gov.uk/government/organisations/academy-for-justice-commissioning\">https://www.gov.uk/government/organisations/academy-for-justice-commissioning</a></p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-organisation')).to eq("<a href=\"https://www.gov.uk/government/organisations/academy-for-justice-commissioning\">https://www.gov.uk/government/organisations/academy-for-justice-commissioning</a>")
     end
   end
 
@@ -130,19 +130,19 @@ RSpec.describe RegistersController, type: :controller do
     it "does not link primary key field" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
       field_value = "D13"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-organisation')).to eq("<p>D13</p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-organisation')).to eq("D13")
     end
 
     it "links register type fields" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
       field_value = "D13"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-service', whitelist: %w(government-organisation))).to eq("<p><a href=\"/registers/government-organisation/records/D13\">D13</a></p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-service', whitelist: %w(government-organisation))).to eq("<a href=\"/registers/government-organisation/records/D13\">D13</a>")
     end
 
     it "does not link if the register is not in the whitelist" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "string", "register" => "government-organisation", "cardinality" => "1" }
       field_value = "D13"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-service', whitelist: [])).to eq("<p>D13</p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-service', whitelist: [])).to eq("D13")
     end
   end
 
@@ -150,25 +150,25 @@ RSpec.describe RegistersController, type: :controller do
     it "resolves CURIE to record" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
       field_value = "government-organisation:D13"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-organisation', whitelist: %w(government-organisation))).to eq("<p><a href=\"/registers/government-organisation/records/D13\">government-organisation:D13</a></p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-organisation', whitelist: %w(government-organisation))).to eq("<a href=\"/registers/government-organisation/records/D13\">government-organisation:D13</a>")
     end
 
     it "does not resolve CURIE to a record if the register doesn't contain records" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
       field_value = "government-organisation:D13"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-organisation', whitelist: [])).to eq("<p>government-organisation:D13</p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-organisation', whitelist: [])).to eq("government-organisation:D13")
     end
 
     it "links one sided CURIE to register" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
       field_value = "government-organisation:"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-domain', whitelist: %w(government-organisation))).to eq("<p><a href=\"/registers/government-organisation\">government-organisation:</a></p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-domain', whitelist: %w(government-organisation))).to eq("<a href=\"/registers/government-organisation\">government-organisation:</a>")
     end
 
     it "doesn't link a one sided CURIE to the register if the register has no records" do
       field = { "text" => "The unique code for a government organisation.", "field" => "government-organisation", "phase" => "beta", "datatype" => "curie", "cardinality" => "1" }
       field_value = "government-organisation:"
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'government-domain', whitelist: [])).to eq("<p>government-organisation:</p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'government-domain', whitelist: [])).to eq("government-organisation:")
     end
   end
 
@@ -176,13 +176,13 @@ RSpec.describe RegistersController, type: :controller do
     it "links each field value in cardinality N fields" do
       field = { "text" => "The classes that a charity falls into.", "field" => "charity-classes", "phase" => "discovery", "datatype" => "string", "register" => "charity-class", "cardinality" => "n" }
       field_value = %w[307 302 301 207 103 102 101]
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'charity', whitelist: %w(charity-class))).to eq("<p><a href=\"/registers/charity-class/records/307\">307</a>, <a href=\"/registers/charity-class/records/302\">302</a>, <a href=\"/registers/charity-class/records/301\">301</a>, <a href=\"/registers/charity-class/records/207\">207</a>, <a href=\"/registers/charity-class/records/103\">103</a>, <a href=\"/registers/charity-class/records/102\">102</a>, <a href=\"/registers/charity-class/records/101\">101</a></p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'charity', whitelist: %w(charity-class))).to eq("<a href=\"/registers/charity-class/records/307\">307</a>, <a href=\"/registers/charity-class/records/302\">302</a>, <a href=\"/registers/charity-class/records/301\">301</a>, <a href=\"/registers/charity-class/records/207\">207</a>, <a href=\"/registers/charity-class/records/103\">103</a>, <a href=\"/registers/charity-class/records/102\">102</a>, <a href=\"/registers/charity-class/records/101\">101</a>")
     end
 
     it "does not link field values if a cardinality N field references registers without records" do
       field = { "text" => "The classes that a charity falls into.", "field" => "charity-classes", "phase" => "discovery", "datatype" => "string", "register" => "charity-class", "cardinality" => "n" }
       field_value = %w[307 302 301 207 103 102 101]
-      expect(subject.field_link_resolver(field, field_value, register_slug: 'charity', whitelist: [])).to eq("<p>307, 302, 301, 207, 103, 102, 101</p>")
+      expect(subject.field_formatter(field, field_value, register_slug: 'charity', whitelist: [])).to eq("307, 302, 301, 207, 103, 102, 101")
     end
   end
 end
