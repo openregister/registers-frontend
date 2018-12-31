@@ -47,10 +47,8 @@ RSpec.feature 'View register', type: :feature do
   scenario 'the states for all pages in API flow are 200' do
     visit('/registers/country')
     expect(page.status_code).to eq(200)
-
     click_link('Use the API')
     expect(page.status_code).to eq(200)
-
     click_link('Skip this step')
     expect(page.status_code).to eq(200)
   end
@@ -58,10 +56,8 @@ RSpec.feature 'View register', type: :feature do
   scenario 'the states for all pages in download flow are 200' do
     visit('/registers/country')
     expect(page.status_code).to eq(200)
-
     click_link('Download the data')
     expect(page.status_code).to eq(200)
-
     click_link('Skip this step')
     expect(page.status_code).to eq(200)
   end
@@ -69,31 +65,32 @@ RSpec.feature 'View register', type: :feature do
   scenario 'goes to questionnaire correctly when download option chosen' do
     visit('/registers/country')
     click_link('Download the data')
-
-    expect(page).to have_content('Before you download the data')
-    expect(page).to have_content('Help us improve GOV.UK Registers')
-
-    expect(page).to have_content('What part of government are you working for?')
-    expect(page).to have_content('What are you using registers for?')
-    expect(page).to have_content('Yes')
-    expect(page).to have_content('Building a service')
-    expect(page).to have_content('For data analysis or reporting')
-    expect(page).to have_content('Other')
-    expect(page).to have_content('No')
-    expect(page).to have_content('Commercial use')
-    expect(page).to have_content('Non-commercial use')
-    expect(page).to have_content('Personal use')
-
+    expect(page.body).to include(
+      'Before you download the data',
+      'Help us improve GOV.UK Registers',
+      'What part of government are you working for?',
+      'What are you using registers for?',
+      'Yes',
+      'Building a service',
+      'For data analysis or reporting',
+      'Other',
+      'No',
+      'Commercial use',
+      'Non-commercial use',
+      'Personal use'
+    )
     click_button('Submit')
   end
 
   scenario 'goes to questionnaire correctly when API option chosen' do
     visit('/registers/country')
     click_link('Use the API')
-    expect(page).to have_content('Before you use the API')
-    expect(page).to have_content('Help us improve GOV.UK Registers')
-    expect(page).to have_content('What part of government are you working for?')
-    expect(page).to have_content('What are you using registers for?')
+    expect(page.body).to include(
+      'Before you use the API',
+      'Help us improve GOV.UK Registers',
+      'What part of government are you working for?',
+      'What are you using registers for?'
+    )
   end
 
   scenario 'goes to download page correctly when questionnaire is skipped' do
@@ -116,9 +113,11 @@ RSpec.feature 'View register', type: :feature do
     click_link('Skip this step')
     visit('/registers/country')
     click_link('Download the data')
-    expect(page).to have_content('Download the data')
-    expect(page).to have_content('ODS (Excel compatible)')
-    expect(page).to have_content('CSV')
+    expect(page.body).to include(
+      'Download the data',
+      'ODS (Excel compatible)',
+      'CSV'
+    )
   end
 
   scenario 'goes to API page correctly when questionnaire is skipped' do
@@ -141,7 +140,6 @@ RSpec.feature 'View register', type: :feature do
     click_link('Skip this step')
     visit('/registers/country')
     click_link('Use the API')
-    expect(page).to have_content('Use the API')
-    expect(page).to have_content('register.gov.uk/records.json?page-size=5000')
+    expect(page.body).to include('Use the API', 'register.gov.uk/records.json?page-size=5000')
   end
 end
