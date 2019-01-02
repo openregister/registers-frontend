@@ -2,7 +2,8 @@
 
 class RegistersController < ApplicationController
   include ActionView::Helpers::UrlHelper
-  helper_method :field_link_resolver
+  helper_method :field_formatter
+
 
   def index
     @search_term = search_term
@@ -52,14 +53,11 @@ class RegistersController < ApplicationController
     end
   end
 
-  def field_link_resolver(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
+  def field_formatter(field, field_value, register_slug: @register.slug, whitelist: register_whitelist)
     resolver = LinkResolver.new(current_register_slug: register_slug, register_whitelist: whitelist)
+    with_links = field_value.is_a?(Array) ? field_value.map { |fv| resolver.resolve(field, fv) }.join(', ') : resolver.resolve(field, field_value)
 
-    if field_value.is_a?(Array)
-      field_value.map { |fv| resolver.resolve(field, fv) }.join(', ').html_safe
-    else
-      resolver.resolve(field, field_value)
-    end
+    field['datatype'] === 'text' ? BlueCloth.new(with_links, auto_links: false).to_html : with_links
   end
 
 private
