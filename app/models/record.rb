@@ -1,5 +1,5 @@
 class Record < ApplicationRecord
-  VALID_FIELD_NAME = /[a-zA-Z\-_\/0-9]+/
+  VALID_FIELD_NAME = /[a-zA-Z\-_\/0-9]+/.freeze
 
   include SearchScope
   belongs_to :register
