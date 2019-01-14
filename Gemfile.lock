@@ -160,8 +160,8 @@ GEM
       railties (>= 4.0.1)
     hashdiff (0.3.7)
     hashie (3.6.0)
-    health_check (2.7.0)
-      rails (>= 4.0)
+    health_check (3.0.0)
+      railties (>= 5.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -432,7 +432,7 @@ DEPENDENCIES
   govuk_notify_rails
   govuk_template
   haml-rails
-  health_check (~> 2.7)
+  health_check (~> 3.0)
   http (= 2.2.1)
   httparty (~> 0.16.3)
   invisible_captcha
