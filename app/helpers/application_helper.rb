@@ -19,7 +19,7 @@ module ApplicationHelper
       'logo-with-crest crest-so'
     when 'uk-atomic-energy-authority'
       'logo-with-crest crest-ukaea'
-    when 'nhs', 'scottish-government', 'welsh-government', 'office-for-national-statistics'
+    when 'nhs', 'scottish-government', 'welsh-government', 'office-for-national-statistics', 'nhs-digital'
       ' '
     else
       'logo-with-crest crest-org'
