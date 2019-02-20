@@ -91,7 +91,7 @@ In order to get metadata changes to appear on the frontend, you must run the for
 1) Run `cf login` and select the `openregister` `prod` space
 1) Run:  
 ```
-cf run-task registers-frontend-queue "bundle exec rake registers_frontend:populate_db:force_full_register_download[ID]""
+cf run-task registers-frontend-queue "bundle exec rake registers_frontend:populate_db:force_full_register_download[ID]"
 ``` 
 where `ID` is the ID of the register with changed metadata for example `country`.
 
