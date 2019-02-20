@@ -62,11 +62,10 @@ If you need to use the Zendesk service you need to add 3 environment variables
 
 Add any registers using the `/admin` UI.
 
-If you need to redownload an existing register from scratch, you can run the job `bundle exec rake registers_frontend:populate_db:force_full_register_download[SLUG]` where `SLUG` is the slug of the register.
-
 ### prod
 
 When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.  
+
 ### sandbox
 
 It's also possible to manually populate the database without running the `registers-frontend-scheduler` and `registers-frontend-queue` apps using `cf run-task`. This may fail for large registers if the task runs out of memory.
@@ -82,6 +81,14 @@ Then you can see the result of the task using:
 cf tasks registers-frontend-research
 cf logs registers-frontend-research | grep fetch
 ```
+
+### Updating Register metadata
+
+If you update Register metadata using the [deployment scripts](https://github.com/openregister/deployment/tree/master/scripts) for example updating the `register-name` or field descriptions, these will not be automatically be picked up by the scheduled task, as it only picks up new `user` entries.
+
+In order to get metadata changes to appear on the frontend, you must run the force full reload task:
+* `cf login` and select the `openregister` `prod` space
+* `cf run-task registers-frontend-queue "bundle exec rake registers_frontend:populate_db:force_full_register_download[ID]""` where `ID` is the ID of the register with changed metadata for example `country`.
 
 ## License
 
