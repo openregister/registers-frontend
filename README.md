@@ -87,8 +87,13 @@ cf logs registers-frontend-research | grep fetch
 If you update Register metadata using the [deployment scripts](https://github.com/openregister/deployment/tree/master/scripts) for example updating the `register-name` or field descriptions, these will not be automatically be picked up by the scheduled task, as it only picks up new `user` entries.
 
 In order to get metadata changes to appear on the frontend, you must run the force full reload task:
-* `cf login` and select the `openregister` `prod` space
-* `cf run-task registers-frontend-queue "bundle exec rake registers_frontend:populate_db:force_full_register_download[ID]""` where `ID` is the ID of the register with changed metadata for example `country`.
+
+1) Run `cf login` and select the `openregister` `prod` space
+1) Run:  
+```
+cf run-task registers-frontend-queue "bundle exec rake registers_frontend:populate_db:force_full_register_download[ID]""
+``` 
+where `ID` is the ID of the register with changed metadata for example `country`.
 
 ## License
 
