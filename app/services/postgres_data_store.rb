@@ -2,7 +2,6 @@ require 'data_store'
 
 class PostgresDataStore
   include DataStore
-  EMPTY_ROOT_HASH = 'sha-256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'.freeze
 
   def initialize(register)
     @page_size = 100
@@ -57,14 +56,6 @@ class PostgresDataStore
     batch_update(:system)
     @items.clear
     @has_existing_entries_in_db = Entry.where(register_id: @register.id).exists?
-  end
-
-  def set_root_hash(root_hash)
-    @register.root_hash = root_hash
-  end
-
-  def get_root_hash
-    @register.root_hash || EMPTY_ROOT_HASH
   end
 
 private

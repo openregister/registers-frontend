@@ -1,8 +1,6 @@
 class ForceFullRegisterDownloadJob < ApplicationJob
   queue_as :default
 
-  class FrontendInvalidRegisterError < StandardError; end
-
   # Redownload all the entries in a register
   def perform(register)
     ActiveRecord::Base.transaction do
@@ -10,7 +8,6 @@ class ForceFullRegisterDownloadJob < ApplicationJob
 
       Record.where(register_id: register.id).delete_all
       Entry.where(register_id: register.id).delete_all
-      register.root_hash = nil
       register.save
 
       Delayed::Worker.logger.info("Updating #{register.name} in database")
