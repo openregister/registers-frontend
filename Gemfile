@@ -25,7 +25,7 @@ gem 'govuk_elements_form_builder', git: 'https://github.com/ministryofjustice/go
 gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
-gem 'govuk-registers-api-client', '~> 1.2.2'
+gem 'govuk-registers-api-client', '~> 2.0.0'
 
 gem 'autoprefixer-rails'
 

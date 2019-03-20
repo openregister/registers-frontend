@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_153344) do
+ActiveRecord::Schema.define(version: 2019_03_20_140323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2018_11_16_153344) do
     t.string "description"
     t.text "related_registers"
     t.string "url"
-    t.string "root_hash"
     t.text "fields_array", array: true
     t.integer "position"
     t.string "seo_title"
