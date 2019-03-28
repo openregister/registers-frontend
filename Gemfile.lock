@@ -242,6 +242,7 @@ GEM
     pg (1.1.4)
     powerpack (0.1.2)
     prometheus-client-mmap (0.9.1)
+    prometheus_exporter (0.4.5)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -437,6 +438,7 @@ DEPENDENCIES
   lograge (~> 0.10.0)
   logstash-event (~> 1.2, >= 1.2.02)
   pg (~> 1.1)
+  prometheus_exporter (~> 0.4.5)
   pry-byebug
   puma (~> 3.0)
   rails (~> 5.2.2)
