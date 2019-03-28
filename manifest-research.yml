@@ -13,3 +13,14 @@ applications:
 - name: registers-frontend-research
   <<: *defaults
   instances: 2
+- name: registers-frontend-queue
+  <<: *defaults
+  no-route: true
+  instances: 1
+  command: bundle exec 'rake environment jobs:work'
+  health-check-type: process
+- name: registers-frontend-prometheus-exporter
+  <<: *defaults
+  instances: 1
+  command: bundle exec 'prometheus_exporter -p 8080'
+  health-check-type: process
