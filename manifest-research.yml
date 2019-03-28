@@ -8,6 +8,8 @@ defaults: &defaults
     # environment variables (persisted for blue/green deploys)
     - registers-product-site-environment-variables
     - logit-ssl-drain
+  env: 
+    PROMETHEUS_EXPORTER: http://registers-frontend-prometheus-exporter.apps.internal:8080
 
 applications:
 - name: registers-frontend-research
@@ -19,7 +21,16 @@ applications:
   instances: 1
   command: bundle exec 'rake environment jobs:work'
   health-check-type: process
+- name: registers-frontend-scheduler
+  <<: *defaults
+  no-route: true
+  instances: 1
+  command: bundle exec clockwork 'lib/clock.rb'
+  health-check-type: process
 - name: registers-frontend-prometheus-exporter
+  routes:
+    - route: registers-frontend-prometheus-exporter.apps.internal
+    - route: registers-frontend-prometheus-exporter.cloudapps.digital/metrics
   <<: *defaults
   instances: 1
   command: bundle exec 'prometheus_exporter -p 8080'
