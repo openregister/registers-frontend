@@ -1,4 +1,4 @@
-unless Rails.env == 'development'
+unless Rails.env == 'development' || Rails.env == 'test'
   require 'prometheus_exporter/middleware'
   require 'prometheus_exporter/instrumentation'
   # This reports stats per request like HTTP status and timings
