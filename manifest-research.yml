@@ -32,6 +32,8 @@ applications:
     - route: registers-frontend-prometheus-exporter.apps.internal
     - route: registers-frontend-prometheus-exporter.cloudapps.digital/metrics
   <<: *defaults
+  services: 
+    - openregister-metric-exporter
   instances: 1
   command: bundle exec 'prometheus_exporter -p 8080'
   health-check-type: process
