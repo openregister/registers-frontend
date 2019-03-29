@@ -41,6 +41,8 @@ applications:
   command: bundle exec 'prometheus_exporter -p 8080'
   health-check-type: http
   health-check-http-endpoint: /metrics
+  services:
+    - prometheus
 - name: registers-frontend-scheduler
   <<: *defaults
   instances: 1
