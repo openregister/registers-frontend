@@ -36,9 +36,6 @@ gem 'zendesk_api'
 gem 'cf-app-utils'
 gem 'health_check', '~> 3.0'
 
-# Email and Text Notifications
-gem 'govuk_notify_rails'
-
 # Pagination
 gem 'kaminari'
 
@@ -54,9 +51,6 @@ gem 'clockwork'
 
 # Monitoring
 gem 'gds_metrics', '~> 0.1.0'
-
-# Encrypted password
-gem 'bcrypt'
 
 # HTTP
 gem 'httparty', '~> 0.16.3'

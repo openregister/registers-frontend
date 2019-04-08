@@ -378,22 +378,6 @@ details {
   }
 }
 
-.admin {
-  table {
-    td:last-child,
-    th:last-child {
-      text-align: right;
-    }
-  }
-
-  .column-one-third {
-    .button {
-      float: right;
-      margin-top: 2.5em;
-    }
-  }
-}
-
 .code-curl {
   border: none;
   color: $red;

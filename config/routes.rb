@@ -78,23 +78,4 @@ Rails.application.routes.draw do
 
   get '404', to: 'errors#not_found'
   get '500', to: 'errors#internal_server_error'
-
-  # Admin paths
-  namespace :admin, path: '/admin' do
-    root to: "registers#index"
-
-    resources :registers, except: [:show] do
-      collection do
-        patch :sort
-      end
-    end
-
-    resources :users
-
-    resources :sessions
-    get "signin" => "sessions#new"
-    get "signout" => "sessions#destroy"
-
-    resources :password_resets
-  end
 end
