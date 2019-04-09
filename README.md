@@ -60,8 +60,6 @@ If you need to use the Zendesk service you need to add 3 environment variables
 
 ## Populating the database with register data on PaaS
 
-Add any registers using the `/admin` UI.
-
 ### prod
 
 When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.  

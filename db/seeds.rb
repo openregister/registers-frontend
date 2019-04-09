@@ -1,5 +1,3 @@
-User.create(name: 'admin', email: 'registerteam@digital.cabinet-office.gov.uk', password: 'password123', admin: true)
-
 d13 = Authority.find_or_create_by!(government_organisation_key: 'D13', name: 'Foreign & Commonwealth Office', registers_description: 'Includes countries and territories')
 d4 = Authority.find_or_create_by!(government_organisation_key: 'D4', name: 'Ministry of Housing, Communities and Local Government', registers_description: 'Includes local authorities in Northern Ireland')
 d18 = Authority.find_or_create_by!(government_organisation_key: 'D18', name: 'Ministry of Justice', registers_description: 'Includes prison estate')
@@ -77,9 +75,3 @@ Register.create(
   category: Category.find_by!(slug: 'government')
 )
 puts "Created Government domain Register"
-
-
-
-puts "The admin interface is located at http://localhost:3000/admin"
-puts "User email is registerteam@digital.cabinet-office.gov.uk"
-puts "User password is password123"
