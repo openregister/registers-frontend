@@ -74,7 +74,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     ast (2.4.0)
-    autoprefixer-rails (9.4.7)
+    autoprefixer-rails (9.5.1)
       execjs
     axlsx_styler (0.2.0)
       activesupport (>= 3.1)
