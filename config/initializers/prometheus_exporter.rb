@@ -1,5 +1,6 @@
 if ENV['PROMETHEUS_EXPORTER']
   require 'prometheus_exporter/instrumentation'
+  require 'prometheus_exporter/client'
   require 'uri'
 
   PROMETHEUS_EXPORTER = URI.parse(ENV['PROMETHEUS_EXPORTER'])
