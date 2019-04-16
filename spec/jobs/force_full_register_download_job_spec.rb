@@ -32,7 +32,7 @@ RSpec.describe ForceFullRegisterDownloadJob, type: :job do
     expect(Entry.where(key: 'CZ').order(entry_number: :desc).first[:previous_entry_number]).to eq(52)
   end
 
-  context 'when incrementally updating data' do
+  context 'when reloading data' do
     before do
       country_update = File.read('./spec/support/country_update.rsf')
       stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
