@@ -8,7 +8,7 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.describe PopulateRegisterDataInDbJob, type: :job do
+RSpec.describe ForceFullRegisterDownloadJob, type: :job do
   let!(:register) { ObjectsFactory.new.create_register('country', 'beta') }
 
   before do
@@ -17,13 +17,7 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
       with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
       to_return(status: 200, body: country_data, headers: {})
 
-    country_proof = File.read('./spec/support/country_proof.json')
-    country_proof_update = File.read('./spec/support/country_proof_update.json')
-    stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
-      to_return({ body: country_proof }, body: country_proof_update)
-
-    PopulateRegisterDataInDbJob.perform_now(register)
+    ForceFullRegisterDownloadJob.perform_now(register)
   end
 
   it 'interprets end_date to second precision by using the start of the time period' do
@@ -41,11 +35,11 @@ RSpec.describe PopulateRegisterDataInDbJob, type: :job do
   context 'when incrementally updating data' do
     before do
       country_update = File.read('./spec/support/country_update.rsf')
-      stub_request(:get, "https://country.register.gov.uk/download-rsf/207").
+      stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
         with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
         to_return(status: 200, body: country_update, headers: {})
 
-      PopulateRegisterDataInDbJob.perform_now(register)
+      ForceFullRegisterDownloadJob.perform_now(register)
     end
 
     it 'retains existing entries' do
