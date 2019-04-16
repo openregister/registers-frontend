@@ -6,7 +6,7 @@ Frontend for [GOV.UK Registers](https://www.registers.service.gov.uk/)
 
 ## Prerequisites
 
-1. Install Ruby 2.5.3
+1. Install Ruby 2.5.5
 2. Install Rails 5.2.2
 3. Install PostgreSQL 9.6+
 4. Install Node 10+
