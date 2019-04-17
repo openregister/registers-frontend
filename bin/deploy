@@ -2,7 +2,7 @@
 set -e
 
 # Parse app names from manifest to ensure it matches up
-SINGLE_INSTANCE_APPS=(registers-frontend-queue registers-frontend-scheduler)
+SINGLE_INSTANCE_APPS=(registers-frontend-queue registers-frontend-scheduler registers-frontend-queue-prometheus-exporter)
 ZERO_DOWNTIME_APPS=registers
 
 # $CF env variables are set by Travis and configured in ../.travis.yml
