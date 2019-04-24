@@ -5,7 +5,7 @@ namespace :registers_frontend do
     desc 'Add task to the queue to populate register data in the database'
     task fetch_later: :environment do
       Register.where.not(register_phase: 'Backlog').find_each do |register|
-        PopulateRegisterDataInDbJob.perform_later(register)
+        ForceFullRegisterDownloadJob.perform_later(register)
       end
     end
 
@@ -13,7 +13,7 @@ namespace :registers_frontend do
     task fetch_now: :environment do
       Register.where.not(register_phase: 'Backlog').find_each do |register|
         puts("populating register #{register.name}")
-        PopulateRegisterDataInDbJob.perform_now(register)
+        ForceFullRegisterDownloadJob.perform_now(register)
       end
 
       puts('populating authorities')

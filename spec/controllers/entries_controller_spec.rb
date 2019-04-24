@@ -11,12 +11,6 @@ RSpec.describe EntriesController, type: :controller do
     register_discovery_data = File.read('./spec/support/register_discovery.rsf')
     register_charity_data = File.read('./spec/support/charity_card_n.rsf')
     register_territory_data = File.read('./spec/support/territory.rsf')
-    country_proof = File.read('./spec/support/country_proof.json')
-    country207 = File.read('./spec/support/country_207.rsf')
-    charity10 = File.read('./spec/support/charity_10.rsf')
-    territory80 = File.read('./spec/support/territory_80.rsf')
-    charity_proof = File.read('./spec/support/charity_proof.json')
-    territory_proof = File.read('./spec/support/territory_proof.json')
 
     ObjectsFactory.new.create_register('country', 'Beta')
     ObjectsFactory.new.create_register('charity', 'Beta')
@@ -48,33 +42,8 @@ RSpec.describe EntriesController, type: :controller do
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_discovery_data, headers: {})
 
-    stub_request(:get, "https://country.register.gov.uk/download-rsf/207").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
-      to_return(status: 200, body: country207, headers: {})
-
-    stub_request(:get, "https://charity.register.gov.uk/download-rsf/10").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.register.gov.uk' }).
-      to_return(status: 200, body: charity10, headers: {})
-
-    stub_request(:get, "https://territory.register.gov.uk/download-rsf/80").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.register.gov.uk' }).
-      to_return(status: 200, body: territory80, headers: {})
-
-    stub_request(:get, "https://country.register.gov.uk/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
-      to_return(status: 200, body: country_proof, headers: {})
-
-    stub_request(:get, "https://charity.register.gov.uk/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'charity.register.gov.uk' }).
-      to_return(status: 200, body: charity_proof, headers: {})
-
-    stub_request(:get, "https://territory.register.gov.uk/proof/register/merkle:sha-256").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'territory.register.gov.uk' }).
-      to_return(status: 200, body: territory_proof, headers: {})
-
-
     Register.find_each do |register|
-      PopulateRegisterDataInDbJob.perform_now(register)
+      ForceFullRegisterDownloadJob.perform_now(register)
     end
   end
 
