@@ -1,5 +1,6 @@
 ---
 defaults: &defaults
+  stack: cflinuxfs3
   buildpack: ruby_buildpack
   memory: 1GB
   services:
