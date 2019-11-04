@@ -51,7 +51,7 @@ gem 'clockwork'
 
 # Monitoring
 gem 'gds_metrics', '~> 0.1.0'
-gem 'prometheus_exporter', '~> 0.4.5'
+gem 'prometheus_exporter', '~> 0.4.16'
 
 # HTTP
 gem 'httparty', '~> 0.17.0'
