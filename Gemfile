@@ -10,7 +10,7 @@ ruby File.read(".ruby-version").chomp
 gem 'email_validator', github: 'mailtop/email_validator'
 gem 'rails', '~> 5.2.2'
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 4.0'
+gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
