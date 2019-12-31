@@ -36,7 +36,7 @@
   = stylesheet_link_tag 'application'
   = csrf_meta_tags
   %meta{ name: 'description', content: "#{@page_description.present? ? @page_description : 'GOV.UK Registers are structured datasets of government information. Designed to ensure government services run on the best quality data infrastructure, registers are accessible through a secure API that is easy to integrate with.'}" }
-  = render partial: 'layouts/analytics'
+  -#= render partial: 'layouts/analytics'
 
 - content_for :body_end do
   = javascript_include_tag 'application'

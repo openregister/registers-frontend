@@ -56,21 +56,21 @@
       defaultValue: ''
     });
 
-  :javascript
-    var forms = document.querySelectorAll('.js--ga-form-hook')
-
-    for(var i = 0; i < forms.length; i++) {
-      forms[i].addEventListener('submit', function(event) {
-        var $partOfGovSelect = event.target.querySelector('select')
-        var partOfGov = $partOfGovSelect.options[$partOfGovSelect.selectedIndex].text
-        if (partOfGov.length > 0) {
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Suggest a register',
-            eventAction: partOfGov,
-            eventLabel: 'What part of government?',
-            nonInteraction: true
-          })
-        }
-      })
-    }
+  -#:javascript
+  -#  var forms = document.querySelectorAll('.js--ga-form-hook')
+  -#
+  -#  for(var i = 0; i < forms.length; i++) {
+  -#    forms[i].addEventListener('submit', function(event) {
+  -#      var $partOfGovSelect = event.target.querySelector('select')
+  -#      var partOfGov = $partOfGovSelect.options[$partOfGovSelect.selectedIndex].text
+  -#      if (partOfGov.length > 0) {
+  -#        ga('send', {
+  -#          hitType: 'event',
+  -#          eventCategory: 'Suggest a register',
+  -#          eventAction: partOfGov,
+  -#          eventLabel: 'What part of government?',
+  -#          nonInteraction: true
+  -#        })
+  -#      }
+  -#    })
+  -#  }

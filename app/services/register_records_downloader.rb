@@ -20,7 +20,7 @@ class RegisterRecordsDownloader
   end
 
   def download_ods
-    ods_download_to_ga
+    #ods_download_to_ga
     headers = register.fields_array
     data = register.records.where(entry_type: 'user').find_each.map do |r|
       headers.map { |f| r.data[f] }

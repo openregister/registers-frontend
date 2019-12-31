@@ -18,14 +18,14 @@
 
     var yesRadioButton = document.getElementById('api_user_is_government_yes');
     yesRadioButton.onclick = function() {
-      ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
+      // ga('send', 'event', 'Form', 'Radio - Yes', 'Do you work for government?');
       var nonGovEmail = document.getElementById('api_user_email_non_gov')
       nonGovEmail.value = "";
     }
 
     var noRadioButton = document.getElementById('api_user_is_government_no');
     noRadioButton.onclick = function() {
-      ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
+      // ga('send', 'event', 'Form', 'Radio - No', 'Do you work for government?');
       var govEmail = document.getElementById('api_user_email_gov')
       govEmail.value = "";
     }

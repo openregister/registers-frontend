@@ -42,9 +42,9 @@
           %p{class: 'govuk-!-margin-bottom-5'} Search all the registers that are ready to use in your government service.
           = render partial: 'layouts/categories'
 
-= content_for :javascript do
-  :javascript
-    var heroButton = document.querySelector('.hero-button');
-    heroButton.onclick = function() {
-      ga('send', 'pageview', '/get-started');
-    }
+-#= content_for :javascript do
+-#  :javascript
+-#    var heroButton = document.querySelector('.hero-button');
+-#    heroButton.onclick = function() {
+-#      ga('send', 'pageview', '/get-started');
+-#    }
