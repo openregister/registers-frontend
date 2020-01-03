@@ -2,7 +2,12 @@ RSpec.shared_context 'country stubs', shared_context: :metadata do
   before(:all) do
     country_data = File.read('./spec/support/country.rsf')
     stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'country.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
     .to_return(status: 200, body: country_data, headers: {})
   end
 

@@ -18,22 +18,53 @@ RSpec.describe EntriesController, type: :controller do
 
     # RSF stubs
     stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'country.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
     .to_return(status: 200, body: country_data, headers: {})
 
     stub_request(:get, 'https://charity.register.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
-      .to_return(status: 200, body: register_charity_data, headers: {})
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'charity.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
+    .to_return(status: 200, body: register_charity_data, headers: {})
 
     stub_request(:get, 'https://territory.register.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
-      .to_return(status: 200, body: register_territory_data, headers: {})
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'territory.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
+    .to_return(status: 200, body: register_territory_data, headers: {})
 
   # Index stubs
+    stub_request(:get, 'https://register.register.gov.uk/download-rsf/0')
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'territory.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
+    .to_return(status: 200, body: register_territory_data, headers: {})
     stub_request(:get, 'https://register.register.gov.uk/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_beta_data, headers: {})
 
+    stub_request(:get, 'https://territory.register.gov.uk/download-rsf/0')
+    .with(headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, identity',
+        'Host' => 'territory.register.gov.uk',
+        'User-Agent' => 'CL'
+    })
+    .to_return(status: 200, body: register_territory_data, headers: {})
     stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
       .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
       .to_return(status: 200, body: register_alpha_data, headers: {})
