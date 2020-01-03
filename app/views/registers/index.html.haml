@@ -82,8 +82,6 @@
           %p
             No results found for <strong>"#{@search_term}"</strong>
             = link_to 'Reset', registers_path, class: 'reset-link'
-          -#%script
-          -#  ga('send', 'event', 'Search', 'No results', '#{@search_term}', {nonInteraction: true});
 
 
 = content_for :javascript do
@@ -101,22 +99,3 @@
         showBy(showByTriggers[index])
       }
     })(document)
-
-  -#:javascript
-  -#  (function(document, undefined) {
-  -#    var links = document.querySelectorAll('.js--list-of-registers a');
-  -#
-  -#    var sendEvent = function(event) {
-  -#      ga('send', {
-  -#        hitType: 'event',
-  -#        eventCategory: 'Show by',
-  -#        eventAction: '#{@show_by_selected.capitalize} - ' + event.target.parentElement.querySelector('h3').innerText.replace(/ register/, ''),
-  -#        eventLabel: 'Select #{ @show_by_selected == "name" ? "register" : "group" }',
-  -#        nonInteraction: true
-  -#      })
-  -#    }
-  -#
-  -#    for (var i = 0; i < links.length; i++) {
-  -#      links[i].addEventListener('click', sendEvent )
-  -#    }
-  -#  })(document)
