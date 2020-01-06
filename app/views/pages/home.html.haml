@@ -41,10 +41,3 @@
           %h2{class: 'govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7'} Government registers collection
           %p{class: 'govuk-!-margin-bottom-5'} Search all the registers that are ready to use in your government service.
           = render partial: 'layouts/categories'
-
-= content_for :javascript do
-  :javascript
-    var heroButton = document.querySelector('.hero-button');
-    heroButton.onclick = function() {
-      ga('send', 'pageview', '/get-started');
-    }

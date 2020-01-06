@@ -22,24 +22,3 @@
         %h3{class: 'govuk-heading-s govuk-!-margin-bottom-1'} Can’t access Google forms?
 
         %p #{link_to 'Contact the GOV.UK Registers team', support_question_url} for support.
-
-
-= content_for :javascript do
-  :javascript
-    var currentHost = window.location.protocol + '//' + window.location.hostname
-    var links = document.getElementsByTagName('a')
-
-    for(var i = 0; i < links.length; i++) {
-      if (links[i].href.match(currentHost) === null) {
-        links[i].addEventListener('click', function(event) {
-          var label = event.target.getAttribute('data-ga-label') ? event.target.getAttribute('data-ga-label') : event.target.href
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Suggest a register',
-            eventAction: 'Link - ' + label,
-            eventLabel: 'Suggest a register form',
-            nonInteraction: true
-          })
-        })
-      }
-    }

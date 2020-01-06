@@ -27,9 +27,3 @@
                 %h2.subsection__title Give feedback
               .subsection__content.js-subsection-content#subsection_content_2
                 %p #{link_to 'Give feedback about GOV.UK Registers', support_path} to help us improve our service.
-
-= content_for :javascript do
-  :javascript
-    ga('send', 'event', 'Form', 'Submitted', 'Create API Key Form', {
-      'dimension1': "#{@api_user.is_government}"
-    });

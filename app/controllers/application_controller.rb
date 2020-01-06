@@ -11,5 +11,12 @@ private
   def current_user
     @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
   end
-  helper_method :current_user
+
+  def remove_cookie_banner(content)
+    #  Hot patch to remove the cookie banner before rendering
+    cookie_banner_regex = %r{<div id="global-cookie-message">\s*.*\s*<\/div>}
+    content.gsub(cookie_banner_regex, '')
+  end
+
+  helper_method :current_user, :remove_cookie_banner
 end

@@ -75,21 +75,3 @@
 
 = content_for :head do
   = render partial: 'registers/structured_data', locals: { register: @register }
-
-= content_for :javascript do
-  - if @show_load_more
-    :javascript
-      var count = 0;
-      if (document.getElementById('load-more-records') !== null) {
-        document.getElementById('load-more-records')
-          .addEventListener('click', function() {
-            count = count + 1
-            ga('send', {
-              hitType: 'event',
-              eventCategory: 'Register Table',
-              eventAction: 'Load more ' + count,
-              eventLabel: 'Load more',
-              nonInteraction: true
-            })
-          })
-      };

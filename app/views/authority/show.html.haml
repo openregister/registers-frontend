@@ -18,24 +18,3 @@
           = render partial: 'layouts/list-of-registers'
         - else
           %p No registers are published by this organisation.
-
-= content_for :javascript do
-  :javascript
-    (function(document, undefined) {
-      var links = document.querySelectorAll('.js--list-of-registers a');
-
-      var sendEvent = function(event) {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Show by',
-          eventAction: 'Organisation - #{@collection.name.html_safe} - ' + event.target.innerText.replace(/ register/, ''),
-          eventLabel: 'Select register',
-          nonInteraction: true
-        })
-      }
-
-      for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', sendEvent )
-      }
-
-    })(document)
