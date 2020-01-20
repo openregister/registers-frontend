@@ -65,7 +65,7 @@ gem 'invisible_captcha'
 gem 'iso8601', '~> 0.12.1'
 
 # MailChimp
-gem 'gibbon', '~> 3.2'
+gem 'gibbon', '~> 3.3'
 
 # Markdown rendering
 gem 'bluecloth'
