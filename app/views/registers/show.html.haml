@@ -1,4 +1,4 @@
-- @page_title = @register.safe_name
+- @page_title = @deprecated.nil? ? @register.safe_name : "[Deprecated] #{@register.safe_name}"
 - @page_description = "#{[@register.meta_description, @register.register_description].find(&:present?)}"
 - content_for :body_classes, 'register-show'
 
@@ -27,6 +27,10 @@
           %div{class: "govuk-organisation-logo #{@register&.authority&.name&.parameterize}"}
             %div{class: "logo-container #{crest_class_name(@register&.authority&.name&.parameterize)}"}
               %span= @register&.authority&.name
+      - if @deprecated
+        .govuk-grid-column-full
+          = render 'deprecated', locals: { link: @deprecated }
+
       %div{class: 'govuk-grid-column-full highlight-boxes govuk-!-padding-left-0 govuk-!-padding-right-0 govuk-!-padding-top-5'}
         %a{href: @next_step_download, class: 'highlight-box govuk-!-padding-6 govuk-!-margin-bottom-9 js--ga-watch-click', id: "label-download" }
           %h3{class: 'heading-medium govuk-!-margin-top-0'} Download the data
