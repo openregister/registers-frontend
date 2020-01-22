@@ -38,6 +38,8 @@ class RegistersController < ApplicationController
   def show
     @register = Register.has_records.find_by_slug!(params[:id])
 
+    @deprecated = DeprecatedRegisters.query(params[:id])
+
     @records = recover_records(@register.fields_array, params)
 
     @register_records_total_count = @register.number_of_records

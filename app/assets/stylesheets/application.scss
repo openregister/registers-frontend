@@ -655,3 +655,16 @@ body:not(.home-page) .breadcrumbs {
 .govuk-footer__link {
   padding: 5px 0;
 }
+
+.deprecated {
+  color: #0b0c0c;
+  padding: 15px;
+  margin-bottom: 20px;
+  clear: both;
+  border: 5px solid #1d70b8;
+  margin: 12px 0;
+
+  h2  {
+    margin-bottom: 10px;
+  }
+}
