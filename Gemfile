@@ -50,7 +50,7 @@ gem 'scenic', '~> 1.5'
 gem 'clockwork'
 
 # Monitoring
-gem 'gds_metrics', '~> 0.1.0'
+gem 'gds_metrics', github: 'freesteph/gds_metrics_ruby'
 gem 'prometheus_exporter', '~> 0.4.5'
 
 # HTTP

@@ -9,6 +9,13 @@ GIT
       rubyzip (~> 1.2.1)
 
 GIT
+  remote: https://github.com/freesteph/gds_metrics_ruby.git
+  revision: 9a3a0f059e47d172af82ea9422e782e50af5bf0f
+  specs:
+    gds_metrics (0.2.1)
+      prometheus-client-mmap (= 0.10.0)
+
+GIT
   remote: https://github.com/mailtop/email_validator.git
   revision: 83fe71a4731b0a01e84d1221264cc9802196820e
   specs:
@@ -129,8 +136,6 @@ GEM
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
-    gds_metrics (0.1.0)
-      prometheus-client-mmap (= 0.9.1)
     gibbon (3.2.0)
       faraday (>= 0.9.1)
       multi_json (>= 1.11.0)
@@ -243,7 +248,7 @@ GEM
       tty-color (~> 0.5)
     pg (1.1.4)
     powerpack (0.1.2)
-    prometheus-client-mmap (0.9.1)
+    prometheus-client-mmap (0.10.0)
     prometheus_exporter (0.4.5)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -432,7 +437,7 @@ DEPENDENCIES
   email_validator!
   factory_bot_rails (~> 5.0)
   faker
-  gds_metrics (~> 0.1.0)
+  gds_metrics!
   gibbon (~> 3.2)
   govuk-lint (~> 3.10)
   govuk-registers-api-client (~> 2.0.0)
@@ -470,7 +475,7 @@ DEPENDENCIES
   zendesk_api
 
 RUBY VERSION
-   ruby 2.5.5p157
+   ruby 2.6.5p114
 
 BUNDLED WITH
-   1.17.1
+   1.17.3
