@@ -1,5 +1,7 @@
 DEPRECATED = {
-  "prison-estate": 'https://google.com'
+  'information-sharing-agreement-powers-and-objectives-0001': 'https://registers.culture.gov.uk/',
+  'information-sharing-agreement-specified-person-0001': 'https://registers.culture.gov.uk/',
+  'information-sharing-agreement-0001': 'https://registers.culture.gov.uk/'
 }.freeze
 
 class DeprecatedRegisters
