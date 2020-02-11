@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/NoRedInk/axlsx.git
-  revision: 1a4a6387bf398e2782933ee6607e5589cd15bee3
-  ref: 1a4a6387bf398e2782933ee6607e5589cd15bee3
-  specs:
-    axlsx (2.1.0.pre)
-      htmlentities (~> 4.3.1)
-      nokogiri (>= 1.4.1)
-      rubyzip (~> 1.2.1)
-
-GIT
   remote: https://github.com/mailtop/email_validator.git
   revision: 83fe71a4731b0a01e84d1221264cc9802196820e
   specs:
@@ -23,6 +13,15 @@ GIT
       govuk_elements_rails (>= 3.0.0)
       govuk_frontend_toolkit (>= 6.0.0)
       rails (>= 4.2)
+
+GIT
+  remote: https://github.com/westonganger/spreadsheet_architect.git
+  revision: 77b76e899fd76cd798158cfeb81c175471a1a7a6
+  specs:
+    spreadsheet_architect (3.3.1)
+      axlsx_styler (>= 1.0.0, < 2)
+      caxlsx (>= 2.0.2, < 4)
+      rodf (>= 1.0.0, < 2)
 
 GEM
   remote: https://rubygems.org/
@@ -76,9 +75,9 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.5.1.1)
       execjs
-    axlsx_styler (0.2.0)
+    axlsx_styler (1.0.0)
       activesupport (>= 3.1)
-      axlsx (>= 2.0, < 4)
+      caxlsx (>= 2.0.2)
     bindex (0.5.0)
     bluecloth (2.2.0)
     builder (3.2.3)
@@ -93,6 +92,11 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    caxlsx (3.0.1)
+      htmlentities (~> 4.3, >= 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 1.3.0, < 3)
     cf-app-utils (0.6)
     clockwork (2.0.3)
       tzinfo
@@ -110,6 +114,7 @@ GEM
     diff-lcs (1.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    dry-inflector (0.2.0)
     equatable (0.6.0)
     erubi (1.8.0)
     erubis (2.7.0)
@@ -297,9 +302,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rodf (1.0.0)
-      activesupport (>= 3.0)
+    rodf (1.1.1)
       builder (>= 3.0)
+      dry-inflector (~> 0.1)
       rubyzip (>= 1.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
@@ -332,7 +337,7 @@ GEM
     ruby_dep (1.5.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
-    rubyzip (1.2.2)
+    rubyzip (2.2.0)
     safe_yaml (1.0.4)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -352,10 +357,6 @@ GEM
       rake (>= 0.9, < 13)
       sass (~> 3.5, >= 3.5.5)
     sexp_processor (4.11.0)
-    spreadsheet_architect (3.2.0)
-      axlsx (>= 2, < 4)
-      axlsx_styler (>= 0.1.7, < 2)
-      rodf (>= 1.0.0, < 2)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -421,7 +422,6 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   autoprefixer-rails
-  axlsx!
   bluecloth
   canonical-rails
   capybara
@@ -461,7 +461,7 @@ DEPENDENCIES
   rspec-rails (~> 3.8)
   sass-rails (~> 5.0)
   scenic (~> 1.5)
-  spreadsheet_architect (~> 3.2)
+  spreadsheet_architect!
   spring
   spring-watcher-listen (~> 2.0.0)
   uglifier (>= 1.3.0)
