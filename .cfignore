@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+.bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -21,4 +21,4 @@
 *.iml
 
 # Ignore outputs from travis.
-/vendor
+vendor
