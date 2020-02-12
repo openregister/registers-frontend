@@ -71,9 +71,7 @@ gem 'gibbon', '~> 3.2'
 gem 'bluecloth'
 
 # ODS
-gem 'spreadsheet_architect', '~> 3.2'
-gem 'axlsx', git: 'https://github.com/NoRedInk/axlsx.git',
-             ref: '1a4a6387bf398e2782933ee6607e5589cd15bee3' # 2.1.0-pre-with-new-rubyzip, see https://github.com/randym/axlsx/issues/536
+gem 'spreadsheet_architect', github: 'westonganger/spreadsheet_architect'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.10'
