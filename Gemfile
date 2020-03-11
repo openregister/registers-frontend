@@ -40,7 +40,7 @@ gem 'health_check', '~> 3.0'
 gem 'kaminari'
 
 # Job Scheduling
-gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.3'
+gem 'delayed_job_active_record', '~> 4.1'
 
 # Database
 gem 'activerecord-import'
