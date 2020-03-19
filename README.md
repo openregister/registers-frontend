@@ -6,7 +6,7 @@ Frontend for [GOV.UK Registers](https://www.registers.service.gov.uk/)
 
 ## Prerequisites
 
-1. Install Ruby 2.5.5
+1. Install Ruby 2.5.7
 2. Install Rails 5.2.2
 3. Install PostgreSQL 9.6+
 4. Install Node 10+
@@ -62,7 +62,7 @@ If you need to use the Zendesk service you need to add 3 environment variables
 
 ### prod
 
-When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.  
+When running in production the `registers-frontend-scheduler` app periodically calls `rake registers_frontend:populate_db:fetch_later` which adds a job to a queue maintained by the `registers-frontend-queue` app. When the job runs it refreshes the data for all registers listed in the database.
 
 ### sandbox
 
