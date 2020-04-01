@@ -38,6 +38,7 @@ follows:
 ```bash
 $ docker-compose build
 $ docker-compose run --rm web rails db:setup
+$ docker-compose run --rm web rake registers_frontend:populate_db:fetch_now
 $ docker-compose up -d
 ```
 

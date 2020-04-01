@@ -5,8 +5,9 @@ services:
     environment:
       POSTGRES_PASSWORD: openregister
       POSTGRES_USER: openregister-info
-      POSTGRES_DB: openregister-info_development
       PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - data:/var/lib/postgresql/data
   web:
     build: .
     ports:
@@ -16,6 +17,7 @@ services:
     environment:
       SELF_SERVICE_HTTP_AUTH_USERNAME: ${SELF_SERVICE_HTTP_AUTH_USERNAME}
       SELF_SERVICE_HTTP_AUTH_PASSWORD: ${SELF_SERVICE_HTTP_AUTH_PASSWORD}
-
+    volumes:
+      - .:/usr/src/app
 volumes:
   data: {}

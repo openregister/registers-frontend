@@ -1,5 +1,10 @@
 FROM ruby:2.6.5
 
+ENV DB_PASSWORD openregister
+ENV DB_USER openregister-info
+ENV DB_DB openregister-info_development
+ENV DB_HOST db
+
 RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
     build-essential \
@@ -23,8 +28,6 @@ COPY .ruby-version /usr/src/app/.ruby-version
 
 RUN bundle install
 COPY . /usr/src/app
-
-RUN sed -i "s/default: \&default/default: \&default\n  username: openregister-info\n  host: db\n  password: openregister/" /usr/src/app/config/database.yml
 
 EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
