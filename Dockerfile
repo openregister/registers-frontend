@@ -1,4 +1,4 @@
-FROM ruby:2.5.5
+FROM ruby:2.6.5
 
 RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
@@ -14,6 +14,7 @@ COPY package.json /usr/src/app/package.json
 COPY package-lock.json /usr/src/app/package-lock.json
 
 RUN npm install
+RUN gem install bundler -v "2.1.4"
 
 COPY Gemfile /usr/src/app/Gemfile
 COPY Gemfile.lock /usr/src/app/Gemfile.lock
