@@ -5,6 +5,7 @@ RUN apt-get update -qq \
     build-essential \
     libpq-dev \
     nodejs \
+    npm \
     postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
