@@ -24,7 +24,7 @@ COPY .ruby-version /usr/src/app/.ruby-version
 RUN bundle install
 COPY . /usr/src/app
 
-RUN sed -i "s/default: \&default/default: \&default\n  username: openregister-info\n  host: db\n  password:/" /usr/src/app/config/database.yml
+RUN sed -i "s/default: \&default/default: \&default\n  username: openregister-info\n  host: db\n  password: openregister/" /usr/src/app/config/database.yml
 
 EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

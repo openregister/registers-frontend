@@ -2,10 +2,8 @@ version: '3'
 services:
   db:
     image: postgres:9.6-alpine
-    volumes:
-      - data:/var/lib/postgresql/data/pgdata
     environment:
-      POSTGRES_PASSWORD:
+      POSTGRES_PASSWORD: openregister
       POSTGRES_USER: openregister-info
       POSTGRES_DB: openregister-info_development
       PGDATA: /var/lib/postgresql/data/pgdata
