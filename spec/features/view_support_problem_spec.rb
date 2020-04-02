@@ -47,6 +47,7 @@ RSpec.feature 'Support page', type: :feature do
 
     before do
       allow(ZendeskFeedback).to receive(:new).and_return zendesk_client
+      allow(zendesk_client).to receive(:send_feedback)
 
       choose t('support.group.gov')
       click_on 'Continue'
@@ -76,12 +77,16 @@ RSpec.feature 'Support page', type: :feature do
 
         click_on 'Submit'
       end
+
+      it 'redirects to a success page' do
+        click_on 'Submit'
+
+        expect(page).to have_content 'Thanks for contacting GOV.UK Registers'
+      end
     end
 
     context 'with invalid form data' do
       before do
-        allow(zendesk_client).to receive(:send_feedback)
-
         fill_in 'Subject', with: subject
         fill_in 'Message', with: message
         fill_in 'Name', with: ''
