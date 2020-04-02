@@ -1,10 +1,5 @@
 FROM ruby:2.6.5
 
-ENV DB_PASSWORD openregister
-ENV DB_USER openregister-info
-ENV DB_DB openregister-info_development
-ENV DB_HOST db
-
 RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
     build-essential \

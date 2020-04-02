@@ -15,6 +15,10 @@ services:
     depends_on:
       - db
     environment:
+      DB_PASSWORD: openregister
+      DB_USER: openregister-info
+      DB_DB: openregister-info_development
+      DB_HOST: db
       SELF_SERVICE_HTTP_AUTH_USERNAME: ${SELF_SERVICE_HTTP_AUTH_USERNAME}
       SELF_SERVICE_HTTP_AUTH_PASSWORD: ${SELF_SERVICE_HTTP_AUTH_PASSWORD}
     volumes:
