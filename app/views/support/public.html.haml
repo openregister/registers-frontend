@@ -1,0 +1,17 @@
+- @page_title = 'Contact'
+
+%main#content.container{role:'main'}
+  .grid-row
+    .column-two-thirds
+      %h1.heading-large= t('.header')
+
+      %p= t('.notice')
+
+      %p= t('.other_pages')
+
+      %ul
+        - t('.links').each do |header, body, href|
+          %li
+            %a.govuk-heading-m.govuk-link--no-visited-state{href: href}
+              = header
+            %p= body

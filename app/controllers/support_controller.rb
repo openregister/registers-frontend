@@ -6,8 +6,8 @@ class SupportController < ApplicationController
   def index; end
 
   def select_support
-    if params[:subject] == 'problem'
-      redirect_to support_problem_path
+    if params[:group] == 'public'
+      redirect_to support_public_path
     else
       redirect_to support_question_path
     end

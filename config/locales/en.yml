@@ -20,6 +20,27 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  support:
+    group:
+      gov: I work in the public sector and need help with the Registers API
+      public: I'm a member of the public with a question for the government
+    public:
+      header: The GOV.UK Registers service is for people who work in the government
+      notice: We can’t give advice to the public. We don’t have access to information about you held by government departments.
+      other_pages: "There are other pages on GOV.UK where you can get help:"
+      links:
+        -
+          - Coronavirus (COVID-19)
+          - What you need to do
+          - https://www.gov.uk/coronavirus
+        -
+          - Contact the government
+          - Ask about benefits, driving, transport, tax, and more
+          - https://www.gov.uk/contact
+        -
+          - Avoid and report internet scams and phishing
+          - Advice on suspicious emails and text messages
+          - https://www.gov.uk/report-suspicious-emails-websites-phishing
   helpers:
     page_entries_info:
       entry:

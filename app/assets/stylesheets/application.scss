@@ -668,3 +668,7 @@ body:not(.home-page) .breadcrumbs {
     margin-bottom: 10px;
   }
 }
+
+.govuk-link--no-visited-state {
+  color: govuk-colour('blue') !important;
+}

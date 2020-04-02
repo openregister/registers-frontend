@@ -11,11 +11,11 @@
           %fieldset
             %legend.visually-hidden How can we help you?
             .multiple-choice
-              = radio_button_tag :subject, :problem, checked: true
-              = label_tag :subject_problem, 'I want to report a problem'
+              = radio_button_tag :group, :civil_service
+              = label_tag :group_civil_service, t('support.group.gov')
             .multiple-choice
-              = radio_button_tag :subject, :question
-              = label_tag :subject_question, 'I have a question or want to give feedback'
+              = radio_button_tag :group, :public, checked: true
+              = label_tag :group_public, t('support.group.public')
         .form-group
           = submit_tag 'Continue', class: 'button'
 
