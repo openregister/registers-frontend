@@ -43,8 +43,11 @@ RSpec.feature 'Support page', type: :feature do
     let(:message) { 'I cannot see replies from the API.' }
     let(:name) { 'John Doe' }
     let(:email) { 'john@doe.com' }
+    let(:zendesk_client) { instance_double(ZendeskFeedback) }
 
     before do
+      allow(ZendeskFeedback).to receive(:new).and_return zendesk_client
+
       choose t('support.group.gov')
       click_on 'Continue'
     end
@@ -54,11 +57,7 @@ RSpec.feature 'Support page', type: :feature do
     end
 
     context 'with valid form data' do
-      let(:zendesk_client) { instance_double(ZendeskFeedback) }
-
       before do
-        allow(ZendeskFeedback).to receive(:new).and_return zendesk_client
-
         fill_in 'Subject', with: subject
         fill_in 'Message', with: message
         fill_in 'Name', with: name
@@ -78,12 +77,28 @@ RSpec.feature 'Support page', type: :feature do
         click_on 'Submit'
       end
     end
-  end
 
-  scenario 'correct information shown after invalid submission' do
-    skip 'obsolete'
-    expect(page).to have_content('Report a problem')
-    click_button('Submit')
-    expect(page).to have_content('Report a problem')
+    context 'with invalid form data' do
+      before do
+        allow(zendesk_client).to receive(:send_feedback)
+
+        fill_in 'Subject', with: subject
+        fill_in 'Message', with: message
+        fill_in 'Name', with: ''
+        fill_in 'Email address', with: email
+      end
+
+      it 'returns to the form with the error' do
+        click_on 'Submit'
+
+        expect(page).to have_content 'Name can\'t be blank'
+      end
+
+      it 'does not call the Zendesk agent' do
+        expect(zendesk_client).to_not have_received :send_feedback
+
+        click_on 'Submit'
+      end
+    end
   end
 end
