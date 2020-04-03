@@ -23,7 +23,7 @@ en:
   support:
     group:
       gov: I work in the public sector and need help with the Registers API
-      public: I'm a member of the public with a question for the government
+      public: I’m a member of the public with a question for the government
     public:
       header: The GOV.UK Registers service is for people who work in the government
       notice: We can’t give advice to the public. We don’t have access to information about you held by government departments.
