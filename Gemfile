@@ -75,6 +75,7 @@ gem 'spreadsheet_architect', github: 'westonganger/spreadsheet_architect'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.10'
+  gem 'guard-rspec'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.8'
 end

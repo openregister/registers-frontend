@@ -3,5 +3,5 @@ class Support
 
   attr_accessor :email, :name, :message, :subject
 
-  validates_presence_of :email, :name, :message
+  validates_presence_of :email, :name, :message, :subject
 end

@@ -6,15 +6,11 @@ class SupportController < ApplicationController
   def index; end
 
   def select_support
-    if params[:subject] == 'problem'
-      redirect_to support_problem_path
+    if params[:group] == 'public'
+      redirect_to support_public_path
     else
       redirect_to support_question_path
     end
-  end
-
-  def problem
-    @support = Support.new
   end
 
   def question
@@ -27,14 +23,12 @@ class SupportController < ApplicationController
     if @support.valid?
       @zendesk_service = ZendeskFeedback.new
       @response = @zendesk_service.send_feedback(support_params)
+
       redirect_to support_thanks_path
     else
       flash[:errors] = @support.errors
-      if params[:support][:subject] == '[Problem]'
-        render :problem
-      else
-        render :question
-      end
+
+      render :question
     end
   end
 
