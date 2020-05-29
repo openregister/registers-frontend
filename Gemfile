@@ -71,7 +71,7 @@ gem 'gibbon', '~> 3.2'
 gem 'bluecloth'
 
 # ODS
-gem 'spreadsheet_architect', github: 'westonganger/spreadsheet_architect'
+gem 'spreadsheet_architect'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.10'
