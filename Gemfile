@@ -8,7 +8,7 @@ end
 ruby File.read(".ruby-version").chomp
 
 gem 'email_validator', github: 'mailtop/email_validator'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.4.3'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
@@ -71,7 +71,7 @@ gem 'gibbon', '~> 3.2'
 gem 'bluecloth'
 
 # ODS
-gem 'spreadsheet_architect', github: 'westonganger/spreadsheet_architect'
+gem 'spreadsheet_architect'
 
 group :development, :test do
   gem 'govuk-lint', '~> 3.10'
