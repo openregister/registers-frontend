@@ -14,7 +14,7 @@ RSpec.describe ForceFullRegisterDownloadJob, type: :job do
   before do
     country_data = File.read('./spec/support/country.rsf')
     stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
-      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
+      with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host' => 'country.register.gov.uk' }).
       to_return(status: 200, body: country_data, headers: {})
 
     ForceFullRegisterDownloadJob.perform_now(register)
@@ -36,7 +36,7 @@ RSpec.describe ForceFullRegisterDownloadJob, type: :job do
     before do
       country_update = File.read('./spec/support/country_update.rsf')
       stub_request(:get, "https://country.register.gov.uk/download-rsf/0").
-        with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate', 'Host' => 'country.register.gov.uk' }).
+        with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host' => 'country.register.gov.uk' }).
         to_return(status: 200, body: country_update, headers: {})
 
       ForceFullRegisterDownloadJob.perform_now(register)

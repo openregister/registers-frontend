@@ -18,28 +18,28 @@ RSpec.describe EntriesController, type: :controller do
 
     # RSF stubs
     stub_request(:get, 'https://country.register.gov.uk/download-rsf/0')
-    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+    .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
     .to_return(status: 200, body: country_data, headers: {})
 
     stub_request(:get, 'https://charity.register.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
       .to_return(status: 200, body: register_charity_data, headers: {})
 
     stub_request(:get, 'https://territory.register.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
       .to_return(status: 200, body: register_territory_data, headers: {})
 
   # Index stubs
     stub_request(:get, 'https://register.register.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
       .to_return(status: 200, body: register_beta_data, headers: {})
 
     stub_request(:get, 'https://register.alpha.openregister.org/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
       .to_return(status: 200, body: register_alpha_data, headers: {})
 
     stub_request(:get, 'https://www.registers.service.gov.uk/download-rsf/0')
-      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip, deflate' })
+      .with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3' })
       .to_return(status: 200, body: register_discovery_data, headers: {})
 
     Register.find_each do |register|
