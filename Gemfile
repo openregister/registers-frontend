@@ -62,7 +62,7 @@ gem 'canonical-rails'
 gem 'invisible_captcha'
 
 # Datetime parsing
-gem 'iso8601', '~> 0.12.1'
+gem 'iso8601', '~> 0.12.2'
 
 # MailChimp
 gem 'gibbon', '~> 3.2'
