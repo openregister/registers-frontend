@@ -1,5 +1,9 @@
 - @omit_header = true
 
+- content_for :top_of_page do
+  :javascript
+    window.GOVUK.addCookieMessage = false;
+
 - content_for :page_title, "#{@page_title.present? ? "#{@page_title} - GOV.UK Registers" : 'GOV.UK Registers' }"
 
 - content_for :body_classes, ' no-js'
@@ -76,5 +80,4 @@
       %li= link_to 'Privacy notice', privacy_notice_path
       %li= link_to 'Cookies', cookies_path
 
-- s = render file: 'layouts/govuk_template'
-= raw remove_cookie_banner(s)
+= render file: 'layouts/govuk_template'
