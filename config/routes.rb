@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'services-using-registers', to: 'pages#services_using_registers', as: 'services_using_registers'
   get 'privacy-notice', to: 'pages#privacy_notice', as: 'privacy_notice'
   get 'cookies', to: 'pages#cookies', as: 'cookies'
+  get 'accessibility-statement', to: 'pages#accessibility_statement', as: 'accessibility_statement'
   get 'terms-and-conditions', to: 'pages#terms_and_conditions', as: 'terms_and_conditions'
   get 'data-format-changes', to: 'pages#data_format_changes', as: 'data_format_changes'
 

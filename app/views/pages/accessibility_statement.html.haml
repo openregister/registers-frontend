@@ -1,0 +1,104 @@
+- @page_title = "Accessibility statement - Registers"
+- content_for :body_classes, 'static-content'
+
+%main#content.container{role:'main'}
+  %nav.breadcrumbs{"aria-label" => "Breadcrumb"}
+    %ol{data: {"click-events" => "", "click-category" => "Header", "click-action" => "Breadcrumb Clicked"}}
+      %li.breadcrumbs__item
+        = link_to 'Components', 'https://www.gov.uk/service-toolkit#components'
+      %li.breadcrumbs__item.breadcrumbs__item
+        = link_to 'GOV.UK Registers', root_path
+      %li.breadcrumbs__item.breadcrumbs__item--active
+        = link_to 'Accessibility statement', '#content', "aria-current" => "page"
+
+  .grid-row
+    .column-two-thirds
+      %h1.govuk-heading-xl Accessibility statement for GOV.UK Register
+      %p.govuk-body This accessibility statement explains how accessible this service is, what to do if you have difficulty using it, and how to report accessibility problems with the service.
+      %p.govuk-body
+        This service is part of the wider GOV.UK website. There’s a separate 
+        = link_to "accessibility statement for the main GOV.UK website", "https://www.gov.uk/help/accessibility"
+        \.
+      %p.govuk-body
+        This page only contains information about the GOV.UK Registers service, available at 
+        =link_to "https://www.registers.service.gov.uk/"
+        \.
+      %p.govuk-body
+        We’ve also made the text in the service as simple as possible to understand.
+
+      %p.govuk-body
+        = link_to "AbilityNet", "https://mcmw.abilitynet.org.uk/"
+         has advice on making your device easier to use if you have a disability.
+      %p.govuk-body This service is run by the Government Digital Service (GDS). We want as many people as possible to be able to use this service. This means you should be able to:
+      %ul.govuk-list.govuk-list--bullet
+        %li change colours, contrast levels and fonts
+        %li zoom in up to 300% without the text spilling off the screen
+        %li get from the start of the service to the end using just a keyboard
+        %li get from the start of the service to the end using speech recognition software
+        %li listen to the service using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+      %h2.govuk-heading-l How accessible is this website
+      %p.govuk-body We know some of this website is not fully accessible; the following accessibility problems have been identified:
+      %ul.govuk-list.govuk-list--bullet
+        %li Missing alternative text which means assistive software such as screen readers will not be able to present this information to users
+        %li Redundant links on pages which may create additional navigation for keyboard and screen reader users
+        %li Lack of Adequate contrast between foreground and background colours which makes it difficult for those with low vision to differentiate between rows in tables.
+      %p.govuk-body We are in the process of transitioning all these platforms to new arrangements, so it would be disproportionate to make the necessary changes to the old platforms.
+      %h2.govuk-heading-l What to do if you have difficulty using this service
+      %p.govuk-body
+        If you need any part of this service in a different format like CSV or Excel file, email
+        = succeed "." do
+          = link_to "enquiries@registers.service.gov.uk", "mailto:enquiries@registers.service.gov.uk"
+      %p.govuk-body We’ll consider your request and get back to you within two working days.
+      %h2.govuk-heading-l Reporting accessibility problems with this service
+      %p.govuk-body
+        If you find any problems that are not listed on this page, email
+        = succeed "." do
+          = link_to "enquiries@registers.service.gov.uk", "mailto:enquiries@registers.service.gov.uk"
+      %p.govuk-body We’ll consider your request and get back to you within two working days.
+      %h2.govuk-heading-l Enforcement procedure
+      %p.govuk-body
+        The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you are not happy with how we respond to your complaint,
+        = succeed "," do
+          = link_to "contact the Equality Advisory and Support Service", "https://www.equalityadvisoryservice.com/"
+      %h2.govuk-heading-l Technical information about this service’s accessibility
+      %p.govuk-body We’re committed to making this service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
+      %h2.govuk-heading-l Compliance status
+      %p.govuk-body
+        This service is partially compliant with the
+        = succeed "," do
+          = link_to "Web Content Accessibility Guidelines version 2.1 AA standard", "https://www.w3.org/TR/WCAG21/"
+      %h2.govuk-heading-l Non compliant content
+      %p.govuk-body The content listed below is non-accessible for the following reasons.
+      %ul.govuk-list.govuk-list--bullet
+        %li Some images do not have a text alternative, so people using a screen reader cannot access the information. This fails WCAG 2.1 success criterion 1.1.1 (non-text content).
+        %li Redundant links on pages which may create additional navigation for keyboard and screen reader users This fails WCAG 2.1 Success Criterion 2.1.1 Keyboard.
+        %li Lack of Adequate contrast between foreground and background colours which makes it difficult for those with low vision to differentiate between rows in tables. especially users with low vision This fails WCAG 2.1 Success Criterion 1.4.3 Contrast.
+      %h2.govuk-heading-l Preparation of this accessibility statement
+      %p.govuk-body We last tested this service for compliance with WCAG 2.1 AA on 18 September 2020
+      %p.govuk-body We used this approach to deciding on a sample of pages to test.
+      %ul.govuk-list.govuk-list--bullet
+        %li
+          We used
+          = link_to "Lighthouse", "https://developers.google.com/web/tools/lighthouse/"
+           to audit each page for accessibility issues.
+        %li
+          We used
+          = link_to "Wave", "https://wave.webaim.org"
+           to automatically test for accessibility issues on pages that do not need users to sign in.
+      %p.govuk-body We tested:
+      %ul.govuk-list.govuk-list--bullet
+        %li
+          our main website platform, available at 
+          = link_to "https://www.registers.service.gov.uk/."
+        %li
+          one of the categories of registers, available at 
+          = link_to "https://www.registers.service.gov.uk/category/crime-justice-and-law"
+        %li
+          A home page of a register at 
+          = link_to "https://www.registers.service.gov.uk/registers/prison-estate"
+      %h2.govuk-heading-l Disproportionate burden
+      %p.govuk-body GDS is planning to retire this platform by March 2021, and will work with organisations who will host the replacements to GOV.UK Registers to ensure that they build services which replace it will be compliant with the Web Content Accessibility Guidelines Version 2.1. As such, undertaking the work to resolve these non compliance issues will be disproportionate as the platform will be closed within the next 6 months.
+      %h2.govuk-heading-l What we’re doing to improve accessibility
+      %p.govuk-body We know the platform at present doesn’t fully support screen readers and doesn’t provide the required levels of contrast.
+      %p.govuk-body We have set out in the Disproportionate burden sections of this statement the reasons why we will not be able to resolve these issues.
+      %p.govuk-body This page was prepared on 18 September 2020.
