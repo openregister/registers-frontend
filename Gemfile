@@ -81,7 +81,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.1.5'
+  gem 'listen', '~> 3.3.3'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
