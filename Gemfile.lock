@@ -252,7 +252,8 @@ GEM
     pg (1.2.3)
     powerpack (0.1.2)
     prometheus-client-mmap (0.9.1)
-    prometheus_exporter (0.4.17)
+    prometheus_exporter (0.7.0)
+      webrick
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -401,6 +402,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.7.0)
     websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -451,7 +453,7 @@ DEPENDENCIES
   lograge (~> 0.11.2)
   logstash-event (~> 1.2, >= 1.2.02)
   pg (~> 1.1)
-  prometheus_exporter (~> 0.4.5)
+  prometheus_exporter (~> 0.7.0)
   pry-byebug
   puma (~> 4.3)
   rails (~> 5.2.4.3)
