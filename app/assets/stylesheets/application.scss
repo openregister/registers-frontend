@@ -673,11 +673,14 @@ body:not(.home-page) .breadcrumbs {
   color: govuk-colour('blue') !important;
 }
 
+$black: #000000;
+$white: #ffffff;
+
 #deprecation-message {
-  color: #000000;
-  background: #ffffff;
-  text-transform: none;
+  color: $black;
+  background: $white;
   font-weight: 400;
   font-size: 19px;
   display: block;
+  text-transform: none;
 }
