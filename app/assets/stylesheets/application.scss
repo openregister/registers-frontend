@@ -672,3 +672,15 @@ body:not(.home-page) .breadcrumbs {
 .govuk-link--no-visited-state {
   color: govuk-colour('blue') !important;
 }
+
+$black: #000000;
+$white: #ffffff;
+
+.deprecation-message {
+  color: $black;
+  background: $white;
+  font-weight: 400;
+  font-size: 19px;
+  display: block;
+  text-transform: none;
+}
