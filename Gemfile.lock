@@ -121,6 +121,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
     formatador (0.2.5)
+    gds_metrics (0.1.0)
+      prometheus-client-mmap (= 0.9.1)
     gibbon (3.3.4)
       faraday (>= 0.16.0)
       multi_json (>= 1.11.0)
@@ -249,6 +251,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.2.3)
     powerpack (0.1.2)
+    prometheus-client-mmap (0.9.1)
     prometheus_exporter (0.4.17)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -426,6 +429,7 @@ DEPENDENCIES
   email_validator!
   factory_bot_rails (~> 5.0)
   faker
+  gds_metrics (~> 0.1.0)
   gibbon (~> 3.2)
   govuk-lint (~> 3.10)
   govuk-registers-api-client (~> 2.0.0)
@@ -467,4 +471,4 @@ RUBY VERSION
    ruby 2.6.5p114
 
 BUNDLED WITH
-   2.2.9
+   2.1.4
