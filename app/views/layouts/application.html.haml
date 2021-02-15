@@ -5,6 +5,11 @@
 - content_for :body_classes, ' no-js'
 
 -content_for :after_header do
+  %span{id: "deprecation-message", class: "phase-banner"}
+    GDS is deprecating GOV.UK Registers and API, effective from 15 March 2021. The historical registers will be made available via the #{link_to 'National Archives', 'https://www.nationalarchives.gov.uk/'} from March 2021. Please ensure you have downloaded the latest version of these registers by this date.
+   
+
+-content_for :after_header do
   :javascript
     document.getElementsByTagName('body')[0].className = document.getElementsByTagName('body')[0].className.replace(/no-js/, 'js')
 
