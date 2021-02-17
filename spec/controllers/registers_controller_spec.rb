@@ -60,7 +60,7 @@ RSpec.describe RegistersController, type: :controller do
     it { expect { subject }.to_not change(Register, :count) }
   end
 
-  describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: 10 rows' do
+  describe 'Request: GET #show. Descr: Check default behaviour. Params: --. Result: all rows' do
     subject { get :show, params: { id: 'country' } }
 
     it { is_expected.to be_successful }
@@ -69,7 +69,7 @@ RSpec.describe RegistersController, type: :controller do
 
     it do
       subject
-      expect(assigns(:records).length).to eq(5)
+      expect(assigns(:records).length).to eq(199)
     end
   end
 

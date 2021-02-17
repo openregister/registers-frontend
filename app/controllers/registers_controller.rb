@@ -79,7 +79,7 @@ private
 
     sort_by = params[:sort_by] ||= default_sort_by.call
 
-    amount = @register.is_register_published_by_dcms? ? 10 : 5
+    amount = 5000
 
     @register.records
             .where(entry_type: 'user')
