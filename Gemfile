@@ -77,7 +77,7 @@ group :development, :test do
   gem 'govuk-lint', '~> 3.10'
   gem 'guard-rspec'
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 4.1'
 end
 
 group :development do
