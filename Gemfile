@@ -54,7 +54,7 @@ gem 'gds_metrics', '~> 0.1.0'
 gem 'prometheus_exporter', '~> 0.4.5'
 
 # HTTP
-gem 'httparty', '~> 0.17.0'
+gem 'httparty', '~> 0.18.1'
 
 # Canonical meta tag
 gem 'canonical-rails'
